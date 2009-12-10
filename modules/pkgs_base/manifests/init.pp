@@ -7,8 +7,15 @@ class pkgs_base {
     }
 
     # DejaVu LGC fonts are used by vim-X11.
-    package { "dejavu-lgc-fonts":
-	ensure	=> installed,
+    if $operatingsystemrelease >= 12 {
+        package { "dejavu-lgc-sans-mono-fonts":
+            ensure	=> installed,
+        }
+    }
+    else {
+        package { "dejavu-lgc-fonts":
+            ensure	=> installed,
+        }
     }
 
     package { "gpm":
