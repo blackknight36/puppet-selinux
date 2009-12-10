@@ -6,6 +6,11 @@ class pkgs_base {
 	ensure	=> installed,
     }
 
+    # DejaVu LGC fonts are used by vim-X11.
+    package { "dejavu-lgc-fonts":
+	ensure	=> installed,
+    }
+
     package { "gpm":
 	ensure	=> installed,
     }
