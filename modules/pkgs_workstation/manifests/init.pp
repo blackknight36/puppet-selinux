@@ -18,10 +18,6 @@ class pkgs_workstation {
 	ensure	=> installed,
     }
 
-    package { "vim-X11":
-	ensure	=> installed,
-    }
-
     package { "workrave":
 	ensure	=> installed,
     }
