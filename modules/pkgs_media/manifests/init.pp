@@ -26,8 +26,10 @@ class pkgs_media {
 	ensure	=> installed,
     }
 
-    package { "gstreamer-plugins-bad":
-	ensure	=> installed,
+    if $operatingsystemrelease < 12 {
+        package { "gstreamer-plugins-bad":
+            ensure	=> installed,
+        }
     }
 
     package { "gstreamer-plugins-ugly":
