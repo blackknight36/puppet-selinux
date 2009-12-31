@@ -12,5 +12,5 @@ files-2k1-sharedata     -fstype=cifs,credentials=/etc/ad.credentials            
 # general storage not belonging to any particiluar Fedora installation
 storage                 -fstype=ext3,rw         :/dev/data/storage
 
-# Fedora 8 root file system
-f8                      -fstype=ext3,ro         :/dev/fedora/f8root
+# Fedora 10 root file system
+f10                     -fstype=ext3,ro         :/dev/fedora/f10root
