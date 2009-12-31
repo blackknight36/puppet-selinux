@@ -45,6 +45,8 @@ node "mdct-dev12.dartcontainer.com" inherits "workstation_node" {
     $bacula_client_director_password = "2hNcW1n2jkNU5ywm4TK6CrY2yDmqlEPcr2SoRP0abEHW"
     $bacula_client_director_monitor_password = "WqQvFNJdbiIfyxnKkoocVQFcNgY0CLVcKXok1TtrhJTH"
     include bacula_client
+
+    include bacula_admin
     include yum-cron
 }
 
