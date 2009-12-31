@@ -10,6 +10,10 @@ class pkgs_workstation {
 	ensure	=> installed,
     }
 
+    package { "mysql-query-browser":
+	ensure	=> installed,
+    }
+
     package { "openoffice.org-calc":
 	ensure	=> installed,
     }
