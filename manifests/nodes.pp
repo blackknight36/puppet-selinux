@@ -36,6 +36,10 @@ node "build_server_node" inherits "server_node" {
 }
 
 
+node "mdct-dev6.dartcontainer.com" inherits "workstation_node" {
+}
+
+
 node "mdct-dev12.dartcontainer.com" inherits "workstation_node" {
     # passwords generated with bacula-password-generator
     $bacula_client_director_password = "2hNcW1n2jkNU5ywm4TK6CrY2yDmqlEPcr2SoRP0abEHW"
