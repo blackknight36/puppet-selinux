@@ -26,6 +26,10 @@ class pkgs_workstation {
 	ensure	=> installed,
     }
 
+    package { "x2vnc":
+	ensure	=> installed,
+    }
+
     package { "xclip":
 	ensure	=> installed,
     }
