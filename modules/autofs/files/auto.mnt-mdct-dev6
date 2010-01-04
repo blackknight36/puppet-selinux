@@ -1,0 +1,16 @@
+# home directory on corporate file server
+files-2k1-d19749       -fstype=cifs,uid=d19749,gid=d19749,credentials=/etc/ad.credentials      ://files-2k1/d19749\$
+
+# shared engineering directory
+files-2k1-eng           -fstype=cifs,credentials=/etc/ad.credentials                            ://files-2k1/Eng
+
+# generic shared directory
+files-2k1-sharedata     -fstype=cifs,credentials=/etc/ad.credentials                            ://files-2k1/ShareData
+
+
+
+# general storage not belonging to any particiluar Fedora installation
+storage                 -fstype=ext3,rw         :/dev/data/storage
+
+# Fedora 8 root file system
+f10root                 -fstype=ext3,ro         :/dev/mdct-dev6/f10root
