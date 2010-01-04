@@ -2,6 +2,10 @@
 
 class pkgs_net_tools {
 
+    package { "bridge-utils":
+	ensure	=> installed,
+    }
+
     package { "mtr":
 	ensure	=> installed,
     }
