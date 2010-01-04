@@ -73,8 +73,13 @@ class autofs {
             file { "/Pound":
                 ensure	=> "/mnt-local/storage/Pound/",
             }
+            file { "/var/lib/libvirt":
+                ensure	=> "/mnt-local/storage/j/libvirt",
+                force   => true,
+            }
             file { "/var/lib/mysql":
                 ensure	=> "/mnt-local/storage/j/mysql",
+                force   => true,
             }
         }
 
