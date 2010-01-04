@@ -26,6 +26,7 @@ node "workstation_node" inherits "base_node" {
     include pkgs_developer
     include pkgs_media
     include pkgs_net_tools
+    include pkgs_virtualization
     include pkgs_workstation
 }
 
