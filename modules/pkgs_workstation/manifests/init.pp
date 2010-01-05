@@ -22,6 +22,10 @@ class pkgs_workstation {
 	ensure	=> installed,
     }
 
+    package { "plant-launchers":
+	ensure	=> installed,
+    }
+
     package { "workrave":
 	ensure	=> installed,
     }
