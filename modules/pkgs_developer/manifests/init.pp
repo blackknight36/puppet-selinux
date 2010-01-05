@@ -14,6 +14,10 @@ class pkgs_developer {
 	ensure	=> installed,
     }
 
+    package { "repoview":
+	ensure	=> installed,
+    }
+
     package { "rpmdevtools":
 	ensure	=> installed,
     }
