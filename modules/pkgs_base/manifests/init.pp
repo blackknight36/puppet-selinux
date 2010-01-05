@@ -7,7 +7,9 @@ class pkgs_base {
     # install foo.i686 now fails as it conflicts with foo.x86_64.  In Fedora
     # 11, it was possible to install foo.i586 (and even glibc.i686) alongside
     # foo.x86_64.  Maybe these simply aren't needed anymore?
-    if ($architecture == "x86_64") and ($operatingsystemrelease <= 11) {
+    #
+    # Fedora 8 only has glibc and at this point, it isn't worth getting picky.
+    if ($architecture == "x86_64") and ($operatingsystemrelease > 8) and ($operatingsystemrelease <= 11) {
         include pkgs_32bit_compat
     }
 
