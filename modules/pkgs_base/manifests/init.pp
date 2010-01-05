@@ -2,6 +2,15 @@
 
 class pkgs_base {
 
+    # These work fine for Fedora 11.  In Fedora 12, all packages on 32-bit
+    # architecture have been compiled fo i686 systems.  Trying to simply
+    # install foo.i686 now fails as it conflicts with foo.x86_64.  In Fedora
+    # 11, it was possible to install foo.i586 (and even glibc.i686) alongside
+    # foo.x86_64.  Maybe these simply aren't needed anymore?
+    if ($architecture == "x86_64") and ($operatingsystemrelease <= 11) {
+        include pkgs_32bit_compat
+    }
+
     package { "bash-completion":
 	ensure	=> installed,
     }
