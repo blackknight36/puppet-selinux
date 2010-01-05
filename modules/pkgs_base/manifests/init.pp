@@ -29,6 +29,10 @@ class pkgs_base {
         }
     }
 
+    package { "expect":
+	ensure	=> installed,
+    }
+
     package { "gpm":
 	ensure	=> installed,
     }
