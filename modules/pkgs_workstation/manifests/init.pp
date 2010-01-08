@@ -6,6 +6,10 @@ class pkgs_workstation {
 	ensure	=> installed,
     }
 
+    package { "flock-herder":
+	ensure	=> installed,
+    }
+
     package { "galculator":
 	ensure	=> installed,
     }
