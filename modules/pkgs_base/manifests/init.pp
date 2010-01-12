@@ -47,6 +47,10 @@ class pkgs_base {
 	ensure	=> installed,
     }
 
+    package { "python-mdct":
+	ensure	=> installed,
+    }
+
     package { "units":
 	ensure	=> installed,
     }
