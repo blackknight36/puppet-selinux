@@ -30,6 +30,10 @@ class pkgs_workstation {
 	ensure	=> installed,
     }
 
+    package { "test-automation":
+	ensure	=> installed,
+    }
+
     package { "workrave":
 	ensure	=> installed,
     }
