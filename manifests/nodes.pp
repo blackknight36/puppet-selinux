@@ -70,3 +70,7 @@ node "mdct-puppet.dartcontainer.com" inherits "server_node" {
     include bacula_client
     include yum-cron
 }
+
+
+node "mdct-test-agent-32.dartcontainer.com" inherits "server_node" {
+}
