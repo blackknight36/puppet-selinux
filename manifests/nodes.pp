@@ -5,13 +5,14 @@ node "base_node" {
     include autofs
     # include cups
     # include local-mounts
-    include openssh-server
     include nscd
     include ntp
-    # include postfix-client
+    include openssh-server
     include pkgs_base
+    # include postfix-client
     include puppet
     include rpcidmapd
+    include storage-relocation
     include sudo
     # include unwanted-services
 }
@@ -69,5 +70,3 @@ node "mdct-puppet.dartcontainer.com" inherits "server_node" {
     include bacula_client
     include yum-cron
 }
-
-
