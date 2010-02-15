@@ -2,11 +2,19 @@
 
 class pkgs_developer {
 
+    package { "builder":
+	ensure	=> installed,
+    }
+
     package { "cvs":
 	ensure	=> installed,
     }
 
     package { "git":
+	ensure	=> installed,
+    }
+
+    package { "gitk":
 	ensure	=> installed,
     }
 
