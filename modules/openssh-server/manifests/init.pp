@@ -11,7 +11,10 @@ class openssh-server {
         mode    => 600,
         owner   => "root",
         require => Package["openssh-server"],
-	source	=> "puppet:///openssh-server/sshd_config",
+	source	=> [
+            "puppet:///openssh-server/sshd_config.$operatingsystem.$operatingsystemrelease",
+            "puppet:///openssh-server/sshd_config",
+        ],
     }
 
     exec { "open-sshd-port":
