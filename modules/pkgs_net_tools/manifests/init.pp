@@ -6,6 +6,10 @@ class pkgs_net_tools {
 	ensure	=> installed,
     }
 
+    package { "nmap":
+	ensure	=> installed,
+    }
+
     package { "mtr":
 	ensure	=> installed,
     }
