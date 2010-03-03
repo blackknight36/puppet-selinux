@@ -45,9 +45,6 @@ node "mdct-dev6.dartcontainer.com" inherits "workstation_node" {
 node "mdct-dev9.dartcontainer.com" inherits "workstation_node" {
 }
 
-node "mdct-dev13.dartcontainer.com" inherits "base_node" {
-    include pkgs_workstation
-}
 
 node "mdct-dev12.dartcontainer.com" inherits "workstation_node" {
     # passwords generated with bacula-password-generator
@@ -56,7 +53,13 @@ node "mdct-dev12.dartcontainer.com" inherits "workstation_node" {
     include bacula_client
 
     include bacula_admin
+    include mysql-server
     include yum-cron
+}
+
+
+node "mdct-dev13.dartcontainer.com" inherits "base_node" {
+    include pkgs_workstation
 }
 
 

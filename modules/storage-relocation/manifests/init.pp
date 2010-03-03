@@ -3,6 +3,7 @@
 class storage-relocation {
 
     include autofs
+    include mysql-server
 
     define replace_original_with_symlink_to_alternate($original, $backup, $alternate) {
         # Make a local backup of the original file or directory that can be
@@ -57,6 +58,7 @@ class storage-relocation {
                 alternate	=> "/mnt-local/storage/j/var/lib/mysql",
                 backup          => "/var/lib/mysql$SUFFIX",
                 original        => "/var/lib/mysql",
+                require         => Service["mysqld"],
             }
 
         }
