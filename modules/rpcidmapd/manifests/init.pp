@@ -2,6 +2,10 @@
 
 class rpcidmapd {
 
+    package { "nfs-utils":
+	 ensure => installed
+    }
+
     package { "nfs-utils-lib":
 	 ensure => installed
     }
@@ -20,6 +24,7 @@ class rpcidmapd {
 	hasrestart	=> true,
 	hasstatus	=> true,
 	require		=> [
+	    Package["nfs-utils"],
 	    Package["nfs-utils-lib"],
 	],
 	subscribe	=> [
