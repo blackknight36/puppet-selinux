@@ -2,15 +2,27 @@
 
 class pkgs_32bit_compat {
 
-    package { "fontconfig.i586":
+    $ALT_ARCH = $operatingsystem ? {
+        centos      => $lsbmajdistrelease ? {
+            5   =>      "i386",
+        },
+        Fedora      => $operatingsystemrelease ? {
+            8   =>      "i386",
+            10  =>      "i386",
+            11  =>      "i586",
+            12  =>      "i686",
+        },
+    }
+
+    package { "fontconfig.$ALT_ARCH":
         ensure  => installed,
     }
 
-    package { "freetype.i586":
+    package { "freetype.$ALT_ARCH":
         ensure  => installed,
     }
 
-    package { "glib2.i586":
+    package { "glib2.$ALT_ARCH":
         ensure  => installed,
     }
 
@@ -18,27 +30,27 @@ class pkgs_32bit_compat {
         ensure  => installed,
     }
 
-    package { "libSM.i586":
+    package { "libSM.$ALT_ARCH":
         ensure  => installed,
     }
 
-    package { "libXext.i586":
+    package { "libXext.$ALT_ARCH":
         ensure  => installed,
     }
 
-    package { "libXi.i586":
+    package { "libXi.$ALT_ARCH":
         ensure  => installed,
     }
 
-    package { "libXrandr.i586":
+    package { "libXrandr.$ALT_ARCH":
         ensure  => installed,
     }
 
-    package { "libXrender.i586":
+    package { "libXrender.$ALT_ARCH":
         ensure  => installed,
     }
 
-    package { "libXtst.i586":
+    package { "libXtst.$ALT_ARCH":
         ensure  => installed,
     }
 
