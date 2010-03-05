@@ -37,6 +37,8 @@ node "build_server_node" inherits "server_node" {
     include pkgs_net_tools
 }
 
+node "mdct-00dw.dartcontainer.com" inherits "server_node" {
+}
 
 node "mdct-dev6.dartcontainer.com" inherits "workstation_node" {
 }
