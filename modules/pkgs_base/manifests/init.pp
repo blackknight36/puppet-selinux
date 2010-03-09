@@ -37,6 +37,10 @@ class pkgs_base {
 	ensure	=> installed,
     }
 
+    package { "iotop":
+	ensure	=> installed,
+    }
+
     if $operatingsystemrelease >= 10 {
 	package { "task":
 	    ensure	=> installed,
