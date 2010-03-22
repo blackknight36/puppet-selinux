@@ -22,6 +22,11 @@ class pkgs_32bit_compat {
         ensure  => installed,
     }
 
+    # GConf2 needed for at least Lotus Notes
+    package { "GConf2.$ALT_ARCH":
+        ensure  => installed,
+    }
+
     package { "glib2.$ALT_ARCH":
         ensure  => installed,
     }

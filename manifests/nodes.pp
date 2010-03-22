@@ -25,6 +25,7 @@ node "server_node" inherits "base_node" {
 
 
 node "workstation_node" inherits "base_node" {
+    include lotus_notes_client
     include pkgs_developer
     include pkgs_media
     include pkgs_net_tools
