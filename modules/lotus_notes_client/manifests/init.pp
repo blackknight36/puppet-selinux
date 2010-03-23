@@ -28,7 +28,7 @@ class lotus_notes_client {
         command => "rpm --import /pub/fedora/mdct/signing_keys/RPM-GPG-KEY-fedora-8-new",
         unless  => $hostname ? {
             "mdct-dev12"        => "true",
-            default             => "rpm -q gpg-pubkey-6df2196f",
+            default             => "rpm -q gpg-pubkey-4f2a6fd2",
         },
         require => [
             File["/pub"],       # from autofs
