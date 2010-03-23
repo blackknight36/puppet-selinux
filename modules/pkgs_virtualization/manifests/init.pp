@@ -2,8 +2,18 @@
 
 class pkgs_virtualization {
 
-    package { "qemu-kvm":
-	ensure	=> installed,
+    if ( $operatingsystem == "Fedora" ) and ($operatingsystemrelease < 11) {
+        package { "kvm":
+            ensure	=> installed,
+        }
+        package { "qemu":
+            ensure	=> installed,
+        }
+    }
+    else {
+        package { "qemu-kvm":
+            ensure	=> installed,
+        }
     }
 
     package { "virt-manager":
