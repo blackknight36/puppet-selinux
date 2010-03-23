@@ -1,5 +1,9 @@
 # /etc/puppet/manifests/nodes.pp
 
+################################################################################
+#                                 Node Types
+################################################################################
+
 node "base_node" {
     include authconfig
     include autofs
@@ -39,6 +43,11 @@ node "build_server_node" inherits "server_node" {
     include pkgs_net_tools
 }
 
+
+################################################################################
+#                                Actual Nodes
+################################################################################
+
 node "mdct-00dw.dartcontainer.com" inherits "server_node" {
 }
 
@@ -51,7 +60,7 @@ node "mdct-dev9.dartcontainer.com" inherits "workstation_node" {
 
 
 node "mdct-dev12.dartcontainer.com" inherits "workstation_node" {
-    # passwords generated with bacula-password-generator
+    # passwords generated with bacula-password-generator package
     $bacula_client_director_password = "2hNcW1n2jkNU5ywm4TK6CrY2yDmqlEPcr2SoRP0abEHW"
     $bacula_client_director_monitor_password = "WqQvFNJdbiIfyxnKkoocVQFcNgY0CLVcKXok1TtrhJTH"
     include bacula_client
@@ -83,7 +92,7 @@ node "mdct-f12-builder.dartcontainer.com" inherits "build_server_node" {
 
 
 node "mdct-puppet.dartcontainer.com" inherits "server_node" {
-    # passwords generated with bacula-password-generator
+    # passwords generated with bacula-password-generator package
     $bacula_client_director_password = "0cCamrzZiiA5mOHh3YkffFoymLroVOTU1wr2nmLEPKae"
     $bacula_client_director_monitor_password = "kPn3DRuaxk9Iwchm0mq4WthqYdwXbI4QI9WLArP3S4nz"
     include bacula_client
@@ -93,3 +102,7 @@ node "mdct-puppet.dartcontainer.com" inherits "server_node" {
 
 node "mdct-test-agent-32.dartcontainer.com" inherits "server_node" {
 }
+
+node "mole.dartcontainer.com" inherits "workstation_node" {
+}
+
