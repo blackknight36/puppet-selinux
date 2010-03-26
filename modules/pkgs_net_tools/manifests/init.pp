@@ -14,6 +14,9 @@ class pkgs_net_tools {
 	ensure	=> installed,
     }
 
+    # tsocks gets its own module
+    include tsocks
+
     package { "wireshark-gnome":
 	ensure	=> installed,
     }
