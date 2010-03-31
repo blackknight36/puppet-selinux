@@ -19,6 +19,7 @@ node "base_node" {
     include rpcidmapd
     include storage-relocation
     include sudo
+    include timezone
     # include unwanted-services
 }
 
