@@ -44,6 +44,13 @@ node "build_server_node" inherits "server_node" {
 }
 
 
+node "puppet_server_node" inherits "server_node" {
+    include pkgs_developer
+    include puppet-server
+    include yum-cron
+}
+
+
 ################################################################################
 #                                Actual Nodes
 ################################################################################
@@ -91,12 +98,11 @@ node "mdct-f12-builder.dartcontainer.com" inherits "build_server_node" {
 }
 
 
-node "mdct-puppet.dartcontainer.com" inherits "server_node" {
+node "mdct-puppet.dartcontainer.com" inherits "puppet_server_node" {
     # passwords generated with bacula-password-generator package
     $bacula_client_director_password = "0cCamrzZiiA5mOHh3YkffFoymLroVOTU1wr2nmLEPKae"
     $bacula_client_director_monitor_password = "kPn3DRuaxk9Iwchm0mq4WthqYdwXbI4QI9WLArP3S4nz"
     include bacula_client
-    include yum-cron
 }
 
 
