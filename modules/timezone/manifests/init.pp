@@ -6,7 +6,7 @@ class timezone {
         group	=> "root",
         mode    => 644,
         owner   => "root",
-        source  => "puppet:///modules/timezone/clock",
+        source  => "puppet:///timezone/clock",
     }
 
     file { "/etc/localtime":
