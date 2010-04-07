@@ -8,7 +8,6 @@ node "base_node" {
     include authconfig
     include autofs
     # include cups
-    # include local-mounts
     include nscd
     include ntp
     include openssh-server
