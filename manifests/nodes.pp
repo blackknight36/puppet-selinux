@@ -14,7 +14,6 @@ node "base_node" {
     include openssh-server
     include pam
     include pkgs_base
-    # include postfix-client
     include puppet
     include rpcidmapd
     include storage-relocation
