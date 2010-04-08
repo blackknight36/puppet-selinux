@@ -19,6 +19,7 @@ node "base_node" {
     include sudo
     include timezone
     # include unwanted-services
+    include xorg-server
 }
 
 
