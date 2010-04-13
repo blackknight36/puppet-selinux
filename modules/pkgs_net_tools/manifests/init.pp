@@ -6,11 +6,19 @@ class pkgs_net_tools {
 	ensure	=> installed,
     }
 
-    package { "nmap":
+    package { "enmasse":
 	ensure	=> installed,
     }
 
     package { "mtr":
+	ensure	=> installed,
+    }
+
+    package { "nmap":
+	ensure	=> installed,
+    }
+
+    package { "openldap-clients":
 	ensure	=> installed,
     }
 
