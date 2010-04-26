@@ -63,6 +63,7 @@ node "mdct-dev6.dartcontainer.com" inherits "workstation_node" {
 
 
 node "mdct-dev9.dartcontainer.com" inherits "workstation_node" {
+    include yum-cron
 }
 
 
