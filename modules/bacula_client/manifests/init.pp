@@ -2,16 +2,45 @@
 
 class bacula_client {
 
-    package { "bacula-client":
-	ensure	=> installed
+    # We're sticking with Bacula 2.x for now.
+    #
+    # F12 and later make the default bacula packages use a newer major version
+    # that is not backwards compatible with a Bacula 2.x server.  They do
+    # however offer a "bacula2" series of packges that provide 2.x (2.4.4 at
+    # this time) for compatiblity with older Bacula server deployments.
+    if $operatingsystem == "Fedora" and $operatingsystemrelease >= 12 {
+        $bacula_major = "bacula2"
+        $conflict_major = "bacula"
+    } else {
+        $bacula_major = "bacula"
+        $conflict_major = undef
+    }
+            
+    # Fedora packages Bacula so that multiple major versions can coexist.  We
+    # only need one of them and force the absence of the other primarily to
+    # ensure that the other has already been configured and has a service
+    # started and listening on the reserved port.  Essentially, we're evicting
+    # any potential port squatter.
+    if "${conflict_major}" != undef {
+        package { "${conflict_major}-client":
+            ensure      => absent,
+        }
+        $conflict_package = [ Package["${conflict_major}-client"] ]
+    } else {
+        $conflict_package = undef
     }
 
-    file { "/etc/bacula/bacula-fd.conf":
+    package { "${bacula_major}-client":
+	ensure	=> installed,
+        require => $conflict_package,
+    }
+
+    file { "/etc/${bacula_major}/bacula-fd.conf":
 	content	=> template("bacula_client/bacula-fd.conf"),
         group	=> "root",
         mode    => 640,
         owner   => "root",
-        require => Package["bacula-client"],
+        require => Package["${bacula_major}-client"],
     }
 
     exec { "open-bacula-fd-port":
@@ -19,17 +48,17 @@ class bacula_client {
         unless  => "grep -q -- '-A INPUT .* -p tcp --dport 9102 -j ACCEPT' /etc/sysconfig/iptables",
     }
 
-    service { "bacula-fd":
+    service { "${bacula_major}-fd":
         enable		=> true,
         ensure		=> running,
         hasrestart	=> true,
         hasstatus	=> true,
         require		=> [
             Exec["open-bacula-fd-port"],
-            Package["bacula-client"],
+            Package["${bacula_major}-client"],
         ],
         subscribe	=> [
-            File["/etc/bacula/bacula-fd.conf"],
+            File["/etc/${bacula_major}/bacula-fd.conf"],
         ]
     }
 
