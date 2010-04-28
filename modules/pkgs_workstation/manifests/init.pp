@@ -34,6 +34,10 @@ class pkgs_workstation {
 	ensure	=> installed,
     }
 
+    package { "tigervnc":
+	ensure	=> installed,
+    }
+
     package { "workrave":
 	ensure	=> installed,
     }
