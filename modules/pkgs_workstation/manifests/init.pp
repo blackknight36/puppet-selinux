@@ -34,7 +34,12 @@ class pkgs_workstation {
 	ensure	=> installed,
     }
 
-    package { "tigervnc":
+    if $operatingsystemrelease > 10 {
+        $vncviewer = "tigervnc"
+    } else {
+        $vncviewer = "vnc"
+    }
+    package { "${vncviewer}":
 	ensure	=> installed,
     }
 
