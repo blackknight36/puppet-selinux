@@ -52,6 +52,10 @@ class pkgs_media {
 	ensure	=> installed,
     }
 
+    package { "koffice-krita":
+	ensure	=> installed,
+    }
+
     package { "lame":
 	ensure	=> installed,
     }
