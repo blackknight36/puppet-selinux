@@ -11,7 +11,6 @@ class dart::base_node {
     include pkgs_base
     include puppet
     include rpcidmapd
-    include storage-relocation
     include sudo
     include timezone
     # include unwanted-services

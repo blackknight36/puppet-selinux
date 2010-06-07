@@ -65,7 +65,4 @@ class autofs {
 	]
     }
 
-    # See also modules/storage-relocation/ for things that are sort of
-    # related.
-
 }

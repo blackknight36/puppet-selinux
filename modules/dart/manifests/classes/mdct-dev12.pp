@@ -9,4 +9,36 @@ class dart::mdct-dev12 inherits dart::workstation_node {
     include bacula_admin
     include mysql-server
     include yum-cron
+
+    $SUFFIX=".orig-${operatingsystem}${operatingsystemrelease}"
+
+    file { "/j":
+        ensure	=> "/mnt-local/storage/j/",
+        require => Service["autofs"],
+    }
+
+    file { "/Pound":
+        ensure	=> "/mnt-local/storage/Pound/",
+        require => Service["autofs"],
+    }
+
+    replace_original_with_symlink_to_alternate { "/etc/libvirt":
+        alternate       => "/mnt-local/storage/j/etc/libvirt",
+        backup          => "/etc/libvirt$SUFFIX",
+        original        => "/etc/libvirt",
+    }
+
+    replace_original_with_symlink_to_alternate { "/var/lib/libvirt":
+        alternate	=> "/mnt-local/storage/j/var/lib/libvirt",
+        backup          => "/var/lib/libvirt$SUFFIX",
+        original        => "/var/lib/libvirt",
+    }
+
+    replace_original_with_symlink_to_alternate { "/var/lib/mysql":
+        alternate	=> "/mnt-local/storage/j/var/lib/mysql",
+        backup          => "/var/lib/mysql$SUFFIX",
+        original        => "/var/lib/mysql",
+        require         => Service["mysqld"],
+    }
+
 }
