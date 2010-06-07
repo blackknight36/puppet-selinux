@@ -2,6 +2,13 @@
 
 class unwanted-services {
 
+    service { "avahi-daemon":
+        enable		=> false,
+        ensure		=> stopped,
+        hasrestart	=> true,
+        hasstatus	=> true,
+    }
+
     service { "iscsi":
         enable		=> false,
         ensure		=> stopped,
