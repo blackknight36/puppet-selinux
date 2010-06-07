@@ -13,6 +13,5 @@ class dart::base_node {
     include rpcidmapd
     include sudo
     include timezone
-    # include unwanted-services
     include xorg-server
 }

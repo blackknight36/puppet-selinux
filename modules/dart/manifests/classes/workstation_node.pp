@@ -7,4 +7,5 @@ class dart::workstation_node inherits dart::base_node {
     include pkgs_net_tools
     include pkgs_virtualization
     include pkgs_workstation
+    include unwanted-services
 }
