@@ -14,6 +14,13 @@ class authconfig {
         ensure  => installed,
     }
 
+    if $operatingsystem == "Fedora" and $operatingsystemrelease >= 13 {
+        exec { "allow-use-nfs-home-dirs":
+            command => "setsebool -P use_nfs_home_dirs on",
+            unless  => "getsebool use_nfs_home_dirs | grep -q -- 'on$'",
+        }
+    }
+
     file { "/etc/pam.d/system-auth-ac":
         group   => "root",
         mode    => 644,
