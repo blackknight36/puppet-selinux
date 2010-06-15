@@ -1,6 +1,6 @@
-# /etc/puppet/modules/pkgs_base/manifests/init.pp
+# /etc/puppet/modules/packages/manifests/classes/base.pp
 
-class pkgs_base {
+class packages::base {
 
     # These work fine for Fedora 11.  In Fedora 12, all packages on 32-bit
     # architecture have been compiled fo i686 systems.  Trying to simply
@@ -10,7 +10,7 @@ class pkgs_base {
     #
     # Fedora 8 only has glibc and at this point, it isn't worth getting picky.
     if ($architecture == "x86_64") and ($operatingsystemrelease > 8) and ($operatingsystemrelease <= 11) {
-        include pkgs_32bit_compat
+        include packages::compat_32bit
     }
 
     package { "bash-completion":

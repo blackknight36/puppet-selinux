@@ -1,6 +1,6 @@
-# /etc/puppet/modules/pkgs_workstation/manifests/init.pp
+# /etc/puppet/modules/packages/manifests/classes/workstation.pp
 
-class pkgs_workstation {
+class packages::workstation {
 
     package { "firefox":
 	ensure	=> installed,

@@ -1,6 +1,6 @@
-# /etc/puppet/modules/pkgs_virtualization/manifests/init.pp
+# /etc/puppet/modules/packages/manifests/classes/virtualization.pp
 
-class pkgs_virtualization {
+class packages::virtualization {
 
     if ( $operatingsystem == "Fedora" ) and ($operatingsystemrelease < 11) {
         package { "kvm":

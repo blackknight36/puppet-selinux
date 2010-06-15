@@ -2,10 +2,10 @@
 
 class dart::workstation_node inherits dart::base_node {
     include lotus_notes_client
-    include pkgs_developer
-    include pkgs_media
-    include pkgs_net_tools
-    include pkgs_virtualization
-    include pkgs_workstation
+    include packages::developer
+    include packages::media
+    include packages::net_tools
+    include packages::virtualization
+    include packages::workstation
     include unwanted-services
 }

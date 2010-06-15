@@ -1,6 +1,6 @@
-# /etc/puppet/modules/pkgs_developer/manifests/init.pp
+# /etc/puppet/modules/packages/manifests/classes/developer.pp
 
-class pkgs_developer {
+class packages::developer {
 
     package { "builder":
 	ensure	=> installed,

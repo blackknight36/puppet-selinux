@@ -1,6 +1,6 @@
-# /etc/puppet/modules/pkgs_32bit_compat/manifests/init.pp
+# /etc/puppet/modules/packages/manifests/classes/compat_32bit.pp
 
-class pkgs_32bit_compat {
+class packages::compat_32bit {
 
     $ALT_ARCH = $operatingsystem ? {
         centos      => $lsbmajdistrelease ? {

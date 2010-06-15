@@ -1,6 +1,6 @@
-# /etc/puppet/modules/pkgs_net_tools/manifests/init.pp
+# /etc/puppet/modules/packages/manifests/classes/net_tools.pp
 
-class pkgs_net_tools {
+class packages::net_tools {
 
     package { "bridge-utils":
 	ensure	=> installed,

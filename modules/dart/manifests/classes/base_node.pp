@@ -7,7 +7,7 @@ class dart::base_node {
     include nscd
     include ntp
     include openssh-server
-    include pkgs_base
+    include packages::base
     include puppet
     include rpcidmapd
     include sudo

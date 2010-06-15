@@ -1,6 +1,6 @@
-# /etc/puppet/modules/pkgs_media/manifests/init.pp
+# /etc/puppet/modules/packages/manifests/classes/media.pp
 
-class pkgs_media {
+class packages::media {
 
     package { "amarok":
 	ensure	=> installed,
