@@ -68,6 +68,10 @@ class packages::media {
 	ensure	=> installed,
     }
 
+    package { "phonon-backend-gstreamer":
+	ensure	=> installed,
+    }
+
     package { "xine-lib-extras-freeworld":
 	ensure	=> installed,
     }
