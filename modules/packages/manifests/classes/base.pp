@@ -47,6 +47,10 @@ class packages::base {
 	}
     }
 
+    package { "mlocate":
+	ensure	=> installed,
+    }
+
     package { "prophile":
 	ensure	=> installed,
     }
