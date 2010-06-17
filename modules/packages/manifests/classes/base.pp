@@ -55,6 +55,10 @@ class packages::base {
 	ensure	=> installed,
     }
 
+    package { "tree":
+	ensure	=> installed,
+    }
+
     package { "units":
 	ensure	=> installed,
     }
