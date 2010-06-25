@@ -1,7 +1,5 @@
 # /etc/puppet/modules/nscd/manifests/init.pp
 
-# NB: nscd *may* cause problems with the builder package, but it is essential
-# to have this for reasonable system performance
 class nscd {
 
     package { "nscd":
