@@ -14,6 +14,20 @@ class authconfig {
         ensure  => installed,
     }
 
+    package { "nscd":
+	ensure	=> installed,
+    }
+
+    service { "nscd":
+        enable		=> true,
+        ensure		=> running,
+        hasrestart	=> true,
+        hasstatus	=> true,
+        require		=> [
+            Package["nscd"],
+        ],
+    }
+
     if $operatingsystem == "Fedora" and $operatingsystemrelease >= 13 {
         exec { "allow-use-nfs-home-dirs":
             command => "setsebool -P use_nfs_home_dirs on",

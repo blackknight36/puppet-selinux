@@ -4,7 +4,6 @@ class dart::base_node {
     include authconfig
     include autofs
     # include cups
-    include nscd
     include ntp
     include openssh-server
     include packages::base
