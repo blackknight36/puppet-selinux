@@ -16,6 +16,15 @@ class lotus_notes_client {
         ],
     }
 
+    # sigh ...  What's next?  A fix pack for the fix pack?
+    package { "ibm_lotus_notes_fixpack":
+	ensure	=> installed,
+        require => [
+            Exec["import_ibm_signing_key"],
+            Package["ibm_lotus_notes"],
+        ],
+    }
+
     # mdct-dev12 treated specially.  I manually imported the key (via rpm
     # --import) and then removed it (via rpm -e) to verify this class would
     # work correctly, but the key always fails to import there now.  However,
