@@ -9,6 +9,13 @@ class unwanted-services {
         hasstatus	=> true,
     }
 
+    service { "bluetooth":
+        enable		=> false,
+        ensure		=> stopped,
+        hasrestart	=> true,
+        hasstatus	=> true,
+    }
+
     service { "iscsi":
         enable		=> false,
         ensure		=> stopped,
