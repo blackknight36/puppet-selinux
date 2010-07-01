@@ -16,6 +16,13 @@ class unwanted-services {
         hasstatus	=> true,
     }
 
+    service { "firstboot":
+        enable		=> false,
+        ensure		=> stopped,
+        hasrestart	=> true,
+        hasstatus	=> true,
+    }
+
     service { "iscsi":
         enable		=> false,
         ensure		=> stopped,
