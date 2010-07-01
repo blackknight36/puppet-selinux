@@ -14,6 +14,10 @@ class packages::kde {
 	ensure	=> installed,
     }
 
+    package { "kdeartwork":
+	ensure	=> installed,
+    }
+
     package { "kmplayer":
 	ensure	=> installed,
     }
