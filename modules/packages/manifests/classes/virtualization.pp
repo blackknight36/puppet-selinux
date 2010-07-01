@@ -16,6 +16,10 @@ class packages::virtualization {
         }
     }
 
+    package { "libvirt":
+	ensure	=> installed,
+    }
+
     package { "virt-manager":
 	ensure	=> installed,
     }
