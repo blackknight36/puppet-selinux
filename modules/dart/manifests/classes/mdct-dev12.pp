@@ -8,6 +8,7 @@ class dart::mdct-dev12 inherits dart::workstation_node {
 
     include bacula_admin
     include mysql-server
+    include packages::kde
     include yum-cron
 
     $SUFFIX=".orig-${operatingsystem}${operatingsystemrelease}"
@@ -26,19 +27,26 @@ class dart::mdct-dev12 inherits dart::workstation_node {
         alternate       => "/mnt-local/storage/j/etc/libvirt",
         backup          => "/etc/libvirt$SUFFIX",
         original        => "/etc/libvirt",
+        # TODO: libvirt needs to be a formal service and treated here like
+        # mysql WRT before/require attrs
+        require         => Package["libvirt"],
     }
 
     replace_original_with_symlink_to_alternate { "/var/lib/libvirt":
         alternate	=> "/mnt-local/storage/j/var/lib/libvirt",
         backup          => "/var/lib/libvirt$SUFFIX",
         original        => "/var/lib/libvirt",
+        # TODO: libvirt needs to be a formal service and treated here like
+        # mysql WRT before/require attrs
+        require         => Package["libvirt"],
     }
 
     replace_original_with_symlink_to_alternate { "/var/lib/mysql":
         alternate	=> "/mnt-local/storage/j/var/lib/mysql",
         backup          => "/var/lib/mysql$SUFFIX",
         original        => "/var/lib/mysql",
-        require         => Service["mysqld"],
+        before          => Service["mysqld"],
+        require         => Package["mysql-server"],
     }
 
 }

@@ -1,10 +1,8 @@
 # /etc/puppet/modules/packages/manifests/classes/media.pp
 
-class packages::media {
+# See also packages::kde.
 
-    package { "amarok":
-	ensure	=> installed,
-    }
+class packages::media {
 
     package { "easytag":
 	ensure	=> installed,
@@ -40,22 +38,6 @@ class packages::media {
 	ensure	=> installed,
     }
 
-    package { "k3b":
-	ensure	=> installed,
-    }
-
-    package { "k3b-extras-freeworld":
-	ensure	=> installed,
-    }
-
-    package { "kmplayer":
-	ensure	=> installed,
-    }
-
-    package { "koffice-krita":
-	ensure	=> installed,
-    }
-
     package { "lame":
 	ensure	=> installed,
     }
@@ -65,10 +47,6 @@ class packages::media {
     }
 
     package { "mplayer":
-	ensure	=> installed,
-    }
-
-    package { "phonon-backend-gstreamer":
 	ensure	=> installed,
     }
 
