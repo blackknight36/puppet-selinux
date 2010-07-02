@@ -18,6 +18,10 @@ class packages::kde {
 	ensure	=> installed,
     }
 
+    package { "kde-plasma-yawp":
+	ensure	=> installed,
+    }
+
     package { "kmplayer":
 	ensure	=> installed,
     }
