@@ -2,6 +2,11 @@
 
 class packages::workstation {
 
+    # One of the very few that provides left-handed cursors.
+    package { "bluecurve-cursor-theme":
+	ensure	=> installed,
+    }
+
     package { "firefox":
 	ensure	=> installed,
     }
