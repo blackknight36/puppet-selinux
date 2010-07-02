@@ -1,6 +1,6 @@
-# /etc/puppet/modules/bacula_client/manifests/init.pp
+# /etc/puppet/modules/bacula/manifests/classes/client.pp
 
-class bacula_client {
+class bacula::client {
 
     # We're sticking with Bacula 2.x for now.
     #
@@ -15,7 +15,7 @@ class bacula_client {
         $bacula_major = "bacula"
         $conflict_major = undef
     }
-            
+
     # Fedora packages Bacula so that multiple major versions can coexist.  We
     # only need one of them and force the absence of the other primarily to
     # ensure that the other has already been configured and has a service
@@ -36,7 +36,7 @@ class bacula_client {
     }
 
     file { "/etc/${bacula_major}/bacula-fd.conf":
-	content	=> template("bacula_client/bacula-fd.conf"),
+	content	=> template("bacula/bacula-fd.conf"),
         group	=> "root",
         mode    => 640,
         owner   => "root",
