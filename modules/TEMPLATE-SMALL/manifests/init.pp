@@ -17,10 +17,13 @@ class MODULE_NAME {
     file { "/CONFIG_PATH/CONFIG_NAME":
         # don't forget to verify these!
         group	=> "root",
-        mode    => 640,
+        mode    => "0640",
         owner   => "root",
         require => Package["PACKAGE_NAME"],
-        source  => "puppet:///MODULE_NAME/CONFIG_NAME",
+        seluser => "system_u",
+        selrole => "object_r",
+        seltype => "etc_t",
+        source  => "puppet:///modules/MODULE_NAME/CONFIG_NAME",
     }
 
     # template file
@@ -28,9 +31,12 @@ class MODULE_NAME {
 	content	=> template("MODULE_NAME/CONFIG_NAME"),
         # don't forget to verify these!
         group	=> "root",
-        mode    => 640,
+        mode    => "0640",
         owner   => "root",
         require => Package["PACKAGE_NAME"],
+        seluser => "system_u",
+        selrole => "object_r",
+        seltype => "etc_t",
     }
 
     exec { "open-SERVICE_NAME-port":
