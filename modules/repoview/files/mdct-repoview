@@ -1,0 +1,6 @@
+# This is being done here since repoview is borken on 00fs
+0 */6 * * * root /usr/bin/repoview -t "Machine Data Collections Team" /pub/fedora/mdct/8/i386/ &> /var/log/mdct-repoview-f8
+2 */6 * * * root /usr/bin/repoview -t "Machine Data Collections Team" /pub/fedora/mdct/10/i386/ &> /var/log/mdct-repoview-f10
+4 */6 * * * root /usr/bin/repoview -t "Machine Data Collections Team" /pub/fedora/mdct/11/i386/ &> /var/log/mdct-repoview-f11
+6 */6 * * * root /usr/bin/repoview -t "Machine Data Collections Team" /pub/fedora/mdct/12/i386/ &> /var/log/mdct-repoview-f12
+8 */6 * * * root /usr/bin/repoview -t "Machine Data Collections Team" /pub/fedora/mdct/13/i386/ &> /var/log/mdct-repoview-f13

@@ -22,10 +22,6 @@ class packages::developer {
 	ensure	=> installed,
     }
 
-    package { "repoview":
-	ensure	=> installed,
-    }
-
     package { "rpmdevtools":
 	ensure	=> installed,
     }
