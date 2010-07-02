@@ -18,7 +18,7 @@ class bacula::admin {
         source  => "puppet:///bacula/tray-monitor.conf",
     }
 
-    file { "/etc/bat.conf":
+    file { "/etc/bacula/bat.conf":
         group	=> "root",
         mode    => 640,
         owner   => "root",
