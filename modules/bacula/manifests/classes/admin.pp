@@ -1,6 +1,6 @@
-# /etc/puppet/modules/bacula_admin/manifests/init.pp
+# /etc/puppet/modules/bacula/manifests/classes/admin.pp
 
-class bacula_admin {
+class bacula::admin {
 
     package { "bacula-traymonitor":
 	ensure	=> installed,
@@ -15,7 +15,7 @@ class bacula_admin {
         mode    => 644,
         owner   => "root",
         require => Package["bacula-traymonitor"],
-        source  => "puppet:///bacula_admin/tray-monitor.conf",
+        source  => "puppet:///bacula/tray-monitor.conf",
     }
 
     file { "/etc/bat.conf":
@@ -23,7 +23,7 @@ class bacula_admin {
         mode    => 640,
         owner   => "root",
         require => Package["bacula-console-bat"],
-        source  => "puppet:///bacula_admin/bat.conf",
+        source  => "puppet:///bacula/bat.conf",
     }
 
 }
