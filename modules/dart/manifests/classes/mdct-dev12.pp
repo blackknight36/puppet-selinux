@@ -9,6 +9,7 @@ class dart::mdct-dev12 inherits dart::workstation_node {
     include bacula::admin
     include mysql-server
     include packages::kde
+    include repoview
     include yum-cron
 
     $SUFFIX=".orig-${operatingsystem}${operatingsystemrelease}"
