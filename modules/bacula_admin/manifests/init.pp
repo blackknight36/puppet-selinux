@@ -10,7 +10,7 @@ class bacula_admin {
 	ensure	=> installed,
     }
 
-    file { "/etc/tray-monitor.conf":
+    file { "/etc/bacula/tray-monitor.conf":
         group	=> "root",
         mode    => 644,
         owner   => "root",
