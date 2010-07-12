@@ -6,6 +6,10 @@ class puppet-server {
 	ensure	=> installed,
     }
 
+    package { "puppet-tools":
+	ensure	=> installed,
+    }
+
     # Not managed here, but vital:
     #   /etc/puppet             (rsync to replacement host; note the local git
     #                            repository)
