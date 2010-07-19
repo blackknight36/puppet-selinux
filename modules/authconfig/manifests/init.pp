@@ -59,9 +59,11 @@ class authconfig {
             # NFS.  Interestingly, this only affects the cd within login as it
             # is still possible to enter the home dir after login when this is
             # off.
-            selboolean { "use_nfs_home_dirs":
-                persistent      => true,
-                value           => on,
+            if $selinux == "true" {
+                selboolean { "use_nfs_home_dirs":
+                    persistent      => true,
+                    value           => on,
+                }
             }
 
             package { "krb5-libs":
