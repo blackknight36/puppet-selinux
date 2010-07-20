@@ -13,6 +13,7 @@ node "mdct-dev13.dartcontainer.com"             { include dart::mdct-dev13 }    
 node "mdct-dev14.dartcontainer.com"             { include dart::mdct-dev14 }            # AH
 node "mdct-f8-builder.dartcontainer.com"        { include dart::mdct-f8-builder }
 node "mdct-f10-builder.dartcontainer.com"       { include dart::mdct-f10-builder }
+node "mdct-f11-builder.dartcontainer.com"       { include dart::mdct-f11-builder }
 node "mdct-f12-builder.dartcontainer.com"       { include dart::mdct-f12-builder }
 node "mdct-f13-builder.dartcontainer.com"       { include dart::mdct-f13-builder }
 node "mdct-puppet.dartcontainer.com"            { include dart::mdct-puppet }
