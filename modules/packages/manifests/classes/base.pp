@@ -75,4 +75,13 @@ class packages::base {
 	ensure	=> installed,
     }
 
+    # No need for yum-presto (delta RPM support) since we have local mirrors and further, we don't mirror the
+    # drpm files.  (This cannot be in the yum class since that class is required for setting defaults for the
+    # package type, which would result in infinite dependency cycles.  This seems like the next best spot.)
+    if $operatingsystem == "Fedora" and $operatingsystemrelease >= "11" {
+        package {"yum-presto":
+            ensure      => absent,
+        }
+    }
+
 }
