@@ -22,6 +22,13 @@ class packages::developer {
 	ensure	=> installed,
     }
 
+    # NB: Configuration file for rpm-build-tools is provided, but only for build_server_nodes since other
+    # developers may want slightly different configs.
+    # See also: modules/dart/manifests/classes/build_server_node.pp.
+    package { "rpm-build-tools":
+	ensure	=> installed,
+    }
+
     package { "rpmdevtools":
 	ensure	=> installed,
     }
