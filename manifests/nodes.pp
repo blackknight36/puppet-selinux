@@ -7,6 +7,7 @@
 node "mdct-00dw.dartcontainer.com"              { include dart::mdct-00dw }
 node "mdct-dev6.dartcontainer.com"              { include dart::mdct-dev6 }             # CK
 node "mdct-dev9.dartcontainer.com"              { include dart::mdct-dev9 }             # MK
+node "mdct-dev10.dartcontainer.com"             { include dart::mdct-dev10 }            # LH
 node "mdct-dev11.dartcontainer.com"             { include dart::mdct-dev11 }            # CP
 node "mdct-dev12.dartcontainer.com"             { include dart::mdct-dev12 }            # JF
 node "mdct-dev13.dartcontainer.com"             { include dart::mdct-dev13 }            # BS
