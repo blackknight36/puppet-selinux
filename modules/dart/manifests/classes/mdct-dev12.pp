@@ -50,4 +50,9 @@ class dart::mdct-dev12 inherits dart::workstation_node {
         require         => Package["mysql-server"],
     }
 
+    mailalias { "root":
+        ensure          => present,
+        recipient       => "john.florian@dart.biz",
+    }
+
 }
