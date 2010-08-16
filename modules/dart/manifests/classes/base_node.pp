@@ -5,6 +5,7 @@ class dart::base_node {
     include autofs
     # include cups
     include cachefilesd
+    include logwatch
     include ntp
     include openssh-server
     include packages::base
