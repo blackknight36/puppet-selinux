@@ -2,4 +2,10 @@
 
 class dart::mdct-dev6 inherits dart::workstation_node {
     include packages::kde
+
+    mailalias { "root":
+        ensure          => present,
+        recipient       => "chris_kennedy@dart.biz",
+    }
+
 }
