@@ -5,7 +5,7 @@ class dart::mdct-dev9 inherits dart::workstation_node {
 
     mailalias { "root":
         ensure          => present,
-        recipient       => "mark_king@dart.biz",
+        recipient       => "mark.king@dart.biz",
     }
 
 }
