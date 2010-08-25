@@ -18,6 +18,15 @@ class packages::developer {
 	ensure	=> installed,
     }
 
+    # required for: rpmbuild --sign
+    package { "gnupg":
+	ensure	=> installed,
+    }
+
+    package { "gnupg2":
+	ensure	=> installed,
+    }
+
     package { "python-devel":
 	ensure	=> installed,
     }
