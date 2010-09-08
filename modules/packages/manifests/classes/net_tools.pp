@@ -6,12 +6,22 @@ class packages::net_tools {
 	ensure	=> installed,
     }
 
+    package { "conntrack-tools":
+	ensure	=> installed,
+    }
+
     package { "enmasse":
 	ensure	=> installed,
     }
 
     package { "mtr":
 	ensure	=> installed,
+    }
+
+    if $operatingsystemrelease >= 9 {
+        package { "netstat-nat":
+            ensure	=> installed,
+        }
     }
 
     package { "nmap":
