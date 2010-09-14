@@ -1,5 +1,7 @@
-# root cannot access user's home when mounted via NFS, so might as well set
-# HOME to something useful.
+# modules/sudo/files/sudoers.mdct
+
+# root cannot access user's home when mounted via NFS and root_squash, so
+# might as well set HOME to something useful.
 Defaults    always_set_home
 
 # Allow all members of Dart's sudoers group (in LDAP) to run all commands.
