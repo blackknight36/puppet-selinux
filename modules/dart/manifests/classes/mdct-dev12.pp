@@ -15,6 +15,11 @@ class dart::mdct-dev12 inherits dart::workstation_node {
     include repoview
     include yum-cron
 
+    # noscript included here because nobody else likely to want it
+    package { "mozilla-noscript":
+        ensure  => installed,
+    }
+
     $SUFFIX=".orig-${operatingsystem}${operatingsystemrelease}"
 
     file { "/j":
