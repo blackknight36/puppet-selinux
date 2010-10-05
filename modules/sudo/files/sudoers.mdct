@@ -6,3 +6,6 @@ Defaults    always_set_home
 
 # Allow all members of Dart's sudoers group (in LDAP) to run all commands.
 %sudoers	ALL=(ALL)	ALL
+
+# Preserve the preferred EDITOR and prophile-related variables.
+Defaults    env_keep += "EDITOR VIMINIT GVIMINIT PROPHILE"

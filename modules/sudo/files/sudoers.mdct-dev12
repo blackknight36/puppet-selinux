@@ -13,5 +13,5 @@
 # Provide a longer working time before expiring credentials.
 Defaults    timestamp_timeout = 15
 
-# Preserve the preferred EDITOR.
-Defaults    env_keep += "EDITOR"
+# Preserve the preferred EDITOR and prophile-related variables.
+Defaults    env_keep += "EDITOR VIMINIT GVIMINIT PROPHILE"
