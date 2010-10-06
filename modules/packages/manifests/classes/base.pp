@@ -59,6 +59,10 @@ class packages::base {
 	ensure	=> installed,
     }
 
+    package { "ruby-rdoc":
+	ensure	=> installed,
+    }
+
     package { "tree":
 	ensure	=> installed,
     }
