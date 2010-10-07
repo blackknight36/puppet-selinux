@@ -41,13 +41,19 @@ class packages::base {
 	ensure	=> installed,
     }
 
-    if $operatingsystemrelease >= 10 {
-	package { "task":
-	    ensure	=> installed,
-	}
+    package { "lsof":
+	ensure	=> installed,
+    }
+
+    package { "man":
+	ensure	=> installed,
     }
 
     package { "mlocate":
+	ensure	=> installed,
+    }
+
+    package { "openssh-clients":
 	ensure	=> installed,
     }
 
@@ -67,6 +73,12 @@ class packages::base {
 	ensure	=> installed,
     }
 
+    if $operatingsystemrelease >= 10 {
+	package { "task":
+	    ensure	=> installed,
+	}
+    }
+
     package { "tree":
 	ensure	=> installed,
     }
@@ -80,6 +92,11 @@ class packages::base {
     }
 
     package { "vim-X11":
+	ensure	=> installed,
+    }
+
+    # xauth required for X11 forwarding
+    package { "xorg-x11-xauth":
 	ensure	=> installed,
     }
 
