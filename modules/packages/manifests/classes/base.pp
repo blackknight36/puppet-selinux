@@ -63,6 +63,10 @@ class packages::base {
 	ensure	=> installed,
     }
 
+    package { "screen":
+	ensure	=> installed,
+    }
+
     package { "tree":
 	ensure	=> installed,
     }
