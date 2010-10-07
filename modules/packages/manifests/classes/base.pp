@@ -14,90 +14,90 @@ class packages::base {
     }
 
     package { "bash-completion":
-	ensure	=> installed,
+        ensure  => installed,
     }
 
     # DejaVu LGC fonts are used by vim-X11.
     if $operatingsystemrelease >= 11 {
         package { "dejavu-lgc-sans-mono-fonts":
-            ensure	=> installed,
+            ensure      => installed,
         }
     }
     else {
         package { "dejavu-lgc-fonts":
-            ensure	=> installed,
+            ensure      => installed,
         }
     }
 
     package { "expect":
-	ensure	=> installed,
+        ensure  => installed,
     }
 
     package { "gpm":
-	ensure	=> installed,
+        ensure  => installed,
     }
 
     package { "iotop":
-	ensure	=> installed,
+        ensure  => installed,
     }
 
     package { "lsof":
-	ensure	=> installed,
+        ensure  => installed,
     }
 
     package { "man":
-	ensure	=> installed,
+        ensure  => installed,
     }
 
     package { "mlocate":
-	ensure	=> installed,
+        ensure  => installed,
     }
 
     package { "openssh-clients":
-	ensure	=> installed,
+        ensure  => installed,
     }
 
     package { "prophile":
-	ensure	=> installed,
+        ensure  => installed,
     }
 
     package { "python-mdct":
-	ensure	=> installed,
+        ensure  => installed,
     }
 
     package { "ruby-rdoc":
-	ensure	=> installed,
+        ensure  => installed,
     }
 
     package { "screen":
-	ensure	=> installed,
+        ensure  => installed,
     }
 
     if $operatingsystemrelease >= 10 {
-	package { "task":
-	    ensure	=> installed,
-	}
+        package { "task":
+            ensure      => installed,
+        }
     }
 
     package { "tree":
-	ensure	=> installed,
+        ensure  => installed,
     }
 
     package { "units":
-	ensure	=> installed,
+        ensure  => installed,
     }
 
     package { "vim-enhanced":
-	ensure	=> installed,
+        ensure  => installed,
     }
 
     package { "vim-X11":
-	ensure	=> installed,
+        ensure  => installed,
     }
 
     # xauth required for X11 forwarding
     package { "xorg-x11-xauth":
-	ensure	=> installed,
+        ensure  => installed,
     }
 
     # No need for yum-presto (delta RPM support) since we have local mirrors and further, we don't mirror the
