@@ -14,6 +14,10 @@ class packages::net_tools {
 	ensure	=> installed,
     }
 
+    package { "ethtool":
+	ensure	=> installed,
+    }
+
     package { "mtr":
 	ensure	=> installed,
     }
