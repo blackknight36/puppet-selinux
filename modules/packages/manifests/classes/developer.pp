@@ -12,6 +12,10 @@ class packages::developer {
 	ensure	=> installed,
     }
 
+    package { "gcc":
+	ensure	=> installed,
+    }
+
     package { "git":
 	ensure	=> installed,
     }
