@@ -4,10 +4,6 @@ class packages::developer {
 
     include rpm-build-tools
 
-    package { "builder":
-	ensure	=> installed,
-    }
-
     package { "cvs":
 	ensure	=> installed,
     }

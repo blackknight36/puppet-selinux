@@ -7,6 +7,10 @@ class packages::workstation {
 	ensure	=> installed,
     }
 
+    package { "builder":
+	ensure	=> installed,
+    }
+
     package { "firefox":
 	ensure	=> installed,
     }
