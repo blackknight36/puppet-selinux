@@ -45,8 +45,14 @@ class packages::base {
         ensure  => installed,
     }
 
-    package { "man":
-        ensure  => installed,
+    if $operatingsystemrelease >= 14 {
+        package { "man-db":
+            ensure  => installed,
+        }
+    } else {
+        package { "man":
+            ensure  => installed,
+        }
     }
 
     package { "mlocate":
