@@ -10,7 +10,7 @@ class dart::mdct-dev12 inherits dart::workstation_node {
     include bacula::client
 
     include bacula::admin
-    #include mysql-server
+    include mysql-server
     include packages::kde
     include repoview
     include yum-cron
@@ -62,4 +62,5 @@ class dart::mdct-dev12 inherits dart::workstation_node {
         ensure          => present,
         recipient       => "john.florian@dart.biz",
     }
+
 }

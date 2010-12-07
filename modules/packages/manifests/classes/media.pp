@@ -16,10 +16,8 @@ class packages::media {
 	ensure	=> installed,
     }
 
-    if $operatingsystemrelease < 14 {
-        package { "gqview":
-            ensure	=> installed,
-        }
+    package { "gqview":
+	ensure	=> installed,
     }
 
     package { "gstreamer-ffmpeg":
