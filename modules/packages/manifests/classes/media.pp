@@ -16,8 +16,15 @@ class packages::media {
 	ensure	=> installed,
     }
 
-    package { "gqview":
-	ensure	=> installed,
+    # gqview was retired for Fedora 14 and has been replaced with a fork named geeqie.
+    if $operatingsystemrelease < 14 {
+        package { "gqview":
+            ensure	=> installed,
+        }
+    } else {
+        package { "geeqie":
+            ensure	=> installed,
+        }
     }
 
     package { "gstreamer-ffmpeg":
