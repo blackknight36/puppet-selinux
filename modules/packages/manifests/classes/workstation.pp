@@ -4,23 +4,27 @@ class packages::workstation {
 
     # One of the very few that provides left-handed cursors.
     package { "bluecurve-cursor-theme":
-	ensure	=> installed,
+        ensure  => installed,
     }
 
     package { "builder":
-	ensure	=> installed,
+        ensure  => installed,
     }
 
     package { "firefox":
-	ensure	=> installed,
+        ensure  => installed,
     }
 
     package { "flock-herder":
-	ensure	=> installed,
+        ensure  => installed,
     }
 
     package { "galculator":
-	ensure	=> installed,
+        ensure  => installed,
+    }
+
+    package { "lyx":
+        ensure  => installed,
     }
 
     # MQB has been dropped due to excessive bugs.  Eventually to be replaced
@@ -28,24 +32,24 @@ class packages::workstation {
     # http://www.shekhargovindarajan.com/open-source/mysql-gui-tools-query-browser-administrator-for-fedora-13/
     if $operatingsystemrelease < 13 {
         package { "mysql-query-browser":
-            ensure	=> installed,
+            ensure      => installed,
         }
     }
 
     package { "openoffice.org-calc":
-	ensure	=> installed,
+        ensure  => installed,
     }
 
     package { "openoffice.org-writer":
-	ensure	=> installed,
+        ensure  => installed,
     }
 
     package { "plant-launchers":
-	ensure	=> installed,
+        ensure  => installed,
     }
 
     package { "test-automation":
-	ensure	=> installed,
+        ensure  => installed,
     }
 
     if $operatingsystemrelease > 10 {
@@ -54,19 +58,19 @@ class packages::workstation {
         $vncviewer = "vnc"
     }
     package { "${vncviewer}":
-	ensure	=> installed,
+        ensure  => installed,
     }
 
     package { "workrave":
-	ensure	=> installed,
+        ensure  => installed,
     }
 
     package { "x2vnc":
-	ensure	=> installed,
+        ensure  => installed,
     }
 
     package { "xclip":
-	ensure	=> installed,
+        ensure  => installed,
     }
 
 }
