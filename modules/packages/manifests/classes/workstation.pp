@@ -23,6 +23,10 @@ class packages::workstation {
 	ensure	=> installed,
     }
 
+    package { "lyx":
+	ensure	=> installed,
+    }
+
     # MQB has been dropped due to excessive bugs.  Eventually to be replaced
     # by mysql-workbench, which is not available as of yet.  For details, see:
     # http://www.shekhargovindarajan.com/open-source/mysql-gui-tools-query-browser-administrator-for-fedora-13/
