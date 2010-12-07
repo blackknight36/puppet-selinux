@@ -27,11 +27,13 @@ class packages::workstation {
         ensure  => installed,
     }
 
-    # MQB has been dropped due to excessive bugs.  Eventually to be replaced
-    # by mysql-workbench, which is not available as of yet.  For details, see:
-    # http://www.shekhargovindarajan.com/open-source/mysql-gui-tools-query-browser-administrator-for-fedora-13/
+    # MQB was dropped (by Fedora) due to excessive bugs and replaced with mysql-workbench.
     if $operatingsystemrelease < 13 {
         package { "mysql-query-browser":
+            ensure      => installed,
+        }
+    } else {
+        package { "mysql-workbench":
             ensure      => installed,
         }
     }
