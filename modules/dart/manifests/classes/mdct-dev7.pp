@@ -1,5 +1,5 @@
 # /etc/puppet/modules/dart/manifests/classes/mdct-dev7.pp
 
-class dart::mdct-dev7 inherits dart::base_node {
+class dart::mdct-dev7 inherits dart::workstation_node {
     include packages::workstation
 }
