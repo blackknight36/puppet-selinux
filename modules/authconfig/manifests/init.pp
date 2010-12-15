@@ -94,7 +94,7 @@ class authconfig {
             # account information continues to be obtained from LDAP.
             exec { "authconfig":
                 before  => File["/etc/sssd/sssd.conf"],
-                command => 'authconfig --enableldap --disableldapauth --ldapserver="ldap://10.1.192.106" --ldapbasedn="dc=dartcontainer,dc=com" --disableldaptls --enablesssd --disablesssdauth --enablekrb5 --krb5realm=DARTCONTAINER.COM --krb5kdc=dartcontainer.com --enablecachecreds --updateall',
+                command => 'authconfig --enableldap --disableldapauth --ldapserver="ldap://10.1.192.106" --ldapbasedn="dc=dartcontainer,dc=com" --disableldaptls --enablesssd --disablesssdauth --enablekrb5 --krb5realm=DARTCONTAINER.COM --krb5kdc=dartcontainer.com --enablecachecreds --updateall --disablefingerprint',
                 require => [
                     File["/etc/pam.d/system-auth-ac"],
                     Package["authconfig"],
@@ -105,7 +105,8 @@ class authconfig {
             }
 
             # According to F13's authconfig(8), authconfig does NOT configure
-            # sssd.conf (must be done manually), so one is provided here.
+            # the domain in sssd.conf; it must be done manually.  Hence
+            # a starter sssd.conf is provided here.
             file { "/etc/sssd/sssd.conf":
                 group   => "root",
                 mode    => "0600",
