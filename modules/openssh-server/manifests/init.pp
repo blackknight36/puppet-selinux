@@ -12,6 +12,7 @@ class openssh-server {
         owner   => "root",
         require => Package["openssh-server"],
 	source	=> [
+            "puppet:///openssh-server/sshd_config.$hostname",
             "puppet:///openssh-server/sshd_config.$operatingsystem.$operatingsystemrelease",
             "puppet:///openssh-server/sshd_config",
         ],
