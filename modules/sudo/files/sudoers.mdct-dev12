@@ -11,7 +11,7 @@
 %sudoers	ALL=(ALL)	ALL
 
 # Provide a longer working time before expiring credentials.
-Defaults    timestamp_timeout = 15
+Defaults    timestamp_timeout = 180
 
 # Preserve the preferred EDITOR and prophile-related variables.
 Defaults    env_keep += "EDITOR VIMINIT GVIMINIT PROPHILE"
