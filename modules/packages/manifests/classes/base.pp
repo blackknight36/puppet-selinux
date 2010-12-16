@@ -17,6 +17,12 @@ class packages::base {
         ensure  => installed,
     }
 
+    if $operatingsystemrelease >= 13 {
+        package { "cifs-utils":
+            ensure  => installed,
+        }
+    }
+
     # DejaVu LGC fonts are used by vim-X11.
     if $operatingsystemrelease >= 11 {
         package { "dejavu-lgc-sans-mono-fonts":
