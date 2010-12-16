@@ -1,14 +1,14 @@
 # home directory on corporate file server
-files-2k1-d19749       -fstype=cifs,uid=d19749,gid=d19749,credentials=/etc/.credentials/d19749.cred ://files-2k1/d19749\$
+files-2k1-d19749       -fstype=cifs,rw,uid=d19749,gid=d19749,credentials=/etc/.credentials/d19749.cred ://files-2k1/d19749\$
 
 # shared engineering directory
-files-2k1-eng           -fstype=cifs,credentials=/etc/.credentials/d19749.cred                            ://files-2k1/Eng
+files-2k1-eng           -fstype=cifs,rw,uid=d19749,gid=d19749,credentials=/etc/.credentials/d19749.cred                            ://files-2k1/Eng
 
 # generic shared directory
-files-2k1-sharedata     -fstype=cifs,credentials=/etc/.credentials/d19749.cred                            ://files-2k1/ShareData
+files-2k1-sharedata     -fstype=cifs,rw,uid=d19749,gid=d19749,credentials=/etc/.credentials/d19749.cred                            ://files-2k1/ShareData
 
 # media directory
-files-2k1-media     	-fstype=cifs,credentials=/etc/.credentials/d19749.cred                            ://files-2k1/media
+files-2k1-media     	-fstype=cifs,rw,uid=d19749,gid=d19749,credentials=/etc/.credentials/d19749.cred                            ://files-2k1/media
 
 # mas7276
 mas7276 		-fstype=cifs,rw,credentials=/etc/.credentials/mas7276.cred     			  ://mas7276.dartcontainer.com/c\$
