@@ -54,6 +54,10 @@ class packages::workstation {
         ensure  => installed,
     }
 
+    package { "usbutils":
+        ensure  => installed,
+    }
+
     if $operatingsystemrelease > 10 {
         $vncviewer = "tigervnc"
     } else {
