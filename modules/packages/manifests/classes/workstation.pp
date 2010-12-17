@@ -46,6 +46,10 @@ class packages::workstation {
         ensure  => installed,
     }
 
+    package { "pavucontrol":
+        ensure  => installed,
+    }
+
     package { "plant-launchers":
         ensure  => installed,
     }
