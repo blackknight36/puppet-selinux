@@ -8,7 +8,9 @@ Section "ServerLayout"
     Screen              1  "Screen1" LeftOf "Screen0"
     Screen              2  "Screen2" RightOf "Screen0"
     #Screen              3  "Screen3" Above "Screen1"
-    Option              "Xinerama" "1"
+    Option              "DontZap" "True"
+    Option              "DontZoom" "True"
+    Option              "Xinerama" "True"
 EndSection
 
 
