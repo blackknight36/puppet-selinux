@@ -4,9 +4,8 @@ class dart::mdct-dev12 inherits dart::workstation_node {
     $plymouth_default_theme = "details"
     include plymouth
 
-    # passwords generated with bacula-password-generator package
-    $bacula_client_director_password = "2hNcW1n2jkNU5ywm4TK6CrY2yDmqlEPcr2SoRP0abEHW"
-    $bacula_client_director_monitor_password = "WqQvFNJdbiIfyxnKkoocVQFcNgY0CLVcKXok1TtrhJTH"
+    $bacula_client_director_password = "204f4392ecdcfd3324ce6efb2cb142f4"
+    $bacula_client_director_monitor_password = "9183e6fe26d853f50e9e57e561057951"
     include bacula::client
 
     include bacula::admin

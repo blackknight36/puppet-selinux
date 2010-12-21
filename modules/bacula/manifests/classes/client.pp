@@ -2,15 +2,17 @@
 
 class bacula::client {
 
-    # We're sticking with Bacula 2.x for now.
+    if $hostname == "mdct-dev12" {
+
+    # We've moved to Bacula 5.x.
     #
     # F12 and later make the default bacula packages use a newer major version
     # that is not backwards compatible with a Bacula 2.x server.  They do
     # however offer a "bacula2" series of packges that provide 2.x (2.4.4 at
     # this time) for compatiblity with older Bacula server deployments.
     if $operatingsystem == "Fedora" and $operatingsystemrelease >= 12 {
-        $bacula_major = "bacula2"
-        $conflict_major = "bacula"
+        $bacula_major = "bacula"
+        $conflict_major = "bacula2"
     } else {
         $bacula_major = "bacula"
         $conflict_major = undef
@@ -25,14 +27,20 @@ class bacula::client {
         package { "${conflict_major}-client":
             ensure      => absent,
         }
-        $conflict_package = [ Package["${conflict_major}-client"] ]
+        package { "${conflict_major}-common":
+            ensure      => absent,
+        }
+        $conflict_packages = [
+            Package["${conflict_major}-client"],
+            Package["${conflict_major}-common"],
+        ]
     } else {
-        $conflict_package = undef
+        $conflict_packages = undef
     }
 
     package { "${bacula_major}-client":
 	ensure	=> installed,
-        require => $conflict_package,
+        require => $conflict_packages,
     }
 
     file { "/etc/${bacula_major}/bacula-fd.conf":
@@ -60,6 +68,8 @@ class bacula::client {
         subscribe	=> [
             File["/etc/${bacula_major}/bacula-fd.conf"],
         ]
+    }
+
     }
 
 }
