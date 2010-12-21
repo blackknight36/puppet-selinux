@@ -51,6 +51,14 @@ class bacula::client {
         require => Package["${bacula_major}-client"],
     }
 
+    file { "/etc/sysconfig/${bacula_major}-fd":
+        group	=> "root",
+        mode    => 640,
+        owner   => "root",
+        require => Package["${bacula_major}-client"],
+        source  => "puppet:///bacula/bacula-fd",
+    }
+
     exec { "open-bacula-fd-port":
         command => "lokkit --port=9102:tcp",
         unless  => "grep -q -- '-A INPUT .* -p tcp --dport 9102 -j ACCEPT' /etc/sysconfig/iptables",
@@ -67,6 +75,7 @@ class bacula::client {
         ],
         subscribe	=> [
             File["/etc/${bacula_major}/bacula-fd.conf"],
+            File["/etc/sysconfig/${bacula_major}-fd"],
         ]
     }
 

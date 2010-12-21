@@ -1,0 +1,6 @@
+# /etc/sysconfig/bacula-fd (provided by puppet bacula::client)
+
+# Force the file daemon to run as a nice process.  Notice the overloaded
+# setting here that lets us inject the ionice option sneakily into the
+# command-line w/o patching the init scripts for the FD.
+NICELEVEL="10 ionice -c 3"
