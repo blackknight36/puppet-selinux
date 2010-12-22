@@ -1,0 +1,16 @@
+" Setup GVIM for this site specifically
+
+
+set guifont=DejaVu\ LGC\ Sans\ Mono\ 10
+
+" Force gvimdiff to use full screen width.  I had little luck using kwin.
+" Looks like kwin applies initially and then gvim forces a new geometry.
+if &diff == 1
+    set columns=262
+    set lines=78
+    set guifont=DejaVu\ LGC\ Sans\ Mono\ 8
+else
+    set columns=96
+    set lines=31
+endif
+

@@ -67,4 +67,11 @@ class dart::mdct-dev12 inherits dart::workstation_node {
         recipient       => "john.florian@dart.biz",
     }
 
+    file { "/root/.gvimrc_site":
+        group	=> "root",
+        mode    => "0644",
+        owner   => "root",
+        source  => "puppet:///private-host/gvimrc_site",
+    }
+
 }
