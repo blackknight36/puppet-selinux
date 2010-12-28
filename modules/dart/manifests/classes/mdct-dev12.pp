@@ -62,6 +62,14 @@ class dart::mdct-dev12 inherits dart::workstation_node {
         require         => Package["mysql-server"],
     }
 
+    mount { "/opt":
+        atboot  => true,
+        device  => "/mnt-local/storage/opt",
+        ensure  => "mounted",
+        fstype  => "none",
+        options => "bind,context=system_u:object_r:usr_t",
+    }
+
     mailalias { "root":
         ensure          => present,
         recipient       => "john.florian@dart.biz",
@@ -83,5 +91,4 @@ class dart::mdct-dev12 inherits dart::workstation_node {
         ensure	=> "/j/git/.gitignore",
         require => File["/j"],
     }
-
 }
