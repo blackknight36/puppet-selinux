@@ -1,11 +1,11 @@
 # home directory on corporate file server
-files-2k1-d13677        -fstype=cifs,uid=d13677,gid=d13677,credentials=/etc/ad.credentials      ://files-2k1/d13677\$
+files-2k1-d13677        -fstype=cifs,uid=d13677,gid=d13677,credentials=/mnt-local/storage/j/.credentials/d13677.cifs    ://files-2k1/d13677\$
 
 # shared engineering directory
-files-2k1-eng           -fstype=cifs,credentials=/etc/ad.credentials                            ://files-2k1/Eng
+files-2k1-eng           -fstype=cifs,credentials=/mnt-local/storage/j/.credentials/d13677.cifs                          ://files-2k1/Eng
 
 # generic shared directory
-files-2k1-sharedata     -fstype=cifs,credentials=/etc/ad.credentials                            ://files-2k1/ShareData
+files-2k1-sharedata     -fstype=cifs,credentials=/mnt-local/storage/j/.credentials/d13677.cifs                          ://files-2k1/ShareData
 
 
 
