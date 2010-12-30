@@ -82,13 +82,4 @@ class dart::mdct-dev12 inherits dart::workstation_node {
         source  => "puppet:///private-host/gvimrc_site",
     }
 
-    file { "/root/.gitconfig":
-        ensure	=> "/j/git/.gitconfig",
-        require => File["/j"],
-    }
-
-    file { "/root/.gitignore":
-        ensure	=> "/j/git/.gitignore",
-        require => File["/j"],
-    }
 }
