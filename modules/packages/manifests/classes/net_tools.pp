@@ -2,6 +2,10 @@
 
 class packages::net_tools {
 
+    package { "bind-utils":
+	ensure	=> installed,
+    }
+
     package { "bridge-utils":
 	ensure	=> installed,
     }
