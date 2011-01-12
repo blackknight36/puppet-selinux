@@ -54,6 +54,10 @@ class packages::workstation {
         ensure  => installed,
     }
 
+    package { "qcad":
+        ensure  => installed,
+    }
+
     package { "test-automation":
         ensure  => installed,
     }
