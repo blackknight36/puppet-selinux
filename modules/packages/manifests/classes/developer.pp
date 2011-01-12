@@ -37,6 +37,12 @@ class packages::developer {
 	ensure	=> installed,
     }
 
+    if $operatingsystemrelease > 11 {
+        package { "python-ipaddr":
+            ensure	=> installed,
+        }
+    }
+
     package { "rpmdevtools":
 	ensure	=> installed,
     }
