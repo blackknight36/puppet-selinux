@@ -1,0 +1,41 @@
+[alias]
+    br = branch
+    ci = commit
+    clog = log --pretty=format:%s
+    co = checkout
+    lg = log --graph --abbrev-commit --pretty=oneline --decorate
+    revert = git reset --hard
+    st = status
+
+[clean]
+    requireForce = false
+
+[color]
+    branch = auto
+    diff = auto
+    interactive = auto
+    showbranch = auto
+    status = auto
+    ui = always
+
+[core]
+    excludesfile = /home/00/d13677/.gitignore
+    whitespace = trailing-space,space-before-tab
+
+[diff]
+    noprefix
+
+[help]
+    autocorrect = 30
+
+[merge]
+    tool = gvimdiff
+    verbosity = 4
+
+[status]
+    showUntrackedFiles = all
+
+[user]
+    email = john_florian@dart.biz
+    name = John Florian
+
