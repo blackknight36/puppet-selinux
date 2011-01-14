@@ -51,4 +51,8 @@ class packages::developer {
 	ensure	=> installed,
     }
 
+    package { "strace":
+	ensure	=> installed,
+    }
+
 }
