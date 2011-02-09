@@ -20,5 +20,5 @@ storage                 -fstype=ext3,rw         :/dev/data/storage
 f10root                 -fstype=ext3,ro         :/dev/mdct-dev6/f10root/
 
 # other stuff
-mdct-dev12-aud  -soft mdct-dev12.dartcontainer.com:/Pound/Library/Audio
+mdct-dev12-aud  -soft mdct-dev12.dartcontainer.com:/Music
 

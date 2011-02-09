@@ -62,6 +62,54 @@ class dart::mdct-dev12 inherits dart::workstation_node {
         require         => Package["mysql-server"],
     }
 
+    file { "/exports":
+        ensure  => directory,
+        group	=> "root",
+        mode    => "0755",
+        owner   => "root",
+    }
+
+    file { "/exports/Music":
+        ensure  => directory,
+        group	=> "root",
+        mode    => "0755",
+        owner   => "root",
+        require => File["/exports"],
+    }
+
+    mount { "/exports/Music":
+        atboot  => true,
+        device  => "/Pound/Library/Audio/Music/",
+        ensure  => "mounted",
+        fstype  => "none",
+        options => "bind,context=system_u:object_r:usr_t",
+        require => File["/exports/Music"],
+    }
+
+    exec { "open-nfs4-port":
+        command => "lokkit --port=2049:tcp",
+        unless  => "grep -q -- '-A INPUT .* -p tcp --dport 2049 -j ACCEPT' /etc/sysconfig/iptables",
+    }
+
+    service { "nfslock":
+        enable		=> true,
+        ensure		=> running,
+        hasrestart	=> true,
+        hasstatus	=> true,
+    }
+
+    service { "nfs":
+        enable		=> true,
+        ensure		=> running,
+        hasrestart	=> true,
+        hasstatus	=> true,
+        require		=> [
+            Exec["open-nfs4-port"],
+            Mount["/exports/Music"],
+            Service["nfslock"],
+        ],
+    }
+
     mount { "/opt":
         atboot  => true,
         device  => "/mnt-local/storage/opt",
