@@ -78,11 +78,14 @@ class dart::mdct-dev12 inherits dart::workstation_node {
     }
 
     mount { "/exports/Music":
+        # NB atboot and noauto seem conflicting but do work.  Essentially,
+        # puppet will make the mount, which will occur after autofs has
+        # started (as needed).
         atboot  => true,
         device  => "/Pound/Library/Audio/Music/",
         ensure  => "mounted",
         fstype  => "none",
-        options => "bind,context=system_u:object_r:usr_t",
+        options => "bind,noauto,context=system_u:object_r:usr_t",
         require => File["/exports/Music"],
     }
 
@@ -111,11 +114,14 @@ class dart::mdct-dev12 inherits dart::workstation_node {
     }
 
     mount { "/opt":
+        # NB atboot and noauto seem conflicting but do work.  Essentially,
+        # puppet will make the mount, which will occur after autofs has
+        # started (as needed).
         atboot  => true,
         device  => "/mnt-local/storage/opt",
         ensure  => "mounted",
         fstype  => "none",
-        options => "bind,context=system_u:object_r:usr_t",
+        options => "bind,noauto,context=system_u:object_r:usr_t",
     }
 
     mailalias { "root":
