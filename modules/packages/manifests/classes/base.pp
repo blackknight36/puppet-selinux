@@ -39,6 +39,10 @@ class packages::base {
         ensure  => installed,
     }
 
+    package { "gparted":
+        ensure  => installed,
+    }
+
     package { "gpm":
         ensure  => installed,
     }
