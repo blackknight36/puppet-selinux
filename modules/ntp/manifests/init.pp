@@ -8,10 +8,23 @@ class ntp {
 
     file { "/etc/ntp.conf":
         group	=> "root",
-        mode    => 644,
+        mode    => "0644",
         owner   => "root",
         require => Package["ntp"],
         source  => "puppet:///ntp/ntp.conf",
+    }
+
+    if $operatingsystemrelease < 14 {
+        $ntpd_sysconfig = "ntpd.pre-F14"
+    } else {
+        $ntpd_sysconfig = "ntpd"
+    }
+    file { "/etc/sysconfig/ntpd":
+        group	=> "root",
+        mode    => "0644",
+        owner   => "root",
+        require => Package["ntp"],
+        source  => "puppet:///ntp/${ntpd_sysconfig}",
     }
 
     service { "ntpd":
@@ -24,6 +37,7 @@ class ntp {
 	],
 	subscribe	=> [
 	    File["/etc/ntp.conf"],
+            File["/etc/sysconfig/ntpd"],
 	]
     }
 

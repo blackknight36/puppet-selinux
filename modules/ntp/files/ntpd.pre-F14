@@ -1,0 +1,4 @@
+# Drop root to id 'ntp:ntp' by default.  This differs from the Fedora default
+# by the addition of -x to prefer slewing the clock rather than stepping it.
+# (It still step at startup, if necessary, because of the -g option.)
+OPTIONS="-u ntp:ntp -p /var/run/ntpd.pid -g -x"
