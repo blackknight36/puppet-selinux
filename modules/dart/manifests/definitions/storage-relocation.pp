@@ -1,6 +1,10 @@
 # /etc/puppet/modules/dart/manifests/definitions/storage-relocation.pp
 
-define replace_original_with_symlink_to_alternate($original, $backup, $alternate) {
+define replace_original_with_symlink_to_alternate(
+        $original, $backup, $alternate,
+        seluser="system_u", $selrole="object_r", seltype="etc_t"
+    ) {
+
     # Make a local backup of the original file or directory that can be
     # used to manually diff with an alternate copy that is presumably
     # carried over from prior OS releases.  The "file" type does provide a
