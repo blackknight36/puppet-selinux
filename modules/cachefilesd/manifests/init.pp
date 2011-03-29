@@ -6,11 +6,11 @@ class cachefilesd {
     if $operatingsystem == "Fedora" and $operatingsystemrelease >= 13 {
 
         package { "cachefilesd":
-            ensure	=> installed,
+            ensure  => installed,
         }
 
         file { "/etc/cachefilesd.conf":
-            group	=> "root",
+            group   => "root",
             mode    => "0640",
             owner   => "root",
             require => Package["cachefilesd"],
@@ -21,14 +21,20 @@ class cachefilesd {
         }
 
         service { "cachefilesd":
-            enable		=> true,
-            ensure		=> running,
-            hasrestart	=> true,
-            hasstatus	=> true,
-            require		=> [
+            enable      => $hostname ? {
+                "mdct-dev10"    => false,
+                default         => true,
+            },
+            ensure      => $hostname ? {
+                "mdct-dev10"    => stopped,
+                default         => running,
+            },
+            hasrestart  => true,
+            hasstatus   => true,
+            require             => [
                 Package["cachefilesd"],
             ],
-            subscribe	=> [
+            subscribe   => [
                 File["/etc/cachefilesd.conf"],
             ],
         }
