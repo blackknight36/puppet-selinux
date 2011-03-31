@@ -14,6 +14,14 @@ class mirrmaid {
         source  => "puppet:///private-host/mirrmaid/mirrmaid.conf",
     }
 
+    file { "/etc/mirrmaid/mirrmaid.conf-testing":
+        group   => "mirrmaid",
+        mode    => "0644",
+        owner   => "root",
+        require => Package["mirrmaid"],
+        source  => "puppet:///private-host/mirrmaid/mirrmaid.conf-testing",
+    }
+
     file { "/etc/mirrmaid/.ssh":
         ensure  => directory,
         force   => true,
