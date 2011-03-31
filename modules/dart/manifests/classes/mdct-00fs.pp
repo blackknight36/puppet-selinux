@@ -21,4 +21,12 @@ class dart::mdct-00fs {
 
     #@# From server_node.pp
     include packages::net_tools
+
+
+    ####
+    # Other resources specific to mdct-00fs:
+    ####
+
+    include mirrmaid
+
 }
