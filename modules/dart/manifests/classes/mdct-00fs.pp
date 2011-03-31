@@ -29,4 +29,21 @@ class dart::mdct-00fs {
 
     include mirrmaid
 
+
+    package { "createrepo":
+        ensure      => installed,
+    }
+
+    package { "flock-herder":
+        ensure      => installed,
+    }
+
+    package { "mdct-puppeteer-admin":
+        ensure      => installed,
+    }
+
+    package { "picaps-backup-agent":
+        ensure      => installed,
+    }
+
 }
