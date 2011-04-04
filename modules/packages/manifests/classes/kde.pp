@@ -66,7 +66,7 @@ class packages::kde {
         ensure  => installed,
     }
 
-    package { "kdebase-workspace-python-applet":
+    package { "plasma-scriptengine-python":
         ensure  => installed,
     }
 
