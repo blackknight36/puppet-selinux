@@ -16,7 +16,10 @@ class yum-cron {
         mode    => 644,
         owner   => "root",
         require => Package["yum-cron"],
-        source  => "puppet:///yum-cron/yum-cron",
+        source  => [
+            "puppet:///private-host/yum-cron/yum-cron",
+            "puppet:///yum-cron/yum-cron",
+        ],
     }
 
     service { "yum-cron":
