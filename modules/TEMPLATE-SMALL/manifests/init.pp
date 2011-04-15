@@ -23,7 +23,10 @@ class MODULE_NAME {
         seluser => "system_u",
         selrole => "object_r",
         seltype => "etc_t",
-        source  => "puppet:///modules/MODULE_NAME/CONFIG_NAME",
+        source  => [
+            "puppet:///private-host/MODULE_NAME/CONFIG_NAME",
+            "puppet:///modules/MODULE_NAME/CONFIG_NAME",
+        ],
     }
 
     # template file
