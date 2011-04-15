@@ -27,14 +27,11 @@ class dart::mdct-00fs {
     # Other resources specific to mdct-00fs:
     ####
 
+    include flock-herder
     include mirrmaid
 
 
     package { "createrepo":
-        ensure      => installed,
-    }
-
-    package { "flock-herder":
         ensure      => installed,
     }
 

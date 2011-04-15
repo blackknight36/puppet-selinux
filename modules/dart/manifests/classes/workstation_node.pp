@@ -1,6 +1,7 @@
 # /etc/puppet/modules/dart/manifests/classes/workstation_node.pp
 
 class dart::workstation_node inherits dart::base_node {
+    include flock-herder
     if $operatingsystemrelease < 14 {
         include lotus_notes_client
     }
