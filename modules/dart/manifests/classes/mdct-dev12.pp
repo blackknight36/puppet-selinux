@@ -39,6 +39,8 @@ class dart::mdct-dev12 inherits dart::workstation_node {
     replace_original_with_symlink_to_alternate { "/etc/libvirt":
         alternate       => "/mnt-local/storage/etc/libvirt",
         backup          => "/etc/libvirt$SUFFIX",
+        before          => Service["libvirtd"],
+        notify          => Service["libvirtd"],
         original        => "/etc/libvirt",
         # TODO: libvirt needs to be a formal service and treated here like
         # mysql WRT before/require attrs
@@ -49,6 +51,8 @@ class dart::mdct-dev12 inherits dart::workstation_node {
     replace_original_with_symlink_to_alternate { "/var/lib/libvirt":
         alternate	=> "/mnt-local/storage/var/lib/libvirt",
         backup          => "/var/lib/libvirt$SUFFIX",
+        before          => Service["libvirtd"],
+        notify          => Service["libvirtd"],
         original        => "/var/lib/libvirt",
         # TODO: libvirt needs to be a formal service and treated here like
         # mysql WRT before/require attrs
@@ -93,6 +97,15 @@ class dart::mdct-dev12 inherits dart::workstation_node {
     exec { "open-nfs4-port":
         command => "lokkit --port=2049:tcp",
         unless  => "grep -q -- '-A INPUT .* -p tcp --dport 2049 -j ACCEPT' /etc/sysconfig/iptables",
+    }
+
+    service { "libvirtd":
+        enable		=> true,
+        ensure		=> running,
+        hasrestart	=> true,
+        hasstatus	=> true,
+        require		=> [
+        ],
     }
 
     service { "nfslock":
