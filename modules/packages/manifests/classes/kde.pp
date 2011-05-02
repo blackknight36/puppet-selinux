@@ -26,10 +26,6 @@ class packages::kde {
         ensure  => installed,
     }
 
-    package { "kbluetooth":
-        ensure  => installed,
-    }
-
     package { "kcm-gtk":
         ensure  => installed,
     }
