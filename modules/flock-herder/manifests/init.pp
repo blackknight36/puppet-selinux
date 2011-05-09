@@ -3,7 +3,7 @@
 class flock-herder {
 
     package { "flock-herder":
-	ensure	=> installed,
+	ensure	=> latest,
     }
 
     # Older puppets cannot cope with this style of source w/o generating

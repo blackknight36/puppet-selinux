@@ -3,7 +3,7 @@
 class mirrmaid {
 
     package { "mirrmaid":
-        ensure  => installed,
+        ensure  => latest,
     }
 
     file { "/etc/mirrmaid/mirrmaid.conf":
