@@ -107,12 +107,17 @@ class authconfig {
             # According to F13's authconfig(8), authconfig does NOT configure
             # the domain in sssd.conf; it must be done manually.  Hence
             # a starter sssd.conf is provided here.
+            if $operatingsystem == "Fedora" and $operatingsystemrelease >= 15 {
+                $sssd_conf = "sssd.conf.Fedora.15+"
+            } else {
+                $sssd_conf = "sssd.conf"
+            }
             file { "/etc/sssd/sssd.conf":
                 group   => "root",
                 mode    => "0600",
                 owner   => "root",
                 require => Package["sssd"],
-                source  => "puppet:///authconfig/sssd.conf",
+                source  => "puppet:///authconfig/$sssd_conf",
             }
 
             service { "sssd":
