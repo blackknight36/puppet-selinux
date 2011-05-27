@@ -23,6 +23,7 @@ node "mdct-f11-builder.dartcontainer.com"       { include dart::mdct-f11-builder
 node "mdct-f12-builder.dartcontainer.com"       { include dart::mdct-f12-builder }
 node "mdct-f13-builder.dartcontainer.com"       { include dart::mdct-f13-builder }
 node "mdct-f14-builder.dartcontainer.com"       { include dart::mdct-f14-builder }
+node "mdct-f15-builder.dartcontainer.com"       { include dart::mdct-f15-builder }
 node "mdct-puppet.dartcontainer.com"            { include dart::mdct-puppet }
 node "mdct-test-agent-32.dartcontainer.com"     { include dart::mdct-test-agent-32 }
 node "mole-dev.dartcontainer.com"               { include dart::mole-dev }
