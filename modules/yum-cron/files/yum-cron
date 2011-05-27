@@ -25,12 +25,14 @@ DOWNLOAD_ONLY=no
 # Level 0 is the default
 DEBUG_LEVEL=1
 
-# randomwait is used by yum to wait random time
-# default is 120 so yum waits random time from 1 to 120 minutes
-# the value must not be zero
+# randomwait is used by yum to prevent thundering herds against the
+# repositories.  Dart has a private mirror, so the herd is relatively small so
+# a large wait isn't needed.
 RANDOMWAIT="7"
 
-# if MAILTO is set, the mail command is used to deliver yum output
+# if MAILTO is set and the mail command is available, the mail command 
+# is used to deliver yum output
+
 # by default MAILTO is unset, so crond mails the output by itself
 # example:  MAILTO=root
 MAILTO=root
@@ -43,3 +45,23 @@ MAILTO=root
 # you may set DAYS_OF_WEEK to the days of the week you want to run 
 # default is every day 
 #DAYS_OF_WEEK="0123456" 
+
+################################################################################
+#
+# ATTENTION!!!
+#
+# The following settings were introduced in Fedora 15.  These will be ignored
+# by older Fedora releases!
+#
+################################################################################
+
+# which day should it do cleanup on?  defaults to 0 (Sunday).  If this day isn't in the 
+# DAYS_OF_WEEK above, it'll never happen
+CLEANDAY="0"
+
+# set to yes to make the yum-cron service to wait for transactions to complete
+SERVICE_WAITS=yes
+
+# set maximum time period (in seconds) for the yum-cron service to wait for
+# transactions to complete.  The default is 300 seconds (5 minutes)
+SERVICE_WAIT_TIME=300
