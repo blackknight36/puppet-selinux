@@ -3,11 +3,17 @@
 class rpcidmapd {
 
     package { "nfs-utils":
-	 ensure => installed
+	 ensure => installed,
     }
 
+    if $operatingsystem == "Fedora" and $operatingsystemrelease >= 15 {
+        $libnfsidmap_package = "libnfsidmap"
+    } else {
+        $libnfsidmap_package = "nfs-utils-lib"
+    }
     package { "nfs-utils-lib":
-	 ensure => installed
+	 ensure => installed,
+         name   => $libnfsidmap_package,
     }
 
     file { "/etc/idmapd.conf":
