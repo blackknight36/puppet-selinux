@@ -28,8 +28,14 @@ class ntp {
     }
 
     service { "ntpd":
-	enable		=> true,
-	ensure		=> running,
+        enable          => $virtual ? {
+            "kvm"       => false,
+            default     => true,
+        },
+        ensure          => $virtual ? {
+            "kvm"       => stopped,
+            default     => running,
+        },
 	hasrestart	=> true,
 	hasstatus	=> true,
 	require		=> [
@@ -38,7 +44,7 @@ class ntp {
 	subscribe	=> [
 	    File["/etc/ntp.conf"],
             File["/etc/sysconfig/ntpd"],
-	]
+	],
     }
 
 }
