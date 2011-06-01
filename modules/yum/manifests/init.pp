@@ -29,6 +29,7 @@ class yum {
 	    "12"	=> "12-1.dcc.noarch",
 	    "13"	=> "13-1.dcc.noarch",
 	    "14"	=> "14-1.dcc.noarch",
+	    "15"	=> "15-1.dcc.noarch",
             },
     }
 
@@ -42,10 +43,12 @@ class yum {
             "12"	=> "12-1.dcc.noarch",
             "13"	=> "13-1.dcc.noarch",
             "14"	=> "14-1.dcc.noarch",
+            "15"	=> "15-1.dcc.noarch",
             },
     }
 
-    # Configure RPM fusion for Fedora 10 and newer.  We don't have this for Fedora 8.
+    # Configure RPM fusion for Fedora 10 and newer.  We don't have this for
+    # Fedora 8.
     if $operatingsystemrelease >= 10 {
 
 	config_repo {"rpmfusion-free":
@@ -57,6 +60,7 @@ class yum {
 		"12"	=> "12-1.noarch",
 		"13"	=> "13-2.noarch",
 		"14"	=> "14-0.4.noarch",
+		"15"	=> "15-1.noarch",
 		},
 	}
 
@@ -69,6 +73,7 @@ class yum {
 		"12" 	=> "12-1.noarch",
 		"13" 	=> "13-2.noarch",
 		"14" 	=> "14-0.4.noarch",
+		"15" 	=> "15-1.noarch",
 		},
 	    require	=> Exec["config-repo-rpmfusion-free"],
 	}
