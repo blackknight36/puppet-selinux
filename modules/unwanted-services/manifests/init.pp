@@ -2,20 +2,6 @@
 
 class unwanted-services {
 
-    service { "avahi-daemon":
-        enable          => false,
-        ensure          => stopped,
-        hasrestart      => true,
-        hasstatus       => true,
-    }
-
-    service { "bluetooth":
-        enable          => false,
-        ensure          => stopped,
-        hasrestart      => true,
-        hasstatus       => true,
-    }
-
     service { "firstboot":
         enable          => false,
         ensure          => stopped,
