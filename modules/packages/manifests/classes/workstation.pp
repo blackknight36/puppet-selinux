@@ -34,12 +34,22 @@ class packages::workstation {
         }
     }
 
-    package { "openoffice.org-calc":
-        ensure  => installed,
-    }
+    if $operatingsystemrelease < 15 {
+        package { "openoffice.org-calc":
+            ensure  => installed,
+        }
 
-    package { "openoffice.org-writer":
-        ensure  => installed,
+        package { "openoffice.org-writer":
+            ensure  => installed,
+        }
+    } else {
+        package { "libreoffice-calc":
+            ensure  => installed,
+        }
+
+        package { "libreoffice-writer":
+            ensure  => installed,
+        }
     }
 
     package { "pavucontrol":
