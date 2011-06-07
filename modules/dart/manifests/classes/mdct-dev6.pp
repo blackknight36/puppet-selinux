@@ -6,12 +6,16 @@ class dart::mdct-dev6 inherits dart::workstation_node {
     include mysql-server
     include packages::kde
 
-    service { "NetworkManager":
-        enable          => false,
-        ensure          => stopped,
-        hasrestart      => true,
-        hasstatus       => true,
-    }
+    # TODO: 'systemctl is-enabled SERVICE' in Fedora 15 always returns true,
+    # so attempting to disable a SERVICE will work, but will be repeated
+    # indefinitely since puppet receives lies.  For now, we just let the
+    # service run to avoid the perpetual noise.
+#   service { "NetworkManager":
+#       enable          => false,
+#       ensure          => stopped,
+#       hasrestart      => true,
+#       hasstatus       => true,
+#   }
 
     service { "network":
         enable          => true,
