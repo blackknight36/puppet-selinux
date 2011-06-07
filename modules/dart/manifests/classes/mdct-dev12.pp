@@ -10,6 +10,7 @@ class dart::mdct-dev12 inherits dart::workstation_node {
 
     include bacula::admin
     include mysql-server
+    include packages::base
     include packages::kde
     include repoview
     include yum-cron
@@ -141,6 +142,12 @@ class dart::mdct-dev12 inherits dart::workstation_node {
     mailalias { "root":
         ensure          => present,
         recipient       => "john.florian@dart.biz",
+    }
+
+    # Make root user source my prophile by default.
+    exec { "prophile-install -f jflorian":
+        require => Package["prophile"],
+        unless  => "grep -q prophile /root/.bash_profile",
     }
 
     file { "/root/.gvimrc_site":
