@@ -27,15 +27,20 @@ class ntp {
         source  => "puppet:///ntp/${ntpd_sysconfig}",
     }
 
+    # TODO: 'systemctl is-enabled SERVICE' in Fedora 15 always returns true,
+    # so attempting to disable a SERVICE will work, but will be repeated
+    # indefinitely since puppet receives lies.  For now, we just let the
+    # service run to avoid the perpetual noise.
+    if $virtual == "kvm" and $operatingsystemrelease < 15 {
+        $ntpd_enable = false
+        $ntpd_ensure = "stopped"
+    } else {
+        $ntpd_enable = true
+        $ntpd_ensure = "running"
+    }
     service { "ntpd":
-        enable          => $virtual ? {
-            "kvm"       => false,
-            default     => true,
-        },
-        ensure          => $virtual ? {
-            "kvm"       => stopped,
-            default     => running,
-        },
+        enable          => $ntpd_enable,
+        ensure          => $ntpd_ensure,
 	hasrestart	=> true,
 	hasstatus	=> true,
 	require		=> [
