@@ -2,7 +2,7 @@
 
 define replace_original_with_symlink_to_alternate(
         $original, $backup, $alternate,
-        seluser="system_u", $selrole="object_r", seltype="etc_t"
+        $seluser="system_u", $selrole="object_r", $seltype="etc_t"
     ) {
 
     # Make a local backup of the original file or directory that can be
