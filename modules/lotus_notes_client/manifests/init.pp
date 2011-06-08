@@ -9,22 +9,6 @@ class lotus_notes_client {
         unless  => "rpm -q gpg-pubkey-34f9ae75",
     }
 
-    package { "ibm_lotus_notes":
-	ensure	=> installed,
-        require => [
-            Exec["import_ibm_signing_key"],
-        ],
-    }
-
-    # sigh ...  What's next?  A fix pack for the fix pack?
-    package { "ibm_lotus_notes_fixpack":
-	ensure	=> installed,
-        require => [
-            Exec["import_ibm_signing_key"],
-            Package["ibm_lotus_notes"],
-        ],
-    }
-
     exec { "import_f8_new_signing_key":
         command => "rpm --import $key_store/RPM-GPG-KEY-fedora-8-new",
         unless  => "rpm -q gpg-pubkey-4f2a6fd2",
@@ -37,6 +21,23 @@ class lotus_notes_client {
 	ensure	=> installed,
         require => [
             Exec["import_f8_new_signing_key"],
+        ],
+    }
+
+    package { "ibm_lotus_notes":
+	ensure	=> installed,
+        require => [
+            Exec["import_ibm_signing_key"],
+            Package["xorg-x11-fonts-truetype-7.2-3.fc8"],
+        ],
+    }
+
+    # sigh ...  What's next?  A fix pack for the fix pack?
+    package { "ibm_lotus_notes_fixpack":
+	ensure	=> installed,
+        require => [
+            Exec["import_ibm_signing_key"],
+            Package["ibm_lotus_notes"],
         ],
     }
 
