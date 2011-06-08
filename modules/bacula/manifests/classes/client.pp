@@ -2,8 +2,6 @@
 
 class bacula::client {
 
-    if $hostname == "mdct-dev12" {
-
     # We've moved to Bacula 5.x.
     #
     # F12 and later make the default bacula packages use a newer major version
@@ -77,8 +75,6 @@ class bacula::client {
             File["/etc/${bacula_major}/bacula-fd.conf"],
             File["/etc/sysconfig/${bacula_major}-fd"],
         ]
-    }
-
     }
 
 }
