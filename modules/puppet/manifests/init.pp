@@ -7,17 +7,15 @@ class puppet {
     }
 
     if versioncmp($puppetversion, "2.6") < 0 {
-        $puppet_era = "pre-2.6"
     } else {
-        $puppet_era = "as-of-2.6"
-        notice('you have new stuff')
+        $puppet_era = ".as-of-2.6"
     }
     file { "/etc/puppet/puppet.conf":
         group	=> "root",
         mode    => 644,
         owner   => "root",
         require => Package["puppet"],
-        source  => "puppet:///puppet/puppet.conf.${puppet_era}",
+        source  => "puppet:///puppet/puppet.conf${puppet_era}",
     }
 
     service { "puppet":
