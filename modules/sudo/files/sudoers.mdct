@@ -7,5 +7,8 @@ Defaults    always_set_home
 # Allow all members of Dart's sudoers group (in LDAP) to run all commands.
 %sudoers	ALL=(ALL)	ALL
 
+# Provide a longer working time before expiring credentials.
+Defaults    timestamp_timeout = 30
+
 # Preserve the preferred EDITOR and prophile-related variables.
 Defaults    env_keep += "EDITOR VIMINIT GVIMINIT PROPHILE"
