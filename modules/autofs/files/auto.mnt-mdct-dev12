@@ -10,7 +10,7 @@ files-2k1-sharedata     -fstype=cifs,credentials=/mnt-local/storage/j/.credentia
 
 
 # general storage not belonging to any particiluar Fedora installation
-storage                 -fstype=ext3,rw         :/dev/data/storage
+storage                 -fstype=ext4,rw         :/dev/data/storage
 
 # Fedora 11 root file system
 f11                     -fstype=ext3,ro         :/dev/fedora/f11root
