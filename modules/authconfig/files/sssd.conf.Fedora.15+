@@ -97,17 +97,17 @@ reconnection_retries = 3
 ; ldap_force_upper_case_realm = True
 
 [domain/default]
-ldap_id_use_start_tls = False
-cache_credentials = True
-auth_provider = krb5
 #debug_level = 10
-krb5_kpasswd = dartcontainer.com
-ldap_search_base = dc=dartcontainer,dc=com
-krb5_realm = DARTCONTAINER.COM
+auth_provider = krb5
+cache_credentials = True
 chpass_provider = krb5
 id_provider = ldap
-min_id = 500
-ldap_uri = ldap://10.1.192.106
-krb5_kdcip = dartcontainer.com
+krb5_kpasswd = dartcontainer.com
+krb5_realm = DARTCONTAINER.COM
+krb5_server = dartcontainer.com
+ldap_id_use_start_tls = False
+ldap_search_base = dc=dartcontainer,dc=com
 ldap_tls_cacertdir = /etc/openldap/cacerts
+ldap_uri = ldap://10.1.192.106
+min_id = 500
 
