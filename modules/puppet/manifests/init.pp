@@ -15,7 +15,10 @@ class puppet {
         mode    => 644,
         owner   => "root",
         require => Package["puppet"],
-        source  => "puppet:///puppet/puppet.conf${puppet_era}",
+        source  => [
+            "puppet:///private-host/puppet/puppet.conf",
+            "puppet:///puppet/puppet.conf${puppet_era}",
+        ],
     }
 
     service { "puppet":
