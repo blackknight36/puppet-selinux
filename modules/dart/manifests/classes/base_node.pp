@@ -3,7 +3,7 @@
 class dart::base_node {
     include authconfig
     include autofs
-    # include cups
+    include cups
     include cachefilesd
     include dart::no-dns-hosts
     include logwatch
