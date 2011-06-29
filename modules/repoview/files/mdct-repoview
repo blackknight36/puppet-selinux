@@ -1,3 +1,5 @@
-38 0,12 * * * root /usr/bin/repoview -t "Machine Data Collections Team" /pub/fedora/mdct/13/i386/ &> /var/log/mdct-repoview-f13
-40 0,12 * * * root /usr/bin/repoview -t "Machine Data Collections Team" /pub/fedora/mdct/14/i386/ &> /var/log/mdct-repoview-f14
-42 0,12 * * * root /usr/bin/repoview -t "Machine Data Collections Team" /pub/fedora/mdct/15/i386/ &> /var/log/mdct-repoview-f15
+38 0,12 * * * root /usr/bin/repoview -t "MDCT on Fedora 13" /pub/fedora/mdct/13/i386/ &> /var/log/mdct-repoview-f13
+
+40 0,12 * * * root /usr/bin/repoview -t "MDCT on Fedora 14" /pub/fedora/mdct/14/i386/ &> /var/log/mdct-repoview-f14
+
+42 0,12 * * * root /usr/bin/repoview -t "MDCT on Fedora 15" /pub/fedora/mdct/15/i386/ &> /var/log/mdct-repoview-f15
