@@ -12,7 +12,6 @@ class dart::mdct-dev12 inherits dart::workstation_node {
     include mysql-server
     include packages::base
     include packages::kde
-    include repoview
     include yum-cron
 
     # noscript included here because nobody else likely to want it

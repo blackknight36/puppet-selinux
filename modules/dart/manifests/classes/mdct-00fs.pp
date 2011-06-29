@@ -30,6 +30,7 @@ class dart::mdct-00fs {
     include flock-herder
     include git-daemon
     include mirrmaid
+    include repoview
 
 
     package { "createrepo":
