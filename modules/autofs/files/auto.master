@@ -22,6 +22,6 @@
 #
 +auto.master
 
-/home/00        /etc/auto.home --timeout=60
-/mnt            /etc/auto.mnt --timeout=60 --ghost
-/mnt-local      /etc/auto.mnt-local --timeout=60 --ghost
+/home/00        /etc/auto.home --timeout=600
+/mnt            /etc/auto.mnt --timeout=600 --ghost
+/mnt-local      /etc/auto.mnt-local --timeout=600 --ghost
