@@ -1,0 +1,1 @@
+42 */4 * * * root nice ionice -c 3 /usr/libexec/mdct-repoview 15 14 13 12 11 10 8

@@ -1,5 +1,97 @@
-38 0,12 * * * root /usr/bin/repoview -t "MDCT on Fedora 13" /pub/fedora/mdct/13/i386/ &> /var/log/mdct-repoview-f13
+#!/bin/sh
 
-40 0,12 * * * root /usr/bin/repoview -t "MDCT on Fedora 14" /pub/fedora/mdct/14/i386/ &> /var/log/mdct-repoview-f14
+html_top() {
+    cat <<EOF
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html><head>
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type"> <title>RepoView: MDCT on Fedora</title> <link href="repoview_files/repostyle.css" type="text/css"
+  rel="stylesheet"> <meta content="index,follow" name="robots"> </head>
+<body>
+    <div class="levbar">
+    <p class="pagetitle">MDCT on Fedora</p>
+    </div>
+    <div class="main">
+        <h3>Index of Repositories</h3>
 
-42 0,12 * * * root /usr/bin/repoview -t "MDCT on Fedora 15" /pub/fedora/mdct/15/i386/ &> /var/log/mdct-repoview-f15
+        <span class="anchor" id="line-24"></span><span class="anchor" id="line-25"></span><p class="line862">The MDCT on Fedora repositories can be browsed directly to see what's
+        in them. Indexes of each repository are made using <a class="http" href="http://fedorahosted.org/repoview/">RepoView</a>. <span class="anchor" id="line-26"></span><span
+            class="anchor" id="line-27"></span></p><ul><li style="list-style-type:none"><div><table style="font-size: small;"><tbody>
+        <tr>
+            <td style="text-align: center;"><p class="line862"> <strong>Fedora Release</strong> </p></td>
+            <td style="text-align: center;"><p class="line862"> <strong>Repository </strong> </p></td>
+            <td colspan="2" style="text-align: center;"><p class="line862"> <strong>Arch </strong> </p></td>
+        </tr>
+EOF
+}
+
+
+html_for_release() {
+    local osrelease="$1"
+    cat <<EOF
+    <tr>
+        <td colspan="1" rowspan="2" style="text-align: center;"><span class="anchor" id="line-29"></span><p class="line862"> $osrelease </p></td>
+        <td><p class="line862">mdct</p></td>
+        <td><p class="line891"><a class="http" href="http://mdct-00fs.dartcontainer.com/ftp/pub/fedora/mdct/$osrelease/SRPMS/repoview/">source</a></p></td>
+        <td><p class="line891"><a class="http" href="http://mdct-00fs.dartcontainer.com/ftp/pub/fedora/mdct/$osrelease/i386/repoview/">i386</a></p></td>
+    </tr>
+    <tr>
+        <td><span class="anchor" id="line-31"></span><p class="line862">mdct-testing</p></td>
+        <td><p class="line891"><a class="http" href="http://mdct-00fs.dartcontainer.com/ftp/pub/fedora/mdct/testing/$osrelease/SRPMS/repoview/">source</a></p></td>
+        <td><p class="line891"><a class="http" href="http://mdct-00fs.dartcontainer.com/ftp/pub/fedora/mdct/testing/$osrelease/i386/repoview/">i386</a></p></td>
+    </tr>
+EOF
+}
+
+
+html_bottom() {
+    cat <<EOF
+        <tr>
+            <td colspan="13" style="text-align: left;"><span class="anchor" id="line-44"></span><p class="line862"> <img alt="/!\" src="repoview_files/alert.png" title="/!\"
+                height="15" width="15"> Note: Sometimes repositories will be empty -- the testing repos for example will be empty if no packages are currently undergoing testing.
+                In such cases, repoview pages will not be available, which may lead to a 404 (page not found).<br> </td>
+        </tr>
+
+        </tbody></table></div></li></ul>
+
+        <p class="footernote">
+          <span>Listing generated: $(date) by mdct-repoview</span>
+        </p>
+    </div>
+
+</body></html>
+EOF
+}
+
+make_repoview() {
+    local osrelease="$1"
+    local arch="$2"
+    local repo="$3"
+    echo "Making repoview for $repo on Fedora $osrelease ($arch)."
+    /usr/bin/repoview \
+        -t "MDCT on Fedora $osrelease ($arch)" \
+        /pub/fedora/$repo/$osrelease/$arch/
+}
+
+
+main() {
+    local new_index="/tmp/mdct-repoview.$$"
+    local live_index="/pub/fedora/mdct/repoview/index.html"
+    html_top > $new_index
+
+    for osrelease in "$@"
+    do
+        for arch in i386 SRPMS
+        do
+            for repo in 'mdct' 'mdct/testing'
+            do
+                make_repoview $osrelease $arch $repo
+            done
+        done
+        html_for_release $osrelease >> $new_index
+    done
+
+    html_bottom >> $new_index
+    mv $new_index $live_index
+}
+
+main "$@" &> /var/log/mdct-repoview
