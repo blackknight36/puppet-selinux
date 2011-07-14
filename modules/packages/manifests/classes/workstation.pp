@@ -60,6 +60,10 @@ class packages::workstation {
         ensure  => installed,
     }
 
+    package { "putty":
+        ensure  => installed,
+    }
+
     package { "qcad":
         ensure  => installed,
     }
