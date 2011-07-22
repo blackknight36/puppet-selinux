@@ -74,7 +74,7 @@ class packages::base {
     }
 
     package { "prophile":
-        ensure  => installed,
+        ensure  => latest,
     }
 
     package { "python-mdct":
