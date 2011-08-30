@@ -27,17 +27,14 @@ class dart::mdct-00fs {
     # Other resources specific to mdct-00fs:
     ####
 
-    include flock-herder
-    include git-daemon
-    include mirrmaid
-    include repoview
+    include 'flock-herder'
+    include 'git-daemon'
+    include 'mdct-puppeteer-admin'
+    include 'mirrmaid'
+    include 'repoview'
 
 
     package { "createrepo":
-        ensure      => installed,
-    }
-
-    package { "mdct-puppeteer-admin":
         ensure      => installed,
     }
 
