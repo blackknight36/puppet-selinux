@@ -2,32 +2,46 @@
 
 class ntp {
 
-    package { "ntp":
+    # TODO: drop special condition for mdct-dev12 once on F16 or later
+    if $operatingsystemrelease > 15 or $hostname == 'mdct-dev12' {
+        $ntp_package = 'chrony'
+        $ntp_daemon = 'chronyd'
+    } else {
+        $ntp_package = 'ntp'
+        $ntp_daemon = 'ntpd'
+    }
+
+    package { "$ntp_package":
 	ensure	=> installed
     }
 
-    file { "/etc/ntp.conf":
-        group	=> "root",
-        mode    => "0644",
-        owner   => "root",
-        require => Package["ntp"],
-        source  => "puppet:///ntp/ntp.conf",
+    file { "ntp_conf":
+        group	=> 'root',
+        mode    => '0644',
+        owner   => 'root',
+        path    => "/etc/${ntp_package}.conf",
+        require => Package["$ntp_package"],
+        source  => "puppet:///ntp/${ntp_package}.conf",
     }
 
-    if $operatingsystemrelease < 14 {
-        $ntpd_sysconfig = "ntpd.pre-F14"
-    } else {
-        $ntpd_sysconfig = "ntpd"
-    }
-    file { "/etc/sysconfig/ntpd":
-        group	=> "root",
-        mode    => "0644",
-        owner   => "root",
-        require => Package["ntp"],
-        source  => "puppet:///ntp/${ntpd_sysconfig}",
+    if $ntp_package == 'ntp' {
+        if $operatingsystemrelease < 14 {
+            $ntpd_sysconfig = "ntpd.pre-F14"
+        } else {
+            $ntpd_sysconfig = "ntpd"
+        }
+        file { "/etc/sysconfig/ntpd":
+            before      => Service["$ntp_daemon"],
+            group	=> "root",
+            mode        => '0644',
+            notify      => Service["$ntp_daemon"],
+            owner       => 'root',
+            require     => Package["$ntp_package"],
+            source      => "puppet:///ntp/${ntpd_sysconfig}",
+        }
     }
 
-    service { "ntpd":
+    service { "$ntp_daemon":
         enable          => $virtual ? {
             "kvm"       => false,
             default     => true,
@@ -39,11 +53,10 @@ class ntp {
 	hasrestart	=> true,
 	hasstatus	=> true,
 	require		=> [
-	    Package["ntp"],
+	    Package["$ntp_package"],
 	],
 	subscribe	=> [
-	    File["/etc/ntp.conf"],
-            File["/etc/sysconfig/ntpd"],
+	    File['ntp_conf'],
 	],
     }
 
