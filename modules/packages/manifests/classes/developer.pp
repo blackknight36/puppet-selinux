@@ -37,6 +37,10 @@ class packages::developer {
 	ensure	=> installed,
     }
 
+    package { "python3-devel":
+	ensure	=> installed,
+    }
+
     if $operatingsystemrelease > 11 {
         package { "python-ipaddr":
             ensure	=> installed,
