@@ -47,6 +47,14 @@ class packages::developer {
         }
     }
 
+    package { "python-tools":
+	ensure	=> installed,
+    }
+
+    package { "python3-tools":
+	ensure	=> installed,
+    }
+
     package { "rpmdevtools":
 	ensure	=> installed,
     }
