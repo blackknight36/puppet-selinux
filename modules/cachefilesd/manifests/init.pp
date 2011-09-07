@@ -23,12 +23,12 @@ class cachefilesd {
         service { "cachefilesd":
             enable      => $hostname ? {
                 #"mdct-dev10"    => false,
-                #"mdct-dev12"    => false,
+                "mdct-dev12"    => false,
                 default         => true,
             },
             ensure      => $hostname ? {
                 #"mdct-dev10"    => stopped,
-                #"mdct-dev12"    => stopped,
+                "mdct-dev12"    => stopped,
                 default         => running,
             },
             hasrestart  => true,
