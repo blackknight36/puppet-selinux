@@ -2,49 +2,42 @@
 
 class packages::net_tools {
 
-    package { "bind-utils":
-	ensure	=> installed,
-    }
-
-    package { "bridge-utils":
-	ensure	=> installed,
-    }
-
-    package { "conntrack-tools":
-	ensure	=> installed,
-    }
-
-    package { "enmasse":
-	ensure	=> installed,
-    }
-
-    package { "ethtool":
-	ensure	=> installed,
-    }
-
-    package { "mtr":
-	ensure	=> installed,
-    }
-
-    if $operatingsystemrelease >= 9 {
-        package { "netstat-nat":
-            ensure	=> installed,
-        }
-    }
-
-    package { "nmap":
-	ensure	=> installed,
-    }
-
-    package { "openldap-clients":
-	ensure	=> installed,
-    }
-
-    # tsocks gets its own module
     include tsocks
 
-    package { "wireshark-gnome":
-	ensure	=> installed,
+    ### Universal Package Inclusion ###
+
+    package { [
+
+        'bind-utils',
+        'bridge-utils',
+        'conntrack-tools',
+        'enmasse',
+        'ethtool',
+        'mtr',
+        'netstat-nat',
+        'nmap',
+        'openldap-clients',
+        'telnet',
+        'wireshark-gnome',
+
+        ]:
+        ensure => installed,
     }
+
+    ### Select Package Inclusion ###
+
+    # none
+
+    ### Universal Package Exclusion ###
+
+    package { [
+
+        ]:
+        ensure => absent,
+    }
+
+    ### Select Package Exclusion ###
+
+    # none
 
 }

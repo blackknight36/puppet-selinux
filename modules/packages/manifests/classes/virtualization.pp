@@ -2,30 +2,50 @@
 
 class packages::virtualization {
 
-    if ( $operatingsystem == "Fedora" ) and ($operatingsystemrelease < 11) {
-        package { "kvm":
-            ensure	=> installed,
-        }
-        package { "qemu":
-            ensure	=> installed,
-        }
-    }
-    else {
-        package { "qemu-kvm":
-            ensure	=> installed,
-        }
+    ### Universal Package Inclusion ###
+
+    package { [
+
+        'libvirt',
+        'virt-manager',
+        'virt-viewer',
+
+        ]:
+        ensure => installed,
     }
 
-    package { "libvirt":
-	ensure	=> installed,
+    ### Select Package Inclusion ###
+
+    if $operatingsystem == 'Fedora' {
+
+        if $operatingsystemrelease >= 11 {
+            package { [
+                'qemu-kvm',
+                ]:
+                ensure => installed,
+            }
+        } else {
+            package { [
+                'kvm',
+                'qemu',
+                ]:
+                ensure => installed,
+            }
+        }
+
     }
 
-    package { "virt-manager":
-	ensure	=> installed,
+
+    ### Universal Package Exclusion ###
+
+    package { [
+
+        ]:
+        ensure => absent,
     }
 
-    package { "virt-viewer":
-	ensure	=> installed,
-    }
+    ### Select Package Exclusion ###
+
+    # none
 
 }

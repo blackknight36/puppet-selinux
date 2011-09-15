@@ -13,49 +13,24 @@ class packages::compat_32bit {
         },
     }
 
-    package { "fontconfig.$ALT_ARCH":
-        ensure  => installed,
-    }
+    ### Universal Package Inclusion ###
 
-    package { "freetype.$ALT_ARCH":
-        ensure  => installed,
-    }
+    package { [
 
-    # GConf2 needed for at least Lotus Notes
-    package { "GConf2.$ALT_ARCH":
-        ensure  => installed,
-    }
+        "GConf2.$ALT_ARCH", # needed by at least Lotus Notes
+        "fontconfig.$ALT_ARCH",
+        "freetype.$ALT_ARCH",
+        "glib2.$ALT_ARCH",
+        "glibc.i686",
+        "libSM.$ALT_ARCH",
+        "libXext.$ALT_ARCH",
+        "libXi.$ALT_ARCH",
+        "libXrandr.$ALT_ARCH",
+        "libXrender.$ALT_ARCH",
+        "libXtst.$ALT_ARCH",
 
-    package { "glib2.$ALT_ARCH":
-        ensure  => installed,
-    }
-
-    package { "glibc.i686":
-        ensure  => installed,
-    }
-
-    package { "libSM.$ALT_ARCH":
-        ensure  => installed,
-    }
-
-    package { "libXext.$ALT_ARCH":
-        ensure  => installed,
-    }
-
-    package { "libXi.$ALT_ARCH":
-        ensure  => installed,
-    }
-
-    package { "libXrandr.$ALT_ARCH":
-        ensure  => installed,
-    }
-
-    package { "libXrender.$ALT_ARCH":
-        ensure  => installed,
-    }
-
-    package { "libXtst.$ALT_ARCH":
-        ensure  => installed,
+        ]:
+        ensure => installed,
     }
 
 }

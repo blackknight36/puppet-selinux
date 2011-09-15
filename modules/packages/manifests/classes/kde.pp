@@ -2,168 +2,54 @@
 
 class packages::kde {
 
-    package { "amarok":
-        ensure  => installed,
-    }
+    ### Universal Package Inclusion ###
 
-    package { "cups-pk-helper":
-        ensure  => installed,
-    }
+    package { [
 
-    package { "digikam":
-        ensure  => installed,
-    }
+        'amarok',
+        'cups-pk-helper',
+        'digikam',
+        'k3b',
+        'k3b-extras-freeworld',
+        'kaffeine',
+        'kcm-gtk',
+        'kcm_touchpad',
+        'kde-plasma-networkmanagement',
+        'kde-plasma-yawp',
+        'kde-settings-pulseaudio',
+        'kdeaccessibility',
+        'kdeartwork',
+        'kdeartwork-screensavers',
+        'kdebase',
+        'kdegames',
+        'kdegraphics',
+        'kdemultimedia',
+        'kdenetwork',
+        'kdepim',
+        'kdeplasma-addons',
+        'kdeutils',
+        'kdeutils-printer-applet',
+        'kdm',
+        'kipi-plugins',
+        'kmplayer',
+        'koffice-krita',
+        'konq-plugins',
+        'konversation',
+        'kpackagekit',
+        'ksshaskpass',
+        'ktorrent',
+        'phonon-backend-gstreamer',
+        'pinentry-qt',
+        'plasma-scriptengine-python',
+        'qtcurve-gtk2',
+        'qtcurve-kde4',
+        'scribus',
+        'system-config-printer-kde',
+        'xorg-x11-apps',
+        'xsettings-kde',
 
-    package { "k3b":
-        ensure  => installed,
-    }
-
-    package { "k3b-extras-freeworld":
-        ensure  => installed,
-    }
-
-    package { "kaffeine":
-        ensure  => installed,
-    }
-
-    package { "kcm-gtk":
-        ensure  => installed,
-    }
-
-    package { "kcm_touchpad":
-        ensure  => installed,
-    }
-
-    package { "kde-plasma-networkmanagement":
-        ensure  => installed,
-    }
-
-    package { "kde-plasma-yawp":
-        ensure  => installed,
-    }
-
-    package { "kde-settings-pulseaudio":
-        ensure  => installed,
-    }
-
-    package { "kdeaccessibility":
-        ensure  => installed,
-    }
-
-    package { "kdeartwork":
-        ensure  => installed,
-    }
-
-    package { "kdeartwork-screensavers":
-        ensure  => installed,
-    }
-
-    package { "kdebase":
-        ensure  => installed,
-    }
-
-    package { "plasma-scriptengine-python":
-        ensure  => installed,
-    }
-
-    package { "kdegames":
-        ensure  => installed,
-    }
-
-    package { "kdegraphics":
-        ensure  => installed,
-    }
-
-    package { "kdemultimedia":
-        ensure  => installed,
-    }
-
-    package { "kdenetwork":
-        ensure  => installed,
-    }
-
-    package { "kdepim":
-        ensure  => installed,
-    }
-
-    package { "kdeplasma-addons":
-        ensure  => installed,
-    }
-
-    package { "kdeutils":
-        ensure  => installed,
-    }
-
-    package { "kdeutils-printer-applet":
-        ensure  => installed,
-    }
-
-    package { "kdm":
-        ensure  => installed,
-    }
-
-    package { "kipi-plugins":
-        ensure  => installed,
-    }
-
-    package { "kmplayer":
-        ensure  => installed,
-    }
-
-    package { "koffice-krita":
-        ensure  => installed,
-    }
-
-    package { "konq-plugins":
-        ensure  => installed,
-    }
-
-    package { "konversation":
-        ensure  => installed,
-    }
-
-    package { "kpackagekit":
-        ensure  => installed,
-    }
-
-    package { "ksshaskpass":
-        ensure  => installed,
-    }
-
-    package { "ktorrent":
-        ensure  => installed,
-    }
-
-    package { "phonon-backend-gstreamer":
-        ensure  => installed,
-    }
-
-    package { "pinentry-qt":
-        ensure  => installed,
-    }
-
-    package { "qtcurve-gtk2":
-        ensure  => installed,
-    }
-
-    package { "qtcurve-kde4":
-        ensure  => installed,
-    }
-
-    package { "scribus":
-        ensure  => installed,
-    }
-
-    package { "system-config-printer-kde":
-        ensure  => installed,
-    }
-
-    package { "xorg-x11-apps":
-        ensure  => installed,
-    }
-
-    package { "xsettings-kde":
-        ensure  => installed,
+        ]:
+        ensure => installed,
     }
 
 }

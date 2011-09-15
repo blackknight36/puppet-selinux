@@ -4,71 +4,54 @@ class packages::developer {
 
     include rpm-build-tools
 
-    package { "cvs":
-	ensure	=> installed,
+    ### Universal Package Inclusion ###
+
+    package { [
+
+        'cvs',
+        'gcc',
+        'git',
+        'gitk',
+        'gnupg',                # required for rpmbuild --sign
+        'gnupg2',               # required for rpmbuild --sign
+        'ipython',
+        'meld',
+        'nasm',
+        'python-devel',
+        'python-tools',
+        'python3-devel',
+        'python3-tools',
+        'rpmdevtools',
+        'subversion',
+
+        ]:
+        ensure => installed,
     }
 
-    package { "gcc":
-	ensure	=> installed,
-    }
+    ### Select Package Inclusion ###
 
-    package { "git":
-	ensure	=> installed,
-    }
+    if $operatingsystem == 'Fedora' {
 
-    package { "gitk":
-	ensure	=> installed,
-    }
-
-    # required for: rpmbuild --sign
-    package { "gnupg":
-	ensure	=> installed,
-    }
-
-    package { "gnupg2":
-	ensure	=> installed,
-    }
-
-    package { "meld":
-	ensure	=> installed,
-    }
-
-    package { "nasm":
-	ensure	=> installed,
-    }
-
-    package { "python-devel":
-	ensure	=> installed,
-    }
-
-    package { "python3-devel":
-	ensure	=> installed,
-    }
-
-    if $operatingsystemrelease > 11 {
-        package { "python-ipaddr":
-            ensure	=> installed,
+        if $operatingsystemrelease >= 12 {
+            package { [
+                'python-ipaddr',
+                ]:
+                ensure  => installed,
+            }
         }
+
     }
 
-    package { "python-tools":
-	ensure	=> installed,
+    ### Universal Package Exclusion ###
+
+    package { [
+
+        ]:
+        ensure => absent,
     }
 
-    package { "python3-tools":
-	ensure	=> installed,
-    }
+    ### Select Package Exclusion ###
 
-    package { "rpmdevtools":
-	ensure	=> installed,
-    }
-
-    package { "subversion":
-	ensure	=> installed,
-    }
-
-    package { "strace":
-	ensure	=> installed,
-    }
+    # none
 
 }
