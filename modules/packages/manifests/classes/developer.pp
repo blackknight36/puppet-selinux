@@ -29,6 +29,10 @@ class packages::developer {
 	ensure	=> installed,
     }
 
+    package { "meld":
+	ensure	=> installed,
+    }
+
     package { "nasm":
 	ensure	=> installed,
     }
