@@ -14,6 +14,7 @@ class packages::base {
         'iotop',
         'lsof',
         'mlocate',
+        'multitail',
         'openssh-clients',
         'policycoreutils-python',       # provides audit2allow and audit2why
         'prophile',
