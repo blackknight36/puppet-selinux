@@ -16,6 +16,7 @@ class packages::base {
         'mlocate',
         'multitail',
         'openssh-clients',
+        'pciutils',
         'policycoreutils-python',       # provides audit2allow and audit2why
         'prophile',
         'python-mdct',
@@ -25,6 +26,7 @@ class packages::base {
         'task',
         'tree',
         'units',
+        'usbutils',
         'vim-X11',
         'vim-enhanced',
         'xorg-x11-xauth',               # xauth required for X11 forwarding

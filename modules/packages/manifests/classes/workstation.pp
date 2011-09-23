@@ -16,7 +16,6 @@ class packages::workstation {
         'putty',
         'qcad',
         'test-automation',
-        'usbutils',
         'workrave',
         'x2vnc',
         'xclip',
