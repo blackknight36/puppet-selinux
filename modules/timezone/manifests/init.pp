@@ -2,15 +2,22 @@
 
 class timezone {
 
-    file { "/etc/sysconfig/clock":
-        group	=> "root",
-        mode    => 644,
-        owner   => "root",
-        source  => "puppet:///timezone/clock",
+    $tzname = $plant_number ? {
+        '01'    => 'America/Detroit',
+        '02'    => 'America/Detroit',
+        '11'    => 'America/Chicago',
+        default => 'America/Detroit',
     }
 
-    file { "/etc/localtime":
-        ensure  => "/usr/share/zoneinfo/America/Detroit"
+    file { '/etc/sysconfig/clock':
+        group   => 'root',
+        mode    => '0644',
+        owner   => 'root',
+        content => template('timezone/clock'),
+    }
+
+    file { '/etc/localtime':
+        ensure  => "/usr/share/zoneinfo/${tzname}",
     }
 
 }
