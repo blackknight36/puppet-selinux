@@ -11,7 +11,6 @@ node "mdct-00fs.dartcontainer.com"              { include dart::mdct-00fs }
 node "mdct-dev6-test.dartcontainer.com"         { include dart::mdct-dev6-test }        # CK TEST
 node "mdct-dev6.dartcontainer.com"              { include dart::mdct-dev6 }             # CK
 node "mdct-dev7.dartcontainer.com"              { include dart::mdct-dev7 }             # CR
-node "mdct-dev9.dartcontainer.com"              { include dart::mdct-dev9 }             # MK
 node "mdct-dev10.dartcontainer.com"             { include dart::mdct-dev10 }            # LH
 node "mdct-dev11.dartcontainer.com"             { include dart::mdct-dev11 }            # CP
 node "mdct-dev12.dartcontainer.com"             { include dart::mdct-dev12 }            # JF
