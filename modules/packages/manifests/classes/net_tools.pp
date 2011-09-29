@@ -17,6 +17,7 @@ class packages::net_tools {
         'netstat-nat',
         'nmap',
         'openldap-clients',
+        'tcpdump',
         'telnet',
         'wireshark-gnome',
 
