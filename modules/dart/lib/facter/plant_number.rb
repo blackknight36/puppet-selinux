@@ -3,6 +3,9 @@
 #       default route.  The value returned will be a two digit code,
 #       left-padded with zeroes, e.g., (Mason ==> "01").  If no default route
 #       exists, a value of "01" (Mason) will be returned.
+#
+# NB: This custom fact requires that the pluginsync feature be enabled in
+# puppet.conf.
 
 Facter.add("plant_number") do
     begin
