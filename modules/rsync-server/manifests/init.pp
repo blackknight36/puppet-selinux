@@ -18,7 +18,7 @@ class rsync-server {
     }
 
     exec { "open-rsync-port":
-        command => "lokkit --port=873:tcp --port:873:udp",
+        command => "lokkit --port=873:tcp",
         require		=> [
             Package["rsync"],
         ],
