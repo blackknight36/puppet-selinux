@@ -1,4 +1,21 @@
 # /etc/puppet/modules/bacula/manifests/classes/admin.pp
+#
+# Synopsis:
+#       Configures a host for bacula administration purposes.
+#
+# Parameters:
+#       NONE
+#
+# Requires:
+#       The variables $bacula_director_password and
+#       $bacula_storage_daemon_password must be set with values matching those
+#       given to bacula::server.
+#
+# Example usage:
+#
+#       $bacula_client_director_password = "secret1"
+#       $bacula_storage_daemon_password = "secret2"
+#       include bacula::admin
 
 class bacula::admin {
 
