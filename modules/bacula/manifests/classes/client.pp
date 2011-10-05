@@ -2,6 +2,8 @@
 
 class bacula::client {
 
+    include lokkit
+
     # We've moved to Bacula 5.x.
     #
     # F12 and later make the default bacula packages use a newer major version
@@ -57,9 +59,8 @@ class bacula::client {
         source  => "puppet:///bacula/bacula-fd",
     }
 
-    exec { "open-bacula-fd-port":
-        command => "lokkit --port=9102:tcp",
-        unless  => "grep -q -- '-A INPUT .* -p tcp --dport 9102 -j ACCEPT' /etc/sysconfig/iptables",
+    lokkit::tcp_port { "bacula-fd":
+        port    => "9102",
     }
 
     service { "${bacula_major}-fd":
@@ -68,7 +69,7 @@ class bacula::client {
         hasrestart	=> true,
         hasstatus	=> true,
         require		=> [
-            Exec["open-bacula-fd-port"],
+            Exec["open-bacula-fd-tcp-port"],
             Package["${bacula_major}-client"],
         ],
         subscribe	=> [

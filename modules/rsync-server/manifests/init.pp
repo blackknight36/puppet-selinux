@@ -2,6 +2,7 @@
 
 class rsync-server {
 
+    include lokkit
     include xinetd
 
     package { "rsync":
@@ -17,12 +18,8 @@ class rsync-server {
         source  => "puppet:///rsync-server/rsync",
     }
 
-    exec { "open-rsync-port":
-        command => "lokkit --port=873:tcp",
-        require		=> [
-            Package["rsync"],
-        ],
-        unless  => "grep -q -- '-A INPUT .* -p tcp --dport 873 -j ACCEPT' /etc/sysconfig/iptables",
+    lokkit::tcp_port { "rsync":
+        port    => "873",
     }
 
 }

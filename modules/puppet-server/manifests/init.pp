@@ -2,6 +2,8 @@
 
 class puppet-server {
 
+    include lokkit
+
     package { "puppet-server":
 	ensure	=> installed,
     }
@@ -18,9 +20,8 @@ class puppet-server {
     #   ip address must be 10.1.192.131
 
 
-    exec { "open-puppetmaster-port":
-        command => "lokkit --port=8140:tcp",
-        unless  => "grep -q -- '-A INPUT .* -p tcp --dport 8140 -j ACCEPT' /etc/sysconfig/iptables",
+    lokkit::tcp_port { "puppetmaster":
+        port    => "8140",
     }
 
     service { "puppetmaster":
@@ -29,7 +30,7 @@ class puppet-server {
         hasrestart	=> true,
         hasstatus	=> true,
         require		=> [
-            Exec["open-puppetmaster-port"],
+            Exec["open-puppetmaster-tcp-port"],
             Package["puppet-server"],
         ],
     }

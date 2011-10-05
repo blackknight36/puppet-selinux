@@ -22,6 +22,8 @@
 
 class MODULE_NAME::CLASS_NAME {
 
+    include lokkit
+
     case $MODULE_NAME_CONFIG_NAME_source {
         "": {
             fail("Required \$MODULE_NAME_CONFIG_NAME_source variable is not defined")
@@ -68,9 +70,8 @@ class MODULE_NAME::CLASS_NAME {
         seltype => "etc_t",
     }
 
-    exec { "open-SERVICE_NAME-port":
-        command => "lokkit --port=9102:tcp",
-        unless  => "grep -q -- '-A INPUT .* -p tcp --dport 9102 -j ACCEPT' /etc/sysconfig/iptables",
+    lokkit::tcp_port { "SERVICE_NAME":
+        port    => "SERVICE_PORT",
     }
 
     service { "SERVICE_NAME":
@@ -79,7 +80,7 @@ class MODULE_NAME::CLASS_NAME {
         hasrestart	=> true,
         hasstatus	=> true,
         require		=> [
-            Exec["open-SERVICE_NAME-port"],
+            Exec["open-SERVICE_NAME-tcp-port"],
             Package["CONFLICTING_PACKAGE_NAME"],
             Package["PACKAGE_NAME"],
         ],

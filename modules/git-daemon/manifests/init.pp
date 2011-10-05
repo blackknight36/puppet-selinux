@@ -2,6 +2,8 @@
 
 class git-daemon {
 
+    include lokkit
+
     package { "git-daemon":
 	ensure	=> installed,
     }
@@ -21,9 +23,8 @@ class git-daemon {
     }
 
 #   mdct-00fs not using firewall and lokkit will enable it
-#   exec { "open-git-daemon-port":
-#       command => "lokkit --port=9418:tcp",
-#       unless  => "grep -q -- '-A INPUT .* -p tcp --dport 9418 -j ACCEPT' /etc/sysconfig/iptables",
+#   lokkit::tcp_port { "git-daemon":
+#       port    => "9418",
 #   }
 
     # No service to manage here.  The git-daemon is spawned by xinetd.

@@ -11,6 +11,8 @@
 
 class samba {
 
+    include lokkit
+
     package { "samba":
 	ensure	=> installed,
     }
@@ -29,14 +31,12 @@ class samba {
         ],
     }
 
-    exec { "open-netbios-ssn-port":
-        command => "lokkit --port=139:tcp",
-        unless  => "grep -q -- '-A INPUT .* -p tcp --dport 139 -j ACCEPT' /etc/sysconfig/iptables",
+    lokkit::tcp_port { "netbios-ssn":
+        port    => "139",
     }
 
-    exec { "open-microsoft-ds-port":
-        command => "lokkit --port=445:tcp",
-        unless  => "grep -q -- '-A INPUT .* -p tcp --dport 445 -j ACCEPT' /etc/sysconfig/iptables",
+    lokkit::tcp_port { "microsoft-ds":
+        port    => "445",
     }
 
     service { "smb":
@@ -45,8 +45,8 @@ class samba {
         hasrestart	=> true,
         hasstatus	=> true,
         require		=> [
-            Exec["open-netbios-ssn-port"],
-            Exec["open-microsoft-ds-port"],
+            Exec["open-netbios-ssn-tcp-port"],
+            Exec["open-microsoft-ds-tcp-port"],
             Package["samba"],
         ],
         subscribe	=> [

@@ -2,6 +2,8 @@
 
 class cups {
 
+    include lokkit
+
     package { "cups":
 	ensure	=> installed,
     }
@@ -43,9 +45,8 @@ class cups {
 #       source  => "puppet:///cups/printers.conf",
 #   }
 
-    exec { "open-cups-port":
-        command => "lokkit --port=631:tcp",
-        unless  => "grep -q -- '-A INPUT .* -p tcp --dport 631 -j ACCEPT' /etc/sysconfig/iptables",
+    lokkit::tcp_port { "cups":
+        port    => "631",
     }
 
     service { "cups":
@@ -54,7 +55,7 @@ class cups {
         hasrestart	=> true,
         hasstatus	=> true,
         require		=> [
-            Exec["open-cups-port"],
+            Exec["open-cups-tcp-port"],
             Package["cups"],
         ],
 # See comment above.

@@ -2,6 +2,8 @@
 
 class openssh-server {
 
+    include lokkit
+
     package { "openssh-server":
 	ensure	=> installed,
     }
@@ -18,11 +20,8 @@ class openssh-server {
         ],
     }
 
-    exec { "open-sshd-port":
-        command => "lokkit --port=22:tcp",
-	# Fedora 8 will have chains named like RH-Firewall-1-INPUT.  In later
-	# releases, the chain is named simply INPUT.
-        unless  => "grep -q -- '-A .*INPUT .* -p tcp --dport 22 -j ACCEPT' /etc/sysconfig/iptables",
+    lokkit::tcp_port { "ssh":
+        port    => "22",
     }
 
     service { "sshd":
@@ -31,7 +30,7 @@ class openssh-server {
         hasrestart	=> true,
         hasstatus	=> true,
         require		=> [
-            Exec["open-sshd-port"],
+            Exec["open-ssh-tcp-port"],
             Package["openssh-server"],
         ],
         subscribe	=> [
