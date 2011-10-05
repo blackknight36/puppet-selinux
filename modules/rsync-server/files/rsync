@@ -1,9 +1,6 @@
-# default: off
-# description: The rsync server is a good addition to an ftp server, as it \
-#	allows crc checksumming etc.
 service rsync
 {
-	disable	= yes
+	disable	        = no
 	flags		= IPv6
 	socket_type     = stream
 	wait            = no
