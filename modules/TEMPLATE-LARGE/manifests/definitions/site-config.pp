@@ -1,4 +1,4 @@
-# /etc/puppet/modules/MODULE_NAME/manifests/definitions/site-config.pp
+# /etc/puppet/modules/MODULE_NAME/manifests/definitions/DEFINE_NAME.pp
 #
 # Synopsis:
 #       Installs a web-site configuration file for the Apache web server.
@@ -14,13 +14,13 @@
 #
 #       include MODULE_NAME
 #
-#       MODULE_NAME::site-config { "acme":
+#       MODULE_NAME::DEFINE_NAME { "acme":
 #           notify  => Service["SERVICE_NAME"],
 #           source  => "puppet:///private-host/acme.conf",
 #       }
 
 
-define MODULE_NAME::site-config ($ensure="present", $source) {
+define MODULE_NAME::DEFINE_NAME ($ensure="present", $source) {
 
     file { "/CONFIG_PATH/conf.d/${name}.conf":
         ensure  => $ensure,
