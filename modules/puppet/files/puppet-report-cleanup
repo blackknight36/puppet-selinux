@@ -1,0 +1,28 @@
+#!/bin/sh
+#
+# Synopsis:
+#       Purge oldest puppet reports and compress all but the most recent of
+#       those that remain.
+#
+# Notes:
+#       This file is managed by puppet.
+
+
+SELF="$(basename $0)"
+
+# REPORT_DIR indicates where puppet is caching its reports.
+REPORT_DIR="/var/lib/puppet/reports"
+
+# UNCOMPRESSED_DAYS indicates how many days of the most recent reports are to
+# be kept uncompressed.
+UNCOMPRESSED_DAYS="7"
+
+main() {
+    tmpwatch --mtime --verbose 30d $REPORT_DIR
+
+    find ${REPORT_DIR} -name '*.yaml' -mtime +${UNCOMPRESSED_DAYS} -print0 \
+        | xargs -0 --no-run-if-empty xz -9
+}
+
+
+main &> /tmp/$SELF
