@@ -1,4 +1,4 @@
-# /etc/puppet/modules/samba/manifests/classes/samba.pp
+# modules/samba/manifests/classes/samba.pp
 #
 # Synopsis:
 #       Establish a SMB/CIFS service.
@@ -13,44 +13,56 @@ class samba {
 
     include lokkit
 
-    package { "samba":
+    package { 'samba':
 	ensure	=> installed,
     }
 
-    file { "/etc/samba/smb.conf":
-        group	=> "root",
-        mode    => "0640",
-        owner   => "root",
-        require => Package["samba"],
-        seluser => "system_u",
-        selrole => "object_r",
-        seltype => "samba_etc_t",
+    file { '/etc/samba/smb.conf':
+        group	=> 'root',
+        mode    => '0640',
+        owner   => 'root',
+        require => Package['samba'],
+        seluser => 'system_u',
+        selrole => 'object_r',
+        seltype => 'samba_etc_t',
         source  => [
-            "puppet:///private-host/samba/smb.conf",
-            "puppet:///modules/samba/smb.conf",
+            'puppet:///private-host/samba/smb.conf',
+            'puppet:///modules/samba/smb.conf',
         ],
     }
 
-    lokkit::tcp_port { "netbios-ssn":
-        port    => "139",
+    lokkit::tcp_port { 'netbios-ssn':
+        port    => '139',
     }
 
-    lokkit::tcp_port { "microsoft-ds":
-        port    => "445",
+    lokkit::tcp_port { 'microsoft-ds':
+        port    => '445',
     }
 
-    service { "smb":
+    selboolean { 'samba_export_all_ro':
+        persistent      => true,
+        value           => on,
+    }
+
+    selboolean { 'samba_export_all_rw':
+        persistent      => true,
+        value           => on,
+    }
+
+    service { 'smb':
         enable		=> true,
         ensure		=> running,
         hasrestart	=> true,
         hasstatus	=> true,
         require		=> [
-            Exec["open-netbios-ssn-tcp-port"],
-            Exec["open-microsoft-ds-tcp-port"],
-            Package["samba"],
+            Exec['open-microsoft-ds-tcp-port'],
+            Exec['open-netbios-ssn-tcp-port'],
+            Package['samba'],
+            Selboolean['samba_export_all_ro'],
+            Selboolean['samba_export_all_rw'],
         ],
         subscribe	=> [
-            File["/etc/samba/smb.conf"],
+            File['/etc/samba/smb.conf'],
         ],
     }
 
