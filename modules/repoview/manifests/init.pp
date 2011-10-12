@@ -1,4 +1,4 @@
-# /etc/puppet/modules/repoview/manifests/init.pp
+# modules/repoview/manifests/init.pp
 
 class repoview {
 
@@ -20,12 +20,8 @@ class repoview {
         owner   => 'root',
     }
 
-    file { '/etc/cron.d/mdct-repoview':
-        group	=> 'root',
-        mode    => '0644',
-        owner   => 'root',
+    cron:jobfile { 'mdct-repoview':
         require => [
-            #Service['crond'],  # if there were such a module
             File['/usr/libexec/mdct-repoview'],
             File['/var/lib/mdct-repoview'],
             Package['repoview'],

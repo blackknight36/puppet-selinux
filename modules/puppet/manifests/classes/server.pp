@@ -1,7 +1,8 @@
-# /etc/puppet/modules/puppet/manifests/classes/server.pp
+# modules/puppet/manifests/classes/server.pp
 
 class puppet::server {
 
+    include cron::daemon
     include lokkit
 
     package { 'puppet-server':
@@ -58,14 +59,8 @@ class puppet::server {
         ],
     }
 
-    file { '/etc/cron.d/puppet-report-cleanup':
-        group	=> 'root',
-        mode    => '0644',
-        owner   => 'root',
+    cron::jobfile { 'puppet-report-cleanup':
         require => Package['puppet-tools'],
-        seluser => 'system_u',
-        selrole => 'object_r',
-        seltype => 'system_cron_spool_t',
         source  => [
             'puppet:///private-host/puppet/puppet-report-cleanup.cron',
             'puppet:///private-domain/puppet/puppet-report-cleanup.cron',
