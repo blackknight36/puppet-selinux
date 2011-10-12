@@ -1,0 +1,6 @@
+# ***** THIS FILE IS MANAGED BY PUPPET *****
+# vim:filetype=crontab
+
+MAILTO=<%= mailto %>
+PATH=<%= path %>
+<%= minute %> <%= hour %> <%= dom %> <%= month %> <%= dow %> <%= user %> <%= command %>
