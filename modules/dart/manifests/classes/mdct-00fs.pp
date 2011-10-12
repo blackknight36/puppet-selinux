@@ -1,4 +1,4 @@
-# /etc/puppet/modules/dart/manifests/classes/mdct-00fs.pp
+# modules/dart/manifests/classes/mdct-00fs.pp
 
 #@# Not ready to take on full-on management; scope is very limited at this time.
 #@# class dart::mdct-00fs inherits dart::server_node {
@@ -7,6 +7,7 @@ class dart::mdct-00fs {
     #@# From base_node
     #@# include authconfig
     #@# include autofs
+    include cron::daemon
     #@# # include cups
     #@# include cachefilesd
     include logwatch
