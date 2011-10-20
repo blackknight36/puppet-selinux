@@ -1,10 +1,11 @@
-# /etc/puppet/modules/timezone/manifests/init.pp
+# modules/timezone/manifests/init.pp
 
 class timezone {
 
     $tzname = $plant_number ? {
         '01'    => 'America/Detroit',
         '02'    => 'America/Detroit',
+        '04'    => 'America/Chicago',
         '11'    => 'America/Chicago',
         default => 'America/Detroit',
     }
