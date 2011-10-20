@@ -27,6 +27,7 @@ class samba {
         seltype => 'samba_etc_t',
         source  => [
             'puppet:///private-host/samba/smb.conf',
+            'puppet:///private-domain/samba/smb.conf',
             'puppet:///modules/samba/smb.conf',
         ],
     }
