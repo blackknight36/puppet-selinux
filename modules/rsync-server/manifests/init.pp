@@ -1,4 +1,4 @@
-# /etc/puppet/modules/rsync-server/manifests/init.pp
+# modules/rsync-server/manifests/init.pp
 
 class rsync-server {
 
@@ -27,7 +27,11 @@ class rsync-server {
         notify  => Service['xinetd'],
         owner   => 'root',
         require => Package['rsync'],
-        source  => 'puppet:///private-host/rsync-server/rsyncd.conf',
+        source  => [
+            'puppet:///private-host/rsync-server/rsyncd.conf',
+            'puppet:///private-domain/rsync-server/rsyncd.conf',
+            'puppet:///modules/rsync-server/rsyncd.conf',
+        ],
     }
 
     lokkit::tcp_port { 'rsync':
