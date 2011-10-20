@@ -8,6 +8,7 @@ node "jflo-f13.dartcontainer.com"               { include dart::jflo-f13 }
 node "mdct-00bk2.dartcontainer.com"             { include dart::mdct-00bk2 }
 node "mdct-00fs.dartcontainer.com"              { include dart::mdct-00fs }
 node "mdct-02ut.dartcontainer.com"              { include dart::mdct-02ut }
+node "mdct-04pt.dartcontainer.com"              { include dart::mdct-04pt }
 node "mdct-dev6-test.dartcontainer.com"         { include dart::mdct-dev6-test }        # CK TEST
 node "mdct-dev6.dartcontainer.com"              { include dart::mdct-dev6 }             # CK
 node "mdct-dev7.dartcontainer.com"              { include dart::mdct-dev7 }             # CR
