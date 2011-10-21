@@ -11,6 +11,7 @@ class dart::base_node {
     include cron::daemon
     include cups
     include cachefilesd
+    include dart::custom-facts
     include dart::no-dns-hosts
     include logwatch
     include ntp
@@ -21,4 +22,5 @@ class dart::base_node {
     include sudo
     include timezone
     include xorg-server
+
 }
