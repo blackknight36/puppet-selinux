@@ -2,5 +2,8 @@
 
 class dart::mdct-00dw inherits dart::server_node {
 
-    include iptables
+    class { 'iptables':
+        enabled => true,
+    }
+
 }

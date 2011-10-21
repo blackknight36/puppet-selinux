@@ -9,11 +9,14 @@ class dart::mdct-dev12 inherits dart::workstation_node {
     include bacula::client
 
     include bacula::admin
-    include iptables
     include mysql-server
     include packages::base
     include packages::kde
     include yum-cron
+
+    class { 'iptables':
+        enabled => true,
+    }
 
     # noscript included here because nobody else likely to want it
     package { "mozilla-noscript":
