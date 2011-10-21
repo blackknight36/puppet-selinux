@@ -9,6 +9,7 @@ class timezone {
         '11'    => 'America/Chicago',
         default => 'America/Detroit',
     }
+    notice("Selected timezone $tzname based on plant_number $plant_number.  This may change next run if puppet has not yet achieved convergence.")
 
     file { '/etc/sysconfig/clock':
         group   => 'root',
