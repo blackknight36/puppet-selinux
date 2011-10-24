@@ -6,10 +6,55 @@
 
 class dart::picaps_test_node inherits dart::server_node {
 
-    # AOS devices pull media-playback content using rsync.
+    # Could be enabled, but need a list of ports to be opened.  Traditional
+    # PICAPS servers just have it disabled however.
+    class { 'iptables':
+        enabled => false,
+    }
+
+    # PICAPS uses rsync for backup and other similar uses
     include rsync-server
 
-    # That same media-playback content is pushed in via Windows systems.
+    # Samba may be useful for some adminstrators
     include samba
+
+    # PICAPS installation is via cvs
+    include packages::developer
+
+    # PICAPS stores are via MySQL
+    include mysql-server
+
+    # Other package a PICAPS server requires
+    package { [
+
+        'httpd',
+        'ncftp',
+
+        ]:
+        ensure  => 'installed',
+    }
+
+    file { '/usr/local/bin/picaps-install-and-setup':
+        group   => 'root',
+        mode    => '0754',
+        owner   => 'root',
+        seluser => 'system_u',
+        selrole => 'object_r',
+        seltype => 'file_t',
+        source  => 'puppet:///modules/dart/picaps/install-and-setup',
+    }
+
+    exec { '/usr/local/bin/picaps-install-and-setup':
+        creates => '/root/picaps-install-and-setup.log',
+        require => [
+            Class['mysql-server'],
+            Class['packages::developer'],
+            Class['rsync-server'],
+            File['/usr/local/bin/picaps-install-and-setup'],
+            Package['httpd'],
+            Package['ncftp'],
+        ],
+        timeout => 1800,
+    }
 
 }
