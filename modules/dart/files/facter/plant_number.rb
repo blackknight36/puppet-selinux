@@ -8,7 +8,8 @@
 
 Facter.add("plant_number") do
     begin
-        gw = IO.popen("/sbin/ip route show 0.0.0.0/0").read().split()[2]
+        output = %x{/sbin/ip route show 0.0.0.0/0}
+        gw = output.split()[2]
         if gw
             plant = "%02d" % gw.split(".")[1]
         else
