@@ -29,7 +29,7 @@ kickstart_clone() {
     #   selinux --disabled
 
     info "disabling SELinux"
-    sed -i 's/^SELINUX=.*/SELINUX=disabled/' /etc/sysconfig/selinux
+    sed -ci 's/^SELINUX=.*/SELINUX=disabled/' /etc/selinux/config
     setenforce 0
 
     #   # Install OS instead of upgrade
