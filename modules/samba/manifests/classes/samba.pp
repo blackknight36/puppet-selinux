@@ -40,14 +40,18 @@ class samba {
         port    => '445',
     }
 
-    selboolean { 'samba_export_all_ro':
-        persistent      => true,
-        value           => on,
-    }
+    if $selinux == true {
+        selboolean { 'samba_export_all_ro':
+            before      => Service['smb'],
+            persistent      => true,
+            value           => on,
+        }
 
-    selboolean { 'samba_export_all_rw':
-        persistent      => true,
-        value           => on,
+        selboolean { 'samba_export_all_rw':
+            before      => Service['smb'],
+            persistent      => true,
+            value           => on,
+        }
     }
 
     service { 'smb':
@@ -59,8 +63,6 @@ class samba {
             Exec['open-microsoft-ds-tcp-port'],
             Exec['open-netbios-ssn-tcp-port'],
             Package['samba'],
-            Selboolean['samba_export_all_ro'],
-            Selboolean['samba_export_all_rw'],
         ],
         subscribe	=> [
             File['/etc/samba/smb.conf'],

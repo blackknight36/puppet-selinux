@@ -38,9 +38,11 @@ class rsync-server {
         port    => '873',
     }
 
-    selboolean { 'rsync_export_all_ro':
-        persistent      => true,
-        value           => on,
+    if $selinux == true {
+        selboolean { 'rsync_export_all_ro':
+            persistent      => true,
+            value           => on,
+        }
     }
 
 }
