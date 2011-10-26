@@ -34,6 +34,12 @@ class dart::picaps_test_node inherits dart::server_node {
         ensure  => 'installed',
     }
 
+    # PICAPS calls gethostbyname() for its own hostname which must resolve.
+    host { "$fqdn":
+        ip              => "$ipaddress",
+        host_aliases    => [ "$hostname" ],
+    }
+
     file { '/usr/local/bin/picaps-install-and-setup':
         group   => 'root',
         mode    => '0754',
