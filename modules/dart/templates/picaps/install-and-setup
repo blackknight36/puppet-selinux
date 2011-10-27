@@ -94,12 +94,15 @@ kickstart_clone() {
     #   ncftpget -R 10.1.192.105 /home/ /pub/kickstart/picaps/hbgw
 
     # Java Setup
-    # release and JAVA_HOME differ here from kickstart, but match current
-    # production standards
+    # The JDK release and JAVA_HOME differ here from kickstart, but match
+    # current production standards.  We set root's JAVA_HOME home to latest
+    # rather than using $picaps_jdk because root's tools probably should just
+    # use the latest whereas applications (e.g., PICAPS) should probably be
+    # explicit for change control purposes.
     if ! rpm -q jdk &> /dev/null
     then
         info "installing JDK"
-        rpm -iv http://mdct-00fs.dartcontainer.com/ftp/pub/oracle/jdk-6u24-linux-amd64.rpm
+        rpm -iv <%= jdk_rpm_source %>
         echo -e "JAVA_HOME=/usr/java/latest/\nexport JAVA_HOME" >> /root/.bash_profile
     else
         info "JDK already installed"
@@ -107,8 +110,8 @@ kickstart_clone() {
 
     # jmx password
     info "installing JMX password"
-    echo -e "root\tspacip" > /usr/java/latest/jre/lib/management/jmxremote.password
-    chmod 600 /usr/java/latest/jre/lib/management/jmxremote.password
+    echo -e "root\tspacip" > <%= picaps_jdk %>/jre/lib/management/jmxremote.password
+    chmod 600 <%= picaps_jdk %>/jre/lib/management/jmxremote.password
 
     # /dist setup
     info "installing PICAPS cvs checkout"

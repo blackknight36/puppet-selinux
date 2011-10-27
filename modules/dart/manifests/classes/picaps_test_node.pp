@@ -6,6 +6,12 @@
 
 class dart::picaps_test_node inherits dart::server_node {
 
+    # Declare the source of the JDK to be installed.
+    $jdk_rpm_source='http://mdct-00fs.dartcontainer.com/ftp/pub/oracle/jdk-6u24-linux-amd64.rpm'
+
+    # Declare the JDK that PICAPS is to use.
+    $picaps_jdk='/usr/java/jdk1.6.0_24'
+
     # Could be enabled, but need a list of ports to be opened.  Traditional
     # PICAPS servers just have it disabled however.
     class { 'iptables':
@@ -41,13 +47,13 @@ class dart::picaps_test_node inherits dart::server_node {
     }
 
     file { '/usr/local/bin/picaps-install-and-setup':
+        content => template('dart/picaps/install-and-setup'),
         group   => 'root',
         mode    => '0754',
         owner   => 'root',
         seluser => 'system_u',
         selrole => 'object_r',
         seltype => 'file_t',
-        source  => 'puppet:///modules/dart/picaps/install-and-setup',
     }
 
     exec { '/usr/local/bin/picaps-install-and-setup':
