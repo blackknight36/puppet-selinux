@@ -161,11 +161,11 @@ kickstart_clone() {
     service cups start
 
     # 00 - Corporate / MDC
-    /usr/sbin/lpadmin -p LP00051 -E -v socket://10.1.0.147 -m laserjet.ppd.gz
-    /usr/sbin/lpadmin -p LP00052 -E -v socket://10.1.0.164 -m epson9.ppd.gz
-    /usr/sbin/lpadmin -p LP00053 -E -v socket://10.1.0.166 -m epson9.ppd.gz
-    /usr/sbin/lpadmin -p LP00054 -E -v socket://10.1.0.169 -m epson9.ppd.gz
-    /usr/sbin/lpadmin -p LP00055 -E -v socket://10.1.80.7 -m epson9.ppd.gz
+    /usr/sbin/lpadmin -p LP00051 -E -v socket://10.1.0.147
+    /usr/sbin/lpadmin -p LP00052 -E -v socket://10.1.0.164
+    /usr/sbin/lpadmin -p LP00053 -E -v socket://10.1.0.166
+    /usr/sbin/lpadmin -p LP00054 -E -v socket://10.1.0.169
+    /usr/sbin/lpadmin -p LP00055 -E -v socket://10.1.80.7
     /usr/sbin/lpadmin -p LP00056 -E -v socket://10.1.250.162:9900
 
     # 01 - Mason
