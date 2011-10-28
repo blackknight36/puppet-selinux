@@ -121,6 +121,7 @@ kickstart_clone() {
     cvs -d :pserver:anonymous@10.1.192.105:/home/cvsroot co picaps/config
     cvs -d :pserver:anonymous@10.1.192.105:/home/cvsroot co picaps/static
     cvs -d :pserver:anonymous@10.1.192.105:/home/cvsroot co picaps/resource
+    cvs -d :pserver:anonymous@10.1.192.105:/home/cvsroot co picaps/reporttemplates
     mv /dist/picaps/* /dist
     rm -rf /dist/picaps
     chmod +x /dist/resource/init.d/picaps
