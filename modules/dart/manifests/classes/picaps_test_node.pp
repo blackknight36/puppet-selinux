@@ -35,6 +35,7 @@ class dart::picaps_test_node inherits dart::server_node {
 
         'httpd',
         'ncftp',
+        'pyserial',
 
         ]:
         ensure  => 'installed',
