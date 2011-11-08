@@ -13,6 +13,9 @@ files-2k1-media     	-fstype=cifs,rw,uid=d19749,gid=d19749,credentials=/etc/.cre
 # mas7276
 mas7276 		-fstype=cifs,rw,credentials=/etc/.credentials/mas7276.cred     			  ://mas7276.dartcontainer.com/c\$
 
+# mas9965
+mas9965 		-fstype=cifs,rw,credentials=/etc/.credentials/mas9965.cred     			  ://mas9965.dartcontainer.com/c\$
+
 # general storage not belonging to any particiluar Fedora installation
 storage                 -fstype=ext3,rw         :/dev/data/storage
 
