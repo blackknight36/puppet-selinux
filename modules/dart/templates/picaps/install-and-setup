@@ -149,7 +149,9 @@ kickstart_clone() {
     ncftpget 10.1.192.105 /var/www/cgi-bin/ /pub/kickstart/picaps/www/cgi-bin/*
     chmod +x /var/www/cgi-bin/checkWeb.cgi
     # Disable Apache's mod_ssl so that port 443 is free for PICAPS
-    sed --in-place 's/^Listen 443/\#&/' /etc/httpd/conf.d/ssl.conf
+    # Apache no longer listens for SSL by default (and if it did, this path
+    # ref is all wrong nowadays).
+    #sed --in-place 's/^Listen 443/\#&/' /etc/httpd/conf.d/ssl.conf
 
     #   # rsync
     #   ncftpget 10.1.192.105 /etc/ /pub/kickstart/picaps/rsyncd.conf
