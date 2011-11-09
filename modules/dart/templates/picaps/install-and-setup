@@ -7,7 +7,7 @@
 SELF="$(basename $0)"
 
 info() {
-    echo "$*"
+    echo -e "\n### $SELF: $*"
 }
 
 
