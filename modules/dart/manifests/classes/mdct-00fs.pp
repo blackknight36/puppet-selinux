@@ -32,7 +32,6 @@ class dart::mdct-00fs {
 
     include 'flock-herder'
     include 'git-daemon'
-    include 'mdct-puppeteer-admin'
     include 'mirrmaid'
     include 'repoview'
 
