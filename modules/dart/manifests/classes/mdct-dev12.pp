@@ -81,14 +81,11 @@ class dart::mdct-dev12 inherits dart::workstation_node {
     }
 
     mount { "/opt":
-        # NB atboot and noauto seem conflicting but do work.  Essentially,
-        # puppet will make the mount, which will occur after autofs has
-        # started (as needed).
         atboot  => true,
         device  => "/mnt-local/storage/opt",
         ensure  => "mounted",
         fstype  => "none",
-        options => "bind,noauto,context=system_u:object_r:usr_t",
+        options => "_netdev,rbind,context=system_u:object_r:usr_t",
     }
 
     mailalias { "root":
