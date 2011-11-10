@@ -14,10 +14,21 @@
 #           enabled => false,
 #       }
 
-class iptables($enabled) {
+class iptables($enabled, $kernel_modules='') {
 
     package { 'iptables':
         ensure  => installed,
+    }
+
+    file { '/etc/sysconfig/iptables-config':
+	content	=> template('iptables/iptables-config'),
+        group	=> 'root',
+        mode    => '0600',
+        owner   => 'root',
+        require => Package['iptables'],
+        seluser => 'system_u',
+        selrole => 'object_r',
+        seltype => 'system_conf_t',
     }
 
     service { 'iptables':
@@ -31,6 +42,7 @@ class iptables($enabled) {
         # weak strategy, best so far: look for rules prefixed with a line
         # number
         status          => '(iptables -L --line-numbers; iptables -L -t nat --line-numbers) | grep -q "^[0-9]"',
+        subscribe       => File['/etc/sysconfig/iptables-config'],
     }
 
 }
