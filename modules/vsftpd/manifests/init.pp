@@ -4,31 +4,21 @@
 #       Configures a host as a vsftpd server.
 #
 # Parameters:
-#       NONE
+#       $allow_use_nfs  true/false      Configure SELinux to permit vsftpd to
+#                                       export content residing on NFS.
 #
 # Requires:
-#       Class['postgresql::server']     <= Use this notation for other resources
-#
-#       $vsftpd_var1                       Abstract variable 1
-#       $vsftpd_var2                       Abstract variable 2
-#       $vsftpd_CONFIG_NAME_source         Source URI for the vsftpd.conf file
+#       NONE
 #
 # Example usage:
 #
-#       $vsftpd_var1 = 'X_foo'
-#       $vsftpd_var2 = 'X_bar'
-#       $vsftpd_CONFIG_NAME_source = 'puppet:///private-host/vsftpd.conf'
-#       include vsftpd
+#       class { 'vsftpd':
+#           allow_use_nfs      => true,
+#       }
 
-class vsftpd {
+class vsftpd($allow_use_nfs=false) {
 
     include lokkit
-
-#   case $vsftpd_CONFIG_NAME_source {
-#       '': {
-#           fail('Required $vsftpd_CONFIG_NAME_source variable is not defined')
-#       }
-#   }
 
     package { 'vsftpd':
 	ensure	=> installed,
@@ -51,6 +41,17 @@ class vsftpd {
 
     lokkit::tcp_port { 'vsftpd':
         port    => '21',
+    }
+
+    if $selinux == 'true' {
+        selboolean { 'allow_ftpd_use_nfs':
+            before      => Service['vsftpd'],
+            persistent  => true,
+            value       => $allow_use_nfs ? {
+                true    => on,
+                default => off,
+            }
+        }
     }
 
     service { 'vsftpd':
