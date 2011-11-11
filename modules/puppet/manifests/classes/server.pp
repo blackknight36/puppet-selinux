@@ -59,13 +59,4 @@ class puppet::server {
         ],
     }
 
-    cron::jobfile { 'puppet-report-cleanup':
-        require => Package['puppet-tools'],
-        source  => [
-            'puppet:///private-host/puppet/puppet-report-cleanup.cron',
-            'puppet:///private-domain/puppet/puppet-report-cleanup.cron',
-            'puppet:///modules/puppet/puppet-report-cleanup.cron',
-        ],
-    }
-
 }
