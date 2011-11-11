@@ -10,6 +10,7 @@ node "mdct-00dw.dartcontainer.com"              { include dart::mdct-00dw }
 node "mdct-00fs.dartcontainer.com"              { include dart::mdct-00fs }
 node "mdct-02ut.dartcontainer.com"              { include dart::mdct-02ut }
 node "mdct-04pt.dartcontainer.com"              { include dart::mdct-04pt }
+node "mdct-03pt.dartcontainer.com"              { include dart::mdct-03pt }
 node "mdct-15pt.dartcontainer.com"              { include dart::mdct-15pt }
 node "mdct-39pt.dartcontainer.com"              { include dart::mdct-39pt }
 node "mdct-aos-master-f15.dartcontainer.com"    { include dart::mdct-aos-master-f15 }
