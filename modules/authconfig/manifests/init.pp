@@ -43,7 +43,7 @@ class authconfig {
             }
 
             exec { 'authconfig':
-                command => 'authconfig --enableldap --enableldapauth --ldapserver='ldap://10.1.192.106' --ldapbasedn='dc=dartcontainer,dc=com' --disableldaptls --updateall',
+                command => 'authconfig --enableldap --enableldapauth --ldapserver="ldap://10.1.192.106" --ldapbasedn="dc=dartcontainer,dc=com" --disableldaptls --updateall',
                 require => [
                     File['/etc/pam.d/system-auth-ac'],
                     Package['authconfig'],
@@ -94,7 +94,7 @@ class authconfig {
             # account information continues to be obtained from LDAP.
             exec { 'authconfig':
                 before  => File['/etc/sssd/sssd.conf'],
-                command => 'authconfig --enableldap --disableldapauth --ldapserver='ldap://10.1.192.106' --ldapbasedn='dc=dartcontainer,dc=com' --disableldaptls --enablesssd --disablesssdauth --enablekrb5 --krb5realm=DARTCONTAINER.COM --krb5kdc=dartcontainer.com --enablecachecreds --updateall --disablefingerprint',
+                command => 'authconfig --enableldap --disableldapauth --ldapserver="ldap://10.1.192.106" --ldapbasedn="dc=dartcontainer,dc=com" --disableldaptls --enablesssd --disablesssdauth --enablekrb5 --krb5realm=DARTCONTAINER.COM --krb5kdc=dartcontainer.com --enablecachecreds --updateall --disablefingerprint',
                 require => [
                     File['/etc/pam.d/system-auth-ac'],
                     Package['authconfig'],
