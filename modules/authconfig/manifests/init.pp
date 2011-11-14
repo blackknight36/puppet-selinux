@@ -66,7 +66,7 @@ class authconfig {
                 }
             }
 
-            package { "krb5-libs":
+            package { [ "krb5-libs", 'pam_krb5' ]:
                 ensure  => installed,
             }
 
@@ -100,6 +100,7 @@ class authconfig {
                     Package["authconfig"],
                     Package["krb5-libs"],
                     Package["nscd"],
+                    Package["pam_krb5"],
                     Package["sssd"],
                 ],
                 unless => "grep -q USEKERBEROS=yes /etc/sysconfig/authconfig"
