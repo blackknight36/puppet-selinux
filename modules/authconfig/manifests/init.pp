@@ -98,6 +98,7 @@ class authconfig {
                 require => [
                     File["/etc/pam.d/system-auth-ac"],
                     Package["authconfig"],
+                    Package["krb5-libs"],
                     Package["nscd"],
                     Package["sssd"],
                 ],
