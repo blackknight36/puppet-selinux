@@ -23,7 +23,7 @@ class repoview {
     }
 
     cron::job { 'mdct-repoview':
-        command => 'nice ionice -c 3 /usr/libexec/mdct-repoview 15 14 13 12 11 10 8',
+        command => 'nice ionice -c 3 /usr/libexec/mdct-repoview 16 15 14 13 12 11 10 8',
         minute  => '42',
         hour    => '*/4',
         require => [
