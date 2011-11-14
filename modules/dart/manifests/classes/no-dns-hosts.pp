@@ -40,4 +40,9 @@ class dart::no-dns-hosts {
         host_aliases    => [ "mdct-f15-builder", "f15b" ],
     }
 
+    host { "mdct-f16-builder.dartcontainer.com":
+        ip              => "10.1.192.139",
+        host_aliases    => [ "mdct-f16-builder", "f16b" ],
+    }
+
 }
