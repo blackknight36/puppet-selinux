@@ -1,9 +1,12 @@
-# /etc/puppet/manifests/nodes.pp
+# manifests/nodes.pp
 
 # This file only contains node/class associations.  Every host now gets its
 # own class which should inherit one of the node-type classes.  All such
 # classes are in the dart module (see modules/dart/manifests/classes/*.pp).
 
+node "est-ci.dartcontainer.com"                 { include dart::est-ci }
+node "est-dev1.dartcontainer.com"               { include dart::est-dev1 }
+node "est-dev2.dartcontainer.com"               { include dart::est-dev2 }
 node "jflo-f13.dartcontainer.com"               { include dart::jflo-f13 }
 node "mdct-00bk2.dartcontainer.com"             { include dart::mdct-00bk2 }
 node "mdct-00dw.dartcontainer.com"              { include dart::mdct-00dw }
