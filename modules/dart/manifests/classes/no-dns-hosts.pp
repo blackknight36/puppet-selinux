@@ -5,19 +5,19 @@
 
 class dart::no-dns-hosts {
 
-    host { 'est-dev1.dartcontainer.com':
+    host { 'mdct-est-dev1.dartcontainer.com':
         ip              => '10.1.250.51',
-        host_aliases    => [ 'est-dev1' ],
+        host_aliases    => [ 'mdct-est-dev1' ],
     }
 
-    host { 'est-dev2.dartcontainer.com':
+    host { 'mdct-est-dev2.dartcontainer.com':
         ip              => '10.1.250.52',
-        host_aliases    => [ 'est-dev2' ],
+        host_aliases    => [ 'mdct-est-dev2' ],
     }
 
-    host { 'est-ci.dartcontainer.com':
+    host { 'mdct-est-ci.dartcontainer.com':
         ip              => '10.1.250.53',
-        host_aliases    => [ 'est-ci' ],
+        host_aliases    => [ 'mdct-est-ci' ],
     }
 
     host { 'mdct-f8-builder.dartcontainer.com':
