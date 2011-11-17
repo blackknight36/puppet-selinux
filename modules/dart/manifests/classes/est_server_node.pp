@@ -4,7 +4,7 @@ class dart::est_server_node inherits dart::server_node {
 
     include postgresql::server
 
-    package { 'tomcat6':
+    package { [ 'tomcat6', 'tomcat6-admin-webapps', ]:
         ensure  => installed,
     }
 
