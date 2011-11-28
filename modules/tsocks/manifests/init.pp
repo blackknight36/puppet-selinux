@@ -1,4 +1,4 @@
-# /etc/puppet/modules/tsocks/manifests/init.pp
+# modules/tsocks/manifests/init.pp
 
 class tsocks {
 

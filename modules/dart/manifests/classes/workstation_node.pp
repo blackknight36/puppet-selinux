@@ -1,4 +1,4 @@
-# /etc/puppet/modules/dart/manifests/classes/workstation_node.pp
+# modules/dart/manifests/classes/workstation_node.pp
 
 class dart::workstation_node inherits dart::base_node {
     include flock-herder

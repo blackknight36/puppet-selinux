@@ -1,4 +1,4 @@
-# /etc/puppet/modules/mysql-server/manifests/init.pp
+# modules/mysql-server/manifests/init.pp
 
 class mysql-server {
 

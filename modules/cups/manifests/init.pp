@@ -1,4 +1,4 @@
-# /etc/puppet/modules/cups/manifests/init.pp
+# modules/cups/manifests/init.pp
 
 class cups {
 

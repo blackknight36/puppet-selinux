@@ -1,4 +1,4 @@
-# /etc/puppet/modules/lotus_notes_client/manifests/init.pp
+# modules/lotus_notes_client/manifests/init.pp
 
 class lotus_notes_client {
 

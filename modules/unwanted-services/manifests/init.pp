@@ -1,4 +1,4 @@
-# /etc/puppet/modules/unwanted-services/manifests/init.pp
+# modules/unwanted-services/manifests/init.pp
 
 class unwanted-services {
 

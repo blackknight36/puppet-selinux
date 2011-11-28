@@ -1,4 +1,4 @@
-# /etc/puppet/modules/packages/manifests/classes/workstation.pp
+# modules/packages/manifests/classes/workstation.pp
 
 class packages::workstation {
 

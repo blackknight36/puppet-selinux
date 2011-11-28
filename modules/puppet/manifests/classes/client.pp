@@ -1,4 +1,4 @@
-# /etc/puppet/modules/puppet/manifests/classes/client.pp
+# modules/puppet/manifests/classes/client.pp
 
 class puppet::client {
 

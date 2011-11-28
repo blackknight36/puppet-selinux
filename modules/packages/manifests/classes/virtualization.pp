@@ -1,4 +1,4 @@
-# /etc/puppet/modules/packages/manifests/classes/virtualization.pp
+# modules/packages/manifests/classes/virtualization.pp
 
 class packages::virtualization {
 

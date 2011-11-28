@@ -1,4 +1,4 @@
-# /etc/puppet/modules/packages/manifests/classes/media.pp
+# modules/packages/manifests/classes/media.pp
 
 # See also packages::kde.
 

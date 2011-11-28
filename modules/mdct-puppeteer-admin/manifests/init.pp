@@ -1,4 +1,4 @@
-# /etc/puppet/modules/mdct-puppeteer-admin/manifests/init.pp
+# modules/mdct-puppeteer-admin/manifests/init.pp
 
 class mdct-puppeteer-admin {
 

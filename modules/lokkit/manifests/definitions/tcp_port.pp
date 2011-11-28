@@ -1,4 +1,4 @@
-# /etc/puppet/modules/lokkit/manifests/definitions/tcp_port.pp
+# modules/lokkit/manifests/definitions/tcp_port.pp
 #
 # Synopsis:
 #       Installs a web-site configuration file for the Apache web server.

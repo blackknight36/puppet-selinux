@@ -1,4 +1,4 @@
-# /etc/puppet/modules/xorg-server/manifests/init.pp
+# modules/xorg-server/manifests/init.pp
 
 class xorg-server {
 

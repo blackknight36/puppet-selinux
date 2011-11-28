@@ -1,4 +1,4 @@
-# /etc/puppet/modules/cachefilesd/manifests/init.pp
+# modules/cachefilesd/manifests/init.pp
 
 class cachefilesd {
 

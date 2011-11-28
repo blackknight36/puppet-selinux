@@ -1,4 +1,4 @@
-# /etc/puppet/modules/dart/manifests/classes/mdct-puppet.pp
+# modules/dart/manifests/classes/mdct-puppet.pp
 
 class dart::mdct-puppet inherits dart::puppet_server_node {
     # passwords generated with bacula-password-generator package

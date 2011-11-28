@@ -1,4 +1,4 @@
-# /etc/puppet/modules/dart/manifests/classes/plant_utility_server_node.pp
+# modules/dart/manifests/classes/plant_utility_server_node.pp
 #
 # Synopsis:
 #       This class is used primarily for servers that provided shared access

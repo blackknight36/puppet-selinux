@@ -1,4 +1,4 @@
-# /etc/puppet/modules/ntp/manifests/init.pp
+# modules/ntp/manifests/init.pp
 
 class ntp {
 

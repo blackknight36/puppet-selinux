@@ -1,4 +1,4 @@
-# /etc/puppet/modules/rpm-build-tools/manifests/init.pp
+# modules/rpm-build-tools/manifests/init.pp
 
 class rpm-build-tools {
 

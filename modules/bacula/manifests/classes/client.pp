@@ -1,4 +1,4 @@
-# /etc/puppet/modules/bacula/manifests/classes/client.pp
+# modules/bacula/manifests/classes/client.pp
 
 class bacula::client {
 

@@ -1,4 +1,4 @@
-# /etc/puppet/modules/flock-herder/manifests/init.pp
+# modules/flock-herder/manifests/init.pp
 
 class flock-herder {
 

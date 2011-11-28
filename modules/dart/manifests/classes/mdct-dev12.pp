@@ -1,4 +1,4 @@
-# /etc/puppet/modules/dart/manifests/classes/mdct-dev12.pp
+# modules/dart/manifests/classes/mdct-dev12.pp
 
 class dart::mdct-dev12 inherits dart::workstation_node {
     $plymouth_default_theme = "details"

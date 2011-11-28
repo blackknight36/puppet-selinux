@@ -1,4 +1,4 @@
-# /etc/puppet/modules/packages/manifests/classes/developer.pp
+# modules/packages/manifests/classes/developer.pp
 
 class packages::developer {
 

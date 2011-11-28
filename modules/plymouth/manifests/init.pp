@@ -1,4 +1,4 @@
-# /etc/puppet/modules/plymouth/manifests/init.pp
+# modules/plymouth/manifests/init.pp
 
 class plymouth {
 

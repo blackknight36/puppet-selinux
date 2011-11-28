@@ -1,4 +1,4 @@
-# /etc/puppet/modules/yum-cron/manifests/init.pp
+# modules/yum-cron/manifests/init.pp
 
 class yum-cron {
 

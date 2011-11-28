@@ -1,4 +1,4 @@
-# /etc/puppet/modules/packages/manifests/classes/net_tools.pp
+# modules/packages/manifests/classes/net_tools.pp
 
 class packages::net_tools {
 

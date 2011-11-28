@@ -1,4 +1,4 @@
-# /etc/puppet/modules/packages/manifests/classes/kde.pp
+# modules/packages/manifests/classes/kde.pp
 
 class packages::kde {
 

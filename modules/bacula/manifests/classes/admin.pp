@@ -1,4 +1,4 @@
-# /etc/puppet/modules/bacula/manifests/classes/admin.pp
+# modules/bacula/manifests/classes/admin.pp
 #
 # Synopsis:
 #       Configures a host for bacula administration purposes.

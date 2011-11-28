@@ -1,4 +1,4 @@
-# /etc/puppet/modules/autofs/manifests/init.pp
+# modules/autofs/manifests/init.pp
 
 class autofs {
 

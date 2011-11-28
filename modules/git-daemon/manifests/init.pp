@@ -1,4 +1,4 @@
-# /etc/puppet/modules/git-daemon/manifests/init.pp
+# modules/git-daemon/manifests/init.pp
 
 class git-daemon {
 

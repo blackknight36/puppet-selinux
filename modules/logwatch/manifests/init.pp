@@ -1,4 +1,4 @@
-# /etc/puppet/modules/logwatch/manifests/init.pp
+# modules/logwatch/manifests/init.pp
 
 class logwatch {
 

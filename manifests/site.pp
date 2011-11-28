@@ -1,4 +1,4 @@
-# /etc/puppet/manifests/site.pp
+# manifests/site.pp
 
 import "nodes"
 

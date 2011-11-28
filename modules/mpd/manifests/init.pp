@@ -1,4 +1,4 @@
-# /etc/puppet/modules/mpd/manifests/init.pp
+# modules/mpd/manifests/init.pp
 
 class mpd {
 

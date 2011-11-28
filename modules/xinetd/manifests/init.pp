@@ -1,4 +1,4 @@
-# /etc/puppet/modules/xinetd/manifests/init.pp
+# modules/xinetd/manifests/init.pp
 
 class xinetd {
 

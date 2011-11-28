@@ -1,4 +1,4 @@
-# /etc/puppet/modules/lokkit/manifests/classes/lokkit.pp
+# modules/lokkit/manifests/classes/lokkit.pp
 #
 # Synopsis:
 #       Configures a host for lokkit use.

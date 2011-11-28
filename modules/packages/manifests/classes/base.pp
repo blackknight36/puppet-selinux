@@ -1,4 +1,4 @@
-# /etc/puppet/modules/packages/manifests/classes/base.pp
+# modules/packages/manifests/classes/base.pp
 
 class packages::base {
 
