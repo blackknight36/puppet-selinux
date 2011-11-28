@@ -18,17 +18,20 @@ class dart::picaps_test_node inherits dart::server_node {
         enabled => false,
     }
 
+    # Enable automatic package updates
+    include 'yum-cron'
+
     # PICAPS uses rsync for backup and other similar uses
-    include rsync-server
+    include 'rsync-server'
 
     # Samba may be useful for some adminstrators
-    include samba
+    include 'samba'
 
     # PICAPS installation is via cvs
-    include packages::developer
+    include 'packages::developer'
 
     # PICAPS stores are via MySQL
-    include mysql-server
+    include 'mysql-server'
 
     # Other package a PICAPS server requires
     package { [
