@@ -25,6 +25,7 @@ node "mdct-dev11.dartcontainer.com"             { include dart::mdct-dev11 }    
 node "mdct-dev12.dartcontainer.com"             { include dart::mdct-dev12 }            # JF
 node "mdct-dev13.dartcontainer.com"             { include dart::mdct-dev13 }            # BS
 node "mdct-dev14.dartcontainer.com"             { include dart::mdct-dev14 }            # AH
+node "mdct-dev16.dartcontainer.com"             { include dart::mdct-dev16 }            # BM
 node "mdct-f8-builder.dartcontainer.com"        { include dart::mdct-f8-builder }
 node "mdct-f10-builder.dartcontainer.com"       { include dart::mdct-f10-builder }
 node "mdct-f11-builder.dartcontainer.com"       { include dart::mdct-f11-builder }
