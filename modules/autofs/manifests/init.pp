@@ -37,6 +37,7 @@ class autofs {
         owner   => "root",
         source	=> $hostname ? {
             "mdct-dev12"        => "puppet:///autofs/auto.mnt-mdct-dev12",
+            "mole"              => "puppet:///autofs/auto.mnt-mole",
             "mdct-dev6"         => "puppet:///autofs/auto.mnt-mdct-dev6",
             "mdct-dev6-test"    => "puppet:///autofs/auto.mnt-mdct-dev6",
             default             => "puppet:///autofs/auto.mnt-local",

@@ -1,0 +1,2 @@
+# Fedora 10 root file system
+f10                     -fstype=ext3,ro         :/dev/VolGroup00/LogVol00
