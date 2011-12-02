@@ -26,7 +26,13 @@ class postgresql::server {
 	ensure	=> installed,
     }
 
-    exec { 'service postgresql initdb':
+    if $operatingsystemrelease >= 16 {
+        $postgresql_initdb_cmd = 'postgresql-setup initdb'
+    } else {
+        $postgresql_initdb_cmd = 'service postgresql initdb'
+    }
+    exec { 'postgresql-initdb':
+        command => $postgresql_initdb_cmd,
         # This ensures the initdb is run once only.  Upon package
         # installation, the data directory is empty.  PG_VERSION (among many
         # other files) will appear once initdb has been run.
@@ -39,7 +45,7 @@ class postgresql::server {
         mode    => 600,
         owner   => 'postgres',
         require => [
-            Exec['service postgresql initdb'],
+            Exec['postgresql-initdb'],
             Package['postgresql-server'],
         ],
         seluser => 'unconfined_u',
@@ -58,7 +64,7 @@ class postgresql::server {
         hasrestart	=> true,
         hasstatus	=> true,
         require		=> [
-            Exec['service postgresql initdb'],
+            Exec['postgresql-initdb'],
             Package['postgresql-server'],
         ],
         subscribe	=> [
