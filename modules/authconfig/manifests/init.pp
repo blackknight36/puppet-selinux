@@ -87,6 +87,16 @@ class authconfig {
                 require => Package['nscd'],
             }
 
+            file { '/etc/pam.d/password-auth-ac':
+                group   => 'root',
+                mode    => '0644',
+                owner   => 'root',
+                require => Package['pam'],
+                source  => [
+                    'puppet:///authconfig/password-auth-ac',
+                ],
+            }
+
             # As of Fedora 13, encryption is required to a directory server if
             # it is to be used for authentication.  Since MDCT's LDAP server
             # doesn't provide encryption, authentication is configured for
@@ -96,6 +106,7 @@ class authconfig {
                 before  => File['/etc/sssd/sssd.conf'],
                 command => 'authconfig --enableldap --disableldapauth --ldapserver="ldap://10.1.192.106" --ldapbasedn="dc=dartcontainer,dc=com" --disableldaptls --enablesssd --disablesssdauth --enablekrb5 --krb5realm=DARTCONTAINER.COM --krb5kdc=dartcontainer.com --enablecachecreds --updateall --disablefingerprint',
                 require => [
+                    File['/etc/pam.d/password-auth-ac'],
                     File['/etc/pam.d/system-auth-ac'],
                     Package['authconfig'],
                     Package['krb5-libs'],
