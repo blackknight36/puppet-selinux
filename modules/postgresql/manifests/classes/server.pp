@@ -41,12 +41,9 @@ class postgresql::server {
     }
 
    file { '/var/lib/pgsql/data/pg_hba.conf':
-        # User/group are defined in LDAP.  Puppet frequently complains that it
-        # cannot find such a user, probably due to a too-short timeout or some
-        # other bug.  Not worth trying to manage so strictly at this point.
-        #group	=> 'postgres',
-        #owner   => 'postgres',
+        group	=> 'postgres',
         mode    => 600,
+        owner   => 'postgres',
         require => [
             Exec['postgresql-initdb'],
             Package['postgresql-server'],
