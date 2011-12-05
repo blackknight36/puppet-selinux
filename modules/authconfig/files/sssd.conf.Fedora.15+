@@ -34,6 +34,7 @@ reconnection_retries = 3
 
 [pam]
 reconnection_retries = 3
+#pam_verbosity = 3
 
 # Example domain configurations
 # Note that enabling enumeration in the following configurations will have a
@@ -97,6 +98,7 @@ reconnection_retries = 3
 ; ldap_force_upper_case_realm = True
 
 [domain/default]
+# For debugging, see also pam_verbosity above.
 #debug_level = 10
 auth_provider = krb5
 cache_credentials = True
