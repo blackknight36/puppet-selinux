@@ -104,7 +104,9 @@ chpass_provider = krb5
 id_provider = ldap
 krb5_kpasswd = dartcontainer.com
 krb5_realm = DARTCONTAINER.COM
-krb5_server = dartcontainer.com
+# Leave krb5_server unset so that sssd can do automatic fail-over when it
+# encounters non-functional domain controllers.
+# krb5_server = dartcontainer.com
 ldap_id_use_start_tls = False
 ldap_search_base = dc=dartcontainer,dc=com
 ldap_tls_cacertdir = /etc/openldap/cacerts
