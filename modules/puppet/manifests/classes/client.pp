@@ -28,7 +28,7 @@ class puppet::client {
         },
         source  => [
             "puppet:///private-host/puppet/puppet.conf",
-            "puppet:///puppet/puppet.conf.${puppet_era}",
+            "puppet:///modules/puppet/puppet.conf.${puppet_era}",
         ],
     }
 

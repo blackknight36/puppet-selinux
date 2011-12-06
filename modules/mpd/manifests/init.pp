@@ -16,7 +16,7 @@ class mpd {
         mode    => 644,
         owner   => "mpd",
         require => Package["mpd"],
-        source  => "puppet:///mpd/mpd.conf",
+        source  => "puppet:///modules/mpd/mpd.conf",
     }
 
     user { "mpd":

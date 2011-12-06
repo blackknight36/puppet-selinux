@@ -56,7 +56,7 @@ class bacula::client {
         mode    => 640,
         owner   => "root",
         require => Package["${bacula_major}-client"],
-        source  => "puppet:///bacula/bacula-fd",
+        source  => "puppet:///modules/bacula/bacula-fd",
     }
 
     lokkit::tcp_port { "bacula-fd":

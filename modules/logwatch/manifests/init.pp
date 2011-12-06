@@ -13,7 +13,7 @@ class logwatch {
         require => Package['logwatch'],
         source  => [
             'puppet:///private-host/logwatch/ignore.conf',
-            'puppet:///logwatch/ignore.conf',
+            'puppet:///modules/logwatch/ignore.conf',
         ],
     }
 
@@ -24,7 +24,7 @@ class logwatch {
         require => Package['logwatch'],
         source  => [
             'puppet:///private-host/logwatch/logwatch.conf',
-            'puppet:///logwatch/logwatch.conf',
+            'puppet:///modules/logwatch/logwatch.conf',
         ],
     }
 

@@ -22,7 +22,7 @@ class ntp {
         owner   => 'root',
         path    => "/etc/${ntp_package}.conf",
         require => Package["$ntp_package"],
-        source  => "puppet:///ntp/${ntp_package}.conf",
+        source  => "puppet:///modules/ntp/${ntp_package}.conf",
     }
 
     if $ntp_package == 'ntp' {
@@ -38,7 +38,7 @@ class ntp {
             mode        => '0644',
             owner       => 'root',
             require     => Package["$ntp_package"],
-            source      => "puppet:///ntp/${ntpd_sysconfig}",
+            source      => "puppet:///modules/ntp/${ntpd_sysconfig}",
         }
 
         # ntp does not deal well with jitter of VM clocks

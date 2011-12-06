@@ -18,7 +18,7 @@ class yum-cron {
         require => Package["yum-cron"],
         source  => [
             "puppet:///private-host/yum-cron/yum-cron",
-            "puppet:///yum-cron/yum-cron",
+            "puppet:///modules/yum-cron/yum-cron",
         ],
     }
 

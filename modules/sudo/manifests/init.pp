@@ -16,8 +16,8 @@ class sudo {
                 owner   => "root",
                 require => Package["sudo"],
                 source  => [
-                    "puppet:///sudo/sudoers.$hostname",
-                    "puppet:///sudo/sudoers.preF13",
+                    "puppet:///modules/sudo/sudoers.$hostname",
+                    "puppet:///modules/sudo/sudoers.preF13",
                 ],
             }
 
@@ -29,8 +29,8 @@ class sudo {
                 owner   => "root",
                 require => Package["sudo"],
                 source  => [
-                    "puppet:///sudo/sudoers.$hostname",
-                    "puppet:///sudo/sudoers.mdct",
+                    "puppet:///modules/sudo/sudoers.$hostname",
+                    "puppet:///modules/sudo/sudoers.mdct",
                 ],
             }
 

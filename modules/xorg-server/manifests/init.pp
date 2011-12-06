@@ -7,7 +7,7 @@ class xorg-server {
             group       => "root",
             mode        => 644,
             owner       => "root",
-            source      => "puppet:///xorg-server/xorg.conf.$hostname",
+            source      => "puppet:///modules/xorg-server/xorg.conf.$hostname",
         }
     }
 

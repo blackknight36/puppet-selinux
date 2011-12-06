@@ -29,8 +29,8 @@ class openssh-server {
 	source	=> [
             'puppet:///private-host/openssh-server/sshd_config',
             'puppet:///private-domain/openssh-server/sshd_config',
-            "puppet:///openssh-server/sshd_config.$operatingsystem.$operatingsystemrelease",
-            'puppet:///openssh-server/sshd_config',
+            "puppet:///modules/openssh-server/sshd_config.$operatingsystem.$operatingsystemrelease",
+            'puppet:///modules/openssh-server/sshd_config',
         ],
     }
 

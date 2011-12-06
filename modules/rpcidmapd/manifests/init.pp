@@ -21,7 +21,7 @@ class rpcidmapd {
         mode    => 644,
         owner   => 'root',
 	require => Package['nfs-utils-lib'],
-        source	=> 'puppet:///rpcidmapd/idmapd.conf',
+        source	=> 'puppet:///modules/rpcidmapd/idmapd.conf',
     }
 
     if $operatingsystem == 'Fedora' and $operatingsystemrelease >= 16 {

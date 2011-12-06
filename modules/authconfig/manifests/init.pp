@@ -17,8 +17,8 @@ class authconfig {
         owner   => 'root',
         require => Package['pam'],
         source  => [
-            "puppet:///authconfig/system-auth-ac.$operatingsystem.$operatingsystemrelease",
-            'puppet:///authconfig/system-auth-ac',
+            "puppet:///modules/authconfig/system-auth-ac.$operatingsystem.$operatingsystemrelease",
+            'puppet:///modules/authconfig/system-auth-ac',
         ],
     }
 
@@ -93,7 +93,7 @@ class authconfig {
                 owner   => 'root',
                 require => Package['pam'],
                 source  => [
-                    'puppet:///authconfig/password-auth-ac',
+                    'puppet:///modules/authconfig/password-auth-ac',
                 ],
             }
 
@@ -130,7 +130,7 @@ class authconfig {
                 mode    => '0600',
                 owner   => 'root',
                 require => Package['sssd'],
-                source  => "puppet:///authconfig/$sssd_conf",
+                source  => "puppet:///modules/authconfig/$sssd_conf",
             }
 
             service { 'sssd':

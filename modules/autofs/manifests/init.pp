@@ -13,7 +13,7 @@ class autofs {
         group   => "root",
         mode    => 644,
         owner   => "root",
-        source  => "puppet:///autofs/auto.home",
+        source  => "puppet:///modules/autofs/auto.home",
     }
 
     file { "/etc/auto.master":
@@ -21,14 +21,14 @@ class autofs {
         mode    => 644,
         owner   => "root",
 	require => Package["autofs"],
-        source  => "puppet:///autofs/auto.master",
+        source  => "puppet:///modules/autofs/auto.master",
     }
 
     file { "/etc/auto.mnt":
         group   => "root",
         mode    => 644,
         owner   => "root",
-        source	=> "puppet:///autofs/auto.mnt",
+        source	=> "puppet:///modules/autofs/auto.mnt",
     }
 
     file { "/etc/auto.mnt-local":
@@ -36,11 +36,11 @@ class autofs {
         mode    => 644,
         owner   => "root",
         source	=> $hostname ? {
-            "mdct-dev12"        => "puppet:///autofs/auto.mnt-mdct-dev12",
-            "mole"              => "puppet:///autofs/auto.mnt-mole",
-            "mdct-dev6"         => "puppet:///autofs/auto.mnt-mdct-dev6",
-            "mdct-dev6-test"    => "puppet:///autofs/auto.mnt-mdct-dev6",
-            default             => "puppet:///autofs/auto.mnt-local",
+            "mdct-dev12"        => "puppet:///modules/autofs/auto.mnt-mdct-dev12",
+            "mole"              => "puppet:///modules/autofs/auto.mnt-mole",
+            "mdct-dev6"         => "puppet:///modules/autofs/auto.mnt-mdct-dev6",
+            "mdct-dev6-test"    => "puppet:///modules/autofs/auto.mnt-mdct-dev6",
+            default             => "puppet:///modules/autofs/auto.mnt-local",
         },
     }
 

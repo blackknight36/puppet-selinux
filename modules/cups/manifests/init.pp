@@ -18,7 +18,7 @@ class cups {
 #       mode    => 600,
 #       owner   => "root",
 #       require => Package["cups"],
-#       source  => "puppet:///cups/classes.conf",
+#       source  => "puppet:///modules/cups/classes.conf",
 #   }
 
 #   file { "/etc/cups/ppd/brother.ppd":
@@ -26,7 +26,7 @@ class cups {
 #       mode    => 644,
 #       owner   => "root",
 #       require => Package["cups"],
-#       source  => "puppet:///cups/brother.ppd",
+#       source  => "puppet:///modules/cups/brother.ppd",
 #   }
 
 #   file { "/etc/cups/printers.conf":
@@ -34,7 +34,7 @@ class cups {
 #       mode    => 600,
 #       owner   => "root",
 #       require => Package["cups"],
-#       source  => "puppet:///cups/printers.conf",
+#       source  => "puppet:///modules/cups/printers.conf",
 #   }
 
 #   file { "/etc/cups/subscriptions.conf":
@@ -42,7 +42,7 @@ class cups {
 #       mode    => 640,
 #       owner   => "root",
 #       require => Package["cups"],
-#       source  => "puppet:///cups/printers.conf",
+#       source  => "puppet:///modules/cups/printers.conf",
 #   }
 
     lokkit::tcp_port { "cups":

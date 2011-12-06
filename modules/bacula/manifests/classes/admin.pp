@@ -32,7 +32,7 @@ class bacula::admin {
         mode    => 644,
         owner   => "root",
         require => Package["bacula-traymonitor"],
-        source  => "puppet:///bacula/tray-monitor.conf",
+        source  => "puppet:///modules/bacula/tray-monitor.conf",
     }
 
     file { "/etc/bacula/bat.conf":
@@ -40,7 +40,7 @@ class bacula::admin {
         mode    => 640,
         owner   => "root",
         require => Package["bacula-console-bat"],
-        source  => "puppet:///bacula/bat.conf",
+        source  => "puppet:///modules/bacula/bat.conf",
     }
 
 }

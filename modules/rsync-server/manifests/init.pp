@@ -17,7 +17,7 @@ class rsync-server {
         require => Package['rsync'],
         source  => [
             'puppet:///private-host/xinetd.d/rsync',
-            'puppet:///rsync-server/rsync',
+            'puppet:///modules/rsync-server/rsync',
         ],
     }
 

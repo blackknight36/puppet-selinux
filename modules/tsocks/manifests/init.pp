@@ -13,7 +13,7 @@ class tsocks {
             mode    => 644,
             owner   => "root",
             require => Package["tsocks"],
-            source  => "puppet:///tsocks/tsocks.conf",
+            source  => "puppet:///modules/tsocks/tsocks.conf",
         }
 
     }
