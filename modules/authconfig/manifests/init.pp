@@ -114,7 +114,7 @@ class authconfig {
                     Package['pam_krb5'],
                     Package['sssd'],
                 ],
-                unless => 'grep -q USEKERBEROS=yes /etc/sysconfig/authconfig'
+                unless => 'grep -q "^ *USEKERBEROS=yes" /etc/sysconfig/authconfig'
             }
 
             # According to F13's authconfig(8), authconfig does NOT configure
