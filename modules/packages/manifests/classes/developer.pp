@@ -22,8 +22,11 @@ class packages::developer {
         'python-tools',
         'python3-devel',
         'python3-tools',
+        'redhat-rpm-config',
         'rpmdevtools',
         'subversion',
+        'unzip',                # needed to repack jars when building rpms
+        'zip',                  # needed to repack jars when building rpms
 
         ]:
         ensure => installed,
