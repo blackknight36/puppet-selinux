@@ -3,7 +3,7 @@
 class rpm-build-tools {
 
     package { "rpm-build-tools":
-	ensure	=> installed,
+	ensure	=> latest,
     }
 
     file { "/etc/rpm-build-tools/git.conf":
