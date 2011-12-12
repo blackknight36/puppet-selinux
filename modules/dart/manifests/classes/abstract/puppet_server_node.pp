@@ -5,4 +5,9 @@ class dart::puppet_server_node inherits dart::server_node {
     include puppet::server
     include yum-cron
 
+    mailalias { "root":
+        ensure          => present,
+        recipient       => "john.florian@dart.biz",
+    }
+
 }

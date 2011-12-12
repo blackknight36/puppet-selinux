@@ -25,4 +25,9 @@ class dart::aos_master_node inherits dart::server_node {
         kernel_modules  => 'nf_conntrack_ftp',
     }
 
+    mailalias { "root":
+        ensure          => present,
+        recipient       => "john.florian@dart.biz",
+    }
+
 }
