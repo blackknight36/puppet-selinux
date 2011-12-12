@@ -13,6 +13,7 @@ class packages::base {
         'gpm',
         'iotop',
         'lsof',
+        'lvm-snapshot-tools',
         'mlocate',
         'multitail',
         'openssh-clients',
