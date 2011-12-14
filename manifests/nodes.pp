@@ -5,16 +5,14 @@
 # such classes are in the dart module (see
 # modules/dart/manifests/classes/abstract/*.pp).
 
-node "mdct-est-ci.dartcontainer.com"            { include dart::mdct-est-ci }
-node "mdct-est-dev1.dartcontainer.com"          { include dart::mdct-est-dev1 }
-node "mdct-est-dev2.dartcontainer.com"          { include dart::mdct-est-dev2 }
 node "jflo-f13.dartcontainer.com"               { include dart::jflo-f13 }
 node "mdct-00bk2.dartcontainer.com"             { include dart::mdct-00bk2 }
 node "mdct-00dw.dartcontainer.com"              { include dart::mdct-00dw }
 node "mdct-00fs.dartcontainer.com"              { include dart::mdct-00fs }
+node "mdct-00sw.dartcontainer.com"              { include dart::mdct-00sw }
 node "mdct-02ut.dartcontainer.com"              { include dart::mdct-02ut }
-node "mdct-04pt.dartcontainer.com"              { include dart::mdct-04pt }
 node "mdct-03pt.dartcontainer.com"              { include dart::mdct-03pt }
+node "mdct-04pt.dartcontainer.com"              { include dart::mdct-04pt }
 node "mdct-15pt.dartcontainer.com"              { include dart::mdct-15pt }
 node "mdct-39pt.dartcontainer.com"              { include dart::mdct-39pt }
 node "mdct-aos-master-f15.dartcontainer.com"    { include dart::mdct-aos-master-f15 }
@@ -27,6 +25,9 @@ node "mdct-dev12.dartcontainer.com"             { include dart::mdct-dev12 }    
 node "mdct-dev13.dartcontainer.com"             { include dart::mdct-dev13 }            # BS
 node "mdct-dev14.dartcontainer.com"             { include dart::mdct-dev14 }            # AH
 node "mdct-dev16.dartcontainer.com"             { include dart::mdct-dev16 }            # BM
+node "mdct-est-ci.dartcontainer.com"            { include dart::mdct-est-ci }
+node "mdct-est-dev1.dartcontainer.com"          { include dart::mdct-est-dev1 }
+node "mdct-est-dev2.dartcontainer.com"          { include dart::mdct-est-dev2 }
 node "mdct-f8-builder.dartcontainer.com"        { include dart::mdct-f8-builder }
 node "mdct-f10-builder.dartcontainer.com"       { include dart::mdct-f10-builder }
 node "mdct-f11-builder.dartcontainer.com"       { include dart::mdct-f11-builder }
