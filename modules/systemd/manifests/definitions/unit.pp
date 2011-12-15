@@ -33,22 +33,17 @@ define systemd::unit ($ensure='present', $enable=true, $running=true,
 
     if $ensure == 'present' {
 
-        $reload_notifies = [
-            Exec["systemctl enable $name"],
-            Exec["systemctl start $name"],
-        ]
-
         exec { "systemctl enable $name":
-            refreshonly => true,
+            require     => Exec["daemon-reload for unit $name"],
+            unless      => "systemctl is-enabled $name",
         }
 
         exec { "systemctl start $name":
-            refreshonly => true,
+            require     => Exec["daemon-reload for unit $name"],
+            unless      => "systemctl is-active $name",
         }
 
     } elsif $ensure == 'absent' {
-
-        $reload_notifies = []
 
         exec { "systemctl disable $name":
             before => File["/etc/systemd/system/${name}"],
@@ -108,7 +103,6 @@ define systemd::unit ($ensure='present', $enable=true, $running=true,
 
     exec { "daemon-reload for unit $name":
         command         => 'systemctl daemon-reload',
-        notify          => $reload_notifies,
         refreshonly     => true,
     }
 
