@@ -15,9 +15,9 @@ class packages::workstation {
         'plant-launchers',
         'putty',
         'qcad',
+        'synergy',
         'test-automation',
         'workrave',
-        'x2vnc',
         'xclip',
 
         ]:
