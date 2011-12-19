@@ -60,6 +60,7 @@ class packages::workstation {
             package { [
                 'libreoffice-calc',
                 'libreoffice-writer',
+                'systemd-gtk',
                 ]:
                 ensure => installed,
             }
