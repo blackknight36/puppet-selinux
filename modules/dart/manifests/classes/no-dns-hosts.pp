@@ -5,21 +5,6 @@
 
 class dart::no-dns-hosts {
 
-    host { 'mdct-est-dev1.dartcontainer.com':
-        ip              => '10.1.250.51',
-        host_aliases    => [ 'mdct-est-dev1' ],
-    }
-
-    host { 'mdct-est-dev2.dartcontainer.com':
-        ip              => '10.1.250.52',
-        host_aliases    => [ 'mdct-est-dev2' ],
-    }
-
-    host { 'mdct-est-ci.dartcontainer.com':
-        ip              => '10.1.250.53',
-        host_aliases    => [ 'mdct-est-ci' ],
-    }
-
     host { 'mdct-f8-builder.dartcontainer.com':
         ip              => '10.1.192.132',
         host_aliases    => [ 'mdct-f8-builder', 'f8b' ],
