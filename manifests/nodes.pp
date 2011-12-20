@@ -16,6 +16,7 @@ node "mdct-04pt.dartcontainer.com"              { include dart::mdct-04pt }
 node "mdct-15pt.dartcontainer.com"              { include dart::mdct-15pt }
 node "mdct-39pt.dartcontainer.com"              { include dart::mdct-39pt }
 node "mdct-aos-master-f15.dartcontainer.com"    { include dart::mdct-aos-master-f15 }
+node "mdct-ci-agent1.dartcontainer.com"         { include dart::mdct-ci-agent1 }
 node "mdct-dev6-test.dartcontainer.com"         { include dart::mdct-dev6-test }        # CK TEST
 node "mdct-dev6.dartcontainer.com"              { include dart::mdct-dev6 }             # CK
 node "mdct-dev7.dartcontainer.com"              { include dart::mdct-dev7 }             # CR
