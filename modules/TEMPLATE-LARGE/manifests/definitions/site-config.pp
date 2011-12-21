@@ -4,8 +4,11 @@
 #       Installs a web-site configuration file for the Apache web server.
 #
 # Parameters:
-#       name:           The name of the web site.
-#       source:         The puppet URI for obtaining the web site's configuration file.
+#       NONE
+#       Name__________  Default_______  Description___________________________
+#
+#       name                            instance name
+#       ensure          present         instance is to be present/absent
 #
 # Requires:
 #       Class['MODULE_NAME']

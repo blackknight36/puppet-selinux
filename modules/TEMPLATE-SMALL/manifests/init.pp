@@ -5,6 +5,10 @@
 #
 # Parameters:
 #       NONE
+#       Name__________  Default_______  Description___________________________
+#
+#       name                            instance name
+#       ensure          present         instance is to be present/absent
 #
 # Requires:
 #       Class['postgresql::server']     <= Use this notation for other resources
