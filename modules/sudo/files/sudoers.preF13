@@ -84,7 +84,8 @@ root	ALL=(ALL) 	ALL
 #%wheel	ALL=(ALL)	ALL
 
 # Allow all members of Dart's sudoers group (in LDAP) to run all commands.
-%sudoers	ALL=(ALL)	ALL
+%sudoers        ALL=(ALL)       NOPASSWD: ALL
+
 
 ## Same thing without a password
 # %wheel	ALL=(ALL)	NOPASSWD: ALL
