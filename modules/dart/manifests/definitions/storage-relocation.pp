@@ -18,11 +18,14 @@ define replace_original_with_symlink_to_alternate(
     # Now make a symlink from the original location to an alternate one.
     file { "$original":
         ensure	=> $alternate,
-        force       => true,
-        require     => [
+        force   => true,
+        require => [
             Exec["archive-$original-to-$backup"],
             Service["autofs"],
         ],
+        selrole => $selrole,
+        seltype => $seltype,
+        seluser => $seluser,
     }
 
 }
