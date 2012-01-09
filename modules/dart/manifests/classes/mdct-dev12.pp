@@ -60,6 +60,7 @@ class dart::mdct-dev12 inherits dart::workstation_node {
         # TODO: libvirt needs to be a formal service and treated here like
         # mysql WRT before/require attrs
         require         => Package["libvirt"],
+        seltype         => "virt_var_lib_t",
     }
 
     replace_original_with_symlink_to_alternate { "/var/lib/mysql":
@@ -68,6 +69,7 @@ class dart::mdct-dev12 inherits dart::workstation_node {
         original        => "/var/lib/mysql",
         before          => Service["mysqld"],
         require         => Package["mysql-server"],
+        seltype         => "mysqld_db_t",
     }
 
     service { "libvirtd":
