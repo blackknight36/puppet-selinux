@@ -1,2 +1,17 @@
-.*.swp
+# GIT Ignores
+
+# VIM swap files
+*.sw?
+
+# Python byte-compilations
+*.py[co]
+
+# IDEA project settings inappropriate for SCM
+.idea/workspace.xml
+
+# package archives such as those made by this2rpm, only applies to project root
+/*.tar.gz
+
+
+# Puppet manages this file and only the source need be tracked.
 /puppet.conf
