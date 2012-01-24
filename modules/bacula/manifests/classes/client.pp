@@ -13,9 +13,17 @@ class bacula::client {
     if $operatingsystem == "Fedora" and $operatingsystemrelease >= 12 {
         $bacula_major = "bacula"
         $conflict_major = "bacula2"
+        # The migration to systemd also introduced other subtle configuration
+        # changes that must be reflected here.
+        if $operatingsystemrelease >= 15 {
+            $ossuffix='.Fedora15+'
+        } else {
+            $ossuffix=''
+        }
     } else {
         $bacula_major = "bacula"
         $conflict_major = undef
+        $ossuffix=''
     }
 
     # Fedora packages Bacula so that multiple major versions can coexist.  We
@@ -56,7 +64,7 @@ class bacula::client {
         mode    => 640,
         owner   => "root",
         require => Package["${bacula_major}-client"],
-        source  => "puppet:///modules/bacula/bacula-fd",
+        source  => "puppet:///modules/bacula/bacula-fd${ossuffix}",
     }
 
     lokkit::tcp_port { "bacula-fd":
