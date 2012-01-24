@@ -17,6 +17,10 @@ class dart::mdct-dev12 inherits dart::workstation_node {
         enabled => true,
     }
 
+    lokkit::rules_file { 'blocks':
+        source  => 'puppet:///private-host/lokkit/blocks',
+    }
+
     # noscript included here because nobody else likely to want it
     package { "mozilla-noscript":
         ensure  => installed,
