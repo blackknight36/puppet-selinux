@@ -1,7 +1,7 @@
 # modules/lokkit/manifests/definitions/udp_port.pp
 #
 # Synopsis:
-#       Installs a web-site configuration file for the Apache web server.
+#       Configures iptables to open/close a specific UDP port.
 #
 # Parameters:
 #       name:           The name of the UDP port to be managed.

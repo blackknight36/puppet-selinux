@@ -1,7 +1,7 @@
 # modules/lokkit/manifests/definitions/tcp_port.pp
 #
 # Synopsis:
-#       Installs a web-site configuration file for the Apache web server.
+#       Configures iptables to open/close a specific TCP port.
 #
 # Parameters:
 #       name:           The name of the TCP port to be managed.
