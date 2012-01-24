@@ -85,6 +85,16 @@ class dart::mdct-dev12 inherits dart::workstation_node {
         ],
     }
 
+    # Prefer forced power off as it's much faster than suspending.
+    service { "libvirtd-guests":
+        enable		=> false,
+        ensure		=> stopped,
+        hasrestart	=> true,
+        hasstatus	=> true,
+        require		=> [
+        ],
+    }
+
     mount { "/opt":
         atboot  => true,
         device  => "/mnt-local/storage/opt",
