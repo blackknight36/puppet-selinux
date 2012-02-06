@@ -6,7 +6,7 @@
 # modules/dart/manifests/classes/abstract/*.pp).
 
 node "jflo-f13.dartcontainer.com"               { include dart::jflo-f13 }
-node "mdct-00bk2.dartcontainer.com"             { include dart::mdct-00bk2 }
+node "mdct-00bk.dartcontainer.com"              { include dart::mdct-00bk }
 node "mdct-00dw.dartcontainer.com"              { include dart::mdct-00dw }
 node "mdct-00fs.dartcontainer.com"              { include dart::mdct-00fs }
 node "mdct-00sw.dartcontainer.com"              { include dart::mdct-00sw }
