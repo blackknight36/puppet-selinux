@@ -1,10 +1,9 @@
 # modules/MODULE_NAME/manifests/definitions/DEFINE_NAME.pp
 #
 # Synopsis:
-#       Installs a web-site configuration file for the Apache web server.
+#       Installs a DEFINE_NAME configuration file for MODULE_NAME.
 #
 # Parameters:
-#       NONE
 #       Name__________  Default_______  Description___________________________
 #
 #       name                            instance name
@@ -25,14 +24,14 @@
 
 define MODULE_NAME::DEFINE_NAME ($ensure='present', $source) {
 
-    file { "/CONFIG_PATH/conf.d/${name}.conf":
+    file { "/CONFIG_PATH/${name}.conf":
         ensure  => $ensure,
         owner   => 'root',
         group   => 'root',
         mode    => '0640',
         seluser => 'system_u',
         selrole => 'object_r',
-        seltype => 'httpd_config_t',
+        seltype => 'MODULE_NAME_config_t',
         require => Package['PACKAGE_NAME'],
         source  => "${source}",
     }

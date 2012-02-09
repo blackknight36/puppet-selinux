@@ -1,17 +1,17 @@
 # modules/MODULE_NAME/manifests/classes/CLASS_NAME.pp
 #
 # Synopsis:
-#       Configures a host as a CLASS_NAME server.
+#       Configures a host as a MODULE_NAME CLASS_NAME.
 #
 # Parameters:
-#       NONE
 #       Name__________  Default_______  Description___________________________
 #
 #       name                            instance name
 #       ensure          present         instance is to be present/absent
 #
 # Requires:
-#       Class['postgresql::server']     <= Use this notation for other resources
+#       NONE
+#       Class['REQ_MODULE::REQ_CLASS'] <= Use this notation for other resources
 #
 #       $MODULE_NAME_var1                       Abstract variable 1
 #       $MODULE_NAME_var2                       Abstract variable 2
@@ -35,20 +35,20 @@ class MODULE_NAME::CLASS_NAME {
     }
 
     package { 'PACKAGE_NAME':
-	ensure	=> installed,
+        ensure  => installed,
     }
 
     package { 'CONFLICTING_PACKAGE_NAME':
-	ensure	=> absent,
-	# It may be necessary to have the replacement installed prior to
-	# removal of the conflicting package.
+        ensure  => absent,
+        # It may be necessary to have the replacement installed prior to
+        # removal of the conflicting package.
         require => Package['PACKAGE_NAME'],
     }
 
     # static file
     file { '/CONFIG_PATH/CONFIG_NAME':
         # don't forget to verify these!
-        group	=> 'root',
+        group   => 'root',
         mode    => '0640',
         owner   => 'root',
         require => Package['PACKAGE_NAME'],
@@ -64,9 +64,9 @@ class MODULE_NAME::CLASS_NAME {
 
     # template file
     file { '/CONFIG_PATH/CONFIG_NAME':
-	content	=> template('MODULE_NAME/CONFIG_NAME'),
+        content => template('MODULE_NAME/CONFIG_NAME'),
         # don't forget to verify these!
-        group	=> 'root',
+        group   => 'root',
         mode    => '0640',
         owner   => 'root',
         require => Package['PACKAGE_NAME'],
@@ -80,16 +80,17 @@ class MODULE_NAME::CLASS_NAME {
     }
 
     service { 'SERVICE_NAME':
-        enable		=> true,
-        ensure		=> running,
-        hasrestart	=> true,
-        hasstatus	=> true,
-        require		=> [
+        enable          => true,
+        ensure          => running,
+        hasrestart      => true,
+        hasstatus       => true,
+        require         => [
+            Class['REQ_MODULE::REQ_CLASS'],
             Exec['open-SERVICE_NAME-tcp-port'],
             Package['CONFLICTING_PACKAGE_NAME'],
             Package['PACKAGE_NAME'],
         ],
-        subscribe	=> [
+        subscribe       => [
             File['/CONFIG_PATH/CONFIG_NAME'],
         ],
     }
