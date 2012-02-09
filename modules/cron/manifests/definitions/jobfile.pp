@@ -16,10 +16,14 @@
 #
 #       include cron::daemon
 #
-#       cron::job { 'example':
-#           minute  => '*/3',
-#           command => 'date >> /tmp/crontest',
+#       cron::jobfile { 'example':
+#           require => [
+#               File['foo'],
+#               Package['bar'],
+#           ],
+#           source  => 'puppet:///private-host/example/example.cron',
 #       }
+
 
 define cron::jobfile ($source, $ensure='present') {
 
