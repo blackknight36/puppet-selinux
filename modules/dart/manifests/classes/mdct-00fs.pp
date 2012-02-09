@@ -33,14 +33,11 @@ class dart::mdct-00fs {
     include 'flock-herder'
     include 'git-daemon'
     include 'mirrmaid'
+    include 'picaps-backup-agent'
     include 'repoview'
 
 
     package { "createrepo":
-        ensure      => installed,
-    }
-
-    package { "picaps-backup-agent":
         ensure      => installed,
     }
 
