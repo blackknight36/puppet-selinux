@@ -20,7 +20,7 @@ class picaps-backup-agent {
     include cron::daemon
 
     package { 'picaps-backup-agent':
-        ensure  => installed,
+        ensure  => latest,
     }
 
     cron::jobfile { 'picaps-backup-agent':
