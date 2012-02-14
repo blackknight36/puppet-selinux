@@ -16,7 +16,6 @@ class packages::kde {
         'kcm_touchpad',
         'kde-plasma-networkmanagement',
         'kde-plasma-yawp',
-        'kde-settings-pulseaudio',
         'kdeaccessibility',
         'kdeartwork',
         'kdeartwork-screensavers',
