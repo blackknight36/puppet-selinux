@@ -2,7 +2,7 @@
 
 class xorg-server {
 
-    if ( $hostname == "mdct-dev12" ) {
+    if ( $hostname == "mdct-dev12" or $hostname == "mdct-dev9" ) {
         file { "/etc/X11/xorg.conf":
             group       => "root",
             mode        => 644,
