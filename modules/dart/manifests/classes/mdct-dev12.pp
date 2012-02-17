@@ -9,6 +9,7 @@ class dart::mdct-dev12 inherits dart::workstation_node {
     include bacula::client
 
     include bacula::admin
+    include jetbrains::idea
     include mysql-server
     include packages::kde
     include yum-cron
