@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=IntelliJ IDEA (<%= name %>)
+Comment=The most intelligent IDE
+MimeType=text/x-java;
+Exec=/opt/jetbrains/idea/idea-IU-<%= build %>/bin/idea.sh
+Icon=/opt/jetbrains/idea/idea-IU-<%= build %>/bin/idea128.png
+Type=Application
+Terminal=0
+MapNotify=false
+Categories=Utility;TextEditor;
+X-Desktop-File-Install-Version=0.15
