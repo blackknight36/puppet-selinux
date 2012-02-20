@@ -98,6 +98,7 @@ class dart::mdct-dev12 inherits dart::workstation_node {
 
     mount { "/opt":
         atboot  => true,
+        before  => Class['jetbrains'],
         device  => "/mnt-local/storage/opt",
         ensure  => "mounted",
         fstype  => "none",
