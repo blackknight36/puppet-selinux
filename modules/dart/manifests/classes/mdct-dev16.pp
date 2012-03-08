@@ -17,4 +17,8 @@ class dart::mdct-dev16 inherits dart::workstation_node {
         port    => '5432',
     }
 
+    lokkit::tcp_port { 'teamcity-build-agent':
+        port    => '9090',
+    }
+
 }
