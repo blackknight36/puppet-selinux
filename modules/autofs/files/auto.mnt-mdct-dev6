@@ -1,5 +1,5 @@
 # home directory on corporate file server
-files-2k1-d19749       -fstype=cifs,rw,uid=d19749,gid=d19749,credentials=/etc/.credentials/d19749.cred ://files-2k1/d19749\$
+d19749       -fstype=cifs,rw,uid=d19749,gid=d19749,credentials=/etc/.credentials/d19749.cred ://mas-fs02/users/d19749
 
 # shared engineering directory
 files-2k1-eng           -fstype=cifs,rw,uid=d19749,gid=d19749,credentials=/etc/.credentials/d19749.cred                            ://files-2k1/Eng
