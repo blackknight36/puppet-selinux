@@ -8,8 +8,10 @@ class packages::developer {
 
     package { [
 
+        'cmake',
         'cvs',
         'gcc',
+        'gcc-c++',
         'git',
         'gitk',
         'gnupg',                # required for rpmbuild --sign
