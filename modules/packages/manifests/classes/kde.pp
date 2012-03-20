@@ -26,7 +26,6 @@ class packages::kde {
         'kdepim',
         'kdeplasma-addons',
         'kdeutils',
-        'kdeutils-printer-applet',
         'kdm',
         'kipi-plugins',
         'kmplayer',
@@ -55,12 +54,14 @@ class packages::kde {
         if $operatingsystemrelease >= 16 {
             package { [
                 'kde-baseapps',
+                'kde-printer-applet',
                 ]:
                 ensure => installed,
             }
         } else {
             package { [
                 'kdebase',
+                'kdeutils-printer-applet',
                 ]:
                 ensure => installed,
             }
