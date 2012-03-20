@@ -19,7 +19,6 @@ class packages::kde {
         'kdeaccessibility',
         'kdeartwork',
         'kdeartwork-screensavers',
-        'kdebase',
         'kdegames',
         'kdegraphics',
         'kdemultimedia',
@@ -47,6 +46,26 @@ class packages::kde {
 
         ]:
         ensure => installed,
+    }
+
+    ### Select Package Inclusion ###
+
+    if $operatingsystem == 'Fedora' {
+
+        if $operatingsystemrelease >= 16 {
+            package { [
+                'kde-baseapps',
+                ]:
+                ensure => installed,
+            }
+        } else {
+            package { [
+                'kdebase',
+                ]:
+                ensure => installed,
+            }
+        }
+
     }
 
 }
