@@ -2,6 +2,7 @@
 
 class dart::mdct-dev16 inherits dart::workstation_node {
 
+    include jetbrains::idea
     include packages::kde
     include yum-cron
 
