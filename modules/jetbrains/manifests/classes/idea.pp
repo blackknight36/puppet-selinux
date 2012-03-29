@@ -81,6 +81,14 @@ class jetbrains::idea {
 
     # Stable releases are named with the release, but extract to the
     # build.
+    #
+    # Present policy plan is to enforce absence of old stable releases
+    # to ensure that no more than two stable releases are installed at any
+    # given time.
+    jetbrains::idea-release { 'ideaIU-11.1':
+        build   => '117.105',
+    }
+
     jetbrains::idea-release { 'ideaIU-11.0.2':
         build   => '111.277',
     }
