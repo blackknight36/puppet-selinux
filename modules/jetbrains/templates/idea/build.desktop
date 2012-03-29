@@ -3,7 +3,7 @@ Name=IntelliJ IDEA (<%= name %>)
 Comment=The most intelligent IDE
 MimeType=text/x-java;
 Exec=/opt/jetbrains/idea/idea-IU-<%= build %>/bin/idea.sh
-Icon=/opt/jetbrains/idea/idea-IU-<%= build %>/bin/idea128.png
+Icon=/opt/jetbrains/idea/idea-IU-<%= build %>/bin/idea.png
 Type=Application
 Terminal=0
 MapNotify=false
