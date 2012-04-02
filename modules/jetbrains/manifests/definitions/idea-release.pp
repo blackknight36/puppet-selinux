@@ -18,7 +18,6 @@
 #       include jetbrains::idea
 #
 #       jetbrains::idea-release { 'latest':
-#           release => "114.98",
 #           build   => "114.98",
 #       }
 
