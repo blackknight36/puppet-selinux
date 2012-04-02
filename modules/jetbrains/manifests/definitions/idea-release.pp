@@ -7,6 +7,7 @@
 #       Name__________  Default_______  Description___________________________
 #
 #       name                            instance name
+#       build                           JetBrains build ID, e.g. '111.277'
 #       ensure          present         instance is to be present/absent
 #
 # Requires:
