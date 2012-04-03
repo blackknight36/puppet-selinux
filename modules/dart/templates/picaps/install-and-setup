@@ -7,7 +7,7 @@
 SELF="$(basename $0)"
 
 info() {
-    echo -e "\n### $SELF: $*"
+    echo -e "\n### $SELF $(date): $*"
 }
 
 
@@ -130,15 +130,22 @@ kickstart_clone() {
 
     # MySQL Setup
     info "configuring MySQL"
-    service mysqld stop 2> /dev/null
+    info "      stopping extant instances of MySQL"
+    service mysqld stop
+    info "      relocating data dir"
     mkdir -p /storage/mysql
     echo -e "/storage/mysql\t\t/var/lib/mysql\t\text4\tbind\t0 0" >> /etc/fstab
     mount /storage/mysql
+    info "      grabbing config"
     mv /etc/my.cnf /etc/my.cnf-orig
     ncftpget 10.1.192.105 /etc/ /pub/kickstart/picaps/my.cnf
+    info "      restarting service"
     service mysqld start
+    info "      creating database"
     mysqladmin create picap
+    info "      enabling service for start at boot"
     chkconfig mysqld on
+    info "      configuring access controls"
     ncftpget 10.1.192.105 /root/ /pub/kickstart/picaps/grantpicaps.sql
     mysql < /root/grantpicaps.sql
     rm -rf /root/grantpicaps.sql
