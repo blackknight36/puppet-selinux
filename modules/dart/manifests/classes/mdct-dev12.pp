@@ -10,7 +10,6 @@ class dart::mdct-dev12 inherits dart::workstation_node {
 
     include bacula::admin
     include jetbrains::idea
-    include mysql-server
     include packages::kde
     include yum-cron
 
@@ -68,14 +67,16 @@ class dart::mdct-dev12 inherits dart::workstation_node {
         seltype         => "virt_var_lib_t",
     }
 
-    replace_original_with_symlink_to_alternate { "/var/lib/mysql":
-        alternate	=> "/mnt-local/storage/var/lib/mysql",
-        backup          => "/var/lib/mysql$SUFFIX",
-        original        => "/var/lib/mysql",
-        before          => Service["mysqld"],
-        require         => Package["mysql-server"],
-        seltype         => "mysqld_db_t",
-    }
+    # disabled until once again needed
+    #   include mysql-server
+    #   replace_original_with_symlink_to_alternate { "/var/lib/mysql":
+    #       alternate	=> "/mnt-local/storage/var/lib/mysql",
+    #       backup          => "/var/lib/mysql$SUFFIX",
+    #       original        => "/var/lib/mysql",
+    #       before          => Service["mysqld"],
+    #       require         => Package["mysql-server"],
+    #       seltype         => "mysqld_db_t",
+    #   }
 
     service { "libvirtd":
         enable		=> true,
