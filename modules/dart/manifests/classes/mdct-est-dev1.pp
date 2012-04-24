@@ -6,4 +6,8 @@ class dart::mdct-est-dev1 inherits dart::est_server_node {
         enabled => true,
     }
 
+    lokkit::tcp_port {
+        'http':                 port => '80';
+    }
+
 }
