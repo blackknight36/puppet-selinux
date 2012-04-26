@@ -1,6 +1,6 @@
 [alias]
     br = branch
-    ci = commit
+    ci = commit -v
     clog = log --pretty=format:%s
     co = checkout
     lg = log --graph --abbrev-commit --pretty=oneline --decorate
@@ -24,12 +24,13 @@
 
 [diff]
     noprefix
+	tool = meld
 
 [help]
     autocorrect = 30
 
 [merge]
-    tool = gvimdiff
+    tool = meld
     verbosity = 4
 
 [status]
@@ -39,3 +40,5 @@
     email = john_florian@dart.biz
     name = John Florian
 
+[difftool]
+	prompt = false

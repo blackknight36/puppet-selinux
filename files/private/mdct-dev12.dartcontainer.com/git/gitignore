@@ -1,2 +1,22 @@
+# GIT Ignores
+
+# VIM swap files
 *.sw?
+
+# Python byte-compilations
 *.py[co]
+
+# IDEA project settings inappropriate for SCM
+.idea/ant.xml
+.idea/compiler.xml
+.idea/copyright/profiles_settings.xml
+.idea/dictionaries/*
+.idea/encodings.xml
+.idea/inspectionProfiles/Project_Default.xml
+.idea/inspectionProfiles/profiles_settings.xml
+.idea/misc.xml
+.idea/scopes/scope_settings.xml
+.idea/workspace.xml
+
+# package archives such as those made by this2rpm, only applies to project root
+/*.tar.gz
