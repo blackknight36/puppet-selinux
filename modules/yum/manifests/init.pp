@@ -2,6 +2,20 @@
 
 class yum {
 
+    file { '/etc/yum.conf':
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0644',
+        seluser => 'system_u',
+        selrole => 'object_r',
+        seltype => 'etc_t',
+        source  => [
+            'puppet:///private-host/yum/yum.conf',
+            'puppet:///private-domain/yum/yum.conf',
+            'puppet:///modules/yum/yum.conf',
+        ],
+    }
+
     define config_repo($server_uri, $pkg_name, $pkg_release) {
 	exec { "config-repo-${name}":
 	    command 	=> "rpm -ivh ${server_uri}/${pkg_name}-${pkg_release}.rpm",
