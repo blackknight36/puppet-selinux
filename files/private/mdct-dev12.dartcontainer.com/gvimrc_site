@@ -1,6 +1,9 @@
 " Setup GVIM for this site specifically
 
 
+" See https://bugzilla.redhat.com/show_bug.cgi?id=673558
+set nomousehide
+
 set guifont=DejaVu\ LGC\ Sans\ Mono\ 10
 
 " Force gvimdiff to use full screen width.  I had little luck using kwin.
