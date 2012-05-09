@@ -6,15 +6,4 @@ class dart::mdct-aos-master-f15 inherits dart::aos_master_node {
     $bacula_client_director_monitor_password = "zdJxxdFhes9YxlJNhAHFOaSbneIy9N3FmlzTkA1wdowU"
     include 'bacula::client'
 
-    include 'apache'
-
-    apache::bind-mount { 'pub':
-        source  => '/pub/',
-    }
-
-    apache::site-config { 'pub':
-        notify  => Service['httpd'],
-        source  => 'puppet:///private-host/apache/pub.conf',
-    }
-
 }

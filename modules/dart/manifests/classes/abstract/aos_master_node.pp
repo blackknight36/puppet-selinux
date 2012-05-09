@@ -2,6 +2,17 @@
 
 class dart::aos_master_node inherits dart::server_node {
 
+    include 'apache'
+
+    apache::bind-mount { 'pub':
+        source  => '/pub/',
+    }
+
+    apache::site-config { 'pub':
+        notify  => Service['httpd'],
+        source  => 'puppet:///private-host/apache/pub.conf',
+    }
+
     include 'flock-herder'
     include 'mdct-puppeteer-admin'
 
