@@ -32,6 +32,8 @@ node "mdct-dev12.dartcontainer.com"             { include dart::mdct-dev12 }    
 node "mdct-dev13.dartcontainer.com"             { include dart::mdct-dev13 }            # BS
 node "mdct-dev14.dartcontainer.com"             { include dart::mdct-dev14 }            # AH
 node "mdct-dev16.dartcontainer.com"             { include dart::mdct-dev16 }            # BM
+node "mdct-dr.dartcontainer.com"                { include dart::mdct-dr }
+node "mdct-dr-dev.dartcontainer.com"            { include dart::mdct-dr-dev }
 node "mdct-est-ci.dartcontainer.com"            { include dart::mdct-est-ci }
 node "mdct-est-dev1.dartcontainer.com"          { include dart::mdct-est-dev1 }
 node "mdct-est-dev2.dartcontainer.com"          { include dart::mdct-est-dev2 }
@@ -43,8 +45,10 @@ node "mdct-f13-builder.dartcontainer.com"       { include dart::mdct-f13-builder
 node "mdct-f14-builder.dartcontainer.com"       { include dart::mdct-f14-builder }
 node "mdct-f15-builder.dartcontainer.com"       { include dart::mdct-f15-builder }
 node "mdct-f16-builder.dartcontainer.com"       { include dart::mdct-f16-builder }
+node "mdct-ngic.dartcontainer.com"              { include dart::mdct-ngic }
 node "mdct-ngic-dev.dartcontainer.com"          { include dart::mdct-ngic-dev }
 node "mdct-puppet.dartcontainer.com"            { include dart::mdct-puppet }
+node "mdct-tc.dartcontainer.com"                { include dart::mdct-tc }
 node "mdct-test-agent-32.dartcontainer.com"     { include dart::mdct-test-agent-32 }
 node "mole-dev.dartcontainer.com"               { include dart::mole-dev }
 node "mole.dartcontainer.com"                   { include dart::mole }
