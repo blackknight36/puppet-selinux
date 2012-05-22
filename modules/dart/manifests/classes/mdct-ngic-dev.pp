@@ -6,4 +6,8 @@ class dart::mdct-ngic-dev inherits dart::ngic_server_node {
         enabled => true,
     }
 
+	lokkit::tcp_port {
+		'postgresql':		port => '5432';
+	}
+
 }
