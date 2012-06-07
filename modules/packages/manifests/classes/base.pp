@@ -9,6 +9,7 @@ class packages::base {
         'apt',
         'bash-completion',
         'expect',
+        'fuse-sshfs',
         'gparted',
         'gpm',
         'iotop',
