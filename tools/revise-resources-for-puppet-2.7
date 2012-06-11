@@ -1,0 +1,250 @@
+#!/bin/sh
+
+# Description:
+#       puppet-2.7 has apparently deprecated the 'import' statement.  While it
+#       doesn't seem to emit any error messages indicating as much, it doesn't
+#       seem to honor them any more either.  The following bug report has been
+#       very informative in discussing this changes, from a consequences point
+#       of view:
+#               http://projects.puppetlabs.com/issues/8433
+#
+#       This script attempts to resolve all related issues within the
+#       resources.  This tool makes many assumptions about the existing nature
+#       of the resources, this it should not be considered flexible enough to
+#       work on any arbitrary set of puppet resources.
+#
+# Usage:
+#       The intended use of this tool goes something like this:
+#               1. Ensure the git working copy is clean with no uncommitted
+#               changes, etc.
+#               2. Create a new branch, i.e.:
+#                       git checkout -b puppet-2.7-compat
+#               3. Run this tool, i.e.:
+#                       cd /etc/puppet
+#                       tools/revise-resources-for-puppet-2.7
+#               4. Perform validation trials.
+#               5. Merge the topic branch into master or wherever is
+#               appropriate.
+
+
+#
+# Helper Functions
+#
+
+commit() {
+    echo '>> committing changes'
+    git commit \
+        --quiet \
+        --message="Refactor - adjustment for puppet-2.7 compatibility
+
+This is an automated commit produced by $0.
+It is only one such commit in a series.  This revision specifically:
+
+$@"
+}
+
+fail() {
+    echo >&2 ">> FATAL ERROR: $@"
+    exit 1
+}
+
+module_paths() {
+    find modules/ -maxdepth 1 -mindepth 1 -type d
+}
+
+okay_to_run() {
+    git diff --quiet || fail 'You have uncommitted changes.'
+    [ -z "${GIT_COMMITTER_EMAIL}" ] && fail 'GIT_COMMITTER_EMAIL must be set.'
+    [ -z "${GIT_COMMITTER_NAME}" ] && fail 'GIT_COMMITTER_NAME must be set.'
+}
+
+
+#
+# Corrective Functions
+#
+
+correct_missing_inits() {
+    # Rationale:
+    #   Some modules may no longer have an init.pp.
+    # Objective:
+    #   If only a single manifest exists for the module, make it the init.pp.
+    echo -e "\n>> Correcting modules without an init.pp."
+    for module_path in $(module_paths)
+    do
+        local module_name="$(basename $module_path)"
+        local init_path="$module_path/manifests/init.pp"
+        if [ ! -e "$init_path" ]
+        then
+            local manifests=( $(find $module_path/manifests/ -type f) )
+            if [ ${#manifests[@]} -eq 1 ]
+            then
+                local solitaire="${manifests[0]}"
+                echo ">>>> promoting solitary manifest $solitaire to $init_path"
+                git mv $solitaire $init_path
+            else
+                local eponym="$module_path/manifests/$module_name.pp"
+                if [ -e "$eponym" ]
+                then
+                    echo ">>>> promoting eponymous manifest $eponym to $init_path"
+                    git mv $eponym $init_path
+                else
+                    echo ">>>> WARNING no obvious candidate for $init_path"
+                fi
+            fi
+        fi
+    done
+    commit '- Promoted solitary manifests to init.pp for each module.'
+}
+
+relocate_nested_manifests() {
+    # Rationale:
+    #   puppet can no longer find manifests "hidden" in subdirectories of
+    #   "modules/MODULE_NAME/manifests/" despite the appropriate import
+    #   statements that have always worked prior to 2.7.
+    # Objective:
+    #   Move all such manifests right into the manifests directory so that:
+    #   "modules/MODULE_NAME/manifests/SUBDIR1/SUBDIR2/foo.pp" becomes
+    #   "modules/MODULE_NAME/manifests/SUBDIR2/foo.pp".  In addition, each
+    #   manifest that is relocated will be have it's name adjusted from
+    #   "MODULE_NAME::MANIFEST_NAME" to "MODULE_NAME::SUBDIR2::MANIFEST_NAME"
+    #   so that the puppet autoloader can find the manifest while retaining
+    #   the directory hierarchy (to the extent still possible).
+    local module_path="$1"
+    local subdir1="$2"
+    local module_name="$(basename $module_path)"
+    local subdir2
+    for subdir2 in $(find $subdir1 -maxdepth 1 -mindepth 1 -type d)
+    do
+        local submodule_name="$(basename $subdir2)"
+        echo ">>>> relocating nested manifests in $subdir2"
+        local manifest
+        for manifest in $(find $subdir2 -type f)
+        do
+            echo ">>>>>> adjusting $manifest"
+            sed --in-place --regexp-extended \
+                "s/^(define|class) +$module_name::/&$submodule_name::/" \
+                "$manifest"
+            local old_ref="$(git diff $manifest | awk '/^-(class|define)/{print $2}')"
+            local new_ref="$(git diff $manifest | awk '/^+(class|define)/{print $2}')"
+            local foreign_ref
+            echo ">>>>>> replacing all $old_ref references with $new_ref"
+            for foreign_ref in $(git grep -l "$old_ref")
+            do
+                sed --in-place --regexp-extended \
+                    "s/$old_ref/$new_ref/g" "$foreign_ref"
+            done
+            git add .
+            commit "- Renamed $old_ref to $new_ref."
+        done
+        git mv "$subdir2/" "$module_path/manifests/"
+        commit "- Relocated nested manifests that had been in $subdir2."
+    done
+}
+
+relocate_subdir_manifests() {
+    # Rationale:
+    #   puppet can no longer find manifests "hidden" in subdirectories of
+    #   "modules/MODULE_NAME/manifests/" despite the appropriate import
+    #   statements that have always worked prior to 2.7.
+    # Objective:
+    #   Move all such manifests right into the manifests directory so that:
+    #   "modules/MODULE_NAME/manifests/SUBDIR/foo.pp" becomes
+    #   "modules/MODULE_NAME/manifests/foo.pp".
+    local subdir="$1"
+    local module_path
+    for module_path in $(module_paths)
+    do
+        local old_path="$module_path/manifests/$subdir"
+        if [ -d $old_path ]
+        then
+            local new_path="$module_path/manifests"
+            echo -e "\n>> relocating manifests in $old_path"
+            git mv $old_path/*.pp $new_path/
+            commit "- Relocated manifests that had been in $old_path."
+            relocate_nested_manifests "$module_path" "$old_path"
+            rmdir $old_path
+        fi
+    done
+}
+
+remove_useless_inits() {
+    # Rationale:
+    #   Many modules will have an init.pp that merely does some bulk importing
+    #   (e.g., 'import classes/*').  So long as these contain nothing but such
+    #   imports, they are now pointless since the puppet's autoloader can
+    #   locate the resources in their "new approved" location.
+    # Objective:
+    #   Delete all such init.pp files.
+    echo -e "\n>> Removing all init.pp files that only import."
+    for module_path in $(module_paths)
+    do
+        local init_path="$module_path/manifests/init.pp"
+        local remainder="$(grep -Ev '^ *#|^ *$|^ *import +' $init_path)"
+        if [ -z "$remainder" ]
+        then
+            git rm "$init_path"
+        fi
+    done
+    commit '- Removed all init.pp files that only have "import" statements.'
+}
+
+rename_template_manifests() {
+    # Rationale:
+    #   There will be a name collision between the sample class and the sample
+    #   definition if this objective is not met.
+    # Objective:
+    #   Rename both to avoid the name collision.
+    echo -e "\n>> Renaming TEMPLATE manifests to avoid name collision."
+    local path='modules/TEMPLATE/manifests'
+    git mv "$path/classes/sample.pp" "$path/init.pp"
+    git mv "$path/definitions/sample.pp" "$path/definition.pp"
+    commit '- Renamed TEMPLATE manifests to avoid name collision.'
+    rmdir $path/{classes,definitions}
+}
+
+repair_headers() {
+    # Rationale:
+    #   Many resources have been relocated and their internal documentation
+    #   may now be inconsistent.
+    # Objective:
+    #   Correct the internal documentation.
+    # Caveats:
+    #   This may fix headers that this tool didn't break.  ;-)
+    local top='modules/'
+    local manifest
+    echo -e "\n>> Repairing internal documentation references."
+    for manifest in $(find "$top" -type f -name '*.pp')
+    do
+        sed --in-place --regexp-extended \
+            "s!^# modules/.*!# $manifest!" \
+            "$manifest"
+    done
+    # fixup TEMPLATE, an intentional variance
+    #   In modules/MODULE_NAME/manifests/definition.pp:
+    #           modules/MODULE_NAME/manifests/DEFINE_NAME.pp
+    #   In modules/MODULE_NAME/manifests/init.pp:
+    #           modules/MODULE_NAME/manifests/CLASS_NAME.pp
+    manifest="modules/TEMPLATE/manifests/definition.pp"
+    sed --in-place \
+        "s!^# $manifest.*!# modules/MODULE_NAME/manifests/DEFINE_NAME.pp!" \
+        "$manifest"
+    manifest="modules/TEMPLATE/manifests/init.pp"
+    sed --in-place \
+        "s!^# $manifest.*!# modules/MODULE_NAME/manifests/CLASS_NAME.pp!" \
+        "$manifest"
+    git add "$top"
+    commit '- Repaired internal documentation references.'
+}
+
+main() {
+    okay_to_run
+    remove_useless_inits
+    rename_template_manifests
+    relocate_subdir_manifests 'classes'
+    relocate_subdir_manifests 'definitions'
+    correct_missing_inits
+    repair_headers
+}
+
+
+main
