@@ -1,6 +1,6 @@
 # modules/dart/manifests/classes/workstation_node.pp
 
-class dart::workstation_node inherits dart::abstract::base_node {
+class dart::abstract::workstation_node inherits dart::abstract::base_node {
     include flock-herder
     include lotus_notes_client
     include packages::developer

@@ -1,6 +1,6 @@
 # modules/dart/manifests/classes/mdct-00sw.pp
 
-class dart::mdct-00sw inherits dart::workstation_node {
+class dart::mdct-00sw inherits dart::abstract::workstation_node {
 
     include packages::kde
     include yum-cron

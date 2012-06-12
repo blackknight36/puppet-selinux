@@ -1,6 +1,6 @@
 # modules/dart/manifests/classes/mdct-dev6-test.pp
 
-class dart::mdct-dev6-test inherits dart::workstation_node {
+class dart::mdct-dev6-test inherits dart::abstract::workstation_node {
     $plymouth_default_theme = "details"
     include plymouth
     include mysql-server

@@ -1,6 +1,6 @@
 # modules/dart/manifests/classes/mdct-dev16.pp
 
-class dart::mdct-dev16 inherits dart::workstation_node {
+class dart::mdct-dev16 inherits dart::abstract::workstation_node {
 
     include jetbrains::idea
     include packages::kde
