@@ -1,6 +1,6 @@
 # modules/dart/manifngics/classes/abstract/ngic_server_node.pp
 
-class dart::ngic_server_node inherits dart::abstract::server_node {
+class dart::abstract::ngic_server_node inherits dart::abstract::server_node {
 
     include lokkit
     include postgresql::server
