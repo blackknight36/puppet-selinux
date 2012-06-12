@@ -1,4 +1,4 @@
-# modules/lokkit/manifests/classes/lokkit.pp
+# modules/lokkit/manifests/init.pp
 #
 # Synopsis:
 #       Configures a host for lokkit use.

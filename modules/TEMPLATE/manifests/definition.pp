@@ -1,4 +1,4 @@
-# modules/MODULE_NAME/manifests/definitions/DEFINE_NAME.pp
+# modules/MODULE_NAME/manifests/DEFINE_NAME.pp
 #
 # Synopsis:
 #       Installs a DEFINE_NAME configuration file for MODULE_NAME.

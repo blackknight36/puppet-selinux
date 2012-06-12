@@ -1,4 +1,4 @@
-# modules/dart/manifests/classes/puppet_server_node.pp
+# modules/dart/manifests/abstract/puppet_server_node.pp
 
 class dart::abstract::puppet_server_node inherits dart::abstract::server_node {
 

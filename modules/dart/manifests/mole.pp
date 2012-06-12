@@ -1,4 +1,4 @@
-# modules/dart/manifests/classes/mole.pp
+# modules/dart/manifests/mole.pp
 
 class dart::mole inherits dart::abstract::workstation_node {
 

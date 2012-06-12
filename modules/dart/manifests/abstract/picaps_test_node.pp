@@ -1,4 +1,4 @@
-# modules/dart/manifests/classes/picaps_test_node.pp
+# modules/dart/manifests/abstract/picaps_test_node.pp
 #
 # Synopsis:
 #       This class is used primarily for servers that are used for testing

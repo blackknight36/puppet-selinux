@@ -1,4 +1,4 @@
-# modules/dart/manifests/classes/no-dns-hosts.pp
+# modules/dart/manifests/no-dns-hosts.pp
 #
 # Synopsis:
 #       Host resolution details for hosts not in Dart's DNS records.

@@ -1,4 +1,4 @@
-# modules/dart/manifests/classes/workstation_node.pp
+# modules/dart/manifests/abstract/workstation_node.pp
 
 class dart::abstract::workstation_node inherits dart::abstract::base_node {
     include flock-herder

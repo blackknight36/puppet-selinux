@@ -1,4 +1,4 @@
-# modules/packages/manifests/classes/workstation.pp
+# modules/packages/manifests/workstation.pp
 
 class packages::workstation {
 

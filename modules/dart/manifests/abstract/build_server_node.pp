@@ -1,4 +1,4 @@
-# modules/dart/manifests/classes/build_server_node.pp
+# modules/dart/manifests/abstract/build_server_node.pp
 
 class dart::abstract::build_server_node inherits dart::abstract::server_node {
     include packages::developer

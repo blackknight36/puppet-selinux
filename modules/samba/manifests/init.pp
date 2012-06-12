@@ -1,4 +1,4 @@
-# modules/samba/manifests/classes/samba.pp
+# modules/samba/manifests/init.pp
 #
 # Synopsis:
 #       Establish a SMB/CIFS service.

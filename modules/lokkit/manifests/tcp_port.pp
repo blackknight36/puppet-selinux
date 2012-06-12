@@ -1,4 +1,4 @@
-# modules/lokkit/manifests/definitions/tcp_port.pp
+# modules/lokkit/manifests/tcp_port.pp
 #
 # Synopsis:
 #       Configures iptables to open/close a specific TCP port.

@@ -1,4 +1,4 @@
-# modules/bacula/manifests/classes/admin.pp
+# modules/bacula/manifests/admin.pp
 #
 # Synopsis:
 #       Configures a host for bacula administration purposes.

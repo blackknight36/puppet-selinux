@@ -1,4 +1,4 @@
-# modules/packages/manifests/classes/compat_32bit.pp
+# modules/packages/manifests/compat_32bit.pp
 
 class packages::compat_32bit {
 

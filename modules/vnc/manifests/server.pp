@@ -1,4 +1,4 @@
-# modules/vnc/manifests/classes/server.pp
+# modules/vnc/manifests/server.pp
 #
 # Synopsis:
 #       Configures a host for serving VNC sessions.

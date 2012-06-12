@@ -1,4 +1,4 @@
-# modules/dart/manifests/classes/est_server_node.pp
+# modules/dart/manifests/abstract/est_server_node.pp
 
 class dart::abstract::est_server_node inherits dart::abstract::server_node {
 

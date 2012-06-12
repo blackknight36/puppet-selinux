@@ -1,4 +1,4 @@
-# modules/dart/manifests/classes/mdct-tc.pp
+# modules/dart/manifests/mdct-tc.pp
 
 class dart::mdct-tc inherits dart::abstract::server_node {
 

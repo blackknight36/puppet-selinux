@@ -1,4 +1,4 @@
-# modules/dart/manifests/classes/custom-facts.pp
+# modules/dart/manifests/custom-facts.pp
 #
 # Synopsis:
 #       Custom facts used for Dart.

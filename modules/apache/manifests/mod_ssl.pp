@@ -1,4 +1,4 @@
-# modules/apache/manifests/classes/mod_ssl.pp
+# modules/apache/manifests/mod_ssl.pp
 #
 # Synopsis:
 #       Configures a host as an Apache HTTP server providing mod_ssl.

@@ -1,4 +1,4 @@
-# modules/cron/manifests/classes/daemon.pp
+# modules/cron/manifests/daemon.pp
 #
 # Synopsis:
 #       Configures a host for the cron daemon.

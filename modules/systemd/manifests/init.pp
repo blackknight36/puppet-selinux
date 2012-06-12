@@ -1,4 +1,4 @@
-# modules/systemd/manifests/classes/systemd.pp
+# modules/systemd/manifests/init.pp
 #
 # Synopsis:
 #       Configures a host for running systemd.

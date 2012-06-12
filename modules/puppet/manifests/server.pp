@@ -1,4 +1,4 @@
-# modules/puppet/manifests/classes/server.pp
+# modules/puppet/manifests/server.pp
 
 class puppet::server {
 

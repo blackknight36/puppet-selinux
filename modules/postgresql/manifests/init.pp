@@ -1,4 +1,4 @@
-# modules/postgresql/manifests/classes/postgresql.pp
+# modules/postgresql/manifests/init.pp
 #
 # Synopsis:
 #       Configures a host as a PostgreSQL client.

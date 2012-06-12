@@ -1,4 +1,4 @@
-# modules/packages/manifests/classes/kde.pp
+# modules/packages/manifests/kde.pp
 
 class packages::kde {
 

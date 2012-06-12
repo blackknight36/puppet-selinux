@@ -1,4 +1,4 @@
-# modules/cron/manifests/definitions/jobfile.pp
+# modules/cron/manifests/jobfile.pp
 #
 # Synopsis:
 #       Installs a single cron job file.

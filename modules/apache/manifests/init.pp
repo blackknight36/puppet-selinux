@@ -1,4 +1,4 @@
-# modules/apache/manifests/classes/apache.pp
+# modules/apache/manifests/init.pp
 #
 # Synopsis:
 #       Configures a host as an Apache HTTP server.

@@ -1,4 +1,4 @@
-# modules/bacula/manifests/classes/client.pp
+# modules/bacula/manifests/client.pp
 
 class bacula::client {
 

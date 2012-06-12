@@ -1,4 +1,4 @@
-# modules/dart/manifests/classes/aos_master_node.pp
+# modules/dart/manifests/abstract/aos_master_node.pp
 
 class dart::abstract::aos_master_node inherits dart::abstract::server_node {
 

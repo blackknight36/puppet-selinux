@@ -1,4 +1,4 @@
-# modules/systemd/manifests/definitions/unit.pp
+# modules/systemd/manifests/unit.pp
 #
 # Synopsis:
 #       Install a systemd unit.

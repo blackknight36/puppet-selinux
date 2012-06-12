@@ -1,4 +1,4 @@
-# modules/dart/manifests/classes/base_node.pp
+# modules/dart/manifests/abstract/base_node.pp
 
 class dart::abstract::base_node {
 

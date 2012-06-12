@@ -1,4 +1,4 @@
-# modules/dart/manifests/classes/mdct-dev16.pp
+# modules/dart/manifests/mdct-dev16.pp
 
 class dart::mdct-dev16 inherits dart::abstract::workstation_node {
 

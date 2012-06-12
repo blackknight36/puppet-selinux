@@ -1,4 +1,4 @@
-# modules/dart/manifests/classes/mdct-aos-master-f15.pp
+# modules/dart/manifests/mdct-aos-master-f15.pp
 
 class dart::mdct-aos-master-f15 inherits dart::abstract::aos_master_node {
 

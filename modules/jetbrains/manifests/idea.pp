@@ -1,4 +1,4 @@
-# modules/jetbrains/manifests/classes/idea.pp
+# modules/jetbrains/manifests/idea.pp
 #
 # Synopsis:
 #       Configures a host to run JetBrains IDEA.

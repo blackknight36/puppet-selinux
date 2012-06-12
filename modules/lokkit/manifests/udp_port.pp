@@ -1,4 +1,4 @@
-# modules/lokkit/manifests/definitions/udp_port.pp
+# modules/lokkit/manifests/udp_port.pp
 #
 # Synopsis:
 #       Configures iptables to open/close a specific UDP port.

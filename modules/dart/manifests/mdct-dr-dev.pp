@@ -1,4 +1,4 @@
-# modules/dart/manifests/classes/mdct-ngic-dev.pp
+# modules/dart/manifests/mdct-dr-dev.pp
 
 class dart::mdct-dr-dev inherits dart::abstract::dr_server_node {
 

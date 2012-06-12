@@ -1,4 +1,4 @@
-# modules/dart/manifests/classes/mdct-dev6.pp
+# modules/dart/manifests/mdct-dev6.pp
 
 class dart::mdct-dev6 inherits dart::abstract::workstation_node {
     $plymouth_default_theme = "details"

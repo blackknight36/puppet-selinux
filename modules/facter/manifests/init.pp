@@ -1,4 +1,4 @@
-# modules/facter/manifests/definitions/custom-fact.pp
+# modules/facter/manifests/init.pp
 #
 # Synopsis:
 #       Installs a custom fact into the facter namespace.

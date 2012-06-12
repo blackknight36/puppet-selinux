@@ -1,4 +1,4 @@
-# modules/packages/manifests/classes/media.pp
+# modules/packages/manifests/media.pp
 
 # See also packages::kde.
 

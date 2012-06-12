@@ -1,4 +1,4 @@
-# modules/jetbrains/manifests/definitions/idea-release.pp
+# modules/jetbrains/manifests/idea-release.pp
 #
 # Synopsis:
 #       Installs a idea-release configuration file for jetbrains.

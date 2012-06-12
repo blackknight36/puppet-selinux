@@ -1,4 +1,4 @@
-# modules/jetbrains/manifests/classes/jetbrains.pp
+# modules/jetbrains/manifests/init.pp
 #
 # Synopsis:
 #       Configures a host to run JetBrains software.

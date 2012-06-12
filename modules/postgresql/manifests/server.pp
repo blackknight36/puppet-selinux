@@ -1,4 +1,4 @@
-# modules/postgresql/manifests/classes/server.pp
+# modules/postgresql/manifests/server.pp
 #
 # Synopsis:
 #       Configures a host as a PostgreSQL server.

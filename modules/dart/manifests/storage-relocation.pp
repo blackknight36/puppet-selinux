@@ -1,4 +1,4 @@
-# modules/dart/manifests/definitions/storage-relocation.pp
+# modules/dart/manifests/storage-relocation.pp
 
 define replace_original_with_symlink_to_alternate(
         $original, $backup, $alternate,

@@ -1,4 +1,4 @@
-# modules/packages/manifests/classes/developer.pp
+# modules/packages/manifests/developer.pp
 
 class packages::developer {
 

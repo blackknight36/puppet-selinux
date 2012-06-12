@@ -1,4 +1,4 @@
-# modules/lokkit/manifests/definitions/rules_file.pp
+# modules/lokkit/manifests/rules_file.pp
 #
 # Synopsis:
 #       Installs a custom iptables rules file via lokkit.

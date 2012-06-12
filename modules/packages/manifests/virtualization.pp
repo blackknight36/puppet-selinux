@@ -1,4 +1,4 @@
-# modules/packages/manifests/classes/virtualization.pp
+# modules/packages/manifests/virtualization.pp
 
 class packages::virtualization {
 

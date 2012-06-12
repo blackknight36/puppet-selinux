@@ -1,4 +1,4 @@
-# modules/packages/manifests/classes/base.pp
+# modules/packages/manifests/base.pp
 
 class packages::base {
 

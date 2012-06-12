@@ -1,4 +1,4 @@
-# modules/dart/manifests/classes/mdct-est-dev1.pp
+# modules/dart/manifests/mdct-est-dev1.pp
 
 class dart::mdct-est-dev1 inherits dart::abstract::est_server_node {
 

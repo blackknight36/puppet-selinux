@@ -1,4 +1,4 @@
-# modules/MODULE_NAME/manifests/classes/CLASS_NAME.pp
+# modules/MODULE_NAME/manifests/CLASS_NAME.pp
 #
 # Synopsis:
 #       Configures a host as a MODULE_NAME CLASS_NAME.
