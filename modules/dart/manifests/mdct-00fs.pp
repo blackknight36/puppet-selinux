@@ -10,7 +10,6 @@ class dart::mdct-00fs {
     include cron::daemon
     #@# # include cups
     #@# include cachefilesd
-    include dart::custom-facts
     include dart::no-dns-hosts
     include logwatch
     include ntp

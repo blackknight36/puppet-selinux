@@ -11,7 +11,6 @@ class dart::abstract::base_node {
     include cron::daemon
     include cups
     include cachefilesd
-    include dart::custom-facts
     include dart::no-dns-hosts
     include logwatch
     include ntp
