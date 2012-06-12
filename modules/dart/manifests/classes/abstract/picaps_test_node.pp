@@ -4,7 +4,7 @@
 #       This class is used primarily for servers that are used for testing
 #       PICAPS through various stages of deployment at a plant.
 
-class dart::picaps_test_node inherits dart::server_node {
+class dart::abstract::picaps_test_node inherits dart::server_node {
 
     # Declare the source of the JDK to be installed.
     $jdk_rpm_source='http://mdct-00fs.dartcontainer.com/ftp/pub/oracle/jdk-6u24-linux-amd64.rpm'
