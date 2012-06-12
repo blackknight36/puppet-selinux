@@ -1,6 +1,6 @@
 # modules/dart/manifests/classes/mdct-tc.pp
 
-class dart::mdct-tc inherits dart::server_node {
+class dart::mdct-tc inherits dart::abstract::server_node {
 
     class { 'iptables':
         enabled => true,

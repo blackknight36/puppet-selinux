@@ -4,7 +4,7 @@
 #       This class is used primarily for servers that provided shared access
 #       to media content used by the AOS media-playback devices.
 
-class dart::plant_utility_server_node inherits dart::server_node {
+class dart::plant_utility_server_node inherits dart::abstract::server_node {
 
     # AOS devices pull media-playback content using rsync.
     include rsync-server

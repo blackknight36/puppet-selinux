@@ -1,6 +1,6 @@
 # modules/dart/manifests/classes/est_server_node.pp
 
-class dart::est_server_node inherits dart::server_node {
+class dart::est_server_node inherits dart::abstract::server_node {
 
     include postgresql::server
 
