@@ -1,6 +1,6 @@
 # modules/dart/manifests/classes/mdct-aos-master-f15.pp
 
-class dart::mdct-aos-master-f15 inherits dart::aos_master_node {
+class dart::mdct-aos-master-f15 inherits dart::abstract::aos_master_node {
 
     $bacula_client_director_password = "hobe9yveB940mWreqoVzfTMIXfWurWi5ROughoJw7A39"
     $bacula_client_director_monitor_password = "zdJxxdFhes9YxlJNhAHFOaSbneIy9N3FmlzTkA1wdowU"

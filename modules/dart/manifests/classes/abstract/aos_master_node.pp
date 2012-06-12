@@ -1,6 +1,6 @@
 # modules/dart/manifests/classes/aos_master_node.pp
 
-class dart::aos_master_node inherits dart::server_node {
+class dart::abstract::aos_master_node inherits dart::server_node {
 
     include 'apache'
 
