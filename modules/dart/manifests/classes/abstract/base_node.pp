@@ -1,6 +1,6 @@
 # modules/dart/manifests/classes/base_node.pp
 
-class dart::base_node {
+class dart::abstract::base_node {
 
     # NOTICE: Any changes made here should also be considered for
     # modules/dart/manifests/classes/mdct-00fs.pp until such time that class
