@@ -22,7 +22,6 @@ class packages::base {
         'policycoreutils-python',       # provides audit2allow and audit2why
         'prophile',
         'python-mdct',
-        'ruby-rdoc',
         'screen',
         'strace',
         'task',
@@ -73,6 +72,20 @@ class packages::base {
         } else {
             package { [
                 'man',
+                ]:
+                ensure => installed,
+            }
+        }
+
+        if $operatingsystemrelease >= 17 {
+            package { [
+                'rubygem-rdoc',
+                ]:
+                ensure => installed,
+            }
+        } else {
+            package { [
+                'ruby-rdoc',
                 ]:
                 ensure => installed,
             }
