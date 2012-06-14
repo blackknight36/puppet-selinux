@@ -19,8 +19,8 @@ class jetbrains::idea {
 
     include jetbrains
 
-    $idea_root = '/opt/jetbrains/idea'
-    file { "${idea_root}":
+    $root = '/opt/jetbrains/idea'
+    file { "${jetbrains::idea::root}":
         ensure  => directory,
         group   => 'root',
         mode    => '0755',
@@ -31,25 +31,25 @@ class jetbrains::idea {
         seluser => 'system_u',
     }
 
-    $idea_launchers = "${idea_root}/launchers"
-    file { "${idea_launchers}":
+    $launchers_path = "${jetbrains::idea::root}/launchers"
+    file { "${jetbrains::idea::launchers_path}":
         ensure  => directory,
         group   => 'root',
         mode    => '0755',
         owner   => 'root',
-        require => File["${idea_root}"],
+        require => File["${jetbrains::idea::root}"],
         selrole => 'object_r',
         seltype => 'usr_t',
         seluser => 'system_u',
     }
 
-    $idea_config = "${idea_root}/etc"
+    $idea_config = "${jetbrains::idea::root}/etc"
     file { "${idea_config}":
         ensure  => directory,
         group   => 'root',
         mode    => '0755',
         owner   => 'root',
-        require => File["${idea_root}"],
+        require => File["${jetbrains::idea::root}"],
         selrole => 'object_r',
         seltype => 'etc_t',
         seluser => 'system_u',

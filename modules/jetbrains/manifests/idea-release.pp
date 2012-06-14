@@ -29,13 +29,13 @@
 
 define jetbrains::idea-release ($build, $ensure='present') {
 
-    file { "${idea_launchers}/${name}.desktop":
+    file { "${jetbrains::idea::launchers_path}/${name}.desktop":
         content => template("jetbrains/idea/build.desktop"),
         ensure  => "${ensure}",
         group   => 'root',
         mode    => '0644',
         owner   => 'root',
-        require => File["${idea_launchers}"],
+        require => File["${jetbrains::idea::launchers_path}"],
         selrole => 'object_r',
         seltype => 'usr_t',
         seluser => 'system_u',
@@ -46,17 +46,17 @@ define jetbrains::idea-release ($build, $ensure='present') {
         'present': {
             exec { "extract-${name}-idea":
                 command => "tar xzf /pub/jetbrains/${name}.tar.gz",
-                creates => "${idea_root}/idea-IU-${build}",
-                cwd     => "${idea_root}",
+                creates => "${jetbrains::idea::root}/idea-IU-${build}",
+                cwd     => "${jetbrains::idea::root}",
                 require => [
                     Class['autofs'],
-                    File["${idea_root}"],
+                    File["${jetbrains::idea::root}"],
                 ],
             }
         }
 
         'absent': {
-            file { "${idea_root}/idea-IU-${build}":
+            file { "${jetbrains::idea::root}/idea-IU-${build}":
                 ensure  => 'absent',
                 force   => true,
                 recurse => true,
