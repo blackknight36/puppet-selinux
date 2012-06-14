@@ -4,25 +4,11 @@ class bacula::client {
 
     include lokkit
 
-    # We've moved to Bacula 5.x.
-    #
-    # F12 and later make the default bacula packages use a newer major version
-    # that is not backwards compatible with a Bacula 2.x server.  They do
-    # however offer a "bacula2" series of packges that provide 2.x (2.4.4 at
-    # this time) for compatiblity with older Bacula server deployments.
-    if $operatingsystem == "Fedora" and $operatingsystemrelease >= 12 {
-        $bacula_major = "bacula"
-        $conflict_major = "bacula2"
-        # The migration to systemd also introduced other subtle configuration
-        # changes that must be reflected here.
-        if $operatingsystemrelease >= 15 {
-            $ossuffix='.Fedora15+'
-        } else {
-            $ossuffix=''
-        }
+    # The introduction of systemd brought subtle configuration changes that
+    # must be reflected here.
+    if $operatingsystemrelease >= 15 {
+        $ossuffix='.Fedora15+'
     } else {
-        $bacula_major = "bacula"
-        $conflict_major = undef
         $ossuffix=''
     }
 
@@ -31,39 +17,30 @@ class bacula::client {
     # ensure that the other has already been configured and has a service
     # started and listening on the reserved port.  Essentially, we're evicting
     # any potential port squatter.
-    if "${conflict_major}" != undef {
-        package { "${conflict_major}-client":
-            ensure      => absent,
-        }
-        package { "${conflict_major}-common":
-            ensure      => absent,
-        }
-        $conflict_packages = [
-            Package["${conflict_major}-client"],
-            Package["${conflict_major}-common"],
-        ]
-    } else {
-        $conflict_packages = undef
+    $conflict_packages = [ "bacula2-client", "bacula2-common", ]
+
+    package { $conflict_packages:
+        ensure  => absent,
     }
 
-    package { "${bacula_major}-client":
+    package { "bacula-client":
 	ensure	=> installed,
-        require => $conflict_packages,
+        require => Package[$conflict_packages],
     }
 
-    file { "/etc/${bacula_major}/bacula-fd.conf":
+    file { "/etc/bacula/bacula-fd.conf":
 	content	=> template("bacula/bacula-fd.conf"),
         group	=> "root",
         mode    => 640,
         owner   => "root",
-        require => Package["${bacula_major}-client"],
+        require => Package["bacula-client"],
     }
 
-    file { "/etc/sysconfig/${bacula_major}-fd":
+    file { "/etc/sysconfig/bacula-fd":
         group	=> "root",
         mode    => 640,
         owner   => "root",
-        require => Package["${bacula_major}-client"],
+        require => Package["bacula-client"],
         source  => "puppet:///modules/bacula/bacula-fd${ossuffix}",
     }
 
@@ -71,18 +48,18 @@ class bacula::client {
         port    => "9102",
     }
 
-    service { "${bacula_major}-fd":
+    service { "bacula-fd":
         enable		=> true,
         ensure		=> running,
         hasrestart	=> true,
         hasstatus	=> true,
         require		=> [
             Exec["open-bacula-fd-tcp-port"],
-            Package["${bacula_major}-client"],
+            Package["bacula-client"],
         ],
         subscribe	=> [
-            File["/etc/${bacula_major}/bacula-fd.conf"],
-            File["/etc/sysconfig/${bacula_major}-fd"],
+            File["/etc/bacula/bacula-fd.conf"],
+            File["/etc/sysconfig/bacula-fd"],
         ]
     }
 
