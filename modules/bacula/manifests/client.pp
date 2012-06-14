@@ -17,49 +17,48 @@ class bacula::client {
     # ensure that the other has already been configured and has a service
     # started and listening on the reserved port.  Essentially, we're evicting
     # any potential port squatter.
-    $conflict_packages = [ "bacula2-client", "bacula2-common", ]
+    $conflict_packages = [ 'bacula2-client', 'bacula2-common', ]
 
     package { $conflict_packages:
         ensure  => absent,
     }
 
-    package { "bacula-client":
+    package { 'bacula-client':
 	ensure	=> installed,
         require => Package[$conflict_packages],
     }
 
-    file { "/etc/bacula/bacula-fd.conf":
-	content	=> template("bacula/bacula-fd.conf"),
-        group	=> "root",
-        mode    => 640,
-        owner   => "root",
-        require => Package["bacula-client"],
+    File {
+        owner   => 'root',
+        group	=> 'root',
+        mode    => '0640',
+        require => Package['bacula-client'],
     }
 
-    file { "/etc/sysconfig/bacula-fd":
-        group	=> "root",
-        mode    => 640,
-        owner   => "root",
-        require => Package["bacula-client"],
+    file { '/etc/bacula/bacula-fd.conf':
+	content	=> template('bacula/bacula-fd.conf'),
+    }
+
+    file { '/etc/sysconfig/bacula-fd':
         source  => "puppet:///modules/bacula/bacula-fd${ossuffix}",
     }
 
-    lokkit::tcp_port { "bacula-fd":
-        port    => "9102",
+    lokkit::tcp_port { 'bacula-fd':
+        port    => '9102',
     }
 
-    service { "bacula-fd":
+    service { 'bacula-fd':
         enable		=> true,
         ensure		=> running,
         hasrestart	=> true,
         hasstatus	=> true,
         require		=> [
-            Exec["open-bacula-fd-tcp-port"],
-            Package["bacula-client"],
+            Exec['open-bacula-fd-tcp-port'],
+            Package['bacula-client'],
         ],
         subscribe	=> [
-            File["/etc/bacula/bacula-fd.conf"],
-            File["/etc/sysconfig/bacula-fd"],
+            File['/etc/bacula/bacula-fd.conf'],
+            File['/etc/sysconfig/bacula-fd'],
         ]
     }
 
