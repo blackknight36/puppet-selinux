@@ -54,18 +54,6 @@ class authconfig {
 
         } else { # this is Fedora 13 or later
 
-            # As of Fedora 13, the policy is more strict and this is required
-            # for logins to gain access to the user's home dir, if it is on
-            # NFS.  Interestingly, this only affects the cd within login as it
-            # is still possible to enter the home dir after login when this is
-            # off.
-            if $selinux == 'true' {
-                selboolean { 'use_nfs_home_dirs':
-                    persistent      => true,
-                    value           => on,
-                }
-            }
-
             package { [ 'krb5-libs', 'pam_krb5' ]:
                 ensure  => installed,
             }
