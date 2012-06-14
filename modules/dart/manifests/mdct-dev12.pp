@@ -1,8 +1,10 @@
 # modules/dart/manifests/mdct-dev12.pp
 
 class dart::mdct-dev12 inherits dart::abstract::workstation_node {
-    $plymouth_default_theme = "details"
-    include plymouth
+
+    class { 'plymouth':
+        theme   => 'details',
+    }
 
     $bacula_client_director_password = "204f4392ecdcfd3324ce6efb2cb142f4"
     $bacula_client_director_monitor_password = "9183e6fe26d853f50e9e57e561057951"
