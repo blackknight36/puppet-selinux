@@ -6,9 +6,10 @@ class dart::mdct-00tl inherits dart::abstract::server_node {
         enabled => true,
     }
 
-    $bacula_client_director_password = "VrLkRkBWWIhDHF8ARkPfGH5mNWnF1wZd939DmfFAhNzS"
-    $bacula_client_director_monitor_password = "8QNsZ1MehmXv61Kx8l2IcnOhtjrXeV3iFBm3GNOqukMU"
-    include bacula::client
+    class { 'bacula::client':
+        dir_passwd      => 'VrLkRkBWWIhDHF8ARkPfGH5mNWnF1wZd939DmfFAhNzS',
+        mon_passwd      => '8QNsZ1MehmXv61Kx8l2IcnOhtjrXeV3iFBm3GNOqukMU',
+    }
 
     lokkit::tcp_port {
             'http':                 port => '80';

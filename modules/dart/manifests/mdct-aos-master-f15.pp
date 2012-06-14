@@ -2,8 +2,9 @@
 
 class dart::mdct-aos-master-f15 inherits dart::abstract::aos_master_node {
 
-    $bacula_client_director_password = "hobe9yveB940mWreqoVzfTMIXfWurWi5ROughoJw7A39"
-    $bacula_client_director_monitor_password = "zdJxxdFhes9YxlJNhAHFOaSbneIy9N3FmlzTkA1wdowU"
-    include 'bacula::client'
+    class { 'bacula::client':
+        dir_passwd      => 'hobe9yveB940mWreqoVzfTMIXfWurWi5ROughoJw7A39',
+        mon_passwd      => 'zdJxxdFhes9YxlJNhAHFOaSbneIy9N3FmlzTkA1wdowU',
+    }
 
 }

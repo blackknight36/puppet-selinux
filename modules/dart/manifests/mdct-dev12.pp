@@ -6,9 +6,10 @@ class dart::mdct-dev12 inherits dart::abstract::workstation_node {
         theme   => 'details',
     }
 
-    $bacula_client_director_password = "204f4392ecdcfd3324ce6efb2cb142f4"
-    $bacula_client_director_monitor_password = "9183e6fe26d853f50e9e57e561057951"
-    include bacula::client
+    class { 'bacula::client':
+        dir_passwd      => '204f4392ecdcfd3324ce6efb2cb142f4',
+        mon_passwd      => '9183e6fe26d853f50e9e57e561057951',
+    }
 
     include bacula::admin
     include jetbrains::idea

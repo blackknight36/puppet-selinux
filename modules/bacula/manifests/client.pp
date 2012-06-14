@@ -1,6 +1,27 @@
 # modules/bacula/manifests/client.pp
+#
+# Synopsis:
+#       Configures a host as a Bacula client.
+#
+# Parameters:
+#       Name__________  Default_______  Description___________________________
+#
+#       dir_passwd      *none*          Password that the Director should use
+#                                       to connect to this client for full
+#                                       control.
+#
+#       mon_passwd      *none*          Password that should be used to
+#                                       connect to this client for restricted
+#                                       control, chiefly status updates.
+#
+# Example Usage:
+#
+#       class { 'bacula::client':
+#           dir_passwd      => 'super-secret-squirrel-sauce',
+#           mon_passwd      => 'stunningly-saturated-squirrel-sausage',
+#       }
 
-class bacula::client {
+class bacula::client($dir_passwd, $mon_passwd) {
 
     include lokkit
 
