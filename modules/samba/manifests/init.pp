@@ -40,18 +40,16 @@ class samba {
         port    => '445',
     }
 
-    if $selinux == true {
-        selboolean { 'samba_export_all_ro':
-            before      => Service['smb'],
-            persistent      => true,
-            value           => on,
-        }
+    selinux::boolean { 'samba_export_all_ro':
+        before          => Service['smb'],
+        persistent      => true,
+        value           => on,
+    }
 
-        selboolean { 'samba_export_all_rw':
-            before      => Service['smb'],
-            persistent      => true,
-            value           => on,
-        }
+    selinux::boolean { 'samba_export_all_rw':
+        before          => Service['smb'],
+        persistent      => true,
+        value           => on,
     }
 
     service { 'smb':

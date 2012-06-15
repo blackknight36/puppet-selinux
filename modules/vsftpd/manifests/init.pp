@@ -43,14 +43,12 @@ class vsftpd($allow_use_nfs=false) {
         port    => '21',
     }
 
-    if $selinux == 'true' {
-        selboolean { 'allow_ftpd_use_nfs':
-            before      => Service['vsftpd'],
-            persistent  => true,
-            value       => $allow_use_nfs ? {
-                true    => on,
-                default => off,
-            }
+    selinux::boolean { 'allow_ftpd_use_nfs':
+        before      => Service['vsftpd'],
+        persistent  => true,
+        value       => $allow_use_nfs ? {
+            true    => on,
+            default => off,
         }
     }
 

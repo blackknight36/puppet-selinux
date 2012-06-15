@@ -21,11 +21,9 @@ class autofs {
     # NFS.  Interestingly, this only affects the cd within login as it
     # is still possible to enter the home dir after login when this is
     # off.
-    if $selinux == 'true' {
-        selboolean { 'use_nfs_home_dirs':
-            persistent      => true,
-            value           => on,
-        }
+    selinux::boolean { 'use_nfs_home_dirs':
+        persistent      => true,
+        value           => on,
     }
 
     file { "/etc/auto.master":
