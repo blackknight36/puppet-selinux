@@ -35,6 +35,7 @@ class apache {
     # Web content is reached via NFS, so selinux must be adjusted to allow the
     # apache daemon to access it.
     selinux::boolean { 'httpd_use_nfs':
+        before          => Service['httpd'],
         persistent      => true,
         value           => on,
     }
@@ -51,7 +52,6 @@ class apache {
         require         => [
             Exec['open-http-tcp-port'],
             Package['httpd'],
-            Selboolean['httpd_use_nfs'],
         ],
         subscribe       => [
             File['/etc/httpd/conf/httpd.conf'],
