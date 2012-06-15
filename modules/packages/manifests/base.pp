@@ -19,7 +19,6 @@ class packages::base {
         'multitail',
         'openssh-clients',
         'pciutils',
-        'policycoreutils-python',       # provides audit2allow and audit2why
         'prophile',
         'python-mdct',
         'screen',
