@@ -18,6 +18,7 @@ class dart::abstract::base_node {
     include packages::base
     include puppet::client
     include rpcidmapd
+    include selinux
     include sudo
     include timezone
     include xorg-server
