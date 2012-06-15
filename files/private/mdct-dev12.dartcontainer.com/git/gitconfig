@@ -1,3 +1,7 @@
+# John Florian's Preferred Git Config
+#
+# vim: filetype=gitconfig
+
 [alias]
     br = branch
     ci = commit -v
@@ -5,6 +9,7 @@
     co = checkout
     lg = log --graph --abbrev-commit --pretty=oneline --decorate
     revert = git reset --hard
+    sed = ! git grep -z --full-name -l '.' | xargs -0 sed -i -e
     st = status
 
 [clean]
@@ -16,7 +21,7 @@
     interactive = auto
     showbranch = auto
     status = auto
-    ui = always
+    ui = auto
 
 [core]
     excludesfile = /home/00/d13677/.gitignore
