@@ -26,6 +26,10 @@ class postgresql::server {
 	ensure	=> installed,
     }
 
+    package { 'postgresql-contrib':
+        ensure  => installed,
+    }
+
     if $operatingsystemrelease >= 16 {
         $postgresql_initdb_cmd = 'postgresql-setup initdb'
     } else {
