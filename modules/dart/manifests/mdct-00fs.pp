@@ -38,6 +38,10 @@ class dart::mdct-00fs {
         source => 'puppet:///private-host/mirrmaid/mirrmaid.conf',
     }
 
+    mirrmaid::config { 'mirrmaid-fedora':
+        source => 'puppet:///private-host/mirrmaid/mirrmaid-fedora.conf',
+    }
+
     mirrmaid::config { 'mirrmaid-testing':
         source => 'puppet:///private-host/mirrmaid/mirrmaid-testing.conf',
     }
