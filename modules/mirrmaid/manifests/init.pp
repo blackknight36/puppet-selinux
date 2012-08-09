@@ -1,4 +1,12 @@
 # modules/mirrmaid/manifests/init.pp
+#
+# Synopsis:
+#       Configures a host for mirrmaid service.
+#
+# Note:
+#       You will need to configure mirrmaid with one or configuration files
+#       via mirrmaid::config.
+
 
 class mirrmaid {
 
@@ -8,28 +16,13 @@ class mirrmaid {
         ensure  => latest,
     }
 
-    file { '/etc/mirrmaid/mirrmaid.conf':
-        group   => 'mirrmaid',
-        mode    => '0644',
-        owner   => 'root',
-        require => Package['mirrmaid'],
-        source  => 'puppet:///private-host/mirrmaid/mirrmaid.conf',
-    }
-
-    file { '/etc/mirrmaid/mirrmaid-testing.conf':
-        group   => 'mirrmaid',
-        mode    => '0644',
-        owner   => 'root',
-        require => Package['mirrmaid'],
-        source  => 'puppet:///private-host/mirrmaid/mirrmaid-testing.conf',
-    }
-
+    # TODO: move this to openssh module as a definition there.
     file { '/etc/mirrmaid/.ssh':
         ensure  => directory,
-        force   => true,
+        owner   => 'mirrmaid',
         group   => 'mirrmaid',
         mode    => '0600',      # puppet will +x for directories
-        owner   => 'mirrmaid',
+        force   => true,
         purge   => true,
         recurse => true,
         require => Package['mirrmaid'],

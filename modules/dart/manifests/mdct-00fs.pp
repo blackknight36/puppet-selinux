@@ -31,7 +31,17 @@ class dart::mdct-00fs {
 
     include 'flock-herder'
     include 'git-daemon'
+
     include 'mirrmaid'
+
+    mirrmaid::config { 'mirrmaid':
+        source => 'puppet:///private-host/mirrmaid/mirrmaid.conf',
+    }
+
+    mirrmaid::config { 'mirrmaid-testing':
+        source => 'puppet:///private-host/mirrmaid/mirrmaid-testing.conf',
+    }
+
     include 'picaps-backup-agent'
     include 'repoview'
 
