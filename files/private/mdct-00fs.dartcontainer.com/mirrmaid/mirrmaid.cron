@@ -8,6 +8,3 @@ PATH=/sbin:/bin:/usr/sbin:/usr/bin
 #       1) gathering PICAPS definitions for local backup
 #       2) YUM repository distribution to mirrors local at each plant
 2,17,32,47 * * * * mirrmaid     nice ionice -c3 mirrmaid -c /etc/mirrmaid/mirrmaid.conf
-
-# Fedora mirroring (rawhide anyway).
-15 */3 * * * mirrmaid           tsocks nice ionice -c3 mirrmaid -c /etc/mirrmaid/mirrmaid-fedora.conf
