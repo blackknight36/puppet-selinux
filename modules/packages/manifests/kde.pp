@@ -29,7 +29,6 @@ class packages::kde {
         'kdm',
         'kipi-plugins',
         'kmplayer',
-        'koffice-krita',
         'konversation',
         'ksshaskpass',
         'ktorrent',
@@ -50,6 +49,20 @@ class packages::kde {
     ### Select Package Inclusion ###
 
     if $operatingsystem == 'Fedora' {
+
+        if $operatingsystemrelease >= 17 {
+            package { [
+                'calligra-krita',
+                ]:
+                ensure => installed,
+            }
+        } else {
+            package { [
+                'koffice-krita',
+                ]:
+                ensure => installed,
+            }
+        }
 
         if $operatingsystemrelease >= 16 {
             package { [
