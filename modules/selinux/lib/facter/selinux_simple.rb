@@ -10,8 +10,8 @@ getenforce_cmd = '/usr/sbin/getenforce'
 
 Facter.add("selinux_simple") do
     setcode do
-        mode = Facter::Util::Resolution.exec(getenforce_cmd)
-        if mode.casecmp('enforcing') == 0
+        mode = Facter::Util::Resolution.exec(getenforce_cmd).chomp
+        if mode.casecmp('Enforcing') == 0
             result = "true"
         else
             result = "false"
