@@ -6,11 +6,17 @@ class puppet::client {
 	ensure	=> installed,
     }
 
+    $scary = "$fqdn is running puppet-$puppetversion.  Versions 2.6.6 and prior are poorly supported and quite buggy.  Please upgrade!"
     if versioncmp($puppetversion, "2.6") < 0 {
         $puppet_era = "pre-2.6"
+        warning "$scary"
+    } elsif versioncmp($puppetversion, "2.6.6") > 0 {
+        $puppet_era = "after-2.6.6"
     } else {
         $puppet_era = "as-of-2.6"
+        warning "$scary"
     }
+
     file { "/etc/puppet/puppet.conf":
         group	=> "root",
         mode    => "0640",

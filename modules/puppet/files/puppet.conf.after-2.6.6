@@ -1,6 +1,6 @@
 # THIS FILE IS MANAGED BY PUPPET
 #
-# files/private/mdct-puppet.dartcontainer.com/puppet/puppet.conf
+# modules/puppet/files/puppet.conf.after-2.6.6
 
 [main]
     # The Puppet log directory.
@@ -33,8 +33,12 @@
     # The default value is '$confdir/localconfig'.
     localconfig = $vardir/localconfig
 
-    report=true
+    report = true
+    show_diff = true
+
+    # The default 30m interval causes too many errors on the puppetmaster due
+    # to the embedded http server being single threaded.
+    runinterval = 3600
 
 [master]
-    certname = mdct-puppet.dartcontainer.com
     reports = tagmail,store,log

@@ -1,3 +1,7 @@
+# THIS FILE IS MANAGED BY PUPPET
+#
+# modules/puppet/files/puppet.conf.pre-2.6
+
 [main]
     # The Puppet log directory.
     # The default value is '$vardir/log'.
@@ -11,7 +15,9 @@
     # The default value is '$confdir/ssl'.
     ssldir = $vardir/ssl
 
-    # Enable pluginsync for distribution of custom facts and types
+    # Enable pluginsync for distribution of custom facts and types.  Do not
+    # enable pluginsync here!  See modules/facter/manifests/init.pp for
+    # details why you shouldn't.
     pluginsync = false
 
 [puppetd]
