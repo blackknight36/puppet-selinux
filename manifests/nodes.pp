@@ -5,7 +5,7 @@
 # such classes are in the dart module (see
 # modules/dart/manifests/classes/abstract/*.pp).
 
-node "jflo-f13.dartcontainer.com"               { include dart::jflo-f13 }
+node "deneb-builder.dartcontainer.com"          { include dart::deneb-builder }
 node "mdct-00bk.dartcontainer.com"              { include dart::mdct-00bk }
 node "mdct-00dtl.dartcontainer.com"             { include dart::mdct-00dtl }
 node "mdct-00tl.dartcontainer.com"              { include dart::mdct-00tl }
