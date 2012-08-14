@@ -19,7 +19,7 @@ class puppet::client {
 
     file { "/etc/puppet/puppet.conf":
         group	=> "root",
-        mode    => "0640",
+        mode    => "0644",
         owner   => "root",
         require => Package["puppet"],
         seluser => "system_u",
