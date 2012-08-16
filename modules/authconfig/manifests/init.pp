@@ -23,7 +23,9 @@ class authconfig {
     }
 
     if $operatingsystem == 'Fedora' {
-        if $operatingsystemrelease < 13 {
+        if $operatingsystemrelease != "Rawhide" and
+           $operatingsystemrelease < 13
+        {
 
             package { 'nss_ldap':
                 ensure  => installed
@@ -108,7 +110,10 @@ class authconfig {
             # According to F13's authconfig(8), authconfig does NOT configure
             # the domain in sssd.conf; it must be done manually.  Hence
             # a starter sssd.conf is provided here.
-            if $operatingsystem == 'Fedora' and $operatingsystemrelease >= 15 {
+            if $operatingsystem == 'Fedora' and
+               $operatingsystemrelease == "Rawhide" or
+               $operatingsystemrelease >= 15
+            {
                 $sssd_conf = 'sssd.conf.Fedora.15+'
             } else {
                 $sssd_conf = 'sssd.conf'

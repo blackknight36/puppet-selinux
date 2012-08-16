@@ -28,7 +28,9 @@ class packages::workstation {
 
     if $operatingsystem == 'Fedora' {
 
-        if $operatingsystemrelease >= 11 {
+        if  $operatingsystemrelease == 'Rawhide' or
+            $operatingsystemrelease >= 11
+        {
             package { [
                 'tigervnc',
                 ]:
@@ -42,7 +44,9 @@ class packages::workstation {
             }
         }
 
-        if $operatingsystemrelease >= 14 {
+        if  $operatingsystemrelease == 'Rawhide' or
+            $operatingsystemrelease >= 14
+        {
             package { [
                 'mysql-workbench',
                 ]:
@@ -56,7 +60,9 @@ class packages::workstation {
             }
         }
 
-        if $operatingsystemrelease >= 15 {
+        if  $operatingsystemrelease == 'Rawhide' or
+            $operatingsystemrelease >= 15
+        {
             package { [
                 'libreoffice-calc',
                 'libreoffice-writer',

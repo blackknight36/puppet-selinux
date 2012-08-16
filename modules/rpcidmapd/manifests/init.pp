@@ -6,7 +6,10 @@ class rpcidmapd {
 	 ensure => installed,
     }
 
-    if $operatingsystem == 'Fedora' and $operatingsystemrelease >= 15 {
+    if  $operatingsystem == 'Fedora' and
+        $operatingsystemrelease == 'Rawhide' or
+        $operatingsystemrelease >= 15
+    {
         $libnfsidmap_package = 'libnfsidmap'
     } else {
         $libnfsidmap_package = 'nfs-utils-lib'
@@ -24,7 +27,10 @@ class rpcidmapd {
         source	=> 'puppet:///modules/rpcidmapd/idmapd.conf',
     }
 
-    if $operatingsystem == 'Fedora' and $operatingsystemrelease >= 16 {
+    if  $operatingsystem == 'Fedora' and
+        $operatingsystemrelease == 'Rawhide' or
+        $operatingsystemrelease >= 16
+    {
         $rpcidmapd_service = 'nfs-idmap'
     } else {
         $rpcidmapd_service = 'rpcidmapd'

@@ -3,7 +3,10 @@
 class cachefilesd {
 
     # Support pre-F13 was weak, so don't bother there.
-    if $operatingsystem == "Fedora" and $operatingsystemrelease >= 13 {
+    if  $operatingsystem == "Fedora" and
+        $operatingsystemrelease == 'Rawhide' or
+        $operatingsystemrelease >= 13
+    {
 
         package { "cachefilesd":
             ensure  => installed,

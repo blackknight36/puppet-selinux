@@ -18,7 +18,9 @@ class packages::virtualization {
 
     if $operatingsystem == 'Fedora' {
 
-        if $operatingsystemrelease >= 11 {
+        if  $operatingsystemrelease == 'Rawhide' or
+            $operatingsystemrelease >= 11
+        {
             package { [
                 'qemu-kvm',
                 ]:

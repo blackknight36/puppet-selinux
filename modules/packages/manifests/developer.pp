@@ -38,7 +38,9 @@ class packages::developer {
 
     if $operatingsystem == 'Fedora' {
 
-        if $operatingsystemrelease >= 12 {
+        if  $operatingsystemrelease == 'Rawhide' or
+            $operatingsystemrelease >= 12
+        {
             package { [
                 'python-ipaddr',
                 ]:

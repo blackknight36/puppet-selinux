@@ -50,7 +50,9 @@ class packages::kde {
 
     if $operatingsystem == 'Fedora' {
 
-        if $operatingsystemrelease >= 17 {
+        if  $operatingsystemrelease == 'Rawhide' or
+            $operatingsystemrelease >= 17
+        {
             package { [
                 'calligra-krita',
                 ]:
@@ -64,7 +66,9 @@ class packages::kde {
             }
         }
 
-        if $operatingsystemrelease >= 16 {
+        if  $operatingsystemrelease == 'Rawhide' or
+            $operatingsystemrelease >= 16
+        {
             package { [
                 'kde-baseapps',
                 'kde-printer-applet',

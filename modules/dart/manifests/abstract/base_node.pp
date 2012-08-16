@@ -23,7 +23,10 @@ class dart::abstract::base_node {
     include timezone
     include xorg-server
 
-    if $operatingsystem == 'Fedora' and $operatingsystemrelease >= 15 {
+    if  $operatingsystem == 'Fedora' and
+        $operatingsystemrelease == 'Rawhide' or
+        $operatingsystemrelease >= 15
+    {
         include systemd
     }
 

@@ -40,7 +40,9 @@ class packages::base {
 
     if $operatingsystem == 'Fedora' {
 
-        if $operatingsystemrelease >= 11 {
+        if  $operatingsystemrelease == 'Rawhide' or
+            $operatingsystemrelease >= 11
+        {
             package { [
                 'dejavu-lgc-sans-mono-fonts',   # used by vim-X11
                 ]:
@@ -54,7 +56,9 @@ class packages::base {
             }
         }
 
-        if $operatingsystemrelease >= 13 {
+        if  $operatingsystemrelease == 'Rawhide' or
+            $operatingsystemrelease >= 13
+        {
             package { [
                 'cifs-utils',
                 ]:
@@ -62,7 +66,9 @@ class packages::base {
             }
         }
 
-        if $operatingsystemrelease >= 14 {
+        if  $operatingsystemrelease == 'Rawhide' or
+            $operatingsystemrelease >= 14
+        {
             package { [
                 'man-db',
                 ]:
@@ -76,7 +82,9 @@ class packages::base {
             }
         }
 
-        if $operatingsystemrelease >= 17 {
+        if  $operatingsystemrelease == 'Rawhide' or
+            $operatingsystemrelease >= 17
+        {
             package { [
                 'rubygem-rdoc',
                 ]:
@@ -110,7 +118,9 @@ class packages::base {
 
     if $operatingsystem == 'Fedora' {
 
-        if $operatingsystemrelease >= 12 {
+        if  $operatingsystemrelease == 'Rawhide' or
+            $operatingsystemrelease >= 12
+        {
             package { [
                 'yum-presto',   # we don't use delta RPM support
                 ]:
@@ -118,7 +128,9 @@ class packages::base {
             }
         }
 
-        if $operatingsystemrelease >= 14 {
+        if  $operatingsystemrelease == 'Rawhide' or
+            $operatingsystemrelease >= 14
+        {
             package { [
                 'PackageKit-yum-plugin', # not used and slows yum startup
                 ]:

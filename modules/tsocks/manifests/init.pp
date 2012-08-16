@@ -2,7 +2,10 @@
 
 class tsocks {
 
-    if ( $operatingsystem == "Fedora" ) and ($operatingsystemrelease >= 11) {
+    if  $operatingsystem == "Fedora" and
+        $operatingsystemrelease == 'Rawhide' or
+        $operatingsystemrelease >= 11
+    {
 
         package { "tsocks":
             ensure	=> installed,

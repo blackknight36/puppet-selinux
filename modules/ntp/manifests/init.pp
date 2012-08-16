@@ -2,9 +2,11 @@
 
 class ntp {
 
-    # TODO: drop special condition for mdct-dev12 once on F16 or later
-    if $operatingsystemrelease > 15 or $hostname == 'mdct-dev12' or
-       $virtual == 'kvm' {
+    if ($operatingsystem == 'Fedora' and
+        $operatingsystemrelease == 'Rawhide' or
+        $operatingsystemrelease > 15) or
+        $virtual == 'kvm'
+    {
         $ntp_package = 'chrony'
         $ntp_daemon = 'chronyd'
     } else {
@@ -27,7 +29,10 @@ class ntp {
 
     if $ntp_package == 'ntp' {
 
-        if $operatingsystemrelease < 14 {
+        if  $operatingsystem == 'Fedora' and
+            $operatingsystemrelease != 'Rawhide' and
+            $operatingsystemrelease < 14
+        {
             $ntpd_sysconfig = "ntpd.pre-F14"
         } else {
             $ntpd_sysconfig = "ntpd"

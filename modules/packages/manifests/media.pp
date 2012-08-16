@@ -31,7 +31,9 @@ class packages::media {
 
     if $operatingsystem == 'Fedora' {
 
-        if $operatingsystemrelease >= 14 {
+        if  $operatingsystemrelease == 'Rawhide' or
+            $operatingsystemrelease >= 14
+        {
             package { [
                 'geeqie',
                 ]:

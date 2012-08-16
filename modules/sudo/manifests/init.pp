@@ -8,7 +8,9 @@ class sudo {
 
     if $operatingsystem == "Fedora" {
 
-        if $operatingsystemrelease < 13 {
+        if  $operatingsystemrelease != 'Rawhide' and
+            $operatingsystemrelease < 13
+        {
 
             file { "/etc/sudoers":
                 group	=> "root",
