@@ -15,4 +15,11 @@ class dart::mdct-puppet inherits dart::abstract::puppet_server_node {
         source  => 'puppet:///private-host/lokkit/blocks',
     }
 
+    file { '/etc/motd':
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0644',
+        source  => 'puppet:///private-host/motd',
+    }
+
 }
