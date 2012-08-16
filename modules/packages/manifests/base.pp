@@ -90,12 +90,6 @@ class packages::base {
             }
         }
 
-        if $architecture == 'x86_64' and
-           $operatingsystemrelease > 8 and
-           $operatingsystemrelease <= 11 {
-            include packages::compat_32bit
-        }
-
     }
 
     ### Universal Package Exclusion ###
