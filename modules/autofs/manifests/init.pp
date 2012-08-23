@@ -26,12 +26,21 @@ class autofs {
         value           => on,
     }
 
+    if  $operatingsystem == "Fedora" and
+        $operatingsystemrelease == 'Rawhide' or
+        $operatingsystemrelease >= 16
+    {
+        $auto_master = 'auto.master.F16+'
+    } else {
+        $auto_master = 'auto.master'
+    }
+
     file { "/etc/auto.master":
         group   => "root",
         mode    => 644,
         owner   => "root",
 	require => Package["autofs"],
-        source  => "puppet:///modules/autofs/auto.master",
+        source  => "puppet:///modules/autofs/${auto_master}",
     }
 
     file { "/etc/auto.mnt":
