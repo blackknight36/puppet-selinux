@@ -56,3 +56,4 @@ node "mdct-tc.dartcontainer.com"                { include dart::mdct-tc }
 node "mdct-test-agent-32.dartcontainer.com"     { include dart::mdct-test-agent-32 }
 node "mole-dev.dartcontainer.com"               { include dart::mole-dev }
 node "mole.dartcontainer.com"                   { include dart::mole }
+node "tc-util.dartcontainer.com"                { include dart::tc-util }

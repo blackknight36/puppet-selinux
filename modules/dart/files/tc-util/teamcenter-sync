@@ -1,0 +1,79 @@
+#!/bin/sh
+#
+# Synopsis:
+#       Synchronize Teamcenter Test Server's volume data to that of the
+#       Production Server's.  This will perform a destructive operation on
+#       Test, but Production should be wholly unaffected.
+#
+# Usage:
+#       To just see what would be done, without making any changes at all:
+#
+#               teamcenter-sync --dry-run
+#
+#       Normal usage that will do whatever necessary to make Test just like
+#       Production:
+#
+#               teamcenter-sync
+#
+# Warning:
+#       This file is managed by puppet.  Any changes made locally here will be
+#       overwritten.  The origin of this file on the puppet master is:
+#
+#               modules/dart/files/tc-util/teamcenter-sync
+#
+# Author:
+#       John Florian <john.florian@dart.biz>
+#
+#
+
+
+# Note: Trailing slashes are critical and must be present!
+SOURCE='/srv/mas-cad10-volumes/'
+TARGET='/srv/mas-cad16-volumes/'
+
+# Who will receive the operations log.
+MAILTO="forrest.styx@dart.biz"
+
+
+# Don't change anything below this point, unless you know what you're doing.
+SELF="$(basename $0)"
+LOG="/var/tmp/${SELF}.log"
+LOGZ="${LOG}.zip"
+
+# Do the actual synchronization of TARGET with SOURCE, honoring any additional
+# command-line options (e.g., --dry-run) that may have been passed.  Send all
+# stdout/stderr on stdout, but also capture both in LOG.
+beg_time="$(date)"
+time rsync \
+    --acls \
+    --archive \
+    --delete \
+    --hard-links \
+    --human-readable \
+    --progress \
+    --stats \
+    --verbose \
+    --xattrs \
+    "$@" \
+    "$SOURCE" "$TARGET" \
+    2>&1 | tee "$LOG"
+end_time="$(date)"
+
+# Compress LOG and mail it to MAILTO as an attachment.
+rm -f $LOGZ &> /dev/null
+zip --junk-paths -q --to-crlf "$LOGZ" "$LOG"
+mailx \
+    -a "$LOGZ" \
+    -r "${SELF}-no-reply@$HOSTNAME" \
+    -s "Teamcenter Volume Synchronization for $beg_time" \
+    "$MAILTO" <<EOF
+Please find the results of the Teamcenter Volume synchronization in the attached file.
+
+Quick Details:
+    Start Time: $beg_time
+    End Time:   $end_time
+
+This is system-generated mail from the script "$0" located on $HOSTNAME.
+EOF
+
+exit 0
