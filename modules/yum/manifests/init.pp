@@ -43,6 +43,7 @@ class yum {
                 '15'	=> '15-1.dcc.noarch',
                 '16'	=> '16-1.dcc.noarch',
                 '17'	=> '17-2.dcc.noarch',
+                '18'	=> '18-1.dcc.noarch',
                 },
         }
 
@@ -59,6 +60,7 @@ class yum {
                 '15'	=> '15-1.dcc.noarch',
                 '16'	=> '16-1.dcc.noarch',
                 '17'	=> '17-1.dcc.noarch',
+                '18'	=> '18-1.dcc.noarch',
                 },
         }
 
@@ -78,6 +80,7 @@ class yum {
                     '15'	=> '15-1.noarch',
                     '16'	=> '16-1.2.noarch',
                     '17'	=> '17.0.3-1.noarch',
+                    '18'	=> '18-0.2.noarch',
                     },
             }
 
@@ -93,6 +96,7 @@ class yum {
                     '15' 	=> '15-1.noarch',
                     '16' 	=> '16-1.1.noarch',
                     '17' 	=> '17.0.3-1.noarch',
+                    '18' 	=> '18-0.2.noarch',
                     },
                 require	=> Exec['config-repo-rpmfusion-free'],
             }
