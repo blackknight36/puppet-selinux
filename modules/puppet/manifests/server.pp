@@ -4,6 +4,7 @@ class puppet::server {
 
     include cron::daemon
     include lokkit
+    include puppet::client
 
     package { 'puppet-server':
 	ensure	=> installed,
@@ -56,6 +57,7 @@ class puppet::server {
         ],
         subscribe	=> [
             File['/etc/puppet/fileserver.conf'],
+            File['/etc/puppet/puppet.conf'],
             File['/etc/sysconfig/puppetmaster'],
         ],
     }
