@@ -12,4 +12,7 @@ class dart::mdct-dr inherits dart::abstract::dr_server_node {
         mon_passwd      => '8QNsZ1MehmXv61Kx8l2IcnOhtjrXeV3iFBm3GNOqukMU',
     }
 
+    lokkit::tcp_port {
+        'postgresql':           port => '5432';
+    }
 }

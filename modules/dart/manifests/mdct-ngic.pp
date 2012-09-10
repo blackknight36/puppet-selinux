@@ -11,4 +11,7 @@ class dart::mdct-ngic inherits dart::abstract::ngic_server_node {
         mon_passwd      => '8QNsZ1MehmXv61Kx8l2IcnOhtjrXeV3iFBm3GNOqukMU',
     }
 
+    lokkit::tcp_port {
+        'postgresql':           port => '5432';
+    }
 }
