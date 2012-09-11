@@ -17,14 +17,9 @@
 class lokkit {
 
     if  $operatingsystem == "Fedora" and
-        $operatingsystemrelease != 'Rawhide' and
-        $operatingsystemrelease < 13
+        $operatingsystemrelease == 'Rawhide' or
+        $operatingsystemrelease >= 13
     {
-        package { "system-config-firewall-base":
-            ensure	=> installed,
-            name        => "system-config-firewall-tui",
-        }
-    } else {
         package { "system-config-firewall-base":
             ensure	=> installed,
         }

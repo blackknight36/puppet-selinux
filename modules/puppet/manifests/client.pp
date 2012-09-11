@@ -6,7 +6,7 @@ class puppet::client {
 	ensure	=> installed,
     }
 
-    $scary = "$fqdn is running puppet-$puppetversion.  Versions 2.6.6 and prior are poorly supported and quite buggy.  Please upgrade!"
+    $scary = "$fqdn is running puppet-$puppetversion atop $operatingsystem $operatingsystemrelease.  Versions 2.6.6 and prior are poorly supported and quite buggy.  Please upgrade!"
     if versioncmp($puppetversion, "2.6") < 0 {
         $puppet_era = "pre-2.6"
         warning "$scary"
@@ -24,14 +24,7 @@ class puppet::client {
         require => Package["puppet"],
         seluser => "system_u",
         selrole => "object_r",
-        seltype => $operatingsystem ? {
-            "Fedora"    => $operatingsystemrelease ? {
-                "11"    => "etc_t",
-                "12"    => "etc_t",
-                default => "puppet_etc_t",
-            },
-            default     => "etc_t",
-        },
+        seltype => "puppet_etc_t",
         source  => [
             "puppet:///private-host/puppet/puppet.conf",
             "puppet:///modules/puppet/puppet.conf.${puppet_era}",
@@ -42,10 +35,7 @@ class puppet::client {
         enable		=> true,
         ensure		=> running,
         hasrestart	=> true,
-        hasstatus	=> $operatingsystemrelease ? {
-	    "8"		=> false,
-	    default	=> true,
-	},
+        hasstatus	=> true,
         require		=> [
             Package["puppet"],
         ],
