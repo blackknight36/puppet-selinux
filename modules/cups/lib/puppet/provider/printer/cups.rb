@@ -13,116 +13,129 @@ Puppet::Type.type(:printer).provide :cups, :parent => Puppet::Provider do
 
   See the lpinfo(8) man page for more detail.
 
-  The PPD file location reported by cups might have been changed by cups (depending on the -m model option or -P ppd
-  option, so it's difficult to identify whether our changes have taken effect. These parameters will only be set on
-  creation (for the moment).
+  If you use the model parameter to select your printer model, it should be one of the valid models listed by lpinfo
+  like so:
+
+  $ lpinfo -m
+
+  The model cannot be determined after the printer has been created, so it usually can't be changed after you create
+  a printer.
   "
 
   commands :lpadmin => "/usr/sbin/lpadmin"
   commands :lpoptions => "/usr/bin/lpoptions"
-  #commands :lpinfo => "/usr/sbin/lpinfo"
   commands :lpstat => "/usr/bin/lpstat"
-
-  #commands :cupsenable => "/usr/sbin/cupsenable"
-  #commands :cupsdisable => "/usr/sbin/cupsdisable"
-
-  #commands :cupsaccept => "/usr/sbin/cupsaccept"
-  #commands :cupsreject => "/usr/sbin/cupsreject"
-
-  has_feature :enableable
 
   mk_resource_methods
 
-  # A hash of possible parameters to their command-line equivalents.
+  # A hash of type parameters to command line short switches.
   Cups_Options = {
-      :class       => '-c%s', # Not fully supported yet, but left here for the adventurous.
-      :model       => '-m%s',
-      :uri         => '-v%s', # lpadmin wont accept a quoted value for device-uri
+      # :class       => '-c%s', # Unsupported, for now
+      :model       => '-m%s', # Not idempotent
+      :uri         => '-v%s',
       :description => '-D%s',
       :location    => '-L%s',
-      :ppd         => '-P%s'
+      :ppd         => '-P%s'  # Also not idempotent
   }
 
-  # Combine output of a number of commands to form a list of printer resources.
+  # The instances method collects information through a number of different command line utilities because no single
+  # utility displays all of the information about a printer's configuration.
   def self.instances
-
     prefetched_uris = printer_uris
-    prefetched_long = printers_long.collect { |printer|
+    provider_instances = []
 
-      printer[:options] = self.printer_options(printer[:name])
+    printers_long.each do |name, printer|
+
+      printer[:options] = self.printer_options(name)
       printer[:provider] = :cups
       printer[:uri] = prefetched_uris[printer[:name]] if prefetched_uris.key?(printer[:name])
 
       # derived from options
       printer[:shared] = printer[:options]['printer-is-shared']
 
-      new(printer)
-    }
-    @property_hash = prefetched_long
+      provider_instances << new(printer)
+    end
 
-    prefetched_long
+    provider_instances
   end
 
   def self.prefetch(resources)
-    instances.each do |prov|
-      if resource = resources[prov.name]
-        resource.provider = prov
+    prefetched_uris = printer_uris
+    prefetched_printers = printers_long
+
+    resources.each do |name, resource|
+
+      if prefetched_printers.has_key? name
+        printer = prefetched_printers[name]
+
+        printer[:ensure] = :present
+        printer[:options] = self.printer_options(name)
+        printer[:provider] = :cups
+        printer[:uri] = prefetched_uris[printer[:name]] if prefetched_uris.key?(printer[:name])
+
+        # derived from options
+        printer[:shared] = printer[:options]['printer-is-shared']
+
+        resource.provider = new(printer)
+      else
+        resource.provider = new(:ensure => :absent)
       end
     end
   end
 
   # Retrieve simple list of printer names
-  def self.printers
+  #def self.printers
+  #  begin
+  #    printers = lpstat('-p').split("\n").map { |line|
+  #      line.match(/printer (.*) (is|disabled)/) {|m| # TODO: i18n
+  #        m.captures[0]
+  #      }
+  #    }.compact
+  #  rescue # Command returns error status when there are no cups queues
+  #    nil
+  #  end
+  #end
+
+  # TODO: Needs a much more efficient way of parsing `lpstat -l -p` output.
+  # TODO: i18n
+  def self.printers_long
+    printers = {}
+
     begin
-      printers = lpstat('-p').split("\n").map { |line|
-        line.match(/printer (.*) (is|disabled)/) {|m|
-          m.captures[0]
-        }
-      }.compact
+      printer = { :accept => :true } # Current printer entry being parsed
+
+      lpstat('-l', '-p').split("\n").each { |line|
+        case line
+          when /^printer/
+
+            if printer.key? :name # Push the last result
+              printers[printer[:name]] = printer
+              printer = { :accept => :true } # Current printer entry being parsed
+            end
+
+            header = line.match(/printer (.*) (disabled|is idle)/).captures # TODO: i18n
+
+            printer[:name] = header[0]
+            printer[:enabled] = (header[1] != 'disabled') ? :true : :false
+
+          when /^\tDescription/
+            printer[:description] = line.match(/\tDescription: (.*)/).captures[0]
+          when /^\tLocation/
+            printer[:location] = line.match(/\tLocation: (.*)/).captures[0]
+          when /^\tInterface/
+            printer[:ppd] = line.match(/\tInterface: (.*)/).captures[0]
+          when /^\tRejecting Jobs$/
+            printer[:accept] = :false
+        end
+      }
+
+      printers[printer[:name]] = printer
 
       printers
     rescue
-      nil
+      debug 'lpstat did not return any results'
+      printers
     end
-  end
-
-  # Retrieve long listing of printers
-  # The PPD path that CUPS uses may have been automatically reformatted or changed by CUPS. making it hard to keep
-  # ppd location idempotent.
-  #
-  # TODO: figure out a more efficient way to parse the output. This will do for now.
-  def self.printers_long
-    printers = []
-    printer = { :accept => true } # Current printer entry being parsed
-
-    lpstat('-l', '-p').split("\n").each { |line|
-      case line
-        when /^printer/
-
-          if printer.key? :name # Push the last result
-            printers.push printer
-            printer = { :accept => true } # Current printer entry being parsed
-          end
-
-          header = line.match(/printer (.*) (disabled|is idle)/).captures
-
-          printer[:name] = header[0]
-          printer[:enabled] = (header[1] != 'disabled')
-
-        when /^\tDescription/
-          printer[:description] = line.match(/\tDescription: (.*)/).captures[0]
-        when /^\tLocation/
-          printer[:location] = line.match(/\tLocation: (.*)/).captures[0]
-        when /^\tInterface/
-          printer[:ppd] = line.match(/\tInterface: (.*)/).captures[0]
-        when /^\tRejecting Jobs$/
-          printer[:accept] = false
-      end
-    }
-
-    printers.push printer
-
-    printers
   end
 
 
@@ -139,69 +152,81 @@ Puppet::Type.type(:printer).provide :cups, :parent => Puppet::Provider do
     options
   end
 
-  # Retrieve Device-uri's
   def self.printer_uris
-    uris = {}
+    begin
+      uris = {}
 
-    lpstat('-v').split("\n").each { |line|
-      caps = line.match(/device for (.*): (.*)/).captures
-      uris[caps[0]] = caps[1]
-    }
+      lpstat('-v').split("\n").each { |line|
+        caps = line.match(/device for (.*): (.*)/).captures # TODO: i18n
+        uris[caps[0]] = caps[1]
+      }
 
-    uris
+      uris
+    rescue
+      {}
+    end
   end
 
   def create
-    options = Array.new
-
-    # Handle most parameters via string substitution
-    Cups_Options.keys.each do |k|
-      options.unshift Cups_Options[k] % @resource[k] if @resource.parameters.key?(k)
-    end
-
-    options.push '-o printer-is-shared=true' if @resource[:shared]
-    options.push '-E' if @resource[:enabled]
-
-    if @resource[:options].is_a? Hash
-      @resource[:options].each_pair do |k, v|
-        options.push "-o %s='%s'" % k, v
+    @property_hash[:ensure] = :present
+    self.class.resource_type.validproperties.each do |property|
+      if val = resource.should(property)
+        @property_hash[property] = val
       end
     end
-
-    lpadmin "-p", @resource[:name], options
   end
 
   def destroy
-    lpadmin "-x", @resource[:name]
+    @property_hash[:ensure] = :absent
   end
 
-  # TODO: use prefetched resources instead of executing the utility again.
   def exists?
-    if self.class.printers
-      self.class.printers.select { |v| v.captures[0].downcase == @resource[:name].downcase }.length > 0
-    else
-      false
-    end
-  end
-
-  def enabled
-    @property_hash[:enabled].to_s
-  end
-
-  def accept
-    @property_hash[:accept].to_s
-  end
-
-  def enable
-    @property_hash[:enabled] = true
-  end
-
-  def disable
-    @property_hash[:enabled] = false
+    @property_hash[:ensure] != :absent
   end
 
   def flush
-    create
+
+    case @property_hash[:ensure]
+      when :absent
+        lpadmin "-x", name
+      when :present
+        # Regardless of whether the printer is being added or modified, the `lpadmin -p` command is used.
+
+        # BUG: flush should never be called if only the model or PPD parameters differ, because lpstat can't tell
+        # what the actual value is.
+        options = Array.new
+
+        # Handle most parameters via string substitution
+        Cups_Options.keys.each do |k|
+          #options.unshift Cups_Options[k] % @property_hash[k] if @property_hash.key?(k)
+          options.unshift Cups_Options[k] % @resource[k] if @resource[k]
+        end
+
+        options.push '-o printer-is-shared=true' if @property_hash[:shared]
+        options.push '-E' if @property_hash[:enabled]
+
+        if @property_hash[:options].is_a? Hash
+          @property_hash[:options].each_pair do |k, v|
+            # EB: Workaround for some command line options having 2 forms, short switch via lpadmin or
+            # long "option-name" via -o
+            next if k == 'device-uri'
+            next if k == 'printer-is-shared'
+            options.push "-o %s='%s'" % [k, v]
+          end
+        end
+
+        begin
+          lpadmin "-p", name, options
+        rescue Exception => e
+          # If an option turns out to be invalid, CUPS will normally add the printer anyway.
+          # Normally, the printer should not even be created, so we delete it again to make things consistent.
+          debug 'Failed to add printer successfully, deleting destination. error: ' + e.message
+          lpadmin "-x", name
+
+          raise e
+        end
+    end
+
     @property_hash.clear
   end
 end

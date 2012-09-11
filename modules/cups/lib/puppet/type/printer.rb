@@ -11,21 +11,6 @@ Puppet::Type.newtype(:printer) do
     end
   end
 
-  # Classes are not yet supported.
-  #newproperty(:class) do
-  #  desc "Adds the named printer to the specified class. If the class does not exist it is created automatically.
-  #
-  #  "
-  #end
-
-  #newproperty(:allow) do
-  #  desc "Specifically allow users and/or groups to print to this destination."
-  #end
-  #
-  #newproperty(:deny) do
-  #  desc "Specifically deny users and/or groups to print to this destination."
-  #end
-
   newproperty(:uri) do
     desc "Sets the device-uri attribute of the printer destination."
   end
@@ -38,14 +23,17 @@ Puppet::Type.newtype(:printer) do
     desc "Provides a textual location of the destination."
   end
 
-  newproperty(:model) do
+  # NOTE: model and ppd are parameters because they cannot be idempotent. CUPS will copy and rename the ppd
+  # upon printer creation (on mac os x at least), therefore: you can only change the model/ppd when the printer is
+  # created.
+  newparam(:model) do
     desc "Sets a standard System V interface script or PPD file for the printer from the model directory.
 
     Use the -m option with the lpinfo(8) command to get a list of supported models.
     "
   end
 
-  newproperty(:ppd) do
+  newparam(:ppd) do
     desc "Specifies a PostScript Printer Description file to use with the printer."
   end
 
