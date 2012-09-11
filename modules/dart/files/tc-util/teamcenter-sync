@@ -37,7 +37,7 @@ MAILTO="forrest.styx@dart.biz"
 
 # Don't change anything below this point, unless you know what you're doing.
 SELF="$(basename $0)"
-LOG="/var/tmp/${SELF}.log"
+LOG="/var/tmp/${SELF}-${USER}.log"
 LOGZ="${LOG}.zip"
 
 # Do the actual synchronization of TARGET with SOURCE, honoring any additional
