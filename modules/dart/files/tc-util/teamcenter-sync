@@ -46,12 +46,14 @@ LOGZ="${LOG}.zip"
 beg_time="$(date)"
 time rsync \
     --acls \
-    --archive \
     --delete \
     --hard-links \
     --human-readable \
+    --links \
     --progress \
+    --recursive \
     --stats \
+    --times \
     --verbose \
     --xattrs \
     "$@" \
