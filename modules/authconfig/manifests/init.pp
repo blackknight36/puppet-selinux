@@ -123,7 +123,10 @@ class authconfig {
                 mode    => '0600',
                 owner   => 'root',
                 require => Package['sssd'],
-                source  => "puppet:///modules/authconfig/$sssd_conf",
+                source  => [
+                    "puppet:///private-host/authconfig/$sssd_conf",
+                    "puppet:///modules/authconfig/$sssd_conf",
+                ],
             }
 
             service { 'sssd':
