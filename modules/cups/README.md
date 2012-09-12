@@ -42,13 +42,14 @@ The most basic printer install possible:
         ppd         => "/Library/Printers/PPDs/Printer.ppd", # PPD file will be autorequired
     }
 
-- The uri identifies how you will connect to the printer. running `lpinfo -v` at the command line will give you some
+- The `uri` identifies how you will connect to the printer. running `lpinfo -v` at the command line will give you some
 valid uri prefixes.
 - The description only appears in certain dialogs on linux and friends. On OSX the description is the actual name of
 the printer.
-- The ppd or model parameter specifies the "driver" to use with this printer. You should use `model` wherever available
-because most driver software will install straight into the cups model directory. You can get a list of valid models by
-running `lpinfo -m` at the command line.
+- The `ppd` or `model` parameter specifies the "driver" to use with this printer. You should use `model` wherever
+available because most driver software will install straight into the cups model directory. You can get a list of valid
+models by running `lpinfo -m` at the command line. You want the first space-delimited field of the output to go into the
+`model` field.
 
 Removing the printer "Basic_Printer" from the previous example:
 
@@ -65,16 +66,15 @@ An example using almost every possible parameter:
         uri         => "lpd://localhost/printer_a",
         description => "This is the printer description",
         location    => "Main office",
-        ppd         => "/Library/Printers/PPDs/Printer.ppd", # Full path to vendor PPD
+        model       => "foomatic:HP-LaserJet-laserjet.ppd",
         # OR
-        model       => "", # A valid model, you can list these with lpinfo -m, this is usually what you would call a
-                           # list of installed drivers.
+        ppd         => "/Library/Printers/PPDs/Printer.ppd", # Full path to vendor PPD
         enabled     => true, # Enabled by default
         shared      => false, # Disabled by default
         options     => { media => 'A4' }, # Hash of options ( name => value ), highly depends on the printer.
     }
 
-- The easiest way to find out a list of valid options for any single printer is to install that printer locally, and
+- The easiest way to find out a list of valid `options` for any single printer is to install that printer locally, and
 run `lpoptions -l` at the command line.
 
 ### Facts
@@ -114,6 +114,18 @@ primarily reads and writes to:
 
 To determine the current default printer queue. You can make this file part of your login script or manage it using
 a commercial osx management solution.
+
+#### Default Paper Size
+
+Again, OSX doesn't respect lpoptions when you set default page size via `lpoptions` or `lpadmin`.
+The file containing the actual default page size is:
+
+    ~/Library/Preferences/com.apple.print.PrintingPrefs.plist
+
+Under the plist key `DefaultPaperID`, which has a string that relates to a non-localised paper size. The PrintCore
+framework seems to have these listed in a binary plist under OSX 10.8. You can dump some localised strings using
+
+    /usr/libexec/plistbuddy -c "print" /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/PrintCore.framework/Versions/Current/Resources/English.lproj/Localizable.strings
 
 #### Vendor PPD Options
 
