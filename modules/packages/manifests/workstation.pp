@@ -17,7 +17,6 @@ class packages::workstation {
         'qcad',
         'synergy',
         'test-automation',
-        'workrave',
         'xclip',
 
         ]:
