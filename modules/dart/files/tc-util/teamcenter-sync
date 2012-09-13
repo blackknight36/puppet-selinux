@@ -37,8 +37,14 @@ MAILTO="forrest.styx@dart.biz"
 
 # Don't change anything below this point, unless you know what you're doing.
 SELF="$(basename $0)"
+ERR="/var/tmp/${SELF}-${USER}.err"
 LOG="/var/tmp/${SELF}-${USER}.log"
 LOGZ="${LOG}.zip"
+
+# Establish a crude real-time log monitor to provide immediate feedback of
+# progress (and errors) to the user.
+> "$LOG" > "$ERR"
+tail -F "$LOG" "$ERR" &
 
 # Do the actual synchronization of TARGET with SOURCE, honoring any additional
 # command-line options (e.g., --dry-run) that may have been passed.  Send all
@@ -58,8 +64,11 @@ time rsync \
     --xattrs \
     "$@" \
     "$SOURCE" "$TARGET" \
-    2>&1 | tee "$LOG"
+    > "$LOG" 2> "$ERR"
 end_time="$(date)"
+
+# Terminate the log monitor process (tail -F ...)
+kill %1 &> /dev/null
 
 # Compress LOG and mail it to MAILTO as an attachment.
 rm -f $LOGZ &> /dev/null
@@ -69,11 +78,15 @@ mailx \
     -r "${SELF}-no-reply@$HOSTNAME" \
     -s "Teamcenter Volume Synchronization for $beg_time" \
     "$MAILTO" <<EOF
-Please find the results of the Teamcenter Volume synchronization in the attached file.
+This mail provides the results of the Teamcenter Volume synchronization tool for the execution initiated on $beg_time.  Below you may find a quick summary of the overall process and any errors that were encountered.  Also, a log of all synchronization actions may be found in the attached file.
 
 Quick Details:
     Start Time: $beg_time
     End Time:   $end_time
+
+== Error Report ==
+$(test -s $ERR && cat $ERR || echo 'No errors occurred.')
+== End of Error Report ==
 
 This is system-generated mail from the script "$0" located on $HOSTNAME.
 EOF
