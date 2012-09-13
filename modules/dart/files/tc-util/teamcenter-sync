@@ -81,8 +81,9 @@ mailx \
 This mail provides the results of the Teamcenter Volume synchronization tool for the execution initiated on $beg_time.  Below you may find a quick summary of the overall process and any errors that were encountered.  Also, a log of all synchronization actions may be found in the attached file.
 
 Quick Details:
-    Start Time: $beg_time
-    End Time:   $end_time
+                    Start Time:\t$beg_time
+                      End Time:\t$end_time
+$(awk -F: '/^Number of files:/,/qqq/{printf "%30s:\t%s\n", $1, $2}' $LOG)
 
 == Error Report ==
 $(test -s $ERR && cat $ERR || echo 'No errors occurred.')
