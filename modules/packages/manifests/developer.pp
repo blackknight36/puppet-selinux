@@ -16,7 +16,6 @@ class packages::developer {
         'gitk',
         'gnupg',                # required for rpmbuild --sign
         'gnupg2',               # required for rpmbuild --sign
-        'ipython',
         'kodos',
         'meld',
         'nasm',
