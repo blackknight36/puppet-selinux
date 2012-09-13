@@ -8,7 +8,6 @@ class dart::mdct-00fs {
     #@# include authconfig
     #@# include autofs
     include cron::daemon
-    #@# # include cups
     #@# include cachefilesd
     include dart::no-dns-hosts
     include logwatch
