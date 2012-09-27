@@ -83,6 +83,16 @@ class packages::base {
         }
 
         if  $operatingsystemrelease == 'Rawhide' or
+            $operatingsystemrelease >= 16
+        {
+            package { [
+                'sssd-tools',
+                ]:
+                ensure => installed,
+            }
+        }
+
+        if  $operatingsystemrelease == 'Rawhide' or
             $operatingsystemrelease >= 17
         {
             package { [
