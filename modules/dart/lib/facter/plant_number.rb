@@ -11,12 +11,20 @@ Facter.add("plant_number") do
         output = %x{/sbin/ip route show 0.0.0.0/0}
         gw = output.split()[2]
         if gw
-            plant = "%02d" % gw.split(".")[1]
+            subnet = "%02d" % gw.split(".")[1]
         else
-            plant = nil
+            subnet = nil
         end
     end
     setcode do
-        plant
+        case subnet
+        when '06'
+            # Aurora, IL is an exception.  Originally subnetted as 10.4/16,
+            # they've migrated to 10.6/16 to accommodate integration of the
+            # Solo network, yet remain plant# 04.
+            '04'
+        else
+            subnet
+        end
     end
 end
