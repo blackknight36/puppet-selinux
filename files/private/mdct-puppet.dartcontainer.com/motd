@@ -26,6 +26,5 @@ Review staged changes:
 Commit staged changes (with final review):
     $ git commit -v
 
-Thank You!
-
+You may review these hints anytime via `cat /etc/motd'.  Thank You!
 
