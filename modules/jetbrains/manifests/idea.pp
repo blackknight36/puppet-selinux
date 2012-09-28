@@ -11,7 +11,7 @@
 # Requires:
 #       NONE
 #
-# Example usage:
+# Example Usage:
 #
 #       include jetbrains::idea
 
@@ -19,64 +19,46 @@ class jetbrains::idea {
 
     include jetbrains
 
+    File {
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0644',
+        seluser => 'system_u',
+        selrole => 'object_r',
+        seltype => 'etc_t',
+    }
+
     $root = '/opt/jetbrains/idea'
     file { "${jetbrains::idea::root}":
         ensure  => directory,
-        group   => 'root',
         mode    => '0755',
-        owner   => 'root',
         require => File['/opt/jetbrains'],
-        selrole => 'object_r',
-        seltype => 'usr_t',
-        seluser => 'system_u',
     }
 
     $launchers_path = "${jetbrains::idea::root}/launchers"
     file { "${jetbrains::idea::launchers_path}":
         ensure  => directory,
-        group   => 'root',
         mode    => '0755',
-        owner   => 'root',
         require => File["${jetbrains::idea::root}"],
-        selrole => 'object_r',
-        seltype => 'usr_t',
-        seluser => 'system_u',
     }
 
     $idea_config = "${jetbrains::idea::root}/etc"
     file { "${idea_config}":
         ensure  => directory,
-        group   => 'root',
         mode    => '0755',
-        owner   => 'root',
         require => File["${jetbrains::idea::root}"],
-        selrole => 'object_r',
-        seltype => 'etc_t',
-        seluser => 'system_u',
     }
 
     $idea_vmoptions = "${idea_config}/vmoptions"
     file { "${idea_vmoptions}":
-        group   => 'root',
-        mode    => '0644',
-        owner   => 'root',
-        require => File["${idea_config}"],
-        selrole => 'object_r',
-        seltype => 'etc_t',
-        seluser => 'system_u',
         source  => 'puppet:///modules/jetbrains/idea/vmoptions',
+        require => File["${idea_config}"],
     }
 
     $idea_rc = "${idea_config}/rc"
     file { "${idea_rc}":
         content => template('jetbrains/idea/rc'),
-        group   => 'root',
-        mode    => '0644',
-        owner   => 'root',
         require => File["${idea_config}"],
-        selrole => 'object_r',
-        seltype => 'etc_t',
-        seluser => 'system_u',
     }
 
     # Stable releases are named with the release, but extract to the

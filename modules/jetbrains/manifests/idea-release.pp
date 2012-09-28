@@ -44,7 +44,7 @@ define jetbrains::idea-release ($build, $ensure='present') {
     case $ensure {
 
         'present': {
-            exec { "extract-${name}-${build}":
+            exec { "extract-${name}-idea":
                 command => "tar xzf /pub/jetbrains/${name}.tar.gz",
                 creates => "${jetbrains::idea::root}/idea-IU-${build}",
                 cwd     => "${jetbrains::idea::root}",

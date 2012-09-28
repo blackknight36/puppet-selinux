@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=PyCharm (<%= name %>)
+Comment=Powerful Python and Django IDE
+MimeType=text/x-java;
+Exec=/opt/jetbrains/pycharm/pycharm-<%= build %>/bin/pycharm.sh
+Icon=/opt/jetbrains/pycharm/pycharm-<%= build %>/bin/pycharm.png
+Type=Application
+Terminal=0
+MapNotify=false
+Categories=Utility;TextEditor;
+X-Desktop-File-Install-Version=0.15
