@@ -11,10 +11,11 @@ class dart::mdct-dev12 inherits dart::abstract::workstation_node {
         mon_passwd      => '9183e6fe26d853f50e9e57e561057951',
     }
 
-    include bacula::admin
-    include jetbrains::idea
-    include packages::kde
-    include yum-cron
+    include 'bacula::admin'
+    include 'jetbrains::idea'
+    include 'jetbrains::pycharm'
+    include 'packages::kde'
+    include 'yum-cron'
 
     class { 'iptables':
         enabled => true,
