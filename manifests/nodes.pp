@@ -21,6 +21,7 @@ node "mdct-25pt.dartcontainer.com"              { include dart::mdct-25pt }
 node "mdct-39pt.dartcontainer.com"              { include dart::mdct-39pt }
 node "mdct-55pt.dartcontainer.com"              { include dart::mdct-55pt }
 node "mdct-75pt.dartcontainer.com"              { include dart::mdct-75pt }
+node "mdct-76pt.dartcontainer.com"              { include dart::mdct-76pt }
 node "mdct-77pt.dartcontainer.com"              { include dart::mdct-77pt }
 node "mdct-aos-master-f15.dartcontainer.com"    { include dart::mdct-aos-master-f15 }
 node "mdct-ci-agent1.dartcontainer.com"         { include dart::mdct-ci-agent1 }
