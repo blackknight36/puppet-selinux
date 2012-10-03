@@ -7,10 +7,10 @@
 class dart::abstract::picaps_test_node inherits dart::abstract::server_node {
 
     # Declare the source of the JDK to be installed.
-    $jdk_rpm_source='http://mdct-00fs.dartcontainer.com/ftp/pub/oracle/jdk-6u24-linux-amd64.rpm'
+    $jdk_rpm_source='http://mdct-00fs.dartcontainer.com/ftp/pub/oracle/jdk-7u5-linux-x64.rpm'
 
     # Declare the JDK that PICAPS is to use.
-    $picaps_jdk='/usr/java/jdk1.6.0_24'
+    $picaps_jdk='/usr/java/jdk1.7.0_05'
 
     # Could be enabled, but need a list of ports to be opened.  Traditional
     # PICAPS servers just have it disabled however.
