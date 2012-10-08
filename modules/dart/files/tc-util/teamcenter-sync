@@ -6,14 +6,24 @@
 #       Test, but Production should be wholly unaffected.
 #
 # Usage:
-#       To just see what would be done, without making any changes at all:
+#       teamcenter-sync [ --dry-run ] TARGET
 #
-#               teamcenter-sync --dry-run
+#       TARGET is the host name providing the shares to be synchronized and
+#       must be one of: mas-cad16, mas-cad26 or mas-cad27.  The --dry-run
+#       option may be specified to to just see what would be done, without
+#       making any changes at all.
 #
-#       Normal usage that will do whatever necessary to make Test just like
-#       Production:
+# Examples:
 #
-#               teamcenter-sync
+#       Do a non-destructive mock run to synchronize mas-cad16 with the
+#       Production source (i.e., //mas-cad10/volumes).
+#
+#               teamcenter-sync --dry-run mas-cad16
+#
+#       Do whatever is necessary to make mas-cad27 just like the Production
+#       source:
+#
+#               teamcenter-sync mas-cad27
 #
 # Warning:
 #       This file is managed by puppet.  Any changes made locally here will be
@@ -27,9 +37,18 @@
 #
 
 
-# Note: Trailing slashes are critical and must be present!
+fail() {
+    echo >&2 "ERROR: $@"
+    exit 64
+}
+
+warn() {
+    echo >&2 "WARNING: $@"
+}
+
+# Note: Trailing slash is critical and must be present!
 SOURCE='/srv/mas-cad10-volumes/'
-TARGET='/srv/mas-cad16-volumes/'
+TARGET=''
 
 # Who will receive the operations log.
 MAILTO="forrest.styx@dart.biz"
@@ -40,6 +59,31 @@ SELF="$(basename $0)"
 ERR="/var/tmp/${SELF}-${USER}.err"
 LOG="/var/tmp/${SELF}-${USER}.log"
 LOGZ="${LOG}.zip"
+
+# Parse options and arguments from the command-line.
+rsync_opts=''
+while [ $# -gt 0 ]
+do
+    word="$1"
+    shift
+    case "$word" in
+        --dry-run )
+            rsync_opts="$rsync_opts $word"
+            ;;
+        -* )
+            warn "ignoring unknown option: $word"
+            ;;
+        mas-cad16 | mas-cad26 | mas-cad27 )
+            TARGET="/srv/$word-volumes/"
+            break
+            ;;
+        * )
+            fail "unknown TARGET '$word'; valid are: mas-cad16, mas-cad26 and mas-cad27"
+            ;;
+    esac
+done
+[ $# -eq 0 ] || warn "ignoring unexpected arguments: $@"
+[ -n "$TARGET" ] || fail "missing required argument: TARGET"
 
 # Establish a crude real-time log monitor to provide immediate feedback of
 # progress (and errors) to the user.
@@ -62,7 +106,7 @@ time rsync \
     --times \
     --verbose \
     --xattrs \
-    "$@" \
+    "$rsync_opts" \
     "$SOURCE" "$TARGET" \
     > "$LOG" 2> "$ERR"
 end_time="$(date)"
