@@ -15,42 +15,39 @@ password=Tc_admin1a
 ',
     }
 
-    file { '/srv/mas-cad10-volumes':
-        ensure  => directory,
-        owner   => 'root',
-        group   => 'root',
-        mode    => '0755',
+    define mounted_tc_volume ($host, $share_name, $owner='root', $options='ro') {
+
+        file { "/srv/${host}-${share_name}":
+            ensure  => directory,
+            owner   => "${owner}",
+            group   => 'root',
+            mode    => '0755',
+        }
+
+        mount { "/srv/${host}-${share_name}":
+            atboot  => true,
+            device  => "//${host}/${share_name}",
+            ensure  => 'mounted',
+            fstype  => 'cifs',
+            options => "${options},credentials=/etc/tc-credentials",
+            require => [
+                File['/etc/tc-credentials'],
+                File["/srv/${host}-${share_name}"],
+            ],
+        }
+
     }
 
-    mount { '/srv/mas-cad10-volumes':
-        atboot  => true,
-        device  => '//mas-cad10/volumes',
-        ensure  => 'mounted',
-        fstype  => 'cifs',
-        options => 'ro,credentials=/etc/tc-credentials',
-        require => [
-            File['/etc/tc-credentials'],
-            File['/srv/mas-cad10-volumes'],
-        ],
+    mounted_tc_volume { 'sync_source':
+        host            => 'mas-cad10',
+        share_name      => 'volumes',
     }
 
-    file { '/srv/mas-cad16-volumes':
-        ensure  => directory,
-        owner   => 'd74326',
-        group   => 'root',
-        mode    => '0755',
-    }
-
-    mount { '/srv/mas-cad16-volumes':
-        atboot  => true,
-        device  => '//mas-cad16/volumes',
-        ensure  => 'mounted',
-        fstype  => 'cifs',
-        options => 'rw,uid=d74326,credentials=/etc/tc-credentials',
-        require => [
-            File['/etc/tc-credentials'],
-            File['/srv/mas-cad16-volumes'],
-        ],
+    mounted_tc_volume { 'sync_target':
+        host            => 'mas-cad16',
+        share_name      => 'volumes',
+        owner           => 'd74326',
+        options         => 'rw,uid=d74326',
     }
 
     file { '/usr/local/bin/teamcenter-sync':
