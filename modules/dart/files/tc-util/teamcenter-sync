@@ -106,7 +106,7 @@ time rsync \
     --times \
     --verbose \
     --xattrs \
-    "$rsync_opts" \
+    $rsync_opts \
     "$SOURCE" "$TARGET" \
     > "$LOG" 2> "$ERR"
 end_time="$(date)"
