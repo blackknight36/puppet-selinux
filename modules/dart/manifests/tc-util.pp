@@ -38,13 +38,27 @@ password=Tc_admin1a
 
     }
 
-    mounted_tc_volume { 'sync_source':
+    mounted_tc_volume { 'teamcenter_source':
         host            => 'mas-cad10',
         share_name      => 'volumes',
     }
 
-    mounted_tc_volume { 'sync_target':
+    mounted_tc_volume { 'teamcenter_preproduction_alpha':
         host            => 'mas-cad16',
+        share_name      => 'volumes',
+        owner           => 'd74326',
+        options         => 'rw,uid=d74326',
+    }
+
+    mounted_tc_volume { 'teamcenter_preproduction_beta':
+        host            => 'mas-cad26',
+        share_name      => 'volumes',
+        owner           => 'd74326',
+        options         => 'rw,uid=d74326',
+    }
+
+    mounted_tc_volume { 'teamcenter_preproduction_gamma':
+        host            => 'mas-cad27',
         share_name      => 'volumes',
         owner           => 'd74326',
         options         => 'rw,uid=d74326',
