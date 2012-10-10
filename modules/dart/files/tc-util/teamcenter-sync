@@ -51,7 +51,7 @@ SOURCE='/srv/mas-cad10-volumes/'
 TARGET=''
 
 # Who will receive the operations log.
-MAILTO="forrest.styx@dart.biz"
+MAILTO="forrest.styx@dart.biz ken.mcintyre@dart.biz"
 
 
 # Don't change anything below this point, unless you know what you're doing.
@@ -120,8 +120,8 @@ zip --junk-paths -q --to-crlf "$LOGZ" "$LOG"
 mailx \
     -a "$LOGZ" \
     -r "${SELF}-no-reply@$HOSTNAME" \
-    -s "Teamcenter Volume Synchronization for $beg_time" \
-    "$MAILTO" <<EOF
+    -s "Teamcenter Volume Synchronization for $TARGET on $beg_time" \
+    $MAILTO <<EOF
 This mail provides the results of the Teamcenter Volume synchronization tool for the execution initiated on $beg_time.  Below you may find a quick summary of the overall process and any errors that were encountered.  Also, a log of all synchronization actions may be found in the attached file.
 
 Quick Details:
