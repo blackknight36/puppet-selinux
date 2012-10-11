@@ -1,0 +1,11 @@
+# ***** THIS FILE IS MANAGED BY PUPPET *****
+# files/private/mdct-00fs.dartcontainer.com/mirrmaid/mirrmaid-rpmfusion.cron
+#
+MAILTO=root
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+
+# All jobs declared here will use this proxy configuration.
+RSYNC_PROXY=mdct-proxy:8080
+
+# RPM Fusion mirroring
+15 * * * * mirrmaid           nice ionice -c3 mirrmaid -c /etc/mirrmaid/mirrmaid-rpmfusion.conf

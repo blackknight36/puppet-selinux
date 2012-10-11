@@ -41,6 +41,10 @@ class dart::mdct-00fs {
         source => 'puppet:///private-host/mirrmaid/mirrmaid-fedora.conf',
     }
 
+    mirrmaid::config { 'mirrmaid-rpmfusion':
+        source => 'puppet:///private-host/mirrmaid/mirrmaid-rpmfusion.conf',
+    }
+
     mirrmaid::config { 'mirrmaid-testing':
         source => 'puppet:///private-host/mirrmaid/mirrmaid-testing.conf',
     }
@@ -48,6 +52,11 @@ class dart::mdct-00fs {
     cron::jobfile { 'mirrmaid-fedora':
         require => Class['mirrmaid'],
         source  => 'puppet:///private-host/mirrmaid/mirrmaid-fedora.cron',
+    }
+
+    cron::jobfile { 'mirrmaid-rpmfusion':
+        require => Class['mirrmaid'],
+        source  => 'puppet:///private-host/mirrmaid/mirrmaid-rpmfusion.cron',
     }
 
     include 'picaps-backup-agent'
