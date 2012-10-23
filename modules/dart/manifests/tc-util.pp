@@ -65,7 +65,7 @@ password=Tc_admin1a
         host            => 'mas-cad16',
         share_name      => 'volumes',
         group           => "${tcadmins_gid}",
-        options         => "rw,gid=${tcadmins_gid}",
+        options         => "rw,uid=0,gid=${tcadmins_gid},file_mode=0660,noperm",
         require         => Group['tcadmins'],
     }
 
@@ -73,7 +73,7 @@ password=Tc_admin1a
         host            => 'mas-cad26',
         share_name      => 'volumes',
         group           => "${tcadmins_gid}",
-        options         => "rw,gid=${tcadmins_gid}",
+        options         => "rw,uid=0,gid=${tcadmins_gid},file_mode=0660,noperm",
         require         => Group['tcadmins'],
     }
 
@@ -81,7 +81,7 @@ password=Tc_admin1a
         host            => 'mas-cad27',
         share_name      => 'volumes',
         group           => "${tcadmins_gid}",
-        options         => "rw,gid=${tcadmins_gid}",
+        options         => "rw,uid=0,gid=${tcadmins_gid},file_mode=0660,noperm",
         require         => Group['tcadmins'],
     }
 

@@ -95,7 +95,6 @@ tail -F "$LOG" "$ERR" &
 # stdout/stderr on stdout, but also capture both in LOG.
 beg_time="$(date)"
 time rsync \
-    --acls \
     --delete \
     --hard-links \
     --human-readable \
@@ -105,7 +104,6 @@ time rsync \
     --stats \
     --times \
     --verbose \
-    --xattrs \
     $rsync_opts \
     "$SOURCE" "$TARGET" \
     > "$LOG" 2> "$ERR"
