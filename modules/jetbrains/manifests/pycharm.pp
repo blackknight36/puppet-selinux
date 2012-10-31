@@ -67,8 +67,13 @@ class jetbrains::pycharm {
     # Present policy plan is to enforce absence of old stable releases
     # to ensure that no more than two stable releases are installed at any
     # given time.
+    jetbrains::pycharm-release { 'pycharm-2.6.3':
+        build   => '2.6.3',
+    }
+
     jetbrains::pycharm-release { 'pycharm-2.6.2':
         build   => '2.6.2',
+        ensure  => 'absent',
     }
 
     jetbrains::pycharm-release { 'pycharm-2.6.1':
