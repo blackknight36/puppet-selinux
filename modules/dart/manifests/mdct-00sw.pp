@@ -13,12 +13,17 @@ class dart::mdct-00sw inherits dart::abstract::workstation_node {
         password        => 'mdct/vnc',
     }
 
+    vnc::display-config { 'Bill Eltzroth':
+        display_num     => 2,
+        user            => 'd9744',
+        password        => 'mdct/vnc',
+    }
+
     # Repeat as necessary for additional user sessions.
     #   vnc::display-config { 'Yosemite Sam':
-    #       display_num     => 2,
+    #       display_num     => 3,
     #       user            => 'd12345',
     #       password        => 'mdct/vnc',
     #   }
-
 
 }
