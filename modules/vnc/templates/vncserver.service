@@ -9,7 +9,7 @@ After=syslog.target network.target
 
 [Service]
 Type=forking
-ExecStart=/sbin/runuser -l <%= user %> -c "/usr/bin/vncserver :<%= display_num %>"
+ExecStart=/sbin/runuser -l <%= user %> -c "/usr/bin/vncserver :<%= display_num %> -geometry <%= geometry %>"
 ExecStop=/sbin/runuser -l <%= user %> -c "/usr/bin/vncserver -kill :<%= display_num %>"
 
 [Install]

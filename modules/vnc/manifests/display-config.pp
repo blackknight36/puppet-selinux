@@ -32,7 +32,9 @@
 #       }
 
 
-define vnc::display-config ($ensure='present', $display_num, $user, $password) {
+define vnc::display-config ($ensure='present', $display_num, $user, $password,
+                            $geometry='1024x768'
+    ) {
 
     $display = ":${display_num}"
 
