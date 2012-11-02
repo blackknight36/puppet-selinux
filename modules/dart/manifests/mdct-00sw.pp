@@ -17,6 +17,7 @@ class dart::mdct-00sw inherits dart::abstract::workstation_node {
         display_num     => 2,
         user            => 'd9744',
         password        => 'mdct/vnc',
+        geometry        => '1600x900',
     }
 
     # Repeat as necessary for additional user sessions.
