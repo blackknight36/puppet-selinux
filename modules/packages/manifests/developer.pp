@@ -48,6 +48,16 @@ class packages::developer {
             }
         }
 
+        if  $operatingsystemrelease == 'Rawhide' or
+            $operatingsystemrelease >= 15
+        {
+            package { [
+                'jtbox',
+                ]:
+                ensure  => installed,
+            }
+        }
+
     }
 
     ### Universal Package Exclusion ###
