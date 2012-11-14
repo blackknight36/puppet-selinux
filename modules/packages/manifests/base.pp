@@ -23,6 +23,7 @@ class packages::base {
         'python-mdct',
         'screen',
         'strace',
+        'system-config-printer',
         'task',
         'tree',
         'units',
