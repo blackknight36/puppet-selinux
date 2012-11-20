@@ -45,10 +45,6 @@ class dart::mdct-00fs {
         source => 'puppet:///private-host/mirrmaid/mirrmaid-rpmfusion.conf',
     }
 
-    mirrmaid::config { 'mirrmaid-testing':
-        source => 'puppet:///private-host/mirrmaid/mirrmaid-testing.conf',
-    }
-
     cron::jobfile { 'mirrmaid-fedora':
         require => Class['mirrmaid'],
         source  => 'puppet:///private-host/mirrmaid/mirrmaid-fedora.cron',
