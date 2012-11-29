@@ -4,17 +4,28 @@
 #       Installs a mirrmaid configuration file.
 #
 # Parameters:
-#       Name__________  Default_______  Description___________________________
+#       Name__________  Notes_  Description___________________________________
 #
-#       name                            instance name
+#       name                    instance name
 #
-#       ensure          present         instance is to be present/absent
+#       ensure          1       instance is to be present/absent
 #
-#       source                          URI of the mirrmaid configuration file
-#                                       to be installed.
+#       source                  URI of the configuration file to be installed
+#
+#       cronjob         2       URI of the cron job file to be installed
+#
+# Notes:
+#
+#       1. Default is 'present'.
+#
+#       2. Use the default (undef) if you do not want a cron job file
+#       installed.  For format and any other requirements, see cron::jobfile
+#       definition for more details.
 
 
-define mirrmaid::config ($ensure='present', $source) {
+define mirrmaid::config ($ensure='present', $source, $cronjob=undef) {
+
+    include 'cron::daemon'
 
     file { "/etc/mirrmaid/${name}.conf":
         ensure  => $ensure,
@@ -23,6 +34,15 @@ define mirrmaid::config ($ensure='present', $source) {
         mode    => '0644',
         require => Package['mirrmaid'],
         source  => "${source}",
+    }
+
+    if $cronjob != undef {
+
+        cron::jobfile { "${name}":
+            require => Class['mirrmaid'],
+            source  => "${cronjob}",
+        }
+
     }
 
 }
