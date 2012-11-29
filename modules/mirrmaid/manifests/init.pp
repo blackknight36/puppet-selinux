@@ -16,19 +16,6 @@ class mirrmaid {
         ensure  => latest,
     }
 
-    # TODO: move this to openssh module as a definition there.
-    file { '/etc/mirrmaid/.ssh':
-        ensure  => directory,
-        owner   => 'mirrmaid',
-        group   => 'mirrmaid',
-        mode    => '0600',      # puppet will +x for directories
-        force   => true,
-        purge   => true,
-        recurse => true,
-        require => Package['mirrmaid'],
-        source  => 'puppet:///private-host/mirrmaid/.ssh',
-    }
-
     cron::jobfile { 'mirrmaid':
         require => [
             File['/etc/mirrmaid/mirrmaid.conf'],

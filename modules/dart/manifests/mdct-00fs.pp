@@ -33,6 +33,23 @@ class dart::mdct-00fs {
 
     include 'mirrmaid'
 
+    # Configure SSH keys to permit mirrmaid to make passwordless connections
+    # to the Picaps servers as needed for both mirrmaid-picaps and
+    # mirrmaid-yum-fanout configurations.
+    #
+    # TODO: move this to openssh module as a definition there.
+    file { '/etc/mirrmaid/.ssh':
+        ensure  => directory,
+        owner   => 'mirrmaid',
+        group   => 'mirrmaid',
+        mode    => '0600',      # puppet will +x for directories
+        force   => true,
+        purge   => true,
+        recurse => true,
+        require => Class['mirrmaid'],
+        source  => 'puppet:///private-host/mirrmaid/.ssh',
+    }
+
     mirrmaid::config { 'mirrmaid':
         source => 'puppet:///private-host/mirrmaid/mirrmaid.conf',
     }
