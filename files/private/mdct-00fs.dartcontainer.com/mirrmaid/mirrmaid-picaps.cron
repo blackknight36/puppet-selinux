@@ -1,0 +1,8 @@
+# ***** THIS FILE IS MANAGED BY PUPPET *****
+# files/private/mdct-00fs.dartcontainer.com/mirrmaid/mirrmaid-picaps.cron
+#
+MAILTO=john.florian@dart.biz
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+
+# Mirroring of PICAPS definitions for local backup
+2,17,32,47 * * * * mirrmaid     nice ionice -c3 mirrmaid -c /etc/mirrmaid/mirrmaid-picaps.conf

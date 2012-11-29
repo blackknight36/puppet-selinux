@@ -50,26 +50,30 @@ class dart::mdct-00fs {
         source  => 'puppet:///private-host/mirrmaid/.ssh',
     }
 
+    # This config is merely note referring the reader to the others.
     mirrmaid::config { 'mirrmaid':
         source => 'puppet:///private-host/mirrmaid/mirrmaid.conf',
+        cronjob => 'puppet:///private-host/mirrmaid/mirrmaid.cron',
+    }
+
+    mirrmaid::config { 'mirrmaid-picaps':
+        source  => 'puppet:///private-host/mirrmaid/mirrmaid-picaps.conf',
+        cronjob => 'puppet:///private-host/mirrmaid/mirrmaid-picaps.cron',
     }
 
     mirrmaid::config { 'mirrmaid-fedora':
-        source => 'puppet:///private-host/mirrmaid/mirrmaid-fedora.conf',
+        source  => 'puppet:///private-host/mirrmaid/mirrmaid-fedora.conf',
+        cronjob => 'puppet:///private-host/mirrmaid/mirrmaid-fedora.cron',
     }
 
     mirrmaid::config { 'mirrmaid-rpmfusion':
-        source => 'puppet:///private-host/mirrmaid/mirrmaid-rpmfusion.conf',
+        source  => 'puppet:///private-host/mirrmaid/mirrmaid-rpmfusion.conf',
+        cronjob => 'puppet:///private-host/mirrmaid/mirrmaid-rpmfusion.cron',
     }
 
-    cron::jobfile { 'mirrmaid-fedora':
-        require => Class['mirrmaid'],
-        source  => 'puppet:///private-host/mirrmaid/mirrmaid-fedora.cron',
-    }
-
-    cron::jobfile { 'mirrmaid-rpmfusion':
-        require => Class['mirrmaid'],
-        source  => 'puppet:///private-host/mirrmaid/mirrmaid-rpmfusion.cron',
+    mirrmaid::config { 'mirrmaid-yum-fanout':
+        source  => 'puppet:///private-host/mirrmaid/mirrmaid-yum-fanout.conf',
+        cronjob => 'puppet:///private-host/mirrmaid/mirrmaid-yum-fanout.cron',
     }
 
     include 'picaps-backup-agent'
