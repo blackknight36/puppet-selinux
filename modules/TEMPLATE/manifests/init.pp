@@ -4,35 +4,20 @@
 #       Configures a host as a MODULE_NAME CLASS_NAME.
 #
 # Parameters:
-#       Name__________  Default_______  Description___________________________
+#       Name__________  Notes_  Description___________________________________
 #
-#       name                            instance name
-#       ensure          present         instance is to be present/absent
+#       name                    instance name
 #
-# Requires:
-#       NONE
-#       Class['REQ_MODULE::REQ_CLASS'] <= Use this notation for other resources
+#       ensure          1       instance is to be present/absent
 #
-#       $MODULE_NAME_var1                       Abstract variable 1
-#       $MODULE_NAME_var2                       Abstract variable 2
-#       $MODULE_NAME_CONFIG_NAME_source         Source URI for the CONFIG_NAME file
+# Notes:
 #
-# Example usage:
-#
-#       $MODULE_NAME_var1 = 'X_foo'
-#       $MODULE_NAME_var2 = 'X_bar'
-#       $MODULE_NAME_CONFIG_NAME_source = 'puppet:///private-host/CONFIG_NAME'
-#       include MODULE_NAME::CLASS_NAME
+#       1. Default is 'present'.
+
 
 class MODULE_NAME::CLASS_NAME {
 
     include lokkit
-
-    case $MODULE_NAME_CONFIG_NAME_source {
-        '': {
-            fail('Required $MODULE_NAME_CONFIG_NAME_source variable is not defined')
-        }
-    }
 
     package { 'PACKAGE_NAME':
         ensure  => installed,

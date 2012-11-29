@@ -4,22 +4,15 @@
 #       Installs a DEFINE_NAME configuration file for MODULE_NAME.
 #
 # Parameters:
-#       Name__________  Default_______  Description___________________________
+#       Name__________  Notes_  Description___________________________________
 #
-#       name                            instance name
-#       ensure          present         instance is to be present/absent
+#       name                    instance name
 #
-# Requires:
-#       Class['MODULE_NAME']
+#       ensure          1       instance is to be present/absent
 #
-# Example usage:
+# Notes:
 #
-#       include MODULE_NAME
-#
-#       MODULE_NAME::DEFINE_NAME { 'acme':
-#           notify  => Service['SERVICE_NAME'],
-#           source  => 'puppet:///private-host/acme.conf',
-#       }
+#       1. Default is 'present'.
 
 
 define MODULE_NAME::DEFINE_NAME ($ensure='present', $source) {
