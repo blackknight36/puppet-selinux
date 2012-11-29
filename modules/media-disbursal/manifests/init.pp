@@ -45,7 +45,7 @@ class media-disbursal {
             Class['rsync-server'],
         ],
         ensure  => directory,
-        require => File['/storage'],
+        require => File['/storage/slideshow'],
     }
 
     # mdct-00fs has the master copies of weather-media that

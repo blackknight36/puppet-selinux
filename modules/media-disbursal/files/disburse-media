@@ -96,7 +96,7 @@ main() {
     (
         if flock --nonblock 200
         then
-            trap cleanup INT TERm
+            trap cleanup INT TERM
             prior_weather=0
             while true
             do
