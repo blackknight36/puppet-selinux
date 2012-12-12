@@ -69,6 +69,14 @@ password=Tc_admin1a
         require         => Group['tcadmins'],
     }
 
+    mounted_tc_volume { 'teamcenter_renumber_test':
+        host            => 'mas-cad23',
+        share_name      => 'volumes',
+        group           => "${tcadmins_gid}",
+        options         => "rw,uid=0,gid=${tcadmins_gid},file_mode=0660,noperm",
+        require         => Group['tcadmins'],
+    }
+
     mounted_tc_volume { 'teamcenter_preproduction_beta':
         host            => 'mas-cad26',
         share_name      => 'volumes',
