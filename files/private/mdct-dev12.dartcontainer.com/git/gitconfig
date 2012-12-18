@@ -1,49 +1,71 @@
 # John Florian's Preferred Git Config
 #
-# vim: filetype=gitconfig
+# Make vim mimic 'git config' behavior.
+# vim: filetype=gitconfig noexpandtab sw=8
 
 [alias]
-    br = branch
-    ci = commit -v
-    clog = log --pretty=format:%s
-    co = checkout
-    lg = log --graph --abbrev-commit --pretty=oneline --decorate
-    revert = git reset --hard
-    sed = ! git grep -z --full-name -l '.' | xargs -0 sed -i -e
-    st = status
+	###
+	### See https://git.wiki.kernel.org/index.php/Aliases
+	###
+	br = branch
+	ci = commit -v
+	clog = log --pretty=format:%s
+	co = checkout
+	# commit = commit -v                Why doesn't this work?
+	grab = checkout
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	lgs = log --shortstat
+	ls = ls-files
+	preview = diff --cached
+	revert = git reset --hard
+	sed = ! git grep -z --full-name -l '.' | xargs -0 sed -i -e
+	st = status
+	unstage = reset HEAD
+	where = ! git ls-files | grep
+	who = shortlog -s --
 
 [clean]
-    requireForce = false
+	requireForce = false
 
 [color]
-    branch = auto
-    diff = auto
-    interactive = auto
-    showbranch = auto
-    status = auto
-    ui = auto
+	branch = auto
+	diff = auto
+	interactive = auto
+	showbranch = auto
+	status = auto
+	ui = auto
+
+[color "decorate"]
+        # default for tags is bold yellow, which shows poorly on white bg
+	tag = bold yellow black
 
 [core]
-    excludesfile = /home/00/d13677/.gitignore
-    whitespace = trailing-space,space-before-tab
+	excludesfile = /home/00/d13677/.gitignore
+	whitespace = trailing-space,space-before-tab
+
+[credential]
+	helper = cache --timeout=3600
 
 [diff]
-    noprefix
+	noprefix
 	tool = meld
 
+[difftool]
+	prompt = false
+
 [help]
-    autocorrect = 30
+	autocorrect = 30
+
+[http]
+	proxy = http://mdct-proxy:8080
 
 [merge]
-    tool = meld
-    verbosity = 4
+	tool = meld
+	verbosity = 4
 
 [status]
     showUntrackedFiles = all
 
 [user]
-    email = john_florian@dart.biz
-    name = John Florian
-
-[difftool]
-	prompt = false
+	email = john_florian@dart.biz
+	name = John Florian
