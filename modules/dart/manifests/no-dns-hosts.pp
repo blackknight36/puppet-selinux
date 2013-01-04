@@ -55,4 +55,9 @@ class dart::no-dns-hosts {
         host_aliases    => [ 'tc-util' ],
     }
 
+    host { 'mdct-pt-dbtest.dartcontainer.com':
+        ip              => '10.1.192.144',
+        host_aliases    => [ 'mdct-pt-dbtest' ],
+    }
+
 }
