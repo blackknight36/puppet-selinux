@@ -43,11 +43,12 @@ class dart::mdct-pt-dbtest inherits dart::abstract::server_node {
         ensure  => 'installed',
     }
 
+    # SEE NO-DNS-HOSTS
     # PICAPS calls gethostbyname() for its own hostname which must resolve.
-    host { "$fqdn":
-        ip              => "$ipaddress",
-        host_aliases    => [ "$hostname" ],
-    }
+    #host { "$fqdn":
+    #    ip              => "$ipaddress",
+    #    host_aliases    => [ "$hostname" ],
+    #}
 
     file { '/usr/local/bin/picaps-install-and-setup':
         content => template('dart/picaps/install-and-setup'),
