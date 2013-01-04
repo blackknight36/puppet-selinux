@@ -66,6 +66,11 @@ class dart::mdct-00fs {
         cronjob => 'puppet:///private-host/mirrmaid/mirrmaid-fedora.cron',
     }
 
+    mirrmaid::config { 'mirrmaid-mariadb':
+        source  => 'puppet:///private-host/mirrmaid/mirrmaid-mariadb.conf',
+        cronjob => 'puppet:///private-host/mirrmaid/mirrmaid-mariadb.cron',
+    }
+
     mirrmaid::config { 'mirrmaid-rpmfusion':
         source  => 'puppet:///private-host/mirrmaid/mirrmaid-rpmfusion.conf',
         cronjob => 'puppet:///private-host/mirrmaid/mirrmaid-rpmfusion.cron',
