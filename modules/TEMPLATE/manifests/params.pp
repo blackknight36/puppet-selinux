@@ -2,17 +2,6 @@
 #
 # Synopsis:
 #       Parameters for the MODULE_NAME puppet module.
-#
-# Parameters:
-#       Name__________  Notes_  Description___________________________
-#
-#       name                    instance name
-#
-#       ensure          1       instance is to be present/absent
-#
-# Notes:
-#
-#       1. Default is 'present'.
 
 
 class MODULE_NAME::params {
