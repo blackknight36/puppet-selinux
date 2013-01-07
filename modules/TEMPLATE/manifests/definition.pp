@@ -4,7 +4,7 @@
 #       Installs a DEFINE_NAME configuration file for MODULE_NAME.
 #
 # Parameters:
-#       Name__________  Notes_  Description___________________________________
+#       Name__________  Notes_  Description___________________________
 #
 #       name                    instance name
 #
@@ -25,7 +25,7 @@ define MODULE_NAME::DEFINE_NAME ($ensure='present', $source) {
         seluser => 'system_u',
         selrole => 'object_r',
         seltype => 'MODULE_NAME_config_t',
-        require => Package['PACKAGE_NAME'],
+        require => Class['CLASS_NAME'],
         source  => "${source}",
     }
 

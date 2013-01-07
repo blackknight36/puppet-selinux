@@ -4,7 +4,7 @@
 #       Configures a host as a MODULE_NAME CLASS_NAME.
 #
 # Parameters:
-#       Name__________  Notes_  Description___________________________________
+#       Name__________  Notes_  Description___________________________
 #
 #       name                    instance name
 #
@@ -17,29 +17,24 @@
 
 class MODULE_NAME::CLASS_NAME {
 
-    include lokkit
+    include MODULE_NAME::params
 
-    package { 'PACKAGE_NAME':
+    package { $MODULE_NAME::params::packages:
         ensure  => installed,
     }
 
-    package { 'CONFLICTING_PACKAGE_NAME':
-        ensure  => absent,
-        # It may be necessary to have the replacement installed prior to
-        # removal of the conflicting package.
-        require => Package['PACKAGE_NAME'],
-    }
-
-    # static file
-    file { '/CONFIG_PATH/CONFIG_NAME':
-        # don't forget to verify these!
+    File {
+        owner   => 'root',
         group   => 'root',
         mode    => '0640',
-        owner   => 'root',
-        require => Package['PACKAGE_NAME'],
         seluser => 'system_u',
         selrole => 'object_r',
         seltype => 'etc_t',
+        subscribe => Package[$MODULE_NAME::params::packages],
+    }
+
+    file { '/CONFIG_PATH/CONFIG_NAME':
+        content => template('MODULE_NAME/CONFIG_NAME'),
         source  => [
             'puppet:///private-host/MODULE_NAME/CONFIG_NAME',
             'puppet:///private-domain/MODULE_NAME/CONFIG_NAME',
@@ -47,36 +42,18 @@ class MODULE_NAME::CLASS_NAME {
         ],
     }
 
-    # template file
-    file { '/CONFIG_PATH/CONFIG_NAME':
-        content => template('MODULE_NAME/CONFIG_NAME'),
-        # don't forget to verify these!
-        group   => 'root',
-        mode    => '0640',
-        owner   => 'root',
-        require => Package['PACKAGE_NAME'],
-        seluser => 'system_u',
-        selrole => 'object_r',
-        seltype => 'etc_t',
+    lokkit::tcp_port {
+        'SERVICE_NAME': port => 'SERVICE_PORT_1',
+        };
     }
 
-    lokkit::tcp_port { 'SERVICE_NAME':
-        port    => 'SERVICE_PORT',
-    }
-
-    service { 'SERVICE_NAME':
+    service { $MODULE_NAME::params::service_name:
         enable          => true,
         ensure          => running,
         hasrestart      => true,
         hasstatus       => true,
-        require         => [
-            Class['REQ_MODULE::REQ_CLASS'],
-            Exec['open-SERVICE_NAME-tcp-port'],
-            Package['CONFLICTING_PACKAGE_NAME'],
-            Package['PACKAGE_NAME'],
-        ],
         subscribe       => [
-            File['/CONFIG_PATH/CONFIG_NAME'],
+            Package[$MODULE_NAME::params::packages],
         ],
     }
 
