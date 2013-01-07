@@ -40,5 +40,9 @@
     # to the embedded http server being single threaded.
     runinterval = 3600
 
+    # puppet-3 now defaults to PSON and sadly fails to fallback to YAML.  See
+    # http://projects.puppetlabs.com/issues/3160 for details.
+    preferred_serialization_format = yaml
+
 [master]
     reports = tagmail,store,log

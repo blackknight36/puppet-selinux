@@ -5,36 +5,36 @@ class puppet::server {
     include cron::daemon
     include lokkit
     include puppet::client
+    include puppet::params
 
-    package { 'puppet-server':
-	ensure	=> installed,
+
+    package { $puppet::params::server_packages:
+        ensure  => installed,
+        notify  => Service[$puppet::params::server_service_name],
     }
 
-    package { 'puppet-tools':
-	ensure	=> installed,
+    File {
+        owner       => 'root',
+        group       => 'root',
+        mode        => '0640',
+        seluser     => 'system_u',
+        selrole     => 'object_r',
+        seltype     => 'puppet_etc_t',
+        before      => Service[$puppet::params::server_service_name],
+        notify      => Service[$puppet::params::server_service_name],
+        subscribe	=> Package[$puppet::params::server_packages],
     }
 
     file { '/etc/puppet/fileserver.conf':
-        group	=> 'root',
-        mode    => '0644',
-        owner   => 'root',
-        require => Package['puppet-server'],
-        seluser => 'system_u',
-        selrole => 'object_r',
-        seltype => 'puppet_etc_t',
         # This one can be a bit of a 'chicken vs. egg' problem.  There's
         # little point in providing a source here since the target is already
-        # within git.
+        # within git.  The rest of the (default) file parameters still apply,
+        # however.
         #       source  => 'puppet:///modules/puppet/fileserver.conf',
+        mode    => '0644',
     }
 
     file { '/etc/sysconfig/puppetmaster':
-        group	=> 'root',
-        mode    => '0640',
-        owner   => 'root',
-        require => Package['puppet-server'],
-        seluser => 'system_u',
-        selrole => 'object_r',
         seltype => 'etc_t',
         source  => 'puppet:///modules/puppet/puppetmaster',
     }
@@ -46,20 +46,12 @@ class puppet::server {
         port    => '8140',
     }
 
-    service { 'puppetmaster':
+    service { $puppet::params::server_service_name:
         enable		=> true,
         ensure		=> running,
         hasrestart	=> true,
         hasstatus	=> true,
-        require		=> [
-            Exec['open-puppetmaster-tcp-port'],
-            Package['puppet-server'],
-        ],
-        subscribe	=> [
-            File['/etc/puppet/fileserver.conf'],
-            File['/etc/puppet/puppet.conf'],
-            File['/etc/sysconfig/puppetmaster'],
-        ],
+        subscribe	=> [ File['/etc/puppet/puppet.conf'], ],
     }
 
 }

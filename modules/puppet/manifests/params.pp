@@ -1,0 +1,32 @@
+# modules/puppet/manifests/params.pp
+#
+# Synopsis:
+#       Parameters for the puppet module that manages puppet itself.
+#
+
+
+class puppet::params {
+
+    case $::operatingsystem {
+        Fedora: {
+            $client_packages = [ 'puppet', ]
+            $server_packages = [ 'puppet-server', 'puppet-tools', ]
+
+            if  $operatingsystemrelease == 'Rawhide' or
+                $operatingsystemrelease >= 18
+            {
+                $client_service_name = 'puppetagent'
+            } else {
+                $client_service_name = 'puppet'
+            }
+
+            $server_service_name = 'puppetmaster'
+        }
+
+        default: {
+            fail ("The puppet module is not yet supported on ${operatingsystem}.")
+        }
+
+    }
+
+}
