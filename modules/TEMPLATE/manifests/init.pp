@@ -21,20 +21,24 @@ class MODULE_NAME::CLASS_NAME {
 
     package { $MODULE_NAME::params::packages:
         ensure  => installed,
+        notify  => Service[$MODULE_NAME::params::service_name],
     }
 
     File {
-        owner   => 'root',
-        group   => 'root',
-        mode    => '0640',
-        seluser => 'system_u',
-        selrole => 'object_r',
-        seltype => 'etc_t',
-        subscribe => Package[$MODULE_NAME::params::packages],
+        owner       => 'root',
+        group       => 'root',
+        mode        => '0640',
+        seluser     => 'system_u',
+        selrole     => 'object_r',
+        seltype     => 'etc_t',
+        before      => Service[$MODULE_NAME::params::service_name],
+        notify      => Service[$MODULE_NAME::params::service_name],
+        subscribe   => Package[$MODULE_NAME::params::packages],
     }
 
     file { '/CONFIG_PATH/CONFIG_NAME':
         content => template('MODULE_NAME/CONFIG_NAME'),
+        # ... or ...
         source  => [
             'puppet:///private-host/MODULE_NAME/CONFIG_NAME',
             'puppet:///private-domain/MODULE_NAME/CONFIG_NAME',
@@ -52,9 +56,6 @@ class MODULE_NAME::CLASS_NAME {
         ensure          => running,
         hasrestart      => true,
         hasstatus       => true,
-        subscribe       => [
-            Package[$MODULE_NAME::params::packages],
-        ],
     }
 
 }
