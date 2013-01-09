@@ -28,51 +28,20 @@ class packages::workstation {
     if $operatingsystem == 'Fedora' {
 
         if  $operatingsystemrelease == 'Rawhide' or
-            $operatingsystemrelease >= 11
-        {
-            package { [
-                'tigervnc',
-                ]:
-                ensure => installed,
-            }
-        } else {
-            package { [
-                'vnc',
-                ]:
-                ensure => installed,
-            }
-        }
-
-        if  $operatingsystemrelease == 'Rawhide' or
-            $operatingsystemrelease >= 14
-        {
-            package { [
-                'mysql-workbench',
-                ]:
-                ensure => installed,
-            }
-        } else {
-            package { [
-                'mysql-query-browser',
-                ]:
-                ensure => installed,
-            }
-        }
-
-        if  $operatingsystemrelease == 'Rawhide' or
-            $operatingsystemrelease >= 15
+            $operatingsystemrelease >= 18
         {
             package { [
                 'libreoffice-calc',
                 'libreoffice-writer',
-                'systemd-gtk',
+                'systemd-ui',
                 ]:
                 ensure => installed,
             }
-        } else {
+        } elsif $operatingsystemrelease >= 15 {
             package { [
-                'openoffice.org-calc',
-                'openoffice.org-writer',
+                'libreoffice-calc',
+                'libreoffice-writer',
+                'systemd-gtk',
                 ]:
                 ensure => installed,
             }
