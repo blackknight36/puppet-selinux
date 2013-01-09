@@ -7,7 +7,7 @@
 #       NONE
 #
 # Requires:
-#       $lokkit_disabled                   Set to "true" to disable typical
+#       $lokkit_disabled                   Set to 'true' to disable typical
 #                                          iptables management via lokkit.
 #
 # Example usage:
@@ -16,12 +16,21 @@
 
 class lokkit {
 
-    if  $operatingsystem == "Fedora" and
+    package { 'system-config-firewall-base':
+        ensure	=> installed,
+    }
+
+    if  $operatingsystem == 'Fedora' and
         $operatingsystemrelease == 'Rawhide' or
-        $operatingsystemrelease >= 13
+        $operatingsystemrelease >= 18
     {
-        package { "system-config-firewall-base":
-            ensure	=> installed,
+        package { 'firewall-config':
+            ensure	=> absent,
+        }
+
+        package { 'firewalld':
+            ensure	=> absent,
+            require => Package['firewall-config'],
         }
     }
 

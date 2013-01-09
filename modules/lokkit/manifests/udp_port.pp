@@ -38,7 +38,7 @@ define lokkit::udp_port ($ensure="open", $port) {
                 exec { "open-${name}-udp-port":
                     command => "lokkit --port=${port}:udp",
                     unless  => "grep -q -- '-A INPUT .* -p udp --dport ${port} -j ACCEPT' /etc/sysconfig/iptables",
-                    require => Package["system-config-firewall-base"],
+                    require => Class['lokkit'],
                 }
             }
 

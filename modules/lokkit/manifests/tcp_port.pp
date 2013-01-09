@@ -38,7 +38,7 @@ define lokkit::tcp_port ($ensure="open", $port) {
                 exec { "open-${name}-tcp-port":
                     command => "lokkit --port=${port}:tcp",
                     unless  => "grep -q -- '-A INPUT .* -p tcp --dport ${port} -j ACCEPT' /etc/sysconfig/iptables",
-                    require => Package["system-config-firewall-base"],
+                    require => Class['lokkit'],
                 }
             }
 
