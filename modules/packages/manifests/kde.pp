@@ -38,7 +38,6 @@ class packages::kde {
         'qtcurve-gtk2',
         'qtcurve-kde4',
         'scribus',
-        'system-config-printer-kde',
         'xorg-x11-apps',
         'xsettings-kde',
 
@@ -51,34 +50,33 @@ class packages::kde {
     if $operatingsystem == 'Fedora' {
 
         if  $operatingsystemrelease == 'Rawhide' or
-            $operatingsystemrelease >= 17
+            $operatingsystemrelease >= 18
         {
             package { [
-                'calligra-krita',
+                'kde-print-manager',
                 ]:
                 ensure => installed,
             }
         } else {
             package { [
-                'koffice-krita',
+                'system-config-printer-kde',
                 ]:
                 ensure => installed,
             }
         }
 
         if  $operatingsystemrelease == 'Rawhide' or
-            $operatingsystemrelease >= 16
+            $operatingsystemrelease >= 17
         {
             package { [
+                'calligra-krita',
                 'kde-baseapps',
-                'kde-printer-applet',
                 ]:
                 ensure => installed,
             }
         } else {
             package { [
-                'kdebase',
-                'kdeutils-printer-applet',
+                'koffice-krita',
                 ]:
                 ensure => installed,
             }
