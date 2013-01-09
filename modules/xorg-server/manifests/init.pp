@@ -1,13 +1,19 @@
 # modules/xorg-server/manifests/init.pp
 
-class xorg-server {
+class xorg-server($drivers=undef, $config=undef) {
 
-    if ( $hostname == "mdct-dev12" or $hostname == "mdct-dev9" ) {
-        file { "/etc/X11/xorg.conf":
-            group       => "root",
-            mode        => 644,
-            owner       => "root",
-            source      => "puppet:///modules/xorg-server/xorg.conf.$hostname",
+    if $drivers != undef {
+        package { $drivers:
+            ensure  => installed,
+        }
+    }
+
+    if $config != undef {
+        file { '/etc/X11/xorg.conf':
+            owner   => 'root',
+            group   => 'root',
+            mode    => 0644,
+            source  => $config,
         }
     }
 

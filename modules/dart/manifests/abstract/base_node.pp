@@ -20,7 +20,6 @@ class dart::abstract::base_node {
     include selinux
     include sudo
     include timezone
-    include xorg-server
 
     if  $operatingsystem == 'Fedora' and
         $operatingsystemrelease == 'Rawhide' or

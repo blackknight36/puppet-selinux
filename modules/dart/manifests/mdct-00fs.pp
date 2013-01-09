@@ -18,7 +18,6 @@ class dart::mdct-00fs {
     #@# include rpcidmapd
     include sudo
     include timezone
-    #@# include xorg-server
 
     #@# From server_node.pp
     include packages::net_tools
