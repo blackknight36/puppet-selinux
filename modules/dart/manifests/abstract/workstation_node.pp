@@ -2,7 +2,8 @@
 
 class dart::abstract::workstation_node inherits dart::abstract::base_node {
     include flock-herder
-    include lotus_notes_client
+    # Lotus Notes has been disabled for now due to poor functioning.
+    #include lotus_notes_client
     include packages::developer
     include packages::media
     include packages::net_tools
