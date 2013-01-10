@@ -43,7 +43,12 @@ class vsftpd($allow_use_nfs=false) {
         port    => '21',
     }
 
-    selinux::boolean { 'allow_ftpd_use_nfs':
+    if $operatingsystem == 'Fedora' and $operatingsystemrelease < 18 {
+        $seboolname = 'allow_ftpd_use_nfs'
+    } else {
+        $seboolname = 'ftpd_use_nfs'
+    }
+    selinux::boolean { $seboolname:
         before      => Service['vsftpd'],
         persistent  => true,
         value       => $allow_use_nfs ? {
