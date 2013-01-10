@@ -116,15 +116,6 @@ class dart::mdct-dev12 inherits dart::abstract::workstation_node {
         ],
     }
 
-    mount { '/opt':
-        atboot  => true,
-        before  => Class['jetbrains'],
-        device  => '/mnt-local/storage/opt',
-        ensure  => 'mounted',
-        fstype  => 'none',
-        options => '_netdev,rbind,context=system_u:object_r:usr_t',
-    }
-
     mailalias { 'root':
         ensure          => present,
         recipient       => 'john.florian@dart.biz',
