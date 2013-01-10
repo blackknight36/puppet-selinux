@@ -3,7 +3,7 @@
 class dart::mdct-dev12 inherits dart::abstract::workstation_node {
 
     class { 'xorg-server':
-        config  => "puppet:///private-host/etc/X11/xorg.conf",
+        config  => 'puppet:///private-host/etc/X11/xorg.conf',
         drivers => ['kmod-nvidia'],
     }
 
@@ -31,63 +31,63 @@ class dart::mdct-dev12 inherits dart::abstract::workstation_node {
     }
 
     # noscript included here because nobody else likely to want it
-    package { "mozilla-noscript":
+    package { 'mozilla-noscript':
         ensure  => installed,
     }
 
     $SUFFIX=".orig-${operatingsystem}${operatingsystemrelease}"
 
-    file { "/j":
-        ensure	=> "/mnt-local/storage/j/",
-        require => Service["autofs"],
+    file { '/j':
+        ensure	=> '/mnt-local/storage/j/',
+        require => Service['autofs'],
     }
 
-    file { "/s":
-        ensure	=> "/mnt-local/storage/",
-        require => Service["autofs"],
+    file { '/s':
+        ensure	=> '/mnt-local/storage/',
+        require => Service['autofs'],
     }
 
-    file { "/Pound":
-        ensure	=> "/mnt-local/storage/Pound/",
-        require => Service["autofs"],
+    file { '/Pound':
+        ensure	=> '/mnt-local/storage/Pound/',
+        require => Service['autofs'],
     }
 
-    replace_original_with_symlink_to_alternate { "/etc/libvirt":
-        alternate       => "/mnt-local/storage/etc/libvirt",
+    replace_original_with_symlink_to_alternate { '/etc/libvirt':
+        alternate       => '/mnt-local/storage/etc/libvirt',
         backup          => "/etc/libvirt$SUFFIX",
-        before          => Service["libvirtd"],
-        notify          => Service["libvirtd"],
-        original        => "/etc/libvirt",
+        before          => Service['libvirtd'],
+        notify          => Service['libvirtd'],
+        original        => '/etc/libvirt',
         # TODO: libvirt needs to be a formal service and treated here like
         # mysql WRT before/require attrs
-        require         => Package["libvirt"],
-        seltype         => "virt_etc_t",
+        require         => Package['libvirt'],
+        seltype         => 'virt_etc_t',
     }
 
-    replace_original_with_symlink_to_alternate { "/var/lib/libvirt":
-        alternate	=> "/mnt-local/storage/var/lib/libvirt",
+    replace_original_with_symlink_to_alternate { '/var/lib/libvirt':
+        alternate	=> '/mnt-local/storage/var/lib/libvirt',
         backup          => "/var/lib/libvirt$SUFFIX",
-        before          => Service["libvirtd"],
-        notify          => Service["libvirtd"],
-        original        => "/var/lib/libvirt",
+        before          => Service['libvirtd'],
+        notify          => Service['libvirtd'],
+        original        => '/var/lib/libvirt',
         # TODO: libvirt needs to be a formal service and treated here like
         # mysql WRT before/require attrs
-        require         => Package["libvirt"],
-        seltype         => "virt_var_lib_t",
+        require         => Package['libvirt'],
+        seltype         => 'virt_var_lib_t',
     }
 
     # disabled until once again needed
     #   include mysql-server
-    #   replace_original_with_symlink_to_alternate { "/var/lib/mysql":
-    #       alternate	=> "/mnt-local/storage/var/lib/mysql",
+    #   replace_original_with_symlink_to_alternate { '/var/lib/mysql':
+    #       alternate	=> '/mnt-local/storage/var/lib/mysql',
     #       backup          => "/var/lib/mysql$SUFFIX",
-    #       original        => "/var/lib/mysql",
-    #       before          => Service["mysqld"],
-    #       require         => Package["mysql-server"],
-    #       seltype         => "mysqld_db_t",
+    #       original        => '/var/lib/mysql',
+    #       before          => Service['mysqld'],
+    #       require         => Package['mysql-server'],
+    #       seltype         => 'mysqld_db_t',
     #   }
 
-    service { "libvirtd":
+    service { 'libvirtd':
         enable		=> true,
         ensure		=> running,
         hasrestart	=> true,
@@ -97,7 +97,7 @@ class dart::mdct-dev12 inherits dart::abstract::workstation_node {
     }
 
     # Prefer forced power off as it's much faster than suspending.
-    service { "libvirtd-guests":
+    service { 'libvirtd-guests':
         enable		=> false,
         ensure		=> stopped,
         hasrestart	=> true,
@@ -106,45 +106,45 @@ class dart::mdct-dev12 inherits dart::abstract::workstation_node {
         ],
     }
 
-    mount { "/opt":
+    mount { '/opt':
         atboot  => true,
         before  => Class['jetbrains'],
-        device  => "/mnt-local/storage/opt",
-        ensure  => "mounted",
-        fstype  => "none",
-        options => "_netdev,rbind,context=system_u:object_r:usr_t",
+        device  => '/mnt-local/storage/opt',
+        ensure  => 'mounted',
+        fstype  => 'none',
+        options => '_netdev,rbind,context=system_u:object_r:usr_t',
     }
 
-    mailalias { "root":
+    mailalias { 'root':
         ensure          => present,
-        recipient       => "john.florian@dart.biz",
+        recipient       => 'john.florian@dart.biz',
     }
 
     # Make root user source my prophile by default.
-    exec { "prophile-install -f jflorian":
-        require => Package["prophile"],
-        unless  => "grep -q prophile /root/.bash_profile",
+    exec { 'prophile-install -f jflorian':
+        require => Package['prophile'],
+        unless  => 'grep -q prophile /root/.bash_profile',
     }
 
-    file { "/root/.gvimrc_site":
-        group	=> "root",
-        mode    => "0644",
-        owner   => "root",
-        source  => "puppet:///private-host/gvimrc_site",
+    file { '/root/.gvimrc_site':
+        group	=> 'root',
+        mode    => '0644',
+        owner   => 'root',
+        source  => 'puppet:///private-host/gvimrc_site',
     }
 
-    file { "/root/.gitconfig":
-        group	=> "root",
-        mode    => "0644",
-        owner   => "root",
-        source  => "puppet:///private-host/git/gitconfig",
+    file { '/root/.gitconfig':
+        group	=> 'root',
+        mode    => '0644',
+        owner   => 'root',
+        source  => 'puppet:///private-host/git/gitconfig',
     }
 
-    file { "/root/.gitignore":
-        group	=> "root",
-        mode    => "0644",
-        owner   => "root",
-        source  => "puppet:///private-host/git/gitignore",
+    file { '/root/.gitignore':
+        group	=> 'root',
+        mode    => '0644',
+        owner   => 'root',
+        source  => 'puppet:///private-host/git/gitignore',
     }
 
     cron { 'daily-git-summary':
