@@ -35,6 +35,16 @@ class dart::mdct-dev12 inherits dart::abstract::workstation_node {
         ensure  => installed,
     }
 
+    # JDK concept developing here until sufficient for everyone.  Must
+    # consider PICAPS developers who may not want the latest or standard
+    # release, whatever that may be.  I want it only for PyCharm, at this
+    # time.
+    package { 'jdk':
+        ensure      => installed,
+        provider    => 'rpm',
+        source      => '/pub/oracle/jdk-7u10-linux-x64.rpm',
+    }
+
     $SUFFIX=".orig-${operatingsystem}${operatingsystemrelease}"
 
     file { '/j':
