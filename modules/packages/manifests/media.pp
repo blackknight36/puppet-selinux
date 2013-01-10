@@ -9,6 +9,7 @@ class packages::media {
     package { [
 
         'ImageMagick',
+        'clementine',
         'easytag',
         'esound-libs',
         'gecko-mediaplayer',
