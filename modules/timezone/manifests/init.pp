@@ -25,15 +25,27 @@ class timezone {
         default => 'America/Detroit',
     }
 
-    file { '/etc/sysconfig/clock':
-        group   => 'root',
-        mode    => '0644',
-        owner   => 'root',
-        content => template('timezone/clock'),
-    }
+    if $operatingsystem == 'Fedora' and $operatingsystemrelease < 18 {
 
-    file { '/etc/localtime':
-        ensure  => "/usr/share/zoneinfo/${tzname}",
+        file { '/etc/sysconfig/clock':
+            group   => 'root',
+            mode    => '0644',
+            owner   => 'root',
+            content => template('timezone/clock'),
+        }
+
+        file { '/etc/localtime':
+            ensure  => "/usr/share/zoneinfo/${tzname}",
+        }
+
+    } else {
+
+        # This accomplishes the same symlink as the File resource above, but
+        # is the preferred method using systemd on F18 and later.
+        exec { "timedatectl set-timezone $tzname":
+            unless  => "timedatectl status | grep -q $tzname",
+        }
+
     }
 
 }
