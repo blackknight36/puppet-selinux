@@ -35,7 +35,8 @@ class timezone {
         }
 
         file { '/etc/localtime':
-            ensure  => "/usr/share/zoneinfo/${tzname}",
+            ensure  => link,
+            target  => "/usr/share/zoneinfo/${tzname}",
         }
 
     } else {
