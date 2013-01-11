@@ -44,7 +44,7 @@ class timezone {
         # This accomplishes the same symlink as the File resource above, but
         # is the preferred method using systemd on F18 and later.
         exec { "timedatectl set-timezone $tzname":
-            unless  => "timedatectl status | grep -q $tzname",
+            unless  => "timedatectl status | grep -q Timezone:\ $tzname",
         }
 
     }
