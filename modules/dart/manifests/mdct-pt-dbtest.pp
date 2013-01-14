@@ -60,17 +60,17 @@ class dart::mdct-pt-dbtest inherits dart::abstract::server_node {
         seltype => 'file_t',
     }
 
-    exec { '/usr/local/bin/picaps-install-and-setup':
-        creates => '/root/picaps-install-and-setup.log',
-        require => [
-            #Class['mysql-server'],
-            Class['packages::developer'],
-            Class['rsync-server'],
-            File['/usr/local/bin/picaps-install-and-setup'],
-            Package['httpd'],
-            Package['ncftp'],
-        ],
-        timeout => 1800,
-    }
+    #exec { '/usr/local/bin/picaps-install-and-setup':
+    #    creates => '/root/picaps-install-and-setup.log',
+    #    require => [
+    #        #Class['mysql-server'],
+    #        Class['packages::developer'],
+    #        Class['rsync-server'],
+    #        File['/usr/local/bin/picaps-install-and-setup'],
+    #        Package['httpd'],
+    #        Package['ncftp'],
+    #    ],
+    #    timeout => 1800,
+    #}
 
 }
