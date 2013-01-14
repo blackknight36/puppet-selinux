@@ -31,7 +31,20 @@ class dart::abstract::picaps_test_node inherits dart::abstract::server_node {
     include 'packages::developer'
 
     # PICAPS stores are via MySQL
-    include 'mysql-server'
+
+
+    case $hostname {
+        'mdct-55pt': {
+            $dbserver = 'mariadb_server'
+        }
+
+        default: {
+            $dbserver = 'mysql-server'
+        }
+
+    }
+    include $dbserver
+
 
     # Other package a PICAPS server requires
     package { [
@@ -60,17 +73,17 @@ class dart::abstract::picaps_test_node inherits dart::abstract::server_node {
         seltype => 'file_t',
     }
 
-    exec { '/usr/local/bin/picaps-install-and-setup':
-        creates => '/root/picaps-install-and-setup.log',
-        require => [
-            Class['mysql-server'],
-            Class['packages::developer'],
-            Class['rsync-server'],
-            File['/usr/local/bin/picaps-install-and-setup'],
-            Package['httpd'],
-            Package['ncftp'],
-        ],
-        timeout => 1800,
-    }
+    #exec { '/usr/local/bin/picaps-install-and-setup':
+    #    creates => '/root/picaps-install-and-setup.log',
+    #    require => [
+    #        Class[$dbserver],
+    #        Class['packages::developer'],
+    #        Class['rsync-server'],
+    #        File['/usr/local/bin/picaps-install-and-setup'],
+    #        Package['httpd'],
+    #        Package['ncftp'],
+    #    ],
+    #    timeout => 1800,
+    #}
 
 }
