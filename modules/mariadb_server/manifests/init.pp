@@ -2,6 +2,16 @@
 
 class mariadb_server {
 
+    file { "/etc/yum.repos.d/MariaDB.repo":
+        group   => "root",
+        mode    => 644,
+        owner   => "root",
+        source  => [
+            'puppet:///private-host/etc/yum.repos.d/MariaDB.repo',
+            'puppet:///modules/mariadb_server/MariaDB.repo',
+        ],
+    }
+
     $key_store="http://mdct-00fs.dartcontainer.com/ftp/pub/fedora/mdct/signing_keys"
 
     exec { "import_mariadb_signing_key":
@@ -12,11 +22,12 @@ class mariadb_server {
     define mariadb_package ($source) {
         package { $name:
 	    ensure      => installed,
-	    provider    => 'rpm',
+	    #provider    => 'rpm',
 	    require => [
+                File["/etc/yum.repos.d/MariaDB.repo"],
 		Exec["import_mariadb_signing_key"],
 	    ],
-            source => $source,
+            #source => $source,
         }
     }
 
