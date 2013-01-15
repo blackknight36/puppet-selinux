@@ -25,33 +25,19 @@ class autofs {
         value       => on,
     }
 
-    # TODO: Perhaps should have a "define autofs::mount", especially given
-    # seltype being unusual as bin_t instead of etc_t.
-    File {
-        owner       => 'root',
-        group       => 'root',
-        mode        => '0644',
-        seluser     => 'system_u',
-        selrole     => 'object_r',
-        seltype     => 'bin_t',
-        before      => Service[$autofs::params::service_name],
-        notify      => Service[$autofs::params::service_name],
-        subscribe   => Package[$autofs::params::packages],
-    }
-
-    file { '/etc/auto.home':
+    autofs::mount { 'home':
         source  => 'puppet:///modules/autofs/auto.home',
     }
 
-    file { '/etc/auto.master':
+    autofs::mount { 'master':
         source  => "puppet:///modules/autofs/${autofs::params::master_source}",
     }
 
-    file { "/etc/auto.mnt":
+    autofs::mount { 'mnt':
         source	=> 'puppet:///modules/autofs/auto.mnt',
     }
 
-    file { '/etc/auto.mnt-local':
+    autofs::mount { 'mnt-local':
         source  => [
             'puppet:///private-host/autofs/auto.mnt-local',
             'puppet:///private-domain/autofs/auto.mnt-local',
@@ -62,7 +48,6 @@ class autofs {
     file { '/pub':
 	    ensure	=> link,
         target  => '/mnt/pub',
-        seltype => 'default_t',
     }
 
     service { $autofs::params::service_name:
