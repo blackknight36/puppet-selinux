@@ -52,10 +52,10 @@ class MODULE_NAME::CLASS_NAME {
     }
 
     service { $MODULE_NAME::params::service_name:
-        enable          => true,
-        ensure          => running,
-        hasrestart      => true,
-        hasstatus       => true,
+        enable      => true,
+        ensure      => running,
+        hasrestart  => true,
+        hasstatus   => true,
     }
 
 }
