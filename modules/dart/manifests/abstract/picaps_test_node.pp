@@ -34,6 +34,10 @@ class dart::abstract::picaps_test_node inherits dart::abstract::server_node {
 
 
     case $hostname {
+        'mdct-04pt': {
+            $dbserver = 'mariadb_server'
+        }
+
         'mdct-55pt': {
             $dbserver = 'mariadb_server'
         }
