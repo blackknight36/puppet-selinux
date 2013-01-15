@@ -1,53 +1,42 @@
 # modules/rpcidmapd/manifests/init.pp
+#
+# Synopsis:
+#       Configures a host to run the NFS ID Mapper Daemon.
+#
+# Parameters:
+#   NONE
+
 
 class rpcidmapd {
 
-    package { 'nfs-utils':
-	 ensure => installed,
+    include rpcidmapd::params
+
+    package { $rpcidmapd::params::packages:
+        ensure  => installed,
+        notify  => Service[$rpcidmapd::params::service_name],
     }
 
-    if  $operatingsystem == 'Fedora' and
-        $operatingsystemrelease == 'Rawhide' or
-        $operatingsystemrelease >= 15
-    {
-        $libnfsidmap_package = 'libnfsidmap'
-    } else {
-        $libnfsidmap_package = 'nfs-utils-lib'
-    }
-    package { 'nfs-utils-lib':
-	 ensure => installed,
-         name   => $libnfsidmap_package,
+    File {
+        owner       => 'root',
+        group       => 'root',
+        mode        => '0640',
+        seluser     => 'system_u',
+        selrole     => 'object_r',
+        seltype     => 'etc_t',
+        before      => Service[$rpcidmapd::params::service_name],
+        notify      => Service[$rpcidmapd::params::service_name],
+        subscribe   => Package[$rpcidmapd::params::packages],
     }
 
     file { '/etc/idmapd.conf':
-        group   => 'root',
-        mode    => 644,
-        owner   => 'root',
-	require => Package['nfs-utils-lib'],
-        source	=> 'puppet:///modules/rpcidmapd/idmapd.conf',
+        source      => 'puppet:///modules/rpcidmapd/idmapd.conf',
     }
 
-    if  $operatingsystem == 'Fedora' and
-        $operatingsystemrelease == 'Rawhide' or
-        $operatingsystemrelease >= 16
-    {
-        $rpcidmapd_service = 'nfs-idmap'
-    } else {
-        $rpcidmapd_service = 'rpcidmapd'
-    }
-    service { 'rpcidmapd':
-	enable		=> true,
-	ensure		=> running,
-	hasrestart	=> true,
-	hasstatus	=> true,
-        name            => $rpcidmapd_service,
-	require		=> [
-	    Package['nfs-utils'],
-	    Package['nfs-utils-lib'],
-	],
-	subscribe	=> [
-	    File['/etc/idmapd.conf'],
-	]
+    service { $rpcidmapd::params::service_name:
+        enable      => true,
+        ensure      => running,
+        hasrestart  => true,
+        hasstatus   => true,
     }
 
 }

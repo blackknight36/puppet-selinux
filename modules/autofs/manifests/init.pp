@@ -76,7 +76,7 @@ class autofs {
             Exec["authconfig"],
 	    File["/pub"],
 	    Package["autofs"],
-	    Service["rpcidmapd"],
+	    Class['rpcidmapd'],
 	],
 	subscribe	=> [
 	    File["/etc/auto.home"],
