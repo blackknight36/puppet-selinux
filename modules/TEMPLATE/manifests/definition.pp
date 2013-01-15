@@ -19,16 +19,20 @@
 
 define MODULE_NAME::DEFINE_NAME ($ensure='present', $source) {
 
+    include MODULE_NAME::params
+
     file { "/CONFIG_PATH/${name}.conf":
-        ensure  => $ensure,
-        owner   => 'root',
-        group   => 'root',
-        mode    => '0640',
-        seluser => 'system_u',
-        selrole => 'object_r',
-        seltype => 'MODULE_NAME_config_t',
-        require => Class['CLASS_NAME'],
-        source  => $source,
+        ensure      => $ensure,
+        owner       => 'root',
+        group       => 'root',
+        mode        => '0640',
+        seluser     => 'system_u',
+        selrole     => 'object_r',
+        seltype     => 'MODULE_NAME_config_t',
+        before      => Service[$MODULE_NAME::params::service_name],
+        notify      => Service[$MODULE_NAME::params::service_name],
+        subscribe   => Package[$MODULE_NAME::params::packages],
+        source      => $source,
     }
 
 }
