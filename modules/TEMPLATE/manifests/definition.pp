@@ -10,6 +10,8 @@
 #
 #       ensure          1       instance is to be present/absent
 #
+#       source                  URI of automount file content
+#
 # Notes:
 #
 #       1. Default is 'present'.
@@ -26,7 +28,7 @@ define MODULE_NAME::DEFINE_NAME ($ensure='present', $source) {
         selrole => 'object_r',
         seltype => 'MODULE_NAME_config_t',
         require => Class['CLASS_NAME'],
-        source  => "${source}",
+        source  => $source,
     }
 
 }
