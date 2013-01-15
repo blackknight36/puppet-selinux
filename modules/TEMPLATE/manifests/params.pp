@@ -9,10 +9,10 @@ class MODULE_NAME::params {
     case $::operatingsystem {
         Fedora: {
 
-            $service_name = 'SERVICE_NAME'
             $packages = [
                 'PACKAGE_NAME',
             ]
+            $service_name = 'SERVICE_NAME'
 
         }
 
