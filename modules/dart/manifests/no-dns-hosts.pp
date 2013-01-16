@@ -50,6 +50,11 @@ class dart::no-dns-hosts {
         host_aliases    => [ 'mdct-f17-builder', 'f17b' ],
     }
 
+    host { 'mdct-f18-builder.dartcontainer.com':
+        ip              => '10.1.192.145',
+        host_aliases    => [ 'mdct-f17-builder', 'f18b' ],
+    }
+
     host { 'tc-util.dartcontainer.com':
         ip              => '10.1.250.61',
         host_aliases    => [ 'tc-util' ],
