@@ -8,4 +8,4 @@ PATH=/sbin:/bin:/usr/sbin:/usr/bin
 RSYNC_PROXY=mdct-proxy:8080
 
 # RPM Fusion mirroring
-25 * * * * mirrmaid           nice ionice -c3 mirrmaid -c /etc/mirrmaid/mirrmaid-rpmfusion.conf
+*/18 * * * * mirrmaid       nice ionice -c3 mirrmaid -c /etc/mirrmaid/mirrmaid-rpmfusion.conf

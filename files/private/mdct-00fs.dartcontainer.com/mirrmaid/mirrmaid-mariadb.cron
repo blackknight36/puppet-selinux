@@ -7,5 +7,5 @@ PATH=/sbin:/bin:/usr/sbin:/usr/bin
 # All jobs declared here will use this proxy configuration.
 RSYNC_PROXY=mdct-proxy:8080
 
-# Fedora mirroring (rawhide anyway).
-15 * * * * mirrmaid           nice ionice -c3 mirrmaid -c /etc/mirrmaid/mirrmaid-mariadb.conf
+# MariaDB mirroring
+*/30 * * * * mirrmaid       nice ionice -c3 mirrmaid -c /etc/mirrmaid/mirrmaid-mariadb.conf
