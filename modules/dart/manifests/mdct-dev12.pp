@@ -20,7 +20,6 @@ class dart::mdct-dev12 inherits dart::abstract::workstation_node {
     include 'jetbrains::idea'
     include 'jetbrains::pycharm'
     include 'packages::kde'
-    include 'yum-cron'
 
     class { 'iptables':
         enabled => true,
