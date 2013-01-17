@@ -148,13 +148,13 @@ class dart::mdct-dev12 inherits dart::abstract::workstation_node {
         source  => 'puppet:///private-host/git/gitignore',
     }
 
-    cron { 'daily-git-summary':
-        command         => '~/bin/git-summary',
-        environment     => 'PATH=/usr/bin:/bin:/usr/games:/usr/local/sbin:/usr/sbin:/sbin:~/bin',
-        user            => 'd13677',
-        hour            => 7,
-        minute          => 52,
-        weekday         => ['1-5'],
+    cron::job { 'git-summary':
+        command => 'nice ionice -c 3 git-summary',
+        dow     => 'Mon-Fri',
+        hour    => '7',
+        minute  => '33',
+        user    => 'd13677',
+        mailto  => 'john.florian@dart.biz',
     }
 
 }
