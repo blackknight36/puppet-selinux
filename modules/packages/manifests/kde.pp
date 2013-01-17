@@ -25,7 +25,6 @@ class packages::kde {
         'kdenetwork',
         'kdepim',
         'kdeplasma-addons',
-        'kdeutils',
         'kdm',
         'kipi-plugins',
         'kmplayer',
