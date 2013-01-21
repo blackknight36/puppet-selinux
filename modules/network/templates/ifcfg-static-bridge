@@ -2,21 +2,16 @@
 # This file is managed by puppet.
 
 BOOTPROTO="none"
-<% if bridge != :undef -%>
-BRIDGE="<%= bridge %>"
-<% end -%>
+DEFROUTE="yes"
+DELAY="0"
 DEVICE="<%= name %>"
 HWADDR="<%= interface_hwaddr %>"
-<% if bridge == :undef -%>
 IPADDR="<%= ip_address %>"
 IPV4_FAILURE_FATAL="yes"
 IPV6INIT="no"
-<% end -%>
 NAME="System <%= name %>"
-<% if bridge == :undef -%>
 NETMASK="<%= netmask %>"
-<% end -%>
 NM_CONTROLLED="no"
 NOZEROCONF="yes"
 ONBOOT="yes"
-TYPE="Ethernet"
+TYPE="Bridge"
