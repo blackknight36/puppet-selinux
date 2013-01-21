@@ -14,7 +14,6 @@ class packages::kde {
         'kaffeine',
         'kcm-gtk',
         'kcm_touchpad',
-        'kde-plasma-networkmanagement',
         'kde-plasma-yawp',
         'kdeaccessibility',
         'kdeartwork',
