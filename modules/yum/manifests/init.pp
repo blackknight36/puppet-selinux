@@ -2,6 +2,8 @@
 
 class yum {
 
+    # Stage => first
+
     file { '/etc/yum.conf':
         owner   => 'root',
         group   => 'root',

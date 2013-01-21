@@ -9,6 +9,8 @@
 
 class rpcidmapd {
 
+    # Stage => early
+
     include rpcidmapd::params
 
     package { $rpcidmapd::params::packages:

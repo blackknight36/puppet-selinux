@@ -2,6 +2,8 @@
 
 class authconfig {
 
+    # Stage => early
+
     package { 'authconfig':
          ensure => installed
     }
