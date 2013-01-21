@@ -5,7 +5,6 @@
 class dart::mdct-00fs {
 
     #@# From base_node
-    #@# include authconfig
     #@# include autofs
     include cron::daemon
     #@# include cachefilesd
@@ -15,7 +14,6 @@ class dart::mdct-00fs {
     #@# include openssh-server
     include packages::base
     include puppet::client
-    #@# include rpcidmapd
     include sudo
     include timezone
 

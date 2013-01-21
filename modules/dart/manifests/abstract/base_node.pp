@@ -6,7 +6,6 @@ class dart::abstract::base_node {
     # modules/dart/manifests/classes/mdct-00fs.pp until such time that class
     # can make direct use of this class.
 
-    include authconfig
     include autofs
     include cron::daemon
     include cachefilesd
@@ -16,7 +15,6 @@ class dart::abstract::base_node {
     include openssh-server
     include packages::base
     include puppet::client
-    include rpcidmapd
     include selinux
     include sudo
     include timezone

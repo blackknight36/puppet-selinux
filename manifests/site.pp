@@ -31,13 +31,15 @@ class { 'yum':
 # Why?  Most classes install packages and many create user/group accounts and
 # the authconfig class lowers the default min_id value.  Doing authconfig
 # early ensures that these new accounts fall below the min_id.
-class { 'authconfig':
-    stage => 'early';
-}
-# Why?  Much for the same reason as authconfig.  Not entirely certain this is
-# necessary, but it seems safest this way.
-class { 'rpcidmapd':
-    stage => 'early';
+if $hostname != 'mdct-00fs' {
+    class { 'authconfig':
+        stage => 'early';
+    }
+    # Why?  Much for the same reason as authconfig.  Not entirely certain this is
+    # necessary, but it seems safest this way.
+    class { 'rpcidmapd':
+        stage => 'early';
+    }
 }
 
 #

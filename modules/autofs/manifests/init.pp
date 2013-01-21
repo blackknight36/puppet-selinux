@@ -9,9 +9,6 @@
 
 class autofs {
 
-    include authconfig
-    include rpcidmapd
-
     include autofs::params
 
     package { $autofs::params::packages:
