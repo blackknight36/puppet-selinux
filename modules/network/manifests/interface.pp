@@ -28,6 +28,7 @@ define network::interface (
         $template='standard',
         $ip_address=undef,
         $netmask=undef,
+        $gateway=undef,
         $bridge=undef,
         $peer_dns='yes'
     ) {

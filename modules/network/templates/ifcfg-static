@@ -6,6 +6,9 @@ BOOTPROTO="none"
 BRIDGE="<%= bridge %>"
 <% end -%>
 DEVICE="<%= name %>"
+<% if bridge == :undef -%>
+GATEWAY="<%= gateway %>"
+<% end -%>
 HWADDR="<%= interface_hwaddr %>"
 <% if bridge == :undef -%>
 IPADDR="<%= ip_address %>"
