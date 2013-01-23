@@ -34,19 +34,11 @@ class timezone {
             content => template('timezone/clock'),
         }
 
-        file { '/etc/localtime':
-            ensure  => link,
-            target  => "/usr/share/zoneinfo/${tzname}",
-        }
+    }
 
-    } else {
-
-        # This accomplishes the same symlink as the File resource above, but
-        # is the preferred method using systemd on F18 and later.
-        exec { "timedatectl set-timezone $tzname":
-            unless  => "timedatectl status | grep -q Timezone:\ $tzname",
-        }
-
+    file { '/etc/localtime':
+        ensure  => link,
+        target  => "/usr/share/zoneinfo/${tzname}",
     }
 
 }
