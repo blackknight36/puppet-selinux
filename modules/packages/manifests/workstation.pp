@@ -6,7 +6,6 @@ class packages::workstation {
 
     package { [
 
-        'bluecurve-cursor-theme',       # provides left-handed cursors
         'builder',
         'firefox',
         'galculator',
