@@ -16,7 +16,6 @@ class packages::workstation {
         'putty',
         'qcad',
         'synergy',
-        'test-automation',
         'xclip',
 
         ]:

@@ -9,5 +9,6 @@ class dart::abstract::workstation_node inherits dart::abstract::base_node {
     include packages::net_tools
     include packages::virtualization
     include packages::workstation
+    include test_automation
     include unwanted-services
 }
