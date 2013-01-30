@@ -70,6 +70,11 @@ class dart::mdct-dev6 inherits dart::abstract::workstation_node {
         require => Service["autofs"],
     }
 
+    file { "/usr/local/selinux":
+        ensure	=> "/mnt-local/storage/usr/local/selinux",
+        require => Service["autofs"],
+    }
+
     replace_original_with_symlink_to_alternate { "/etc/libvirt":
         alternate       => "/mnt-local/storage/etc/libvirt",
         backup          => "/etc/libvirt$SUFFIX",
