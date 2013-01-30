@@ -4,6 +4,8 @@ class dart::mdct-dev12 inherits dart::abstract::workstation_node {
 
     class { 'network':
         network_manager => false,
+        domain          => 'dartcontainer.com',
+        name_servers    => ['10.1.0.98', '10.1.0.99'],
     }
 
     network::interface { 'br0':

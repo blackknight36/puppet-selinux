@@ -9,16 +9,23 @@
 #       network_manager false           If true, use NetworkManager instead of
 #                                       legacy network service.
 #
+#       domain                          Name of domain.
+#
+#       name_servers    undef           List of IP addresses that provide DNS
+#                                       name resolution.
+#
 # Requires:
 #       NONE
 #
 # Example Usage:
 #
 #       class {'network':
-#            network_manager => true,
+#            network_manager    => true,
+#            domain             => 'example.com',
+#            name_servers       => ['192.168.1.1', '192.168.1.2']
 #       }
 
-class network ($network_manager=false) {
+class network ($network_manager=false, $domain, $name_servers=undef) {
 
     # initscripts is required regardless of whether NetworkManager is used.
     package { 'initscripts':
@@ -37,6 +44,19 @@ class network ($network_manager=false) {
             # It may be necessary to have the replacement installed prior to
             # removal of the conflicting package.
             require => Package['initscripts'],
+        }
+    }
+
+    if $name_servers != undef {
+        file { '/etc/resolv.conf':
+            owner   => 'root',
+            group   => 'root',
+            mode    => '0644',
+            seluser => 'system_u',
+            selrole => 'object_r',
+            seltype => 'etc_t',
+            before  => Service[$service],
+            content => template('network/resolv.conf'),
         }
     }
 
