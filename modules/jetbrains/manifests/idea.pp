@@ -67,12 +67,17 @@ class jetbrains::idea {
     # Present policy plan is to enforce absence of old stable releases
     # to ensure that no more than two stable releases are installed at any
     # given time.
+    jetbrains::idea-release { 'ideaIU-12.0.2':
+        build   => '123.123',
+    }
+
     jetbrains::idea-release { 'ideaIU-11.1.4':
         build   => '117.963',
     }
 
     jetbrains::idea-release { 'ideaIU-11.1.3':
         build   => '117.798',
+        ensure  => absent,
     }
 
     jetbrains::idea-release { 'ideaIU-11.1.2':
@@ -80,14 +85,14 @@ class jetbrains::idea {
         ensure  => absent,
     }
 
-    jetbrains::idea-release { 'ideaIU-11.1.1':
-        build   => '117.117',
-        ensure  => absent,
+    # EAP releases are simpler as their name reflects the build.
+    jetbrains::idea-release { 'ideaIU-123.150':
+        build   => "123.150",
     }
 
-    # EAP releases are simpler as their name reflects the build.
     jetbrains::idea-release { 'ideaIU-114.98':
         build   => "114.98",
+        ensure  => absent,
     }
 
 }
