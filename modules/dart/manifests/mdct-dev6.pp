@@ -2,26 +2,36 @@
 
 class dart::mdct-dev6 inherits dart::abstract::workstation_node {
 
+    class { 'network':
+        network_manager => false,
+        domain => 'dartcontainer.com',
+        name_servers => ['10.1.0.98','10.1.0.99'],
+    }
+
+    network::interface { 'br0':
+        template => 'static-bridge',
+        ip_address  => '10.1.0.156',
+        netmask     => '255.255.0.0',
+        gateway     => '10.1.0.25',
+    }
+
+    network::interface { 'em1':
+        template    => 'static',
+        bridge      => 'br0',
+    }
+
+    class { 'xorg-server':
+        config  => 'puppet:///private-host/etc/X11/xorg.conf',
+        drivers => ['kmod-nvidia'],
+    }
+
     class { 'plymouth':
         theme   => 'details',
     }
 
     include mysql-server
     include packages::kde
-
-    service { "NetworkManager":
-        enable          => false,
-        ensure          => stopped,
-        hasrestart      => true,
-        hasstatus       => true,
-    }
-
-    service { "network":
-        enable          => true,
-        ensure          => running,
-        hasrestart      => true,
-        hasstatus       => true,
-    }
+    include jetbrains::idea
 
     $SUFFIX=".orig-${operatingsystem}${operatingsystemrelease}"
 
@@ -52,11 +62,6 @@ class dart::mdct-dev6 inherits dart::abstract::workstation_node {
 
     file { "/etc/sysconfig/picaps":
         ensure	=> "/mnt-local/storage/dist/resource/init.d/sysconfig",
-        require => Service["autofs"],
-    }
-
-    file { "/usr/local/idea":
-        ensure	=> "/mnt-local/storage/usr/local/idea",
         require => Service["autofs"],
     }
 
