@@ -6,9 +6,8 @@
 # Parameters:
 #       Name__________  Default_______  Description___________________________
 #
-#       network_manager false           Install NetworkManager and related
-#                                       packages, which are useful on WiFi
-#                                       capable devices.
+#       network_manager false           If true, use NetworkManager instead of
+#                                       legacy network service.
 #
 # Requires:
 #       NONE
@@ -21,17 +20,20 @@
 
 class network ($network_manager=false) {
 
+    # initscripts is required regardless of whether NetworkManager is used.
     package { 'initscripts':
         ensure  => installed,
     }
 
     if $network_manager == true {
-        package { ['NetworkManager', 'kde-plasma-networkmanagement']:
-            ensure => installed,
+        $service = 'NetworkManager'
+        package { ['NetworkManager']:
+            ensure  => installed,
         }
     } else {
+        $service = 'network'
         yum::remove { 'NetworkManager':
-            before  => Service['network'],
+            before  => Service[$service],
             # It may be necessary to have the replacement installed prior to
             # removal of the conflicting package.
             require => Package['initscripts'],
@@ -44,12 +46,12 @@ class network ($network_manager=false) {
         target  => "sysconfig/network-scripts/",
     }
 
-    service { 'network':
-        enable          => true,
-        ensure          => running,
-        hasrestart      => true,
-        hasstatus       => true,
-        require         => [
+    service { $service:
+        enable      => true,
+        ensure      => running,
+        hasrestart  => true,
+        hasstatus   => true,
+        require     => [
             Package['initscripts'],
         ],
     }
