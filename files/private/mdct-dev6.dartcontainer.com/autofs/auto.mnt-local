@@ -17,10 +17,10 @@ files-2k1-prodmondata  	-fstype=cifs,rw,uid=d19749,gid=d19749,credentials=/etc/.
 mas9965 		-fstype=cifs,rw,credentials=/etc/.credentials/mas9965.cred     			  ://mas9965.dartcontainer.com/c\$
 
 # general storage not belonging to any particiluar Fedora installation
-storage                 -fstype=ext3,rw         :/dev/data/storage
+storage                 -fstype=ext4,rw         :/dev/data2013/storage
 
 # general storage not belonging to any particiluar Fedora installation
-#storage-new                 -fstype=ext3,rw         :/dev/data2013/storage
+storage-old                 -fstype=ext3,rw         :/dev/data/storage
 
 # Fedora 15 root file system
 #f15root                 -fstype=ext4,ro         :/dev/mdctdev6_2010/f15root/
