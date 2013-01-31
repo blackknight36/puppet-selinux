@@ -40,6 +40,7 @@ class rpcidmapd {
     if $rpcidmapd::params::kernel_options != undef {
         file { '/etc/modprobe.d/nfs.conf':
             mode    => '0644',
+            seltype => 'modules_conf_t',
             content => "$rpcidmapd::params::kernel_options\n",
         }
     }
