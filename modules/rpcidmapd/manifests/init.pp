@@ -34,6 +34,16 @@ class rpcidmapd {
         source      => 'puppet:///modules/rpcidmapd/idmapd.conf',
     }
 
+    # Configuring the nfs kernel module like this is only necessary so long as
+    # our NFS servers are Fedora < 16.  This works around a kernel bug on
+    # older NFS servers.  Technical contact for this is Levi Harper.
+    if $rpcidmapd::params::kernel_options != undef {
+        file { '/etc/modprobe.d/nfs.conf':
+            mode    => '0644',
+            content => "$rpcidmapd::params::kernel_options\n",
+        }
+    }
+
     service { $rpcidmapd::params::service_name:
         enable      => true,
         ensure      => running,

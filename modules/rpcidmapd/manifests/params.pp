@@ -16,11 +16,13 @@ class rpcidmapd::params {
                     'libnfsidmap',
                     'nfs-utils',
                 ]
+                $kernel_options = 'options nfs nfs4_disable_idmapping=n'
             } else {
                 $packages = [
                     'nfs-utils',
                     'nfs-utils-lib',
                 ]
+                $kernel_options = undef
             }
 
             if  $operatingsystemrelease == 'Rawhide' or
