@@ -17,7 +17,7 @@
 
 class MODULE_NAME::CLASS_NAME {
 
-    include MODULE_NAME::params
+    include 'MODULE_NAME::params'
 
     package { $MODULE_NAME::params::packages:
         ensure  => installed,
