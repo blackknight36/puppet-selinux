@@ -114,4 +114,4 @@ ldap_search_base = dc=dartcontainer,dc=com
 ldap_tls_cacertdir = /etc/openldap/cacerts
 ldap_uri = ldap://10.1.192.106
 min_id = 500
-
+pwd_expiration_warning = 14
