@@ -50,8 +50,8 @@ warn() {
 SOURCE='/srv/mas-cad10-volumes/'
 TARGET=''
 
-# Who will receive the operations log.
-MAILTO="forrest.styx@dart.biz ken.mcintyre@dart.biz"
+# A space delimited list of who will receive the operations log.
+MAILTO="forrest.styx@dart.biz"
 
 
 # Don't change anything below this point, unless you know what you're doing.

@@ -11,7 +11,7 @@ class dart::tc-util inherits dart::abstract::server_node {
         mode    => '0400',
         content => 'domain=MASON_NTD
 username=tcadmin
-password=Tc_admin1a
+password=T1c!3P01
 ',
     }
 
@@ -24,7 +24,7 @@ password=Tc_admin1a
     # Users defined in Active Directory; this just for group membership since
     # the 'groupadd' provider for the group type (above) does not support
     # membership management.
-    user { ['d20113', 'd74326']:
+    user { ['d74326']:
         groups  => 'tcadmins',
         require => Group['tcadmins'],
     }
