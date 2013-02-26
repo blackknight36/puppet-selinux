@@ -1,77 +1,79 @@
 # modules/iptables/manifests/init.pp
 #
 # Synopsis:
-#       Configures the iptables and ip6tables services on a host.
+#       Configures the iptables service(s) on a host.
 #
 # Parameters:
-#       $enabled       services enabled: true (default) or false
+#       Name__________  Notes_  Description___________________________
 #
-# Requires:
+#       enabled                 service is to be enabled and running
 #
-# Example usage:
+#       kernel_modules  1       additional kernel modules to be loaded, e.g.,
+#                               for conntrack support
 #
-#       class { 'iptables':
-#           enabled => false,
-#       }
+# Notes:
+#
+#       1. Default is ''.
+
 
 class iptables($enabled, $kernel_modules='') {
 
-    package { 'iptables':
-        ensure => installed,
+    include 'iptables::params'
+
+    package { $iptables::params::packages:
+        ensure  => installed,
+        notify  => Service[$iptables::params::services],
     }
 
-    if $operatingsystem == 'Fedora' and $operatingsystemrelease < 16 {
-        package { 'iptables-ipv6':
-            before      => File['/etc/sysconfig/ip6tables-config'],
-            ensure => installed,
-        }
+    File {
+        owner       => 'root',
+        group       => 'root',
+        mode        => '0600',
+        seluser     => 'system_u',
+        selrole     => 'object_r',
+        seltype     => 'system_conf_t',
+        before      => Service[$iptables::params::services],
+        notify      => Service[$iptables::params::services],
+        subscribe   => Package[$iptables::params::packages],
     }
 
     file { '/etc/sysconfig/iptables-config':
-	content	=> template('iptables/iptables-config'),
-        group	=> 'root',
-        mode    => '0600',
-        owner   => 'root',
-        require => Package['iptables'],
-        seluser => 'system_u',
-        selrole => 'object_r',
-        seltype => 'system_conf_t',
+        content => template('iptables/iptables-config'),
     }
 
     file { '/etc/sysconfig/ip6tables-config':
-        before  => Service['ip6tables'],
-	content	=> template('iptables/ip6tables-config'),
-        group	=> 'root',
-        mode    => '0600',
-        owner   => 'root',
-        seluser => 'system_u',
-        selrole => 'object_r',
-        seltype => 'system_conf_t',
+        content => template('iptables/ip6tables-config'),
     }
 
-    service { 'iptables':
-        enable          => $enabled,
-        ensure          => $enabled,
-        hasrestart      => true,
-        hasstatus       => false,   # it does, but always exits 0
-        require         => [
-            Package['iptables'],
-        ],
-        # weak strategy, best so far: look for rules prefixed with a line
-        # number
-        status          => '(iptables -L --line-numbers; iptables -L -t nat --line-numbers) | grep -q "^[0-9]"',
-        subscribe       => File['/etc/sysconfig/iptables-config'],
+    Service {
+        enable      => $enabled,
+        ensure      => $enabled,
+        hasrestart  => true,
+        hasstatus   => true,
     }
 
-    service { 'ip6tables':
-        enable          => $enabled,
-        ensure          => $enabled,
-        hasrestart      => true,
-        hasstatus       => false,   # it does, but always exits 0
-        # weak strategy, best so far: look for rules prefixed with a line
-        # number
-        status          => 'ip6tables -L --line-numbers | grep -q "^[0-9]"',
-        subscribe       => File['/etc/sysconfig/ip6tables-config'],
+    if $operatingsystem == 'Fedora' and $operatingsystemrelease < 16 {
+        service { 'iptables':
+            hasstatus   => false,   # it does, but always exits 0
+            # weak strategy, best so far: look for rules prefixed with a line
+            # number
+            status      => '(iptables -L --line-numbers; iptables -L -t nat --line-numbers) | grep -q "^[0-9]"',
+        }
+
+        service { 'ip6tables':
+            hasstatus   => false,   # it does, but always exits 0
+            # weak strategy, best so far: look for rules prefixed with a line
+            # number
+            status      => 'ip6tables -L --line-numbers | grep -q "^[0-9]"',
+        }
+    } else {
+        # Fedora 16 introduces systemd, which provides sane status support ...
+        service { $iptables::params::services:
+            enable      => $enabled,
+            ensure      => $enabled,
+            hasrestart  => true,
+            hasstatus   => true,
+        }
     }
 
 }
