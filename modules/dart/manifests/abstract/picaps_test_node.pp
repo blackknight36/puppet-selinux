@@ -62,6 +62,13 @@ class dart::abstract::picaps_test_node inherits dart::abstract::server_node {
     }
 
     # PICAPS calls gethostbyname() for its own hostname which must resolve.
+    #
+    # NB: If you get the following error from puppet here ...
+    #   Parameter ip failed: Invalid IP address ""
+    # ... it is most likely due to this bug ...
+    #   https://projects.puppetlabs.com/issues/15001
+    # As a work around, you should either: 1) put the host into DNS or, 2) put
+    # the host into /etc/hosts (manually, of course).
     host { "$fqdn":
         ip              => "$ipaddress",
         host_aliases    => [ "$hostname" ],
