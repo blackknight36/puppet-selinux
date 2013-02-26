@@ -18,7 +18,7 @@ class openssh-server {
     include lokkit
 
     package { 'openssh-server':
-	ensure	=> installed,
+        ensure	=> installed,
     }
 
     file { '/etc/ssh/sshd_config':
@@ -26,7 +26,7 @@ class openssh-server {
         mode    => 600,
         owner   => 'root',
         require => Package['openssh-server'],
-	source	=> [
+        source	=> [
             'puppet:///private-host/openssh-server/sshd_config',
             'puppet:///private-domain/openssh-server/sshd_config',
             "puppet:///modules/openssh-server/sshd_config.$operatingsystem.$operatingsystemrelease",
