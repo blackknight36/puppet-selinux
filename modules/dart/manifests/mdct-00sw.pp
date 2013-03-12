@@ -20,6 +20,13 @@ class dart::mdct-00sw inherits dart::abstract::workstation_node {
         geometry        => '1600x900',
     }
 
+    vnc::display-config { 'Koua Vue':
+        display_num     => 3,
+        user            => 'd24024',
+        password        => 'mdct/vnc',
+        geometry        => '1600x900',
+    }
+
     # Repeat as necessary for additional user sessions.
     #   vnc::display-config { 'Yosemite Sam':
     #       display_num     => 3,
