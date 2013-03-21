@@ -48,33 +48,19 @@ class packages::kde {
     if $operatingsystem == 'Fedora' {
 
         if  $operatingsystemrelease == 'Rawhide' or
-            $operatingsystemrelease >= 18
+            $operatingsystemrelease >= 17
         {
             package { [
+                'calligra-krita',
+                'kde-baseapps',
                 'kde-print-manager',
                 ]:
                 ensure => installed,
             }
         } else {
             package { [
-                'system-config-printer-kde',
-                ]:
-                ensure => installed,
-            }
-        }
-
-        if  $operatingsystemrelease == 'Rawhide' or
-            $operatingsystemrelease >= 17
-        {
-            package { [
-                'calligra-krita',
-                'kde-baseapps',
-                ]:
-                ensure => installed,
-            }
-        } else {
-            package { [
                 'koffice-krita',
+                'system-config-printer-kde',
                 ]:
                 ensure => installed,
             }
