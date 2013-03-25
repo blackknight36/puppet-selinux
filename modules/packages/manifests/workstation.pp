@@ -11,7 +11,6 @@ class packages::workstation {
         'galculator',
         'lyx',
         'pavucontrol',
-        'pbm-progs',
         'plant-launchers',
         'putty',
         'qcad',
