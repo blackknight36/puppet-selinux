@@ -15,7 +15,6 @@ class packages::workstation {
         'plant-launchers',
         'putty',
         'qcad',
-        'synergy',
         'xclip',
 
         ]:
