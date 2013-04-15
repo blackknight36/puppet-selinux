@@ -1,6 +1,6 @@
-# modules/mariadb_server/manifests/init.pp
+# modules/mariadb_server_preF18/manifests/init.pp
 
-class mariadb_server {
+class mariadb_server_preF18 {
 
     file { "/etc/yum.repos.d/MariaDB.repo":
         group   => "root",
@@ -8,7 +8,7 @@ class mariadb_server {
         owner   => "root",
         source  => [
             'puppet:///private-host/etc/yum.repos.d/MariaDB.repo',
-            'puppet:///modules/mariadb_server/MariaDB.repo',
+            'puppet:///modules/mariadb_server_preF18/MariaDB.repo',
         ],
     }
 
@@ -64,7 +64,7 @@ class mariadb_server {
         owner   => "root",
         source  => [
             'puppet:///private-host/etc/my.cnf',
-            'puppet:///modules/mariadb_server/my.cnf',
+            'puppet:///modules/mariadb_server_preF18/my.cnf',
         ],
     }
 
