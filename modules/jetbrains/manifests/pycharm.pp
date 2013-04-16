@@ -84,17 +84,17 @@ class jetbrains::pycharm {
 
     # EAP releases are simpler as their name reflects the build.
 
+    jetbrains::pycharm-release { 'pycharm-129.258':
+        build   => '129.258',
+    }
+
     jetbrains::pycharm-release { 'pycharm-129.103':
         build   => '129.103',
+        ensure  => 'absent',
     }
 
     jetbrains::pycharm-release { 'pycharm-129.19':
         build   => '129.19',
-        ensure  => 'absent',
-    }
-
-    jetbrains::pycharm-release { 'pycharm-125.16':
-        build   => '125.16',
         ensure  => 'absent',
     }
 
