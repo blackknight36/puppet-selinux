@@ -10,6 +10,7 @@ class dart::abstract::picaps_production_server_node inherits dart::abstract::ser
         'numactl',
         'numad',
         'httpd',
+        'cups',
         'ncftp',
         'pyserial',
         ]:
