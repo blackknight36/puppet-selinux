@@ -24,7 +24,7 @@ password=T1c!3P01
     # Users defined in Active Directory; this just for group membership since
     # the 'groupadd' provider for the group type (above) does not support
     # membership management.
-    user { ['d74326']:
+    user { ['d74326', 'd850293']:
         groups  => 'tcadmins',
         require => Group['tcadmins'],
     }

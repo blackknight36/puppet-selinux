@@ -51,7 +51,7 @@ SOURCE='/srv/mas-cad10-volumes/'
 TARGET=''
 
 # A space delimited list of who will receive the operations log.
-MAILTO="forrest.styx@dart.biz"
+MAILTO="forrest.styx@dart.biz arul.jaganathan@dart.biz"
 
 
 # Don't change anything below this point, unless you know what you're doing.
