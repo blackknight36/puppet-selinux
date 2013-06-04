@@ -53,17 +53,17 @@ class dart::abstract::picaps_production_server_node inherits dart::abstract::ser
     # TODO: something
 
     # JDK's
+    oracle::jdk { 'jdk-7u21-linux-x64':
+        ensure  => 'present',
+        version => '7',
+        update  => '21',
+    }
     oracle::jdk { 'jdk-7u17-linux-x64':
         ensure  => 'present',
         version => '7',
         update  => '17',
-    }
-    oracle::jdk { 'jdk-7u15-linux-x64':
-        ensure  => 'present',
-        version => '7',
-        update  => '15',
         before  => [
-            Exec["install oracle jdk-7u17-linux-x64"],
+            Exec["install oracle jdk-7u21-linux-x64"],
         ],
     }
     file { "/usr/java/latest/jre/lib/management/jmxremote.password":
@@ -74,7 +74,7 @@ class dart::abstract::picaps_production_server_node inherits dart::abstract::ser
             'puppet:///modules/dart/picaps-servers/jmxremote.password',
         ],
         require  => [
-            Exec["install oracle jdk-7u17-linux-x64"],
+            Exec["install oracle jdk-7u21-linux-x64"],
         ],
     }
 

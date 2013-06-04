@@ -10,7 +10,7 @@ class dart::mdct-0314pi inherits dart::abstract::picaps_production_server_node {
 
     #network::interface { 'em1':
     #    template => 'static',
-    #    ip_address  => '10.7.215.201',
+    #    ip_address  => '10.7.215.3',
     #    netmask     => '255.255.252.0',
     #    gateway     => '10.7.215.254',
     #}
