@@ -5,6 +5,12 @@ class dart::tc-util inherits dart::abstract::server_node {
     include packages::developer
     include yum-cron
 
+    #
+    ##
+    ### TeamCenter Sync Support
+    ##
+    #
+
     file { '/etc/tc-credentials':
         owner   => 'root',
         group   => 'root',
@@ -98,6 +104,51 @@ password=T1c!3P01
         group   => 'root',
         mode    => '0755',
         source  => 'puppet:///modules/dart/tc-util/teamcenter-sync',
+    }
+
+    #
+    ##
+    ### TeamCenter Git Repository Support
+    ##
+    #
+
+    file { '/storage':
+        ensure  => 'directory',
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0755',
+        seluser => 'system_u',
+        selrole => 'object_r',
+        seltype => 'file_t',
+    }
+
+    mount { '/storage':
+        atboot  => true,
+        device  => '/dev/mapper/vg_tcutil-lv_storage',
+        dump    => 1,
+        ensure  => 'mounted',
+        fstype  => 'ext4',
+        options => 'defaults',
+        pass    => 2,
+        require => File['/storage'],
+    }
+
+    file { '/srv/git_home':
+        ensure  => 'directory',
+        # Nothing else managed since the values will differ before/after the
+        # mount below occurs, which confuses puppet.
+    }
+
+    mount { '/srv/git_home':
+        atboot  => true,
+        device  => '/storage/git_home',
+        ensure  => 'mounted',
+        fstype  => 'none',
+        options => 'bind',
+        require => [
+            File['/srv/git_home'],
+            Mount['/storage'],
+        ],
     }
 
 }
