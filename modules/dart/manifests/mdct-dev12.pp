@@ -53,10 +53,10 @@ class dart::mdct-dev12 inherits dart::abstract::workstation_node {
         ensure  => installed,
     }
 
-    oracle::jdk { 'jdk-7u17-linux-x64':
+    oracle::jdk { 'jdk-7u25-linux-x64':
         ensure  => 'present',
         version => '7',
-        update  => '17',
+        update  => '25',
     }
 
     $SUFFIX=".orig-${operatingsystem}${operatingsystemrelease}"
