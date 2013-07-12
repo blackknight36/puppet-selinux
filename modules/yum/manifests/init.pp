@@ -61,31 +61,15 @@ class yum {
         }
 
         config_repo {'rpmfusion-free':
-            server_uri	=> "$pub/rpmfusion/free/fedora/releases/${operatingsystemrelease}/Everything/${architecture}/os/",
+            server_uri	=> "$pub/rpmfusion/free/fedora",
             pkg_name	=> 'rpmfusion-free-release',
-            pkg_release	=> $operatingsystemrelease ? {
-                '13'	=> '13-2.noarch',
-                '14'	=> '14-0.4.noarch',
-                '15'	=> '15-1.noarch',
-                '16'	=> '16-1.2.noarch',
-                '17'	=> '17.0.3-1.noarch',
-                '18'	=> '18-2.noarch',
-                '19'	=> '19-1.noarch',
-                },
+            pkg_release	=> "$operatingsystemrelease.noarch",
         }
 
         config_repo {'rpmfusion-nonfree':
-            server_uri	=> "$pub/rpmfusion/nonfree/fedora/releases/${operatingsystemrelease}/Everything/${architecture}/os/",
+            server_uri	=> "$pub/rpmfusion/nonfree/fedora",
             pkg_name	=> 'rpmfusion-nonfree-release',
-            pkg_release	=> $operatingsystemrelease ? {
-                '13' 	=> '13-2.noarch',
-                '14' 	=> '14-0.4.noarch',
-                '15' 	=> '15-1.noarch',
-                '16' 	=> '16-1.1.noarch',
-                '17' 	=> '17.0.3-1.noarch',
-                '18' 	=> '18-2.noarch',
-                '19' 	=> '19-1.noarch',
-                },
+            pkg_release	=> "$operatingsystemrelease.noarch",
             require	=> Exec['config-repo-rpmfusion-free'],
         }
 
