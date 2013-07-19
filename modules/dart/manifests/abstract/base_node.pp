@@ -14,7 +14,6 @@ class dart::abstract::base_node {
     include ntp
     include openssh-server
     include packages::base
-    include puppet::client
     #include selinux
     include sudo
     include timezone

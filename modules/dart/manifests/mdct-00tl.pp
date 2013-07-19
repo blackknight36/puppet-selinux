@@ -11,6 +11,9 @@ class dart::mdct-00tl inherits dart::abstract::server_node {
         mon_passwd      => '8QNsZ1MehmXv61Kx8l2IcnOhtjrXeV3iFBm3GNOqukMU',
     }
 
+    class { 'puppet::client':
+    }
+
     lokkit::tcp_port {
             'http':                 port => '80';
     }

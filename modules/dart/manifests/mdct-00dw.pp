@@ -6,4 +6,7 @@ class dart::mdct-00dw inherits dart::abstract::server_node {
         enabled => true,
     }
 
+    class { 'puppet::client':
+    }
+
 }

@@ -3,6 +3,10 @@
 class dart::abstract::dr_server_node inherits dart::abstract::server_node {
 
     include lokkit
+
+    class { 'puppet::client':
+    }
+
     include postgresql::server
 
     package { [ 'tomcat', 'tomcat-admin-webapps', ]:

@@ -6,9 +6,13 @@ class dart::mdct-tc inherits dart::abstract::server_node {
         enabled => true,
     }
 
+    include apache
     include lokkit
     include postgresql::server
-    include apache
+
+    class { 'puppet::client':
+    }
+
 
     package { [ 'php', ]:
         ensure  => installed,

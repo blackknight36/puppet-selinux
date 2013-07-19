@@ -6,6 +6,9 @@
 
 class dart::abstract::plant_utility_server_node inherits dart::abstract::server_node {
 
+    class { 'puppet::client':
+    }
+
     # AOS devices pull media-playback content using rsync.
     include rsync-server
 

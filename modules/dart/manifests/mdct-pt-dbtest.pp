@@ -1,7 +1,8 @@
 # modules/dart/manifests/mdct-pt-dbtest.pp
 #
 # Synopsis:
-#       This class is used primarily for a PICAPS test server specific to database testing
+#       This class is used primarily for a PICAPS test server specific to
+#       database testing.
 
 class dart::mdct-pt-dbtest inherits dart::abstract::server_node {
 
@@ -19,6 +20,13 @@ class dart::mdct-pt-dbtest inherits dart::abstract::server_node {
 
     # Enable automatic package updates
     include 'yum-cron'
+
+    # PICAPS admins desire puppet only for tasks at server inception and forgo
+    # all run-state management.
+    class { 'puppet::client':
+        enable  => false,
+        ensure  = 'stopped',
+    }
 
     # PICAPS uses rsync for backup and other similar uses
     include 'rsync-server'

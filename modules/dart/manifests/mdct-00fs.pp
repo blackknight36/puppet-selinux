@@ -13,7 +13,10 @@ class dart::mdct-00fs {
     include ntp
     #@# include openssh-server
     include packages::base
-    include puppet::client
+
+    class { 'puppet::client':
+    }
+
     include sudo
     include timezone
 

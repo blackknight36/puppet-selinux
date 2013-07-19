@@ -2,4 +2,7 @@
 
 class dart::mdct-dev10-srvr inherits dart::abstract::server_node {
 
+    class { 'puppet::client':
+    }
+
 }

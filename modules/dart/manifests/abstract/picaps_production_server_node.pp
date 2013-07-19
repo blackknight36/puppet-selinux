@@ -22,6 +22,13 @@ class dart::abstract::picaps_production_server_node inherits dart::abstract::ser
         enabled => false,
     }
 
+    # PICAPS admins desire puppet only for tasks at server inception and forgo
+    # all run-state management.
+    class { 'puppet::client':
+        enable  => false,
+        ensure  = 'stopped',
+    }
+
     mailalias { "root":
         ensure          => present,
         recipient       => "chris.kennedy@dart.biz",

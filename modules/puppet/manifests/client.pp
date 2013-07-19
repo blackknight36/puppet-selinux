@@ -1,6 +1,6 @@
 # modules/puppet/manifests/client.pp
 
-class puppet::client {
+class puppet::client ($enable=true, $ensure='running') {
 
     include puppet::params
 
@@ -29,7 +29,7 @@ class puppet::client {
         seltype     => 'puppet_etc_t',
         before      => Service[$puppet::params::client_service_name],
         notify      => Service[$puppet::params::client_service_name],
-        subscribe	=> Package[$puppet::params::client_packages],
+        subscribe   => Package[$puppet::params::client_packages],
     }
 
     file { '/etc/puppet/puppet.conf':
@@ -40,8 +40,8 @@ class puppet::client {
     }
 
     service { $puppet::params::client_service_name:
-        enable		=> true,
-        ensure		=> running,
+        enable		=> $enable,
+        ensure		=> $ensure,
         hasrestart	=> true,
         hasstatus	=> true,
     }

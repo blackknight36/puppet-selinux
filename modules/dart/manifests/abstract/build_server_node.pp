@@ -3,6 +3,10 @@
 class dart::abstract::build_server_node inherits dart::abstract::server_node {
     include packages::developer
     include packages::net_tools
+
+    class { 'puppet::client':
+    }
+
     include unwanted-services
 
     file { '/j':
