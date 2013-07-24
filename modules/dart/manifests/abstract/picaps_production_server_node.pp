@@ -26,7 +26,7 @@ class dart::abstract::picaps_production_server_node inherits dart::abstract::ser
     # all run-state management.
     class { 'puppet::client':
         enable  => false,
-        ensure  = 'stopped',
+        ensure  => 'stopped',
     }
 
     mailalias { "root":
@@ -38,7 +38,7 @@ class dart::abstract::picaps_production_server_node inherits dart::abstract::ser
     # Note: switching from enforcing or permissive to disabled requires reboot.
     # Note: switching from disabled to enforcing or permissive requires reboot.
     class { 'selinux':
-        mode => 'disabled', 
+        mode => 'disabled',
     }
 
     # OpenIPMI
@@ -50,7 +50,7 @@ class dart::abstract::picaps_production_server_node inherits dart::abstract::ser
     # PICAPS uses rsync for backup and other similar uses
     include 'rsync-server'
 
-    # Samba 
+    # Samba
     include 'samba'
 
     # Developer tools (includes python, cvs, git, etc)
