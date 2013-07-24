@@ -25,6 +25,7 @@ node 'mdct-76pt.dartcontainer.com'              { include dart::mdct-76pt }
 node 'mdct-77pt.dartcontainer.com'              { include dart::mdct-77pt }
 node 'mdct-99pi.dartcontainer.com'              { include dart::mdct-99pi }
 node 'mdct-0314pi.dartcontainer.com'            { include dart::mdct-0314pi }
+node 'mdct-recov.dartcontainer.com'             { include dart::mdct-recov }
 node 'mdct-pt-dbtest.dartcontainer.com'         { include dart::mdct-pt-dbtest }
 node 'mdct-aos-master-f15.dartcontainer.com'    { include dart::mdct-aos-master-f15 }
 node 'mdct-ci-agent1.dartcontainer.com'         { include dart::mdct-ci-agent1 }
