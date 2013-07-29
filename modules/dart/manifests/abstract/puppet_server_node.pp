@@ -2,6 +2,7 @@
 
 class dart::abstract::puppet_server_node inherits dart::abstract::server_node {
 
+    include 'autofs'
     include 'packages::developer'
 
     class { 'puppet::client':

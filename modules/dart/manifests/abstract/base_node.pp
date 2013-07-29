@@ -6,7 +6,6 @@ class dart::abstract::base_node {
     # modules/dart/manifests/classes/mdct-00fs.pp until such time that class
     # can make direct use of this class.
 
-    include autofs
     include cron::daemon
     include cachefilesd
     include dart::no-dns-hosts

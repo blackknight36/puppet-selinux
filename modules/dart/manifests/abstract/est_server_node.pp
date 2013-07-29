@@ -2,6 +2,7 @@
 
 class dart::abstract::est_server_node inherits dart::abstract::server_node {
 
+    include 'autofs'
     include postgresql::server
 
     class { 'puppet::client':

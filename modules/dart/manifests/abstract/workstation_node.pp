@@ -1,6 +1,8 @@
 # modules/dart/manifests/abstract/workstation_node.pp
 
 class dart::abstract::workstation_node inherits dart::abstract::base_node {
+
+    include 'autofs'
     include flock-herder
     # Lotus Notes has been disabled for now due to poor functioning.
     #include lotus_notes_client
