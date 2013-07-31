@@ -61,8 +61,8 @@ class jetbrains::pycharm {
         require => File["${pycharm_config}"],
     }
 
-    # Stable releases are named with the release, but extract to the
-    # build.
+    #
+    # Stable Releases
     #
     # Present policy plan is to enforce absence of old stable releases
     # to ensure that no more than two stable releases are installed at any
@@ -77,14 +77,16 @@ class jetbrains::pycharm {
         ensure  => 'absent',
     }
 
-    # EAP releases are simpler as their name reflects the build.
+    #
+    # EAP Releases
+    #
+
+    jetbrains::pycharm-release { 'pycharm-130.1451':
+        build   => '130.1451',
+    }
 
     jetbrains::pycharm-release { 'pycharm-130.1058':
         build   => '130.1058',
-    }
-
-    jetbrains::pycharm-release { 'pycharm-129.696':
-        build   => '129.696',
         ensure  => 'absent',
     }
 
