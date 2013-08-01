@@ -13,7 +13,6 @@ class packages::workstation {
         'pavucontrol',
         'plant-launchers',
         'putty',
-        'qcad',
         'xclip',
 
         ]:
