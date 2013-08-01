@@ -20,8 +20,8 @@ class dart::tc-util inherits dart::abstract::server_node {
         group   => 'root',
         mode    => '0400',
         content => 'domain=MASON_NTD
-username=tcsync
-password=T@amc3Nt
+username=tcservices
+password=T5A!ENsER
 ',
     }
 
