@@ -111,6 +111,22 @@ class dart::abstract::picaps_test_server_node inherits dart::abstract::server_no
             Package["httpd"],
         ],
     }
+    file { "/etc/cups/cupsd.conf":
+        group   => "lp",
+        mode    => 640,
+        owner   => "root",
+        source  => [
+            'puppet:///modules/dart/picaps-servers/picaps-cupsd.conf',
+        ],
+    }
+    file { "/root/picaps-printer-setup.sh":
+        group   => "root",
+        mode    => 755,
+        owner   => "root",
+        source  => [
+            'puppet:///modules/dart/picaps-servers/picaps-printer-setup.sh',
+        ],
+    }
     #file { "/etc/httpd/conf.d/ssl.conf":
     #    group   => "root",
     #    mode    => 644,
