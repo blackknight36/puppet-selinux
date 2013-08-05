@@ -20,10 +20,10 @@ class dart::mdct-dev6 inherits dart::abstract::workstation_node {
         bridge      => 'br0',
     }
 
-    class { 'xorg-server':
-        config  => 'puppet:///private-host/etc/X11/xorg.conf',
-        drivers => ['kmod-nvidia'],
-    }
+#   class { 'xorg-server':
+#       config  => 'puppet:///private-host/etc/X11/xorg.conf',
+#       drivers => ['kmod-nvidia'],
+#   }
 
     class { 'plymouth':
         theme   => 'details',
