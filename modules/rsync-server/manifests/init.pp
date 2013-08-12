@@ -2,7 +2,6 @@
 
 class rsync-server {
 
-    include lokkit
     include xinetd
 
     package { 'rsync':

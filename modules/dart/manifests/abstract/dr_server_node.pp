@@ -3,7 +3,6 @@
 class dart::abstract::dr_server_node inherits dart::abstract::server_node {
 
     include 'autofs'
-    include lokkit
 
     class { 'puppet::client':
     }

@@ -6,7 +6,6 @@ class dart::mdct-ci-agent1 inherits dart::abstract::est_server_node {
         enabled => true,
     }
 
-    include 'lokkit'
     lokkit::tcp_port { 'teamcity':
         port    => '9090',
     }

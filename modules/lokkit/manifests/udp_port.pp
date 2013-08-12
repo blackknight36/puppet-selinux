@@ -1,7 +1,7 @@
 # modules/lokkit/manifests/udp_port.pp
 #
 # Synopsis:
-#       Configures iptables to open/close a specific UDP port.
+#       Opens or closes a UDP port in iptables via lokkit.
 #
 # Parameters:
 #       name:           The name of the UDP port to be managed.
@@ -11,9 +11,11 @@
 # Requires:
 #       Class["lokkit"]
 #
-# Example usage:
+# Example Usage:
 #
-#       include lokkit
+#       class { 'lokkit':
+#           managed_host => true,
+#       }
 #
 #       lokkit::udp_port { "domain":
 #           ensure  => "open",
@@ -23,9 +25,7 @@
 
 define lokkit::udp_port ($ensure="open", $port) {
 
-    if $lokkit_disabled == "true" {
-        info("Disabled via \$lokkit_disabled.")
-    } else {
+    if $lokkit::managed_host == true {
 
         case $ensure {
 
@@ -48,6 +48,8 @@ define lokkit::udp_port ($ensure="open", $port) {
 
         }
 
+    } else {
+        notice "iptables management via lokkit is disabled on $fqdn via lokkit::managed_host."
     }
 
 }

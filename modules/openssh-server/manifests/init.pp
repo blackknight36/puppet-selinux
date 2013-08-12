@@ -15,8 +15,6 @@
 
 class openssh-server {
 
-    include lokkit
-
     package { 'openssh-server':
         ensure	=> installed,
     }

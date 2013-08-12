@@ -3,7 +3,6 @@
 class puppet::server {
 
     include cron::daemon
-    include lokkit
     include puppet::client
     include puppet::params
 

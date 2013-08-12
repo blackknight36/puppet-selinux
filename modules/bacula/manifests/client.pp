@@ -23,8 +23,6 @@
 
 class bacula::client($dir_passwd, $mon_passwd) {
 
-    include lokkit
-
     # The introduction of systemd brought subtle configuration changes that
     # must be reflected here.
     if $operatingsystemrelease >= 15 {

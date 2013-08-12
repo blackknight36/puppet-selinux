@@ -11,8 +11,6 @@
 
 class samba {
 
-    include lokkit
-
     package { 'samba':
 	ensure	=> installed,
     }

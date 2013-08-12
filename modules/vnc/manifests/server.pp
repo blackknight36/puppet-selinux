@@ -15,8 +15,6 @@
 
 class vnc::server {
 
-    include lokkit
-
     package { 'tigervnc-server-minimal':
 	ensure	=> installed,
     }

@@ -16,8 +16,6 @@
 
 class apache {
 
-    include 'lokkit'
-
     package { 'httpd':
         ensure  => installed,
     }

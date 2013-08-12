@@ -18,8 +18,6 @@
 
 class vsftpd($allow_use_nfs=false) {
 
-    include lokkit
-
     package { 'vsftpd':
 	ensure	=> installed,
     }

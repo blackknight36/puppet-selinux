@@ -9,6 +9,11 @@ class dart::abstract::base_node {
     include cron::daemon
     include cachefilesd
     include dart::no-dns-hosts
+
+    class { 'lokkit':
+        managed_host    => true,
+    }
+
     include logwatch
     include ntp
     include openssh-server

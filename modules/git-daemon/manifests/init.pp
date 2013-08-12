@@ -2,8 +2,6 @@
 
 class git-daemon {
 
-    include lokkit
-
     package { "git-daemon":
 	ensure	=> installed,
     }
