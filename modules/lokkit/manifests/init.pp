@@ -14,23 +14,19 @@
 #
 #       include lokkit
 
+
 class lokkit {
 
     package { 'system-config-firewall-base':
-        ensure	=> installed,
+        ensure  => installed,
     }
 
+    # firewalld is used exclusively of iptables.  We require the latter.
     if  $operatingsystem == 'Fedora' and
         $operatingsystemrelease == 'Rawhide' or
         $operatingsystemrelease >= 18
     {
-        package { 'firewall-config':
-            ensure	=> absent,
-        }
-
-        package { 'firewalld':
-            ensure	=> absent,
-            require => Package['firewall-config'],
+        yum::remove { 'firewalld':
         }
     }
 
