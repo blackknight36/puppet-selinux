@@ -9,7 +9,7 @@ class dart::abstract::puppet_server_node inherits dart::abstract::server_node {
     }
 
     include 'puppet::server'
-    include 'yum-cron'
+    include 'dart::subsys::yum_cron'
 
     mailalias { 'puppet':
         ensure          => present,

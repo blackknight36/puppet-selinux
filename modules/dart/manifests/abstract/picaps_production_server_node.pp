@@ -45,7 +45,7 @@ class dart::abstract::picaps_production_server_node inherits dart::abstract::ser
     include 'ipmi'
 
     # Automatic package updates
-    #include 'yum-cron'
+    #include 'dart::subsys::yum_cron'
 
     # PICAPS uses rsync for backup and other similar uses
     include 'rsync-server'

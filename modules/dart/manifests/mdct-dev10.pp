@@ -3,6 +3,6 @@
 class dart::mdct-dev10 inherits dart::abstract::workstation_node {
 
     include jetbrains::idea
-    include yum-cron
+    include 'dart::subsys::yum_cron'
 
 }

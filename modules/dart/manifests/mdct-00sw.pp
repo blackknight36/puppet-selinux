@@ -3,7 +3,7 @@
 class dart::mdct-00sw inherits dart::abstract::workstation_node {
 
     include packages::kde
-    include yum-cron
+    include 'dart::subsys::yum_cron'
 
     include vnc::server
 

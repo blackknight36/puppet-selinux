@@ -7,7 +7,7 @@ class dart::tc-util inherits dart::abstract::server_node {
     class { 'puppet::client':
     }
 
-    include yum-cron
+    include 'dart::subsys::yum_cron'
 
     #
     ##

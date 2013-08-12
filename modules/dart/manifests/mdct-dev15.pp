@@ -2,5 +2,5 @@
 
 class dart::mdct-dev15 inherits dart::abstract::workstation_node {
     include packages::kde
-    include yum-cron
+    include 'dart::subsys::yum_cron'
 }

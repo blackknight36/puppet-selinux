@@ -37,6 +37,8 @@ ERROR_LEVEL=0
 # more output. Level 1 is a useful level if you want to see what's been
 # done and don't want to read /var/log/yum.log. Level 0 is the default
 # if no value is set here.
+#
+# Dart policy is to be made aware of upates via report.
 DEBUG_LEVEL=1
 
 # If MAILTO is set and the /bin/mail command is available, the mail
@@ -65,21 +67,12 @@ MAILTO=root
 # if you want to ensure that updates happen at a known time, but could
 # be bad for update servers to be hit by all clients at exactly the
 # same time.
-RANDOMWAIT=7
+RANDOMWAIT=60
 
 # You may set DAYS_OF_WEEK to the numeric days of the week you want to
 # run, where 0 is Sunday and 6 is Saturday. The default is to run every
 # day.
 #DAYS_OF_WEEK="0123456" 
-
-################################################################################
-#
-# ATTENTION!!!
-#
-# The following settings were introduced in Fedora 15.  These will be ignored
-# by older Fedora releases!
-#
-################################################################################
 
 # The cleanup task (which clears the package cache) can run on a subset
 # of the days above. (If the value chosen here doesn't appear in

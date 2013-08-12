@@ -19,7 +19,7 @@ class dart::mdct-pt-dbtest inherits dart::abstract::server_node {
     }
 
     # Enable automatic package updates
-    include 'yum-cron'
+    include 'dart::subsys::yum_cron'
 
     # PICAPS admins desire puppet only for tasks at server inception and forgo
     # all run-state management.

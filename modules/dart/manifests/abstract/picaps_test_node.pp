@@ -19,7 +19,7 @@ class dart::abstract::picaps_test_node inherits dart::abstract::server_node {
     }
 
     # Enable automatic package updates
-    include 'yum-cron'
+    include 'dart::subsys::yum_cron'
 
     # PICAPS uses rsync for backup and other similar uses
     include 'rsync-server'
