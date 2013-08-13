@@ -12,7 +12,7 @@ class puppet::params {
             $client_packages = [ 'puppet', ]
             $server_packages = [ 'puppet-server', 'puppet-tools', ]
 
-            if versioncmp($puppetversion, '3') > 0 {
+            if $::operatingsystemrelease >= 19 {
                 $client_service_name = 'puppetagent'
             } else {
                 $client_service_name = 'puppet'
