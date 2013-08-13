@@ -90,8 +90,13 @@ class jetbrains::idea {
     }
 
     # EAP releases are simpler as their name reflects the build.
+    jetbrains::idea-release { 'ideaIU-129.961':
+        build   => "129.961",
+    }
+
     jetbrains::idea-release { 'ideaIU-123.150':
         build   => "123.150",
+        ensure  => absent,
     }
 
     jetbrains::idea-release { 'ideaIU-114.98':
