@@ -19,6 +19,16 @@ class packages::virtualization {
     if $operatingsystem == 'Fedora' {
 
         if  $operatingsystemrelease == 'Rawhide' or
+            $operatingsystemrelease >= 17
+        {
+            package { [
+                'libvirt-daemon-kvm',
+                ]:
+                ensure => installed,
+            }
+        }
+
+        if  $operatingsystemrelease == 'Rawhide' or
             $operatingsystemrelease >= 11
         {
             package { [
