@@ -17,11 +17,7 @@ class selinux::params {
                     'selinux-policy',
                     'selinux-policy-targeted',
                 ]
-<<<<<<< HEAD
             } else {
-=======
-            else {
->>>>>>> 980f23fc33ef1f127fd982dd5595cf4c794416f9
                 $packages = [
                     'libselinux',
                     'libselinux-utils',
