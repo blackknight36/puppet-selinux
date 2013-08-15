@@ -45,6 +45,9 @@ class autofs {
     file { '/pub':
 	    ensure	=> link,
         target  => '/mnt/pub',
+        seluser => 'system_u',
+        selrole => 'object_r',
+        seltype => 'nfs_t',
     }
 
     service { $autofs::params::service_name:
