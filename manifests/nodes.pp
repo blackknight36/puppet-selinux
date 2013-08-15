@@ -56,6 +56,8 @@ node 'mdct-f18-builder.dartcontainer.com'       { include dart::mdct-f18-builder
 node 'mdct-f19-builder.dartcontainer.com'       { include dart::mdct-f19-builder }
 node 'mdct-ngic.dartcontainer.com'              { include dart::mdct-ngic }
 node 'mdct-ngic-dev.dartcontainer.com'          { include dart::mdct-ngic-dev }
+node 'mdct-ovirt-engine.dartcontainer.com'      { include 'dart::mdct_ovirt_engine' }
+node /^mdct-ovirt-node-.*\.dartcontainer\.com$/ { include 'dart::mdct_ovirt_node' }
 node 'mdct-puppet.dartcontainer.com'            { include dart::mdct-puppet }
 node 'mdct-tc.dartcontainer.com'                { include dart::mdct-tc }
 node 'mdct-test-agent-32.dartcontainer.com'     { include dart::mdct-test-agent-32 }
