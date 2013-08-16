@@ -46,7 +46,7 @@
 /bin/cp -a /dist/resource/systemd/picaps-display.service /etc/systemd/system/picaps-display.service
 /bin/cp -a /dist/resource/systemd/picaps-persister.service /etc/systemd/system/picaps-persister.service
 /bin/cp -a /dist/resource/systemd/picaps-poller.service /etc/systemd/system/picaps-poller.service
-/bin/cp -a /dist/resource/systemd/picaps-poller.service /etc/systemd/system/picaps-poller-xmlrpc.service
+/bin/cp -a /dist/resource/systemd/picaps-poller-xmlrpc.service /etc/systemd/system/picaps-poller-xmlrpc.service
 /bin/systemctl --system daemon-reload
 # enable services
 /bin/systemctl enable picaps-core.service
