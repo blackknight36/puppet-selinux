@@ -21,7 +21,7 @@ class puppet::server {
         seltype     => 'puppet_etc_t',
         before      => Service[$puppet::params::server_service_name],
         notify      => Service[$puppet::params::server_service_name],
-        subscribe	=> Package[$puppet::params::server_packages],
+        subscribe   => Package[$puppet::params::server_packages],
     }
 
     file { '/etc/puppet/fileserver.conf':
@@ -41,16 +41,17 @@ class puppet::server {
     # All other puppet resources, except puppet.conf (see client.pp), are
     # managed via GIT 'in place'.
 
-    lokkit::tcp_port { 'puppetmaster':
-        port    => '8140',
+    lokkit::tcp_port {
+        'puppetmaster':
+            port    => '8140';
     }
 
     service { $puppet::params::server_service_name:
-        enable		=> true,
-        ensure		=> running,
-        hasrestart	=> true,
-        hasstatus	=> true,
-        subscribe	=> [ File['/etc/puppet/puppet.conf'], ],
+        enable      => true,
+        ensure      => running,
+        hasrestart  => true,
+        hasstatus   => true,
+        subscribe   => [ File['/etc/puppet/puppet.conf'], ],
     }
 
 }

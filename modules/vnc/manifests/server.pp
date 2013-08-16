@@ -16,11 +16,11 @@
 class vnc::server {
 
     package { 'tigervnc-server-minimal':
-	ensure	=> installed,
+        ensure  => installed,
     }
 
     package { 'tigervnc-server':
-	ensure	=> installed,
+        ensure  => installed,
         require => Package['tigervnc-server-minimal'],
     }
 

@@ -31,7 +31,7 @@ class autofs {
     }
 
     autofs::mount { 'mnt':
-        source	=> 'puppet:///modules/autofs/auto.mnt',
+        source  => 'puppet:///modules/autofs/auto.mnt',
     }
 
     autofs::mount { 'mnt-local':
@@ -47,12 +47,12 @@ class autofs {
         # from actually changing, so don't even try as it otherwise generates
         # an endless stream of tagmail.
         file { '/pub':
-            ensure	=> link,
+            ensure  => link,
             target  => '/mnt/pub',
         }
     } else {
         file { '/pub':
-            ensure	=> link,
+            ensure  => link,
             target  => '/mnt/pub',
             seluser => 'system_u',
             selrole => 'object_r',

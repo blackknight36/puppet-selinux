@@ -13,15 +13,15 @@
 class bacula::admin {
 
     package { "bacula-traymonitor":
-	ensure	=> installed,
+        ensure  => installed,
     }
 
     package { "bacula-console-bat":
-	ensure	=> installed,
+        ensure  => installed,
     }
 
     file { "/etc/bacula/tray-monitor.conf":
-        group	=> "root",
+        group   => "root",
         mode    => 644,
         owner   => "root",
         require => Package["bacula-traymonitor"],
@@ -29,7 +29,7 @@ class bacula::admin {
     }
 
     file { "/etc/bacula/bat.conf":
-        group	=> "root",
+        group   => "root",
         mode    => 640,
         owner   => "root",
         require => Package["bacula-console-bat"],

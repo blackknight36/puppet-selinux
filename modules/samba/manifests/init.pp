@@ -12,11 +12,11 @@
 class samba {
 
     package { 'samba':
-	ensure	=> installed,
+        ensure  => installed,
     }
 
     file { '/etc/samba/smb.conf':
-        group	=> 'root',
+        group   => 'root',
         mode    => '0640',
         owner   => 'root',
         require => Package['samba'],
@@ -30,37 +30,35 @@ class samba {
         ],
     }
 
-    lokkit::tcp_port { 'netbios-ssn':
-        port    => '139',
+    lokkit::tcp_port {
+        'netbios-ssn':
+            port    => '139';
+        'microsoft-ds':
+            port    => '445';
     }
 
-    lokkit::tcp_port { 'microsoft-ds':
-        port    => '445',
-    }
-
-    selinux::boolean { 'samba_export_all_ro':
-        before          => Service['smb'],
-        persistent      => true,
-        value           => on,
-    }
-
-    selinux::boolean { 'samba_export_all_rw':
-        before          => Service['smb'],
-        persistent      => true,
-        value           => on,
+    selinux::boolean {
+        'samba_export_all_ro':
+            before          => Service['smb'],
+            persistent      => true,
+            value           => on;
+        'samba_export_all_rw':
+            before          => Service['smb'],
+            persistent      => true,
+            value           => on;
     }
 
     service { 'smb':
-        enable		=> true,
-        ensure		=> running,
-        hasrestart	=> true,
-        hasstatus	=> true,
-        require		=> [
+        enable      => true,
+        ensure      => running,
+        hasrestart  => true,
+        hasstatus   => true,
+        require     => [
             Exec['open-microsoft-ds-tcp-port'],
             Exec['open-netbios-ssn-tcp-port'],
             Package['samba'],
         ],
-        subscribe	=> [
+        subscribe   => [
             File['/etc/samba/smb.conf'],
         ],
     }

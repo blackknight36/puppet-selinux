@@ -23,7 +23,7 @@ class apache {
     file { '/etc/httpd/conf/httpd.conf':
         # New templates are best made from pristine copies from the target OS
         # with local changes applied atop that.
-        content	=> template("apache/httpd.conf.${operatingsystem}.${operatingsystemrelease}"),
+        content => template("apache/httpd.conf.${operatingsystem}.${operatingsystemrelease}"),
         group   => 'root',
         mode    => '0640',
         owner   => 'root',
@@ -38,8 +38,9 @@ class apache {
         value           => on,
     }
 
-    lokkit::tcp_port { 'http':
-        port    => '80',
+    lokkit::tcp_port {
+        'http':
+            port    => '80';
     }
 
     service { 'httpd':

@@ -5,11 +5,11 @@ class repoview {
     include cron::daemon
 
     package { 'repoview':
-	ensure	=> installed,
+        ensure  => installed,
     }
 
     file { '/usr/libexec/mdct-repoview':
-        group	=> 'root',
+        group   => 'root',
         mode    => '0755',
         owner   => 'root',
         source  => 'puppet:///modules/repoview/mdct-repoview',
@@ -17,7 +17,7 @@ class repoview {
 
     file { '/var/lib/mdct-repoview':
         ensure  => 'directory',
-        group	=> 'root',
+        group   => 'root',
         mode    => '0755',
         owner   => 'root',
     }

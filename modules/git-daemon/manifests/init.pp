@@ -3,11 +3,11 @@
 class git-daemon {
 
     package { "git-daemon":
-	ensure	=> installed,
+        ensure  => installed,
     }
 
     file { "/etc/xinetd.d/git":
-        group	=> "root",
+        group   => "root",
         mode    => "0644",
         owner   => "root",
         require => Package["git-daemon"],

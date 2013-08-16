@@ -8,11 +8,11 @@ class tsocks {
     {
 
         package { "tsocks":
-            ensure	=> installed,
+            ensure  => installed,
         }
 
         file { "/etc/tsocks.conf":
-            group	=> "root",
+            group   => "root",
             mode    => 644,
             owner   => "root",
             require => Package["tsocks"],

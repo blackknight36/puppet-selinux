@@ -1,8 +1,8 @@
 # modules/dart/manifests/abstract/picaps_test_server_node.pp
 #
 # Synopsis:
-#       This class is to be used primarily for servers that are used for testing
-#	PICAPS through various stages of deployment at a plant.
+#       This class is to be used primarily for servers that are used for
+#       testing PICAPS through various stages of deployment at a plant.
 
 class dart::abstract::picaps_test_server_node inherits dart::abstract::server_node {
 
@@ -88,17 +88,17 @@ class dart::abstract::picaps_test_server_node inherits dart::abstract::server_no
         before => Package['httpd'],
     }
     group { 'apache':
-       provider => 'groupadd',
-       gid      => 48,
-       system   => true,
-       before   => User['apache'],
+        provider    => 'groupadd',
+        gid         => 48,
+        system      => true,
+        before      => User['apache'],
     }
     file { "/var/www/html/index.html":
         group   => "root",
         mode    => 644,
         owner   => "root",
-        content  => template('dart/picaps/index.html'),
-        require		=> [
+        content => template('dart/picaps/index.html'),
+        require => [
             Package["httpd"],
         ],
     }
@@ -106,8 +106,8 @@ class dart::abstract::picaps_test_server_node inherits dart::abstract::server_no
         group   => "root",
         mode    => 755,
         owner   => "root",
-        content  => template('dart/picaps/checkWeb.cgi'),
-        require		=> [
+        content => template('dart/picaps/checkWeb.cgi'),
+        require => [
             Package["httpd"],
         ],
     }
@@ -136,11 +136,11 @@ class dart::abstract::picaps_test_server_node inherits dart::abstract::server_no
     #    ],
     #}
     service { "httpd":
-        enable		=> true,
-        ensure		=> running,
-        hasrestart	=> true,
-        hasstatus	=> true,
-        require		=> [
+        enable      => true,
+        ensure      => running,
+        hasrestart  => true,
+        hasstatus   => true,
+        require     => [
             Package["httpd"],
             File ["/var/www/html/index.html"],
             File ["/var/www/cgi-bin/checkWeb.cgi"],
@@ -156,32 +156,32 @@ class dart::abstract::picaps_test_server_node inherits dart::abstract::server_no
         mode    => 644,
         owner   => "root",
         source  => 'puppet:///modules/dart/picaps-servers/picaps-mysqld.service',
-        before => File['/storage/mysql'],
+        before  => File['/storage/mysql'],
     }
     file { '/storage/':
-        owner       => 'root',
-        group       => 'root',
-        mode        => '0755',
-	ensure      => 'directory',
-	before      => File['/storage/mysql'],
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0755',
+    ensure      => 'directory',
+    before      => File['/storage/mysql'],
     }
     file { '/storage/mysql':
-        owner       => 'mysql',
-        group       => 'mysql',
-        mode        => '0755',
-        seluser     => 'system_u',
-        selrole     => 'object_r',
-        seltype     => 'mysqld_db_t',
-	ensure      => 'directory',
-	before      => Class['mariadb::server'],
+        owner   => 'mysql',
+        group   => 'mysql',
+        mode    => '0755',
+        seluser => 'system_u',
+        selrole => 'object_r',
+        seltype => 'mysqld_db_t',
+    ensure      => 'directory',
+    before      => Class['mariadb::server'],
     }
     user { 'mysql':
-        provider => 'useradd',
-        uid    => 444,
-        gid    => 444,
-        home   => '/storage/mysql',
-        system => true,
-        before => File['/etc/systemd/system/mysqld.service'],
+        provider    => 'useradd',
+        uid         => 444,
+        gid         => 444,
+        home        => '/storage/mysql',
+        system      => true,
+        before      => File['/etc/systemd/system/mysqld.service'],
     }
     group { 'mysql':
        provider => 'groupadd',
@@ -194,7 +194,7 @@ class dart::abstract::picaps_test_server_node inherits dart::abstract::server_no
         group   => "root",
         mode    => 660,
         owner   => "root",
-        content  => template('dart/picaps/picaps-grant.sql'),
+        content => template('dart/picaps/picaps-grant.sql'),
     }
     file { "/root/picaps-databases.sql":
         group   => "root",

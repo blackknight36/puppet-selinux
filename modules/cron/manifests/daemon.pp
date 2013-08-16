@@ -16,15 +16,15 @@
 class cron::daemon {
 
     package { 'cronie':
-	ensure	=> installed,
+        ensure  => installed,
     }
 
     service { 'crond':
-        enable		=> true,
-        ensure		=> running,
-        hasrestart	=> true,
-        hasstatus	=> true,
-        require		=> [
+        enable      => true,
+        ensure      => running,
+        hasrestart  => true,
+        hasstatus   => true,
+        require     => [
             Package['cronie'],
         ],
     }

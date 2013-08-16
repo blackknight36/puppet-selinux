@@ -3,7 +3,7 @@
 class sudo {
 
     package { "sudo":
-	ensure	=> installed
+        ensure  => installed
     }
 
     if  $operatingsystem == "Fedora" and
@@ -12,7 +12,7 @@ class sudo {
     {
 
         file { "/etc/sudoers.d/mdct":
-            group	=> "root",
+            group   => "root",
             mode    => 440,
             owner   => "root",
             require => Package["sudo"],

@@ -57,77 +57,77 @@ class dart::mdct-dev12 inherits dart::abstract::workstation_node {
     $SUFFIX=".orig-${operatingsystem}${operatingsystemrelease}"
 
     file { '/j':
-        ensure	=> '/mnt-local/storage/j/',
+        ensure  => '/mnt-local/storage/j/',
         require => Service['autofs'],
     }
 
     file { '/s':
-        ensure	=> '/mnt-local/storage/',
+        ensure  => '/mnt-local/storage/',
         require => Service['autofs'],
     }
 
     file { '/Pound':
-        ensure	=> '/mnt-local/storage/Pound/',
+        ensure  => '/mnt-local/storage/Pound/',
         require => Service['autofs'],
     }
 
     replace_original_with_symlink_to_alternate { '/etc/libvirt':
-        alternate       => '/mnt-local/storage/etc/libvirt',
-        backup          => "/etc/libvirt$SUFFIX",
-        before          => Service['libvirtd'],
-        notify          => Service['libvirtd'],
-        original        => '/etc/libvirt',
+        alternate   => '/mnt-local/storage/etc/libvirt',
+        backup      => "/etc/libvirt$SUFFIX",
+        before      => Service['libvirtd'],
+        notify      => Service['libvirtd'],
+        original    => '/etc/libvirt',
         # TODO: libvirt needs to be a formal service and treated here like
         # mysql WRT before/require attrs
-        require         => Package['libvirt'],
-        seltype         => 'virt_etc_t',
+        require     => Package['libvirt'],
+        seltype     => 'virt_etc_t',
     }
 
     replace_original_with_symlink_to_alternate { '/var/lib/libvirt':
-        alternate	=> '/mnt-local/storage/var/lib/libvirt',
-        backup          => "/var/lib/libvirt$SUFFIX",
-        before          => Service['libvirtd'],
-        notify          => Service['libvirtd'],
-        original        => '/var/lib/libvirt',
+        alternate   => '/mnt-local/storage/var/lib/libvirt',
+        backup      => "/var/lib/libvirt$SUFFIX",
+        before      => Service['libvirtd'],
+        notify      => Service['libvirtd'],
+        original    => '/var/lib/libvirt',
         # TODO: libvirt needs to be a formal service and treated here like
         # mysql WRT before/require attrs
-        require         => Package['libvirt'],
-        seltype         => 'virt_var_lib_t',
+        require     => Package['libvirt'],
+        seltype     => 'virt_var_lib_t',
     }
 
     # disabled until once again needed
     #   include mysql-server
     #   replace_original_with_symlink_to_alternate { '/var/lib/mysql':
-    #       alternate	=> '/mnt-local/storage/var/lib/mysql',
-    #       backup          => "/var/lib/mysql$SUFFIX",
-    #       original        => '/var/lib/mysql',
-    #       before          => Service['mysqld'],
-    #       require         => Package['mysql-server'],
-    #       seltype         => 'mysqld_db_t',
+    #       alternate   => '/mnt-local/storage/var/lib/mysql',
+    #       backup      => "/var/lib/mysql$SUFFIX",
+    #       original    => '/var/lib/mysql',
+    #       before      => Service['mysqld'],
+    #       require     => Package['mysql-server'],
+    #       seltype     => 'mysqld_db_t',
     #   }
 
     service { 'libvirtd':
-        enable		=> true,
-        ensure		=> running,
-        hasrestart	=> true,
-        hasstatus	=> true,
-        require		=> [
+        enable      => true,
+        ensure      => running,
+        hasrestart  => true,
+        hasstatus   => true,
+        require     => [
         ],
     }
 
     # Prefer forced power off as it's much faster than suspending.
     service { 'libvirtd-guests':
-        enable		=> false,
-        ensure		=> stopped,
-        hasrestart	=> true,
-        hasstatus	=> true,
-        require		=> [
+        enable      => false,
+        ensure      => stopped,
+        hasrestart  => true,
+        hasstatus   => true,
+        require     => [
         ],
     }
 
     mailalias { 'root':
-        ensure          => present,
-        recipient       => 'john.florian@dart.biz',
+        ensure      => present,
+        recipient   => 'john.florian@dart.biz',
     }
 
     # Make root user source my prophile by default.
@@ -137,21 +137,21 @@ class dart::mdct-dev12 inherits dart::abstract::workstation_node {
     }
 
     file { '/root/.gvimrc_site':
-        group	=> 'root',
+        group   => 'root',
         mode    => '0644',
         owner   => 'root',
         source  => 'puppet:///private-host/gvimrc_site',
     }
 
     file { '/root/.gitconfig':
-        group	=> 'root',
+        group   => 'root',
         mode    => '0644',
         owner   => 'root',
         source  => 'puppet:///private-host/git/gitconfig',
     }
 
     file { '/root/.gitignore':
-        group	=> 'root',
+        group   => 'root',
         mode    => '0644',
         owner   => 'root',
         source  => 'puppet:///private-host/git/gitignore',

@@ -44,11 +44,12 @@ class mariadb::server ($config_uri=undef) {
         file { '/etc/my.cnf.d/server.cnf':
             source  => $config_uri,
             before  => Package[$mariadb::params::serverpackages],
-	}
+        }
     }
 
     lokkit::tcp_port {
-        'mysqld': port => '3306',
+        'mysqld':
+            port => '3306';
     }
 
     service { $mariadb::params::service_name:

@@ -3,11 +3,11 @@
 class rpm-build-tools {
 
     package { "rpm-build-tools":
-	ensure	=> latest,
+        ensure  => latest,
     }
 
     file { "/etc/rpm-build-tools/git.conf":
-        group	=> "root",
+        group   => "root",
         mode    => "0644",
         owner   => "root",
         require => Package["rpm-build-tools"],
@@ -18,7 +18,7 @@ class rpm-build-tools {
     }
 
     file { "/etc/rpm-build-tools/rpmbuild.conf":
-        group	=> "root",
+        group   => "root",
         mode    => "0644",
         owner   => "root",
         require => Package["rpm-build-tools"],
@@ -29,7 +29,7 @@ class rpm-build-tools {
     }
 
     file { "/etc/rpm-build-tools/yum.conf":
-        group	=> "root",
+        group   => "root",
         mode    => "0644",
         owner   => "root",
         require => Package["rpm-build-tools"],

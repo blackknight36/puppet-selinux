@@ -16,7 +16,7 @@ class puppet::client ($enable=true, $ensure='running') {
     }
 
     package { $puppet::params::client_packages:
-        ensure	=> installed,
+        ensure  => installed,
         notify  => Service[$puppet::params::client_service_name],
     }
 
@@ -40,10 +40,10 @@ class puppet::client ($enable=true, $ensure='running') {
     }
 
     service { $puppet::params::client_service_name:
-        enable		=> $enable,
-        ensure		=> $ensure,
-        hasrestart	=> true,
-        hasstatus	=> true,
+        enable      => $enable,
+        ensure      => $ensure,
+        hasrestart  => true,
+        hasstatus   => true,
     }
 
 }

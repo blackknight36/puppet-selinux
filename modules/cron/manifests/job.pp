@@ -97,7 +97,7 @@ define cron::job ($command,
     file { "/etc/cron.d/${name}":
         content => template('cron/job'),
         ensure  => $ensure,
-        group	=> 'root',
+        group   => 'root',
         mode    => '0644',
         owner   => 'root',
         selrole => 'object_r',
