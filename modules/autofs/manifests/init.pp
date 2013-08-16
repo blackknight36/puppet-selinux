@@ -42,12 +42,22 @@ class autofs {
         ],
     }
 
-    file { '/pub':
-	    ensure	=> link,
-        target  => '/mnt/pub',
-        seluser => 'system_u',
-        selrole => 'object_r',
-        seltype => 'nfs_t',
+    if $::operatingsystemrelease < 19 {
+        # Older versions of puppet and/or Fedora prevent the SELinux context
+        # from actually changing, so don't even try as it otherwise generates
+        # an endless stream of tagmail.
+        file { '/pub':
+            ensure	=> link,
+            target  => '/mnt/pub',
+        }
+    } else {
+        file { '/pub':
+            ensure	=> link,
+            target  => '/mnt/pub',
+            seluser => 'system_u',
+            selrole => 'object_r',
+            seltype => 'nfs_t',
+        }
     }
 
     service { $autofs::params::service_name:
