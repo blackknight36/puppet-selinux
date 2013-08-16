@@ -19,15 +19,23 @@
 #       pkg_release             The remainder of $pkg_name, sans the '.rpm'
 #                               suffix, i.e., the EVR portion of NEVR.
 #
+#       use_tsocks      1       Set to true if it's necessary to use a SOCKS
+#                               proxy to reach $server_uri.
+#
 # Notes:
 #
-#       NONE
+#       1. Default is false.
 
 
-define yum::repo($server_uri, $pkg_name, $pkg_release) {
+define yum::repo($server_uri, $pkg_name, $pkg_release, $use_tsocks=false) {
+
+    $tsocks = $use_tsocks ? {
+        true    => 'tsocks',
+        default => '',
+    }
 
     exec { "install-yum-repo-${name}":
-        command => "yum -y install ${server_uri}/${pkg_name}-${pkg_release}.rpm",
+        command => "$tsocks yum -y install ${server_uri}/${pkg_name}-${pkg_release}.rpm",
         unless  => "rpm -q ${pkg_name}",
     }
 
