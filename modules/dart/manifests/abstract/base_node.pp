@@ -29,4 +29,19 @@ class dart::abstract::base_node {
         include systemd
     }
 
+    class { 'yum':
+        conf_source => 'puppet:///modules/dart/yum/yum.conf',
+        stage       => 'first';
+    }
+
+    class { 'dart::subsys::yum::fedora':
+        require => Class['yum'],
+        stage   => 'first',
+    }
+
+    class { 'dart::subsys::yum::mdct':
+        require => Class['yum'],
+        stage   => 'first',
+    }
+
 }

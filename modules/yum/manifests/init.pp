@@ -1,8 +1,14 @@
 # modules/yum/manifests/init.pp
+#
+# Synopsis:
+#       Configures YUM on a host.
+#
+# Parameters:
+#       Name__________  Notes_  Description___________________________
+#
+#       conf_source             URI for main yum.conf content.
 
-class yum {
-
-    # Stage => first
+class yum ($conf_source) {
 
     file { '/etc/yum.conf':
         owner   => 'root',
@@ -11,15 +17,7 @@ class yum {
         seluser => 'system_u',
         selrole => 'object_r',
         seltype => 'etc_t',
-        source  => [
-            'puppet:///private-host/yum/yum.conf',
-            'puppet:///private-domain/yum/yum.conf',
-            'puppet:///modules/yum/yum.conf',
-        ],
+        source  => $conf_source,
     }
-
-    include 'yum::fedora'
-    include 'yum::mdct'
-    include 'yum::rpmfusion'
 
 }

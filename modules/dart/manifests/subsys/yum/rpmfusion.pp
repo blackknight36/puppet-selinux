@@ -1,8 +1,8 @@
-# modules/yum/manifests/rpmfusion.pp
+# modules/dart/manifests/subsys/yum/mdct.pp
 
-class yum::rpmfusion {
+class dart::subsys::yum::rpmfusion {
 
-    include 'yum::params'
+    include 'dart::subsys::yum::params'
 
     # Rawhide systems begin life as the latest stable release and should be
     # fully puppetized prior to upgrading to rawhide.  Once there, they have

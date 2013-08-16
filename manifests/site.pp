@@ -23,11 +23,6 @@ stage { 'final':
 # Associate classes with run stages (instead of the default Stage['main']).
 #
 
-# Why?  Most classes install packages, but to do that yum is needed.
-class { 'yum':
-    stage   => 'first';
-}
-
 # Why?  Most classes install packages and many create user/group accounts and
 # the authconfig class lowers the default min_id value.  Doing authconfig
 # early ensures that these new accounts fall below the min_id.

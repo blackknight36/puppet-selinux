@@ -24,9 +24,6 @@ class yum::params {
                 $cron_conf_target = '/etc/yum/yum-cron.conf'
             }
 
-            $fedora_repo_uri = 'http://mdct-00fs.dartcontainer.com/ftp/pub/fedora'
-        }
-
         default: {
             fail ("The yum module is not yet supported on ${operatingsystem}.")
         }
