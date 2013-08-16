@@ -3,11 +3,11 @@
 class flock-herder {
 
     package { "flock-herder":
-	ensure	=> latest,
+        ensure  => latest,
     }
 
     file { "/etc/herd.conf":
-        group	=> "root",
+        group   => "root",
         mode    => "0644",
         owner   => "root",
         require => Package["flock-herder"],

@@ -3,15 +3,15 @@
 class mysql-server {
 
     package { "mysql-server":
-	ensure	=> installed,
+        ensure  => installed,
     }
 
     service { "mysqld":
-        enable		=> true,
-        ensure		=> running,
-        hasrestart	=> true,
-        hasstatus	=> true,
-        require		=> [
+        enable      => true,
+        ensure      => running,
+        hasrestart  => true,
+        hasstatus   => true,
+        require     => [
             Package["mysql-server"],
         ],
     }

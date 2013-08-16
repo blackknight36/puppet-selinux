@@ -35,7 +35,7 @@ define cron::jobfile ($source, $ensure='present') {
 
     file { "/etc/cron.d/${name}":
         ensure  => $ensure,
-        group	=> 'root',
+        group   => 'root',
         mode    => '0644',
         owner   => 'root',
         selrole => 'object_r',

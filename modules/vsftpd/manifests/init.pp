@@ -19,11 +19,11 @@
 class vsftpd($allow_use_nfs=false) {
 
     package { 'vsftpd':
-	ensure	=> installed,
+        ensure  => installed,
     }
 
     file { '/etc/vsftpd/vsftpd.conf':
-        group	=> 'root',
+        group   => 'root',
         mode    => '0600',
         owner   => 'root',
         require => Package['vsftpd'],
@@ -56,15 +56,15 @@ class vsftpd($allow_use_nfs=false) {
     }
 
     service { 'vsftpd':
-        enable		=> true,
-        ensure		=> running,
-        hasrestart	=> true,
-        hasstatus	=> true,
-        require		=> [
+        enable      => true,
+        ensure      => running,
+        hasrestart  => true,
+        hasstatus   => true,
+        require     => [
             Exec['open-vsftpd-tcp-port'],
             Package['vsftpd'],
         ],
-        subscribe	=> [
+        subscribe   => [
             File['/etc/vsftpd/vsftpd.conf'],
         ],
     }

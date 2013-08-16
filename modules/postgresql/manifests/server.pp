@@ -23,7 +23,7 @@
 class postgresql::server {
 
     package { 'postgresql-server':
-	ensure	=> installed,
+        ensure  => installed,
     }
 
     package { 'postgresql-contrib':
@@ -45,7 +45,7 @@ class postgresql::server {
     }
 
    file { '/var/lib/pgsql/data/pg_hba.conf':
-        group	=> 'postgres',
+        group   => 'postgres',
         mode    => 600,
         owner   => 'postgres',
         require => [
@@ -63,15 +63,15 @@ class postgresql::server {
     }
 
     service { 'postgresql':
-        enable		=> true,
-        ensure		=> running,
-        hasrestart	=> true,
-        hasstatus	=> true,
-        require		=> [
+        enable      => true,
+        ensure      => running,
+        hasrestart  => true,
+        hasstatus   => true,
+        require     => [
             Exec['postgresql-initdb'],
             Package['postgresql-server'],
         ],
-        subscribe	=> [
+        subscribe   => [
             File['/var/lib/pgsql/data/pg_hba.conf'],
         ],
     }

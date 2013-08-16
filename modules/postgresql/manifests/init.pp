@@ -16,7 +16,7 @@
 class postgresql {
 
     package { 'postgresql':
-	ensure	=> installed,
+        ensure  => installed,
     }
 
 }

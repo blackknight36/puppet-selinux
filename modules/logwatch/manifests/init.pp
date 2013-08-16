@@ -3,11 +3,11 @@
 class logwatch {
 
     package { 'logwatch':
-	ensure	=> installed,
+        ensure  => installed,
     }
 
     file { '/etc/logwatch/conf/ignore.conf':
-        group	=> 'root',
+        group   => 'root',
         mode    => '0640',
         owner   => 'root',
         require => Package['logwatch'],
@@ -18,7 +18,7 @@ class logwatch {
     }
 
     file { '/etc/logwatch/conf/logwatch.conf':
-        group	=> 'root',
+        group   => 'root',
         mode    => '0640',
         owner   => 'root',
         require => Package['logwatch'],

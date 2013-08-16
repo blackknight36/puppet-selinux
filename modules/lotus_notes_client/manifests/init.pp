@@ -18,14 +18,14 @@ class lotus_notes_client {
     # fonts, but much of the rendering will be wrong.  Fedora dropped these
     # fonts due to licensing concerns.
     package { "xorg-x11-fonts-truetype-7.2-3.fc8":
-	ensure	=> installed,
+        ensure  => installed,
         require => [
             Exec["import_f8_new_signing_key"],
         ],
     }
 
     package { "ibm_lotus_notes":
-	ensure	=> installed,
+        ensure  => installed,
         require => [
             Exec["import_ibm_signing_key"],
             Package["xorg-x11-fonts-truetype-7.2-3.fc8"],
@@ -34,7 +34,7 @@ class lotus_notes_client {
 
     # sigh ...  What's next?  A fix pack for the fix pack?
     package { "ibm_lotus_notes_fixpack":
-	ensure	=> installed,
+        ensure  => installed,
         require => [
             Exec["import_ibm_signing_key"],
             Package["ibm_lotus_notes"],

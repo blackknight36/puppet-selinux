@@ -11,13 +11,13 @@ define replace_original_with_symlink_to_alternate(
     # backup parameter, but I've seen it fail with directory structures
     # containing intra-relative symlinks; hence this workaround.
     exec { "archive-$original-to-$backup":
-        command     => "cp -a $original $backup",
-        unless      => "test -e $backup",
+        command => "cp -a $original $backup",
+        unless  => "test -e $backup",
     }
 
     # Now make a symlink from the original location to an alternate one.
     file { "$original":
-        ensure	=> $alternate,
+        ensure  => $alternate,
         force   => true,
         require => [
             Exec["archive-$original-to-$backup"],

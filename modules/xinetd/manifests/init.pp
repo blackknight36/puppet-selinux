@@ -3,15 +3,15 @@
 class xinetd {
 
     package { "xinetd":
-	ensure	=> installed,
+        ensure  => installed,
     }
 
     service { "xinetd":
-        enable		=> true,
-        ensure		=> running,
-        hasrestart	=> true,
-        hasstatus	=> true,
-        require		=> [
+        enable      => true,
+        ensure      => running,
+        hasrestart  => true,
+        hasstatus   => true,
+        require     => [
             Package["xinetd"],
         ],
     }

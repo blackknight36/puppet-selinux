@@ -43,19 +43,19 @@ class bacula::client($dir_passwd, $mon_passwd) {
     }
 
     package { 'bacula-client':
-	ensure	=> installed,
+        ensure  => installed,
         require => Package[$conflict_packages],
     }
 
     File {
         owner   => 'root',
-        group	=> 'root',
+        group   => 'root',
         mode    => '0640',
         require => Package['bacula-client'],
     }
 
     file { '/etc/bacula/bacula-fd.conf':
-	content	=> template('bacula/bacula-fd.conf'),
+        content => template('bacula/bacula-fd.conf'),
     }
 
     file { '/etc/sysconfig/bacula-fd':
@@ -67,15 +67,15 @@ class bacula::client($dir_passwd, $mon_passwd) {
     }
 
     service { 'bacula-fd':
-        enable		=> true,
-        ensure		=> running,
-        hasrestart	=> true,
-        hasstatus	=> true,
-        require		=> [
+        enable      => true,
+        ensure      => running,
+        hasrestart  => true,
+        hasstatus   => true,
+        require     => [
             Exec['open-bacula-fd-tcp-port'],
             Package['bacula-client'],
         ],
-        subscribe	=> [
+        subscribe   => [
             File['/etc/bacula/bacula-fd.conf'],
             File['/etc/sysconfig/bacula-fd'],
         ]

@@ -16,35 +16,36 @@
 class openssh-server {
 
     package { 'openssh-server':
-        ensure	=> installed,
+        ensure  => installed,
     }
 
     file { '/etc/ssh/sshd_config':
-        group	=> 'root',
+        group   => 'root',
         mode    => 600,
         owner   => 'root',
         require => Package['openssh-server'],
-        source	=> [
+        source  => [
             'puppet:///private-host/openssh-server/sshd_config',
             'puppet:///private-domain/openssh-server/sshd_config',
             "puppet:///modules/openssh-server/sshd_config.$operatingsystem.$operatingsystemrelease",
         ],
     }
 
-    lokkit::tcp_port { 'ssh':
-        port    => '22',
+    lokkit::tcp_port {
+        'ssh':
+            port    => '22';
     }
 
     service { 'sshd':
-        enable		=> true,
-        ensure		=> running,
-        hasrestart	=> true,
-        hasstatus	=> true,
-        require		=> [
+        enable      => true,
+        ensure      => running,
+        hasrestart  => true,
+        hasstatus   => true,
+        require     => [
             Exec['open-ssh-tcp-port'],
             Package['openssh-server'],
         ],
-        subscribe	=> [
+        subscribe   => [
             File['/etc/ssh/sshd_config'],
         ]
     }

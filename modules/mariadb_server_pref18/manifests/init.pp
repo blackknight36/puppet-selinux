@@ -21,31 +21,31 @@ class mariadb_server_pref18 {
 
     define mariadb_package ($source) {
         package { $name:
-	    ensure      => installed,
-	    #provider    => 'rpm',
-	    require => [
+            ensure      => installed,
+            #provider   => 'rpm',
+            require     => [
                 File["/etc/yum.repos.d/MariaDB.repo"],
-		Exec["import_mariadb_signing_key"],
-	    ],
-            #source => $source,
+                Exec["import_mariadb_signing_key"],
+            ],
+            #source     => $source,
         }
     }
 
     mariadb_package { "MariaDB-common":
-        source      => $operatingsystemrelease ? {
+        source  => $operatingsystemrelease ? {
             16 => 'http://mdct-00fs/ftp/pub/mariadb/mariadb-5.5.28/fedora16-amd64/rpms/MariaDB-5.5.28-fedora16-x86_64-common.rpm',
             17 => 'http://mdct-00fs/ftp/pub/mariadb/mariadb-5.5.28/fedora17-amd64/rpms/MariaDB-5.5.28-fedora17-x86_64-common.rpm',
         }
     }
 
     mariadb_package { "MariaDB-client":
-        source      => $operatingsystemrelease ? {
+        source  => $operatingsystemrelease ? {
             16 => 'http://mdct-00fs/ftp/pub/mariadb/mariadb-5.5.28/fedora16-amd64/rpms/MariaDB-5.5.28-fedora16-x86_64-client.rpm',
             17 => 'http://mdct-00fs/ftp/pub/mariadb/mariadb-5.5.28/fedora17-amd64/rpms/MariaDB-5.5.28-fedora17-x86_64-client.rpm',
         },
-	require => [
+        require => [
             Package[ "MariaDB-common" ],
-	],
+        ],
     }
 
     mariadb_package { "MariaDB-server":
@@ -53,9 +53,9 @@ class mariadb_server_pref18 {
             16 => 'http://mdct-00fs/ftp/pub/mariadb/mariadb-5.5.28/fedora16-amd64/rpms/MariaDB-5.5.28-fedora16-x86_64-server.rpm',
             17 => 'http://mdct-00fs/ftp/pub/mariadb/mariadb-5.5.28/fedora17-amd64/rpms/MariaDB-5.5.28-fedora17-x86_64-server.rpm',
         },
-	require => [
+        require => [
             Package[ "MariaDB-common" ],
-	],
+        ],
     }
 
     file { "/etc/my.cnf":
@@ -70,15 +70,15 @@ class mariadb_server_pref18 {
 
 
     service { "mysql":
-        enable		=> true,
-        ensure		=> running,
-        hasrestart	=> true,
-        hasstatus	=> true,
-	require         => [
+        enable      => true,
+        ensure      => running,
+        hasrestart  => true,
+        hasstatus   => true,
+        require     => [
             Package[ "MariaDB-server" ],
             File["/etc/my.cnf"],
-	],
-        subscribe       => [
+        ],
+        subscribe   => [
             File["/etc/my.cnf"],
         ]
 

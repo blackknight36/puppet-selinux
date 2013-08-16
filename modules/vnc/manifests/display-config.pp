@@ -51,7 +51,7 @@ define vnc::display-config ($ensure='present', $display_num, $user, $password,
     }
 
     systemd::unit { "vncserver${display}.service":
-        content	=> template('vnc/vncserver.service'),
+        content => template('vnc/vncserver.service'),
         ensure  => $ensure,
         require => Exec["set vncserver password $display"],
     }

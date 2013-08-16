@@ -5,11 +5,11 @@ class rsync-server {
     include xinetd
 
     package { 'rsync':
-	ensure	=> installed,
+        ensure  => installed,
     }
 
     file { '/etc/xinetd.d/rsync':
-        group	=> 'root',
+        group   => 'root',
         mode    => '0644',
         notify  => Service['xinetd'],
         owner   => 'root',
@@ -21,7 +21,7 @@ class rsync-server {
     }
 
     file { '/etc/rsyncd.conf':
-        group	=> 'root',
+        group   => 'root',
         mode    => '0644',
         notify  => Service['xinetd'],
         owner   => 'root',
@@ -33,13 +33,15 @@ class rsync-server {
         ],
     }
 
-    lokkit::tcp_port { 'rsync':
-        port    => '873',
+    lokkit::tcp_port {
+        'rsync':
+            port    => '873';
     }
 
-    selinux::boolean { 'rsync_export_all_ro':
-        persistent      => true,
-        value           => on,
+    selinux::boolean {
+        'rsync_export_all_ro':
+            persistent  => true,
+            value       => on;
     }
 
 }

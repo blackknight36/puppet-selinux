@@ -6,13 +6,13 @@ class mpd {
     # things to share the sound card anyway!
 
     package { "mpd":
-	ensure	=> installed,
+        ensure  => installed,
     }
 
     # static file
     file { "/etc/mpd.conf":
         # don't forget to verify these!
-        group	=> "mpd",
+        group   => "mpd",
         mode    => 644,
         owner   => "mpd",
         require => Package["mpd"],
@@ -20,22 +20,22 @@ class mpd {
     }
 
     user { "mpd":
-        ensure          => present,
+        ensure  => present,
         # mpd needs access to the audio group so that if it starts its own
         # instance of pulseaudio, its instance will need access to the sound
         # card.
-        groups          => ["audio, pulse-access", "pulse", "pulse-rt"],
+        groups  => ["audio, pulse-access", "pulse", "pulse-rt"],
     }
 
     service { "mpd":
-        enable		=> true,
-        ensure		=> running,
-        hasrestart	=> true,
-        hasstatus	=> true,
-        require		=> [
+        enable      => true,
+        ensure      => running,
+        hasrestart  => true,
+        hasstatus   => true,
+        require     => [
             Package["mpd"],
         ],
-        subscribe	=> [
+        subscribe   => [
             File["/etc/mpd.conf"],
         ]
     }
