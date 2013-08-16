@@ -13,6 +13,8 @@ class dart::abstract::picaps_production_server_node inherits dart::abstract::ser
         'cups',
         'ncftp',
         'pyserial',
+        'setserial',
+        'mx',
         ]:
         ensure  => 'installed',
     }
