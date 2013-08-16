@@ -5,11 +5,11 @@ class mdct-puppeteer-admin {
     $SELF='mdct-puppeteer-admin'
 
     package { "${SELF}":
-	ensure	=> installed,
+        ensure  => installed,
     }
 
     file { "/etc/${SELF}/${SELF}.conf":
-        group	=> "root",
+        group   => "root",
         mode    => "0644",
         owner   => "root",
         require => Package["${SELF}"],
