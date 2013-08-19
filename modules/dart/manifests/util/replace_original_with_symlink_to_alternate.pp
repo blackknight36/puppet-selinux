@@ -1,6 +1,6 @@
-# modules/dart/manifests/storage-relocation.pp
+# modules/dart/manifests/util/replace_original_with_symlink_to_alternate.pp
 
-define replace_original_with_symlink_to_alternate(
+define dart::util::replace_original_with_symlink_to_alternate(
         $original, $backup, $alternate,
         $seluser="system_u", $selrole="object_r", $seltype="etc_t"
     ) {

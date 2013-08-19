@@ -75,7 +75,7 @@ class dart::mdct-dev6 inherits dart::abstract::workstation_node {
         require => Service["autofs"],
     }
 
-    replace_original_with_symlink_to_alternate { "/etc/libvirt":
+    dart::util::replace_original_with_symlink_to_alternate { "/etc/libvirt":
         alternate   => "/mnt-local/storage/etc/libvirt",
         backup      => "/etc/libvirt$SUFFIX",
         original    => "/etc/libvirt",
@@ -85,7 +85,7 @@ class dart::mdct-dev6 inherits dart::abstract::workstation_node {
         seltype     => "virt_etc_t",
     }
 
-    replace_original_with_symlink_to_alternate { "/var/lib/libvirt":
+    dart::util::replace_original_with_symlink_to_alternate { "/var/lib/libvirt":
         alternate   => "/mnt-local/storage/var/lib/libvirt",
         backup      => "/var/lib/libvirt$SUFFIX",
         original    => "/var/lib/libvirt",
@@ -95,7 +95,7 @@ class dart::mdct-dev6 inherits dart::abstract::workstation_node {
         seltype     => "virt_var_lib_t",
     }
 
-    replace_original_with_symlink_to_alternate { "/var/lib/mysql":
+    dart::util::replace_original_with_symlink_to_alternate { "/var/lib/mysql":
         alternate   => "/mnt-local/storage/var/lib/mysql",
         backup      => "/var/lib/mysql$SUFFIX",
         original    => "/var/lib/mysql",
