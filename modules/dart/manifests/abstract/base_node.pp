@@ -8,7 +8,7 @@ class dart::abstract::base_node {
 
     include cron::daemon
     include cachefilesd
-    include dart::no-dns-hosts
+    include 'dart::subsys::dns::no_dns_hosts'
 
     class { 'lokkit':
         managed_host    => true,

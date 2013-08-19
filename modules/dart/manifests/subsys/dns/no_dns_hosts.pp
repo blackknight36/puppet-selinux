@@ -1,9 +1,9 @@
-# modules/dart/manifests/no-dns-hosts.pp
+# modules/dart/manifests/subsys/dns/no_dns_hosts.pp
 #
 # Synopsis:
 #       Host resolution details for hosts not in Dart's DNS records.
 
-class dart::no-dns-hosts {
+class dart::subsys::dns::no_dns_hosts {
 
     host { 'mdct-dev15.dartcontainer.com':
         ip              => '10.1.250.50',

@@ -8,7 +8,7 @@ class dart::mdct-00fs {
     #@# include autofs
     include cron::daemon
     #@# include cachefilesd
-    include dart::no-dns-hosts
+    include 'dart::subsys::dns::no_dns_hosts'
     include logwatch
     include ntp
     #@# include openssh-server
