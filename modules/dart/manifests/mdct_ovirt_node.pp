@@ -7,4 +7,6 @@ class dart::mdct_ovirt_node inherits dart::abstract::server_node {
     class { 'puppet::client':
     }
 
+    include 'tsocks'
+
 }
