@@ -19,6 +19,16 @@ class packages::virtualization {
     if $operatingsystem == 'Fedora' {
 
         if  $operatingsystemrelease == 'Rawhide' or
+            $operatingsystemrelease >= 19
+        {
+            package { [
+                'virt-install',
+                ]:
+                ensure => installed,
+            }
+        }
+
+        if  $operatingsystemrelease == 'Rawhide' or
             $operatingsystemrelease >= 17
         {
             package { [
