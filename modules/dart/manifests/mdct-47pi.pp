@@ -1,4 +1,10 @@
 # modules/dart/manifests/mdct-1047pi.pp
+#
+# Synopsis:
+#       PICAPS live server for Brazil
+#
+# Contact:
+#       Chris Kennedy
 
 class dart::mdct-1047pi inherits dart::abstract::picaps_production_server_node {
 

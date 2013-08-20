@@ -1,4 +1,10 @@
 # modules/dart/manifests/mdct-aos-master-f19.pp
+#
+# Synopsis:
+#       AOS Master
+#
+# Contact:
+#       John Florian
 
 class dart::mdct-aos-master-f19 inherits dart::abstract::aos_master_node {
 

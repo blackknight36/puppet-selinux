@@ -1,4 +1,10 @@
 # modules/dart/manifests/mdct-tc.pp
+#
+# Synopsis:
+#       PostgreSQL support server for Teamcenter migration process
+#
+# Contact:
+#       Ben Minshall
 
 class dart::mdct-tc inherits dart::abstract::server_node {
 

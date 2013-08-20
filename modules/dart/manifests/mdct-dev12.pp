@@ -1,4 +1,10 @@
 # modules/dart/manifests/mdct-dev12.pp
+#
+# Synopsis:
+#       Developer Workstation
+#
+# Contact:
+#       John Florian
 
 class dart::mdct-dev12 inherits dart::abstract::workstation_node {
 

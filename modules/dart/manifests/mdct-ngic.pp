@@ -1,4 +1,10 @@
 # modules/dart/manifests/mdct-ngic.pp
+#
+# Synopsis:
+#       NGIC Materials Database (production)
+#
+# Contact:
+#       Ben Minshall
 
 class dart::mdct-ngic inherits dart::abstract::ngic_server_node {
 

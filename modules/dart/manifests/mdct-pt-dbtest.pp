@@ -3,6 +3,9 @@
 # Synopsis:
 #       This class is used primarily for a PICAPS test server specific to
 #       database testing.
+#
+# Contact:
+#       Chris Kennedy
 
 class dart::mdct-pt-dbtest inherits dart::abstract::server_node {
 

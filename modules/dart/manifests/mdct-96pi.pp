@@ -1,4 +1,10 @@
-# modules/dart/manifests/mdct-91pi.pp
+# modules/dart/manifests/mdct-96pi.pp
+#
+# Synopsis:
+#       PICAPS live server for Corporate
+#
+# Contact:
+#       Nathan Nephew
 
 class dart::mdct-96pi inherits dart::abstract::picaps_production_server_node {
 

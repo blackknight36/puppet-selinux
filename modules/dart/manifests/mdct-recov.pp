@@ -1,4 +1,10 @@
 # modules/dart/manifests/mdct-recov.pp
+#
+# Synopsis:
+#       PICAPS disaster recovery planning and testing
+#
+# Contact:
+#       Nathan Nephew
 
 class dart::mdct-recov inherits dart::abstract::picaps_production_server_node {
 

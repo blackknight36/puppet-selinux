@@ -1,4 +1,10 @@
 # modules/dart/manifests/mdct-00sw.pp
+#
+# Synopsis:
+#       Shared Workstation
+#
+# Contact:
+#       John Florian
 
 class dart::mdct-00sw inherits dart::abstract::workstation_node {
 

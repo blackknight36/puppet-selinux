@@ -1,4 +1,10 @@
 # modules/dart/manifests/mdct-puppet.pp
+#
+# Synopsis:
+#       Puppet Master
+#
+# Contact:
+#       John Florian
 
 class dart::mdct-puppet inherits dart::abstract::puppet_server_node {
 

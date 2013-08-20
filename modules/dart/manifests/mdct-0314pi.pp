@@ -1,4 +1,10 @@
 # modules/dart/manifests/mdct-0314pi.pp
+#
+# Synopsis:
+#       PICAPS live server for Dallas
+#
+# Contact:
+#       Nathan Nephew
 
 class dart::mdct-0314pi inherits dart::abstract::picaps_production_server_node {
 

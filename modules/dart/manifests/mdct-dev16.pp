@@ -1,4 +1,10 @@
 # modules/dart/manifests/mdct-dev16.pp
+#
+# Synopsis:
+#       Developer Workstation
+#
+# Contact:
+#       Ben Minshall
 
 class dart::mdct-dev16 inherits dart::abstract::workstation_node {
 

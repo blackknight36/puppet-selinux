@@ -1,4 +1,10 @@
 # modules/dart/manifests/tc-util.pp
+#
+# Synopsis:
+#       General purpose utility server for TeamCenter
+#
+# Contact:
+#       John Florian
 
 class dart::tc-util inherits dart::abstract::server_node {
 

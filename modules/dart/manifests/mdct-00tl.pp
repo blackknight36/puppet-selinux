@@ -1,4 +1,10 @@
 # modules/dart/manifests/mdct-00tl.pp
+#
+# Synopsis:
+#       TestLink server (production)
+#
+# Contact:
+#       Nathan Nephew
 
 class dart::mdct-00tl inherits dart::abstract::server_node {
 

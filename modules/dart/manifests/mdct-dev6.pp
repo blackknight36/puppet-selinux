@@ -1,4 +1,10 @@
 # modules/dart/manifests/mdct-dev6.pp
+#
+# Synopsis:
+#       Developer Workstation
+#
+# Contact:
+#       Chris Kennedy
 
 class dart::mdct-dev6 inherits dart::abstract::workstation_node {
 

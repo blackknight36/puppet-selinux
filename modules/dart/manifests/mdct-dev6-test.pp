@@ -1,4 +1,10 @@
 # modules/dart/manifests/mdct-dev6-test.pp
+#
+# Synopsis:
+#       Developer Workstation (experimental testing)
+#
+# Contact:
+#       Chris Kennedy
 
 class dart::mdct-dev6-test inherits dart::abstract::workstation_node {
 

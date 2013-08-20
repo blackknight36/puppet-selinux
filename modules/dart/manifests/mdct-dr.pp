@@ -1,4 +1,10 @@
 # modules/dart/manifests/mdct-dr.pp
+#
+# Synopsis:
+#       Design Review application (production; serves Machine Design group)
+#
+# Contact:
+#       Ben Minshall
 
 class dart::mdct-dr inherits dart::abstract::dr_server_node {
 
