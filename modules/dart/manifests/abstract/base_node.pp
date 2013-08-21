@@ -33,7 +33,10 @@ class dart::abstract::base_node {
     }
 
     class { 'yum':
-        conf_source => 'puppet:///modules/dart/yum/yum.conf',
+        conf_source => $hostname ? {
+            /^mdct-ovirt-/  => 'puppet:///modules/dart/yum/yum-proxied.conf',
+            default         => 'puppet:///modules/dart/yum/yum.conf',
+        },
         stage       => 'first';
     }
 
