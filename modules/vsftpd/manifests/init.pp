@@ -60,13 +60,8 @@ class vsftpd($allow_use_nfs=false) {
         ensure      => running,
         hasrestart  => true,
         hasstatus   => true,
-        require     => [
-            Exec['open-vsftpd-tcp-port'],
-            Package['vsftpd'],
-        ],
-        subscribe   => [
-            File['/etc/vsftpd/vsftpd.conf'],
-        ],
+        require     => Package['vsftpd'],
+        subscribe   => File['/etc/vsftpd/vsftpd.conf'],
     }
 
 }

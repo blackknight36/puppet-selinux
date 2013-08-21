@@ -71,10 +71,7 @@ class bacula::client($dir_passwd, $mon_passwd) {
         ensure      => running,
         hasrestart  => true,
         hasstatus   => true,
-        require     => [
-            Exec['open-bacula-fd-tcp-port'],
-            Package['bacula-client'],
-        ],
+        require     => Package['bacula-client'],
         subscribe   => [
             File['/etc/bacula/bacula-fd.conf'],
             File['/etc/sysconfig/bacula-fd'],

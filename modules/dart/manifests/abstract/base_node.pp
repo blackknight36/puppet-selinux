@@ -11,7 +11,10 @@ class dart::abstract::base_node {
     include 'dart::subsys::dns::no_dns_hosts'
 
     class { 'lokkit':
-        managed_host    => true,
+        managed_host    => $hostname ? {
+            /^mdct-ovirt-/  => false,
+            default         => true,
+        },
     }
 
     include logwatch

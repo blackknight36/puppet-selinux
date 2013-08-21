@@ -41,13 +41,8 @@ class openssh-server {
         ensure      => running,
         hasrestart  => true,
         hasstatus   => true,
-        require     => [
-            Exec['open-ssh-tcp-port'],
-            Package['openssh-server'],
-        ],
-        subscribe   => [
-            File['/etc/ssh/sshd_config'],
-        ]
+        require     => Package['openssh-server'],
+        subscribe   => File['/etc/ssh/sshd_config'],
     }
 
 }

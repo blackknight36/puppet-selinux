@@ -53,14 +53,8 @@ class samba {
         ensure      => running,
         hasrestart  => true,
         hasstatus   => true,
-        require     => [
-            Exec['open-microsoft-ds-tcp-port'],
-            Exec['open-netbios-ssn-tcp-port'],
-            Package['samba'],
-        ],
-        subscribe   => [
-            File['/etc/samba/smb.conf'],
-        ],
+        require     => Package['samba'],
+        subscribe   => File['/etc/samba/smb.conf'],
     }
 
 }

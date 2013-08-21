@@ -44,17 +44,12 @@ class apache {
     }
 
     service { 'httpd':
-        enable          => true,
-        ensure          => running,
-        hasrestart      => true,
-        hasstatus       => true,
-        require         => [
-            Exec['open-http-tcp-port'],
-            Package['httpd'],
-        ],
-        subscribe       => [
-            File['/etc/httpd/conf/httpd.conf'],
-        ],
+        enable      => true,
+        ensure      => running,
+        hasrestart  => true,
+        hasstatus   => true,
+        require     => Package['httpd'],
+        subscribe   => File['/etc/httpd/conf/httpd.conf'],
     }
 
 }
