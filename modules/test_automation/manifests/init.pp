@@ -12,8 +12,8 @@ class test_automation {
 
     # Must allow remote systems to contact this host via IPP in order for the
     # Report Diff Viewer to work correctly.
-    lokkit::tcp_port {
-        'ipp': port => '631',
+    iptables::tcp_port {
+        'ipp':  port => '631';
     }
 
 }

@@ -62,8 +62,8 @@ class bacula::client($dir_passwd, $mon_passwd) {
         source  => "puppet:///modules/bacula/bacula-fd${ossuffix}",
     }
 
-    lokkit::tcp_port { 'bacula-fd':
-        port    => '9102',
+    iptables::tcp_port {
+        'bacula-fd':    port => '9102';
     }
 
     service { 'bacula-fd':

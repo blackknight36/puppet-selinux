@@ -6,11 +6,7 @@
 # Contact:
 #       Nathan Nephew
 
-class dart::mdct-00dtl inherits dart::abstract::server_node {
-
-    class { 'iptables':
-        enabled => true,
-    }
+class dart::mdct-00dtl inherits dart::abstract::semi_guarded_server_node {
 
     class { 'puppet::client':
     }

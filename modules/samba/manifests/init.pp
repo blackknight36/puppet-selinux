@@ -30,11 +30,9 @@ class samba {
         ],
     }
 
-    lokkit::tcp_port {
-        'netbios-ssn':
-            port    => '139';
-        'microsoft-ds':
-            port    => '445';
+    iptables::tcp_port {
+        'netbios-ssn':  port => '139';
+        'microsoft-ds': port => '445';
     }
 
     selinux::boolean {

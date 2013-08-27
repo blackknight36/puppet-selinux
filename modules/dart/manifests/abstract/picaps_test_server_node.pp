@@ -4,7 +4,7 @@
 #       This class is to be used primarily for servers that are used for
 #       testing PICAPS through various stages of deployment at a plant.
 
-class dart::abstract::picaps_test_server_node inherits dart::abstract::server_node {
+class dart::abstract::picaps_test_server_node inherits dart::abstract::unguarded_server_node {
 
     # Other packages required by PICAPS servers
     package { [
@@ -20,24 +20,12 @@ class dart::abstract::picaps_test_server_node inherits dart::abstract::server_no
         ensure  => 'installed',
     }
 
-    # Disable iptables
-    class { 'iptables':
-        enabled => false,
-    }
-
     class { 'puppet::client':
     }
 
     mailalias { "root":
         ensure          => present,
         recipient       => "nathan.nephew@dart.biz",
-    }
-
-    # Disable selinux
-    # Note: switching from enforcing or permissive to disabled requires reboot.
-    # Note: switching from disabled to enforcing or permissive requires reboot.
-    class { 'selinux':
-        mode => 'disabled',
     }
 
     # PICAPS uses rsync for backup and other similar uses

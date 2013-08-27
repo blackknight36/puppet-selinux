@@ -4,6 +4,11 @@ class dart::abstract::workstation_node inherits dart::abstract::base_node {
 
     include 'autofs'
     include flock-herder
+
+    class { 'iptables':
+        enabled => true,
+    }
+
     # Lotus Notes has been disabled for now due to poor functioning.
     #include lotus_notes_client
     include packages::developer

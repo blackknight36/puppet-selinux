@@ -6,7 +6,7 @@
 # Contact:
 #       John Florian
 
-class dart::mdct-00bk inherits dart::abstract::server_node {
+class dart::mdct-00bk inherits dart::abstract::guarded_server_node {
 
     class { 'puppet::client':
     }

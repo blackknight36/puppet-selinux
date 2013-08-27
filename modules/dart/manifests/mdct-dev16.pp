@@ -12,7 +12,7 @@ class dart::mdct-dev16 inherits dart::abstract::workstation_node {
     include packages::kde
     include 'dart::subsys::yum_cron'
 
-    lokkit::tcp_port {
+    iptables::tcp_port {
         'gwt-codeserver':       port => '9997';
         'gwt-debug':            port => '8888';
         'http':                 port => '80';

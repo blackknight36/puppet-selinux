@@ -4,7 +4,7 @@
 #       This class is used primarily for servers that provided shared access
 #       to media content used by the AOS media-playback devices.
 
-class dart::abstract::plant_utility_server_node inherits dart::abstract::server_node {
+class dart::abstract::plant_utility_server_node inherits dart::abstract::guarded_server_node {
 
     include 'autofs'
 

@@ -6,7 +6,7 @@
 # Contact:
 #       Brian Moles
 
-class dart::mole-dev inherits dart::abstract::server_node {
+class dart::mole-dev inherits dart::abstract::guarded_server_node {
 
     class { 'puppet::client':
     }

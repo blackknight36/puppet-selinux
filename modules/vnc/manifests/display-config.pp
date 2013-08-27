@@ -60,8 +60,8 @@ define vnc::display-config ($ensure='present', $display_num, $user, $password,
     # TODO: handle ensure='absent' sense appropriately.
     #
     $vncserver_port = 5900 + $display_num
-    lokkit::tcp_port { "vncserver${display}":
-        port    => $vncserver_port,
+    iptables::tcp_port {
+        "vncserver${display}":  port => $vncserver_port;
     }
 
 }

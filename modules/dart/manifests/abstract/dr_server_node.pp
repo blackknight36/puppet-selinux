@@ -6,7 +6,7 @@
 # Contact:
 #       Ben Minshall
 
-class dart::abstract::dr_server_node inherits dart::abstract::server_node {
+class dart::abstract::dr_server_node inherits dart::abstract::guarded_server_node {
 
     include 'autofs'
 
@@ -19,8 +19,8 @@ class dart::abstract::dr_server_node inherits dart::abstract::server_node {
         ensure  => installed,
     }
 
-    lokkit::tcp_port { 'tomcat':
-        port    => '8080',
+    iptables::tcp_port {
+        'tomcat':   port => '8080';
     }
 
 }

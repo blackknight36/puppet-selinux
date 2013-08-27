@@ -36,12 +36,16 @@ class dart::abstract::aos_master_node inherits dart::abstract::server_node {
     }
 
     class { 'iptables':
-        enabled => true,
+        enabled         => true,
         kernel_modules  => 'nf_conntrack_ftp',
     }
 
-    lokkit::rules_file { 'blocks':
-        source  => 'puppet:///private-host/lokkit/blocks',
+    iptables::rules_file { 'blocks':
+        source  => 'puppet:///private-host/iptables/blocks',
+    }
+
+    class { 'selinux':
+        mode    => 'enforcing',
     }
 
     mailalias { 'root':

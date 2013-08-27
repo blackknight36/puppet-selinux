@@ -20,9 +20,9 @@ class git-daemon {
         ],
     }
 
-#   mdct-00fs not using firewall and lokkit will enable it
-#   lokkit::tcp_port { "git-daemon":
-#       port    => "9418",
+#   mdct-00fs not using firewall and iptables::tcp_port would enable it
+#   iptables::tcp_port {
+#       'git-daemon':   port => '9418';
 #   }
 
     # No service to manage here.  The git-daemon is spawned by xinetd.

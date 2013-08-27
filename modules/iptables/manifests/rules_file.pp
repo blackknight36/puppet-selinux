@@ -1,37 +1,34 @@
-# modules/lokkit/manifests/rules_file.pp
+# modules/iptables/manifests/rules_file.pp
 #
 # Synopsis:
 #       Installs a custom iptables rules file via lokkit.
 #
 # Parameters:
-#       Name__________  Default_______  Description___________________________
+#       Name__________  Notes_  Description___________________________
 #
-#       name                            instance name
-#       ensure          present         present/absent
-#       source                          origin of custom rules file
-#       type            ipv4            protocol type: "ipv4" or "ipv6"
-#       table           filter          netfilter table to be affected
+#       name                    instance name
 #
-# Requires:
-#       Class['iptables']
-#       Class['lokkit']
+#       ensure          1       one of: 'present' or 'absent'
 #
-# Example usage:
+#       source                  origin of custom rules file
 #
-#       include lokkit
+#       type            2       one of: 'ipv4' or 'ipv6'
 #
-#       lokkit::tcp_port { 'ssh':
-#           ensure  => 'open',
-#           port    => '22',
-#       }
+#       table           3       netfilter table to be affected
+#
+# Notes:
+#
+#       1. Default is 'present'.
+#
+#       2. Default is 'ipv4'.
+#
+#       3. Default is 'filter'.
 
 
-define lokkit::rules_file ($ensure='present', $source, $type='ipv4',
+define iptables::rules_file ($ensure='present', $source, $type='ipv4',
                            $table='filter') {
 
-    if $lokkit_disabled == 'true' {
-        info('Disabled via $lokkit_disabled.')
-    } else {
+    if $iptables::managed_host == true {
 
         case $ensure {
 
@@ -45,13 +42,13 @@ define lokkit::rules_file ($ensure='present', $source, $type='ipv4',
                 $rules_file="/etc/sysconfig/iptables.${name}"
 
                 file { "${rules_file}":
+                    owner   => 'root',
                     group   => 'root',
                     mode    => '0600',
-                    owner   => 'root',
-                    require => Class['iptables'],
                     seluser => 'system_u',
                     selrole => 'object_r',
                     seltype => 'system_conf_t',
+                    require => Class['iptables'],
                     source  => "${source}",
                 }
 
@@ -68,6 +65,8 @@ define lokkit::rules_file ($ensure='present', $source, $type='ipv4',
 
         }
 
+    } else {
+        notice("iptables management is disabled on $fqdn via \$iptables::managed_host.")
     }
 
 }

@@ -13,12 +13,8 @@ class dart::mdct-puppet inherits dart::abstract::puppet_server_node {
         mon_passwd      => 'db6696b5078c30697ae55a2788f0529d',
     }
 
-    class { 'iptables':
-        enabled => true,
-    }
-
-    lokkit::rules_file { 'blocks':
-        source  => 'puppet:///private-host/lokkit/blocks',
+    iptables::rules_file { 'blocks':
+        source  => 'puppet:///private-host/iptables/blocks',
     }
 
     file { '/etc/motd':

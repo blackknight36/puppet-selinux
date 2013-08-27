@@ -46,8 +46,9 @@ class MODULE_NAME::CLASS_NAME {
         ],
     }
 
-    lokkit::tcp_port {
-        'SERVICE_NAME': port => 'SERVICE_PORT_1',
+    iptables::tcp_port {
+        'SERVICE_NAME': port => 'SERVICE_PORT_1';
+        'SERVICE_NAME': port => 'SERVICE_PORT_2';
         };
     }
 

@@ -6,7 +6,7 @@
 # Contact:
 #       ???
 
-class dart::mdct-test-agent-32 inherits dart::abstract::server_node {
+class dart::mdct-test-agent-32 inherits dart::abstract::unguarded_server_node {
 
     class { 'puppet::client':
     }

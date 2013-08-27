@@ -6,11 +6,7 @@
 # Contact:
 #       Nathan Nephew
 
-class dart::mdct-00tl inherits dart::abstract::server_node {
-
-    class { 'iptables':
-        enabled => true,
-    }
+class dart::mdct-00tl inherits dart::abstract::semi_guarded_server_node {
 
     class { 'bacula::client':
         dir_passwd      => 'VrLkRkBWWIhDHF8ARkPfGH5mNWnF1wZd939DmfFAhNzS',
@@ -20,8 +16,8 @@ class dart::mdct-00tl inherits dart::abstract::server_node {
     class { 'puppet::client':
     }
 
-    lokkit::tcp_port {
-            'http':                 port => '80';
+    iptables::tcp_port {
+        'http': port => '80';
     }
 
 }

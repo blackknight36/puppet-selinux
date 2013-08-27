@@ -38,9 +38,8 @@ class apache {
         value           => on,
     }
 
-    lokkit::tcp_port {
-        'http':
-            port    => '80';
+    iptables::tcp_port {
+        'http': port => '80';
     }
 
     service { 'httpd':

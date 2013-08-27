@@ -31,9 +31,8 @@ class openssh-server {
         ],
     }
 
-    lokkit::tcp_port {
-        'ssh':
-            port    => '22';
+    iptables::tcp_port {
+        'ssh':  port => '22';
     }
 
     service { 'sshd':

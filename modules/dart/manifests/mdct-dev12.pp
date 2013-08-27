@@ -41,12 +41,9 @@ class dart::mdct-dev12 inherits dart::abstract::workstation_node {
     include 'packages::kde'
     include 'dart::subsys::yum_cron'
 
-    class { 'iptables':
-        enabled => true,
+    iptables::rules_file { 'blocks':
+        source  => 'puppet:///private-host/iptables/blocks',
     }
-
-    lokkit::rules_file { 'blocks':
-        source  => 'puppet:///private-host/lokkit/blocks',
     }
 
     # noscript included here because nobody else likely to want it

@@ -3,7 +3,7 @@
 # Synopsis:
 #       This class is to be used for PICAPS production servers only.
 
-class dart::abstract::picaps_production_server_node inherits dart::abstract::server_node {
+class dart::abstract::picaps_production_server_node inherits dart::abstract::unguarded_server_node {
 
     # Other packages required by PICAPS servers
     package { [
@@ -19,11 +19,6 @@ class dart::abstract::picaps_production_server_node inherits dart::abstract::ser
         ensure  => 'installed',
     }
 
-    # Disable iptables
-    class { 'iptables':
-        enabled => false,
-    }
-
     # PICAPS admins desire puppet only for tasks at server inception and forgo
     # all run-state management.
     class { 'puppet::client':
@@ -34,13 +29,6 @@ class dart::abstract::picaps_production_server_node inherits dart::abstract::ser
     mailalias { "root":
         ensure          => present,
         recipient       => "chris.kennedy@dart.biz",
-    }
-
-    # Disable selinux
-    # Note: switching from enforcing or permissive to disabled requires reboot.
-    # Note: switching from disabled to enforcing or permissive requires reboot.
-    class { 'selinux':
-        mode => 'disabled',
     }
 
     # OpenIPMI

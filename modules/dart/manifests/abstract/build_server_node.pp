@@ -1,6 +1,6 @@
 # modules/dart/manifests/abstract/build_server_node.pp
 
-class dart::abstract::build_server_node inherits dart::abstract::server_node {
+class dart::abstract::build_server_node inherits dart::abstract::guarded_server_node {
 
     include 'autofs'
     include packages::developer

@@ -43,9 +43,8 @@ class mariadb::client ($config_uri=undef) {
         }
     }
 
-    lokkit::tcp_port {
-        'mysqld':
-            port => '3306';
+    iptables::tcp_port {
+        'mysqld':   port => '3306';
     }
 
     service { $mariadb::params::service_name:

@@ -6,11 +6,7 @@
 # Contact:
 #       Ben Minshall
 
-class dart::mdct-tc inherits dart::abstract::server_node {
-
-    class { 'iptables':
-        enabled => true,
-    }
+class dart::mdct-tc inherits dart::abstract::guarded_server_node {
 
     include apache
     include postgresql::server
@@ -28,7 +24,7 @@ class dart::mdct-tc inherits dart::abstract::server_node {
         mon_passwd      => '8QNsZ1MehmXv61Kx8l2IcnOhtjrXeV3iFBm3GNOqukMU',
     }
 
-    lokkit::tcp_port {
-        'postgres':             port => '5432';
+    iptables::tcp_port {
+        'postgres': port => '5432';
     }
 }

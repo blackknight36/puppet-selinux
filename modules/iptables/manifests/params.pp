@@ -9,10 +9,11 @@ class iptables::params {
     case $::operatingsystem {
         Fedora: {
 
-            if $operatingsystemrelease < 16 {
+            if $::operatingsystemrelease < 16 {
                 $packages = [
                     'iptables',
                     'iptables-ipv6',
+                    'system-config-firewall-base',  # for lokkit
                 ]
                 $services = [
                     'iptables',
@@ -21,16 +22,27 @@ class iptables::params {
             } else {
                 $packages = [
                     'iptables',
+                    'system-config-firewall-base',  # for lokkit
                 ]
                 $services = [
                     'iptables',
+                ]
+            }
+            if $::operatingsystemrelease == 'Rawhide' or
+               $::operatingsystemrelease >= 18
+            {
+                $conflicting_packages = [
+                    'firewalld',
+                ]
+            } else {
+                $conflicting_packages = [
                 ]
             }
 
         }
 
         default: {
-            fail ("The iptables module is not yet supported on ${operatingsystem}.")
+            fail ("The iptables module is not yet supported on ${::operatingsystem}.")
         }
 
     }

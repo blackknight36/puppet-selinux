@@ -37,8 +37,8 @@ class vsftpd($allow_use_nfs=false) {
         ],
     }
 
-    lokkit::tcp_port { 'vsftpd':
-        port    => '21',
+    iptables::tcp_port {
+        'vsftpd':   port => '21';
     }
 
     if $operatingsystem == 'Fedora' and $operatingsystemrelease < 18 {

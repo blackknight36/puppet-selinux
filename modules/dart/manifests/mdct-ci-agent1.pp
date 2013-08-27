@@ -8,22 +8,18 @@
 #
 # TODO:
 #       Rather than inheriting from dart::abstract::est_server_node, this
-#       should probably inherit dart::abstract::server_node instead as it
-#       likely only needs postgresql postgresql-server and postgresql-contrib
-#       with an est user created in postgres, not tomcat and open ports in the
-#       8000-range like the production EST system(s).
+#       should probably inherit dart::abstract::guarded_server_node instead as
+#       it likely only needs postgresql postgresql-server and
+#       postgresql-contrib with an est user created in postgres, not tomcat
+#       and open ports in the 8000-range like the production EST system(s).
 #
 #       A good time to tackle such a change would be during the next rebuild
 #       of this host, if ever.
 
 class dart::mdct-ci-agent1 inherits dart::abstract::est_server_node {
 
-    class { 'iptables':
-        enabled => true,
-    }
-
-    lokkit::tcp_port { 'teamcity':
-        port    => '9090',
+    iptables::tcp_port {
+        'teamcity': port => '9090';
     }
 
 }

@@ -14,8 +14,8 @@ class apache::mod_ssl {
         ensure  => installed,
     }
 
-    lokkit::tcp_port { 'https':
-        port    => '443',
+    iptables::tcp_port {
+        'https':    port => '443';
     }
 
 }

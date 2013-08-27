@@ -41,9 +41,8 @@ class puppet::server {
     # All other puppet resources, except puppet.conf (see client.pp), are
     # managed via GIT 'in place'.
 
-    lokkit::tcp_port {
-        'puppetmaster':
-            port    => '8140';
+    iptables::tcp_port {
+        'puppetmaster': port => '8140';
     }
 
     service { $puppet::params::server_service_name:

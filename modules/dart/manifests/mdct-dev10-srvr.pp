@@ -6,7 +6,7 @@
 # Contact:
 #       Levi Harper
 
-class dart::mdct-dev10-srvr inherits dart::abstract::server_node {
+class dart::mdct-dev10-srvr inherits dart::abstract::guarded_server_node {
 
     class { 'puppet::client':
     }

@@ -8,8 +8,4 @@
 
 class dart::mdct-est-dev2 inherits dart::abstract::est_server_node {
 
-    class { 'iptables':
-        enabled => true,
-    }
-
 }

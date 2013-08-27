@@ -33,9 +33,8 @@ class rsync-server {
         ],
     }
 
-    lokkit::tcp_port {
-        'rsync':
-            port    => '873';
+    iptables::tcp_port {
+        'rsync':    port => '873';
     }
 
     selinux::boolean {
