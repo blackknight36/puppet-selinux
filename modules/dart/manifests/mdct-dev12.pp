@@ -44,6 +44,9 @@ class dart::mdct-dev12 inherits dart::abstract::workstation_node {
     iptables::rules_file { 'blocks':
         source  => 'puppet:///private-host/iptables/blocks',
     }
+
+    class { 'selinux':
+        mode => 'enforcing',
     }
 
     # noscript included here because nobody else likely to want it
