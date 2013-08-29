@@ -13,7 +13,6 @@ class dart::mdct-dev17 inherits dart::abstract::workstation_node {
 
     iptables::tcp_port {
         'tomcat': port => '8080';
-        };
     }
 
 }
