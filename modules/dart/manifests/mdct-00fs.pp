@@ -87,7 +87,7 @@ class dart::mdct-00fs {
         cronjob => 'puppet:///private-host/mirrmaid/mirrmaid-yum-fanout.cron',
     }
 
-    include 'picaps-backup-agent'
+    include 'picaps::backup_agent'
     include 'repoview'
 
 
