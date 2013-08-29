@@ -59,7 +59,6 @@ node 'mdct-ngic-dev.dartcontainer.com'          { include 'dart::mdct-ngic-dev' 
 node 'mdct-ngic.dartcontainer.com'              { include 'dart::mdct-ngic' }
 node 'mdct-ovirt-engine.dartcontainer.com'      { include 'dart::mdct_ovirt_engine' }
 node 'mdct-pt-dbtest.dartcontainer.com'         { include 'dart::mdct-pt-dbtest' }
-node 'mdct-puppet.dartcontainer.com'            { include 'dart::mdct-puppet' }
 node 'mdct-recov.dartcontainer.com'             { include 'dart::mdct-recov' }
 node 'mdct-tc.dartcontainer.com'                { include 'dart::mdct-tc' }
 node 'mdct-test-agent-32.dartcontainer.com'     { include 'dart::mdct-test-agent-32' }
@@ -69,3 +68,4 @@ node 'tc-util.dartcontainer.com'                { include 'dart::tc-util' }
 
 node /^mdct-dev10-.*\.dartcontainer\.com$/      { include 'dart::mdct-dev10-srvr' }
 node /^mdct-ovirt-node-.*\.dartcontainer\.com$/ { include 'dart::mdct_ovirt_node' }
+node /^mdct-puppet.*\.dartcontainer\.com$/      { include 'dart::mdct-puppet' }

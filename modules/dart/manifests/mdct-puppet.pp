@@ -1,7 +1,7 @@
 # modules/dart/manifests/mdct-puppet.pp
 #
 # Synopsis:
-#       Puppet Master
+#       Puppet Master(s)
 #
 # Contact:
 #       John Florian
