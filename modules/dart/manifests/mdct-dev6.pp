@@ -35,7 +35,7 @@ class dart::mdct-dev6 inherits dart::abstract::workstation_node {
         theme   => 'details',
     }
 
-    include mysql-server
+#    include mysql-server
     include packages::kde
     include jetbrains::idea
 
@@ -101,14 +101,14 @@ class dart::mdct-dev6 inherits dart::abstract::workstation_node {
         seltype     => "virt_var_lib_t",
     }
 
-    dart::util::replace_original_with_symlink_to_alternate { "/var/lib/mysql":
-        alternate   => "/mnt-local/storage/var/lib/mysql",
-        backup      => "/var/lib/mysql$SUFFIX",
-        original    => "/var/lib/mysql",
-        before      => Service["mysqld"],
-        require     => Package["mysql-server"],
-        seltype     => "mysqld_db_t",
-    }
+#    dart::util::replace_original_with_symlink_to_alternate { "/var/lib/mysql":
+#        alternate   => "/mnt-local/storage/var/lib/mysql",
+#        backup      => "/var/lib/mysql$SUFFIX",
+#        original    => "/var/lib/mysql",
+#        before      => Service["mysqld"],
+#        require     => Package["mysql-server"],
+#        seltype     => "mysqld_db_t",
+#    }
 
     mailalias { "root":
         ensure      => present,
