@@ -81,12 +81,12 @@ class jetbrains::pycharm {
     # EAP Releases
     #
 
-    jetbrains::pycharm-release { 'pycharm-130.1451':
-        build   => '130.1451',
+    jetbrains::pycharm-release { 'pycharm-130.1764':
+        build   => '130.1764',
     }
 
-    jetbrains::pycharm-release { 'pycharm-130.1058':
-        build   => '130.1058',
+    jetbrains::pycharm-release { 'pycharm-130.1451':
+        build   => '130.1451',
         ensure  => 'absent',
     }
 
