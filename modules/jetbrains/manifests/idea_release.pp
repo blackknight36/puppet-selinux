@@ -1,7 +1,7 @@
-# modules/jetbrains/manifests/idea-release.pp
+# modules/jetbrains/manifests/idea_release.pp
 #
 # Synopsis:
-#       Installs a idea-release configuration file for jetbrains.
+#       Installs a single, specific JetBrains IDEA release.
 #
 # Parameters:
 #       Name__________  Default_______  Description___________________________
@@ -17,17 +17,17 @@
 #
 #       include jetbrains::idea
 #
-#       jetbrains::idea-release { 'latest':
+#       jetbrains::idea_release { 'latest':
 #           build   => "114.98",
 #       }
 #
-#       jetbrains::idea-release { 'ancient':
+#       jetbrains::idea_release { 'ancient':
 #           build   => "1.23",
 #           ensure  => absent,
 #       }
 
 
-define jetbrains::idea-release ($build, $ensure='present') {
+define jetbrains::idea_release ($build, $ensure='present') {
 
     file { "${jetbrains::idea::launchers_path}/${name}.desktop":
         content => template("jetbrains/idea/build.desktop"),

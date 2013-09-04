@@ -1,4 +1,4 @@
-# modules/jetbrains/manifests/pycharm-release.pp
+# modules/jetbrains/manifests/pycharm_release.pp
 #
 # Synopsis:
 #       Installs a single, specific JetBrains PyCharm release.
@@ -17,12 +17,12 @@
 #
 #       include jetbrains::pycharm
 #
-#       jetbrains::pycharm-release { 'latest':
+#       jetbrains::pycharm_release { 'latest':
 #           build   => '2.6',
 #       }
 
 
-define jetbrains::pycharm-release ($build, $ensure='present') {
+define jetbrains::pycharm_release ($build, $ensure='present') {
 
     file { "${jetbrains::pycharm::launchers_path}/${name}.desktop":
         content => template('jetbrains/pycharm/build.desktop'),

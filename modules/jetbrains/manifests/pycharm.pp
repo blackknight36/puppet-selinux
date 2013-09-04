@@ -68,11 +68,11 @@ class jetbrains::pycharm {
     # to ensure that no more than two stable releases are installed at any
     # given time.
 
-    jetbrains::pycharm-release { 'pycharm-2.7.3':
+    jetbrains::pycharm_release { 'pycharm-2.7.3':
         build   => '2.7.3',
     }
 
-    jetbrains::pycharm-release { 'pycharm-2.7.2':
+    jetbrains::pycharm_release { 'pycharm-2.7.2':
         build   => '2.7.2',
         ensure  => 'absent',
     }
@@ -81,11 +81,11 @@ class jetbrains::pycharm {
     # EAP Releases
     #
 
-    jetbrains::pycharm-release { 'pycharm-130.1764':
+    jetbrains::pycharm_release { 'pycharm-130.1764':
         build   => '130.1764',
     }
 
-    jetbrains::pycharm-release { 'pycharm-130.1451':
+    jetbrains::pycharm_release { 'pycharm-130.1451':
         build   => '130.1451',
         ensure  => 'absent',
     }
