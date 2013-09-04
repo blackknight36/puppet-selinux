@@ -10,7 +10,9 @@
 #
 #       ensure          1       instance is to be present/absent
 #
-#       source                  URI of automount file content
+#       version                 JDK version number (e.g., '7')
+#
+#       update                  JDK update number (e.g., '25')
 #
 # Notes:
 #
