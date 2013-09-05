@@ -10,14 +10,13 @@
 #
 # Requires:
 #       NONE
-#
-# Example Usage:
-#
-#       include jetbrains::pycharm
+
 
 class jetbrains::pycharm {
 
-    include jetbrains
+    include 'jetbrains'
+
+    $root = '/opt/jetbrains/pycharm'
 
     File {
         owner   => 'root',
@@ -28,7 +27,6 @@ class jetbrains::pycharm {
         seltype => 'etc_t',
     }
 
-    $root = '/opt/jetbrains/pycharm'
     file { "${jetbrains::pycharm::root}":
         ensure  => directory,
         mode    => '0755',

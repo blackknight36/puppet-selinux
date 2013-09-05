@@ -10,14 +10,13 @@
 #
 # Requires:
 #       NONE
-#
-# Example Usage:
-#
-#       include jetbrains::idea
+
 
 class jetbrains::idea {
 
-    include jetbrains
+    include 'jetbrains'
+
+    $root = '/opt/jetbrains/idea'
 
     File {
         owner   => 'root',
@@ -28,7 +27,6 @@ class jetbrains::idea {
         seltype => 'etc_t',
     }
 
-    $root = '/opt/jetbrains/idea'
     file { "${jetbrains::idea::root}":
         ensure  => directory,
         mode    => '0755',

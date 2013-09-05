@@ -4,25 +4,23 @@
 #       Installs a single, specific JetBrains PyCharm release.
 #
 # Parameters:
-#       Name__________  Default_______  Description___________________________
+#       Name__________  Notes_  Description___________________________
 #
-#       name                            instance name
-#       build                           JetBrains build ID, e.g. '2.6'
-#       ensure          present         instance is to be present/absent
+#       name                    instance name
 #
-# Requires:
-#       Class['jetbrains::pycharm']
+#       ensure          1       instance is to be present/absent
 #
-# Example Usage:
+#       build                   PyCharm build ID, e.g. '2.6'
 #
-#       include jetbrains::pycharm
+# Notes:
 #
-#       jetbrains::pycharm_release { 'latest':
-#           build   => '2.6',
-#       }
+#       1. Default is 'present'.
 
 
 define jetbrains::pycharm_release ($build, $ensure='present') {
+
+    $product_name = "pycharm-${build}"
+    $product_root = "${jetbrains::teamcity::root}/${product_name}"
 
     file { "${jetbrains::pycharm::launchers_path}/${name}.desktop":
         content => template('jetbrains/pycharm/build.desktop'),
@@ -39,9 +37,9 @@ define jetbrains::pycharm_release ($build, $ensure='present') {
     case $ensure {
 
         'present': {
-            exec { "extract-${name}-pycharm":
-                command => "tar xzf /pub/jetbrains/${name}.tar.gz",
-                creates => "${jetbrains::pycharm::root}/pycharm-${build}",
+            exec { "extract-${name}":
+                command => "tar xzf /pub/jetbrains/pycharm-${build}.tar.gz",
+                creates => "${product_root}",
                 cwd     => "${jetbrains::pycharm::root}",
                 require => [
                     Class['autofs'],
@@ -51,7 +49,7 @@ define jetbrains::pycharm_release ($build, $ensure='present') {
         }
 
         'absent': {
-            file { "${jetbrains::pycharm::root}/pycharm-${build}":
+            file { "${product_root}":
                 ensure  => 'absent',
                 force   => true,
                 recurse => true,

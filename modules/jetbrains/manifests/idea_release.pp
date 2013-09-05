@@ -4,30 +4,23 @@
 #       Installs a single, specific JetBrains IDEA release.
 #
 # Parameters:
-#       Name__________  Default_______  Description___________________________
+#       Name__________  Notes_  Description___________________________
 #
-#       name                            instance name
-#       build                           JetBrains build ID, e.g. '111.277'
-#       ensure          present         instance is to be present/absent
+#       name                    instance name
 #
-# Requires:
-#       Class['jetbrains::idea']
+#       ensure          1       instance is to be present/absent
 #
-# Example usage:
+#       build                   IDEA build ID, e.g. '111.277'
 #
-#       include jetbrains::idea
+# Notes:
 #
-#       jetbrains::idea_release { 'latest':
-#           build   => "114.98",
-#       }
-#
-#       jetbrains::idea_release { 'ancient':
-#           build   => "1.23",
-#           ensure  => absent,
-#       }
+#       1. Default is 'present'.
 
 
 define jetbrains::idea_release ($build, $ensure='present') {
+
+    $product_name = "idea-IU-${build}"
+    $product_root = "${jetbrains::teamcity::root}/${product_name}"
 
     file { "${jetbrains::idea::launchers_path}/${name}.desktop":
         content => template("jetbrains/idea/build.desktop"),
@@ -44,9 +37,9 @@ define jetbrains::idea_release ($build, $ensure='present') {
     case $ensure {
 
         'present': {
-            exec { "extract-${name}-idea":
+            exec { "extract-${name}":
                 command => "tar xzf /pub/jetbrains/${name}.tar.gz",
-                creates => "${jetbrains::idea::root}/idea-IU-${build}",
+                creates => "${product_root}",
                 cwd     => "${jetbrains::idea::root}",
                 require => [
                     Class['autofs'],
@@ -56,7 +49,7 @@ define jetbrains::idea_release ($build, $ensure='present') {
         }
 
         'absent': {
-            file { "${jetbrains::idea::root}/idea-IU-${build}":
+            file { "${product_root}":
                 ensure  => 'absent',
                 force   => true,
                 recurse => true,
