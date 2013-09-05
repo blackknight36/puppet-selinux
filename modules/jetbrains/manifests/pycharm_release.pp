@@ -45,7 +45,7 @@ define jetbrains::pycharm_release ($build, $ensure='present') {
                 cwd     => "${jetbrains::pycharm::root}",
                 require => [
                     Class['autofs'],
-                    File["${jetbrains::pycharm::root}"],
+                    Class['jetbrains::pycharm'],
                 ],
             }
         }

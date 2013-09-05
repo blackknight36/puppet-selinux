@@ -50,7 +50,7 @@ define jetbrains::idea_release ($build, $ensure='present') {
                 cwd     => "${jetbrains::idea::root}",
                 require => [
                     Class['autofs'],
-                    File["${jetbrains::idea::root}"],
+                    Class['jetbrains::idea'],
                 ],
             }
         }
