@@ -38,6 +38,14 @@ class puppet::server {
         source  => 'puppet:///modules/puppet/puppetmaster',
     }
 
+    # A custom service unit file is installed to alter default policy
+    # regarding restarting after exiting.  See unit source for more details.
+    systemd::unit { 'puppetmaster.service':
+        source  => 'puppet:///modules/puppet/puppetmaster.service',
+        before  => Service[$puppet::params::server_service_name],
+        notify  => Service[$puppet::params::server_service_name],
+    }
+
     # All other puppet resources, except puppet.conf (see client.pp), are
     # managed via GIT 'in place'.
 
