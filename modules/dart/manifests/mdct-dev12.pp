@@ -53,10 +53,8 @@ class dart::mdct-dev12 inherits dart::abstract::workstation_node {
         ensure  => installed,
     }
 
-    oracle::jdk { 'jdk-7u25-linux-x64':
-        ensure  => 'present',
-        version => '7',
-        update  => '25',
+    oracle::jdk { 'for PyCharm':
+        ensure  => 'latest',
     }
 
     $SUFFIX=".orig-${operatingsystem}${operatingsystemrelease}"
