@@ -19,8 +19,10 @@
 
 define jetbrains::pycharm_release ($build, $ensure='present') {
 
+    include 'jetbrains::params'
+
     $product_name = "pycharm-${build}"
-    $product_root = "${jetbrains::teamcity::root}/${product_name}"
+    $product_root = "${jetbrains::params::pycharm_root}/${product_name}"
 
     file { "${jetbrains::pycharm::launchers_path}/${name}.desktop":
         content => template('jetbrains/pycharm/build.desktop'),
@@ -40,10 +42,10 @@ define jetbrains::pycharm_release ($build, $ensure='present') {
             exec { "extract-${name}":
                 command => "tar xzf /pub/jetbrains/pycharm-${build}.tar.gz",
                 creates => "${product_root}",
-                cwd     => "${jetbrains::pycharm::root}",
+                cwd     => "${jetbrains::params::pycharm_root}",
                 require => [
                     Class['autofs'],
-                    Class['jetbrains::pycharm'],
+                    File["${jetbrains::params::pycharm_root}"],
                 ],
             }
         }

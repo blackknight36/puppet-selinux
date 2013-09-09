@@ -15,8 +15,7 @@
 class jetbrains::idea {
 
     include 'jetbrains'
-
-    $root = '/opt/jetbrains/idea'
+    include 'jetbrains::params'
 
     File {
         owner   => 'root',
@@ -27,24 +26,24 @@ class jetbrains::idea {
         seltype => 'etc_t',
     }
 
-    file { "${jetbrains::idea::root}":
+    file { "${jetbrains::params::idea_root}":
         ensure  => directory,
         mode    => '0755',
         require => File['/opt/jetbrains'],
     }
 
-    $launchers_path = "${jetbrains::idea::root}/launchers"
+    $launchers_path = "${jetbrains::params::idea_root}/launchers"
     file { "${jetbrains::idea::launchers_path}":
         ensure  => directory,
         mode    => '0755',
-        require => File["${jetbrains::idea::root}"],
+        require => File["${jetbrains::params::idea_root}"],
     }
 
-    $idea_config = "${jetbrains::idea::root}/etc"
+    $idea_config = "${jetbrains::params::idea_root}/etc"
     file { "${idea_config}":
         ensure  => directory,
         mode    => '0755',
-        require => File["${jetbrains::idea::root}"],
+        require => File["${jetbrains::params::idea_root}"],
     }
 
     $idea_vmoptions = "${idea_config}/vmoptions"

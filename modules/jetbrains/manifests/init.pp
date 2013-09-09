@@ -10,12 +10,11 @@
 #
 # Requires:
 #       NONE
-#
-# Example usage:
-#
-#       include jetbrains
+
 
 class jetbrains {
+
+    include 'jetbrains::params'
 
     File {
         ensure  => directory,
@@ -30,7 +29,7 @@ class jetbrains {
     file { '/opt':
     }
 
-    file { '/opt/jetbrains':
+    file { "${jetbrains::params::root}":
         require => File['/opt'],
     }
 

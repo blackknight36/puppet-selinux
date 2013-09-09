@@ -19,8 +19,10 @@
 
 define jetbrains::idea_release ($build, $ensure='present') {
 
+    include 'jetbrains::params'
+
     $product_name = "idea-IU-${build}"
-    $product_root = "${jetbrains::teamcity::root}/${product_name}"
+    $product_root = "${jetbrains::params::idea_root}/${product_name}"
 
     file { "${jetbrains::idea::launchers_path}/${name}.desktop":
         content => template("jetbrains/idea/build.desktop"),
@@ -40,10 +42,10 @@ define jetbrains::idea_release ($build, $ensure='present') {
             exec { "extract-${name}":
                 command => "tar xzf /pub/jetbrains/${name}.tar.gz",
                 creates => "${product_root}",
-                cwd     => "${jetbrains::idea::root}",
+                cwd     => "${jetbrains::params::idea_root}",
                 require => [
                     Class['autofs'],
-                    Class['jetbrains::idea'],
+                    File["${jetbrains::params::idea_root}"],
                 ],
             }
         }

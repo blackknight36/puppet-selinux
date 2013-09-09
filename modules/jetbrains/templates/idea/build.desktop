@@ -1,9 +1,9 @@
 [Desktop Entry]
-Name=IntelliJ IDEA (<%= name %>)
+Name=IntelliJ IDEA (<%= @name %>)
 Comment=The most intelligent IDE
 MimeType=text/x-java;
-Exec=/opt/jetbrains/idea/idea-IU-<%= build %>/bin/idea.sh
-Icon=/opt/jetbrains/idea/idea-IU-<%= build %>/bin/idea.png
+Exec=<%= @product_root %>/bin/idea.sh
+Icon=<%= @product_root %>/bin/idea.png
 Type=Application
 Terminal=0
 MapNotify=false

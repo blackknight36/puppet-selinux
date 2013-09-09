@@ -15,8 +15,7 @@
 class jetbrains::pycharm {
 
     include 'jetbrains'
-
-    $root = '/opt/jetbrains/pycharm'
+    include 'jetbrains::params'
 
     File {
         owner   => 'root',
@@ -27,24 +26,24 @@ class jetbrains::pycharm {
         seltype => 'etc_t',
     }
 
-    file { "${jetbrains::pycharm::root}":
+    file { "${jetbrains::params::pycharm_root}":
         ensure  => directory,
         mode    => '0755',
         require => File['/opt/jetbrains'],
     }
 
-    $launchers_path = "${jetbrains::pycharm::root}/launchers"
+    $launchers_path = "${jetbrains::params::pycharm_root}/launchers"
     file { "${jetbrains::pycharm::launchers_path}":
         ensure  => directory,
         mode    => '0755',
-        require => File["${jetbrains::pycharm::root}"],
+        require => File["${jetbrains::params::pycharm_root}"],
     }
 
-    $pycharm_config = "${jetbrains::pycharm::root}/etc"
+    $pycharm_config = "${jetbrains::params::pycharm_root}/etc"
     file { "${pycharm_config}":
         ensure  => directory,
         mode    => '0755',
-        require => File["${jetbrains::pycharm::root}"],
+        require => File["${jetbrains::params::pycharm_root}"],
     }
 
     $pycharm_vmoptions = "${pycharm_config}/vmoptions"

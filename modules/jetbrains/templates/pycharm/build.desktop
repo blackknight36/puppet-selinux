@@ -1,9 +1,9 @@
 [Desktop Entry]
-Name=PyCharm (<%= name %>)
+Name=PyCharm (<%= @name %>)
 Comment=Powerful Python and Django IDE
 MimeType=text/x-java;
-Exec=/opt/jetbrains/pycharm/pycharm-<%= build %>/bin/pycharm.sh
-Icon=/opt/jetbrains/pycharm/pycharm-<%= build %>/bin/pycharm.png
+Exec=<%= @product_root %>/bin/pycharm.sh
+Icon=<%= @product_root %>/bin/pycharm.png
 Type=Application
 Terminal=0
 MapNotify=false
