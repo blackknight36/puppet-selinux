@@ -1,0 +1,8 @@
+# Source this file to configure your environment for JetBrains TeamCity usage.
+
+export TEAMCITY_DATA_PATH="<%= scope.lookupvar('jetbrains::teamcity::buildserver_root') %>"
+
+# These are also supported (as of version 8.0.3; see bin/teamcity-server.sh)
+#   export TEAMCITY_PREPARE_SCRIPT
+#   export TEAMCITY_SERVER_MEM_OPTS=
+#   export TEAMCITY_SERVER_OPTS=
