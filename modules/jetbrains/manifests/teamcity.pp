@@ -21,8 +21,6 @@ class jetbrains::teamcity {
     include 'jetbrains'
     include 'jetbrains::params'
 
-    $buildserver_root = "${jetbrains::params::teamcity_root}/.BuildServer"
-
     File {
         owner   => 'teamcity',
         group   => 'teamcity',
@@ -39,20 +37,18 @@ class jetbrains::teamcity {
         require => File['/opt/jetbrains'],
     }
 
-    $teamcity_config = "${jetbrains::params::teamcity_root}/etc"
-    file { "${teamcity_config}":
+    file { "${jetbrains::params::teamcity_etc_root}":
         ensure  => directory,
         mode    => '0755',
         require => File["${jetbrains::params::teamcity_root}"],
     }
 
-    $teamcity_rc = "${teamcity_config}/rc"
-    file { "${teamcity_rc}":
+    file { "${jetbrains::params::teamcity_rc}":
         content => template('jetbrains/teamcity/rc'),
-        require => File["${teamcity_config}"],
+        require => File["${jetbrains::params::teamcity_etc_root}"],
     }
 
-    file { "${buildserver_root}":
+    file { "${jetbrains::params::teamcity_buildserver_root}":
         ensure  => directory,
         mode    => '0755',
         require => File["${jetbrains::params::teamcity_root}"],
