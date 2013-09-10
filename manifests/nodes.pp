@@ -61,6 +61,7 @@ node 'mdct-ovirt-engine.dartcontainer.com'      { include 'dart::mdct_ovirt_engi
 node 'mdct-pt-dbtest.dartcontainer.com'         { include 'dart::mdct-pt-dbtest' }
 node 'mdct-recov.dartcontainer.com'             { include 'dart::mdct-recov' }
 node 'mdct-tc.dartcontainer.com'                { include 'dart::mdct-tc' }
+node 'mdct-teamcity.dartcontainer.com'          { include 'dart::mdct_teamcity' }
 node 'mdct-test-agent-32.dartcontainer.com'     { include 'dart::mdct-test-agent-32' }
 node 'mole-dev.dartcontainer.com'               { include 'dart::mole-dev' }
 node 'mole.dartcontainer.com'                   { include 'dart::mole' }
