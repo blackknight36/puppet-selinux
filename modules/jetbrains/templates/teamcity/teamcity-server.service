@@ -1,5 +1,5 @@
 [Unit]
-Description=TeamCity, Continuous Integration for Everybody
+Description=TeamCity continuous integration server
 Documentation=http://www.jetbrains.com/teamcity/documentation/
 
 After=network.target nss-lookup.target

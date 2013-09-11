@@ -1,4 +1,4 @@
-# modules/jetbrains/manifests/teamcity_release.pp
+# modules/jetbrains/manifests/teamcity/server_release.pp
 #
 # Synopsis:
 #       Installs a single, specific JetBrains TeamCity Server release.
@@ -21,10 +21,12 @@
 #       2. Default is true.
 
 
-define jetbrains::teamcity_release ($build, $ensure='present', $active=true) {
+define jetbrains::teamcity::server_release (
+        $build, $ensure='present', $active=true
+    ) {
 
     include 'jetbrains::params'
-    include 'jetbrains::teamcity'
+    include 'jetbrains::teamcity::server'
 
     $product_name = "teamcity-${build}"
     $product_root = "${jetbrains::params::teamcity_root}/${product_name}"
@@ -43,9 +45,10 @@ define jetbrains::teamcity_release ($build, $ensure='present', $active=true) {
                 group   => 'teamcity',
                 require => [
                     Class['autofs'],
-                    Class['jetbrains::teamcity'],
+                    Class['jetbrains::teamcity::server'],
                 ],
             }
+
         }
 
         'absent': {
@@ -63,7 +66,7 @@ define jetbrains::teamcity_release ($build, $ensure='present', $active=true) {
     }
 
     systemd::unit { "${product_name}.service":
-        content => template('jetbrains/teamcity/teamcity.service'),
+        content => template('jetbrains/teamcity/teamcity-server.service'),
         ensure  => $ensure,
         enable  => $active,
         running => $active,

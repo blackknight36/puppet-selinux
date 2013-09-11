@@ -1,4 +1,4 @@
-# modules/jetbrains/manifests/teamcity.pp
+# modules/jetbrains/manifests/teamcity/server.pp
 #
 # Synopsis:
 #       Configures a host to run a JetBrains TeamCity Server.
@@ -12,11 +12,11 @@
 #       NONE
 #
 # Notes:
-#       - Generally you will want to just use jetbrains::teamcity_release
-#       instead.
+#       - Generally, you will want to just include the class
+#       'jetbrains::teamcity::server_release' instead.
 
 
-class jetbrains::teamcity {
+class jetbrains::teamcity::server {
 
     include 'jetbrains'
     include 'jetbrains::params'
