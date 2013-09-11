@@ -26,8 +26,17 @@ class dart::abstract::teamcity_server_node inherits dart::abstract::guarded_serv
         ensure  => installed,
     }
 
-    jetbrains::teamcity_release { 'TeamCity-8.0.3':
-        build   => '8.0.3',
+    case $hostname {
+        'mdct-est-ci': {
+            jetbrains::teamcity_release { 'TeamCity-7.1':
+                build   => '7.1',
+            }
+        }
+        'mdct-teamcity': {
+            jetbrains::teamcity_release { 'TeamCity-8.0.3':
+                build   => '8.0.3',
+            }
+        }
     }
 
 }

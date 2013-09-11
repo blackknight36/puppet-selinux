@@ -8,16 +8,20 @@
 #
 #       name                    instance name
 #
+#       build                   TeamCity build ID, e.g. '3.0.8'
+#
 #       ensure          1       instance is to be present/absent
 #
-#       build                   TeamCity build ID, e.g. '3.0.8'
+#       active          2       instance is to be enabled/running
 #
 # Notes:
 #
 #       1. Default is 'present'.
+#
+#       2. Default is true.
 
 
-define jetbrains::teamcity_release ($ensure='present', $build) {
+define jetbrains::teamcity_release ($build, $ensure='present', $active=true) {
 
     include 'jetbrains::params'
     include 'jetbrains::teamcity'
@@ -56,6 +60,13 @@ define jetbrains::teamcity_release ($ensure='present', $build) {
             fail('$ensure must be either "present" or "absent".')
         }
 
+    }
+
+    systemd::unit { "${product_name}.service":
+        content => template('jetbrains/teamcity/teamcity.service'),
+        ensure  => $ensure,
+        enable  => $active,
+        running => $active,
     }
 
 }

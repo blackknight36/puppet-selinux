@@ -1,0 +1,21 @@
+[Unit]
+Description=TeamCity, Continuous Integration for Everybody
+Documentation=http://www.jetbrains.com/teamcity/documentation/
+
+After=network.target nss-lookup.target
+
+[Service]
+Type=forking
+RemainAfterExit=yes
+Restart=on-failure
+
+EnvironmentFile=<%= scope.lookupvar('jetbrains::params::teamcity_rc') %>
+ExecStart=<%= @product_root %>/bin/teamcity-server.sh start
+ExecStop=<%= @product_root %>/bin/teamcity-server.sh stop
+
+User=teamcity
+Group=teamcity
+
+
+[Install]
+WantedBy=multi-user.target
