@@ -35,6 +35,7 @@ class dart::mdct-dev12 inherits dart::abstract::workstation_node {
         mon_passwd      => '9183e6fe26d853f50e9e57e561057951',
     }
 
+    include 'apache'
     include 'bacula::admin'
     include 'jetbrains::pycharm'
     include 'packages::kde'
@@ -48,7 +49,7 @@ class dart::mdct-dev12 inherits dart::abstract::workstation_node {
         mode => 'enforcing',
     }
 
-    package { ['mozilla-noscript', 'redshift']:
+    package { ['mozilla-noscript', 'man2html', 'redshift']:
         ensure  => installed,
     }
 
