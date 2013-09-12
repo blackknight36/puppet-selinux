@@ -75,10 +75,11 @@ define jetbrains::teamcity::server_release (
     }
 
     systemd::unit { "${product_name}.service":
-        content => template('jetbrains/teamcity/teamcity-server.service'),
-        ensure  => $ensure,
-        enable  => $active,
-        running => $active,
+        content         => template('jetbrains/teamcity/teamcity-server.service'),
+        ensure          => $ensure,
+        enable          => $active,
+        running         => $active,
+        restart_events  => File["${jetbrains::params::teamcity_rc}"],
     }
 
 }
