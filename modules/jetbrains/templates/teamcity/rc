@@ -1,5 +1,15 @@
 # Source this file to configure your environment for JetBrains TeamCity usage.
 
+# Tomcat binds to IPv6 only without this setting which makes the TeamCity
+# Server unreachable for most Dart network clients.
+JAVA_OPTS="-Djava.net.preferIPv4Stack=true"
+
+# Keep the .BuildServer data directory external to the installation directory
+# for a specific TeamCity release so that this data is shared between
+# releases.  (However, only one should probably have access at any given
+# time).  This should be acceptable because the default is to place this in
+# the TeamCity user's home directory.  We don't want it there though because
+# that would mean traversing NFS for this heavily used content.
 TEAMCITY_DATA_PATH="<%= scope.lookupvar('jetbrains::params::teamcity_buildserver_root') %>"
 
 # These are also supported (as of version 8.0.3; see bin/teamcity-server.sh)
