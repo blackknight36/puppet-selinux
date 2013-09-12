@@ -49,7 +49,6 @@ class MODULE_NAME::CLASS_NAME {
     iptables::tcp_port {
         'SERVICE_NAME': port => 'SERVICE_PORT_1';
         'SERVICE_NAME': port => 'SERVICE_PORT_2';
-        };
     }
 
     service { $MODULE_NAME::params::service_name:
