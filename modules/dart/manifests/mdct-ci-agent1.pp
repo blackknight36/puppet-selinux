@@ -18,8 +18,4 @@
 
 class dart::mdct-ci-agent1 inherits dart::abstract::est_server_node {
 
-    iptables::tcp_port {
-        'teamcity': port => '9090';
-    }
-
 }

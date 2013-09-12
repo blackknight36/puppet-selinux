@@ -32,4 +32,8 @@ class jetbrains::teamcity::server {
         require => User['teamcity'],
     }
 
+    iptables::tcp_port {
+        'teamcity-server':  port => '8111';
+    }
+
 }

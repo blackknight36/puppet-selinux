@@ -21,10 +21,6 @@ class dart::abstract::teamcity_agent_node inherits dart::abstract::guarded_serve
     include 'packages::developer'
     include 'puppet::client'
 
-    iptables::tcp_port {
-        'teamcity': port => '9090';
-    }
-
     case $hostname {
 #       'mdct-est-ci': {
 #           jetbrains::teamcity::agent_release { 'TeamCity-7.1':

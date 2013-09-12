@@ -32,4 +32,8 @@ class jetbrains::teamcity::agent {
         require => User['teamcity'],
     }
 
+    iptables::tcp_port {
+        'teamcity-agent':   port => '9090';
+    }
+
 }

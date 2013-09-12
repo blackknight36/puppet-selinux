@@ -17,6 +17,8 @@ class dart::mdct-dev16 inherits dart::abstract::workstation_node {
         'gwt-debug':            port => '8888';
         'http':                 port => '80';
         'postgres':             port => '5432';
+
+        # This class may want to include dart::abstract::teamcity_agent_node.
         'teamcity-build-agent': port => '9090';
     }
 
