@@ -1,7 +1,7 @@
 # John Florian's Preferred Git Config
 #
 # Make vim mimic 'git config' behavior.
-# vim: filetype=gitconfig noexpandtab sw=8
+# vim: filetype=gitconfig noexpandtab tabstop=8
 
 [alias]
 	###
@@ -12,6 +12,7 @@
 	clog = log --pretty=format:%s
 	co = checkout
 	# commit = commit -v                Why doesn't this work?
+	find = ! git ls-files | grep
 	grab = checkout
 	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 	lgs = log --shortstat
@@ -21,8 +22,10 @@
 	sed = ! git grep -z --full-name -l '.' | xargs -0 sed -i -e
 	st = status
 	unstage = reset HEAD
-	where = ! git ls-files | grep
 	who = shortlog -s --
+
+[branch]
+	autosetuprebase = always
 
 [clean]
 	requireForce = false
@@ -36,7 +39,7 @@
 	ui = auto
 
 [color "decorate"]
-        # default for tags is bold yellow, which shows poorly on white bg
+	# default for tags is bold yellow, which shows poorly on white bg
 	tag = bold yellow black
 
 [core]
@@ -68,7 +71,7 @@
 	default = current
 
 [status]
-    showUntrackedFiles = all
+	showUntrackedFiles = all
 
 [user]
 	email = john_florian@dart.biz
