@@ -1,7 +1,7 @@
-# modules/jetbrains/manifests/teamcity/server.pp
+# modules/jetbrains/manifests/teamcity/agent.pp
 #
 # Synopsis:
-#       Configures a host to run a JetBrains TeamCity Server.
+#       Configures a host to run a JetBrains TeamCity Build Agent.
 #
 # Parameters:
 #       Name__________  Default_______  Description___________________________
@@ -13,10 +13,10 @@
 #
 # Notes:
 #       - Generally, you will want to just include the class
-#       'jetbrains::teamcity::server_release' instead.
+#       'jetbrains::teamcity::agent_release' instead.
 
 
-class jetbrains::teamcity::server {
+class jetbrains::teamcity::agent {
 
     include 'jetbrains'
     include 'jetbrains::params'

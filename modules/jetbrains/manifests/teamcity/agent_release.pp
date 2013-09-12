@@ -1,7 +1,7 @@
-# modules/jetbrains/manifests/teamcity/server_release.pp
+# modules/jetbrains/manifests/teamcity/agent_release.pp
 #
 # Synopsis:
-#       Installs a single, specific JetBrains TeamCity release Server.
+#       Installs a single, specific JetBrains TeamCity release Build Agent.
 #
 # Parameters:
 #       Name__________  Notes_  Description___________________________
@@ -21,14 +21,14 @@
 #       2. Default is true.
 
 
-define jetbrains::teamcity::server_release (
+define jetbrains::teamcity::agent_release (
         $build, $ensure='present', $active=true
     ) {
 
     include 'jetbrains::params'
-    include 'jetbrains::teamcity::server'
+    include 'jetbrains::teamcity::agent'
 
-    $product_name = "teamcity-server-${build}"
+    $product_name = "teamcity-agent-${build}"
     $product_root = "${jetbrains::params::teamcity_root}/${product_name}"
 
     case $ensure {
@@ -40,19 +40,19 @@ define jetbrains::teamcity::server_release (
                 #   that it conforms with other JetBrain's products and so
                 #   that it's possible to have multiple releases installed, if
                 #   needed.
-                #   2. Exclude the Build Agent that is bundled and distributed
-                #   with the Server package.  The
-                #   jetbrains::teamcity::agent_release class extract that
-                #   portion separately so that the puppet portions can remain
-                #   modular in a pure sense.
-                command => "tar xz --transform='s!^TeamCity!${product_name}!' --exclude=TeamCity/buildAgent -f /pub/jetbrains/TeamCity-${build}.tar.gz",
+                #   2. Only extract the Build Agent that is bundled and
+                #   distributed with the Server package.  The
+                #   jetbrains::teamcity::server_release class excludes this
+                #   portion so that the puppet portions can remain modular in
+                #   a pure sense.
+                command => "tar xz --transform='s!^TeamCity/buildAgent!${product_name}!' -f /pub/jetbrains/TeamCity-${build}.tar.gz TeamCity/buildAgent/",
                 creates => "${product_root}",
                 cwd     => "${jetbrains::params::teamcity_root}",
                 user    => 'teamcity',
                 group   => 'teamcity',
                 require => [
                     Class['autofs'],
-                    Class['jetbrains::teamcity::server'],
+                    Class['jetbrains::teamcity::agent'],
                 ],
                 before  => Systemd::Unit["${product_name}.service"],
             }
@@ -60,7 +60,7 @@ define jetbrains::teamcity::server_release (
         }
 
         'absent': {
-            file { "${product_root}":
+            file { "${product_root}/buildAgent":
                 ensure  => 'absent',
                 force   => true,
                 recurse => true,
@@ -75,7 +75,7 @@ define jetbrains::teamcity::server_release (
     }
 
     systemd::unit { "${product_name}.service":
-        content => template('jetbrains/teamcity/teamcity-server.service'),
+        content => template('jetbrains/teamcity/teamcity-agent.service'),
         ensure  => $ensure,
         enable  => $active,
         running => $active,
