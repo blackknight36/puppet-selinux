@@ -1,0 +1,61 @@
+config_opts['root'] = 'fedora-<%= @release %>-<%= @arch %>'
+config_opts['target_arch'] = '<%= @arch %>'
+config_opts['legal_host_arches'] = ('<%= @arch %>',)
+config_opts['chroot_setup_cmd'] = 'groupinstall buildsys-build'
+config_opts['dist'] = 'fc<%= @release %>'  # only useful for --resultdir variable subst
+
+config_opts['yum.conf'] = """
+[main]
+cachedir=/var/cache/yum
+debuglevel=1
+reposdir=/dev/null
+logfile=/var/log/yum.log
+retries=20
+obsoletes=1
+gpgcheck=0
+assumeyes=1
+syslog_ident=mock
+syslog_device=
+
+# repos
+
+[fedora]
+name=fedora
+baseurl=http://mdct-00fs.dartcontainer.com/ftp/pub/fedora/<%= @release %>/Everything/<%= @arch %>/os/
+failovermethod=priority
+
+[updates]
+name=updates
+baseurl=http://mdct-00fs.dartcontainer.com/ftp/pub/fedora/<%= @release %>/Everything/<%= @arch %>/os/
+failovermethod=priority
+
+[updates-testing]
+name=updates-testing
+baseurl=http://mdct-00fs.dartcontainer.com/ftp/pub/fedora/updates/testing/<%= @release %>/<%= @arch %>/
+failovermethod=priority
+enabled=0
+
+[local]
+name=local
+baseurl=http://mdct-00fs.dartcontainer.com/ftp/pub/fedora/mdct/testing/<%= @release %>/<%= @arch %>/
+cost=2000
+enabled=0
+
+#   [fedora-debuginfo]
+#   name=fedora-debuginfo
+#   mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-debug-<%= @release %>&arch=<%= @arch %>
+#   failovermethod=priority
+#   enabled=0
+
+#   [updates-debuginfo]
+#   name=updates-debuginfo
+#   mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-released-debug-f<%= @release %>&arch=<%= @arch %>
+#   failovermethod=priority
+#   enabled=0
+
+#   [updates-testing-debuginfo]
+#   name=updates-testing-debuginfo
+#   mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-testing-debug-f<%= @release %>&arch=<%= @arch %>
+#   failovermethod=priority
+#   enabled=0
+#   """
