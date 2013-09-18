@@ -57,6 +57,15 @@ class packages::developer {
                 ensure  => installed,
             }
         }
+        if  $operatingsystemrelease == 'Rawhide' or
+            $operatingsystemrelease >= 17
+        {
+            package { [
+                'rubygem-ronn',
+                ]:
+                ensure  => installed,
+            }
+        }
 
     }
 
