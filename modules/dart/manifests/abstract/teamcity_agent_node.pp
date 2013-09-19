@@ -30,6 +30,7 @@ class dart::abstract::teamcity_agent_node inherits dart::abstract::guarded_serve
         'mdct-teamcity', 'mdct-teamcity-agent1': {
             jetbrains::teamcity::agent_release { 'TeamCity-8.0.3':
                 build   => '8.0.3',
+                server_url  => 'http://mdct-teamcity.dartcontainer.com:8111/',
             }
         }
     }

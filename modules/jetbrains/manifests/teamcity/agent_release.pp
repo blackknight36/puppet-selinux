@@ -14,15 +14,25 @@
 #
 #       active          2       instance is to be enabled/running
 #
+#       server_url      3       URL were TeamCity Server may be reached
+#
 # Notes:
 #
 #       1. Default is 'present'.
 #
 #       2. Default is true.
+#
+#       3. Default is 'http://localhost:8111/', which is only appropriate for
+#       the "bundled" authorized Agent that "comes with" the Server.  The
+#       TeamCity package has both Agent and Server bundled together for the
+#       Server installation, but the Puppet manifests isolate the two for
+#       better modularity whilst still allowing the typical integrated setup
+#       of the Server.
 
 
 define jetbrains::teamcity::agent_release (
-        $build, $ensure='present', $active=true
+        $build, $ensure='present', $active=true,
+        $server_url='http://localhost:8111/'
     ) {
 
     include 'jetbrains::params'
@@ -30,6 +40,7 @@ define jetbrains::teamcity::agent_release (
 
     $product_name = "teamcity-agent-${build}"
     $product_root = "${jetbrains::params::teamcity_root}/${product_name}"
+    $product_props = "${product_root}/conf/buildAgent.properties"
 
     case $ensure {
 
@@ -57,6 +68,18 @@ define jetbrains::teamcity::agent_release (
                 before  => Systemd::Unit["${product_name}.service"],
             }
 
+            jetbrains::teamcity::agent_property { 'name':
+                value       =>  "${hostname}",
+                props_file  => "${product_props}",
+                before      => Systemd::Unit["${product_name}.service"],
+            }
+
+            jetbrains::teamcity::agent_property { 'serverUrl':
+                value       =>  "${server_url}",
+                props_file  => "${product_props}",
+                before      => Systemd::Unit["${product_name}.service"],
+            }
+
         }
 
         'absent': {
@@ -79,7 +102,11 @@ define jetbrains::teamcity::agent_release (
         ensure          => $ensure,
         enable          => $active,
         running         => $active,
-        restart_events  => File["${jetbrains::params::teamcity_rc}"],
+        restart_events  => [
+            File["${jetbrains::params::teamcity_rc}"],
+            Jetbrains::Teamcity::Agent_property['name'],
+            Jetbrains::Teamcity::Agent_property['serverUrl'],
+        ],
     }
 
 }
