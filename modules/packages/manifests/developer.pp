@@ -58,7 +58,7 @@ class packages::developer {
             }
         }
         if  $operatingsystemrelease == 'Rawhide' or
-            $operatingsystemrelease >= 17
+            $operatingsystemrelease >= 18
         {
             package { [
                 'rubygem-ronn',
