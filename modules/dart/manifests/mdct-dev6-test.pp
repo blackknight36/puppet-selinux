@@ -13,7 +13,6 @@ class dart::mdct-dev6-test inherits dart::abstract::workstation_node {
     }
 
     include mysql-server
-    include packages::kde
 
     service { "NetworkManager":
         enable      => false,

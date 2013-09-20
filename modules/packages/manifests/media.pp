@@ -1,7 +1,5 @@
 # modules/packages/manifests/media.pp
 
-# See also packages::kde.
-
 class packages::media {
 
     ### Universal Package Inclusion ###

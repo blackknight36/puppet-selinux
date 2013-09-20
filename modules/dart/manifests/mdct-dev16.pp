@@ -9,7 +9,6 @@
 class dart::mdct-dev16 inherits dart::abstract::workstation_node {
 
     include jetbrains::idea
-    include packages::kde
     include 'dart::subsys::yum_cron'
 
     iptables::tcp_port {

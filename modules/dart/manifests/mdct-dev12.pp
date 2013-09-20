@@ -38,7 +38,6 @@ class dart::mdct-dev12 inherits dart::abstract::workstation_node {
     include 'apache'
     include 'bacula::admin'
     include 'jetbrains::pycharm'
-    include 'packages::kde'
     include 'dart::subsys::yum_cron'
 
     iptables::rules_file { 'blocks':
