@@ -46,9 +46,6 @@ class dart::abstract::picaps_production_server_node inherits dart::abstract::ung
     # Developer tools (includes python, cvs, git, etc)
     include 'packages::developer'
 
-    # Printing support
-    # TODO: something
-
     # JDK's
     oracle::jdk { 'jdk-7u21-linux-x64':
         ensure  => 'present',
@@ -85,10 +82,10 @@ class dart::abstract::picaps_production_server_node inherits dart::abstract::ung
         before => Package['httpd'],
     }
     group { 'apache':
-       provider => 'groupadd',
-       gid      => 48,
-       system   => true,
-       before   => User['apache'],
+        provider    => 'groupadd',
+        gid         => 48,
+        system      => true,
+        before      => User['apache'],
     }
     file { "/var/www/html/index.html":
         group   => "root",
@@ -128,6 +125,9 @@ class dart::abstract::picaps_production_server_node inherits dart::abstract::ung
         ],
     }
 
+    # Printing support
+    # TODO: something
+
     # PICAPS database
     class { 'mariadb::server':
         config_uri => 'puppet:///modules/dart/picaps-servers/picaps-mariadb-server.cnf',
@@ -150,12 +150,12 @@ class dart::abstract::picaps_production_server_node inherits dart::abstract::ung
         before  => Class['mariadb::server'],
     }
     user { 'mysql':
-        provider=> 'useradd',
-        uid     => 444,
-        gid     => 444,
-        home    => '/storage/mysql',
-        system  => true,
-        before  => File['/etc/systemd/system/mysqld.service'],
+        provider    => 'useradd',
+        uid         => 444,
+        gid         => 444,
+        home        => '/storage/mysql',
+        system      => true,
+        before      => File['/etc/systemd/system/mysqld.service'],
     }
     group { 'mysql':
        provider => 'groupadd',

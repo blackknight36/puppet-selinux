@@ -37,9 +37,6 @@ class dart::abstract::picaps_test_server_node inherits dart::abstract::unguarded
     # Developer tools (includes python, cvs, git, etc)
     include 'packages::developer'
 
-    # Printing support
-    # TODO: something
-
     # JDK's
     oracle::jdk { 'jdk-7u25-linux-x64':
         ensure  => 'present',
@@ -99,6 +96,8 @@ class dart::abstract::picaps_test_server_node inherits dart::abstract::unguarded
             Package["httpd"],
         ],
     }
+
+    # Printing support
     file { "/etc/cups/cupsd.conf":
         group   => "lp",
         mode    => 640,
@@ -160,8 +159,8 @@ class dart::abstract::picaps_test_server_node inherits dart::abstract::unguarded
         seluser => 'system_u',
         selrole => 'object_r',
         seltype => 'mysqld_db_t',
-    ensure      => 'directory',
-    before      => Class['mariadb::server'],
+        ensure  => 'directory',
+        before  => Class['mariadb::server'],
     }
     user { 'mysql':
         provider    => 'useradd',
