@@ -5,11 +5,12 @@
 
 class dart::abstract::picaps_production_server_node inherits dart::abstract::unguarded_server_node {
 
+    include 'dart::subsys::picaps::apache'
+
     # Other packages required by PICAPS servers
     package { [
         'numactl',
         'numad',
-        'httpd',
         'cups',
         'ncftp',
         'pyserial',
@@ -69,59 +70,6 @@ class dart::abstract::picaps_production_server_node inherits dart::abstract::ung
         ],
         require  => [
             Exec["install oracle jdk-7u21-linux-x64"],
-        ],
-    }
-
-    # PICAPS Web Server Redirection
-    user { 'apache':
-        provider => 'useradd',
-        uid    => 48,
-        gid    => 48,
-        home   => '/var/www',
-        system => true,
-        before => Package['httpd'],
-    }
-    group { 'apache':
-        provider    => 'groupadd',
-        gid         => 48,
-        system      => true,
-        before      => User['apache'],
-    }
-    file { "/var/www/html/index.html":
-        group   => "root",
-        mode    => 644,
-        owner   => "root",
-        content => template('dart/picaps/index.html'),
-        require => [
-            Package["httpd"],
-        ],
-    }
-    file { "/var/www/cgi-bin/checkWeb.cgi":
-        group   => "root",
-        mode    => 755,
-        owner   => "root",
-        content => template('dart/picaps/checkWeb.cgi'),
-        require => [
-            Package["httpd"],
-        ],
-    }
-    #file { "/etc/httpd/conf.d/ssl.conf":
-    #    group   => "root",
-    #    mode    => 644,
-    #    owner   => "root",
-    #    source  => [
-    #        'puppet:///modules/dart/picaps-servers/picaps-httpd-ssl.conf',
-    #    ],
-    #}
-    service { "httpd":
-        enable      => true,
-        ensure      => running,
-        hasrestart  => true,
-        hasstatus   => true,
-        require     => [
-            Package["httpd"],
-            File ["/var/www/html/index.html"],
-            File ["/var/www/cgi-bin/checkWeb.cgi"],
         ],
     }
 
