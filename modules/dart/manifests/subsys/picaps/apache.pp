@@ -14,6 +14,11 @@ class dart::subsys::picaps::apache {
         before  => Service['httpd'],
     }
 
+    Apache::Site-Config {
+        before  => Service['httpd'],
+        notify  => Service['httpd'],
+    }
+
     package { 'httpd':
         ensure  => installed,
     }
@@ -46,6 +51,16 @@ class dart::subsys::picaps::apache {
     #apache::site-config { 'ssl':
     #    source  => 'puppet:///modules/dart/picaps-servers/picaps-httpd-ssl.conf',
     #}
+
+    # Serve up /local -- locally mirrored parts of /pub as used by AOS nodes.
+    apache::site-config { 'local':
+        source  => 'puppet:///modules/dart/httpd/local.conf',
+    }
+
+    # Serve up /pub -- all of /pub but access requires WAN traversal.
+    apache::site-config { 'pub':
+        source  => 'puppet:///modules/dart/httpd/pub.conf',
+    }
 
     service { 'httpd':
         enable      => true,
