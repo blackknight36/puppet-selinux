@@ -20,3 +20,8 @@ TEAMCITY_DATA_PATH="<%= scope.lookupvar('jetbrains::params::teamcity_buildserver
 #   TEAMCITY_PREPARE_SCRIPT
 #   TEAMCITY_SERVER_MEM_OPTS=
 #   TEAMCITY_SERVER_OPTS=
+
+# A PATH having sbin *after* bin is required if a TeamCity Agent is to ever
+# run mock for building RPMs, otherwise mock will fail when run as a non-root
+# user, which is the only sane way to run mock.
+PATH=/usr/bin:/usr/sbin
