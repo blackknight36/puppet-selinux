@@ -68,16 +68,18 @@ define jetbrains::teamcity::agent_release (
                 before  => Systemd::Unit["${product_name}.service"],
             }
 
-            jetbrains::teamcity::agent_property { 'name':
-                value       =>  "${hostname}",
+            Jetbrains::Teamcity::Agent_property {
                 props_file  => "${product_props}",
                 before      => Systemd::Unit["${product_name}.service"],
+                require     => Exec["extract-${product_name}"],
+            }
+
+            jetbrains::teamcity::agent_property { 'name':
+                value       =>  "${hostname}",
             }
 
             jetbrains::teamcity::agent_property { 'serverUrl':
                 value       =>  "${server_url}",
-                props_file  => "${product_props}",
-                before      => Systemd::Unit["${product_name}.service"],
             }
 
         }
