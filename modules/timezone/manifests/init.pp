@@ -14,6 +14,7 @@ class timezone {
         '19'    => 'America/Detroit',                   # Plant City
         '25'    => 'America/Los_Angeles',               # Tumwater
         '39'    => 'America/Detroit',                   # Randleman
+        '47'    => 'America/Sao_Paulo',                 # Brazil
         '52'    => 'America/Detroit',                   # Lancaster
         '55'    => 'America/Los_Angeles',               # Lodi
         '72'    => 'America/Tijuana',                   # Tijuana
