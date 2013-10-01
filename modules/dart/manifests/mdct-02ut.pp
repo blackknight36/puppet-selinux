@@ -4,7 +4,7 @@
 #       General purpose utility server for Leola
 #
 # Contact:
-#       Chris Kennedy
+#       John Florian
 
 class dart::mdct-02ut inherits dart::abstract::plant_utility_server_node {
 
