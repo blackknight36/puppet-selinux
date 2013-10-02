@@ -12,16 +12,40 @@
 #
 #       build                   PyCharm build ID, e.g. '2.6'
 #
+#       edition         2       one of: 'community', 'professional' or
+#                               'legacy'
+#
 # Notes:
 #
 #       1. Default is 'present'.
+#
+#       2. Default is 'legacy', which is only appropriate for releases/builds
+#       prior to the introduction of the professional/community editions,
+#       i.e., 3.0.
 
 
-define jetbrains::pycharm_release ($build, $ensure='present') {
+define jetbrains::pycharm_release (
+        $build, $ensure='present', $edition='legacy'
+    ) {
 
     include 'jetbrains::params'
 
-    $product_name = "pycharm-${build}"
+    case $edition {
+        'community': {
+            $install_tag = '-community'
+            $package_tag = '-community'
+        }
+        'professional': {
+            $install_tag = ''
+            $package_tag = '-professional'
+        }
+        default: {
+            $install_tag = ''
+            $package_tag = ''
+        }
+    }
+
+    $product_name = "pycharm${install_tag}-${build}"
     $product_root = "${jetbrains::params::pycharm_root}/${product_name}"
 
     file { "${jetbrains::pycharm::launchers_path}/${name}.desktop":
@@ -40,7 +64,7 @@ define jetbrains::pycharm_release ($build, $ensure='present') {
 
         'present': {
             exec { "extract-${name}":
-                command => "tar xzf /pub/jetbrains/pycharm-${build}.tar.gz",
+                command => "tar xzf /pub/jetbrains/pycharm${package_tag}-${build}.tar.gz",
                 creates => "${product_root}",
                 cwd     => "${jetbrains::params::pycharm_root}",
                 require => [
