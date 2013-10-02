@@ -26,6 +26,7 @@ class postgresql::server {
 
     package { $postgresql::params::server_packages:
         ensure  => installed,
+        notify  => Service[$postgresql::params::service_name],
     }
 
     exec { 'postgresql-initdb':
@@ -34,20 +35,12 @@ class postgresql::server {
         # installation, the data directory is empty.  PG_VERSION (among many
         # other files) will appear once initdb has been run.
         creates => '/var/lib/pgsql/data/PG_VERSION',
+        before  => Service[$postgresql::params::service_name],
         require => Package[$postgresql::params::server_packages],
     }
 
-   file { '/var/lib/pgsql/data/pg_hba.conf':
-        group   => 'postgres',
-        mode    => 600,
-        owner   => 'postgres',
-        require => [
-            Exec['postgresql-initdb'],
-            Package[$postgresql::params::server_packages],
-        ],
-        seluser => 'unconfined_u',
-        selrole => 'object_r',
-        seltype => 'postgresql_db_t',
+    postgresql::config { 'pg_hba.conf':
+        require => Exec['postgresql-initdb'],
         source  => [
             'puppet:///private-host/postgresql/pg_hba.conf',
             'puppet:///private-domain/postgresql/pg_hba.conf',
@@ -60,13 +53,6 @@ class postgresql::server {
         ensure      => running,
         hasrestart  => true,
         hasstatus   => true,
-        require     => [
-            Exec['postgresql-initdb'],
-            Package[$postgresql::params::server_packages],
-        ],
-        subscribe   => [
-            File['/var/lib/pgsql/data/pg_hba.conf'],
-        ],
     }
 
 }
