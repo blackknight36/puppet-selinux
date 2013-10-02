@@ -16,32 +16,25 @@
 #       is a good chance the database is to be accessible to the localhost
 #       only.
 #
-# Example usage:
+# Example Usage:
 #
 #       include postgresql::server
 
 class postgresql::server {
 
-    package { 'postgresql-server':
+    include 'postgresql::params'
+
+    package { $postgresql::params::server_packages:
         ensure  => installed,
     }
 
-    package { 'postgresql-contrib':
-        ensure  => installed,
-    }
-
-    if $operatingsystemrelease >= 16 {
-        $postgresql_initdb_cmd = 'postgresql-setup initdb'
-    } else {
-        $postgresql_initdb_cmd = 'service postgresql initdb'
-    }
     exec { 'postgresql-initdb':
-        command => $postgresql_initdb_cmd,
+        command => $postgresql::params::initdb_cmd,
         # This ensures the initdb is run once only.  Upon package
         # installation, the data directory is empty.  PG_VERSION (among many
         # other files) will appear once initdb has been run.
         creates => '/var/lib/pgsql/data/PG_VERSION',
-        require => Package['postgresql-server'],
+        require => Package[$postgresql::params::server_packages],
     }
 
    file { '/var/lib/pgsql/data/pg_hba.conf':
@@ -50,7 +43,7 @@ class postgresql::server {
         owner   => 'postgres',
         require => [
             Exec['postgresql-initdb'],
-            Package['postgresql-server'],
+            Package[$postgresql::params::server_packages],
         ],
         seluser => 'unconfined_u',
         selrole => 'object_r',
@@ -62,14 +55,14 @@ class postgresql::server {
         ],
     }
 
-    service { 'postgresql':
+    service { $postgresql::params::service_name:
         enable      => true,
         ensure      => running,
         hasrestart  => true,
         hasstatus   => true,
         require     => [
             Exec['postgresql-initdb'],
-            Package['postgresql-server'],
+            Package[$postgresql::params::server_packages],
         ],
         subscribe   => [
             File['/var/lib/pgsql/data/pg_hba.conf'],
