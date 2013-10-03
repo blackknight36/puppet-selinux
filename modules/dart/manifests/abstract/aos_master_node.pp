@@ -2,7 +2,9 @@
 
 class dart::abstract::aos_master_node inherits dart::abstract::server_node {
 
-    include 'apache'
+    class { 'apache':
+        use_nfs => 'on',
+    }
 
     apache::bind-mount { 'pub':
         source  => '/pub/',

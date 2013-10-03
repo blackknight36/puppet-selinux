@@ -8,13 +8,9 @@
 #
 # Requires:
 #       NONE
-#
-# Example usage:
-#
-#       include 'apache'
 
 
-class apache {
+class apache ($use_nfs='off', $network_connect_db='off') {
 
     package { 'httpd':
         ensure  => installed,
@@ -30,12 +26,13 @@ class apache {
         require => Package['httpd'],
     }
 
-    # Web content is reached via NFS, so selinux must be adjusted to allow the
-    # apache daemon to access it.
-    selinux::boolean { 'httpd_use_nfs':
-        before          => Service['httpd'],
-        persistent      => true,
-        value           => on,
+    selinux::boolean {
+        'httpd_use_nfs':
+            persistent      => true,
+            value           => $use_nfs;
+        'httpd_can_network_connect_db':
+            persistent      => true,
+            value           => $network_connect_db;
     }
 
     iptables::tcp_port {
