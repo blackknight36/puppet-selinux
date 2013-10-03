@@ -19,8 +19,7 @@ class dart::subsys::picaps::apache {
         notify  => Service['httpd'],
     }
 
-    package { 'httpd':
-        ensure  => installed,
+    class { '::apache':
     }
 
     user { 'apache':
@@ -29,7 +28,7 @@ class dart::subsys::picaps::apache {
         gid    => 48,
         home   => '/var/www',
         system => true,
-        before => Package['httpd'],
+        before => Class['::apache'],
     }
 
     group { 'apache':
@@ -60,16 +59,6 @@ class dart::subsys::picaps::apache {
     # Serve up /pub -- all of /pub but access requires WAN traversal.
     apache::site-config { 'pub':
         source  => 'puppet:///modules/dart/httpd/pub.conf',
-    }
-
-    service { 'httpd':
-        enable      => true,
-        ensure      => running,
-        hasrestart  => true,
-        hasstatus   => true,
-        require     => [
-            Package['httpd'],
-        ],
     }
 
 }
