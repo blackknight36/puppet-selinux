@@ -1,8 +1,7 @@
 # modules/apache/manifests/misc-config.pp
 #
 # Synopsis:
-#       Installs a miscellaneous configuration file for the Apache HTTP
-#       server.
+#       Installs a miscellaneous configuration file for the Apache HTTP server.
 #
 # Parameters:
 #       Name__________  Default_______  Description___________________________
@@ -14,12 +13,11 @@
 # Requires:
 #       Class['apache']
 #
-# Example usage:
+# Example Usage:
 #
 #       include 'apache'
 #
 #       apache::misc-config { 'dav_auth':
-#           notify  => Service['apache'],
 #           source  => 'puppet:///private-host/dav_auth',
 #       }
 
@@ -34,8 +32,10 @@ define apache::misc-config ($ensure='present', $source) {
         seluser => 'system_u',
         selrole => 'object_r',
         seltype => 'httpd_config_t',
-        require => Package['httpd'],
         source  => "${source}",
+        require => Package['httpd'],
+        before  => Service['httpd'],
+        notify  => Service['httpd'],
     }
 
 }

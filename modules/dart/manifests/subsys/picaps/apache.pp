@@ -14,11 +14,6 @@ class dart::subsys::picaps::apache {
         before  => Service['httpd'],
     }
 
-    Apache::Site-Config {
-        before  => Service['httpd'],
-        notify  => Service['httpd'],
-    }
-
     class { '::apache':
     }
 

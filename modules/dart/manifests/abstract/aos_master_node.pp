@@ -11,7 +11,6 @@ class dart::abstract::aos_master_node inherits dart::abstract::server_node {
     }
 
     apache::site-config { 'pub':
-        notify  => Service['httpd'],
         source  => 'puppet:///private-host/apache/pub.conf',
     }
 
