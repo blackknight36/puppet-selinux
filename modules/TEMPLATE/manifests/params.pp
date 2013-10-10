@@ -17,7 +17,7 @@ class MODULE_NAME::params {
         }
 
         default: {
-            fail ("The MODULE_NAME module is not yet supported on ${operatingsystem}.")
+            fail ("The MODULE_NAME module is not yet supported on ${::operatingsystem}.")
         }
 
     }

@@ -10,7 +10,7 @@
 #
 #       ensure          1       instance is to be present/absent
 #
-#       source                  URI of automount file content
+#       source                  URI of file content
 #
 # Notes:
 #
@@ -19,7 +19,7 @@
 
 define MODULE_NAME::DEFINE_NAME ($ensure='present', $source) {
 
-    include MODULE_NAME::params
+    include 'MODULE_NAME::params'
 
     file { "/CONFIG_PATH/${name}.conf":
         ensure      => $ensure,
