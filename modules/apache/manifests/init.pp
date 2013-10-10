@@ -4,7 +4,17 @@
 #       Configures a host as an Apache HTTP server.
 #
 # Parameters:
-#       NONE
+#       Name__________  Notes_  Description___________________________
+#
+#       use_nfs         1       allow httpd to access nfs file systems
+#
+#       network_connect_db
+#                       1       allow httpd scripts and modules to connect to
+#                               databases over the network
+#
+# Notes:
+#
+#       1. Default is 'off'.
 #
 # Requires:
 #       NONE
