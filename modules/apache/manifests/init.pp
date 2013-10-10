@@ -22,25 +22,36 @@
 
 class apache ($use_nfs='off', $network_connect_db='off') {
 
-    package { 'httpd':
+    include 'apache::params'
+
+    package { $apache::params::packages:
         ensure  => installed,
+        notify  => Service[$apache::params::service_name],
+    }
+
+    File {
+        owner       => 'root',
+        group       => 'root',
+        mode        => '0640',
+        seluser     => 'system_u',
+        selrole     => 'object_r',
+        seltype     => 'httpd_config_t',
+        before      => Service[$apache::params::service_name],
+        notify      => Service[$apache::params::service_name],
+        subscribe   => Package[$apache::params::packages],
     }
 
     file { '/etc/httpd/conf/httpd.conf':
         # New templates are best made from pristine copies from the target OS
         # with local changes applied atop that.
-        content => template("apache/httpd.conf.${operatingsystem}.${operatingsystemrelease}"),
-        group   => 'root',
-        mode    => '0640',
-        owner   => 'root',
-        require => Package['httpd'],
+        content => template("apache/httpd.conf.${::operatingsystem}.${::operatingsystemrelease}"),
     }
 
     selinux::boolean {
-        'httpd_use_nfs':
+        $apache::params::bool_use_nfs:
             persistent      => true,
-            value           => $use_nfs;
-        'httpd_can_network_connect_db':
+            value           => $anon_write;
+        $apache::params::bool_can_network_connect_db:
             persistent      => true,
             value           => $network_connect_db;
     }
@@ -49,13 +60,11 @@ class apache ($use_nfs='off', $network_connect_db='off') {
         'http': port => '80';
     }
 
-    service { 'httpd':
+    service { $apache::params::service_name:
         enable      => true,
         ensure      => running,
         hasrestart  => true,
         hasstatus   => true,
-        require     => Package['httpd'],
-        subscribe   => File['/etc/httpd/conf/httpd.conf'],
     }
 
 }

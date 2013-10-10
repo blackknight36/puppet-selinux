@@ -25,6 +25,8 @@
 
 define apache::bind-mount ($ensure='mounted', $source) {
 
+    include 'apache::params'
+
     file { "/var/www/${name}":
         ensure  => directory,
 # These are disabled because they cause puppet failure once the mount is in
@@ -39,12 +41,12 @@ define apache::bind-mount ($ensure='mounted', $source) {
 # Disabling seltype for now since the value doesn't stick at all.
 # TODO: revisit this once SELinux is available on NFS server.
 #       seltype => 'httpd_sys_content_t',
-        require => Package['httpd'],
+        require => Package[$apache::params::packages],
     }
 
     mount { "/var/www/${name}":
         atboot  => true,
-        before  => Service['httpd'],
+        before  => Service[$apache::params::service_name],
         device  => $source,
         ensure  => $ensure,
         fstype  => 'none',

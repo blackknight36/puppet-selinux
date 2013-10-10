@@ -24,6 +24,8 @@
 
 define apache::misc-config ($ensure='present', $source) {
 
+    include 'apache::params'
+
     file { "/etc/httpd/${name}":
         ensure  => $ensure,
         owner   => 'root',
@@ -33,9 +35,9 @@ define apache::misc-config ($ensure='present', $source) {
         selrole => 'object_r',
         seltype => 'httpd_config_t',
         source  => "${source}",
-        require => Package['httpd'],
-        before  => Service['httpd'],
-        notify  => Service['httpd'],
+        require => Package[$apache::params::packages],
+        before  => Service[$apache::params::service_name],
+        notify  => Service[$apache::params::service_name],
     }
 
 }
