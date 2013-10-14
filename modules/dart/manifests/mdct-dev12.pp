@@ -30,15 +30,22 @@ class dart::mdct-dev12 inherits dart::abstract::workstation_node {
         theme   => 'details',
     }
 
+    include 'apache'            # only need for serving man2html
+
     class { 'bacula::client':
         dir_passwd      => '204f4392ecdcfd3324ce6efb2cb142f4',
         mon_passwd      => '9183e6fe26d853f50e9e57e561057951',
     }
 
-    include 'apache'
     include 'bacula::admin'
-    include 'jetbrains::pycharm'
     include 'dart::subsys::yum_cron'
+    include 'jetbrains::pycharm'
+
+    class { 'koji::cli':
+        hub         => 'http://mdct-koji.dartcontainer.com/kojihub',
+        web         => 'http://mdct-koji.dartcontainer.com/koji',
+        downloads   => 'http://mdct-koji.dartcontainer.com/kojifiles',
+    }
 
     iptables::rules_file { 'blocks':
         source  => 'puppet:///private-host/iptables/blocks',
