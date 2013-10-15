@@ -12,6 +12,9 @@ class koji::params {
             $cli_packages = [
                 'koji',
             ]
+            $hub_packages = [
+                'koji-hub',
+            ]
 
         }
 
