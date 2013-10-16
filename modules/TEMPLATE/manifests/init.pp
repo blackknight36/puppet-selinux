@@ -4,7 +4,7 @@
 #       Configures a host as a MODULE_NAME CLASS_NAME.
 #
 # Parameters:
-#       Name__________  Notes_  Description___________________________
+#       Name__________  Notes_  Description___________________________________
 #
 #       name                    instance name
 #

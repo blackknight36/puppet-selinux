@@ -4,7 +4,7 @@
 #       Installs a DEFINE_NAME configuration file for MODULE_NAME.
 #
 # Parameters:
-#       Name__________  Notes_  Description___________________________
+#       Name__________  Notes_  Description___________________________________
 #
 #       name                    instance name
 #
