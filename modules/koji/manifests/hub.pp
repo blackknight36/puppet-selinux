@@ -42,7 +42,7 @@ class koji::hub ( $db_host, $db_user, $db_passwd, $web_cn ) {
     File {
         owner       => 'root',
         group       => 'root',
-        mode        => '0640',
+        mode        => '0644',
         seluser     => 'system_u',
         selrole     => 'object_r',
         seltype     => 'etc_t',
@@ -69,8 +69,6 @@ class koji::hub ( $db_host, $db_user, $db_passwd, $web_cn ) {
     }
 
     file { '/etc/koji-hub/hub.conf':
-        #group   => 'apache',
-        mode    => '0644',
         content => template('koji/hub/hub.conf'),
     }
 

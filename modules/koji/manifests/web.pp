@@ -54,7 +54,6 @@ class koji::web ( $secret ) {
     }
 
     file { '/etc/kojiweb/web.conf':
-        #group   => 'apache',
         content => template('koji/web/web.conf'),
     }
 
