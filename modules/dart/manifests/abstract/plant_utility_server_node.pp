@@ -7,7 +7,6 @@
 class dart::abstract::plant_utility_server_node inherits dart::abstract::guarded_server_node {
 
     include 'autofs'
-    include 'open-vm-tools'
 
     class { 'puppet::client':
     }
@@ -24,4 +23,10 @@ class dart::abstract::plant_utility_server_node inherits dart::abstract::guarded
     # in a location where media-playback clients can utilize it.
     include media-disbursal
 
+    # Other packages required by a plant utility server
+    package { [
+        'open-vm-tools',
+        ]:
+        ensure => 'installed',
+    }
 }
