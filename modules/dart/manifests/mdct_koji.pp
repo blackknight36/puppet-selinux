@@ -77,6 +77,9 @@ class dart::mdct_koji inherits dart::abstract::guarded_server_node {
         top_dir     => "${topdir}",
     }
 
+    class { 'koji::kojira':
+        hub     => "http://${fqdn}/kojihub",
+        top_dir => "${topdir}",
     }
 
     class { 'koji::web':

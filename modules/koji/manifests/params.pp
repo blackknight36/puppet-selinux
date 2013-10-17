@@ -15,9 +15,13 @@ class koji::params {
             $hub_packages = [
                 'koji-hub',
             ]
+            $kojira_packages = [
+                'koji-utils',
+            ]
             $web_packages = [
                 'koji-web',
             ]
+            $kojira_service_name = 'kojira'
 
         }
 
