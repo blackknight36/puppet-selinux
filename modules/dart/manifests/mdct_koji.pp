@@ -53,6 +53,15 @@ class dart::mdct_koji inherits dart::abstract::guarded_server_node {
     $hub        = "http://${fqdn}/kojihub"
     $downloads  = "http://${fqdn}/kojifiles"
 
+    class { 'koji::builder':
+        client_cert => 'puppet:///private-host/builder-01.pem',
+        ca_cert     => 'puppet:///private-host/koji_ca_cert.crt',
+        web_ca_cert => 'puppet:///private-host/koji_ca_cert.crt',
+        hub         => "${hub}",
+        downloads   => "${downloads}",
+        top_dir     => "${topdir}",
+    }
+
     class { 'koji::ca':
         country         => 'US',
         state           => 'Michigan',
