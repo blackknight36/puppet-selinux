@@ -13,9 +13,11 @@
 #       db_passwd               password needed for database connection
 #
 #       web_cn                  CN (common name) of web client for SSL
+#
+#       top_dir                 directory containing the repos/ directory
 
 
-class koji::hub ( $db_host, $db_user, $db_passwd, $web_cn ) {
+class koji::hub ( $db_host, $db_user, $db_passwd, $web_cn, $top_dir ) {
 
     include 'koji::params'
 
@@ -35,7 +37,7 @@ class koji::hub ( $db_host, $db_user, $db_passwd, $web_cn ) {
             source      => 'puppet:///modules/koji/httpd/ssl.conf',
             subscribe   => Class['apache::mod_ssl'];
         'kojihub':
-            source      => 'puppet:///modules/koji/hub/kojihub.conf',
+            content     => template('koji/hub/kojihub.conf'),
             subscribe   => Package[$koji::params::hub_packages];
     }
 
@@ -51,16 +53,14 @@ class koji::hub ( $db_host, $db_user, $db_passwd, $web_cn ) {
         subscribe   => Package[$koji::params::hub_packages],
     }
 
-    $koji_dir = '/srv/koji'
-
-    file { "$koji_dir":
+    file { "${top_dir}":
         ensure  => directory,
         mode    => '0755',
         seltype => 'var_t',
     }
 
-    file { [ "$koji_dir/packages", "$koji_dir/repos", "$koji_dir/work",
-             "$koji_dir/scratch", ]:
+    file { [ "${top_dir}/packages", "${top_dir}/repos", "${top_dir}/work",
+             "${top_dir}/scratch", ]:
         ensure  => directory,
         owner   => 'apache',
         group   => 'apache',

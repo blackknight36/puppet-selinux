@@ -45,6 +45,7 @@ class dart::mdct-dev12 inherits dart::abstract::workstation_node {
         hub         => 'http://mdct-koji.dartcontainer.com/kojihub',
         web         => 'http://mdct-koji.dartcontainer.com/koji',
         downloads   => 'http://mdct-koji.dartcontainer.com/kojifiles',
+        top_dir     => '/srv/koji',     # TODO: share via NFS?
     }
 
     iptables::rules_file { 'blocks':

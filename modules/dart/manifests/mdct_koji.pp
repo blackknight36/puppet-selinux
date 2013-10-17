@@ -49,12 +49,20 @@ class dart::mdct_koji inherits dart::abstract::guarded_server_node {
         seltype => 'etc_t',
     }
 
+    $topdir = '/srv/koji'
 
     class { 'koji::ca':
         country         => 'US',
         state           => 'Michigan',
         locality        => 'Mason',
         organization    => 'Dart Container Corp.',
+    }
+
+    class { 'koji::cli':
+        hub         => "http://${fqdn}/kojihub",
+        web         => "http://${fqdn}/koji",
+        downloads   => "http://${fqdn}/kojifiles",
+        top_dir     => "${topdir}",
     }
 
     class { 'koji::database':
@@ -66,12 +74,9 @@ class dart::mdct_koji inherits dart::abstract::guarded_server_node {
         db_user     => 'koji',
         db_passwd   => 'mdct.koji',
         web_cn      => "/C=US/ST=Michigan/O=Dart Container Corp./OU=kojiweb/CN=${fqdn}",
+        top_dir     => "${topdir}",
     }
 
-    class { 'koji::cli':
-        hub         => "http://${fqdn}/kojihub",
-        web         => "http://${fqdn}/koji",
-        downloads   => "http://${fqdn}/kojifiles",
     }
 
     class { 'koji::web':

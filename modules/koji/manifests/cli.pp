@@ -11,9 +11,11 @@
 #       web                     URL of your Koji-Web server
 #
 #       downloads               URL of your package download site
+#
+#       top_dir                 directory containing the repos/ directory
 
 
-class koji::cli ( $hub, $web, $downloads ) {
+class koji::cli ( $hub, $web, $downloads, $top_dir ) {
 
     include 'koji::params'
 
