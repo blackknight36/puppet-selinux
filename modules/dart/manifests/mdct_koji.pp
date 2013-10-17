@@ -49,7 +49,9 @@ class dart::mdct_koji inherits dart::abstract::guarded_server_node {
         seltype => 'etc_t',
     }
 
-    $topdir = '/srv/koji'
+    $topdir     = '/srv/koji'
+    $hub        = "http://${fqdn}/kojihub"
+    $downloads  = "http://${fqdn}/kojifiles"
 
     class { 'koji::ca':
         country         => 'US',
@@ -59,9 +61,9 @@ class dart::mdct_koji inherits dart::abstract::guarded_server_node {
     }
 
     class { 'koji::cli':
-        hub         => "http://${fqdn}/kojihub",
+        hub         => "${hub}",
         web         => "http://${fqdn}/koji",
-        downloads   => "http://${fqdn}/kojifiles",
+        downloads   => "${downloads}",
         top_dir     => "${topdir}",
     }
 
@@ -78,7 +80,7 @@ class dart::mdct_koji inherits dart::abstract::guarded_server_node {
     }
 
     class { 'koji::kojira':
-        hub     => "http://${fqdn}/kojihub",
+        hub     => "${hub}",
         top_dir => "${topdir}",
     }
 
