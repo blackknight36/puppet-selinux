@@ -9,6 +9,9 @@ class koji::params {
     case $::operatingsystem {
         Fedora: {
 
+            $builder_packages = [
+                'koji-builder',
+            ]
             $cli_packages = [
                 'koji',
             ]
@@ -21,6 +24,7 @@ class koji::params {
             $web_packages = [
                 'koji-web',
             ]
+            $builder_service_name = 'kojid'
             $kojira_service_name = 'kojira'
 
         }
