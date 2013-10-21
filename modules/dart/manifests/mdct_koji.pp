@@ -35,11 +35,6 @@
 
 class dart::mdct_koji inherits dart::abstract::guarded_server_node {
 
-    mailalias { 'root':
-        ensure      => present,
-        recipient   => 'john.florian@dart.biz',
-    }
-
     File {
         owner   => 'root',
         group   => 'root',
@@ -47,6 +42,13 @@ class dart::mdct_koji inherits dart::abstract::guarded_server_node {
         seluser => 'system_u',
         selrole => 'object_r',
         seltype => 'etc_t',
+    }
+
+    include 'autofs'
+
+    mailalias { 'root':
+        ensure      => present,
+        recipient   => 'john.florian@dart.biz',
     }
 
     $topdir     = '/srv/koji'
