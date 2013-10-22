@@ -32,6 +32,13 @@ class koji::hub ( $db_host, $db_user, $db_passwd, $web_cn, $top_dir ) {
 
     include 'apache::mod_ssl'
 
+    apache::module_config {
+        '99-prefork':
+            source      => 'puppet:///modules/koji/httpd/99-prefork.conf';
+        '99-worker':
+            source      => 'puppet:///modules/koji/httpd/99-worker.conf';
+    }
+
     apache::site-config {
         'ssl':
             source      => 'puppet:///modules/koji/httpd/ssl.conf',
