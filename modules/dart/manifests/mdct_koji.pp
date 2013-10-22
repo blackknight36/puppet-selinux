@@ -86,7 +86,7 @@ class dart::mdct_koji inherits dart::abstract::guarded_server_node {
         db_host     => 'localhost',
         db_user     => 'koji',
         db_passwd   => 'mdct.koji',
-        web_cn      => "/C=US/ST=Michigan/O=Dart Container Corp./OU=kojiweb/CN=${fqdn}",
+        web_cn      => "CN=${fqdn},OU=kojiweb,O=Dart Container Corp.,ST=Michigan,C=US",
         top_dir     => "${topdir}",
     }
 
