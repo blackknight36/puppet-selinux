@@ -27,9 +27,10 @@ class koji::ca ( $country, $state, $locality, $organization ) {
 
     include 'koji::params'
 
-    $ca_root = '/etc/pki/koji'
-    $ca_key = "${ca_root}/private/koji_ca_cert.key"
-    $ca_cert = "${ca_root}/koji_ca_cert.crt"
+    $ca_name = 'Koji'
+    $ca_root = "/etc/pki/${ca_name}"
+    $ca_key = "${ca_root}/private/${ca_name}_ca_cert.key"
+    $ca_cert = "${ca_root}/certs/${ca_name}_ca_cert.crt"
     $ca_gen_cnf = "${ca_root}/confs/cacertgen.cnf"
 
     File {
@@ -60,7 +61,7 @@ class koji::ca ( $country, $state, $locality, $organization ) {
     file { "${ca_root}/certgen.sh":
         mode    => 0750,
         require => File["${ca_root}"],
-        source  => 'puppet:///modules/koji/ca/certgen.sh',
+        content => template('koji/ca/certgen.sh'),
     }
 
     file { "${ca_root}/ssl.cnf":
@@ -85,7 +86,7 @@ class koji::ca ( $country, $state, $locality, $organization ) {
     }
 
     exec { 'create_ca_cert':
-        command => "openssl req -config ssl.cnf -new -x509 -subj \"/C=${country}/ST=${state}/L=${locality}/O=Dart Container Corp./OU=Koji Certificate Authority/CN=${fqdn}\" -days 3650 -key ${ca_key} -out ${ca_cert} -extensions v3_ca",
+        command => "openssl req -config ssl.cnf -new -x509 -subj \"/C=${country}/ST=${state}/L=${locality}/O=Dart Container Corp./OU=${ca_name} Certificate Authority/CN=${fqdn}\" -days 3650 -key ${ca_key} -out ${ca_cert} -extensions v3_ca",
         creates => "${ca_cert}",
         require => Exec['create_ca_key'],
     }
