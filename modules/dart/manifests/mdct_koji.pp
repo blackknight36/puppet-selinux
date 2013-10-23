@@ -7,7 +7,7 @@
 #
 #       - https://fedoraproject.org/wiki/Koji/ServerHowTo
 #
-#       - /etc/pki/koji
+#       - /etc/pki/Koji
 #
 #           This directory contains an OpenSSL CA and one or more certificates
 #           that koji uses to authenticate its various components: koji-hub,
@@ -56,9 +56,9 @@ class dart::mdct_koji inherits dart::abstract::guarded_server_node {
     $downloads  = "http://${fqdn}/kojifiles"
 
     class { 'koji::builder':
-        client_cert => 'puppet:///private-host/builder-01.pem',
-        ca_cert     => 'puppet:///private-host/koji_ca_cert.crt',
-        web_ca_cert => 'puppet:///private-host/koji_ca_cert.crt',
+        client_cert => 'puppet:///private-host/mdct-koji.dartcontainer.com.pem',
+        ca_cert     => 'puppet:///private-host/Koji_ca_cert.crt',
+        web_ca_cert => 'puppet:///private-host/Koji_ca_cert.crt',
         hub         => "${hub}",
         downloads   => "${downloads}",
         top_dir     => "${topdir}",
