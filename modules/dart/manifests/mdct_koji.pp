@@ -37,12 +37,17 @@ class dart::mdct_koji inherits dart::abstract::guarded_server_node {
 
     include 'autofs'
 
+    autofs::mount2 { 'koji':
+        master_source   => 'puppet:///private-host/autofs/koji.autofs',
+        map_source      => 'puppet:///private-host/autofs/koji.map',
+    }
+
     mailalias { 'root':
         ensure      => present,
         recipient   => 'john.florian@dart.biz',
     }
 
-    $topdir     = '/srv/koji'
+    $topdir     = '/mnt/koji'
     $hub        = "http://${fqdn}/kojihub"
     $downloads  = "http://${fqdn}/kojifiles"
 

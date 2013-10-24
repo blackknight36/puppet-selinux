@@ -1,0 +1,1 @@
+koji    -rw,hard,intr,nosuid,noatime,fsc    mdct-00fs:/storage/projects/koji
