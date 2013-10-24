@@ -21,11 +21,16 @@ class koji::params {
             $kojira_packages = [
                 'koji-utils',
             ]
+            $mash_packages = [
+                'mash',
+                'repoview',
+            ]
             $web_packages = [
                 'koji-web',
             ]
             $builder_service_name = 'kojid'
             $kojira_service_name = 'kojira'
+            $our_mashes = '/etc/mash/ours'
 
         }
 

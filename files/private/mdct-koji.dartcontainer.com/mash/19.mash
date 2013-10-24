@@ -1,0 +1,24 @@
+# mash config file
+# vim: syntax=dosini
+
+[19]
+rpm_path = %(arch)s
+repodata_path = %(arch)s/
+source_path = SRPMS
+debuginfo = True
+# do not create i386s in x86_64
+multilib = False
+multilib_method = devel
+tag = f19
+inherit = False
+# TODO: implement signing and all that
+strict_keys = False
+# keys = FB4b18E6
+# TODO: implement repoview
+repoviewurl = http://mdct-00fs.dartcontainer.com/ftp/pub/fedora/mdct/19/%(arch)s/
+repoviewtitle = "MDCT on Fedora 19 - %(arch)s"
+arches = i386 x86_64
+delta = False
+# Change distro_tags as fedora-release version gets bumped
+#distro_tags = cpe:/o:fedoraproject:fedora:19 Schrödinger's Cat
+hash_packages = False

@@ -99,4 +99,13 @@ class dart::mdct_koji inherits dart::abstract::guarded_server_node {
         secret  => 'D0gG0n31t',
     }
 
+    class { 'koji::mash':
+        hub     => "${hub}",
+        top_dir     => "${topdir}",
+    }
+
+    koji::mash_repo { '19':
+        source  => 'puppet:///private-host/mash/19.mash',
+    }
+
 }
