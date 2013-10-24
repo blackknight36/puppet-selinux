@@ -58,6 +58,7 @@ class dart::mdct_koji inherits dart::abstract::guarded_server_node {
         hub         => "${hub}",
         downloads   => "${downloads}",
         top_dir     => "${topdir}",
+        require     => Class['Koji::Hub'],
     }
 
     class { 'koji::ca':
@@ -84,11 +85,13 @@ class dart::mdct_koji inherits dart::abstract::guarded_server_node {
         db_passwd   => 'mdct.koji',
         web_cn      => "CN=${fqdn},OU=kojiweb,O=Dart Container Corp.,ST=Michigan,C=US",
         top_dir     => "${topdir}",
+        require     => Class['Koji::Database'],
     }
 
     class { 'koji::kojira':
         hub     => "${hub}",
         top_dir => "${topdir}",
+        require => Class['Koji::Hub'],
     }
 
     class { 'koji::web':
@@ -97,7 +100,8 @@ class dart::mdct_koji inherits dart::abstract::guarded_server_node {
 
     class { 'koji::mash':
         hub     => "${hub}",
-        top_dir     => "${topdir}",
+        top_dir => "${topdir}",
+        require => Class['Koji::Hub'],
     }
 
     koji::mash_repo { '19':
