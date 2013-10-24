@@ -3,6 +3,10 @@
 # Synopsis:
 #       Installs a automount configuration file for autofs.
 #
+# Description:
+#       THIS DEFINITION IS OBSOLETE.  All new code should be using
+#       autofs::mount2 instead!
+#
 # Parameters:
 #       Name__________  Notes_  Description___________________________
 #
