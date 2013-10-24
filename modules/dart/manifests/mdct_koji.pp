@@ -35,15 +35,6 @@
 
 class dart::mdct_koji inherits dart::abstract::guarded_server_node {
 
-    File {
-        owner   => 'root',
-        group   => 'root',
-        mode    => '0644',
-        seluser => 'system_u',
-        selrole => 'object_r',
-        seltype => 'etc_t',
-    }
-
     include 'autofs'
 
     mailalias { 'root':
