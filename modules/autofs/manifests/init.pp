@@ -4,60 +4,89 @@
 #       Configures a host for the autofs service.
 #
 # Parameters:
-#       NONE
+#       Name__________  Notes_  Description___________________________________
+#
+#       legacy          1       Treat host as a legacy host.
+#
+# Notes:
+#
+#       1. Default is true (for backwards compatibility), but all new host
+#       builds should endeavor to use dart::subsys::autofs::common instead
+#       which will set up the same traditional auto-mounts, but in a way that
+#       is much more flexible and future-proof.
 
 
-class autofs {
+class autofs ( $legacy=true ) {
 
-    include autofs::params
+    include 'autofs::params'
 
     package { $autofs::params::packages:
         ensure  => installed,
         notify  => Service[$autofs::params::service_name],
     }
 
-    selinux::boolean { 'use_nfs_home_dirs':
-        before      => Service[$autofs::params::service_name],
-        persistent  => true,
-        value       => on,
-    }
+    # This is domain-specific logic and doesn't belong within the autofs
+    # module.  It is being ported to reside under dart::subsys::autofs, but
+    # until migration is complete, we must provide for backwards
+    # compatibility.
+    if $legacy {
+        selinux::boolean { 'use_nfs_home_dirs':
+            before      => Service[$autofs::params::service_name],
+            persistent  => true,
+            value       => on,
+        }
 
-    autofs::mount { 'home':
-        source  => 'puppet:///modules/autofs/auto.home',
-    }
+        autofs::mount { 'home':
+            source  => 'puppet:///modules/autofs/auto.home',
+        }
 
-    autofs::mount { 'master':
-        source  => "puppet:///modules/autofs/${autofs::params::master_source}",
-    }
+        autofs::mount { 'master':
+            source  => "puppet:///modules/autofs/${autofs::params::master_source}",
+        }
 
-    autofs::mount { 'mnt':
-        source  => 'puppet:///modules/autofs/auto.mnt',
-    }
+        autofs::mount { 'mnt':
+            source  => 'puppet:///modules/autofs/auto.mnt',
+        }
 
-    autofs::mount { 'mnt-local':
-        source  => [
-            'puppet:///private-host/autofs/auto.mnt-local',
-            'puppet:///private-domain/autofs/auto.mnt-local',
-            'puppet:///modules/autofs/auto.mnt-local',
-        ],
-    }
+        autofs::mount { 'mnt-local':
+            source  => [
+                'puppet:///private-host/autofs/auto.mnt-local',
+                'puppet:///private-domain/autofs/auto.mnt-local',
+                'puppet:///modules/autofs/auto.mnt-local',
+            ],
+        }
 
-    if $::operatingsystemrelease < 19 {
-        # Older versions of puppet and/or Fedora prevent the SELinux context
-        # from actually changing, so don't even try as it otherwise generates
-        # an endless stream of tagmail.
-        file { '/pub':
-            ensure  => link,
-            target  => '/mnt/pub',
+        if $::operatingsystemrelease < 19 {
+            # Older versions of puppet and/or Fedora prevent the SELinux context
+            # from actually changing, so don't even try as it otherwise generates
+            # an endless stream of tagmail.
+            file { '/pub':
+                ensure  => link,
+                target  => '/mnt/pub',
+            }
+        } else {
+            file { '/pub':
+                ensure  => link,
+                target  => '/mnt/pub',
+                seluser => 'system_u',
+                selrole => 'object_r',
+                seltype => 'nfs_t',
+            }
         }
     } else {
-        file { '/pub':
-            ensure  => link,
-            target  => '/mnt/pub',
-            seluser => 'system_u',
-            selrole => 'object_r',
-            seltype => 'nfs_t',
+
+        concat { 'autofs_master_map':
+            path    => '/etc/auto.master',
+            notify  => Service[$autofs::params::service_name],
         }
+
+        # Mimic the Fedora defaults.
+        concat::fragment{ 'autofs_master_map_prefix':
+            target  => 'autofs_master_map',
+            order   => 0,
+            source  => 'puppet:///modules/autofs/auto.master-base',
+        }
+
     }
 
     service { $autofs::params::service_name:

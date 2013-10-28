@@ -5,7 +5,7 @@
 #
 # Description:
 #       THIS DEFINITION IS OBSOLETE.  All new code should be using
-#       autofs::mount2 instead!
+#       autofs::mount_point (and autofs::map_entry) instead!
 #
 # Parameters:
 #       Name__________  Notes_  Description___________________________
