@@ -33,7 +33,7 @@ define autofs::map_entry ($mount, $key, $options=undef, $remote) {
 
     $sterile_name = regsubst($mount, '[^\w]+', '_', 'G')
 
-    concat::fragment { "map_entry_for_${sterile_name}":
+    concat::fragment { "map_entry_for_${key}_on_${sterile_name}":
       target    => "map_for_${sterile_name}",
       content   => template('autofs/map_entry.erb'),
     }
