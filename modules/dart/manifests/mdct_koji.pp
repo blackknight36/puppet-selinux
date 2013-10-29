@@ -35,27 +35,35 @@
 
 class dart::mdct_koji inherits dart::abstract::guarded_server_node {
 
+    $topdir     = '/mnt/koji'
+    $hub        = "http://${fqdn}/kojihub"
+    $downloads  = "http://${fqdn}/kojifiles"
+    $repodir    = '/mnt/mdct-new-repo'
+
     class { 'dart::subsys::autofs::common':
         legacy  => false,
     }
 
-#   autofs::mount2 {
-#       'koji':
-#           master_source   => 'puppet:///private-host/autofs/koji.autofs',
-#           map_source      => 'puppet:///private-host/autofs/koji.map';
-#       'mdct-new-repo':
-#           master_source   => 'puppet:///private-host/autofs/mdct-new-repo.autofs',
-#           map_source      => 'puppet:///private-host/autofs/mdct-new-repo.map';
-#   }
+    autofs::map_entry {
+
+        "${topdir}":
+            mount   => '/mnt',
+            key     => 'koji',
+            options => '-rw,hard,nosuid,noatime,fsc',
+            remote  => 'mdct-00fs:/storage/projects/koji';
+
+        "${repodir}":
+            mount   => '/mnt',
+            key     => 'mdct-new-repo',
+            options => '-rw,hard,nosuid,noatime,fsc',
+            remote  => 'mdct-00fs:/storage/projects/mdct-new-repo';
+
+    }
 
     mailalias { 'root':
         ensure      => present,
         recipient   => 'john.florian@dart.biz',
     }
-
-    $topdir     = '/mnt/koji'
-    $hub        = "http://${fqdn}/kojihub"
-    $downloads  = "http://${fqdn}/kojifiles"
 
     class { 'koji::builder':
         client_cert => 'puppet:///private-host/mdct-koji.dartcontainer.com.pem',
@@ -64,7 +72,10 @@ class dart::mdct_koji inherits dart::abstract::guarded_server_node {
         hub         => "${hub}",
         downloads   => "${downloads}",
         top_dir     => "${topdir}",
-        require     => Class['Koji::Hub'],
+        require     => [
+            Autofs::Map_entry["${topdir}"],
+            Class['Koji::Hub'],
+        ],
     }
 
     class { 'koji::ca':
@@ -79,6 +90,7 @@ class dart::mdct_koji inherits dart::abstract::guarded_server_node {
         web         => "http://${fqdn}/koji",
         downloads   => "${downloads}",
         top_dir     => "${topdir}",
+        require     => Autofs::Map_entry["${topdir}"],
     }
 
     class { 'koji::database':
@@ -91,13 +103,19 @@ class dart::mdct_koji inherits dart::abstract::guarded_server_node {
         db_passwd   => 'mdct.koji',
         web_cn      => "CN=${fqdn},OU=kojiweb,O=Dart Container Corp.,ST=Michigan,C=US",
         top_dir     => "${topdir}",
-        require     => Class['Koji::Database'],
+        require     => [
+            Autofs::Map_entry["${topdir}"],
+            Class['Koji::Database'],
+        ],
     }
 
     class { 'koji::kojira':
         hub     => "${hub}",
         top_dir => "${topdir}",
-        require => Class['Koji::Hub'],
+        require     => [
+            Autofs::Map_entry["${topdir}"],
+            Class['Koji::Hub'],
+        ],
     }
 
     class { 'koji::web':
@@ -107,11 +125,18 @@ class dart::mdct_koji inherits dart::abstract::guarded_server_node {
     class { 'koji::mash':
         hub     => "${hub}",
         top_dir => "${topdir}",
-        require => Class['Koji::Hub'],
+        require     => [
+            Autofs::Map_entry["${topdir}"],
+            Class['Koji::Hub'],
+        ],
     }
 
     koji::mash_repo { '19':
         source  => 'puppet:///private-host/mash/19.mash',
+        require     => [
+            Autofs::Map_entry["${repodir}"],
+            Autofs::Map_entry["${topdir}"],
+        ],
     }
 
 }
