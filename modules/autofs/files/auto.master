@@ -12,6 +12,10 @@
 #
 /net	-hosts
 #
+# Include /etc/auto.master.d/*.autofs
+#
++dir:/etc/auto.master.d
+#
 # Include central master map if it can be found using
 # nsswitch sources.
 #
@@ -22,6 +26,3 @@
 #
 +auto.master
 
-/home/00        /etc/auto.home --timeout=600
-/mnt            /etc/auto.mnt --timeout=600 --ghost
-/mnt-local      /etc/auto.mnt-local --timeout=600 --ghost

@@ -14,14 +14,6 @@ class autofs::params {
             ]
             $service_name = 'autofs'
 
-            if  $operatingsystemrelease == 'Rawhide' or
-                $operatingsystemrelease >= 16
-            {
-                $master_source = 'auto.master.F16+'
-            } else {
-                $master_source = 'auto.master'
-            }
-
         }
 
         default: {

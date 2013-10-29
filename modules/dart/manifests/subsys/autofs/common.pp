@@ -38,22 +38,22 @@ class dart::subsys::autofs::common ($legacy=true) {
 
     if $legacy {
         autofs::mount { 'home':
-            source  => 'puppet:///modules/autofs/auto.home',
+            source  => 'puppet:///modules/dart/autofs/auto.home',
         }
 
         autofs::mount { 'master':
-            source  => "puppet:///modules/autofs/${autofs::params::master_source}",
+            source  => "puppet:///modules/dart/autofs/auto.master",
         }
 
         autofs::mount { 'mnt':
-            source  => 'puppet:///modules/autofs/auto.mnt',
+            source  => 'puppet:///modules/dart/autofs/auto.mnt',
         }
 
         autofs::mount { 'mnt-local':
             source  => [
                 'puppet:///private-host/autofs/auto.mnt-local',
                 'puppet:///private-domain/autofs/auto.mnt-local',
-                'puppet:///modules/autofs/auto.mnt-local',
+                'puppet:///modules/dart/autofs/auto.mnt-local',
             ],
         }
     } else {
