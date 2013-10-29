@@ -35,12 +35,18 @@
 
 class dart::mdct_koji inherits dart::abstract::guarded_server_node {
 
-    include 'autofs'
-
-    autofs::mount2 { 'koji':
-        master_source   => 'puppet:///private-host/autofs/koji.autofs',
-        map_source      => 'puppet:///private-host/autofs/koji.map',
+    class { 'dart::subsys::autofs::common':
+        legacy  => false,
     }
+
+#   autofs::mount2 {
+#       'koji':
+#           master_source   => 'puppet:///private-host/autofs/koji.autofs',
+#           map_source      => 'puppet:///private-host/autofs/koji.map';
+#       'mdct-new-repo':
+#           master_source   => 'puppet:///private-host/autofs/mdct-new-repo.autofs',
+#           map_source      => 'puppet:///private-host/autofs/mdct-new-repo.map';
+#   }
 
     mailalias { 'root':
         ensure      => present,

@@ -6,7 +6,10 @@
 
 class dart::abstract::teamcity_server_node inherits dart::abstract::guarded_server_node {
 
-    include 'autofs'
+    class { 'dart::subsys::autofs::common':
+        legacy  => true,
+    }
+
     include 'dart::subsys::yum_cron'
 
     oracle::jdk { 'for TeamCity Server':

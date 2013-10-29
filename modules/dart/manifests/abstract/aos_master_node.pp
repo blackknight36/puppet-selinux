@@ -14,7 +14,10 @@ class dart::abstract::aos_master_node inherits dart::abstract::server_node {
         source  => 'puppet:///private-host/apache/pub.conf',
     }
 
-    include 'autofs'
+    class { 'dart::subsys::autofs::common':
+        legacy  => false,
+    }
+
     include 'flock-herder'
     include 'mdct-puppeteer-admin'
 
