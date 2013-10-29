@@ -2,10 +2,7 @@
 
 class dart::abstract::build_server_node inherits dart::abstract::guarded_server_node {
 
-    class { 'dart::subsys::autofs::common':
-        legacy  => true,
-    }
-
+    include 'dart::subsys::autofs::common'
     include packages::developer
     include packages::net_tools
 

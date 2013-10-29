@@ -2,10 +2,7 @@
 
 class dart::abstract::est_server_node inherits dart::abstract::guarded_server_node {
 
-    class { 'dart::subsys::autofs::common':
-        legacy  => true,
-    }
-
+    include 'dart::subsys::autofs::common'
     include 'postgresql::server'
 
     # puppet::client is included this way to prevent duplicate declaration
