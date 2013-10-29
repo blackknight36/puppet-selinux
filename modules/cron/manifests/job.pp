@@ -43,7 +43,8 @@
 #
 # [*mailto*]
 #   Any stdout/stderr will be sent here.  May be a user name for localhost
-#   mail or a fully qualified email address.  Defaults to "root".
+#   mail or a fully qualified email address.  If set to "" (an empty string),
+#   no mail will be sent.  Defaults to "root".
 #
 # [*path*]
 #   Executable search path to be used in environment while running command.
@@ -80,12 +81,6 @@ define cron::job ($command,
     case $hour {
         '': {
             fail('Required $hour variable is not defined.')
-        }
-    }
-
-    case $mailto {
-        '': {
-            fail('Required $mailto variable is not defined.')
         }
     }
 
