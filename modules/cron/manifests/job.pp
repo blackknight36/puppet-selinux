@@ -68,49 +68,49 @@ define cron::job ($command,
 
     case $dom {
         '': {
-            fail('Required $dom (day of month) variable is not defined.')
+            fail('Required $dom (day of month) variable is not defined')
         }
     }
 
     case $dow {
         '': {
-            fail('Required $dow (day of week) variable is not defined.')
+            fail('Required $dow (day of week) variable is not defined')
         }
     }
 
     case $hour {
         '': {
-            fail('Required $hour variable is not defined.')
+            fail('Required $hour variable is not defined')
         }
     }
 
     case $minute {
         '': {
-            fail('Required $minute variable is not defined.')
+            fail('Required $minute variable is not defined')
         }
     }
 
     case $month {
         '': {
-            fail('Required $month variable is not defined.')
+            fail('Required $month variable is not defined')
         }
     }
 
     case $path {
         '': {
-            fail('Required $path variable is not defined.')
+            fail('Required $path variable is not defined')
         }
     }
 
     case $command {
         '': {
-            fail('Required $command variable is not defined.')
+            fail('Required $command variable is not defined')
         }
     }
 
     case $user {
         '': {
-            fail('Required $user variable is not defined.')
+            fail('Required $user variable is not defined')
         }
     }
 

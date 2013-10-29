@@ -34,7 +34,7 @@ define iptables::rules_file ($ensure='present', $source, $type='ipv4',
 
             'absent': {
                 # The lokkit executable itself lacks this feature.
-                fail('Removal of custom rules is not yet supported.')
+                fail('Removal of custom rules is not yet supported')
             }
 
             'present': {

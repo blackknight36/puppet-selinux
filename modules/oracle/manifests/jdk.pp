@@ -33,7 +33,7 @@ define oracle::jdk ($ensure='present', $version=undef, $update=undef, $arch='x64
         $rpm_update = '25'
     } else {
         if $version == undef or $update == undef {
-            fail ('$version and $update must specified unless $ensure is set to "latest".')
+            fail ('$version and $update must specified unless $ensure is set to "latest"')
         } else {
             $rpm_version = "$version"
             $rpm_update = "$update"

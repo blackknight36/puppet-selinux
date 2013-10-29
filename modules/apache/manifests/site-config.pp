@@ -61,7 +61,7 @@ define apache::site-config ($ensure='present', $source=undef, $content=undef) {
             content => "${content}",
         }
     } else {
-        fail ('One of $source or $content is required.')
+        fail ('One of $source or $content is required')
     }
 
 }

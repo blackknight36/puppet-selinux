@@ -59,7 +59,7 @@ define jetbrains::idea_release ($build, $ensure='present') {
         }
 
         default: {
-            fail('$ensure must be either "present" or "absent".')
+            fail('$ensure must be either "present" or "absent"')
         }
 
     }

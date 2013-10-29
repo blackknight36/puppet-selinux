@@ -25,7 +25,7 @@ define iptables::udp_port ($ensure='open', $port) {
 
             'closed': {
                 # The lokkit executable itself lacks this feature.
-                fail('Closing ports is not yet supported.')
+                fail('Closing ports is not yet supported')
             }
 
             'open': {
@@ -37,7 +37,7 @@ define iptables::udp_port ($ensure='open', $port) {
             }
 
             default: {
-                fail('$ensure must be either "open" or "closed".')
+                fail('$ensure must be either "open" or "closed"')
             }
 
         }

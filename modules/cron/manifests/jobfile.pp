@@ -29,7 +29,7 @@ define cron::jobfile ($source, $ensure='present') {
 
     case $source {
         '': {
-            fail('Required $source variable is not defined.')
+            fail('Required $source variable is not defined')
         }
     }
 

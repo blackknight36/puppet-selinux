@@ -56,7 +56,7 @@ define apache::module_config (
             content => "${content}",
         }
     } else {
-        fail ('One of $source or $content is required.')
+        fail ('One of $source or $content is required')
     }
 
 }
