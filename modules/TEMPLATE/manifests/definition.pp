@@ -1,20 +1,30 @@
 # modules/MODULE_NAME/manifests/DEFINE_NAME.pp
 #
-# Synopsis:
-#       Installs a DEFINE_NAME configuration file for MODULE_NAME.
+# == Define: MODULE_NAME::DEFINE_NAME
 #
-# Parameters:
-#       Name__________  Notes_  Description___________________________________
+# Installs a DEFINE_NAME configuration file for MODULE_NAME.
 #
-#       name                    instance name
+# === Parameters
 #
-#       ensure          1       instance is to be present/absent
+# [*namevar*]
+#   An arbitrary identifier for the DEFINE_NAME instance unless the "foo"
+#   parameter is not set in which case this must provide the value normally
+#   set with the "foo" parameter.
 #
-#       source                  URI of file content
+# [*ensure*]
+#   Instance is to be 'present' (default) or 'absent'.
 #
-# Notes:
+# [*content*]
+#   Literal content for the DEFINE_NAME file.  One and only one of "content"
+#   or "source" must be given.
 #
-#       1. Default is 'present'.
+# [*source*]
+#   URI of the DEFINE_NAME file content.  One and only one of "content" or
+#   "source" must be given.
+#
+# === Authors
+#
+#   John Florian <john.florian@dart.biz>
 
 
 define MODULE_NAME::DEFINE_NAME ($ensure='present', $source) {

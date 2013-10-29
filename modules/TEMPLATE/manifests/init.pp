@@ -1,18 +1,17 @@
 # modules/MODULE_NAME/manifests/CLASS_NAME.pp
 #
-# Synopsis:
-#       Configures a host as a MODULE_NAME CLASS_NAME.
+# == Class: MODULE_NAME::CLASS_NAME
 #
-# Parameters:
-#       Name__________  Notes_  Description___________________________________
+# Configures a host as a MODULE_NAME CLASS_NAME.
 #
-#       name                    instance name
+# === Parameters
 #
-#       ensure          1       instance is to be present/absent
+# [*ensure*]
+#   Instance is to be 'present' (default) or 'absent'.
 #
-# Notes:
+# === Authors
 #
-#       1. Default is 'present'.
+#   John Florian <john.florian@dart.biz>
 
 
 class MODULE_NAME::CLASS_NAME {
