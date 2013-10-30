@@ -32,8 +32,9 @@ if $hostname != 'mdct-00fs' {
     }
     # Why?  Much for the same reason as authconfig.  Not entirely certain this is
     # necessary, but it seems safest this way.
-    class { 'rpcidmapd':
-        stage => 'early';
+    class { 'nfs::rpcidmapd':
+        stage   => 'early',
+        domain  => "${domain}",
     }
 }
 

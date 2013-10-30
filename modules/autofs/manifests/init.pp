@@ -61,7 +61,7 @@ class autofs ( $legacy=true ) {
         hasstatus   => true,
         require     => [
             Class['authconfig'],
-            Class['rpcidmapd'],
+            Class['nfs::rpcidmapd'],
         ],
     }
 

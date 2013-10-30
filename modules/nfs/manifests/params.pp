@@ -1,10 +1,15 @@
-# modules/rpcidmapd/manifests/params.pp
+# modules/nfs/manifests/params.pp
 #
-# Synopsis:
-#       Parameters for the rpcidmapd puppet module.
+# == Class: nfs::params
+#
+# Parameters for the nfs puppet module.
+#
+# === Authors
+#
+#   John Florian <john.florian@dart.biz>
 
 
-class rpcidmapd::params {
+class nfs::params {
 
     case $::operatingsystem {
         Fedora: {
@@ -12,13 +17,13 @@ class rpcidmapd::params {
             if  $operatingsystemrelease == 'Rawhide' or
                 $operatingsystemrelease >= 15
             {
-                $packages = [
+                $utils_packages = [
                     'libnfsidmap',
                     'nfs-utils',
                 ]
                 $kernel_options = 'options nfs nfs4_disable_idmapping=n'
             } else {
-                $packages = [
+                $utils_packages = [
                     'nfs-utils',
                     'nfs-utils-lib',
                 ]
@@ -28,15 +33,15 @@ class rpcidmapd::params {
             if  $operatingsystemrelease == 'Rawhide' or
                 $operatingsystemrelease >= 16
             {
-                $service_name = 'nfs-idmap'
+                $idmap_service = 'nfs-idmap'
             } else {
-                $service_name = 'rpcidmapd'
+                $idmap_service = 'rpcidmapd'
             }
 
         }
 
         default: {
-            fail ("The rpcidmapd module is not yet supported on ${operatingsystem}.")
+            fail ("The nfs module is not yet supported on ${::operatingsystem}.")
         }
 
     }
