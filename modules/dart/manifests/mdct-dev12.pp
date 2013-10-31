@@ -66,23 +66,46 @@ class dart::mdct-dev12 inherits dart::abstract::workstation_node {
 
     $SUFFIX=".orig-${operatingsystem}${operatingsystemrelease}"
 
-    file { '/j':
-        ensure  => '/mnt-local/storage/j/',
-        require => Service['autofs'],
+    autofs::map_entry { '/mnt/storage':
+        mount   => '/mnt',
+        key     => 'storage',
+        options => '-fstype=ext4,rw',
+        remote  => ':/dev/data/storage',
     }
 
-    file { '/s':
-        ensure  => '/mnt-local/storage/',
-        require => Service['autofs'],
+    autofs::map_entry { '/mnt/mas-fs02-d13677':
+        mount   => '/mnt',
+        key     => 'mas-fs02-d13677',
+        options => '-fstype=cifs,uid=d13677,gid=d13677,credentials=/mnt/storage/j/.credentials/d13677.cifs',
+        remote  => '://mas-fs02/Users/d13677',
+    }
+
+    autofs::map_entry { '/mnt/mas-fs01-eng':
+        mount   => '/mnt',
+        key     => 'mas-fs01-eng',
+        options => '-fstype=cifs,credentials=/mnt/storage/j/.credentials/d13677.cifs',
+        remote  => '://mas-fs01/Eng',
+    }
+
+    autofs::map_entry { '/mnt/mas-fs01-sharedata':
+        mount   => '/mnt',
+        key     => 'mas-fs01-sharedata',
+        options => '-fstype=cifs,credentials=/mnt/storage/j/.credentials/d13677.cifs',
+        remote  => '://mas-fs01/ShareData',
+    }
+
+    file { '/j':
+        ensure  => link,
+        target  => '/mnt/storage/j/',
     }
 
     file { '/Pound':
-        ensure  => '/mnt-local/storage/Pound/',
-        require => Service['autofs'],
+        ensure  => link,
+        target  => '/mnt/storage/Pound/',
     }
 
     dart::util::replace_original_with_symlink_to_alternate { '/etc/libvirt':
-        alternate   => '/mnt-local/storage/etc/libvirt',
+        alternate   => '/mnt/storage/etc/libvirt',
         backup      => "/etc/libvirt$SUFFIX",
         before      => Service['libvirtd'],
         notify      => Service['libvirtd'],
@@ -94,7 +117,7 @@ class dart::mdct-dev12 inherits dart::abstract::workstation_node {
     }
 
     dart::util::replace_original_with_symlink_to_alternate { '/var/lib/libvirt':
-        alternate   => '/mnt-local/storage/var/lib/libvirt',
+        alternate   => '/mnt/storage/var/lib/libvirt',
         backup      => "/var/lib/libvirt$SUFFIX",
         before      => Service['libvirtd'],
         notify      => Service['libvirtd'],
@@ -108,7 +131,7 @@ class dart::mdct-dev12 inherits dart::abstract::workstation_node {
     # disabled until once again needed
     #   include mysql-server
     #   dart::util::replace_original_with_symlink_to_alternate { '/var/lib/mysql':
-    #       alternate   => '/mnt-local/storage/var/lib/mysql',
+    #       alternate   => '/mnt/storage/var/lib/mysql',
     #       backup      => "/var/lib/mysql$SUFFIX",
     #       original    => '/var/lib/mysql',
     #       before      => Service['mysqld'],
