@@ -36,6 +36,9 @@ if $hostname != 'mdct-00fs' {
         stage   => 'early',
         domain  => "${domain}",
     }
+    class { 'nfs::rpcgssd':
+        stage   => 'early',
+    }
 }
 
 #

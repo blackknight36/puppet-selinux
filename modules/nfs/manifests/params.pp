@@ -34,8 +34,13 @@ class nfs::params {
                 $operatingsystemrelease >= 16
             {
                 $idmap_service = 'nfs-idmap'
+                $gss_service = 'nfs-secure'
+            } elsif $operatingsystemrelease >= 15 {
+                $idmap_service = 'rpcidmapd'
+                $gss_service = 'rpcgssd'
             } else {
                 $idmap_service = 'rpcidmapd'
+                $gss_service = undef    # Sorry, no soup for you.  Upgrade!
             }
 
         }
