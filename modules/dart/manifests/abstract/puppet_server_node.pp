@@ -2,10 +2,7 @@
 
 class dart::abstract::puppet_server_node inherits dart::abstract::guarded_server_node {
 
-    class { 'dart::subsys::autofs::common':
-        legacy  => false,
-    }
-
+    include 'dart::subsys::autofs::common'
     include 'packages::developer'
 
     class { 'puppet::client':

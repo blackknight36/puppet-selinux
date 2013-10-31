@@ -1,22 +1,19 @@
 # modules/autofs/manifests/init.pp
 #
-# Synopsis:
-#       Configures a host for the autofs service.
+# == Class: autofs
 #
-# Parameters:
-#       Name__________  Notes_  Description___________________________________
+# Configures a host for the autofs service.
 #
-#       legacy          1       Treat host as a legacy host.
+# === Parameters
 #
-# Notes:
+# None
 #
-#       1. Default is true (for backwards compatibility), but all new host
-#       builds should endeavor to use dart::subsys::autofs::common instead
-#       which will set up the same traditional auto-mounts, but in a way that
-#       is much more flexible and future-proof.
+# === Authors
+#
+#   John Florian <john.florian@dart.biz>
 
 
-class autofs ( $legacy=true ) {
+class autofs {
 
     include 'autofs::params'
 
@@ -36,22 +33,17 @@ class autofs ( $legacy=true ) {
         require => Package[$autofs::params::packages],
     }
 
-    # TODO: make unconditional when all legacy cases have been transitioned
-    if ! $legacy {
+    concat { 'autofs_master_map':
+        path    => '/etc/auto.master',
+        notify  => Service[$autofs::params::service_name],
+        require => File['/etc/auto.master.d/'],
+    }
 
-        concat { 'autofs_master_map':
-            path    => '/etc/auto.master',
-            notify  => Service[$autofs::params::service_name],
-            require => File['/etc/auto.master.d/'],
-        }
-
-        # Mimic the Fedora defaults.
-        concat::fragment{ 'autofs_master_map_prefix':
-            target  => 'autofs_master_map',
-            order   => 0,
-            source  => 'puppet:///modules/autofs/auto.master',
-        }
-
+    # Mimic the Fedora defaults.
+    concat::fragment{ 'autofs_master_map_prefix':
+        target  => 'autofs_master_map',
+        order   => 0,
+        source  => 'puppet:///modules/autofs/auto.master',
     }
 
     service { $autofs::params::service_name:

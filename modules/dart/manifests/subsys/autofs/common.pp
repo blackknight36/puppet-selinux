@@ -10,25 +10,17 @@
 #
 # === Parameters
 #
-# [*legacy*]
-#   To remain backwards compatible with extant setups, this should be set to
-#   true (the default).  However, it is much preferred for newer setups to
-#   have this false because it leads to a much cleaner and more flexible
-#   configuration where, for example, /mnt can be used for more than just our
-#   static "homes and pub" configuration.
+# None
 #
 # === Authors
 #
 #   John Florian <john.florian@dart.biz>
 
 
-class dart::subsys::autofs::common ($legacy=true) {
+class dart::subsys::autofs::common {
 
     include 'autofs::params'
-
-    class { 'autofs':
-        legacy  => $legacy,
-    }
+    include 'autofs'
 
     selinux::boolean { 'use_nfs_home_dirs':
         before      => Service[$autofs::params::service_name],
@@ -36,58 +28,26 @@ class dart::subsys::autofs::common ($legacy=true) {
         value       => on,
     }
 
-    if $legacy {
-        autofs::mount { 'home':
-            source  => 'puppet:///modules/dart/autofs/auto.home',
-        }
+    autofs::mount_point { '/home/00':
+        options => '--timeout=600',
+    }
 
-        autofs::mount { 'master':
-            source  => "puppet:///modules/dart/autofs/auto.master",
-        }
+    autofs::map_entry { '/home/00/*':
+        mount   => '/home/00',
+        key     => '*',
+        options => '-fstype=nfs4,rw,hard,intr,nosuid,relatime,fsc',
+        remote  => 'mdct-00fs:/&',
+    }
 
-        autofs::mount { 'mnt':
-            source  => 'puppet:///modules/dart/autofs/auto.mnt',
-        }
+    autofs::mount_point { '/mnt':
+        options => '--timeout=600 --ghost',
+    }
 
-        autofs::mount { 'mnt-local':
-            source  => [
-                'puppet:///private-host/autofs/auto.mnt-local',
-                'puppet:///private-domain/autofs/auto.mnt-local',
-                'puppet:///modules/dart/autofs/auto.mnt-local',
-            ],
-        }
-    } else {
-
-        autofs::mount_point { '/home/00':
-            options => '--timeout=600',
-        }
-
-        autofs::map_entry { '/home/00/*':
-            mount   => '/home/00',
-            key     => '*',
-            options => '-fstype=nfs4,rw,hard,intr,nosuid,relatime,fsc',
-            remote  => 'mdct-00fs:/&',
-        }
-
-        autofs::mount_point { '/mnt':
-            options => '--timeout=600 --ghost',
-        }
-
-        autofs::map_entry { '/mnt/pub':
-            mount   => '/mnt',
-            key     => 'pub',
-            options => '-rw,hard,intr,nosuid,noatime,fsc',
-            remote  => 'mdct-00fs:/storage/pub',
-        }
-
-        # TODO: migrate mnt-local
-
-        # Purge legacy /etc/auto.<MOUNT_NAME> map files ...
-        file { [ '/etc/auto.home', '/etc/auto.mnt']:
-            ensure  => absent,
-            notify  => Service[$autofs::params::service_name],
-        }
-
+    autofs::map_entry { '/mnt/pub':
+        mount   => '/mnt',
+        key     => 'pub',
+        options => '-rw,hard,intr,nosuid,noatime,fsc',
+        remote  => 'mdct-00fs:/storage/pub',
     }
 
     if $::operatingsystemrelease < 19 {

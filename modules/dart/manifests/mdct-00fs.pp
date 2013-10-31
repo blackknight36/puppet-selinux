@@ -12,10 +12,7 @@ class dart::mdct-00fs {
 
     #@# From base_node
 
-    #@# class { 'dart::subsys::autofs::common':
-    #@#     legacy  => true,
-    #@# }
-
+    #@# include 'dart::subsys::autofs::common'
     include cron::daemon
     #@# include cachefilesd
     include 'dart::subsys::dns::no_dns_hosts'

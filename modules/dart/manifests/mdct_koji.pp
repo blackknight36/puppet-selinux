@@ -40,9 +40,7 @@ class dart::mdct_koji inherits dart::abstract::guarded_server_node {
     $downloads  = "http://${fqdn}/kojifiles"
     $repodir    = '/mnt/mdct-new-repo'
 
-    class { 'dart::subsys::autofs::common':
-        legacy  => false,
-    }
+    include 'dart::subsys::autofs::common'
 
     autofs::map_entry {
 

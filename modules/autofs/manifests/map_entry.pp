@@ -7,9 +7,6 @@
 # instances as well since, at this time, only indirect mounts are supported by
 # this puppet module.
 #
-# While this is the preferred way to manage autofs, it does require inclusion
-# of the autofs class with the legacy parameter set to false.
-#
 # === Parameters
 #
 # [*namevar*]
