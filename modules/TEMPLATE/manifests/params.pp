@@ -1,7 +1,12 @@
 # modules/MODULE_NAME/manifests/params.pp
 #
-# Synopsis:
-#       Parameters for the MODULE_NAME puppet module.
+# == Class: MODULE_NAME::params
+#
+# Parameters for the MODULE_NAME puppet module.
+#
+# === Authors
+#
+#   John Florian <john.florian@dart.biz>
 
 
 class MODULE_NAME::params {
