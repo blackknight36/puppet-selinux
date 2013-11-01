@@ -26,8 +26,7 @@ class iptables($managed_host=true, $enabled=true, $kernel_modules='') {
 
     include 'iptables::params'
 
-    package { $iptables::params::conflicting_packages:
-        ensure  => absent,
+    yum::remove { $iptables::params::conflicting_packages:
         before  => Package[$iptables::params::packages],
     }
 
