@@ -33,6 +33,7 @@ define iptables::udp_port ($ensure='open', $port) {
                     command => "lokkit --port=${port}:udp",
                     unless  => "grep -q -- '-A INPUT .* -p udp --dport ${port} -j ACCEPT' /etc/sysconfig/iptables",
                     notify  => Service[$iptables::params::services],
+                    require => Package[$iptables::params::packages],
                 }
             }
 

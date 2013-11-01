@@ -33,6 +33,7 @@ define iptables::tcp_port ($ensure='open', $port) {
                     command => "lokkit --port=${port}:tcp",
                     unless  => "grep -q -- '-A INPUT .* -p tcp --dport ${port} -j ACCEPT' /etc/sysconfig/iptables",
                     notify  => Service[$iptables::params::services],
+                    require => Package[$iptables::params::packages],
                 }
             }
 
