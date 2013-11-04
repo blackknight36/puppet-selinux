@@ -26,8 +26,9 @@ class koji::hub ( $db_host, $db_user, $db_passwd, $web_cn, $top_dir ) {
     }
 
     class { 'apache':
-        network_connect_db  => 'on',
         anon_write          => 'on',
+        network_connect_db  => 'on',
+        use_nfs             => 'on',
     }
 
     include 'apache::mod_ssl'
