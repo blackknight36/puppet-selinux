@@ -6,12 +6,17 @@ class dart::abstract::aos_master_node inherits dart::abstract::server_node {
         use_nfs => 'on',
     }
 
-    apache::bind-mount { 'pub':
-        source  => '/pub/',
-    }
-
     apache::site-config { 'pub':
         source  => 'puppet:///private-host/apache/pub.conf',
+    }
+
+    systemd::mount { '/var/www/pub':
+        mnt_description => '/pub served via httpd',
+        mnt_what        => '/mnt/pub',
+        mnt_options     => 'bind,context=system_u:object_r:httpd_sys_content_t',
+        mnt_requires    => 'autofs.service',
+        mnt_after       => 'autofs.service',
+        require         => Class['autofs', 'apache'],
     }
 
     include 'dart::subsys::autofs::common'
@@ -27,13 +32,13 @@ class dart::abstract::aos_master_node inherits dart::abstract::server_node {
 
     # vsftpd will deny clients access to /pub/mdct-aos-flash/ so we must rbind
     # mount that content to an acceptable location.
-    mount { '/var/ftp/pub':
-        atboot  => true,
-        device  => '/mnt/pub',
-        ensure  => 'mounted',
-        fstype  => 'none',
-        options => '_netdev,rbind',
-        require => Class['vsftpd'],
+    systemd::mount { '/var/ftp/pub':
+        mnt_description => '/pub served via vsftpd',
+        mnt_what        => '/mnt/pub',
+        mnt_options     => 'rbind',
+        mnt_requires    => 'autofs.service',
+        mnt_after       => 'autofs.service',
+        require         => Class['autofs', 'vsftpd'],
     }
 
     class { 'iptables':
