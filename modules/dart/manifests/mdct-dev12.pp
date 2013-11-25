@@ -66,32 +66,38 @@ class dart::mdct-dev12 inherits dart::abstract::workstation_node {
 
     $SUFFIX=".orig-${operatingsystem}${operatingsystemrelease}"
 
-    autofs::map_entry { '/mnt/storage':
-        mount   => '/mnt',
-        key     => 'storage',
-        options => '-fstype=ext4,rw',
-        remote  => ':/dev/data/storage',
-    }
+    autofs::map_entry {
 
-    autofs::map_entry { '/mnt/mas-fs02-d13677':
-        mount   => '/mnt',
-        key     => 'mas-fs02-d13677',
-        options => '-fstype=cifs,uid=d13677,gid=d13677,credentials=/mnt/storage/j/.credentials/d13677.cifs',
-        remote  => '://mas-fs02/Users/d13677',
-    }
+        '/mnt/mas-fs02-d13677':
+            mount   => '/mnt',
+            key     => 'mas-fs02-d13677',
+            options => '-fstype=cifs,uid=d13677,gid=d13677,credentials=/mnt/storage/j/.credentials/d13677.cifs',
+            remote  => '://mas-fs02/Users/d13677';
 
-    autofs::map_entry { '/mnt/mas-fs01-eng':
-        mount   => '/mnt',
-        key     => 'mas-fs01-eng',
-        options => '-fstype=cifs,credentials=/mnt/storage/j/.credentials/d13677.cifs',
-        remote  => '://mas-fs01/Eng',
-    }
+        '/mnt/mas-fs01-eng':
+            mount   => '/mnt',
+            key     => 'mas-fs01-eng',
+            options => '-fstype=cifs,credentials=/mnt/storage/j/.credentials/d13677.cifs',
+            remote  => '://mas-fs01/Eng';
 
-    autofs::map_entry { '/mnt/mas-fs01-sharedata':
-        mount   => '/mnt',
-        key     => 'mas-fs01-sharedata',
-        options => '-fstype=cifs,credentials=/mnt/storage/j/.credentials/d13677.cifs',
-        remote  => '://mas-fs01/ShareData',
+        '/mnt/mas-fs01-sharedata':
+            mount   => '/mnt',
+            key     => 'mas-fs01-sharedata',
+            options => '-fstype=cifs,credentials=/mnt/storage/j/.credentials/d13677.cifs',
+            remote  => '://mas-fs01/ShareData';
+
+        '/mnt/koji':
+            mount   => '/mnt',
+            key     => 'koji',
+            options => '-rw,hard,nosuid,noatime,fsc',
+            remote  => 'mdct-00fs:/storage/projects/koji';
+
+        '/mnt/storage':
+            mount   => '/mnt',
+            key     => 'storage',
+            options => '-fstype=ext4,rw',
+            remote  => ':/dev/data/storage';
+
     }
 
     file { '/j':
