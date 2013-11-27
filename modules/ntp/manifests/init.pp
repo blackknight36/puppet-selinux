@@ -1,88 +1,57 @@
 # modules/ntp/manifests/init.pp
+#
+# == Class: ntp
+#
+# Configures a host to run an NTP service, be it chronyd (preferred) or ntpd.
+#
+# === Parameters
+#
+# NONE
+#
+# === Authors
+#
+#   John Florian <john.florian@dart.biz>
+
 
 class ntp {
 
-    if ($operatingsystem == 'Fedora' and
-        $operatingsystemrelease == 'Rawhide' or
-        $operatingsystemrelease > 15) or
-        $virtual == 'kvm'
-    {
-        $ntp_package = 'chrony'
-        $ntp_daemon = 'chronyd'
-    } else {
-        $ntp_package = 'ntp'
-        $ntp_daemon = 'ntpd'
+    include 'ntp::params'
+
+    package { $ntp::params::package:
+        ensure  => installed,
+        notify  => Service[$ntp::params::service],
     }
 
-    package { "$ntp_package":
-        ensure  => installed
+    File {
+        owner       => 'root',
+        group       => 'root',
+        mode        => '0644',
+        seluser     => 'system_u',
+        selrole     => 'object_r',
+        seltype     => 'etc_t',
+        before      => Service[$ntp::params::service],
+        notify      => Service[$ntp::params::service],
+        subscribe   => Package[$ntp::params::package],
     }
 
-    file { "ntp_conf":
-        group   => 'root',
-        mode    => '0644',
-        owner   => 'root',
-        path    => "/etc/${ntp_package}.conf",
-        require => Package["$ntp_package"],
-        source  => "puppet:///modules/ntp/${ntp_package}.conf",
+    file { $ntp::params::config:
+        source  => "puppet:///modules/ntp/${ntp::params::_name}.conf",
     }
 
-    if $ntp_package == 'ntp' {
-
-        if  $operatingsystem == 'Fedora' and
-            $operatingsystemrelease != 'Rawhide' and
-            $operatingsystemrelease < 14
-        {
-            $ntpd_sysconfig = "ntpd.pre-F14"
-        } else {
-            $ntpd_sysconfig = "ntpd"
-        }
-
+    if $ntp::params::sysconfig {
         file { "/etc/sysconfig/ntpd":
-            group       => "root",
-            mode        => '0644',
-            owner       => 'root',
-            require     => Package["$ntp_package"],
-            source      => "puppet:///modules/ntp/${ntpd_sysconfig}",
+            source  => "puppet:///modules/ntp/${ntp::params::sysconfig}",
         }
+    }
 
-        # ntp does not deal well with jitter of VM clocks
-        service { "$ntp_daemon":
-            enable      => $virtual ? {
-                "kvm"   => false,
-                default => true,
-            },
-            ensure      => $virtual ? {
-                "kvm"   => stopped,
-                default => running,
-            },
-            hasrestart  => true,
-            hasstatus   => true,
-            require             => [
-                Package["$ntp_package"],
-            ],
-            subscribe   => [
-                File['ntp_conf'],
-                File['/etc/sysconfig/ntpd'],
-            ],
-        }
-
-    } else {
-
-        # chrony deals well with jitter of VM clocks
-        service { "$ntp_daemon":
-            enable      => true,
-            ensure      => running,
-            hasrestart  => true,
-            hasstatus   => true,
-            require             => [
-                Package["$ntp_package"],
-            ],
-            subscribe   => [
-                File['ntp_conf'],
-            ],
-        }
-
+    service { $ntp::params::service:
+        enable      => $ntp::params::needed,
+        ensure      => $ntp::params::needed ? {
+            false   => stopped,
+            default => running,
+        },
+        hasrestart  => true,
+        hasstatus   => true,
     }
 
 }
