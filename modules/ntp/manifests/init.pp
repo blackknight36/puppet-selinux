@@ -6,14 +6,19 @@
 #
 # === Parameters
 #
-# NONE
+# [*allow_clients*]
+#   An array of strings with each specifying a subnet (e.g., '192.168.1.0/24')
+#   that is permitted to use the host as a time source via NTP.  This
+#   parameter is only supported via 'chrony' and ignored if 'ntp' is used.
+#   A value of undef (the default) is to disallow client access to this host
+#   as a time source.
 #
 # === Authors
 #
 #   John Florian <john.florian@dart.biz>
 
 
-class ntp {
+class ntp ($allow_clients=undef) {
 
     include 'ntp::params'
 
@@ -35,7 +40,7 @@ class ntp {
     }
 
     file { $ntp::params::config:
-        source  => "puppet:///modules/ntp/${ntp::params::_name}.conf",
+        content => template("ntp/${ntp::params::_name}.conf"),
     }
 
     if $ntp::params::sysconfig {
