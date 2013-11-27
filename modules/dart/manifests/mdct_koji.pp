@@ -137,4 +137,12 @@ class dart::mdct_koji inherits dart::abstract::guarded_server_node {
         ],
     }
 
+    include 'cron::daemon'
+
+    cron::job { 'mash_19':
+        command => "mash -o ${repodir} 19 &> ${repodir}/logs/mash_19",
+        minute  => '*/15',
+        mailto  => '',
+    }
+
 }
