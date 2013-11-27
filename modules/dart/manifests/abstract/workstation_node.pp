@@ -3,7 +3,7 @@
 class dart::abstract::workstation_node inherits dart::abstract::base_node {
 
     include 'dart::subsys::autofs::common'
-    include flock-herder
+    include 'flock-herder'
 
     class { 'iptables':
         enabled => true,
@@ -21,7 +21,7 @@ class dart::abstract::workstation_node inherits dart::abstract::base_node {
     }
 
     include 'test_automation'
-    include unwanted-services
+    include 'unwanted-services'
 
     class { 'dart::subsys::yum::rpmfusion':
         require => Class['yum'],

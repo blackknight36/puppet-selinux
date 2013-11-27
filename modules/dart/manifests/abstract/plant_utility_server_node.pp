@@ -12,7 +12,7 @@ class dart::abstract::plant_utility_server_node inherits dart::abstract::guarded
     }
 
     # AOS devices pull media-playback content using rsync.
-    include rsync-server
+    include 'rsync-server'
 
     # That same media-playback content is pushed in via Windows systems.
     include 'samba'
@@ -21,7 +21,7 @@ class dart::abstract::plant_utility_server_node inherits dart::abstract::guarded
     # media-disbursal module knows how to retrieve that imagery and merge it
     # with the content from the Windows system and disburse all such content
     # in a location where media-playback clients can utilize it.
-    include media-disbursal
+    include 'media-disbursal'
 
     # Other packages required by a plant utility server
     if $::operatingsystem == 'Fedora' and $::operatingsystemrelease > 15 {

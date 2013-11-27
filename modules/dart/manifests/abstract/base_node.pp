@@ -12,7 +12,7 @@ class dart::abstract::base_node {
     include 'dart::subsys::system_accounts'
     include 'logwatch'
     include 'ntp'
-    include openssh-server
+    include 'openssh-server'
     include 'packages::base'
     #include 'selinux'
     include 'sudo'

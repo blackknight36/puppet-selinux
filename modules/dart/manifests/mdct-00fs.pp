@@ -19,7 +19,7 @@ class dart::mdct-00fs {
     include 'dart::subsys::system_accounts'
     include 'logwatch'
     include 'ntp'
-    #@# include openssh-server
+    #@# include 'openssh-server'
     include 'packages::base'
 
     class { 'puppet::client':
