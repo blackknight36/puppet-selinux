@@ -8,7 +8,7 @@
 #
 # Example usage:
 #
-#       include bacula::admin
+#       include 'bacula::admin'
 
 class bacula::admin {
 

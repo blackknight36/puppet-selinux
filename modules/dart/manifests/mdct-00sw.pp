@@ -10,7 +10,7 @@ class dart::mdct-00sw inherits dart::abstract::workstation_node {
 
     include 'dart::subsys::yum_cron'
 
-    include vnc::server
+    include 'vnc::server'
 
     vnc::display-config { 'Roger Brunk':
         display_num     => 1,

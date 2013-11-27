@@ -3,8 +3,8 @@
 class dart::abstract::build_server_node inherits dart::abstract::guarded_server_node {
 
     include 'dart::subsys::autofs::common'
-    include packages::developer
-    include packages::net_tools
+    include 'packages::developer'
+    include 'packages::net_tools'
 
     class { 'puppet::client':
     }

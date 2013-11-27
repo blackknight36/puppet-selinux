@@ -58,7 +58,7 @@ define concat(
   $order='alpha',
   $ensure_newline = false
 ) {
-  include concat::setup
+  include 'concat::setup'
 
   $safe_name   = regsubst($name, '/', '_', 'G')
   $concatdir   = $concat::setup::concatdir

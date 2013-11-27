@@ -2,9 +2,9 @@
 
 class puppet::server {
 
-    include cron::daemon
-    include puppet::client
-    include puppet::params
+    include 'cron::daemon'
+    include 'puppet::client'
+    include 'puppet::params'
 
 
     package { $puppet::params::server_packages:

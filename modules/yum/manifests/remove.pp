@@ -22,7 +22,7 @@
 #
 # Example Usage:
 #
-#       include yum
+#       include 'yum'
 #
 #       yum::remove { 'foo': }
 

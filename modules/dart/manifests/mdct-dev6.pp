@@ -36,7 +36,7 @@ class dart::mdct-dev6 inherits dart::abstract::workstation_node {
     }
 
 #    include mysql-server
-    include jetbrains::idea
+    include 'jetbrains::idea'
 
     $SUFFIX=".orig-${operatingsystem}${operatingsystemrelease}"
 

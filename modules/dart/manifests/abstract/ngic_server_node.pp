@@ -7,7 +7,7 @@ class dart::abstract::ngic_server_node inherits dart::abstract::guarded_server_n
     class { 'puppet::client':
     }
 
-    include postgresql::server
+    include 'postgresql::server'
 
     package { [ 'tomcat', 'tomcat-admin-webapps', ]:
         ensure  => installed,

@@ -23,8 +23,8 @@
 #
 # Example usage:
 #
-#       include systemd
-#       include vnc
+#       include 'systemd'
+#       include 'vnc'
 #
 #       vnc::display-config { 'acme':
 #           notify  => Service['SERVICE_NAME'],

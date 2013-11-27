@@ -11,7 +11,7 @@
 #
 # Example usage:
 #
-#       include cron::daemon
+#       include 'cron::daemon'
 
 class cron::daemon {
 

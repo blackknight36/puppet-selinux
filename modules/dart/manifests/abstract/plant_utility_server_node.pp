@@ -15,7 +15,7 @@ class dart::abstract::plant_utility_server_node inherits dart::abstract::guarded
     include rsync-server
 
     # That same media-playback content is pushed in via Windows systems.
-    include samba
+    include 'samba'
 
     # Additional content comes in the form of MDC's weather imagery.  The
     # media-disbursal module knows how to retrieve that imagery and merge it

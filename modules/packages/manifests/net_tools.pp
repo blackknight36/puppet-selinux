@@ -2,7 +2,7 @@
 
 class packages::net_tools {
 
-    include tsocks
+    include 'tsocks'
 
     ### Universal Package Inclusion ###
 

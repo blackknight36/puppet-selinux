@@ -2,7 +2,7 @@
 
 class rsync-server {
 
-    include xinetd
+    include 'xinetd'
 
     package { 'rsync':
         ensure  => installed,

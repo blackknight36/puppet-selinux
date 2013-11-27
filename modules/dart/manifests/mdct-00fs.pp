@@ -13,23 +13,23 @@ class dart::mdct-00fs {
     #@# From base_node
 
     #@# include 'dart::subsys::autofs::common'
-    include cron::daemon
-    #@# include cachefilesd
+    include 'cron::daemon'
+    #@# include 'cachefilesd'
     include 'dart::subsys::dns::no_dns_hosts'
     include 'dart::subsys::system_accounts'
-    include logwatch
-    include ntp
+    include 'logwatch'
+    include 'ntp'
     #@# include openssh-server
-    include packages::base
+    include 'packages::base'
 
     class { 'puppet::client':
     }
 
-    include sudo
-    include timezone
+    include 'sudo'
+    include 'timezone'
 
     #@# From server_node.pp
-    include packages::net_tools
+    include 'packages::net_tools'
 
 
     ####

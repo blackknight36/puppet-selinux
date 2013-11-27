@@ -18,7 +18,7 @@
 #
 # Example usage:
 #
-#       include selinux
+#       include 'selinux'
 #
 #       selinux::fcontext { 'httpd_use_nfs':
 #           persistent => true,

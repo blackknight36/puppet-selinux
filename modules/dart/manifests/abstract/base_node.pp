@@ -6,23 +6,23 @@ class dart::abstract::base_node {
     # modules/dart/manifests/classes/mdct-00fs.pp until such time that class
     # can make direct use of this class.
 
-    include cron::daemon
-    include cachefilesd
+    include 'cron::daemon'
+    include 'cachefilesd'
     include 'dart::subsys::dns::no_dns_hosts'
     include 'dart::subsys::system_accounts'
-    include logwatch
-    include ntp
+    include 'logwatch'
+    include 'ntp'
     include openssh-server
-    include packages::base
-    #include selinux
-    include sudo
-    include timezone
+    include 'packages::base'
+    #include 'selinux'
+    include 'sudo'
+    include 'timezone'
 
     if  $operatingsystem == 'Fedora' and
         $operatingsystemrelease == 'Rawhide' or
         $operatingsystemrelease >= 15
     {
-        include systemd
+        include 'systemd'
     }
 
     class { 'yum':

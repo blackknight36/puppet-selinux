@@ -11,7 +11,7 @@
 #
 # Example usage:
 #
-#       include postgresql
+#       include 'postgresql'
 
 class postgresql {
 

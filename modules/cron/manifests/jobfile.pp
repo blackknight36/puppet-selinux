@@ -14,7 +14,7 @@
 #
 # Example usage:
 #
-#       include cron::daemon
+#       include 'cron::daemon'
 #
 #       cron::jobfile { 'example':
 #           require => [

@@ -8,8 +8,8 @@
 
 class dart::mdct-tc inherits dart::abstract::guarded_server_node {
 
-    include apache
-    include postgresql::server
+    include 'apache'
+    include 'postgresql::server'
 
     class { 'puppet::client':
     }

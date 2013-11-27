@@ -15,7 +15,7 @@
 #
 # Example usage:
 #
-#       include network
+#       include 'network'
 #
 #       network::interface { 'acme':
 #           notify  => Service['SERVICE_NAME'],

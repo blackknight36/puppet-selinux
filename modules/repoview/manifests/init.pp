@@ -2,7 +2,7 @@
 
 class repoview {
 
-    include cron::daemon
+    include 'cron::daemon'
 
     package { 'repoview':
         ensure  => installed,

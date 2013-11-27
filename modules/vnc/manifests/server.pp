@@ -11,7 +11,7 @@
 #
 # Example usage:
 #
-#       include vnc::server
+#       include 'vnc::server'
 
 class vnc::server {
 

@@ -18,7 +18,7 @@
 #
 # Example Usage:
 #
-#       include postgresql::server
+#       include 'postgresql::server'
 
 class postgresql::server {
 
