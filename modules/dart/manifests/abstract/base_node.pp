@@ -11,7 +11,17 @@ class dart::abstract::base_node {
     include 'dart::subsys::dns::no_dns_hosts'
     include 'dart::subsys::system_accounts'
     include 'logwatch'
-    include 'ntp'
+
+    class { 'ntp':
+        allow_clients   => $hostname ? {
+            'mdct-0302pi'   => ['10.7.84/22'],
+            'mdct-0310pi'   => ['10.31.52/22'],
+            'mdct-0314pi'   => ['10.7.212/22'],
+            'mdct-47pi'     => ['10.47/16'],
+            default => undef,
+        },
+    }
+
     include 'openssh-server'
     include 'packages::base'
     #include 'selinux'
