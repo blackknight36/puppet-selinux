@@ -16,6 +16,7 @@
 class autofs {
 
     include 'autofs::params'
+    include 'concat::setup'
 
     package { $autofs::params::packages:
         ensure  => installed,
