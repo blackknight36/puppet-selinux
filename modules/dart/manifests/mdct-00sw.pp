@@ -12,12 +12,6 @@ class dart::mdct-00sw inherits dart::abstract::workstation_node {
 
     include 'vnc::server'
 
-    vnc::display-config { 'Roger Brunk':
-        display_num     => 1,
-        user            => 'd33576',
-        password        => 'mdct/vnc',
-    }
-
     vnc::display-config { 'Bill Eltzroth':
         display_num     => 2,
         user            => 'd9744',
