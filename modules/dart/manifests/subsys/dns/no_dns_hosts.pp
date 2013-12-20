@@ -74,6 +74,11 @@ class dart::subsys::dns::no_dns_hosts {
         host_aliases    => [ 'mdct-f19-builder', 'f19b' ],
     }
 
+    host { 'mdct-f20-builder.dartcontainer.com':
+        ip              => '10.1.192.132',
+        host_aliases    => [ 'mdct-f20-builder', 'f20b' ],
+    }
+
     host { 'mdct-koji.dartcontainer.com':
         ip              => '10.1.192.124',
         host_aliases    => [ 'mdct-koji', 'koji' ],
