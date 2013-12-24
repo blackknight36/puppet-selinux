@@ -7,5 +7,5 @@
 #       1. IDEA should not be set here.  That is dependent upon the specific
 #       release and is reflected within each release's desktop file.
 
-export IDEA_VM_OPTIONS="<%= idea_vmoptions %>"
+export IDEA_VM_OPTIONS="<%= @idea_vmoptions %>"
 export IDEA_JDK="$JAVA_HOME"

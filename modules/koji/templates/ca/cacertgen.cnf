@@ -1,11 +1,11 @@
-HOME                    = <%= ca_root %>
+HOME                    = <%= @ca_root %>
 RANDFILE                = .rand
 
 [ca]
 default_ca              = ca_default
 
 [ca_default]
-dir                     = <%= ca_root %>
+dir                     = <%= @ca_root %>
 certs                   = $dir/certs
 crl_dir                 = $dir/crl
 database                = $dir/index.txt
@@ -41,13 +41,13 @@ string_mask             = MASK:0x2002
 prompt                  = no
 
 [req_distinguished_name]
-countryName                     = <%= country %>
-stateOrProvinceName             = <%= state %>
-localityName                    = <%= locality %>
+countryName                     = <%= @country %>
+stateOrProvinceName             = <%= @state %>
+localityName                    = <%= @locality %>
 organizationName                = <%= organization %>
 organizationalUnitName          = Koji Certificate Authority
-commonName                      = <%= fqdn %>
-emailAddress                    = root@<%= fqdn %>
+commonName                      = <%= @fqdn %>
+emailAddress                    = root@<%= @fqdn %>
 
 [req_attributes]
 challengePassword               = A challenge password

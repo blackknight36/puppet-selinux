@@ -7,7 +7,7 @@
 SELF="$(basename $0)"
 
 # The (directory) name of our Certificate Authority for Koji infrastructure.
-CA_NAME='<%= ca_name %>'
+CA_NAME='<%= @ca_name %>'
 
 # The Certificate Authority's own certificate and key files.
 CA_CRT="certs/${CA_NAME}_ca_cert.crt"

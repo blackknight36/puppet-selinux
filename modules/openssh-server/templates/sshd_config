@@ -61,7 +61,7 @@ SyslogFacility AUTHPRIV
 # To disable tunneled clear text passwords, change to no here!
 #PasswordAuthentication yes
 #PermitEmptyPasswords no
-PasswordAuthentication <%= permit_password_authentication %>
+PasswordAuthentication <%= @permit_password_authentication %>
 
 # Change to no to disable s/key passwords
 #ChallengeResponseAuthentication yes

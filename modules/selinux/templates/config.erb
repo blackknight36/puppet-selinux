@@ -4,7 +4,7 @@
 #     permissive - SELinux prints warnings instead of enforcing.
 #     disabled - No SELinux policy is loaded.
 <% if @mode %>
-SELINUX=<%= mode %>
+SELINUX=<%= @mode %>
 <% else %>
 SELINUX=enforcing
 <% end %>

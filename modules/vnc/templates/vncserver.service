@@ -1,16 +1,16 @@
-# vncserver service unit file for <%= name %>
-# specifically: user <%= user %> on display :<%= display_num %>
+# vncserver service unit file for <%= @name %>
+# specifically: user <%= @user %> on display :<%= @display_num %>
 #
 # This file is managed by puppet via the vnc module.
 
 [Unit]
-Description=Remote desktop service (VNC) for <%= user %> on display :<%= display_num %>
+Description=Remote desktop service (VNC) for <%= @user %> on display :<%= @display_num %>
 After=syslog.target network.target
 
 [Service]
 Type=forking
-ExecStart=/sbin/runuser -l <%= user %> -c "/usr/bin/vncserver :<%= display_num %> -geometry <%= geometry %>"
-ExecStop=/sbin/runuser -l <%= user %> -c "/usr/bin/vncserver -kill :<%= display_num %>"
+ExecStart=/sbin/runuser -l <%= @user %> -c "/usr/bin/vncserver :<%= @display_num %> -geometry <%= @geometry %>"
+ExecStop=/sbin/runuser -l <%= @user %> -c "/usr/bin/vncserver -kill :<%= @display_num %>"
 
 [Install]
 WantedBy=multi-user.target

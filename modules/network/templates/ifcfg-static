@@ -1,23 +1,23 @@
-# Network interface configuration for <%= name %> on <%= fqdn %>.
+# Network interface configuration for <%= @name %> on <%= @fqdn %>.
 # This file is managed by puppet.
 
 BOOTPROTO="none"
-<% if bridge != :undef -%>
-BRIDGE="<%= bridge %>"
+<% if @bridge != :undef -%>
+BRIDGE="<%= @bridge %>"
 <% end -%>
-DEVICE="<%= name %>"
-<% if bridge == :undef -%>
-GATEWAY="<%= gateway %>"
+DEVICE="<%= @name %>"
+<% if @bridge == :undef -%>
+GATEWAY="<%= @gateway %>"
 <% end -%>
-HWADDR="<%= interface_hwaddr %>"
-<% if bridge == :undef -%>
-IPADDR="<%= ip_address %>"
+HWADDR="<%= @interface_hwaddr %>"
+<% if @bridge == :undef -%>
+IPADDR="<%= @ip_address %>"
 IPV4_FAILURE_FATAL="yes"
 IPV6INIT="no"
 <% end -%>
-NAME="System <%= name %>"
-<% if bridge == :undef -%>
-NETMASK="<%= netmask %>"
+NAME="System <%= @name %>"
+<% if @bridge == :undef -%>
+NETMASK="<%= @netmask %>"
 <% end -%>
 NM_CONTROLLED="no"
 NOZEROCONF="yes"

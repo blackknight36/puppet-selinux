@@ -6,7 +6,7 @@ import traceback
 import sys
 from cgi import *
 
-HOST="<%= fqdn %>"
+HOST="<%= @fqdn %>"
 PORT="443"
 
 print 'Content-type: text/html'

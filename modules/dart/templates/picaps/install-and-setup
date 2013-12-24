@@ -102,7 +102,7 @@ kickstart_clone() {
     if ! rpm -q jdk &> /dev/null
     then
         info "installing JDK"
-        rpm -iv <%= jdk_rpm_source %>
+        rpm -iv <%= @jdk_rpm_source %>
         echo -e "JAVA_HOME=/usr/java/latest/\nexport JAVA_HOME" >> /root/.bash_profile
     else
         info "JDK already installed"
@@ -110,8 +110,8 @@ kickstart_clone() {
 
     # jmx password
     info "installing JMX password"
-    echo -e "root\tspacip" > <%= picaps_jdk %>/jre/lib/management/jmxremote.password
-    chmod 600 <%= picaps_jdk %>/jre/lib/management/jmxremote.password
+    echo -e "root\tspacip" > <%= @picaps_jdk %>/jre/lib/management/jmxremote.password
+    chmod 600 <%= @picaps_jdk %>/jre/lib/management/jmxremote.password
 
     # /dist setup
     info "installing PICAPS cvs checkout"
