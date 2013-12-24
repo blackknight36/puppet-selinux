@@ -1,6 +1,9 @@
 # THIS FILE IS MANAGED BY PUPPET
 #
-# modules/puppet/files/puppet.conf.after-2.6.6
+# Origin: modules/puppet/files/puppet.conf.ge-2.6-le-2.6.6
+#
+# This configuration is suitable for puppet versions:
+#       2.6 <= puppet <= 2.6.6
 
 [main]
     # The Puppet log directory.
@@ -15,10 +18,10 @@
     # The default value is '$confdir/ssl'.
     ssldir = $vardir/ssl
 
-    # Enable pluginsync for distribution of custom facts and types.  With
-    # puppet versions after 2.6.6 (but not including 2.6.6), it is safe to
-    # enable the pluginsync feature.
-    pluginsync = true
+    # Enable pluginsync for distribution of custom facts and types.  Do not
+    # enable pluginsync here!  See modules/facter/manifests/init.pp for
+    # details why you shouldn't.
+    pluginsync = false
 
 [agent]
     # The file in which puppetd stores a list of the classes
@@ -39,10 +42,6 @@
     # The default 30m interval causes too many errors on the puppetmaster due
     # to the embedded http server being single threaded.
     runinterval = 3600
-
-    # puppet-3 now defaults to PSON and sadly fails to fallback to YAML.  See
-    # http://projects.puppetlabs.com/issues/3160 for details.
-    preferred_serialization_format = yaml
 
 [master]
     reports = tagmail,store,log

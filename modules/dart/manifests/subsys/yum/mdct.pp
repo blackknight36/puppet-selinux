@@ -20,6 +20,7 @@ class dart::subsys::yum::mdct {
                 '17'    => '17-1.dcc.noarch',
                 '18'    => '18-1.fc18.noarch',
                 '19'    => '19-1.fc19.noarch',
+                '20'    => '19-1.fc19.noarch',
             },
         }
 

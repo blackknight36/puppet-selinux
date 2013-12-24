@@ -8,16 +8,15 @@
 # minimal-security-severity:Critical =  --sec-severity=Critical upgrade-minimal
 update_cmd = default
 
-# Whether a message should emitted when updates are available.
+# Whether a message should be emitted when updates are available,
+# were downloaded, or applied.
 update_messages = yes
 
-# Whether updates should be downloaded when they are available. Note
-# that updates_messages must also be yes for updates to be downloaded.
+# Whether updates should be downloaded when they are available.
 download_updates = yes
 
 # Whether updates should be applied when they are available.  Note
-# that both update_messages and download_updates must also be yes for
-# the update to be applied
+# that download_updates must also be yes for the update to be applied.
 #
 # Dart policy is to apply updates as soon as available.
 apply_updates = yes
@@ -62,6 +61,7 @@ email_host = localhost
 
 
 [groups]
+# NOTE: This only works when group_command != objects, which is now the default
 # List of groups to update
 group_list = None
 
@@ -69,6 +69,8 @@ group_list = None
 group_package_types = mandatory, default
 
 [base]
+# This section overrides yum.conf
+
 # Use this to filter Yum core messages
 # -4: critical
 # -3: critical+errors
@@ -81,3 +83,6 @@ debuglevel = -1
 # skip_broken = True
 
 mdpolicy = group:main
+
+# Uncomment to auto-import new gpg keys (dangerous)
+# assumeyes = True

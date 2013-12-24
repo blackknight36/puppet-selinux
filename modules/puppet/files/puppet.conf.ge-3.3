@@ -1,6 +1,9 @@
 # THIS FILE IS MANAGED BY PUPPET
 #
-# modules/puppet/files/puppet.conf.as-of-2.6
+# Origin: modules/puppet/files/puppet.conf.ge-3.3
+#
+# This configuration is suitable for puppet versions:
+#       3.3 <= puppet
 
 [main]
     # The Puppet log directory.
@@ -15,10 +18,10 @@
     # The default value is '$confdir/ssl'.
     ssldir = $vardir/ssl
 
-    # Enable pluginsync for distribution of custom facts and types.  Do not
-    # enable pluginsync here!  See modules/facter/manifests/init.pp for
-    # details why you shouldn't.
-    pluginsync = false
+    # Enable pluginsync for distribution of custom facts and types.  With
+    # puppet versions after 2.6.6 (but not including 2.6.6), it is safe to
+    # enable the pluginsync feature.
+    pluginsync = true
 
 [agent]
     # The file in which puppetd stores a list of the classes

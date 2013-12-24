@@ -5,14 +5,21 @@ class puppet::client ($enable=true, $ensure='running') {
     include 'puppet::params'
 
     $scary = "$fqdn is running puppet-$puppetversion atop $operatingsystem $operatingsystemrelease.  Versions 2.6.6 and prior are poorly supported and quite buggy.  Please upgrade!"
+
     if versioncmp($puppetversion, '2.6') < 0 {
-        $puppet_era = 'pre-2.6'
+        $era = 'ge-0.0-lt-2.6'
         warning "$scary"
-    } elsif versioncmp($puppetversion, '2.6.6') > 0 {
-        $puppet_era = 'after-2.6.6'
     } else {
-        $puppet_era = 'as-of-2.6'
-        warning "$scary"
+        if versioncmp($puppetversion, '2.6.6') <= 0 {
+            $era = 'ge-2.6-le-2.6.6'
+            warning "$scary"
+        } else {
+            if versioncmp($puppetversion, '3.3') < 0 {
+                $era = 'gt-2.6.6-lt-3.3'
+            } else {
+                $era = 'ge-3.3'
+            }
+        }
     }
 
     package { $puppet::params::client_packages:
@@ -35,7 +42,7 @@ class puppet::client ($enable=true, $ensure='running') {
     file { '/etc/puppet/puppet.conf':
         source  => [
             'puppet:///private-host/puppet/puppet.conf',
-            "puppet:///modules/puppet/puppet.conf.${puppet_era}",
+            "puppet:///modules/puppet/puppet.conf.${era}",
         ],
     }
 
