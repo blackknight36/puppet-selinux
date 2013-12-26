@@ -33,11 +33,6 @@ class puppet::server {
         mode    => '0644',
     }
 
-    file { '/etc/sysconfig/puppetmaster':
-        seltype => 'etc_t',
-        source  => 'puppet:///modules/puppet/puppetmaster',
-    }
-
     # A custom service unit file is installed to alter default policy
     # regarding restarting after exiting.  See unit source for more details.
     systemd::unit { 'puppetmaster.service':
