@@ -6,6 +6,7 @@
 
 class dart::abstract::picaps_test_server_node inherits dart::abstract::unguarded_server_node {
 
+    include 'dart::subsys::autofs::common'
     include 'dart::subsys::picaps::apache'
 
     # Other packages required by PICAPS servers

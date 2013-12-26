@@ -6,6 +6,8 @@
 
 class dart::abstract::picaps_test_node inherits dart::abstract::unguarded_server_node {
 
+    include 'dart::subsys::autofs::common'
+
     # Declare the source of the JDK to be installed.
     $jdk_rpm_source='http://mdct-00fs.dartcontainer.com/ftp/pub/oracle/jdk-7u5-linux-x64.rpm'
 
