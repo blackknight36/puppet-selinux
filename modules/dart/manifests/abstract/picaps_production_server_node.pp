@@ -5,6 +5,7 @@
 
 class dart::abstract::picaps_production_server_node inherits dart::abstract::unguarded_server_node {
 
+    include 'dart::subsys::autofs::common'
     include 'dart::subsys::picaps::apache'
 
     # Other packages required by PICAPS servers
@@ -48,17 +49,17 @@ class dart::abstract::picaps_production_server_node inherits dart::abstract::ung
     include 'packages::developer'
 
     # JDK's
-    oracle::jdk { 'jdk-7u21-linux-x64':
+    oracle::jdk { 'jdk-7u45-linux-x64':
         ensure  => 'present',
         version => '7',
-        update  => '21',
+        update  => '45',
     }
-    oracle::jdk { 'jdk-7u17-linux-x64':
+    oracle::jdk { 'jdk-7u40-linux-x64':
         ensure  => 'present',
         version => '7',
-        update  => '17',
+        update  => '40',
         before  => [
-            Exec["install oracle jdk-7u21-linux-x64"],
+            Exec["install oracle jdk-7u45-linux-x64"],
         ],
     }
     file { "/usr/java/latest/jre/lib/management/jmxremote.password":
@@ -69,7 +70,7 @@ class dart::abstract::picaps_production_server_node inherits dart::abstract::ung
             'puppet:///modules/dart/picaps-servers/jmxremote.password',
         ],
         require  => [
-            Exec["install oracle jdk-7u21-linux-x64"],
+            Exec["install oracle jdk-7u45-linux-x64"],
         ],
     }
 
@@ -80,7 +81,7 @@ class dart::abstract::picaps_production_server_node inherits dart::abstract::ung
     class { 'mariadb::server':
         config_uri => 'puppet:///modules/dart/picaps-servers/picaps-mariadb-server.cnf',
     }
-    file { "/etc/systemd/system/mysqld.service":
+    file { "/etc/systemd/system/mysqld.service": # modified mysqld.service is necessary to configure NUMA interleaving for MySQL process
         group   => "root",
         mode    => 644,
         owner   => "root",
