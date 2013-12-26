@@ -14,11 +14,7 @@ class puppet::client ($enable=true, $ensure='running') {
             $era = 'ge-2.6-le-2.6.6'
             warning "$scary"
         } else {
-            if versioncmp($puppetversion, '3.3') < 0 {
-                $era = 'gt-2.6.6-lt-3.3'
-            } else {
-                $era = 'ge-3.3'
-            }
+            $era = 'gt-2.6.6'
         }
     }
 
