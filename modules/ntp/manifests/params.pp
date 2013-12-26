@@ -27,11 +27,7 @@ class ntp::params {
                 $needed = true
             } else {
                 $_name = 'ntp'
-                if $::operatingsystemrelease < 14 {
-                    $sysconfig = "${_name}d.pre-F14"
-                } else {
-                    $sysconfig = "${_name}d"
-                }
+                $sysconfig = "${_name}d"
                 # On the other hand, ntpd does not deal well with jitter of VM
                 # clocks so defeat the service in that case.  NB: $is_virtual
                 # returns a string, not a boolean!  For future safety, it is

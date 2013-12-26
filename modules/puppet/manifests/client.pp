@@ -4,11 +4,13 @@ class puppet::client ($enable=true, $ensure='running') {
 
     include 'puppet::params'
 
+    $sorry = "$fqdn is running puppet-$puppetversion atop $operatingsystem $operatingsystemrelease.  Versions prior to 2.6 can no longer be supported.  Please upgrade or disable puppet there!"
+
     $scary = "$fqdn is running puppet-$puppetversion atop $operatingsystem $operatingsystemrelease.  Versions 2.6.6 and prior are poorly supported and quite buggy.  Please upgrade!"
 
     if versioncmp($puppetversion, '2.6') < 0 {
         $era = 'ge-0.0-lt-2.6'
-        warning "$scary"
+        fail ("$sorry")
     } else {
         if versioncmp($puppetversion, '2.6.6') <= 0 {
             $era = 'ge-2.6-le-2.6.6'
