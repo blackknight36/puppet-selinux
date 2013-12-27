@@ -18,7 +18,7 @@ define jetbrains::teamcity::agent_property ($props_file, $value) {
     include 'jetbrains::teamcity::agent'
 
     exec { "configure-${name}":
-        command => "sed -ri 's|^(${name}=).*$|\1${value}|' ${props_file}",
+        command => "sed -ri 's|^(${name}=).*$|\\1${value}|' ${props_file}",
         unless  => "grep -q '^${name}=${value}$' ${props_file}",
         user    => 'teamcity',
         group   => 'teamcity',
