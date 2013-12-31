@@ -19,7 +19,6 @@ class packages::media {
         'mp3gain',
         'mplayer',
         'pulseaudio-esound-compat',
-        'xine-lib-extras-freeworld',
         'xsane',
 
         ]:
@@ -41,6 +40,15 @@ class packages::media {
         } else {
             package { [
                 'gqview',
+                ]:
+                ensure => installed,
+            }
+        }
+
+        if  $operatingsystemrelease < 20
+        {
+            package { [
+                'xine-lib-extras-freeworld',
                 ]:
                 ensure => installed,
             }
