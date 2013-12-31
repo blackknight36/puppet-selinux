@@ -1,4 +1,4 @@
-# modules/dart/manifests/subsys/yum/mdct.pp
+# modules/dart/manifests/subsys/yum/rpmfusion.pp
 
 class dart::subsys::yum::rpmfusion {
 
