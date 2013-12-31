@@ -2,21 +2,21 @@
 # This file is managed by puppet.
 
 BOOTPROTO="none"
-<% if @bridge != :undef -%>
+<% if @bridge -%>
 BRIDGE="<%= @bridge %>"
 <% end -%>
 DEVICE="<%= @name %>"
-<% if @bridge == :undef -%>
+<% if !@bridge -%>
 GATEWAY="<%= @gateway %>"
 <% end -%>
 HWADDR="<%= @interface_hwaddr %>"
-<% if @bridge == :undef -%>
+<% if !@bridge -%>
 IPADDR="<%= @ip_address %>"
 IPV4_FAILURE_FATAL="yes"
 IPV6INIT="no"
 <% end -%>
 NAME="System <%= @name %>"
-<% if @bridge == :undef -%>
+<% if !@bridge -%>
 NETMASK="<%= @netmask %>"
 <% end -%>
 NM_CONTROLLED="no"

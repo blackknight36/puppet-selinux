@@ -2,7 +2,7 @@
 # This file is managed by puppet.
 
 BOOTPROTO="dhcp"
-<% if @bridge != :undef -%>
+<% if @bridge -%>
 BRIDGE="<%= @bridge %>"
 <% end -%>
 DEFROUTE="yes"
