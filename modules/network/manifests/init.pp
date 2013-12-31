@@ -1,50 +1,59 @@
 # modules/network/manifests/init.pp
 #
-# Synopsis:
-#       Configures network services on a host.
+# == Class: network
 #
-# Parameters:
-#       Name__________  Default_______  Description___________________________
+# Configures network services on a host.
 #
-#       network_manager false           If true, use NetworkManager instead of
-#                                       legacy network service.
+# === Parameters
 #
-#       domain                          Name of domain.
+# [*service*]
+#   Use 'legacy' (default) or 'nm' (NetworkManager) service.  Required.
 #
-#       name_servers    undef           List of IP addresses that provide DNS
-#                                       name resolution.
+# [*domain*]
+#   Name of the network domain.  Optional.  Typically not required for hosts
+#   with interfaces configured exclusively by DHCP.
 #
-# Requires:
-#       NONE
+# [*name_servers*]
+#   List of IP addresses that provide DNS name resolution.  Optional.
+#   Typically not required for hosts with interfaces configured exclusively by
+#   DHCP.  If set, this will cause the name resolver configuration to be
+#   managed.
 #
-# Example Usage:
+# [*gui_tools*]
+#   Are GUI tools to be installed?  true or false (default).
 #
-#       class {'network':
-#            network_manager    => true,
-#            domain             => 'example.com',
-#            name_servers       => ['192.168.1.1', '192.168.1.2']
-#       }
+# === Authors
+#
+#   John Florian <jflorian@doubledog.org>
 
-class network ($network_manager=false, $domain, $name_servers=undef) {
 
-    # initscripts is required regardless of whether NetworkManager is used.
-    package { 'initscripts':
-        ensure  => installed,
+class network ($service='legacy', $domain=undef, $name_servers=undef,
+               $gui_tools=false) {
+
+    include 'network::params'
+
+    # PITA reduction
+    file { "/etc/network":
+        ensure  => link,
+        target  => "sysconfig/network-scripts/",
     }
 
-    if $network_manager == true {
-        $service = 'NetworkManager'
-        package { ['NetworkManager']:
+    package {
+
+        $network::params::legacy_packages:
             ensure  => installed,
-        }
-    } else {
-        $service = 'network'
-        yum::remove { 'NetworkManager':
-            before  => Service[$service],
-            # It may be necessary to have the replacement installed prior to
-            # removal of the conflicting package.
-            require => Package['initscripts'],
-        }
+            notify  => Service[$network::params::legacy_services];
+
+        $network::params::manager_packages:
+            ensure  => installed,
+            notify  => Service[$network::params::manager_services];
+
+        $network::params::gui_packages:
+            ensure  => $gui_tools ? {
+                true    => installed,
+                default => absent,
+            };
+
     }
 
     if $name_servers != undef {
@@ -55,25 +64,36 @@ class network ($network_manager=false, $domain, $name_servers=undef) {
             seluser => 'system_u',
             selrole => 'object_r',
             seltype => 'etc_t',
-            before  => Service[$service],
             content => template('network/resolv.conf'),
         }
     }
 
-    # PITA reduction
-    file { "/etc/network":
-        ensure  => link,
-        target  => "sysconfig/network-scripts/",
-    }
+    service {
 
-    service { $service:
-        enable      => true,
-        ensure      => running,
-        hasrestart  => true,
-        hasstatus   => true,
-        require     => [
-            Package['initscripts'],
-        ],
+        $network::params::legacy_services:
+            enable      => $service ? {
+                'legacy'    => true,
+                default     => false,
+            },
+            ensure      => $service ? {
+                'legacy'    => running,
+                default     => stopped,
+            },
+            hasrestart  => true,
+            hasstatus   => true;
+
+        $network::params::manager_services:
+            enable      => $service ? {
+                'nm'        => true,
+                default     => false,
+            },
+            ensure      => $service ? {
+                'nm'        => running,
+                default     => stopped,
+            },
+            hasrestart  => true,
+            hasstatus   => true;
+
     }
 
 }

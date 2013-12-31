@@ -9,7 +9,7 @@
 class dart::mdct-dev12 inherits dart::abstract::workstation_node {
 
     class { 'network':
-        network_manager => false,
+        service         => 'nm',
         domain          => 'dartcontainer.com',
         name_servers    => ['10.1.0.98', '10.1.0.99'],
     }
@@ -19,6 +19,7 @@ class dart::mdct-dev12 inherits dart::abstract::workstation_node {
         ip_address  => '10.1.0.158',
         netmask     => '255.255.0.0',
         gateway     => '10.1.0.25',
+        stp         => 'no',
     }
 
     network::interface { 'em1':

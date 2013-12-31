@@ -9,16 +9,17 @@
 class dart::mdct-dev6 inherits dart::abstract::workstation_node {
 
     class { 'network':
-        network_manager => false,
-        domain => 'dartcontainer.com',
-        name_servers => ['10.1.0.98','10.1.0.99'],
+        service         => 'legacy',
+        domain          => 'dartcontainer.com',
+        name_servers    => ['10.1.0.98', '10.1.0.99'],
     }
 
     network::interface { 'br0':
-        template => 'static-bridge',
+        template    => 'static-bridge',
         ip_address  => '10.1.0.156',
         netmask     => '255.255.0.0',
         gateway     => '10.1.0.25',
+        stp         => 'no',
     }
 
     network::interface { 'em1':

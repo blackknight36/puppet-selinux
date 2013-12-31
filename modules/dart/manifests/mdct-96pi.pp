@@ -9,9 +9,9 @@
 class dart::mdct-96pi inherits dart::abstract::picaps_production_server_node {
 
     class { 'network':
-        network_manager => false,
+        service         => 'legacy',
         domain          => 'dartcontainer.com',
-        name_servers    => ['10.1.0.98','10.1.0.99'],
+        name_servers    => ['10.1.0.98', '10.1.0.99'],
     }
 
     network::interface { 'em1':
