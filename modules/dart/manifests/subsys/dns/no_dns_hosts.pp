@@ -16,7 +16,7 @@ class dart::subsys::dns::no_dns_hosts {
     }
 
     host { 'mdct-dev19.dartcontainer.com':
-        ip              => '10.1.30.134',
+        ip              => '10.1.250.183',
         host_aliases    => [ 'mdct-dev19' ],
     }
 
