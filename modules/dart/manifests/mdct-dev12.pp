@@ -53,6 +53,13 @@ class dart::mdct-dev12 inherits dart::abstract::workstation_node {
         source  => 'puppet:///private-host/iptables/blocks',
     }
 
+    printer { 'dell':
+        uri         => 'socket://10.1.193.23:9100',
+        description => 'Dell 3100cn',
+        location    => 'Florian\'s office',
+        model       => 'foomatic:Dell-3100cn-pxlcolor.ppd',
+    }
+
     class { 'selinux':
         mode => 'enforcing',
     }
