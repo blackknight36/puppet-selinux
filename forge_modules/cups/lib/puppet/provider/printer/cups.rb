@@ -51,7 +51,8 @@ Puppet::Type.type(:printer).provide :cups, :parent => Puppet::Provider do
 
     printers_long.each do |name, printer|
 
-      printer[:options] = self.printer_options(name)
+      # Temporarily disabling options in instances
+      #printer[:options] = self.printer_options(name)
       printer[:provider] = :cups
       printer[:uri] = prefetched_uris[printer[:name]] if prefetched_uris.key?(printer[:name])
 
@@ -74,7 +75,8 @@ Puppet::Type.type(:printer).provide :cups, :parent => Puppet::Provider do
         printer = prefetched_printers[name]
 
         printer[:ensure] = :present
-        printer[:options] = self.printer_options(name)
+        printer[:options] = self.printer_options(name, resource)
+        printer[:ppd_options] = self.ppd_options(name, resource)
         printer[:provider] = :cups
         printer[:uri] = prefetched_uris[printer[:name]] if prefetched_uris.key?(printer[:name])
 
@@ -131,17 +133,41 @@ Puppet::Type.type(:printer).provide :cups, :parent => Puppet::Provider do
   end
 
 
-  # Retrieve options including whether the printer destination is shared.
-  def self.printer_options(destination)
+  # I only retrieve options that are specified in the type definition, which avoids resetting all options at once.
+  # queue options are space separated, and come in pairs separated by equals(=)
+  def self.printer_options(destination, resource)
     options = {}
+
+    return options unless resource[:options].kind_of? Hash
 
     # I'm using shellsplit here from the ruby std lib to avoid having to write a quoted string parser.
     Shellwords.shellwords(lpoptions('-d', destination)).each do |kv|
       values = kv.split('=')
-      options[values[0]] = values[1]
+      options[values[0]] = values[1] if resource[:options].key? values[0]
     end
 
     options
+  end
+
+  # vendor PPD options are formatted differently:
+  # ShortName/Long Name: *Selected NotSelectedValue
+  def self.ppd_options(destination, resource)
+    ppdopts = {}
+
+    return ppdopts unless resource[:ppd_options].kind_of? Hash
+
+    lpoptions('-d', destination, '-l').each_line do |line|
+      keyvalues = line.split(':')
+      key = /^([^\/]*)/.match(keyvalues[0]).captures[0]
+
+      next unless resource[:ppd_options].key? key
+
+      selected_value = /\s\*([^\s]*)\s/.match(keyvalues[1]).captures[0]
+
+      ppdopts[key] = selected_value
+    end
+
+    ppdopts
   end
 
   def self.printer_uris
@@ -183,19 +209,22 @@ Puppet::Type.type(:printer).provide :cups, :parent => Puppet::Provider do
         lpadmin "-x", name
       when :present
         # Regardless of whether the printer is being added or modified, the `lpadmin -p` command is used.
+        # Sometimes, in the case of `-E` or `-o` parameters, lpadmin seems to do nothing under some circumstances.
+        # For this reason, I'm running cupsenable/reject and lpoptions to ensure those values match what we expect.
 
         # BUG: flush should never be called if only the model or PPD parameters differ, because lpstat can't tell
         # what the actual value is.
-        options = Array.new
+
+        params = Array.new # lpadmin parameters
+        options = Array.new # lpoptions parameters
+        vendor_options = Array.new # ppd options
 
         # Handle most parameters via string substitution
         Cups_Options.keys.each do |k|
-          #options.unshift Cups_Options[k] % @property_hash[k] if @property_hash.key?(k)
-          options.unshift Cups_Options[k] % @resource[k] if @resource[k]
+          params.unshift Cups_Options[k] % @resource[k] if @resource[k]
         end
 
         options.push '-o printer-is-shared=true' if @property_hash[:shared] === :true
-
 
         if @property_hash[:options].is_a? Hash
           @property_hash[:options].each_pair do |k, v|
@@ -209,28 +238,41 @@ Puppet::Type.type(:printer).provide :cups, :parent => Puppet::Provider do
           end
         end
 
+        if @property_hash[:ppd_options].is_a? Hash
+          @property_hash[:ppd_options].each_pair do |k, v|
+            vendor_options.push "-o %s=%s" % [k, v]
+          end
+        end
+
         begin
-          # -E must always be the first switch to take effect.
+          # -E means different things when it comes before or after -p, see man page for explanation.
           if @property_hash[:enabled] === :true and @property_hash[:accept] === :true
-            lpadmin "-p", name, "-E", options
+            lpadmin "-p", name, "-E", params
           else
-            lpadmin "-p", name, options
+            lpadmin "-p", name, params
           end
 
-          # -E option covers enable & accept both true, and allows us to skip the other utilities.
-          #unless @property_hash[:enabled] === :true and @property_hash[:accept] === :true
-            if @property_hash[:enabled] === :true
-              cupsenable name
-            else
-              cupsdisable name
-            end
+          unless options.empty?
+            lpoptions "-p", name, options
+          end
 
-            if @property_hash[:accept] === :true
-              cupsaccept name
-            else
-              cupsreject name
-            end
-          #end
+          unless vendor_options.empty?
+            lpoptions "-p", name, vendor_options
+          end
+
+          # Normally, the -E option would let us skip cupsenable/accept.
+          # But the behaviour seems unpredictable when the queue already exists.
+          if @property_hash[:enabled] === :true
+            cupsenable name
+          else
+            cupsdisable name
+          end
+
+          if @property_hash[:accept] === :true
+            cupsaccept name
+          else
+            cupsreject name
+          end
         rescue Exception => e
           # If an option turns out to be invalid, CUPS will normally add the printer anyway.
           # Normally, the printer should not even be created, so we delete it again to make things consistent.

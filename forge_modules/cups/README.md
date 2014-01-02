@@ -42,14 +42,13 @@ The most basic printer install possible:
         ppd         => "/Library/Printers/PPDs/Printer.ppd", # PPD file will be autorequired
     }
 
-- The `uri` identifies how you will connect to the printer. running `lpinfo -v` at the command line will give you some
+- The uri identifies how you will connect to the printer. running `lpinfo -v` at the command line will give you some
 valid uri prefixes.
 - The description only appears in certain dialogs on linux and friends. On OSX the description is the actual name of
 the printer.
-- The `ppd` or `model` parameter specifies the "driver" to use with this printer. You should use `model` wherever
-available because most driver software will install straight into the cups model directory. You can get a list of valid
-models by running `lpinfo -m` at the command line. You want the first space-delimited field of the output to go into the
-`model` field.
+- The ppd or model parameter specifies the "driver" to use with this printer. You should use `model` wherever available
+because most driver software will install straight into the cups model directory. You can get a list of valid models by
+running `lpinfo -m` at the command line.
 
 Removing the printer "Basic_Printer" from the previous example:
 
@@ -66,15 +65,17 @@ An example using almost every possible parameter:
         uri         => "lpd://localhost/printer_a",
         description => "This is the printer description",
         location    => "Main office",
-        model       => "foomatic:HP-LaserJet-laserjet.ppd",
-        # OR
         ppd         => "/Library/Printers/PPDs/Printer.ppd", # Full path to vendor PPD
+        # OR
+        model       => "", # A valid model, you can list these with lpinfo -m, this is usually what you would call a
+                           # list of installed drivers.
         enabled     => true, # Enabled by default
         shared      => false, # Disabled by default
-        options     => { media => 'A4' }, # Hash of options ( name => value ), highly depends on the printer.
+        options     => { media => 'A4' }, # Hash of options ( name => value ), these are non vendor specific options.
+        ppd_options => { 'HPOption_Duplexer' => 'False' }, # Hash of vendor PPD options
     }
 
-- The easiest way to find out a list of valid `options` for any single printer is to install that printer locally, and
+- The easiest way to find out a list of valid options for any single printer is to install that printer locally, and
 run `lpoptions -l` at the command line.
 
 ### Facts
