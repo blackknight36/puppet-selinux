@@ -22,6 +22,7 @@ class packages::base {
         'prophile',
         'python-mdct',
         'screen',
+        'sendmail',
         'strace',
         'system-config-printer',
         'task',
