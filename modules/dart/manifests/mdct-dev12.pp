@@ -64,7 +64,7 @@ class dart::mdct-dev12 inherits dart::abstract::workstation_node {
         mode => 'enforcing',
     }
 
-    package { ['mozilla-noscript', 'man2html', 'redshift']:
+    package { ['kio_mtp', 'mozilla-noscript', 'man2html', 'redshift']:
         ensure  => installed,
     }
 
