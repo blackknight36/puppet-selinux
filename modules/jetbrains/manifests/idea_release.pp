@@ -1,20 +1,23 @@
 # modules/jetbrains/manifests/idea_release.pp
 #
-# Synopsis:
-#       Installs a single, specific JetBrains IDEA release.
+# == Define: jetbrains::idea_release
 #
-# Parameters:
-#       Name__________  Notes_  Description___________________________
+# Installs a single, specific JetBrains IDEA release.
 #
-#       name                    instance name
+# === Parameters
 #
-#       ensure          1       instance is to be present/absent
+# [*namevar*]
+#   The instance name.
 #
-#       build                   IDEA build ID, e.g. '111.277'
+# [*ensure*]
+#   Instance is to be 'present' (default) or 'absent'.
 #
-# Notes:
+# [*build*]
+#   IDEA build ID, e.g., '111.277'.
 #
-#       1. Default is 'present'.
+# === Authors
+#
+#   John Florian <john.florian@dart.biz>
 
 
 define jetbrains::idea_release ($build, $ensure='present') {

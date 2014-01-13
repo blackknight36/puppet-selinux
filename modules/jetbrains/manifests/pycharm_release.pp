@@ -1,27 +1,28 @@
 # modules/jetbrains/manifests/pycharm_release.pp
 #
-# Synopsis:
-#       Installs a single, specific JetBrains PyCharm release.
+# == Define: jetbrains::pycharm_release
 #
-# Parameters:
-#       Name__________  Notes_  Description___________________________
+# Installs a single, specific JetBrains PyCharm release.
 #
-#       name                    instance name
+# === Parameters
 #
-#       ensure          1       instance is to be present/absent
+# [*namevar*]
+#   The instance name.
 #
-#       build                   PyCharm build ID, e.g. '2.6'
+# [*ensure*]
+#   Instance is to be 'present' (default) or 'absent'.
 #
-#       edition         2       one of: 'community', 'professional' or
-#                               'legacy'
+# [*build*]
+#   PyCharm build ID, e.g., '2.6'.
 #
-# Notes:
+# [*edition*]
+#   One of: 'community', 'professional' or 'legacy' (default).  'legacy' is
+#   only appropriate for releases/builds prior to the introduction of the
+#   professional/community editions, i.e., 3.0.
 #
-#       1. Default is 'present'.
+# === Authors
 #
-#       2. Default is 'legacy', which is only appropriate for releases/builds
-#       prior to the introduction of the professional/community editions,
-#       i.e., 3.0.
+#   John Florian <john.florian@dart.biz>
 
 
 define jetbrains::pycharm_release (

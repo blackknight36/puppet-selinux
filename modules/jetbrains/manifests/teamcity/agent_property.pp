@@ -1,16 +1,23 @@
 # modules/jetbrains/manifests/teamcity/agent_property.pp
 #
-# Synopsis:
-#       Configures a single, specific JetBrains TeamCity Build Agent property.
+# == Define: jetbrains::teamcity::agent_property
 #
-# Parameters:
-#       Name__________  Notes_  Description___________________________
+# Configures a single, specific JetBrains TeamCity Build Agent property.
 #
-#       name                    property name
+# === Parameters
 #
-#       value                   value that property is to take
+# [*namevar*]
+#   The property name.
 #
-#       props_file              path to Build Agent's configuration properties
+# [*value*]
+#   Value that property is to take.
+#
+# [*props_file*]
+#   Path to Build Agent's configuration properties file.
+#
+# === Authors
+#
+#   John Florian <john.florian@dart.biz>
 
 
 define jetbrains::teamcity::agent_property ($props_file, $value) {

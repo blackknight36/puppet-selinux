@@ -1,19 +1,21 @@
 # modules/jetbrains/manifests/teamcity/server.pp
 #
-# Synopsis:
-#       Configures a host to run a JetBrains TeamCity Server.
+# == Class: jetbrains::teamcity::server
 #
-# Parameters:
-#       Name__________  Default_______  Description___________________________
+# Configures a host to run a JetBrains TeamCity Server.
 #
-#       NONE
+# === Parameters
 #
-# Requires:
-#       NONE
+# NONE
 #
-# Notes:
-#       - Generally, you will want to just include the class
-#       'jetbrains::teamcity::server_release' instead.
+# === Notes
+#
+#   1. Generally, you will want to just include the class
+#   'jetbrains::teamcity::server_release' instead.
+#
+# === Authors
+#
+#   John Florian <john.florian@dart.biz>
 
 
 class jetbrains::teamcity::server {

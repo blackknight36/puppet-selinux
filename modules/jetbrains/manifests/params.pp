@@ -1,7 +1,12 @@
 # modules/jetbrains/manifests/params.pp
 #
-# Synopsis:
-#       Parameters for the jetbrains module.
+# == Class: jetbrains::params
+#
+# Parameters for the jetbrains puppet module.
+#
+# === Authors
+#
+#   John Florian <john.florian@dart.biz>
 
 
 class jetbrains::params {

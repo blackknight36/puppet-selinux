@@ -1,15 +1,16 @@
 # modules/jetbrains/manifests/init.pp
 #
-# Synopsis:
-#       Configures a host to run JetBrains software.
+# == Class: jetbrains
 #
-# Parameters:
-#       Name__________  Default_______  Description___________________________
+# Configures a host to run JetBrains software.
 #
-#       NONE
+# === Parameters
 #
-# Requires:
-#       NONE
+# NONE
+#
+# === Authors
+#
+#   John Florian <john.florian@dart.biz>
 
 
 class jetbrains {

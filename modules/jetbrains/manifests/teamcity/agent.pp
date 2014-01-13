@@ -1,19 +1,21 @@
 # modules/jetbrains/manifests/teamcity/agent.pp
 #
-# Synopsis:
-#       Configures a host to run a JetBrains TeamCity Build Agent.
+# == Class: jetbrains::teamcity::agent
 #
-# Parameters:
-#       Name__________  Default_______  Description___________________________
+# Configures a host to run a JetBrains TeamCity Build Agent.
 #
-#       NONE
+# === Parameters
 #
-# Requires:
-#       NONE
+# NONE
 #
-# Notes:
-#       - Generally, you will want to just include the class
-#       'jetbrains::teamcity::agent_release' instead.
+# === Notes
+#
+#   1. Generally, you will want to just include the class
+#   'jetbrains::teamcity::agent_release' instead.
+#
+# === Authors
+#
+#   John Florian <john.florian@dart.biz>
 
 
 class jetbrains::teamcity::agent {

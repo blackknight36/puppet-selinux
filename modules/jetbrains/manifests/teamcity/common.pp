@@ -1,16 +1,16 @@
 # modules/jetbrains/manifests/teamcity/common.pp
 #
-# Synopsis:
-#       Configures a host to run a JetBrains TeamCity (Server and/or Build
-#       Agent).
+# == Class: jetbrains::teamcity::common
 #
-# Parameters:
-#       Name__________  Default_______  Description___________________________
+# Configures a host to run JetBrains TeamCity (Server and/or Build Agent).
 #
-#       NONE
+# === Parameters
 #
-# Requires:
-#       NONE
+# NONE
+#
+# === Authors
+#
+#   John Florian <john.florian@dart.biz>
 
 
 class jetbrains::teamcity::common {

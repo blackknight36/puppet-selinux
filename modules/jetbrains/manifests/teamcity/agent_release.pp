@@ -1,33 +1,38 @@
 # modules/jetbrains/manifests/teamcity/agent_release.pp
 #
-# Synopsis:
-#       Installs a single, specific JetBrains TeamCity release Build Agent.
+# == Define: jetbrains::teamcity::agent_release
 #
-# Parameters:
-#       Name__________  Notes_  Description___________________________
+# Installs a single, specific JetBrains TeamCity Build Agent release.
 #
-#       name                    instance name
+# === Parameters
 #
-#       build                   TeamCity build ID, e.g. '3.0.8'
+# [*namevar*]
+#   The instance name.
 #
-#       ensure          1       instance is to be present/absent
+# [*ensure*]
+#   Instance is to be 'present' (default) or 'absent'.
 #
-#       active          2       instance is to be enabled/running
+# [*build*]
+#   TeamCity build ID, e.g., '3.0.8'.
 #
-#       server_url      3       URL were TeamCity Server may be reached
+# [*ensure*]
+#   Instance is to be 'present' (default) or 'absent'.
 #
-# Notes:
+# [*active*]
+#   When true (default), instance is to be enabled and running.  Otherwise
+#   instance is to be disabled and stopped.
 #
-#       1. Default is 'present'.
+# [*server_url*]
+#   URL were TeamCity Server may be reached.  Default is
+#   'http://localhost:8111/', which is only appropriate for the "bundled"
+#   authorized Agent that "comes with" the Server.  The TeamCity package has
+#   both Agent and Server bundled together for the Server installation, but
+#   the Puppet manifests isolate the two for better modularity whilst still
+#   allowing the typical integrated setup of the Server.
 #
-#       2. Default is true.
+# === Authors
 #
-#       3. Default is 'http://localhost:8111/', which is only appropriate for
-#       the "bundled" authorized Agent that "comes with" the Server.  The
-#       TeamCity package has both Agent and Server bundled together for the
-#       Server installation, but the Puppet manifests isolate the two for
-#       better modularity whilst still allowing the typical integrated setup
-#       of the Server.
+#   John Florian <john.florian@dart.biz>
 
 
 define jetbrains::teamcity::agent_release (
