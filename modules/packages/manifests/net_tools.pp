@@ -13,6 +13,7 @@ class packages::net_tools {
         'conntrack-tools',
         'enmasse',
         'ethtool',
+        'ipcalculator',
         'mtr',
         'netstat-nat',
         'nmap',
