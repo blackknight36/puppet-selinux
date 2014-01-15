@@ -122,8 +122,9 @@ class packages::base {
 
     # Kludging around puppet's inability to remove deps,
     # system-config-keyboard in this case.
-    exec { 'yum -y remove firstboot':
-        onlyif  => 'rpm -q firstboot',
+    yum::remove {
+        'firstboot':;
+        'ModemManager':;
     }
 
     ### Select Package Exclusion ###
