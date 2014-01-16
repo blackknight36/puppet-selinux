@@ -6,7 +6,7 @@
 # Contact:
 #       Ben Minshall
 
-class dart::mdct-est-ci inherits dart::abstract::teamcity_server_node {
+class dart::mdct_est_ci inherits dart::abstract::teamcity_server_node {
 
     include 'dart::abstract::est_server_node'
 
