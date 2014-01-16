@@ -6,6 +6,6 @@
 # Contact:
 #       Ben Minshall
 
-class dart::mdct-est-dev2 inherits dart::abstract::est_server_node {
+class dart::mdct_est_dev2 inherits dart::abstract::est_server_node {
 
 }
