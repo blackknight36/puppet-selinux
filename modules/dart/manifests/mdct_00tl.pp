@@ -6,7 +6,7 @@
 # Contact:
 #       Nathan Nephew
 
-class dart::mdct-00tl inherits dart::abstract::semi_guarded_server_node {
+class dart::mdct_00tl inherits dart::abstract::semi_guarded_server_node {
 
     class { 'bacula::client':
         dir_passwd      => 'VrLkRkBWWIhDHF8ARkPfGH5mNWnF1wZd939DmfFAhNzS',
