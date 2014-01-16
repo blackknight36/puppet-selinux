@@ -29,7 +29,7 @@
 #       This file is managed by puppet.  Any changes made locally here will be
 #       overwritten.  The origin of this file on the puppet master is:
 #
-#               modules/dart/files/tc-util/teamcenter-sync
+#               modules/dart/files/tc_util/teamcenter-sync
 #
 # Author:
 #       John Florian <john.florian@dart.biz>

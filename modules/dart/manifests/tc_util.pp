@@ -113,7 +113,7 @@ password=T5A!ENsER
         owner   => 'root',
         group   => 'root',
         mode    => '0755',
-        source  => 'puppet:///modules/dart/tc-util/teamcenter-sync',
+        source  => 'puppet:///modules/dart/tc_util/teamcenter-sync',
     }
 
     #
