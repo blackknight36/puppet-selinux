@@ -6,7 +6,7 @@
 # Contact:
 #       Ben Minshall
 
-class dart::mdct-dr inherits dart::abstract::dr_server_node {
+class dart::mdct_dr inherits dart::abstract::dr_server_node {
 
     class { 'bacula::client':
         dir_passwd      => 'pEw3jdJle4QQwkdvSeofk4827DNVldkfjeiRslkDs3',
