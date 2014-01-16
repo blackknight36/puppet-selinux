@@ -26,13 +26,13 @@
 #       include 'systemd'
 #       include 'vnc'
 #
-#       vnc::display-config { 'acme':
+#       vnc::display_config { 'acme':
 #           notify  => Service['SERVICE_NAME'],
 #           source  => 'puppet:///private-host/acme.conf',
 #       }
 
 
-define vnc::display-config ($ensure='present', $display_num, $user, $password,
+define vnc::display_config ($ensure='present', $display_num, $user, $password,
                             $geometry='1024x768'
     ) {
 
