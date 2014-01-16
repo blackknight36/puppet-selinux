@@ -67,7 +67,7 @@ class dart::abstract::picaps_production_server_node inherits dart::abstract::ung
         mode    => 600,
         owner   => "root",
         source  => [
-            'puppet:///modules/dart/picaps-servers/jmxremote.password',
+            'puppet:///modules/dart/picaps_servers/jmxremote.password',
         ],
         require  => [
             Exec["install oracle jdk-7u45-linux-x64"],
@@ -79,13 +79,13 @@ class dart::abstract::picaps_production_server_node inherits dart::abstract::ung
 
     # PICAPS database
     class { 'mariadb::server':
-        config_uri => 'puppet:///modules/dart/picaps-servers/picaps-mariadb-server.cnf',
+        config_uri => 'puppet:///modules/dart/picaps_servers/picaps-mariadb-server.cnf',
     }
     file { "/etc/systemd/system/mysqld.service": # modified mysqld.service is necessary to configure NUMA interleaving for MySQL process
         group   => "root",
         mode    => 644,
         owner   => "root",
-        source  => 'puppet:///modules/dart/picaps-servers/picaps-mysqld.service',
+        source  => 'puppet:///modules/dart/picaps_servers/picaps-mysqld.service',
         before  => File['/storage/mysql'],
     }
     file { '/storage/mysql':
@@ -123,19 +123,19 @@ class dart::abstract::picaps_production_server_node inherits dart::abstract::ung
         group   => "root",
         mode    => 660,
         owner   => "root",
-        source  => 'puppet:///modules/dart/picaps-servers/picaps-databases.sql',
+        source  => 'puppet:///modules/dart/picaps_servers/picaps-databases.sql',
     }
     file { "/root/picaps-install.sh":
         group   => "root",
         mode    => 770,
         owner   => "root",
-        source  => 'puppet:///modules/dart/picaps-servers/picaps-install.sh',
+        source  => 'puppet:///modules/dart/picaps_servers/picaps-install.sh',
     }
     file { "/root/picaps-initdb.sh":
         group   => "root",
         mode    => 770,
         owner   => "root",
-        source  => 'puppet:///modules/dart/picaps-servers/picaps-initdb.sh',
+        source  => 'puppet:///modules/dart/picaps_servers/picaps-initdb.sh',
     }
 
     # PICAPS Software

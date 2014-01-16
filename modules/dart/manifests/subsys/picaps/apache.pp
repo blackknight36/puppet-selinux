@@ -43,7 +43,7 @@ class dart::subsys::picaps::apache {
     }
 
     #apache::site_config { 'ssl':
-    #    source  => 'puppet:///modules/dart/picaps-servers/picaps-httpd-ssl.conf',
+    #    source  => 'puppet:///modules/dart/picaps_servers/picaps-httpd-ssl.conf',
     #}
 
     # Serve up /local -- locally mirrored parts of /pub as used by AOS nodes.

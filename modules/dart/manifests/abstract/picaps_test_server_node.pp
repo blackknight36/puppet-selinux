@@ -58,7 +58,7 @@ class dart::abstract::picaps_test_server_node inherits dart::abstract::unguarded
         mode    => 600,
         owner   => "root",
         source  => [
-            'puppet:///modules/dart/picaps-servers/jmxremote.password',
+            'puppet:///modules/dart/picaps_servers/jmxremote.password',
         ],
         require  => [
             Exec["install oracle jdk-7u25-linux-x64"],
@@ -71,7 +71,7 @@ class dart::abstract::picaps_test_server_node inherits dart::abstract::unguarded
         mode    => 640,
         owner   => "root",
         source  => [
-            'puppet:///modules/dart/picaps-servers/picaps-cupsd.conf',
+            'puppet:///modules/dart/picaps_servers/picaps-cupsd.conf',
         ],
     }
     file { "/root/picaps-printer-setup.sh":
@@ -79,19 +79,19 @@ class dart::abstract::picaps_test_server_node inherits dart::abstract::unguarded
         mode    => 755,
         owner   => "root",
         source  => [
-            'puppet:///modules/dart/picaps-servers/picaps-printer-setup.sh',
+            'puppet:///modules/dart/picaps_servers/picaps-printer-setup.sh',
         ],
     }
 
     # PICAPS database
     class { 'mariadb::server':
-        config_uri => 'puppet:///modules/dart/picaps-servers/picaps-test-mariadb-server.cnf',
+        config_uri => 'puppet:///modules/dart/picaps_servers/picaps-test-mariadb-server.cnf',
     }
     file { "/etc/systemd/system/mysqld.service":
         group   => "root",
         mode    => 644,
         owner   => "root",
-        source  => 'puppet:///modules/dart/picaps-servers/picaps-mysqld.service',
+        source  => 'puppet:///modules/dart/picaps_servers/picaps-mysqld.service',
         before  => File['/storage/mysql'],
     }
     file { '/storage/':
@@ -136,25 +136,25 @@ class dart::abstract::picaps_test_server_node inherits dart::abstract::unguarded
         group   => "root",
         mode    => 660,
         owner   => "root",
-        source  => 'puppet:///modules/dart/picaps-servers/picaps-databases.sql',
+        source  => 'puppet:///modules/dart/picaps_servers/picaps-databases.sql',
     }
     file { "/root/picaps-install.sh":
         group   => "root",
         mode    => 770,
         owner   => "root",
-        source  => 'puppet:///modules/dart/picaps-servers/picaps-install.sh',
+        source  => 'puppet:///modules/dart/picaps_servers/picaps-install.sh',
     }
     file { "/root/picaps-initdb.sh":
         group   => "root",
         mode    => 770,
         owner   => "root",
-        source  => 'puppet:///modules/dart/picaps-servers/picaps-initdb.sh',
+        source  => 'puppet:///modules/dart/picaps_servers/picaps-initdb.sh',
     }
     file { "/root/picaps-test-initdb.sh":
         group   => "root",
         mode    => 770,
         owner   => "root",
-        source  => 'puppet:///modules/dart/picaps-servers/picaps-test-initdb.sh',
+        source  => 'puppet:///modules/dart/picaps_servers/picaps-test-initdb.sh',
     }
 
     # PICAPS Software
