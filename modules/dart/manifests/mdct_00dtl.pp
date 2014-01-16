@@ -6,7 +6,7 @@
 # Contact:
 #       Nathan Nephew
 
-class dart::mdct-00dtl inherits dart::abstract::semi_guarded_server_node {
+class dart::mdct_00dtl inherits dart::abstract::semi_guarded_server_node {
 
     class { 'puppet::client':
     }
