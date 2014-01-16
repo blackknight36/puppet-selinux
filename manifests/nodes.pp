@@ -13,7 +13,7 @@ node 'mdct-00fs.dartcontainer.com'              { include 'dart::mdct-00fs' }
 node 'mdct-00sw.dartcontainer.com'              { include 'dart::mdct-00sw' }
 node 'mdct-00tl.dartcontainer.com'              { include 'dart::mdct-00tl' }
 node 'mdct-01pt.dartcontainer.com'              { include 'dart::mdct-01pt' }
-node 'mdct-02ut.dartcontainer.com'              { include 'dart::mdct-02ut' }
+node 'mdct-02ut.dartcontainer.com'              { include 'dart::mdct_02ut' }
 node 'mdct-03pt.dartcontainer.com'              { include 'dart::mdct_03pt' }
 node 'mdct-03ut.dartcontainer.com'              { include 'dart::mdct_03ut' }
 node 'mdct-04pt.dartcontainer.com'              { include 'dart::mdct_04pt' }
