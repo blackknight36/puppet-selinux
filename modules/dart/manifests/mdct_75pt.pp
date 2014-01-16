@@ -6,6 +6,6 @@
 # Contact:
 #       Nathan Nephew
 
-class dart::mdct-75pt inherits dart::abstract::picaps_test_server_node {
+class dart::mdct_75pt inherits dart::abstract::picaps_test_server_node {
 
 }
