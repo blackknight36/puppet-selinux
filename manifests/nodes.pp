@@ -35,7 +35,7 @@ node 'mdct-0310pi.dartcontainer.com'            { include 'dart::mdct-0310pi' }
 node 'mdct-0314pi.dartcontainer.com'            { include 'dart::mdct-0314pi' }
 node 'mdct-aos-master-f15.dartcontainer.com'    { include 'dart::mdct-aos-master-f15' }
 node 'mdct-aos-master-f19.dartcontainer.com'    { include 'dart::mdct-aos-master-f19' }
-node 'mdct-ci-agent1.dartcontainer.com'         { include 'dart::mdct-ci-agent1' }
+node 'mdct-ci-agent1.dartcontainer.com'         { include 'dart::mdct_ci_agent1' }
 node 'mdct-dev6-test.dartcontainer.com'         { include 'dart::mdct_dev6_test' }
 node 'mdct-dev6.dartcontainer.com'              { include 'dart::mdct_dev6' }
 node 'mdct-dev7.dartcontainer.com'              { include 'dart::mdct_dev7' }

@@ -16,6 +16,6 @@
 #       A good time to tackle such a change would be during the next rebuild
 #       of this host, if ever.
 
-class dart::mdct-ci-agent1 inherits dart::abstract::est_server_node {
+class dart::mdct_ci_agent1 inherits dart::abstract::est_server_node {
 
 }
