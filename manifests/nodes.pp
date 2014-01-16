@@ -21,7 +21,7 @@ node 'mdct-10ut.dartcontainer.com'              { include 'dart::mdct-10ut' }
 node 'mdct-15pt.dartcontainer.com'              { include 'dart::mdct-15pt' }
 node 'mdct-19pt.dartcontainer.com'              { include 'dart::mdct-19pt' }
 node 'mdct-19ut.dartcontainer.com'              { include 'dart::mdct-19ut' }
-node 'mdct-25pt.dartcontainer.com'              { include 'dart::mdct-25pt' }
+node 'mdct-25pt.dartcontainer.com'              { include 'dart::mdct_25pt' }
 node 'mdct-39pt.dartcontainer.com'              { include 'dart::mdct_39pt' }
 node 'mdct-47pt.dartcontainer.com'              { include 'dart::mdct_47pt' }
 node 'mdct-47pi.dartcontainer.com'              { include 'dart::mdct_47pi' }
