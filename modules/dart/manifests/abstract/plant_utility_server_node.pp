@@ -18,10 +18,10 @@ class dart::abstract::plant_utility_server_node inherits dart::abstract::guarded
     include 'samba'
 
     # Additional content comes in the form of MDC's weather imagery.  The
-    # media-disbursal module knows how to retrieve that imagery and merge it
+    # media_disbursal module knows how to retrieve that imagery and merge it
     # with the content from the Windows system and disburse all such content
     # in a location where media-playback clients can utilize it.
-    include 'media-disbursal'
+    include 'media_disbursal'
 
     # Other packages required by a plant utility server
     if $::operatingsystem == 'Fedora' and $::operatingsystemrelease > 15 {

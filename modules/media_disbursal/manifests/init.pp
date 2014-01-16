@@ -1,4 +1,4 @@
-# modules/media-disbursal/manifests/init.pp
+# modules/media_disbursal/manifests/init.pp
 #
 # Synopsis:
 #       Configures a host to have access to MDC's weather imagery media.
@@ -10,7 +10,7 @@
 #       Class['rsync_server']
 #       Class['samba']
 
-class media-disbursal {
+class media_disbursal {
 
     # Establish a root for shared file resources.
     file { '/storage':
@@ -70,7 +70,7 @@ class media-disbursal {
             File['/storage/slideshow'],
             Mount['/storage/slideshow/weathermedia'],
         ],
-        source  => 'puppet:///modules/media-disbursal/disburse-media',
+        source  => 'puppet:///modules/media_disbursal/disburse-media',
     }
 
     exec { '/usr/local/bin/disburse-media':
