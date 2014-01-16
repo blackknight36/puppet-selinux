@@ -1,6 +1,6 @@
-# modules/xorg-server/manifests/init.pp
+# modules/xorg_server/manifests/init.pp
 
-class xorg-server($drivers=undef, $config=undef) {
+class xorg_server($drivers=undef, $config=undef) {
 
     if $drivers != undef {
         package { $drivers:
