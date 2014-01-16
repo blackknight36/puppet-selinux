@@ -17,12 +17,12 @@
 #
 #       include 'apache'
 #
-#       apache::misc-config { 'dav_auth':
+#       apache::misc_config { 'dav_auth':
 #           source  => 'puppet:///private-host/dav_auth',
 #       }
 
 
-define apache::misc-config ($ensure='present', $source) {
+define apache::misc_config ($ensure='present', $source) {
 
     include 'apache::params'
 
