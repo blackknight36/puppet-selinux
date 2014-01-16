@@ -6,6 +6,6 @@
 # Contact:
 #       Elizabeth Scott
 
-class dart::mdct-dev19 inherits dart::abstract::workstation_node {
+class dart::mdct_dev19 inherits dart::abstract::workstation_node {
     include 'dart::subsys::yum_cron'
 }
