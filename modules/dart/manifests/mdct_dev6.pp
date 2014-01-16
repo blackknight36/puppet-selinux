@@ -6,7 +6,7 @@
 # Contact:
 #       Chris Kennedy
 
-class dart::mdct-dev6 inherits dart::abstract::workstation_node {
+class dart::mdct_dev6 inherits dart::abstract::workstation_node {
 
     class { 'network':
         service         => 'legacy',
