@@ -6,7 +6,7 @@
 # Contact:
 #       Ben Minshall
 
-class dart::mdct-dev16 inherits dart::abstract::workstation_node {
+class dart::mdct_dev16 inherits dart::abstract::workstation_node {
 
     include 'jetbrains::idea'
     include 'dart::subsys::yum_cron'
