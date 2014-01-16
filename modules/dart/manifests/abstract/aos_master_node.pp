@@ -21,7 +21,7 @@ class dart::abstract::aos_master_node inherits dart::abstract::server_node {
 
     include 'dart::subsys::autofs::common'
     include 'flock_herder'
-    include 'mdct-puppeteer-admin'
+    include 'mdct_puppeteer_admin'
 
     class { 'puppet::client':
     }

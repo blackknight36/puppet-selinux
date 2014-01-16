@@ -1,6 +1,6 @@
-# modules/mdct-puppeteer-admin/manifests/init.pp
+# modules/mdct_puppeteer_admin/manifests/init.pp
 
-class mdct-puppeteer-admin {
+class mdct_puppeteer_admin {
 
     $SELF='mdct-puppeteer-admin'
 
@@ -17,8 +17,8 @@ class mdct-puppeteer-admin {
         selrole => "object_r",
         seltype => "etc_t",
         source  => [
-            "puppet:///private-host/${SELF}/${SELF}.conf",
-            "puppet:///modules/${SELF}/${SELF}.conf",
+            "puppet:///private-host/mdct_puppeteer_admin/${SELF}.conf",
+            "puppet:///modules/mdct_puppeteer_admin/${SELF}.conf",
         ],
     }
 
