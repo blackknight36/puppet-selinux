@@ -19,11 +19,11 @@
 #
 #       include 'apache'
 #
-#       apache::bind-mount { 'html':
+#       apache::bind_mount { 'html':
 #           source  => '/mnt/resources/www/html/',
 #       }
 
-define apache::bind-mount ($ensure='mounted', $source) {
+define apache::bind_mount ($ensure='mounted', $source) {
 
     include 'apache::params'
 
