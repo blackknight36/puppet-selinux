@@ -6,6 +6,6 @@
 # Contact:
 #       Chris Rockhold
 
-class dart::mdct-dev7 inherits dart::abstract::workstation_node {
+class dart::mdct_dev7 inherits dart::abstract::workstation_node {
     include 'dart::subsys::yum_cron'
 }
