@@ -6,7 +6,7 @@
 # Contact:
 #       Chris Kennedy
 
-class dart::mdct-dev6-test inherits dart::abstract::workstation_node {
+class dart::mdct_dev6_test inherits dart::abstract::workstation_node {
 
     class { 'plymouth':
         theme   => 'details',
