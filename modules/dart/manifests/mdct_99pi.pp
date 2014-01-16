@@ -6,7 +6,7 @@
 # Contact:
 #       Chris Kennedy
 
-class dart::mdct-99pi inherits dart::abstract::picaps_production_server_node {
+class dart::mdct_99pi inherits dart::abstract::picaps_production_server_node {
 
     #class { 'network':
     #    network_manager => false,
