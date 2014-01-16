@@ -37,7 +37,7 @@ class dart::mdct_00fs {
     ####
 
     include 'flock_herder'
-    include 'git-daemon'
+    include 'git_daemon'
 
     include 'mirrmaid'
 

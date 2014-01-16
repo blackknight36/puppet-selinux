@@ -1,6 +1,6 @@
-# modules/git-daemon/manifests/init.pp
+# modules/git_daemon/manifests/init.pp
 
-class git-daemon {
+class git_daemon {
 
     package { "git-daemon":
         ensure  => installed,
@@ -15,8 +15,8 @@ class git-daemon {
         selrole => "object_r",
         seltype => "etc_t",
         source  => [
-            "puppet:///private-host/git-daemon/xinetd-git.conf",
-            "puppet:///modules/git-daemon/xinetd-git.conf",
+            "puppet:///private-host/git_daemon/xinetd-git.conf",
+            "puppet:///modules/git_daemon/xinetd-git.conf",
         ],
     }
 
