@@ -6,7 +6,7 @@
 # such classes are in the dart module (see
 # modules/dart/manifests/classes/abstract/*.pp).
 
-node 'mdct-00bk.dartcontainer.com'              { include 'dart::mdct-00bk' }
+node 'mdct-00bk.dartcontainer.com'              { include 'dart::mdct_00bk' }
 node 'mdct-00dtl.dartcontainer.com'             { include 'dart::mdct_00dtl' }
 node 'mdct-00dw.dartcontainer.com'              { include 'dart::mdct_00dw' }
 node 'mdct-00fs.dartcontainer.com'              { include 'dart::mdct_00fs' }
