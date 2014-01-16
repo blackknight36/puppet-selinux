@@ -6,7 +6,7 @@
 # Contact:
 #       John Florian
 
-class dart::mdct-puppet inherits dart::abstract::puppet_server_node {
+class dart::mdct_puppet inherits dart::abstract::puppet_server_node {
 
     class { 'bacula::client':
         dir_passwd      => 'd730e38202fb2f6b8f8fb35045538a9f',

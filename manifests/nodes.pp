@@ -76,4 +76,4 @@ node 'tc-util.dartcontainer.com'                { include 'dart::tc_util' }
 
 node /^mdct-dev10-.*\.dartcontainer\.com$/      { include 'dart::mdct-dev10-srvr' }
 node /^mdct-ovirt-node-.*\.dartcontainer\.com$/ { include 'dart::mdct_ovirt_node' }
-node /^mdct-puppet.*\.dartcontainer\.com$/      { include 'dart::mdct-puppet' }
+node /^mdct-puppet.*\.dartcontainer\.com$/      { include 'dart::mdct_puppet' }
