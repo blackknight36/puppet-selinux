@@ -36,7 +36,7 @@ class dart::mdct_00fs {
     # Other resources specific to mdct-00fs:
     ####
 
-    include 'flock-herder'
+    include 'flock_herder'
     include 'git-daemon'
 
     include 'mirrmaid'

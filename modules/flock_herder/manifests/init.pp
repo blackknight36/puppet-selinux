@@ -1,6 +1,6 @@
-# modules/flock-herder/manifests/init.pp
+# modules/flock_herder/manifests/init.pp
 
-class flock-herder {
+class flock_herder {
 
     package { "flock-herder":
         ensure  => latest,
@@ -15,8 +15,8 @@ class flock-herder {
         selrole => "object_r",
         seltype => "etc_t",
         source  => [
-            "puppet:///private-host/flock-herder/herd.conf",
-            "puppet:///modules/flock-herder/herd.conf",
+            "puppet:///private-host/flock_herder/herd.conf",
+            "puppet:///modules/flock_herder/herd.conf",
         ],
     }
 

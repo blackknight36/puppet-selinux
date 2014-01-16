@@ -3,7 +3,7 @@
 class dart::abstract::workstation_node inherits dart::abstract::base_node {
 
     include 'dart::subsys::autofs::common'
-    include 'flock-herder'
+    include 'flock_herder'
 
     class { 'iptables':
         enabled => true,
