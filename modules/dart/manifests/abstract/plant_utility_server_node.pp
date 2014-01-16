@@ -12,7 +12,7 @@ class dart::abstract::plant_utility_server_node inherits dart::abstract::guarded
     }
 
     # AOS devices pull media-playback content using rsync.
-    include 'rsync-server'
+    include 'rsync_server'
 
     # That same media-playback content is pushed in via Windows systems.
     include 'samba'

@@ -26,7 +26,7 @@ class dart::mdct_pt_dbtest inherits dart::abstract::unguarded_server_node {
     }
 
     # PICAPS uses rsync for backup and other similar uses
-    include 'rsync-server'
+    include 'rsync_server'
 
     # Samba may be useful for some adminstrators
     include 'samba'
@@ -70,7 +70,7 @@ class dart::mdct_pt_dbtest inherits dart::abstract::unguarded_server_node {
     #    require => [
     #        #Class['mysql_server'],
     #        Class['packages::developer'],
-    #        Class['rsync-server'],
+    #        Class['rsync_server'],
     #        File['/usr/local/bin/picaps-install-and-setup'],
     #        Package['httpd'],
     #        Package['ncftp'],

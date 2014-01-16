@@ -1,6 +1,6 @@
-# modules/rsync-server/manifests/init.pp
+# modules/rsync_server/manifests/init.pp
 
-class rsync-server {
+class rsync_server {
 
     include 'xinetd'
 
@@ -16,7 +16,7 @@ class rsync-server {
         require => Package['rsync'],
         source  => [
             'puppet:///private-host/xinetd.d/rsync',
-            'puppet:///modules/rsync-server/rsync',
+            'puppet:///modules/rsync_server/rsync',
         ],
     }
 
@@ -27,9 +27,9 @@ class rsync-server {
         owner   => 'root',
         require => Package['rsync'],
         source  => [
-            'puppet:///private-host/rsync-server/rsyncd.conf',
-            'puppet:///private-domain/rsync-server/rsyncd.conf',
-            'puppet:///modules/rsync-server/rsyncd.conf',
+            'puppet:///private-host/rsync_server/rsyncd.conf',
+            'puppet:///private-domain/rsync_server/rsyncd.conf',
+            'puppet:///modules/rsync_server/rsyncd.conf',
         ],
     }
 

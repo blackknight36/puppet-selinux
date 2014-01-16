@@ -40,7 +40,7 @@ class dart::abstract::picaps_production_server_node inherits dart::abstract::ung
     #include 'dart::subsys::yum_cron'
 
     # PICAPS uses rsync for backup and other similar uses
-    include 'rsync-server'
+    include 'rsync_server'
 
     # Samba
     include 'samba'
