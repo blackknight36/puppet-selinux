@@ -17,7 +17,7 @@ node 'mdct-02ut.dartcontainer.com'              { include 'dart::mdct-02ut' }
 node 'mdct-03pt.dartcontainer.com'              { include 'dart::mdct-03pt' }
 node 'mdct-03ut.dartcontainer.com'              { include 'dart::mdct-03ut' }
 node 'mdct-04pt.dartcontainer.com'              { include 'dart::mdct-04pt' }
-node 'mdct-10ut.dartcontainer.com'              { include 'dart::mdct-10ut' }
+node 'mdct-10ut.dartcontainer.com'              { include 'dart::mdct_10ut' }
 node 'mdct-15pt.dartcontainer.com'              { include 'dart::mdct_15pt' }
 node 'mdct-19pt.dartcontainer.com'              { include 'dart::mdct_19pt' }
 node 'mdct-19ut.dartcontainer.com'              { include 'dart::mdct_19ut' }

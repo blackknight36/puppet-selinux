@@ -6,6 +6,6 @@
 # Contact:
 #       John Florian
 
-class dart::mdct-10ut inherits dart::abstract::plant_utility_server_node {
+class dart::mdct_10ut inherits dart::abstract::plant_utility_server_node {
 
 }
