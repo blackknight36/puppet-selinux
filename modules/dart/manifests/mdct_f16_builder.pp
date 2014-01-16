@@ -6,6 +6,6 @@
 # Contact:
 #       John Florian
 
-class dart::mdct-f16-builder inherits dart::abstract::build_server_node {
+class dart::mdct_f16_builder inherits dart::abstract::build_server_node {
     include 'dart::subsys::yum_cron'
 }
