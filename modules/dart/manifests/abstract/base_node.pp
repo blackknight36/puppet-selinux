@@ -22,7 +22,7 @@ class dart::abstract::base_node {
         },
     }
 
-    include 'openssh-server'
+    include 'openssh_server'
     include 'packages::base'
     #include 'selinux'
     include 'sudo'

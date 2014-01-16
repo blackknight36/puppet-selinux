@@ -1,4 +1,4 @@
-# modules/openssh-server/manifests/init.pp
+# modules/openssh_server/manifests/init.pp
 #
 # Synopsis:
 #       Configures a host as a OpenSSH server server.
@@ -11,9 +11,9 @@
 #
 # Example usage:
 #
-#       include 'openssh-server'
+#       include 'openssh_server'
 
-class openssh-server {
+class openssh_server {
 
     package { 'openssh-server':
         ensure  => installed,
@@ -25,9 +25,9 @@ class openssh-server {
         owner   => 'root',
         require => Package['openssh-server'],
         source  => [
-            'puppet:///private-host/openssh-server/sshd_config',
-            'puppet:///private-domain/openssh-server/sshd_config',
-            "puppet:///modules/openssh-server/sshd_config.$operatingsystem.$operatingsystemrelease",
+            'puppet:///private-host/openssh_server/sshd_config',
+            'puppet:///private-domain/openssh_server/sshd_config',
+            "puppet:///modules/openssh_server/sshd_config.$operatingsystem.$operatingsystemrelease",
         ],
     }
 

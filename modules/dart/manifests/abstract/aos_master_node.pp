@@ -69,7 +69,7 @@ class dart::abstract::aos_master_node inherits dart::abstract::server_node {
         seluser => 'system_u',
         selrole => 'object_r',
         seltype => 'sshd_key_t',
-        notify  => Class['openssh-server'],
+        notify  => Class['openssh_server'],
         source  => 'puppet:///private-domain/ssh/aos-master-host_rsa_key',
     }
 
@@ -80,7 +80,7 @@ class dart::abstract::aos_master_node inherits dart::abstract::server_node {
         seluser => 'system_u',
         selrole => 'object_r',
         seltype => 'etc_t',
-        notify  => Class['openssh-server'],
+        notify  => Class['openssh_server'],
         source  => 'puppet:///private-domain/ssh/aos-master-host_rsa_key.pub',
     }
 
