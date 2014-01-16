@@ -70,7 +70,7 @@ node 'mdct-tc.dartcontainer.com'                { include 'dart::mdct-tc' }
 node 'mdct-teamcity.dartcontainer.com'          { include 'dart::mdct_teamcity' }
 node 'mdct-teamcity-agent1.dartcontainer.com'   { include 'dart::mdct_teamcity_agent1' }
 node 'mdct-test-agent-32.dartcontainer.com'     { include 'dart::mdct-test-agent-32' }
-node 'mole-dev.dartcontainer.com'               { include 'dart::mole-dev' }
+node 'mole-dev.dartcontainer.com'               { include 'dart::mole_dev' }
 node 'mole.dartcontainer.com'                   { include 'dart::mole' }
 node 'tc-util.dartcontainer.com'                { include 'dart::tc_util' }
 
