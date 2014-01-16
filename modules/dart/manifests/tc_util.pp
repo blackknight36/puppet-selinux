@@ -6,7 +6,7 @@
 # Contact:
 #       John Florian
 
-class dart::tc-util inherits dart::abstract::guarded_server_node {
+class dart::tc_util inherits dart::abstract::guarded_server_node {
 
     include 'packages::developer'
 
