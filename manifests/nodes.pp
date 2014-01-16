@@ -9,7 +9,7 @@
 node 'mdct-00bk.dartcontainer.com'              { include 'dart::mdct-00bk' }
 node 'mdct-00dtl.dartcontainer.com'             { include 'dart::mdct-00dtl' }
 node 'mdct-00dw.dartcontainer.com'              { include 'dart::mdct-00dw' }
-node 'mdct-00fs.dartcontainer.com'              { include 'dart::mdct-00fs' }
+node 'mdct-00fs.dartcontainer.com'              { include 'dart::mdct_00fs' }
 node 'mdct-00sw.dartcontainer.com'              { include 'dart::mdct_00sw' }
 node 'mdct-00tl.dartcontainer.com'              { include 'dart::mdct_00tl' }
 node 'mdct-01pt.dartcontainer.com'              { include 'dart::mdct_01pt' }
