@@ -21,7 +21,7 @@ class dart::abstract::workstation_node inherits dart::abstract::base_node {
     }
 
     include 'test_automation'
-    include 'unwanted-services'
+    include 'unwanted_services'
 
     class { 'dart::subsys::yum::rpmfusion':
         require => Class['yum'],

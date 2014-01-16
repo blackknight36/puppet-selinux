@@ -1,6 +1,6 @@
-# modules/unwanted-services/manifests/init.pp
+# modules/unwanted_services/manifests/init.pp
 #
-# == Class: unwanted-services
+# == Class: unwanted_services
 #
 # Stops and disables several services that are typically of no value.
 #
@@ -13,7 +13,7 @@
 #   John Florian <jflorian@doubledog.org>
 
 
-class unwanted-services {
+class unwanted_services {
 
     service { 'firstboot':
         enable      => false,

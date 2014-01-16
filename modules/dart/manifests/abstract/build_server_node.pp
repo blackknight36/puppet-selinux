@@ -9,7 +9,7 @@ class dart::abstract::build_server_node inherits dart::abstract::guarded_server_
     class { 'puppet::client':
     }
 
-    include 'unwanted-services'
+    include 'unwanted_services'
 
     file { '/j':
         ensure  => directory,
