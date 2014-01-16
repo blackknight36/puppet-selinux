@@ -6,7 +6,7 @@
 # Contact:
 #       John Florian
 
-class dart::mdct-dev12 inherits dart::abstract::workstation_node {
+class dart::mdct_dev12 inherits dart::abstract::workstation_node {
 
     class { 'network':
         service         => 'nm',
