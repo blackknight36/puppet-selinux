@@ -6,7 +6,7 @@
 # Contact:
 #       John Florian
 
-class dart::mdct-00sw inherits dart::abstract::workstation_node {
+class dart::mdct_00sw inherits dart::abstract::workstation_node {
 
     include 'dart::subsys::yum_cron'
 
