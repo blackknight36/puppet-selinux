@@ -6,7 +6,7 @@
 # Contact:
 #       Nathan Nephew
 
-class dart::mdct-recov inherits dart::abstract::picaps_production_server_node {
+class dart::mdct_recov inherits dart::abstract::picaps_production_server_node {
 
     class { 'network':
         service         => 'legacy',

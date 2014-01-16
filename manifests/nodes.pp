@@ -65,7 +65,7 @@ node 'mdct-ngic-dev.dartcontainer.com'          { include 'dart::mdct-ngic-dev' 
 node 'mdct-ngic.dartcontainer.com'              { include 'dart::mdct-ngic' }
 node 'mdct-ovirt-engine.dartcontainer.com'      { include 'dart::mdct_ovirt_engine' }
 node 'mdct-pt-dbtest.dartcontainer.com'         { include 'dart::mdct-pt-dbtest' }
-node 'mdct-recov.dartcontainer.com'             { include 'dart::mdct-recov' }
+node 'mdct-recov.dartcontainer.com'             { include 'dart::mdct_recov' }
 node 'mdct-tc.dartcontainer.com'                { include 'dart::mdct_tc' }
 node 'mdct-teamcity.dartcontainer.com'          { include 'dart::mdct_teamcity' }
 node 'mdct-teamcity-agent1.dartcontainer.com'   { include 'dart::mdct_teamcity_agent1' }
