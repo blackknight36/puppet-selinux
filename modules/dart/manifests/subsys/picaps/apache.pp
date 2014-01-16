@@ -42,17 +42,17 @@ class dart::subsys::picaps::apache {
         content => template('dart/picaps/checkWeb.cgi'),
     }
 
-    #apache::site-config { 'ssl':
+    #apache::site_config { 'ssl':
     #    source  => 'puppet:///modules/dart/picaps-servers/picaps-httpd-ssl.conf',
     #}
 
     # Serve up /local -- locally mirrored parts of /pub as used by AOS nodes.
-    apache::site-config { 'local':
+    apache::site_config { 'local':
         source  => 'puppet:///modules/dart/httpd/local.conf',
     }
 
     # Serve up /pub -- all of /pub but access requires WAN traversal.
-    apache::site-config { 'pub':
+    apache::site_config { 'pub':
         source  => 'puppet:///modules/dart/httpd/pub.conf',
     }
 

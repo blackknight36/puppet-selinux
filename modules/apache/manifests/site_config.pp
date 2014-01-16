@@ -30,12 +30,12 @@
 #
 #       include 'apache'
 #
-#       apache::site-config { 'acme':
+#       apache::site_config { 'acme':
 #           source  => 'puppet:///private-host/acme.conf',
 #       }
 
 
-define apache::site-config ($ensure='present', $source=undef, $content=undef) {
+define apache::site_config ($ensure='present', $source=undef, $content=undef) {
 
     include 'apache::params'
 

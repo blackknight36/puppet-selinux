@@ -31,7 +31,7 @@ class koji::web ( $secret ) {
 
     include 'apache::mod_ssl'
 
-    apache::site-config {
+    apache::site_config {
         # Duplicates that in koji::hub.  See assumptions note above.
         #   'ssl':
         #       source      => 'puppet:///modules/koji/httpd/ssl.conf',

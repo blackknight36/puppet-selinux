@@ -6,7 +6,7 @@ class dart::abstract::aos_master_node inherits dart::abstract::server_node {
         use_nfs => 'on',
     }
 
-    apache::site-config { 'pub':
+    apache::site_config { 'pub':
         source  => 'puppet:///private-host/apache/pub.conf',
     }
 

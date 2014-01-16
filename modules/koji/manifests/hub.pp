@@ -40,7 +40,7 @@ class koji::hub ( $db_host, $db_user, $db_passwd, $web_cn, $top_dir ) {
             source      => 'puppet:///modules/koji/httpd/99-worker.conf';
     }
 
-    apache::site-config {
+    apache::site_config {
         'ssl':
             source      => 'puppet:///modules/koji/httpd/ssl.conf',
             subscribe   => Class['apache::mod_ssl'];
