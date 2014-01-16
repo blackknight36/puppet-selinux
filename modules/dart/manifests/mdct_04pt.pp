@@ -1,4 +1,4 @@
-# modules/dart/manifests/mdct-04pt.pp
+# modules/dart/manifests/mdct_04pt.pp
 #
 # Synopsis:
 #       PICAPS test server for Aurora

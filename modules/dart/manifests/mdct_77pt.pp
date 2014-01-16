@@ -1,4 +1,4 @@
-# modules/dart/manifests/mdct-77pt.pp
+# modules/dart/manifests/mdct_77pt.pp
 #
 # Synopsis:
 #       PICAPS test server for Canada

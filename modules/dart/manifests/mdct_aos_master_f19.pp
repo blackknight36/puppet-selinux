@@ -1,4 +1,4 @@
-# modules/dart/manifests/mdct-aos-master-f19.pp
+# modules/dart/manifests/mdct_aos_master_f19.pp
 #
 # Synopsis:
 #       AOS Master

@@ -1,4 +1,4 @@
-# modules/dart/manifests/mdct-f15-builder.pp
+# modules/dart/manifests/mdct_f15_builder.pp
 #
 # Synopsis:
 #       Package Builder for Fedora 15 Release

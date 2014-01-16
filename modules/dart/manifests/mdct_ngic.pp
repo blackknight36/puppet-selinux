@@ -1,4 +1,4 @@
-# modules/dart/manifests/mdct-ngic.pp
+# modules/dart/manifests/mdct_ngic.pp
 #
 # Synopsis:
 #       NGIC Materials Database (production)

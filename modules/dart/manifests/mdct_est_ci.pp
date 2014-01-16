@@ -1,4 +1,4 @@
-# modules/dart/manifests/mdct-est-ci.pp
+# modules/dart/manifests/mdct_est_ci.pp
 #
 # Synopsis:
 #       TeamCity Continuous Integration server

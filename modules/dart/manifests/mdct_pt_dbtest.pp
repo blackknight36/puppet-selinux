@@ -1,4 +1,4 @@
-# modules/dart/manifests/mdct-pt-dbtest.pp
+# modules/dart/manifests/mdct_pt_dbtest.pp
 #
 # Synopsis:
 #       This class is used primarily for a PICAPS test server specific to

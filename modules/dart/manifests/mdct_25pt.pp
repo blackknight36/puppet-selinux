@@ -1,4 +1,4 @@
-# modules/dart/manifests/mdct-25pt.pp
+# modules/dart/manifests/mdct_25pt.pp
 #
 # Synopsis:
 #       PICAPS test server for Tumwater

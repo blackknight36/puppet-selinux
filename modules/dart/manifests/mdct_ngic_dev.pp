@@ -1,4 +1,4 @@
-# modules/dart/manifests/mdct-ngic-dev.pp
+# modules/dart/manifests/mdct_ngic_dev.pp
 #
 # Synopsis:
 #       NGIC Materials Database (testing and development environment)

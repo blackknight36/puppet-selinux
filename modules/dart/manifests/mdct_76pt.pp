@@ -1,4 +1,4 @@
-# modules/dart/manifests/mdct-76pt.pp
+# modules/dart/manifests/mdct_76pt.pp
 #
 # Synopsis:
 #       PICAPS test server for Australia

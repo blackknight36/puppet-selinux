@@ -1,4 +1,4 @@
-# modules/dart/manifests/mdct-dev12.pp
+# modules/dart/manifests/mdct_dev12.pp
 #
 # Synopsis:
 #       Developer Workstation

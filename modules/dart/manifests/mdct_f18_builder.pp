@@ -1,4 +1,4 @@
-# modules/dart/manifests/mdct-f18-builder.pp
+# modules/dart/manifests/mdct_f18_builder.pp
 #
 # Synopsis:
 #       Package Builder for Fedora 18 Release

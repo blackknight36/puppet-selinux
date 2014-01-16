@@ -1,4 +1,4 @@
-# modules/dart/manifests/mdct-19pt.pp
+# modules/dart/manifests/mdct_19pt.pp
 #
 # Synopsis:
 #       PICAPS test server for Plant City

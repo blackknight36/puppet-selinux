@@ -1,4 +1,4 @@
-# modules/dart/manifests/mdct-tc.pp
+# modules/dart/manifests/mdct_tc.pp
 #
 # Synopsis:
 #       PostgreSQL support server for Teamcenter migration process

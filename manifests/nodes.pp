@@ -4,7 +4,7 @@
 # This file only contains node/class associations.  Every host now gets its
 # own class which should inherit one of the abstract node-type classes.  All
 # such classes are in the dart module (see
-# modules/dart/manifests/classes/abstract/*.pp).
+# manifests/nodes.pp
 
 node 'mdct-00bk.dartcontainer.com'              { include 'dart::mdct_00bk' }
 node 'mdct-00dtl.dartcontainer.com'             { include 'dart::mdct_00dtl' }

@@ -1,4 +1,4 @@
-# modules/dart/manifests/mdct-dev7.pp
+# modules/dart/manifests/mdct_dev7.pp
 #
 # Synopsis:
 #       Technician Workstation

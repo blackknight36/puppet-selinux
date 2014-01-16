@@ -1,4 +1,4 @@
-# modules/dart/manifests/mdct-ci-agent1.pp
+# modules/dart/manifests/mdct_ci_agent1.pp
 #
 # Synopsis:
 #       TeamCity build-farm member; with EST environment (for unit tests)

@@ -1,4 +1,4 @@
-# modules/picaps-backup-agent/manifests/init.pp
+# modules/picaps/manifests/backup_agent.pp
 #
 # Synopsis:
 #       Configures a host with the PICAPS Backup Agent.

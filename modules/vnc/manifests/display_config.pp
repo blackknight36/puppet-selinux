@@ -1,4 +1,4 @@
-# modules/vnc/manifests/display-config.pp
+# modules/vnc/manifests/display_config.pp
 #
 # Synopsis:
 #       Configures a VNC display for a single user session.

@@ -1,4 +1,4 @@
-# modules/dart/manifests/mdct-03pt.pp
+# modules/dart/manifests/mdct_03pt.pp
 #
 # Synopsis:
 #       PICAPS test server for Lithonia

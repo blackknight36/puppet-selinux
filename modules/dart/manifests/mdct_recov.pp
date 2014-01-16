@@ -1,4 +1,4 @@
-# modules/dart/manifests/mdct-recov.pp
+# modules/dart/manifests/mdct_recov.pp
 #
 # Synopsis:
 #       PICAPS disaster recovery planning and testing

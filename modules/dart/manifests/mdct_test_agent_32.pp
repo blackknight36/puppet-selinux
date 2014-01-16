@@ -1,4 +1,4 @@
-# modules/dart/manifests/mdct-test-agent-32.pp
+# modules/dart/manifests/mdct_test_agent_32.pp
 #
 # Synopsis:
 #       ???

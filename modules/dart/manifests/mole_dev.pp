@@ -1,4 +1,4 @@
-# modules/dart/manifests/mole-dev.pp
+# modules/dart/manifests/mole_dev.pp
 #
 # Synopsis:
 #       Developer Workstation

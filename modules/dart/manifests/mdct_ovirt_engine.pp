@@ -1,4 +1,4 @@
-# modules/dart/manifests/mdct-ovirt-engine.pp
+# modules/dart/manifests/mdct_ovirt_engine.pp
 #
 # Synopsis:
 #       oVirt Engine (manages oVirt nodes, which host team VMs)

@@ -1,4 +1,4 @@
-# modules/dart/manifests/mdct-aos-master-f15.pp
+# modules/dart/manifests/mdct_aos_master_f15.pp
 #
 # Synopsis:
 #       AOS Master (legacy, see newer)

@@ -1,4 +1,4 @@
-# modules/dart/manifests/mdct-dr-dev.pp
+# modules/dart/manifests/mdct_dr_dev.pp
 #
 # Synopsis:
 #       Design Review application (test and development environment)

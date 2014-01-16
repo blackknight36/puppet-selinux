@@ -1,4 +1,4 @@
-# modules/dart/manifests/mdct-est-dev1.pp
+# modules/dart/manifests/mdct_est_dev1.pp
 #
 # Synopsis:
 #       EST testing and development environment

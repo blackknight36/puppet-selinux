@@ -1,4 +1,4 @@
-# modules/dart/manifests/mdct-f16-builder.pp
+# modules/dart/manifests/mdct_f16_builder.pp
 #
 # Synopsis:
 #       Package Builder for Fedora 16 Release

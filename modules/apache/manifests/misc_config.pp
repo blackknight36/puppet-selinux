@@ -1,4 +1,4 @@
-# modules/apache/manifests/misc-config.pp
+# modules/apache/manifests/misc_config.pp
 #
 # Synopsis:
 #       Installs a miscellaneous configuration file for the Apache HTTP server.

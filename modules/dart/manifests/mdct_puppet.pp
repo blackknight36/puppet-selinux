@@ -1,4 +1,4 @@
-# modules/dart/manifests/mdct-puppet.pp
+# modules/dart/manifests/mdct_puppet.pp
 #
 # Synopsis:
 #       Puppet Master(s)

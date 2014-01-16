@@ -1,4 +1,4 @@
-# modules/dart/manifests/mdct-dev10-srvr.pp
+# modules/dart/manifests/mdct_dev10_srvr.pp
 #
 # Synopsis:
 #       Experimental VM-based servers

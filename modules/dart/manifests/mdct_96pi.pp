@@ -1,4 +1,4 @@
-# modules/dart/manifests/mdct-96pi.pp
+# modules/dart/manifests/mdct_96pi.pp
 #
 # Synopsis:
 #       PICAPS live server for Corporate

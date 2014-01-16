@@ -1,4 +1,4 @@
-# modules/dart/manifests/mdct-00dw.pp
+# modules/dart/manifests/mdct_00dw.pp
 #
 # Synopsis:
 #       EST data warehouse

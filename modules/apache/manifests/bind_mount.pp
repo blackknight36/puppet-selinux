@@ -1,4 +1,4 @@
-# modules/apache/manifests/bind-mount.pp
+# modules/apache/manifests/bind_mount.pp
 #
 # Synopsis:
 #       Bind mounts a directory structure under the standard web server root

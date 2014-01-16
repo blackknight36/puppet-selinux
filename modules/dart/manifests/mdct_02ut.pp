@@ -1,4 +1,4 @@
-# modules/dart/manifests/mdct-02ut.pp
+# modules/dart/manifests/mdct_02ut.pp
 #
 # Synopsis:
 #       General purpose utility server for Leola

@@ -1,4 +1,4 @@
-# modules/dart/manifests/mdct-01pt.pp
+# modules/dart/manifests/mdct_01pt.pp
 #
 # Synopsis:
 #       PICAPS test server for Mason

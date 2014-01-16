@@ -1,4 +1,4 @@
-# modules/dart/manifests/mdct-39pt.pp
+# modules/dart/manifests/mdct_39pt.pp
 #
 # Synopsis:
 #       PICAPS test server for Randleman

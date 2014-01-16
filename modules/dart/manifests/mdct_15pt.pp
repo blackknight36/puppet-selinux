@@ -1,4 +1,4 @@
-# modules/dart/manifests/mdct-15pt.pp
+# modules/dart/manifests/mdct_15pt.pp
 #
 # Synopsis:
 #       PICAPS test server for Quitman

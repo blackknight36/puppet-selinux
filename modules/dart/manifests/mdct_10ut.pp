@@ -1,4 +1,4 @@
-# modules/dart/manifests/mdct-10ut.pp
+# modules/dart/manifests/mdct_10ut.pp
 #
 # Synopsis:
 #       General purpose utility server for Waxahachie

@@ -1,4 +1,4 @@
-# modules/dart/manifests/mdct-00sw.pp
+# modules/dart/manifests/mdct_00sw.pp
 #
 # Synopsis:
 #       Shared Workstation

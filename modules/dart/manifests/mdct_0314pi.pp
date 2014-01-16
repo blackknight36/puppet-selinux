@@ -1,4 +1,4 @@
-# modules/dart/manifests/mdct-0314pi.pp
+# modules/dart/manifests/mdct_0314pi.pp
 #
 # Synopsis:
 #       PICAPS live server for Dallas

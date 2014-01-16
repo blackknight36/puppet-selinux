@@ -1,4 +1,4 @@
-# modules/dart/manifests/mdct-0302pi.pp
+# modules/dart/manifests/mdct_0302pi.pp
 #
 # Synopsis:
 #       PICAPS live server for Federalsburg

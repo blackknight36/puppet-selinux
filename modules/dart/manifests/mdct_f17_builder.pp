@@ -1,4 +1,4 @@
-# modules/dart/manifests/mdct-f17-builder.pp
+# modules/dart/manifests/mdct_f17_builder.pp
 #
 # Synopsis:
 #       Package Builder for Fedora 17 Release

@@ -1,4 +1,4 @@
-# modules/dart/manifests/mdct-f20-builder.pp
+# modules/dart/manifests/mdct_f20_builder.pp
 #
 # Synopsis:
 #       Package Builder for Fedora 20 Release

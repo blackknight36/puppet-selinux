@@ -1,4 +1,4 @@
-# modules/dart/manifests/mdct-f19-builder.pp
+# modules/dart/manifests/mdct_f19_builder.pp
 #
 # Synopsis:
 #       Package Builder for Fedora 19 Release

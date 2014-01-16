@@ -1,4 +1,4 @@
-# modules/dart/manifests/mdct-19ut.pp
+# modules/dart/manifests/mdct_19ut.pp
 #
 # Synopsis:
 #       General purpose utility server for Plant City

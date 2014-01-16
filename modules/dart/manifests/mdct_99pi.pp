@@ -1,4 +1,4 @@
-# modules/dart/manifests/mdct-99pi.pp
+# modules/dart/manifests/mdct_99pi.pp
 #
 # Synopsis:
 #       PICAPS test server for TestPlant99 

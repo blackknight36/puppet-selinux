@@ -1,4 +1,4 @@
-# modules/dart/manifests/mdct-03ut.pp
+# modules/dart/manifests/mdct_03ut.pp
 #
 # Synopsis:
 #       General purpose utility server for Lithonia

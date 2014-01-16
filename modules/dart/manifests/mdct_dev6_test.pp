@@ -1,4 +1,4 @@
-# modules/dart/manifests/mdct-dev6-test.pp
+# modules/dart/manifests/mdct_dev6_test.pp
 #
 # Synopsis:
 #       Developer Workstation (experimental testing)

@@ -1,4 +1,4 @@
-# modules/dart/manifests/mdct-00fs.pp
+# modules/dart/manifests/mdct_00fs.pp
 #
 # Synopsis:
 #       MDC/PMES file server

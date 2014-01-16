@@ -1,4 +1,4 @@
-# modules/dart/manifests/mdct-dr.pp
+# modules/dart/manifests/mdct_dr.pp
 #
 # Synopsis:
 #       Design Review application (production; serves Machine Design group)

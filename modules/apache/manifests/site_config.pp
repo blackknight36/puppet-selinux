@@ -1,4 +1,4 @@
-# modules/apache/manifests/site-config.pp
+# modules/apache/manifests/site_config.pp
 #
 # Synopsis:
 #       Installs a site configuration file for the Apache HTTP server.

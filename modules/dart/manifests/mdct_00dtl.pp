@@ -1,4 +1,4 @@
-# modules/dart/manifests/mdct-00dtl.pp
+# modules/dart/manifests/mdct_00dtl.pp
 #
 # Synopsis:
 #       TestLink server for development

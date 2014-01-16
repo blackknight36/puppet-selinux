@@ -1,4 +1,4 @@
-# modules/dart/manifests/mdct-00bk.pp
+# modules/dart/manifests/mdct_00bk.pp
 #
 # Synopsis:
 #       Bacula backup system (director & storage daemons)

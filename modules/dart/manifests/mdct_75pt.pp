@@ -1,4 +1,4 @@
-# modules/dart/manifests/mdct-75pt.pp
+# modules/dart/manifests/mdct_75pt.pp
 #
 # Synopsis:
 #       PICAPS test server for England

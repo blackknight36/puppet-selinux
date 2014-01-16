@@ -1,4 +1,4 @@
-# modules/dart/manifests/mdct-55pt.pp
+# modules/dart/manifests/mdct_55pt.pp
 #
 # Synopsis:
 #       PICAPS test server for Lodi

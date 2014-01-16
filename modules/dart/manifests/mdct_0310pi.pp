@@ -1,4 +1,4 @@
-# modules/dart/manifests/mdct-0310pi.pp
+# modules/dart/manifests/mdct_0310pi.pp
 #
 # Synopsis:
 #       PICAPS live server for Kostner

@@ -1,4 +1,4 @@
-# modules/dart/manifests/tc-util.pp
+# modules/dart/manifests/tc_util.pp
 #
 # Synopsis:
 #       General purpose utility server for TeamCenter

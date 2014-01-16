@@ -1,4 +1,4 @@
-# modules/dart/manifests/mdct-f14-builder.pp
+# modules/dart/manifests/mdct_f14_builder.pp
 #
 # Synopsis:
 #       Package Builder for Fedora 14 Release

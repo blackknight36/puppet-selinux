@@ -1,4 +1,4 @@
-# modules/dart/manifests/mdct-47pi.pp
+# modules/dart/manifests/mdct_47pi.pp
 #
 # Synopsis:
 #       PICAPS live server for Brazil
