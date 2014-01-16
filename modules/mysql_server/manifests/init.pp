@@ -1,6 +1,6 @@
-# modules/mysql-server/manifests/init.pp
+# modules/mysql_server/manifests/init.pp
 
-class mysql-server {
+class mysql_server {
 
     package { "mysql-server":
         ensure  => installed,

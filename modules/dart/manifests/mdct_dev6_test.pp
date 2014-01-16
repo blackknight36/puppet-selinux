@@ -12,7 +12,7 @@ class dart::mdct_dev6_test inherits dart::abstract::workstation_node {
         theme   => 'details',
     }
 
-    include 'mysql-server'
+    include 'mysql_server'
 
     service { "NetworkManager":
         enable      => false,

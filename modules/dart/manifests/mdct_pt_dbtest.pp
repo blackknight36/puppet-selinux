@@ -35,7 +35,7 @@ class dart::mdct_pt_dbtest inherits dart::abstract::unguarded_server_node {
     include 'packages::developer'
 
     # PICAPS stores are via MySQL
-    #include 'mysql-server' --DISABLED SINCE THIS INSTANCE IS FOR TESTING OTHER RDBMS
+    #include 'mysql_server' --DISABLED SINCE THIS INSTANCE IS FOR TESTING OTHER RDBMS
 
     # Other package a PICAPS server requires
     package { [
@@ -68,7 +68,7 @@ class dart::mdct_pt_dbtest inherits dart::abstract::unguarded_server_node {
     #exec { '/usr/local/bin/picaps-install-and-setup':
     #    creates => '/root/picaps-install-and-setup.log',
     #    require => [
-    #        #Class['mysql-server'],
+    #        #Class['mysql_server'],
     #        Class['packages::developer'],
     #        Class['rsync-server'],
     #        File['/usr/local/bin/picaps-install-and-setup'],

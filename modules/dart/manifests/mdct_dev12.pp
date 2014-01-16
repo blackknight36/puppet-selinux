@@ -144,7 +144,7 @@ class dart::mdct_dev12 inherits dart::abstract::workstation_node {
     }
 
     # disabled until once again needed
-    #   include 'mysql-server'
+    #   include 'mysql_server'
     #   dart::util::replace_original_with_symlink_to_alternate { '/var/lib/mysql':
     #       alternate   => '/mnt/storage/var/lib/mysql',
     #       backup      => "/var/lib/mysql$SUFFIX",
