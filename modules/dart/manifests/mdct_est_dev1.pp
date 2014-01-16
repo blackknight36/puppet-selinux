@@ -6,7 +6,7 @@
 # Contact:
 #       Ben Minshall
 
-class dart::mdct-est-dev1 inherits dart::abstract::est_server_node {
+class dart::mdct_est_dev1 inherits dart::abstract::est_server_node {
 
     iptables::tcp_port {
         'http': port => '80';
