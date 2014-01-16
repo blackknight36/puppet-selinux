@@ -1,6 +1,6 @@
-# modules/rpm-build-tools/manifests/init.pp
+# modules/rpm_build_tools/manifests/init.pp
 
-class rpm-build-tools {
+class rpm_build_tools {
 
     package { "rpm-build-tools":
         ensure  => latest,
@@ -14,7 +14,7 @@ class rpm-build-tools {
         seluser => "system_u",
         selrole => "object_r",
         seltype => "etc_t",
-        source  => "puppet:///modules/rpm-build-tools/git.conf",
+        source  => "puppet:///modules/rpm_build_tools/git.conf",
     }
 
     file { "/etc/rpm-build-tools/rpmbuild.conf":
@@ -25,7 +25,7 @@ class rpm-build-tools {
         seluser => "system_u",
         selrole => "object_r",
         seltype => "etc_t",
-        source  => "puppet:///modules/rpm-build-tools/rpmbuild.conf",
+        source  => "puppet:///modules/rpm_build_tools/rpmbuild.conf",
     }
 
     file { "/etc/rpm-build-tools/yum.conf":
@@ -36,7 +36,7 @@ class rpm-build-tools {
         seluser => "system_u",
         selrole => "object_r",
         seltype => "etc_t",
-        source  => "puppet:///modules/rpm-build-tools/yum.conf",
+        source  => "puppet:///modules/rpm_build_tools/yum.conf",
     }
 
 }

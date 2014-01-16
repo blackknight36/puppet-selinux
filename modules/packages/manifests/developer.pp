@@ -2,7 +2,7 @@
 
 class packages::developer {
 
-    include 'rpm-build-tools'
+    include 'rpm_build_tools'
 
     ### Universal Package Inclusion ###
 
