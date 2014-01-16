@@ -62,7 +62,7 @@ node 'mdct-f19-builder.dartcontainer.com'       { include 'dart::mdct-f19-builde
 node 'mdct-f20-builder.dartcontainer.com'       { include 'dart::mdct-f20-builder' }
 node 'mdct-koji.dartcontainer.com'              { include 'dart::mdct_koji' }
 node 'mdct-ngic-dev.dartcontainer.com'          { include 'dart::mdct_ngic_dev' }
-node 'mdct-ngic.dartcontainer.com'              { include 'dart::mdct-ngic' }
+node 'mdct-ngic.dartcontainer.com'              { include 'dart::mdct_ngic' }
 node 'mdct-ovirt-engine.dartcontainer.com'      { include 'dart::mdct_ovirt_engine' }
 node 'mdct-pt-dbtest.dartcontainer.com'         { include 'dart::mdct_pt_dbtest' }
 node 'mdct-recov.dartcontainer.com'             { include 'dart::mdct_recov' }
