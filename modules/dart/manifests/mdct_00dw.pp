@@ -6,7 +6,7 @@
 # Contact:
 #       Ben Minshall
 
-class dart::mdct-00dw inherits dart::abstract::guarded_server_node {
+class dart::mdct_00dw inherits dart::abstract::guarded_server_node {
 
     class { 'puppet::client':
     }
