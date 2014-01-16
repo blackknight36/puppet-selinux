@@ -6,7 +6,7 @@
 # Contact:
 #       Nathan Nephew
 
-class dart::mdct-0314pi inherits dart::abstract::picaps_production_server_node {
+class dart::mdct_0314pi inherits dart::abstract::picaps_production_server_node {
 
     #class { 'network':
     #    network_manager => false,
