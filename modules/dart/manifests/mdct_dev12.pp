@@ -64,8 +64,17 @@ class dart::mdct_dev12 inherits dart::abstract::workstation_node {
         mode => 'enforcing',
     }
 
-    package { ['kio_mtp', 'mozilla-noscript', 'man2html', 'redshift',
-               'kde-plasma-yawp']:
+    package { [
+        'kcometen4',
+        'kde-plasma-yawp',
+        'kdeartwork-screensavers',
+        'kio_mtp',
+        'man2html',
+        'qstars-kde',
+        'redshift',
+        'rss-glx-kde',
+        'tempest-kde',
+    ]:
         ensure  => installed,
     }
 
