@@ -20,6 +20,7 @@ class packages::base {
         'openssh-clients',
         'pciutils',
         'prophile',
+        'psmisc',
         'python-mdct',
         'screen',
         'sendmail',
