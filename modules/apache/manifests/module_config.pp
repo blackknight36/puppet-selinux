@@ -1,31 +1,30 @@
 # modules/apache/manifests/module_config.pp
 #
-# Synopsis:
-#       Installs a module configuration file for the Apache HTTP server.
+# == Define: apache::module_config
 #
-# Parameters:
-#       Name__________  Notes_  Description___________________________________
+# Installs a module configuration file for the Apache HTTP server.
 #
-#       name            1       instance name, e.g., "99-prefork"
+# === Parameters
 #
-#       ensure          2       instance is to be present/absent
+# [*namevar*]
+#   Instance name, e.g., "99-prefork".  Include neither path, nor '.conf'
+#   extension.  These typically have a two-digit prefix for priority
+#   sequencing.
 #
-#       source          3       URI of file content
+# [*ensure*]
+#   Instance is to be 'present' (default) or 'absent'.
 #
-#       content         3       literal file content
+# [*content*]
+#   Literal content for the module_config file.  One and only one of "content"
+#   or "source" must be given.
 #
-# Notes:
+# [*source*]
+#   URI of the module_config file content.  One and only one of "content" or
+#   "source" must be given.
 #
-#       1. Include neither path, nor '.conf' extension.  These typically have
-#       a two-digit prefix for priority sequencing.
+# === Authors
 #
-#       2. Default is 'present'.
-#
-#       3. Default is undef.  Either the source parameter or the content
-#       parameter must be specified.  The other should be left at its default.
-#
-# Requires:
-#       Class['apache']
+#   John Florian <john.florian@dart.biz>
 
 
 define apache::module_config (
@@ -34,7 +33,7 @@ define apache::module_config (
 
     include 'apache::params'
 
-    File {
+    file { "/etc/httpd/conf.modules.d/${name}.conf":
         ensure  => $ensure,
         owner   => 'root',
         group   => 'root',
@@ -42,21 +41,11 @@ define apache::module_config (
         seluser => 'system_u',
         selrole => 'object_r',
         seltype => 'httpd_config_t',
+        source  => $source,
+        content => $content,
         require => Package[$apache::params::packages],
-        before  => Service[$apache::params::service_name],
-        notify  => Service[$apache::params::service_name],
-    }
-
-    if $source != undef {
-        file { "/etc/httpd/conf.modules.d/${name}.conf":
-            source  => "${source}",
-        }
-    } elsif $content != undef {
-        file { "/etc/httpd/conf.modules.d/${name}.conf":
-            content => "${content}",
-        }
-    } else {
-        fail ('One of $source or $content is required')
+        before  => Service[$apache::params::services],
+        notify  => Service[$apache::params::services],
     }
 
 }

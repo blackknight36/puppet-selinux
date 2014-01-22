@@ -3,7 +3,7 @@
 class dart::abstract::aos_master_node inherits dart::abstract::server_node {
 
     class { 'apache':
-        use_nfs => 'on',
+        use_nfs => true,
     }
 
     apache::site_config { 'pub':

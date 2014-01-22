@@ -17,6 +17,7 @@
 
 class koji::web ( $secret ) {
 
+    include 'apache::params'
     include 'koji::params'
 
     package { $koji::params::web_packages:
@@ -25,8 +26,8 @@ class koji::web ( $secret ) {
 
     # Duplicates that in koji::hub.  See assumptions note above.
     #   class { 'apache':
-    #       network_connect_db  => 'on',
-    #       anon_write          => 'on',
+    #       network_connect_db  => true,
+    #       anon_write          => true,
     #   }
 
     include 'apache::mod_ssl'
@@ -48,8 +49,8 @@ class koji::web ( $secret ) {
         seluser     => 'system_u',
         selrole     => 'object_r',
         seltype     => 'etc_t',
-        before      => Class['apache'],
-        notify      => Class['apache'],
+        before      => Service[$apache::params::services],
+        notify      => Service[$apache::params::services],
         subscribe   => Package[$koji::params::web_packages],
     }
 

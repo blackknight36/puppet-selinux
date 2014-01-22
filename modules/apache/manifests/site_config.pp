@@ -1,45 +1,35 @@
 # modules/apache/manifests/site_config.pp
 #
-# Synopsis:
-#       Installs a site configuration file for the Apache HTTP server.
+# == Define: apache::site_config
 #
-# Parameters:
-#       Name__________  Notes_  Description___________________________________
+# Installs a site-specific configuration file for the Apache web server.
 #
-#       name            1       instance name
+# === Parameters
 #
-#       ensure          2       instance is to be present/absent
+# [*namevar*]
+#   An arbitrary identifier for the site configuration file instance.
 #
-#       source          3       URI of file content
+# [*ensure*]
+#   Instance is to be 'present' (default) or 'absent'.
 #
-#       content         3       literal file content
+# [*content*]
+#   Literal content for the site configuration file.  One and only one of
+#   "content" or "source" must be given.
 #
-# Notes:
+# [*source*]
+#   URI of the site configuration file content.  One and only one of "content"
+#   or "source" must be given.
 #
-#       1. Include neither path, nor '.conf' extension.
+# === Authors
 #
-#       2. Default is 'present'.
-#
-#       3. Default is undef.  Either the source parameter or the content
-#       parameter must be specified.  The other should be left at its default.
-#
-# Requires:
-#       Class['apache']
-#
-# Example Usage:
-#
-#       include 'apache'
-#
-#       apache::site_config { 'acme':
-#           source  => 'puppet:///private-host/acme.conf',
-#       }
+#   John Florian <jflorian@doubledog.org>
 
 
-define apache::site_config ($ensure='present', $source=undef, $content=undef) {
+define apache::site_config ($ensure='present', $content=undef, $source=undef) {
 
     include 'apache::params'
 
-    File {
+    file { "/etc/httpd/conf.d/${name}.conf":
         ensure  => $ensure,
         owner   => 'root',
         group   => 'root',
@@ -47,21 +37,10 @@ define apache::site_config ($ensure='present', $source=undef, $content=undef) {
         seluser => 'system_u',
         selrole => 'object_r',
         seltype => 'httpd_config_t',
+        content => $content,
+        source  => $source,
         require => Package[$apache::params::packages],
-        before  => Service[$apache::params::service_name],
-        notify  => Service[$apache::params::service_name],
-    }
-
-    if $source != undef {
-        file { "/etc/httpd/conf.d/${name}.conf":
-            source  => "${source}",
-        }
-    } elsif $content != undef {
-        file { "/etc/httpd/conf.d/${name}.conf":
-            content => "${content}",
-        }
-    } else {
-        fail ('One of $source or $content is required')
+        notify  => Service[$apache::params::services],
     }
 
 }

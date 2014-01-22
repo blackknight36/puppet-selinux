@@ -19,6 +19,7 @@
 
 class koji::hub ( $db_host, $db_user, $db_passwd, $web_cn, $top_dir ) {
 
+    include 'apache::params'
     include 'koji::params'
 
     package { $koji::params::hub_packages:
@@ -26,9 +27,9 @@ class koji::hub ( $db_host, $db_user, $db_passwd, $web_cn, $top_dir ) {
     }
 
     class { 'apache':
-        anon_write          => 'on',
-        network_connect_db  => 'on',
-        use_nfs             => 'on',
+        anon_write          => true,
+        network_connect_db  => true,
+        use_nfs             => true,
     }
 
     include 'apache::mod_ssl'
@@ -56,8 +57,8 @@ class koji::hub ( $db_host, $db_user, $db_passwd, $web_cn, $top_dir ) {
         seluser     => 'system_u',
         selrole     => 'object_r',
         seltype     => 'etc_t',
-        before      => Class['apache'],
-        notify      => Class['apache'],
+        before      => Service[$apache::params::services],
+        notify      => Service[$apache::params::services],
         subscribe   => Package[$koji::params::hub_packages],
     }
 

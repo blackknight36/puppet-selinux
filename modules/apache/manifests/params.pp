@@ -1,18 +1,29 @@
 # modules/apache/manifests/params.pp
 #
-# Synopsis:
-#       Parameters for the apache puppet module.
+# == Class: apache::params
+#
+# Parameters for the apache puppet module.
+#
+# === Authors
+#
+#   John Florian <jflorian@doubledog.org>
 
 
 class apache::params {
 
     case $::operatingsystem {
+
         Fedora: {
 
             $packages = [
                 'httpd',
             ]
-            $service_name = 'httpd'
+            $modssl_packages = [
+                'mod_ssl',
+            ]
+            $services = [
+                'httpd',
+            ]
 
             if $::operatingsystemrelease < 18 {
                 $bool_anon_write = 'allow_httpd_anon_write'
@@ -22,10 +33,11 @@ class apache::params {
             $bool_can_network_connect_db = 'httpd_can_network_connect_db'
             $bool_use_nfs = 'httpd_use_nfs'
 
+
         }
 
         default: {
-            fail ("The apache module is not yet supported on ${::operatingsystem}.")
+            fail ("The apache module is not yet supported on $::operatingsystem.")
         }
 
     }
