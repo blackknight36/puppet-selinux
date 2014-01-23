@@ -17,7 +17,9 @@
 
 class koji::database ( $config_source ) {
 
-    include 'postgresql::server'
+    class { 'postgresql::server':
+        hba_conf    => 'puppet:///private-host/postgresql/pg_hba.conf',
+    }
 
     # NB: This config is hardly needed.  Presently, the only requirement would
     # be to adjust listen_addresses and even that is only needed when the

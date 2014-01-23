@@ -3,7 +3,10 @@
 class dart::abstract::est_server_node inherits dart::abstract::guarded_server_node {
 
     include 'dart::subsys::autofs::common'
-    include 'postgresql::server'
+
+    class { 'postgresql::server':
+        hba_conf    => 'puppet:///private-host/postgresql/pg_hba.conf',
+    }
 
     # puppet::client is included this way to prevent duplicate declaration
     # arising out of dart::abstract::teamcity_server_node.  This works only

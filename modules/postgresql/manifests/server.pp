@@ -1,54 +1,52 @@
 # modules/postgresql/manifests/server.pp
 #
-# Synopsis:
-#       Configures a host as a PostgreSQL server.
+# == Class: postgresql::server
 #
-# Parameters:
-#       NONE
+# Configures a host as a PostgreSQL server.
 #
-# Requires:
-#       NONE
+# === Parameters
 #
-# Notes:
-#       - This class will automatically initialize the database cluster if
-#       there is none.
-#       - This class currently will not open any firewall ports because there
-#       is a good chance the database is to be accessible to the localhost
-#       only.
+# [*hba_conf*]
+#   Source URI of the pg_hba.conf file.
 #
-# Example Usage:
+# === Notes
 #
-#       include 'postgresql::server'
+#   - This class will automatically initialize the database cluster if no
+#   cluster already exists.
+#
+#   - This class will not open any firewall ports because there is a good
+#   chance the database is to be accessible to the localhost only.
+#
+# === Authors
+#
+#   John Florian <jflorian@doubledog.org>
 
-class postgresql::server {
+
+class postgresql::server ($hba_conf) {
 
     include 'postgresql::params'
 
     package { $postgresql::params::server_packages:
         ensure  => installed,
-        notify  => Service[$postgresql::params::service_name],
+        notify  => Service[$postgresql::params::server_services],
     }
 
     exec { 'postgresql-initdb':
         command => $postgresql::params::initdb_cmd,
         # This ensures the initdb is run once only.  Upon package
         # installation, the data directory is empty.  PG_VERSION (among many
-        # other files) will appear once initdb has been run.
+        # other files) will appear once the cluster has been initialized.
         creates => '/var/lib/pgsql/data/PG_VERSION',
-        before  => Service[$postgresql::params::service_name],
+        before  => Service[$postgresql::params::server_services],
         require => Package[$postgresql::params::server_packages],
     }
 
     postgresql::config { 'pg_hba.conf':
         require => Exec['postgresql-initdb'],
-        source  => [
-            'puppet:///private-host/postgresql/pg_hba.conf',
-            'puppet:///private-domain/postgresql/pg_hba.conf',
-            'puppet:///modules/postgresql/pg_hba.conf',
-        ],
+        source  => $hba_conf,
     }
 
-    service { $postgresql::params::service_name:
+    service { $postgresql::params::server_services:
         enable      => true,
         ensure      => running,
         hasrestart  => true,

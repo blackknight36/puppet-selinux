@@ -1,19 +1,29 @@
 # modules/postgresql/manifests/params.pp
 #
-# Synopsis:
-#       Parameters for the postgresql puppet module.
+# == Class: postgresql::params
+#
+# Parameters for the postgresql puppet module.
+#
+# === Authors
+#
+#   John Florian <jflorian@doubledog.org>
 
 
 class postgresql::params {
 
     case $::operatingsystem {
+
         Fedora: {
 
+            $client_packages = [
+                'postgresql',
+            ]
             $server_packages = [
-                'postgresql-contrib',
                 'postgresql-server',
             ]
-            $service_name = 'postgresql'
+            $server_services = [
+                'postgresql',
+            ]
 
             if $::operatingsystemrelease >= 16 {
                 $initdb_cmd = 'postgresql-setup initdb'
@@ -24,7 +34,7 @@ class postgresql::params {
         }
 
         default: {
-            fail ("The postgresql module is not yet supported on ${::operatingsystem}.")
+            fail ("The postgresql module is not yet supported on $::operatingsystem.")
         }
 
     }

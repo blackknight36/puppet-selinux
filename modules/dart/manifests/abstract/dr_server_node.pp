@@ -13,7 +13,9 @@ class dart::abstract::dr_server_node inherits dart::abstract::guarded_server_nod
     class { 'puppet::client':
     }
 
-    include 'postgresql::server'
+    class { 'postgresql::server':
+        hba_conf    => 'puppet:///private-host/postgresql/pg_hba.conf',
+    }
 
     package { [ 'tomcat', 'tomcat-admin-webapps', ]:
         ensure  => installed,

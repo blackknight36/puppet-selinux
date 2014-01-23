@@ -1,38 +1,48 @@
 # modules/postgresql/manifests/config.pp
 #
-# Synopsis:
-#       Installs a PostgreSQL Server configuration file.
+# == Define: postgresql::config
 #
-# Parameters:
-#       Name__________  Notes_  Description___________________________
+# Installs a PostgreSQL Server configuration file.
 #
-#       name                    instance name
+# === Parameters
 #
-#       ensure          1       instance is to be present/absent
+# [*namevar*]
+#   Instance name.
 #
-#       source                  URI of file content
+# [*ensure*]
+#   Instance is to be 'present' (default) or 'absent'.
 #
-# Notes:
+# [*content*]
+#   Literal content for the config file.  One and only one of "content" or
+#   "source" must be given.
 #
-#       1. Default is 'present'.
+# [*source*]
+#   URI of the config file content.  One and only one of "content" or "source"
+#   must be given.
+#
+# === Authors
+#
+#   John Florian <jflorian@doubledog.org>
 
 
-define postgresql::config ($ensure='present', $source) {
+define postgresql::config (
+        $ensure='present', $content=undef, $source=undef,
+    ) {
 
     include 'postgresql::params'
 
     file { "/var/lib/pgsql/data/${name}":
-        ensure      => $ensure,
-        owner       => 'postgres',
-        group       => 'postgres',
-        mode        => '0600',
-        seluser     => 'unconfined_u',
-        selrole     => 'object_r',
-        seltype     => 'postgresql_db_t',
-        before      => Service[$postgresql::params::service_name],
-        notify      => Service[$postgresql::params::service_name],
-        subscribe   => Package[$postgresql::params::server_packages],
-        source      => $source,
+        ensure  => $ensure,
+        owner   => 'postgres',
+        group   => 'postgres',
+        mode    => '0600',
+        seluser => 'unconfined_u',
+        selrole => 'object_r',
+        seltype => 'postgresql_db_t',
+        content => $content,
+        source  => $source,
+        require => Package[$postgresql::params::server_packages],
+        notify  => Service[$postgresql::params::server_services],
     }
 
 }
