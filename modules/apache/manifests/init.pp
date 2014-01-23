@@ -10,6 +10,10 @@
 #   Configure SE Linux to allow httpd to modify public files used for public
 #   file tranfer services.  One of: true or false (default).
 #
+# [*network_connect*]
+#   Configure SE Linux to allow httpd scripts and modules to connect to the
+#   network using TCP.  One of: true or false (default).
+#
 # [*network_connect_db*]
 #   Configure SE Linux to allow httpd scripts and modules to connect to
 #   databases over the network.  One of: true or false (default).
@@ -23,7 +27,10 @@
 #   John Florian <jflorian@doubledog.org>
 
 
-class apache ($anon_write=false, $network_connect_db=false, $use_nfs=false) {
+class apache (
+        $anon_write=false, $network_connect=false, $network_connect_db=false,
+        $use_nfs=false
+    ) {
 
     include 'apache::params'
 
@@ -60,6 +67,11 @@ class apache ($anon_write=false, $network_connect_db=false, $use_nfs=false) {
     selinux::boolean {
         $apache::params::bool_anon_write:
             value       => $anon_write ? {
+                true    => 'on',
+                default => 'off',
+            };
+        $apache::params::bool_can_network_connect:
+            value       => $network_connect ? {
                 true    => 'on',
                 default => 'off',
             };
