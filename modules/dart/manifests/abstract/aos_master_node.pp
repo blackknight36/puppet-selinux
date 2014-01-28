@@ -1,4 +1,17 @@
 # modules/dart/manifests/abstract/aos_master_node.pp
+#
+# == Class: dart::abstract::aos_master_node
+#
+# Configures a AOS Master host.
+#
+# === Parameters
+#
+# NONE
+#
+# === Authors
+#
+#   John Florian <john.florian@dart.biz>
+
 
 class dart::abstract::aos_master_node inherits dart::abstract::server_node {
 
@@ -20,6 +33,13 @@ class dart::abstract::aos_master_node inherits dart::abstract::server_node {
     }
 
     include 'dart::subsys::autofs::common'
+
+    class { 'dhcpd_driven::server':
+        hba_conf    => 'puppet:///private-host/postgresql/pg_hba.conf',
+        python_ver  => '2.7',
+        settings    => 'puppet:///private-host/dhcpd-driven/dhcpd-driven.conf',
+    }
+
     include 'flock_herder'
     include 'mdct_puppeteer_admin'
 

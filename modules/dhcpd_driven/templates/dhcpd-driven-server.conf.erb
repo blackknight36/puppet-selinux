@@ -1,0 +1,17 @@
+<VirtualHost *:80>
+    CustomLog "/var/log/httpd/managed_switches_access_log" combined
+    ErrorLog "/var/log/httpd/managed_switches_error_log"
+
+    Alias /static/ "<%= @python_base %>/django/contrib/admin/static/"
+    <Directory "<%= @python_base %>/django/contrib/admin/static/">
+        Require all granted
+    </Directory>
+
+    WSGIScriptAlias / "<%= @python_base %>/dhcpd_driven/server/server/wsgi.py"
+    <Directory "<%= @python_base %>/dhcpd_driven/">
+        <Files wsgi.py>
+            Require all granted
+        </Files>
+    </Directory>
+
+</VirtualHost>

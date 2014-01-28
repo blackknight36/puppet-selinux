@@ -1,10 +1,17 @@
 # modules/dart/manifests/mdct_aos_master_f19.pp
 #
-# Synopsis:
-#       AOS Master
+# == Class: dart::mdct_aos_master_f19
 #
-# Contact:
-#       John Florian
+# Configures the AOS Master host.
+#
+# === Parameters
+#
+# NONE
+#
+# === Authors
+#
+#   John Florian <john.florian@dart.biz>
+
 
 class dart::mdct_aos_master_f19 inherits dart::abstract::aos_master_node {
 
