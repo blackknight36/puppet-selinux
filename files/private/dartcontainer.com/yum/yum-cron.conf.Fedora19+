@@ -76,8 +76,9 @@ group_package_types = mandatory, default
 # -3: critical+errors
 # -2: critical+errors+warnings (default)
 #
-# Dart policy is to report at the info level.
-debuglevel = -1
+# Dart policy has been to report at the info level.  Trying default as info
+# (-1) is rather noisy.
+debuglevel = -2
 
 # override yum options of the same name
 # skip_broken = True
