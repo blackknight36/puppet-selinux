@@ -47,6 +47,12 @@ class jetbrains::pycharm {
         require => File["${jetbrains::params::pycharm_root}"],
     }
 
+    $pycharm_icon = "${pycharm_config}/pycharm.png"
+    file { "${pycharm_icon}":
+        source  => 'puppet:///modules/jetbrains/pycharm/pycharm.png',
+        require => File["${pycharm_config}"],
+    }
+
     $pycharm_vmoptions = "${pycharm_config}/vmoptions"
     file { "${pycharm_vmoptions}":
         source  => 'puppet:///modules/jetbrains/pycharm/vmoptions',

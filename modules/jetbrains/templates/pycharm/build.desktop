@@ -3,7 +3,7 @@ Name=PyCharm (<%= @build %>)
 Comment=Powerful Python and Django IDE
 MimeType=text/x-java;
 Exec=<%= @product_root %>/bin/pycharm.sh
-Icon=<%= @product_root %>/bin/pycharm.png
+Icon=<%= @pycharm_icon %>
 Type=Application
 Terminal=0
 MapNotify=false
