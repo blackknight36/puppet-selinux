@@ -14,8 +14,8 @@ class dhcpd_driven::params {
     case $::operatingsystem {
         Fedora: {
 
-            $server_packages = [
-                'dhcpd-driven-server',
+            $master_packages = [
+                'dhcpd-driven-master',
             ]
 
         }

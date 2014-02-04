@@ -44,11 +44,11 @@ class dart::abstract::aos_master_node inherits dart::abstract::server_node {
         password    => '!',
         system      => true,
         subscribe   => Group['django'],
-        before      => Class['dhcpd_driven::server'],
-        notify      => Class['dhcpd_driven::server'],
+        before      => Class['dhcpd_driven::master'],
+        notify      => Class['dhcpd_driven::master'],
     }
 
-    class { 'dhcpd_driven::server':
+    class { 'dhcpd_driven::master':
         hba_conf        => 'puppet:///private-host/postgresql/pg_hba.conf',
         python_ver      => '2.7',
         settings        => 'puppet:///private-host/dhcpd-driven/dhcpd-driven.conf',

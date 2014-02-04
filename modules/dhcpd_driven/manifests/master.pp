@@ -1,8 +1,8 @@
-# modules/dhcpd_driven/manifests/server.pp
+# modules/dhcpd_driven/manifests/master.pp
 #
-# == Class: dhcpd_driven::server
+# == Class: dhcpd_driven::master
 #
-# Configures a host to run the dhcpd-driven-server package and to serve hosts
+# Configures a host to run the dhcpd-driven-master package and to serve hosts
 # running the dhcpd-driven-client package.
 #
 # === Parameters
@@ -29,7 +29,7 @@
 #   John Florian <john.florian@dart.biz>
 
 
-class dhcpd_driven::server (
+class dhcpd_driven::master (
         $hba_conf, $python_ver, $settings, $django_user, $django_group,
     ) {
 
@@ -39,13 +39,13 @@ class dhcpd_driven::server (
 
     $python_base="/usr/lib/python${python_ver}/site-packages"
 
-    package { $dhcpd_driven::params::server_packages:
+    package { $dhcpd_driven::params::master_packages:
         ensure  => installed,
         notify  => Service[$apache::params::services],
     }
 
-    apache::site_config { 'dhcpd-driven-server':
-        content  => template('dhcpd_driven/dhcpd-driven-server.conf.erb'),
+    apache::site_config { 'dhcpd-driven-master':
+        content  => template('dhcpd_driven/dhcpd-driven-master.conf.erb'),
     }
 
     File {
@@ -57,7 +57,7 @@ class dhcpd_driven::server (
         seltype     => 'etc_t',
         before      => Service[$apache::params::services],
         notify      => Service[$apache::params::services],
-        subscribe   => Package[$dhcpd_driven::params::server_packages],
+        subscribe   => Package[$dhcpd_driven::params::master_packages],
     }
 
     file { '/etc/dhcpd-driven.conf':

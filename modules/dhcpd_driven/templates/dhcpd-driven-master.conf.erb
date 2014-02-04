@@ -10,7 +10,7 @@
         Require all granted
     </Directory>
 
-    WSGIScriptAlias / "<%= @python_base %>/dhcpd_driven/server/server/wsgi.py"
+    WSGIScriptAlias / "<%= @python_base %>/dhcpd_driven/master/master/wsgi.py"
     <Directory "<%= @python_base %>/dhcpd_driven/">
         <Files wsgi.py>
             Require all granted
