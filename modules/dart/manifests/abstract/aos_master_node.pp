@@ -34,10 +34,26 @@ class dart::abstract::aos_master_node inherits dart::abstract::server_node {
 
     include 'dart::subsys::autofs::common'
 
+    group { 'django':
+        system  => true,
+    }
+
+    user { 'django':
+        comment     => 'Django application WSGI daemon account',
+        home        => '/var/www/',
+        password    => '!',
+        system      => true,
+        subscribe   => Group['django'],
+        before      => Class['dhcpd_driven::server'],
+        notify      => Class['dhcpd_driven::server'],
+    }
+
     class { 'dhcpd_driven::server':
-        hba_conf    => 'puppet:///private-host/postgresql/pg_hba.conf',
-        python_ver  => '2.7',
-        settings    => 'puppet:///private-host/dhcpd-driven/dhcpd-driven.conf',
+        hba_conf        => 'puppet:///private-host/postgresql/pg_hba.conf',
+        python_ver      => '2.7',
+        settings        => 'puppet:///private-host/dhcpd-driven/dhcpd-driven.conf',
+        django_user     => 'django',
+        django_group    => 'django',
     }
 
     include 'flock_herder'

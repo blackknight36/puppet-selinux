@@ -16,12 +16,22 @@
 # [*settings*]
 #   Soure URI that provides the /etc/dhcpd-driven.conf content.
 #
+# [*django_user*]
+#   ID of the user account under which the Django app will run within the WSGI
+#   daemon.
+#
+# [*django_group*]
+#   ID of the group account under which the Django app will run within the
+#   WSGI daemon.
+#
 # === Authors
 #
 #   John Florian <john.florian@dart.biz>
 
 
-class dhcpd_driven::server ($hba_conf, $python_ver, $settings) {
+class dhcpd_driven::server (
+        $hba_conf, $python_ver, $settings, $django_user, $django_group,
+    ) {
 
     include 'apache'
     include 'apache::params'
