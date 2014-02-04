@@ -1,6 +1,4 @@
 <VirtualHost *:80>
-    CustomLog "/var/log/httpd/managed_switches_access_log" combined
-    ErrorLog "/var/log/httpd/managed_switches_error_log"
 
     WSGIDaemonProcess <%= @domain %> user=<%= @django_user %> group=<%= @django_group %> threads=25
     WSGIProcessGroup <%= @domain %>
