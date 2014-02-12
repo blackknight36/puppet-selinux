@@ -30,7 +30,7 @@ define oracle::jdk ($ensure='present', $version=undef, $update=undef, $arch='x64
         # Don't alter the latest values until you've ensured that both 32- and
         # 64-bit versions of the package are available in /pub/oracle!!!
         $rpm_version = '7'
-        $rpm_update = '25'
+        $rpm_update = '51'
     } else {
         if $version == undef or $update == undef {
             fail ('$version and $update must specified unless $ensure is set to "latest"')
