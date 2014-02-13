@@ -16,7 +16,7 @@ class dart::abstract::picaps_production_server_node inherits dart::abstract::ung
         'ncftp',
         'pyserial',
         'setserial',
-        'mx',
+        'python-egenix-mx-base',
         ]:
         ensure  => 'installed',
     }
@@ -49,17 +49,17 @@ class dart::abstract::picaps_production_server_node inherits dart::abstract::ung
     include 'packages::developer'
 
     # JDK's
+    oracle::jdk { 'jdk-7u51-linux-x64':
+        ensure  => 'present',
+        version => '7',
+        update  => '51',
+    }
     oracle::jdk { 'jdk-7u45-linux-x64':
         ensure  => 'present',
         version => '7',
         update  => '45',
-    }
-    oracle::jdk { 'jdk-7u40-linux-x64':
-        ensure  => 'present',
-        version => '7',
-        update  => '40',
         before  => [
-            Exec["install oracle jdk-7u45-linux-x64"],
+            Exec["install oracle jdk-7u51-linux-x64"],
         ],
     }
     file { "/usr/java/latest/jre/lib/management/jmxremote.password":
@@ -70,7 +70,7 @@ class dart::abstract::picaps_production_server_node inherits dart::abstract::ung
             'puppet:///modules/dart/picaps_servers/jmxremote.password',
         ],
         require  => [
-            Exec["install oracle jdk-7u45-linux-x64"],
+            Exec["install oracle jdk-7u51-linux-x64"],
         ],
     }
 
@@ -81,11 +81,11 @@ class dart::abstract::picaps_production_server_node inherits dart::abstract::ung
     class { 'mariadb::server':
         config_uri => 'puppet:///modules/dart/picaps_servers/picaps-mariadb-server.cnf',
     }
-    file { "/etc/systemd/system/mysqld.service": # modified mysqld.service is necessary to configure NUMA interleaving for MySQL process
+    file { "/etc/systemd/system/mariadb.service": # modified mariadb.service is necessary to configure NUMA interleaving for MariaDB process
         group   => "root",
         mode    => 644,
         owner   => "root",
-        source  => 'puppet:///modules/dart/picaps_servers/picaps-mysqld.service',
+        source  => 'puppet:///modules/dart/picaps_servers/picaps-mariadb.service',
         before  => File['/storage/mysql'],
     }
     file { '/storage/mysql':
@@ -104,7 +104,7 @@ class dart::abstract::picaps_production_server_node inherits dart::abstract::ung
         gid         => 444,
         home        => '/storage/mysql',
         system      => true,
-        before      => File['/etc/systemd/system/mysqld.service'],
+        before      => File['/etc/systemd/system/mariadb.service'],
     }
     group { 'mysql':
        provider => 'groupadd',

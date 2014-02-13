@@ -52,7 +52,7 @@ innodb_adaptive_flushing       = 1 #2013-04-30 CPK: was not included by Percona,
 innodb_fast_checksum           = 1 #2013-04-30 CPK: not included by Percona configurator, XtraDB only but several times faster than InnoDB checksums
 
 # LOGGING #
-log_error                      = /var/log/mysqld.log
+log_error                      = /var/log/mariadb/mariadb.log
 log_queries_not_using_indexes  = 1
 slow_query_log                 = 1
 slow_query_log_file            = /storage/mysql/mysql-slow.log

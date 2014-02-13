@@ -24,4 +24,4 @@ ${JAVA_HOME}/bin/java \
     -Dbuild=$build \
     -jar /dist/Picaps-$build.jar \
     com.dartcontainer.mdc.picaps.util.InitializeDatabase \
-    -h localhost
+    -h localhost -includetest
