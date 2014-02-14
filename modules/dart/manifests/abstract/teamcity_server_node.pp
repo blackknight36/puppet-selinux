@@ -32,9 +32,9 @@ class dart::abstract::teamcity_server_node inherits dart::abstract::guarded_serv
                 build   => '7.1',
             }
         }
-        'mdct-teamcity': {
-            jetbrains::teamcity::server_release { 'TeamCity-8.0.3':
-                build   => '8.0.3',
+        'mdct-teamcity-f20': {
+            jetbrains::teamcity::server_release { 'TeamCity-8.1a':
+                build   => '8.1a',
             }
         }
     }
