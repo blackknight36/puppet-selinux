@@ -12,8 +12,7 @@ class dart::mdct_teamcity inherits dart::abstract::teamcity_server_node {
     # though our Puppet infrastructure doesn't require it.
     include 'dart::abstract::teamcity_agent_node'
 
-    mailalias { 'root':
-        ensure      => present,
+    sendmail::alias { 'root':
         recipient   => 'john.florian@dart.biz',
     }
 

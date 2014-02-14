@@ -23,7 +23,6 @@ class packages::base {
         'psmisc',
         'python-mdct',
         'screen',
-        'sendmail',
         'strace',
         'system-config-printer',
         'task',

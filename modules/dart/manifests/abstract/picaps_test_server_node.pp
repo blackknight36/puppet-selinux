@@ -25,9 +25,8 @@ class dart::abstract::picaps_test_server_node inherits dart::abstract::unguarded
     class { 'puppet::client':
     }
 
-    mailalias { "root":
-        ensure          => present,
-        recipient       => "nathan.nephew@dart.biz",
+    sendmail::alias { 'root':
+        recipient   => 'nathan.nephew@dart.biz',
     }
 
     # PICAPS uses rsync for backup and other similar uses

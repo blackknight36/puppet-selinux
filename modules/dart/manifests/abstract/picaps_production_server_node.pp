@@ -28,9 +28,8 @@ class dart::abstract::picaps_production_server_node inherits dart::abstract::ung
         ensure  => 'stopped',
     }
 
-    mailalias { "root":
-        ensure          => present,
-        recipient       => "chris.kennedy@dart.biz",
+    sendmail::alias { 'root':
+        recipient   => 'chris.kennedy@dart.biz',
     }
 
     # OpenIPMI

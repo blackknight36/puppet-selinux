@@ -159,8 +159,8 @@ class dart::mdct_dev6_test inherits dart::abstract::workstation_node {
         require     => Package["mysql-server"],
     }
 
-    mailalias { "root":
-        ensure      => present,
-        recipient   => "chris.kennedy@dart.biz",
+    sendmail::alias { 'root':
+        recipient   => 'chris.kennedy@dart.biz',
     }
+
 }

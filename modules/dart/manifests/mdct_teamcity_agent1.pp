@@ -8,8 +8,7 @@
 
 class dart::mdct_teamcity_agent1 inherits dart::abstract::teamcity_agent_node {
 
-    mailalias { 'root':
-        ensure      => present,
+    sendmail::alias { 'root':
         recipient   => 'john.florian@dart.biz',
     }
 

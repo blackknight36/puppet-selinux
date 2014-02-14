@@ -90,8 +90,7 @@ class dart::abstract::aos_master_node inherits dart::abstract::server_node {
         mode    => 'enforcing',
     }
 
-    mailalias { 'root':
-        ensure      => present,
+    sendmail::alias { 'root':
         recipient   => 'john.florian@dart.biz',
     }
 

@@ -173,8 +173,7 @@ class dart::mdct_dev6 inherits dart::abstract::workstation_node {
 #        seltype     => "mysqld_db_t",
 #    }
 
-    mailalias { "root":
-        ensure      => present,
-        recipient   => "chris.kennedy@dart.biz",
+    sendmail::alias { 'root':
+        recipient   => 'chris.kennedy@dart.biz',
     }
 }

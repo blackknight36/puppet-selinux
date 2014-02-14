@@ -15,8 +15,7 @@ class dart::mdct_est_ci inherits dart::abstract::teamcity_server_node {
     include 'dart::abstract::teamcity_agent_node'
 
 
-    mailalias { 'root':
-        ensure      => present,
+    sendmail::alias { 'root':
         recipient   => 'ben.minshall@dart.biz',
     }
 

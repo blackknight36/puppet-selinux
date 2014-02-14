@@ -11,14 +11,12 @@ class dart::abstract::puppet_server_node inherits dart::abstract::guarded_server
     include 'puppet::server'
     include 'dart::subsys::yum_cron'
 
-    mailalias { 'puppet':
-        ensure          => present,
-        recipient       => 'root',
+    sendmail::alias { 'puppet':
+        recipient   => 'root',
     }
 
-    mailalias { 'root':
-        ensure          => present,
-        recipient       => 'john.florian@dart.biz',
+    sendmail::alias { 'root':
+        recipient   => 'john.florian@dart.biz',
     }
 
 }

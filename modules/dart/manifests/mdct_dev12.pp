@@ -182,8 +182,7 @@ class dart::mdct_dev12 inherits dart::abstract::workstation_node {
         ],
     }
 
-    mailalias { 'root':
-        ensure      => present,
+    sendmail::alias { 'root':
         recipient   => 'john.florian@dart.biz',
     }
 

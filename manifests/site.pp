@@ -58,16 +58,6 @@ File {
     backup  => "main",
 }
 
-# Puppet will not automatically exec newaliases when mail aliases are
-# configured as it rightly makes no assumptions about the mail system
-# configuration.  However, this is suitable for our scope.
-Mailalias {
-    notify  => Exec['newaliases'],
-}
-exec { "newaliases":
-    refreshonly => true,
-}
-
 Package {
     # Depend on yum being used and configured first.
     provider    => 'yum',

@@ -58,8 +58,7 @@ class dart::mdct_koji inherits dart::abstract::guarded_server_node {
 
     }
 
-    mailalias { 'root':
-        ensure      => present,
+    sendmail::alias { 'root':
         recipient   => 'john.florian@dart.biz',
     }
 
