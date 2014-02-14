@@ -7,14 +7,16 @@
 #
 # === Parameters
 #
-# NONE
+# [*enable*]
+#   Should the service be enabled and running?  Must be one of true or false
+#   (default).
 #
 # === Authors
 #
 #   John Florian <john.florian@dart.biz>
 
 
-class sendmail {
+class sendmail ($enable=false) {
 
     include 'sendmail::params'
 
@@ -24,8 +26,11 @@ class sendmail {
     }
 
     service { $sendmail::params::services:
-        enable      => true,
-        ensure      => running,
+        enable      => $enable,
+        ensure      => $enable ? {
+            true    => running,
+            default => stopped,
+        },
         hasrestart  => true,
         hasstatus   => true,
     }
