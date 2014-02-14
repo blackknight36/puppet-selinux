@@ -12,10 +12,13 @@ class puppet::params {
             $client_packages = [ 'puppet', ]
             $server_packages = [ 'puppet-server', 'puppet-tools', ]
 
-            if $::operatingsystemrelease >= 19 {
-                $client_service_name = 'puppetagent'
-            } else {
+            # Apparently the brilliant packagers at puppetlabs have no clue
+            # what stability means or why it's a good thing.
+            if versioncmp($puppetversion, '3.1') < 0 or
+               versioncmp($puppetversion, '3.4.0') >= 0 {
                 $client_service_name = 'puppet'
+            } else {
+                $client_service_name = 'puppetagent'
             }
 
             $server_service_name = 'puppetmaster'
