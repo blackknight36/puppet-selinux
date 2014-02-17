@@ -45,10 +45,6 @@ class dart::abstract::teamcity_agent_node inherits dart::abstract::guarded_serve
         }
     }
 
-    package { 'tito':
-        ensure  => installed,
-    }
-
     mock::target { 'Fedora-17-i386':
         family  => 'fedora',
         release => '17',

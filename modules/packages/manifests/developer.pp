@@ -27,6 +27,7 @@ class packages::developer {
         'rpmdevtools',
         'ruby-devel',
         'subversion',
+        'tito',
         'unzip',                # needed to repack jars when building rpms
         'zip',                  # needed to repack jars when building rpms
 
