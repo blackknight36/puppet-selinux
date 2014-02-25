@@ -22,20 +22,6 @@ class unwanted_services {
         hasstatus   => true,
     }
 
-    service { 'iscsi':
-        enable      => false,
-        ensure      => stopped,
-        hasrestart  => true,
-        hasstatus   => true,
-    }
-
-    service { 'iscsid':
-        enable      => false,
-        ensure      => stopped,
-        hasrestart  => true,
-        hasstatus   => true,
-    }
-
     service { 'livesys':
         enable      => false,
         #ensure     => stopped,     # there is nothing to stop
