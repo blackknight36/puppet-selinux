@@ -21,6 +21,17 @@ class dart::abstract::picaps_production_server_node inherits dart::abstract::ung
         ensure  => 'installed',
     }
 
+    # Root prompt
+    file { '/root/.bash_profile':
+	source => 'puppet:///modules/dart/picaps_servers/picaps-root-bash-profile',
+    }
+    file { '/root/.bashrc':
+	source => 'puppet:///modules/dart/picaps_servers/picaps-root-bashrc',
+    }
+    file { '/etc/profile.d/nicer_bash.sh':
+	source => 'puppet:///modules/dart/picaps_servers/picaps-root-bash-prompt.sh',
+    }
+
     # PICAPS admins desire puppet only for tasks at server inception and forgo
     # all run-state management.
     class { 'puppet::client':
@@ -28,6 +39,7 @@ class dart::abstract::picaps_production_server_node inherits dart::abstract::ung
         ensure  => 'stopped',
     }
 
+    # Sendmail alias
     sendmail::alias { 'root':
         recipient   => 'chris.kennedy@dart.biz',
     }
