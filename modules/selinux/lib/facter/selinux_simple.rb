@@ -12,9 +12,9 @@ Facter.add("selinux_simple") do
     setcode do
         mode = Facter::Util::Resolution.exec(getenforce_cmd).chomp
         if mode.casecmp('Enforcing') == 0
-            result = "true"
+            result = true
         else
-            result = "false"
+            result = false
         end
         result
     end
