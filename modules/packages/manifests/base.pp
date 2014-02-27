@@ -19,7 +19,6 @@ class packages::base {
         'multitail',
         'openssh-clients',
         'pciutils',
-        'prophile',
         'psmisc',
         'python-mdct',
         'screen',

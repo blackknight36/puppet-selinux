@@ -24,6 +24,7 @@ class dart::abstract::base_node {
 
     include 'openssh_server'
     include 'packages::base'
+    include 'prophile'
     #include 'selinux'
     include 'sendmail'
     include 'sudo'
