@@ -15,7 +15,11 @@ class mariadb::params {
             $clientpackages = [
                 'mariadb',
             ]
-            $service_name = 'mysqld'
+            if $::operatingsystemrelease >= 20 {
+                $service_name = 'mariadb'
+            } else {
+                $service_name = 'mysqld'
+            }
 
         }
 
