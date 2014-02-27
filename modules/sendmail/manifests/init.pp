@@ -35,4 +35,16 @@ class sendmail ($enable=false) {
         hasstatus   => true,
     }
 
+    # Puppet will not automatically exec newaliases when mail aliases are
+    # configured as it rightly makes no assumptions about the mail system
+    # configuration.
+    #
+    # This is defined here, not in sendmail::alias from which the event
+    # originates, because to define it there would result in duplicate
+    # declarations of the Exec, iff more than one sendmail::alias is declared.
+    exec { $sendmail::params::newaliases_cmd:
+        refreshonly => true,
+        require     => Package[$sendmail::params::packages],
+    }
+
 }

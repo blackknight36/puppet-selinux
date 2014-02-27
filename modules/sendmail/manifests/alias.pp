@@ -31,12 +31,4 @@ define sendmail::alias ($ensure='present', $recipient) {
         notify      => Exec[$sendmail::params::newaliases_cmd],
     }
 
-    # Puppet will not automatically exec newaliases when mail aliases are
-    # configured as it rightly makes no assumptions about the mail system
-    # configuration.
-    exec { $sendmail::params::newaliases_cmd:
-        refreshonly => true,
-        require     => Package[$sendmail::params::packages],
-    }
-
 }
