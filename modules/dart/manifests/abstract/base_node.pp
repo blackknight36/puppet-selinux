@@ -55,4 +55,6 @@ class dart::abstract::base_node {
         stage   => 'first',
     }
 
+    include 'ovirt::guest'
+
 }
