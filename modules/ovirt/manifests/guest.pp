@@ -19,7 +19,7 @@ class ovirt::guest {
 
     # Only install the packages and run the services if this is a guest VM on
     # an oVirt host.  This uses a custom fact provided by this module.
-    if $is_ovirt_guest {
+    if $is_ovirt_guest and $::operatingsystem == 'Fedora' and $::operatingsystemrelease >= 17 {
 
         package { $ovirt::params::guest_packages:
             ensure  => installed,
