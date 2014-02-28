@@ -49,7 +49,6 @@ class dart::abstract::aos_master_node inherits dart::abstract::server_node {
     }
 
     class { 'dhcpd_driven::master':
-        hba_conf        => 'puppet:///private-host/postgresql/pg_hba.conf',
         python_ver      => '2.7',
         settings        => 'puppet:///private-host/dhcpd-driven/dhcpd-driven.conf',
         django_user     => 'django',
@@ -58,6 +57,10 @@ class dart::abstract::aos_master_node inherits dart::abstract::server_node {
 
     include 'flock_herder'
     include 'mdct_puppeteer_admin'
+
+    class { 'postgresql::server':
+        hba_conf    => 'puppet:///private-host/postgresql/pg_hba.conf',
+    }
 
     class { 'puppet::client':
     }

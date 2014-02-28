@@ -7,9 +7,6 @@
 #
 # === Parameters
 #
-# [*hba_conf*]
-#   URI of the PostgreSQL host-based authentication configuration file.
-#
 # [*python_ver*]
 #   Python version that will run the deployment.
 #
@@ -30,7 +27,7 @@
 
 
 class dhcpd_driven::master (
-        $hba_conf, $python_ver, $settings, $django_user, $django_group,
+        $python_ver, $settings, $django_user, $django_group,
     ) {
 
     include 'apache'
@@ -62,10 +59,6 @@ class dhcpd_driven::master (
 
     file { '/etc/dhcpd-driven.conf':
         source  => $settings,
-    }
-
-    class { 'postgresql::server':
-        hba_conf    => $hba_conf
     }
 
 }
