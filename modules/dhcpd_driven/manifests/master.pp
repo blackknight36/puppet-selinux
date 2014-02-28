@@ -3,7 +3,7 @@
 # == Class: dhcpd_driven::master
 #
 # Configures a host to run the dhcpd-driven-master package and to serve hosts
-# running the dhcpd-driven-client package.
+# running the dhcpd-driven-slave package.
 #
 # === Parameters
 #
