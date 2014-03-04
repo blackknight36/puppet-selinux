@@ -39,7 +39,7 @@ define selinux::boolean ($persistent=false, $value) {
     #
     # notice("on $hostname with puppet $puppetversion and facter $facterversion on $operatingsystem $operatingsystemrelease, selinux: $selinux vs selinux_simple: $selinux_simple")
 
-    if $selinux_simple {
+    if $selinux_simple == 'true' {
         selboolean { "$name":
             persistent      => $persistent,
             value           => $value,
