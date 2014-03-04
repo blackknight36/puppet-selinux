@@ -30,7 +30,9 @@ class dart::abstract::picaps_test_server_node inherits dart::abstract::unguarded
     }
 
     # PICAPS uses rsync for backup and other similar uses
-    include 'rsync_server'
+    #   class { 'rsync::server':
+    #       source  => 'puppet:///modules/dart/picaps_servers/rsyncd/rsyncd.conf',
+    #   }
 
     # Samba
     include 'samba'
