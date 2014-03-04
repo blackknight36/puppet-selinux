@@ -7,7 +7,7 @@
 #       NONE
 #
 # Requires:
-#       Class['rsync_server']
+#       Class['rsync::server']
 #       Class['samba']
 
 class media_disbursal {
@@ -16,7 +16,7 @@ class media_disbursal {
     file { '/storage':
         before  => [
             Class['samba'],
-            Class['rsync_server'],
+            Class['rsync::server'],
         ],
         ensure  => directory,
         group   => 'root',
@@ -28,7 +28,7 @@ class media_disbursal {
     file { '/storage/slideshow':
         before  => [
             Class['samba'],
-            Class['rsync_server'],
+            Class['rsync::server'],
         ],
         ensure  => directory,
         group   => 'root',
@@ -42,7 +42,7 @@ class media_disbursal {
     file { '/storage/slideshow/weathermedia':
         before  => [
             Class['samba'],
-            Class['rsync_server'],
+            Class['rsync::server'],
         ],
         ensure  => directory,
         require => File['/storage/slideshow'],
