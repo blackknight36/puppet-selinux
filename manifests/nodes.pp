@@ -76,5 +76,6 @@ node 'mole.dartcontainer.com'                   { include 'dart::mole' }
 node 'tc-util.dartcontainer.com'                { include 'dart::tc_util' }
 
 node /^mdct-dev10-.*\.dartcontainer\.com$/      { include 'dart::mdct_dev10_srvr' }
+node /^mdct-foreman.*\.dartcontainer\.com$/     { include 'dart::mdct_foreman' }
 node /^mdct-ovirt-node-.*\.dartcontainer\.com$/ { include 'dart::mdct_ovirt_node' }
 node /^mdct-puppet.*\.dartcontainer\.com$/      { include 'dart::mdct_puppet' }

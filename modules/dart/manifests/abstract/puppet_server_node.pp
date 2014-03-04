@@ -8,6 +8,10 @@ class dart::abstract::puppet_server_node inherits dart::abstract::guarded_server
     class { 'puppet::client':
     }
 
+    class { 'puppet::foreman':
+        foreman_url => 'http://10.1.250.106:3000/',
+    }
+
     include 'puppet::server'
     include 'dart::subsys::yum_cron'
 
