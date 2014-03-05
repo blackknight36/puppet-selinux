@@ -1,10 +1,17 @@
 # modules/dart/manifests/mdct_dev12.pp
 #
-# Synopsis:
-#       Developer Workstation
+# == Class: dart::mdct_dev12
 #
-# Contact:
-#       John Florian
+# Configures a host as John Florian's workstation.
+#
+# === Parameters
+#
+# NONE
+#
+# === Authors
+#
+#   John Florian <john.florian@dart.biz>
+
 
 class dart::mdct_dev12 inherits dart::abstract::workstation_node {
 
