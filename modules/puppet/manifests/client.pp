@@ -1,4 +1,26 @@
 # modules/puppet/manifests/client.pp
+#
+# == Class: puppet::client
+#
+# Configures a host as a puppet client.
+#
+# === Parameters
+#
+# [*enable*]
+#   If true (default), the puppet client service will be enabled for automatic
+#   startup during system boot.  Otherwise the client service will not be
+#   started automatically.
+#
+# [*ensure*]
+#   If 'running' (default), the puppet client service will be started
+#   immediately, if it is not already running.  Other valid values are:
+#   'stopped', false (same as 'stopped') and true (same as 'running').
+#
+# === Authors
+#
+#   John Florian <jflorian@doubledog.org>
+#   John Florian <john.florian@dart.biz>
+
 
 class puppet::client ($enable=true, $ensure='running') {
 
@@ -22,18 +44,18 @@ class puppet::client ($enable=true, $ensure='running') {
 
     package { $puppet::params::client_packages:
         ensure  => installed,
-        notify  => Service[$puppet::params::client_service_name],
+        notify  => Service[$puppet::params::client_services],
     }
 
     File {
         owner       => 'root',
-        group       => 'root',
-        mode        => '0644',
+        group       => 'puppet',
+        mode        => '0640',
         seluser     => 'system_u',
         selrole     => 'object_r',
         seltype     => 'puppet_etc_t',
-        before      => Service[$puppet::params::client_service_name],
-        notify      => Service[$puppet::params::client_service_name],
+        before      => Service[$puppet::params::client_services],
+        notify      => Service[$puppet::params::client_services],
         subscribe   => Package[$puppet::params::client_packages],
     }
 
@@ -44,7 +66,7 @@ class puppet::client ($enable=true, $ensure='running') {
         ],
     }
 
-    service { $puppet::params::client_service_name:
+    service { $puppet::params::client_services:
         enable      => $enable,
         ensure      => $ensure,
         hasrestart  => true,

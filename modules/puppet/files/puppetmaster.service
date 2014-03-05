@@ -11,7 +11,7 @@ PIDFile=/run/puppet/master.pid
 ExecStartPre=/usr/bin/install -d -o puppet -m 755 /run/puppet
 ExecStart=/usr/bin/puppet master
 
-# Dart wants a fault tolerant Puppet Master {{{
+# Dart expects a fault tolerant Puppet Master {{{
 Restart=always
 StartLimitInterval=0
 # }}}
