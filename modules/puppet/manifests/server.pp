@@ -6,6 +6,20 @@
 #
 # === Parameters
 #
+# [*enable*]
+#   This option is only honored when "use_passenger" is false.
+#
+#   If true (default), the puppet master service will be enabled for automatic
+#   startup during system boot.  Otherwise the master service will not be
+#   started automatically.
+#
+# [*ensure*]
+#   This option is only honored when "use_passenger" is false.
+#
+#   If 'running' (default), the puppet master service will be started
+#   immediately, if it is not already running.  Other valid values are:
+#   'stopped', false (same as 'stopped') and true (same as 'running').
+#
 # [*use_passenger*]
 #   If true (default), the puppet master will serve TCP port 8140 (the
 #   standard) using Apache httpd via the Phusion Passenger rack server.
@@ -22,7 +36,9 @@
 #   John Florian <john.florian@dart.biz>
 
 
-class puppet::server ($use_passenger, $cert_name) {
+class puppet::server (
+        $enable=true, $ensure='running', $use_passenger, $cert_name,
+    ) {
 
     include 'puppet::params'
 
@@ -90,10 +106,10 @@ class puppet::server ($use_passenger, $cert_name) {
 #   }
 
     service { $puppet::params::server_services:
-        enable      => ! $use_passenger,
+        enable      => (! $use_passenger and $enable),
         ensure      => $use_passenger ? {
             true    => stopped,
-            default => running,
+            default => $ensure,
         },
             hasrestart  => true,
             hasstatus   => true,
