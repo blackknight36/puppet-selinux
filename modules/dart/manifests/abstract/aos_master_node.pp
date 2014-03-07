@@ -6,14 +6,27 @@
 #
 # === Parameters
 #
-# NONE
+# [*python_ver*]
+#   Python version that will run the deployment.
+#
+# [*django_user*]
+#   ID of the user account under which the Django app will run within the WSGI
+#   daemon.
+#
+# [*django_group*]
+#   ID of the group account under which the Django app will run within the
+#   WSGI daemon.
 #
 # === Authors
 #
 #   John Florian <john.florian@dart.biz>
 
 
-class dart::abstract::aos_master_node inherits dart::abstract::server_node {
+class dart::abstract::aos_master_node (
+        $python_ver, $django_user, $django_group,
+    ) inherits dart::abstract::server_node {
+
+    $python_base="/usr/lib/python${python_ver}/site-packages"
 
     class { 'apache':
         use_nfs => true,
@@ -34,25 +47,30 @@ class dart::abstract::aos_master_node inherits dart::abstract::server_node {
 
     include 'dart::subsys::autofs::common'
 
-    group { 'django':
+    group { $django_group:
         system  => true,
     }
 
-    user { 'django':
+    user { $django_user:
         comment     => 'Django application WSGI daemon account',
         home        => '/var/www/',
         password    => '!',
         system      => true,
-        subscribe   => Group['django'],
+        subscribe   => Group[$django_group],
         before      => Class['dhcpd_driven::master'],
         notify      => Class['dhcpd_driven::master'],
     }
 
     class { 'dhcpd_driven::master':
-        python_ver      => '2.7',
         settings        => 'puppet:///private-host/dhcpd-driven/dhcpd-driven.conf',
-        django_user     => 'django',
-        django_group    => 'django',
+    }
+
+    class { 'firewall_driven::master':
+        settings        => 'puppet:///private-host/firewall-driven/firewall-driven.conf',
+    }
+
+    apache::site_config { 'django-apps':
+        content  => template('dart/httpd/aos-master-django-apps.erb'),
     }
 
     include 'flock_herder'

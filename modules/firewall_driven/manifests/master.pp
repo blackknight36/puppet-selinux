@@ -1,27 +1,27 @@
-# modules/dhcpd_driven/manifests/master.pp
+# modules/firewall_driven/manifests/master.pp
 #
-# == Class: dhcpd_driven::master
+# == Class: firewall_driven::master
 #
-# Configures a host to run the dhcpd-driven-master package and to serve hosts
-# running the dhcpd-driven-slave package.
+# Configures a host to run the firewall-driven-master package and to serve
+# hosts running the firewall-driven-slave package.
 #
 # === Parameters
 #
 # [*settings*]
-#   Soure URI that provides the /etc/dhcpd-driven.conf content.
+#   Soure URI that provides the /etc/firewall-driven.conf content.
 #
 # === Authors
 #
 #   John Florian <john.florian@dart.biz>
 
 
-class dhcpd_driven::master ($settings) {
+class firewall_driven::master ($settings) {
 
     include 'apache'
     include 'apache::params'
-    include 'dhcpd_driven::params'
+    include 'firewall_driven::params'
 
-    package { $dhcpd_driven::params::master_packages:
+    package { $firewall_driven::params::master_packages:
         ensure  => installed,
         notify  => Service[$apache::params::services],
     }
@@ -35,10 +35,10 @@ class dhcpd_driven::master ($settings) {
         seltype     => 'etc_t',
         before      => Service[$apache::params::services],
         notify      => Service[$apache::params::services],
-        subscribe   => Package[$dhcpd_driven::params::master_packages],
+        subscribe   => Package[$firewall_driven::params::master_packages],
     }
 
-    file { '/etc/dhcpd-driven.conf':
+    file { '/etc/firewall-driven.conf':
         source  => $settings,
     }
 
