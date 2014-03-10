@@ -9,6 +9,11 @@ class dart::abstract::picaps_production_server_node inherits dart::abstract::ung
     include 'dart::subsys::picaps::apache'
 
     # Other packages required by PICAPS servers
+    if $::operatingsystem == 'Fedora' and $::operatingsystemrelease >= 20 {
+        $python_mx = 'python-egenix-mx-base'
+    } else {
+        $python_mx = 'mx'
+    }
     package { [
         'numactl',
         'numad',
@@ -16,7 +21,7 @@ class dart::abstract::picaps_production_server_node inherits dart::abstract::ung
         'ncftp',
         'pyserial',
         'setserial',
-        'python-egenix-mx-base',
+        $python_mx,
         ]:
         ensure  => 'installed',
     }
