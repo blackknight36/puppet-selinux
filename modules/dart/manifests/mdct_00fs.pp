@@ -90,11 +90,5 @@ class dart::mdct_00fs {
     }
 
     include 'picaps::backup_agent'
-    include 'repoview'
-
-
-    package { "createrepo":
-        ensure      => installed,
-    }
 
 }

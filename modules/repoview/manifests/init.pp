@@ -8,24 +8,26 @@ class repoview {
         ensure  => installed,
     }
 
-    file { '/usr/libexec/mdct-repoview':
-        group   => 'root',
-        mode    => '0755',
+    File {
         owner   => 'root',
-        source  => 'puppet:///modules/repoview/mdct-repoview',
+        group   => 'teamcity',
+        mode    => '0755',
     }
 
-    file { '/var/lib/mdct-repoview':
-        ensure  => 'directory',
-        group   => 'root',
-        mode    => '0755',
-        owner   => 'root',
+    file {
+        '/usr/libexec/mdct-repoview':
+            source  => 'puppet:///modules/repoview/mdct-repoview';
+
+        ['/var/lib/mdct-repoview', '/var/log/mdct-repoview']:
+            ensure  => 'directory',
+            mode    => '0775';
     }
 
     cron::job { 'mdct-repoview':
-        command => 'nice ionice -c 3 /usr/libexec/mdct-repoview 16 15 14 13 12 11 10 8',
+        command => 'nice ionice -c 3 /usr/libexec/mdct-repoview 20 19 18 17 16 15 14 13 12 11 10 8',
         minute  => '42',
         hour    => '*/4',
+        user    => 'teamcity',
         require => [
             File['/usr/libexec/mdct-repoview'],
             File['/var/lib/mdct-repoview'],

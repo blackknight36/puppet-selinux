@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# This file is managed by puppet.
+# Origin: modules/repoview/files/mdct-repoview
+
 html_top() {
     cat <<EOF
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -19,11 +22,10 @@ html_top() {
         <tr>
             <td style="text-align: center;"><p class="line862"> <strong>Fedora Release</strong> </p></td>
             <td style="text-align: center;"><p class="line862"> <strong>Repository </strong> </p></td>
-            <td colspan="2" style="text-align: center;"><p class="line862"> <strong>Arch </strong> </p></td>
+            <td colspan="3" style="text-align: center;"><p class="line862"> <strong>Arch </strong> </p></td>
         </tr>
 EOF
 }
-
 
 html_for_release() {
     local osrelease="$1"
@@ -33,15 +35,16 @@ html_for_release() {
         <td><p class="line862">mdct</p></td>
         <td><p class="line891"><a class="http" href="http://mdct-00fs.dartcontainer.com/ftp/pub/fedora/mdct/$osrelease/SRPMS/repoview/">source</a></p></td>
         <td><p class="line891"><a class="http" href="http://mdct-00fs.dartcontainer.com/ftp/pub/fedora/mdct/$osrelease/i386/repoview/">i386</a></p></td>
+        <td><p class="line891"><a class="http" href="http://mdct-00fs.dartcontainer.com/ftp/pub/fedora/mdct/$osrelease/x86_64/repoview/">x86_64</a></p></td>
     </tr>
     <tr>
         <td><span class="anchor" id="line-31"></span><p class="line862">mdct-testing</p></td>
         <td><p class="line891"><a class="http" href="http://mdct-00fs.dartcontainer.com/ftp/pub/fedora/mdct/testing/$osrelease/SRPMS/repoview/">source</a></p></td>
         <td><p class="line891"><a class="http" href="http://mdct-00fs.dartcontainer.com/ftp/pub/fedora/mdct/testing/$osrelease/i386/repoview/">i386</a></p></td>
+        <td><p class="line891"><a class="http" href="http://mdct-00fs.dartcontainer.com/ftp/pub/fedora/mdct/testing/$osrelease/x86_64/repoview/">x86_64</a></p></td>
     </tr>
 EOF
 }
-
 
 html_bottom() {
     cat <<EOF
@@ -72,7 +75,6 @@ make_repoview() {
         /pub/fedora/$repo/$osrelease/$arch/
 }
 
-
 main() {
     local new_index="/tmp/mdct-repoview.$$"
     local live_index="/pub/fedora/mdct/repoview/index.html"
@@ -80,7 +82,7 @@ main() {
 
     for osrelease in "$@"
     do
-        for arch in i386 SRPMS
+        for arch in i386 x86_64 SRPMS
         do
             for repo in 'mdct' 'mdct/testing'
             do
@@ -94,4 +96,4 @@ main() {
     mv $new_index $live_index
 }
 
-main "$@" &> /var/log/mdct-repoview
+main "$@" &> /var/log/mdct-repoview/mdct-repoview

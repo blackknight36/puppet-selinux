@@ -20,10 +20,15 @@ class dart::abstract::teamcity_server_node inherits dart::abstract::guarded_serv
 
     include 'packages::developer'
     include 'puppet::client'
+    include 'repoview'
 
-    # This package allows optimal performance in production environments.
-    package { 'tomcat-native':
-        ensure  => installed,
+    package {
+        'createrepo':
+            ensure  => installed;
+
+        # This package allows optimal performance in production environments.
+        'tomcat-native':
+            ensure  => installed;
     }
 
     case $hostname {
