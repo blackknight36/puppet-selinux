@@ -10,7 +10,7 @@ class repoview {
 
     File {
         owner   => 'root',
-        group   => 'teamcity',
+        group   => 'repomgr',
         mode    => '0755',
     }
 
@@ -27,7 +27,7 @@ class repoview {
         command => 'nice ionice -c 3 /usr/libexec/mdct-repoview 20 19 18 17 16 15 14 13 12 11 10 8',
         minute  => '42',
         hour    => '*/4',
-        user    => 'teamcity',
+        user    => 'repomgr',
         require => [
             File['/usr/libexec/mdct-repoview'],
             File['/var/lib/mdct-repoview'],
