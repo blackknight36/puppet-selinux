@@ -27,4 +27,10 @@ class dart::mdct_teamcity_f20 inherits dart::abstract::teamcity_server_node {
         recipient   => 'john.florian@dart.biz',
     }
 
+    include 'repoview'
+
+    package { 'createrepo':
+        ensure  => installed,
+    }
+
 }
