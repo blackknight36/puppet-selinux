@@ -20,6 +20,7 @@ node 'mdct-0314pi.dartcontainer.com'            { include 'dart::mdct_0314pi' }
 node 'mdct-03pt.dartcontainer.com'              { include 'dart::mdct_03pt' }
 node 'mdct-03ut.dartcontainer.com'              { include 'dart::mdct_03ut' }
 node 'mdct-04pt.dartcontainer.com'              { include 'dart::mdct_04pt' }
+node 'mdct-05pt.dartcontainer.com'              { include 'dart::mdct_05pt' }
 node 'mdct-10ut.dartcontainer.com'              { include 'dart::mdct_10ut' }
 node 'mdct-15pt.dartcontainer.com'              { include 'dart::mdct_15pt' }
 node 'mdct-19pt.dartcontainer.com'              { include 'dart::mdct_19pt' }

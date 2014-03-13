@@ -46,17 +46,17 @@ class dart::abstract::picaps_test_server_node inherits dart::abstract::unguarded
     include 'packages::developer'
 
     # JDK's
-    oracle::jdk { 'jdk-7u25-linux-x64':
+    oracle::jdk { 'jdk-7u51-linux-x64':
         ensure  => 'present',
         version => '7',
-        update  => '25',
+        update  => '51',
     }
-    oracle::jdk { 'jdk-7u21-linux-x64':
+    oracle::jdk { 'jdk-7u45-linux-x64':
         ensure  => 'present',
         version => '7',
-        update  => '21',
+        update  => '45',
         before  => [
-            Exec["install oracle jdk-7u25-linux-x64"],
+            Exec["install oracle jdk-7u51-linux-x64"],
         ],
     }
     file { "/usr/java/latest/jre/lib/management/jmxremote.password":
