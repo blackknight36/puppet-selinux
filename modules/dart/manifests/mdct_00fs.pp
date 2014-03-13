@@ -16,7 +16,6 @@ class dart::mdct_00fs {
     include 'cron::daemon'
     #@# include 'cachefilesd'
     include 'dart::subsys::dns::no_dns_hosts'
-    include 'dart::subsys::system_accounts'
     include 'logwatch'
     include 'ntp'
     #@# include 'openssh_server'

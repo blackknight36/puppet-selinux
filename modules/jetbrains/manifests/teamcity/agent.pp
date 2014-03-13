@@ -31,7 +31,6 @@ class jetbrains::teamcity::agent {
         seluser => 'system_u',
         selrole => 'object_r',
         seltype => 'etc_t',
-        require => User['teamcity'],
     }
 
     iptables::tcp_port {

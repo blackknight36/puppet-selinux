@@ -25,7 +25,6 @@ class jetbrains::teamcity::common {
         seluser => 'system_u',
         selrole => 'object_r',
         seltype => 'etc_t',
-        require => User['teamcity'],
     }
 
     file { "${jetbrains::params::teamcity_root}":

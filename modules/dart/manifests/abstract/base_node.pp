@@ -9,7 +9,6 @@ class dart::abstract::base_node {
     include 'cron::daemon'
     include 'cachefilesd'
     include 'dart::subsys::dns::no_dns_hosts'
-    include 'dart::subsys::system_accounts'
     include 'logwatch'
 
     class { 'ntp':
