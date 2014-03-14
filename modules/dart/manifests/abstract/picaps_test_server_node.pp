@@ -67,7 +67,7 @@ class dart::abstract::picaps_test_server_node inherits dart::abstract::unguarded
             'puppet:///modules/dart/picaps_servers/jmxremote.password',
         ],
         require  => [
-            Exec["install oracle jdk-7u25-linux-x64"],
+            Exec["install oracle jdk-7u51-linux-x64"],
         ],
     }
 
