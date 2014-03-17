@@ -33,4 +33,9 @@ class dart::mdct_teamcity_f20 inherits dart::abstract::teamcity_server_node {
         ensure  => installed,
     }
 
+    class { 'bacula::client':
+        dir_passwd      => 'RFdZ9Dm9bxuIEIp1Q7Gu0sEoHX9AUHecFbwE6weT1IAz',
+        mon_passwd      => 'hRGbzxczzByoo9chMe7y6Qlxeo0dmfedAKJCP9Y2M4o6',
+    }
+
 }
