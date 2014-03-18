@@ -29,7 +29,8 @@ class dart::abstract::aos_master_node (
     $python_base="/usr/lib/python${python_ver}/site-packages"
 
     class { 'apache':
-        use_nfs => true,
+        network_connect => true,
+        use_nfs         => true,
     }
 
     apache::site_config { 'pub':
