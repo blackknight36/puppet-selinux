@@ -164,6 +164,12 @@ class dart::abstract::picaps_production_server_node inherits dart::abstract::ung
     # TODO: PICAPS package
     # TODO: PICAPS-bridge package
 
+    # Link for yum-fanout-mirror
+    file { "/local":
+        ensure  => link,
+        target  => "/storage/pub",
+    }
+
     # PICAPS calls gethostbyname() for its own hostname which must resolve.
     #
     # NB: If you get the following error from puppet here ...
