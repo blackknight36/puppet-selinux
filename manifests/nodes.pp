@@ -69,7 +69,6 @@ node 'mdct-ovirt-engine.dartcontainer.com'      { include 'dart::mdct_ovirt_engi
 node 'mdct-pt-dbtest.dartcontainer.com'         { include 'dart::mdct_pt_dbtest' }
 node 'mdct-recov.dartcontainer.com'             { include 'dart::mdct_recov' }
 node 'mdct-tc.dartcontainer.com'                { include 'dart::mdct_tc' }
-node 'mdct-teamcity-agent1.dartcontainer.com'   { include 'dart::mdct_teamcity_agent1' }
 node 'mdct-teamcity-f20.dartcontainer.com'      { include 'dart::mdct_teamcity_f20' }
 node 'mdct-test-agent-32.dartcontainer.com'     { include 'dart::mdct_test_agent_32' }
 node 'mole-dev.dartcontainer.com'               { include 'dart::mole_dev' }
@@ -80,3 +79,4 @@ node /^mdct-dev10-.*\.dartcontainer\.com$/      { include 'dart::mdct_dev10_srvr
 node /^mdct-foreman.*\.dartcontainer\.com$/     { include 'dart::mdct_foreman' }
 node /^mdct-ovirt-node-.*\.dartcontainer\.com$/ { include 'dart::mdct_ovirt_node' }
 node /^mdct-puppet.*\.dartcontainer\.com$/      { include 'dart::mdct_puppet' }
+node /^mdct-teamcity-agent.*\.dartcontainer.com$/   { include 'dart::mdct_teamcity_agent' }
