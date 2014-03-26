@@ -10,7 +10,9 @@ class dart::abstract::teamcity_server_node inherits dart::abstract::guarded_serv
     include 'dart::subsys::yum_cron'
 
     oracle::jdk { 'for TeamCity Server':
-        ensure  => 'latest',
+        ensure  => 'present',
+        version => '7',
+        update  => '51',
         # Oracle's architecture labeling is non-standard; so we adapt here.
         arch    => $architecture ? {
             'i386'      => 'i586',

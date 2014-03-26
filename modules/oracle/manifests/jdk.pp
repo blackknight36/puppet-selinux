@@ -1,48 +1,58 @@
 # modules/oracle/manifests/jdk.pp
 #
-# Synopsis:
-#       Installs JDK package(s) from Oracle.
+# == Define: oracle::jdk
 #
-# Parameters:
-#       Name__________  Notes_  Description___________________________
+# Installs one of Oracle's JDKs.
 #
-#       name                    instance name
+# === Parameters
 #
-#       ensure          1       instance is to be present/absent/latest
+# [*namevar*]
+#   An arbitrary identifier for the JDK instance.
 #
-#       version         2       JDK version number (e.g., '7')
+# [*ensure*]
+#   Instance is to be 'present' (default) or 'absent'.
 #
-#       update          2       JDK update number (e.g., '25')
+# [*version*]
+#   JDK version number (e.g., '7').  Required except when *ensure* is
+#   'latest'.
 #
-#       arch                    platform architecure (i.e., 'x64' or 'i586')
+# [*update*]
+#   JDK version's update number (e.g., '25').  Required except when *ensure*
+#   is 'latest'.  Use '' for the initial release of a new version where there
+#   is no update number suffixed.
 #
-# Notes:
+# [*arch*]
+#   Oracle's packaging architecture (e.g., 'x64' for 64-bit Intel or 'i586'
+#   for 32-bit Intel).
 #
-#       1. Default is 'present'.  TODO: support 'absent'.
+# === Authors
 #
-#       2. Default is undef, but must be specified unless $ensure is
-#       'present'.
+#   John Florian <john.florian@dart.biz>
 
 
-define oracle::jdk ($ensure='present', $version=undef, $update=undef, $arch='x64') {
+define oracle::jdk (
+        $ensure='present', $version=undef, $update=undef, $arch='x64',
+) {
 
-    if $ensure == 'latest' {
-        # Don't alter the latest values until you've ensured that both 32- and
-        # 64-bit versions of the package are available in /pub/oracle!!!
-        $rpm_version = '7'
-        $rpm_update = '51'
+    validate_re($version, '^\d+$', '$version is invalid or not defined')
+    validate_re($update, '^\d*$', '$update is invalid or not defined')
+
+    # Oracle, like Sun before them, has horrible packaging practices where the
+    # rpm file name only resembles the rpm's %Name field.
+
+    if $update == '' {
+        $update_tag1 = ''
+        $update_tag2 = ''
     } else {
-        if $version == undef or $update == undef {
-            fail ('$version and $update must specified unless $ensure is set to "latest"')
-        } else {
-            $rpm_version = "$version"
-            $rpm_update = "$update"
-        }
+        $update_tag1 = "u$update"
+        $update_tag2 = "_$update"
     }
 
     exec { "install oracle $name":
-        command => "rpm -i --force http://mdct-00fs.dartcontainer.com/ftp/pub/oracle/jdk-${rpm_version}u${rpm_update}-linux-${arch}.rpm",
-        unless  => "rpm -q jdk-1.${rpm_version}.0_${rpm_update}-fcs",
+        command => "rpm -i --force http://mdct-00fs.dartcontainer.com/ftp/pub/oracle/jdk-${version}${update_tag1}-linux-${arch}.rpm",
+        unless  => "rpm -q jdk-1.${version}.0${update_tag2}-fcs",
+        # Allow extra time, especially for trans-WAN installations.
+        timeout => 1200,
     }
 
 }
