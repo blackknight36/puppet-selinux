@@ -1,24 +1,30 @@
 # modules/mock/manifests/target.pp
 #
-# Synopsis:
-#       Configures a host with a mock build-target configuration.
+# == Define: mock::target
 #
-# Parameters:
-#       Name__________  Notes_  Description___________________________
+# Installs a build-target configuration file for mock.
 #
-#       name                    instance name
+# === Parameters
 #
-#       ensure          1       instance is to be present/absent
+# [*namevar*]
+#   An arbitrary identifier for the target instance.
 #
-#       family                  e.g., 'fedora' or 'epel'
+# [*ensure*]
+#   Instance is to be 'present' (default) or 'absent'.
 #
-#       release                 e.g., '19'
+# [*family*]
+#   The build target's distribution family.  E.g., 'fedora' or 'epel'.
 #
-#       arch                    e.g., 'x86_64', 'i386', 'arm', 'ppc64'
+# [*release*]
+#   The build target's distribution release.  E.g., '20'.
 #
-# Notes:
+# [*arch*]
+#   The build target's distribution platform architecture.  E.g., 'x86_64',
+#   'i386', 'arm', 'ppc64', etc.
 #
-#       1. Default is 'present'.
+# === Authors
+#
+#   John Florian <john.florian@dart.biz>
 
 
 define mock::target ($family, $release, $arch, $ensure='present') {
@@ -27,13 +33,13 @@ define mock::target ($family, $release, $arch, $ensure='present') {
     include 'mock::params'
 
     File {
-        owner   => 'root',
-        group   => 'mock',
-        mode    => '0644',
-        seluser => 'system_u',
-        selrole => 'object_r',
-        seltype => 'etc_t',
-        require => Class['mock::common'],
+        owner       => 'root',
+        group       => 'mock',
+        mode        => '0644',
+        seluser     => 'system_u',
+        selrole     => 'object_r',
+        seltype     => 'etc_t',
+        subscribe   => Package[$mock::params::packages],
     }
 
     file { "/etc/mock/${family}-${release}-${arch}.cfg":
