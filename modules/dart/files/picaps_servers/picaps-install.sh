@@ -5,6 +5,7 @@
 /bin/cvs -d :pserver:anonymous@10.1.192.105:/home/cvsroot co picaps/config
 /bin/cvs -d :pserver:anonymous@10.1.192.105:/home/cvsroot co picaps/static
 /bin/cvs -d :pserver:anonymous@10.1.192.105:/home/cvsroot co picaps/resource
+  #/bin/cvs -d :pserver:anonymous@10.1.192.105:/home/cvsroot co picaps/reporttemplates # corporate only
 /bin/mkdir -p picaps/reporttemplates
 # make original startup/shutdown scripts executable
 /bin/chmod +x picaps/resource/init.d/picaps
@@ -24,6 +25,8 @@
 /bin/chmod +x picaps/bin/startup-shutdown/shutdown-core.sh
 /bin/chmod +x picaps/bin/startup-shutdown/shutdown-display.sh
 /bin/chmod +x picaps/bin/startup-shutdown/shutdown-coretocore.sh
+  #/bin/chmod +x picaps/bin/corporate/sap-file-watcher.sh # corporate only
+  #/bin/chmod +x picaps/bin/corporate/export-sap-pm-measurements.sh #corporate only
 /bin/mv /root/picaps /dist
 
 # Integrate with Fedora
@@ -38,6 +41,9 @@
 /bin/ln -s /dist/config/picaps-display /etc/sysconfig/picaps-display
 /bin/ln -s /dist/config/picaps-persister /etc/sysconfig/picaps-persister
 /bin/ln -s /dist/config/picaps-poller /etc/sysconfig/picaps-poller
+# corporate only
+  #/bin/ln -sd /dist/resource/cron/sap-file-watcher /etc/cron.d/sap-file-watcher
+  #/bin/ln -sd /dist/resource/cron/export-sap-pm-measurements /etc/cron.d/export-sap-pm-measurements
 # systemd target & services
 /bin/cp -a /dist/resource/systemd/picaps-all.target /etc/systemd/system/picaps-all.target
 /bin/cp -a /dist/resource/systemd/picaps-bridge.service /etc/systemd/system/picaps-bridge.service
