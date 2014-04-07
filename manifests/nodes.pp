@@ -56,7 +56,6 @@ node 'mdct-f14-builder.dartcontainer.com'       { include 'dart::mdct_f14_builde
 node 'mdct-f15-builder.dartcontainer.com'       { include 'dart::mdct_f15_builder' }
 node 'mdct-f16-builder.dartcontainer.com'       { include 'dart::mdct_f16_builder' }
 node 'mdct-f17-builder.dartcontainer.com'       { include 'dart::mdct_f17_builder' }
-node 'mdct-f20-builder.dartcontainer.com'       { include 'dart::mdct_f20_builder' }
 node 'mdct-koji.dartcontainer.com'              { include 'dart::mdct_koji' }
 node 'mdct-nexus.dartcontainer.com'             { include 'dart::mdct_nexus' }
 node 'mdct-ngic-dev.dartcontainer.com'          { include 'dart::mdct_ngic_dev' }

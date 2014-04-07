@@ -93,6 +93,7 @@ class dart::subsys::dns::no_dns_hosts {
     }
 
     host { 'mdct-f20-builder.dartcontainer.com':
+        ensure          => absent,
         ip              => '10.1.192.132',
         host_aliases    => [ 'mdct-f20-builder', 'f20b' ],
     }
