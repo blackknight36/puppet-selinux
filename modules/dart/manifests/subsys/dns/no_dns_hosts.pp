@@ -80,6 +80,7 @@ class dart::subsys::dns::no_dns_hosts {
     }
 
     host { 'mdct-f18-builder.dartcontainer.com':
+        ensure          => absent,
         ip              => '10.1.192.145',
         host_aliases    => [ 'mdct-f18-builder', 'f18b' ],
     }
