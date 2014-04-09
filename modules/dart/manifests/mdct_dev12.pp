@@ -231,4 +231,8 @@ class dart::mdct_dev12 inherits dart::abstract::workstation_node {
         mailto  => 'john.florian@dart.biz',
     }
 
+    mock::user {
+        'd13677':;
+    }
+
 }
