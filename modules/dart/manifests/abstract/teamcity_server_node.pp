@@ -35,8 +35,8 @@ class dart::abstract::teamcity_server_node inherits dart::abstract::guarded_serv
             }
         }
         'mdct-teamcity-f20': {
-            jetbrains::teamcity::server_release { 'TeamCity-8.1a':
-                build   => '8.1a',
+            jetbrains::teamcity::server_release { 'TeamCity-8.1.2':
+                build   => '8.1.2',
             }
         }
     }
