@@ -1,7 +1,16 @@
 # modules/dart/manifests/abstract/teamcity_server_node.pp
 #
-# Synopsis:
-#       Typical TeamCity Server for Dart use.
+# == Class: dart::abstract::teamcity_server_node
+#
+# Configures a host as a typical TeamCity Server for Dart use.
+#
+# === Parameters
+#
+# NONE
+#
+# === Authors
+#
+#   John Florian <john.florian@dart.biz>
 
 
 class dart::abstract::teamcity_server_node inherits dart::abstract::guarded_server_node {
@@ -38,6 +47,20 @@ class dart::abstract::teamcity_server_node inherits dart::abstract::guarded_serv
             jetbrains::teamcity::server_release { 'TeamCity-8.1.2':
                 build   => '8.1.2',
             }
+
+            # TeamCity relies on a manually installed postgresql-jdbc driver
+            # in /opt/jetbrains/teamcity/.BuildServer/lib/jdbc/ that was
+            # downloaded from http://jdbc.postgresql.org/download.html
+            #
+            # I didn't make puppet manage this since it resides in TeamCity's
+            # Data directory.  Installing the postgresql-jdbc package from
+            # Fedora didn't work and it seems too old according to the driver
+            # web page which states JDK 1.7 should use the "JDBC41" driver.
+            class { 'postgresql::server':
+                hba_conf    => 'puppet:///private-host/postgresql/pg_hba.conf',
+                before      => Jetbrains::Teamcity::Server_release['TeamCity-8.1.2'],
+            }
+
         }
     }
 
