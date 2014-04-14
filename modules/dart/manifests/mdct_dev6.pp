@@ -69,32 +69,32 @@ class dart::mdct_dev6 inherits dart::abstract::workstation_node {
         remote  => '://mas9965.dartcontainer.com/c\$',
     }
 
-    autofs::map_entry { '/mnt/files-2k1-prodmondata':
+    autofs::map_entry { '/mnt/mas-fs01-prodmondata':
         mount   => '/mnt',
-        key     => 'files-2k1-prodmondata',
+        key     => 'mas-fs01-prodmondata',
         options => '-fstype=cifs,rw,uid=d19749,gid=d19749,credentials=/etc/.credentials/d19749.cred',
-        remote  => '://files-2k1/prodmondata',
+        remote  => '://mas-fs01/prodmondata',
     }
 
-    autofs::map_entry { '/mnt/files-2k1-media':
+    autofs::map_entry { '/mnt/mas-fs01-media':
         mount   => '/mnt',
-        key     => 'files-2k1-media',
+        key     => 'mas-fs01-media',
         options => '-fstype=cifs,rw,uid=d19749,gid=d19749,credentials=/etc/.credentials/d19749.cred',
-        remote  => '://files-2k1/media',
+        remote  => '://mas-fs01/media',
     }
 
-    autofs::map_entry { '/mnt/files-2k1-sharedata':
+    autofs::map_entry { '/mnt/mas-fs01-sharedata':
         mount   => '/mnt',
-        key     => 'files-2k1-sharedata',
+        key     => 'mas-fs01-sharedata',
         options => '-fstype=cifs,rw,uid=d19749,gid=d19749,credentials=/etc/.credentials/d19749.cred',
-        remote  => '://files-2k1/ShareData',
+        remote  => '://mas-fs01/ShareData',
     }
 
-    autofs::map_entry { '/mnt/files-2k1-eng':
+    autofs::map_entry { '/mnt/mas-fs01-eng':
         mount   => '/mnt',
-        key     => 'files-2k1-eng',
+        key     => 'mas-fs01-eng',
         options => '-fstype=cifs,rw,uid=d19749,gid=d19749,credentials=/etc/.credentials/d19749.cred',
-        remote  => '://files-2k1/Eng',
+        remote  => '://mas-fs01/Eng',
     }
 
     autofs::map_entry { '/mnt/d19749':
