@@ -37,6 +37,13 @@ class dart::abstract::aos_master_node (
         source  => 'puppet:///private-host/apache/pub.conf',
     }
 
+    file { '/var/www/html/index.html':
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0644',
+        source  => 'puppet:///private-host/apache/index.html',
+    }
+
     systemd::mount { '/var/www/pub':
         mnt_description => '/pub served via httpd',
         mnt_what        => '/mnt/pub',
