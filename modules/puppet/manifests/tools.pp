@@ -29,7 +29,7 @@ class puppet::tools ($cron_cleanup, $tools_conf=undef) {
     file { '/etc/puppet-tools.conf':
         owner       => 'root',
         group       => 'puppet',
-        mode        => '0640',
+        mode        => '0644',
         seluser     => 'system_u',
         selrole     => 'object_r',
         seltype     => 'puppet_etc_t',
