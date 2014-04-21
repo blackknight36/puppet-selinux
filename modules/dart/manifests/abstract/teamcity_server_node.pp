@@ -17,18 +17,6 @@ class dart::abstract::teamcity_server_node inherits dart::abstract::guarded_serv
 
     include 'dart::subsys::autofs::common'
     include 'dart::subsys::yum_cron'
-
-    oracle::jdk { 'for TeamCity Server':
-        ensure  => 'present',
-        version => '7',
-        update  => '51',
-        # Oracle's architecture labeling is non-standard; so we adapt here.
-        arch    => $architecture ? {
-            'i386'      => 'i586',
-            'x86_64'    => 'x64',
-        },
-    }
-
     include 'packages::developer'
     include 'puppet::client'
 
@@ -44,6 +32,8 @@ class dart::abstract::teamcity_server_node inherits dart::abstract::guarded_serv
             }
         }
         'mdct-teamcity-f20': {
+            include 'openjdk::java_1_7_0'
+
             jetbrains::teamcity::server_release { 'TeamCity-8.1.2':
                 build   => '8.1.2',
             }
