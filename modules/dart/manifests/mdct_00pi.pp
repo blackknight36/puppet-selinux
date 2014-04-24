@@ -27,12 +27,19 @@ class dart::mdct_00pi inherits dart::abstract::picaps_production_server_node {
         options => '-fstype=cifs,rw,credentials=/etc/.credentials/mdcgate.cred',
         remote  => '://mas-fs01/ProdMonData',
     }
+    autofs::map_entry { '/mnt/sm2ci00v-miisbx':
+        mount   => '/mnt',
+        key     => 'sm2ci00v-miisbx',
+        options => '-fstype=cifs,rw,credentials=/etc/.credentials/mas_mdc.cred',
+        remote  => '://sm2ci00v/miisbx',
+    }
     file { '/etc/.credentials':
         owner   => 'root',
         group   => 'root',
         mode    => '0750',
         ensure  => 'directory',
         before  => File['/etc/.credentials/mdcgate.cred'],
+        before  => File['/etc/.credentials/mas_mdc.cred'],
     }
     file { "/etc/.credentials/mdcgate.cred":
         group   => "root",
@@ -43,8 +50,21 @@ class dart::mdct_00pi inherits dart::abstract::picaps_production_server_node {
         ],
         before  => Autofs::Map_entry['/mnt/prodmondata'],
     }
+    file { "/etc/.credentials/mas_mdc.cred":
+        group   => "root",
+        mode    => 600,
+        owner   => "root",
+        source  => [
+            'puppet:///modules/dart/picaps_servers/mas_mdc.cred',
+        ],
+        before  => Autofs::Map_entry['/mnt/sm2ci00v-miisbx'],
+    }
     file { "/dist/reportoutput":
         ensure  => link,
         target  => "/mnt/prodmondata/staging",
+    }
+    file { "/dist/mii":
+        ensure  => link,
+        target  => "/mnt/sm2ci00v-miisbx/MII",
     }
 }
