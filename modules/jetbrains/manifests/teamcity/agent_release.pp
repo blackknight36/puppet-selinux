@@ -91,7 +91,7 @@ define jetbrains::teamcity::agent_release (
                 ensure  => 'absent',
                 force   => true,
                 recurse => true,
-                after   => Systemd::Unit["${product_name}.service"],
+                require => Systemd::Unit["${product_name}.service"],
             }
         }
 
