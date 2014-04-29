@@ -15,9 +15,6 @@
 # [*build*]
 #   TeamCity build ID, e.g., '3.0.8'.
 #
-# [*ensure*]
-#   Instance is to be 'present' (default) or 'absent'.
-#
 # [*active*]
 #   When true (default), instance is to be enabled and running.  Otherwise
 #   instance is to be disabled and stopped.
