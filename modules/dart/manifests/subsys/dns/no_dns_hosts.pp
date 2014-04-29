@@ -70,6 +70,11 @@ class dart::subsys::dns::no_dns_hosts {
         host_aliases    => [ 'mdct-teamcity-agent2' ],
     }
 
+    host { 'mdct-teamcity-agent3.dartcontainer.com':
+        ip              => '10.1.192.134',
+        host_aliases    => [ 'mdct-teamcity-agent3' ],
+    }
+
     host { 'tc-util.dartcontainer.com':
         ip              => '10.1.250.61',
         host_aliases    => [ 'tc-util' ],

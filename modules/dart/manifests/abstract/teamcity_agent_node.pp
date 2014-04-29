@@ -27,7 +27,7 @@ class dart::abstract::teamcity_agent_node inherits dart::abstract::guarded_serve
                 build   => '7.1',
             }
         }
-        /^mdct-teamcity-(f20|agent.*)$/: {
+        /^mdct-teamcity-agent.*$/: {
             include 'openjdk::java_1_7_0'
 
             jetbrains::teamcity::agent_release { 'TeamCity-8.1.2':
