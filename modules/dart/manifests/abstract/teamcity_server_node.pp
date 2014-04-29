@@ -34,8 +34,15 @@ class dart::abstract::teamcity_server_node inherits dart::abstract::guarded_serv
         'mdct-teamcity-f20': {
             include 'openjdk::java_1_7_0'
 
-            jetbrains::teamcity::server_release { 'TeamCity-8.1.2':
-                build   => '8.1.2',
+            $production = '8.1.2'
+
+            jetbrains::teamcity::server_release { "TeamCity-${production}":
+                build   => "${production}",
+            }
+
+            jetbrains::teamcity::server_release { 'TeamCity-8.1a':
+                ensure  => absent,
+                build   => '8.1a',
             }
 
             # TeamCity relies on a manually installed postgresql-jdbc driver
@@ -48,7 +55,7 @@ class dart::abstract::teamcity_server_node inherits dart::abstract::guarded_serv
             # web page which states JDK 1.7 should use the "JDBC41" driver.
             class { 'postgresql::server':
                 hba_conf    => 'puppet:///private-host/postgresql/pg_hba.conf',
-                before      => Jetbrains::Teamcity::Server_release['TeamCity-8.1.2'],
+                before      => Jetbrains::Teamcity::Server_release["TeamCity-${production}"],
             }
 
         }
