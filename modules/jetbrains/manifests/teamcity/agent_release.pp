@@ -87,7 +87,7 @@ define jetbrains::teamcity::agent_release (
         }
 
         'absent': {
-            file { "${product_root}/buildAgent":
+            file { "${product_root}":
                 ensure  => 'absent',
                 force   => true,
                 recurse => true,
