@@ -46,7 +46,8 @@
   #/bin/ln -sd /dist/resource/cron/export-sap-pm-measurements /etc/cron.d/export-sap-pm-measurements
 # systemd target & services
 /bin/cp -a /dist/resource/systemd/picaps-all.target /etc/systemd/system/picaps-all.target
-/bin/cp -a /dist/resource/systemd/picaps-bridge.service /etc/systemd/system/picaps-bridge.service
+/bin/cp -a /dist/resource/systemd/picaps-bridge-1.service /etc/systemd/system/picaps-bridge-1.service
+/bin/cp -a /dist/resource/systemd/picaps-bridge-2.service /etc/systemd/system/picaps-bridge-2.service
 /bin/cp -a /dist/resource/systemd/picaps-core.service /etc/systemd/system/picaps-core.service
 /bin/cp -a /dist/resource/systemd/picaps-coretocore.service /etc/systemd/system/picaps-coretocore.service
 /bin/cp -a /dist/resource/systemd/picaps-display.service /etc/systemd/system/picaps-display.service
@@ -55,16 +56,18 @@
 /bin/cp -a /dist/resource/systemd/picaps-poller-xmlrpc.service /etc/systemd/system/picaps-poller-xmlrpc.service
 /bin/systemctl --system daemon-reload
 # enable services
-/bin/systemctl enable picaps-core.service
-/bin/systemctl enable picaps-display.service
-/bin/systemctl enable picaps-persister.service
+#/bin/systemctl enable picaps-core.service
+#/bin/systemctl enable picaps-display.service
+#/bin/systemctl enable picaps-persister.service
 #/bin/systemctl enable picaps-poller.service
-#/bin/systemctl enable picaps-bridge.service
+#/bin/systemctl enable picaps-bridge-1.service
+#/bin/systemctl enable picaps-bridge-2.service
 #/bin/systemctl enable picaps-coretocore.service
+#/bin/systemctl enable picaps-all.target
 
 # Additional software -- HB->PICAPS Bridge
-/bin/wget -P /home/ --no-verbose --mirror --no-host-directories --cut-dirs 3 ftp://mdct-00fs.dartcontainer.com/pub/kickstart/picaps/hbgw
-/bin/find /home/hbgw -type f -exec rm -f {}/.listing \;
+#/bin/wget -P /home/ --no-verbose --mirror --no-host-directories --cut-dirs 3 ftp://mdct-00fs.dartcontainer.com/pub/kickstart/picaps/hbgw
+#/bin/find /home/hbgw -type f -exec rm -f {}/.listing \;
 
 # Configure PICAPS database
 /usr/bin/mysql < /root/picaps-databases.sql
