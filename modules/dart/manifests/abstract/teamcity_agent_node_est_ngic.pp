@@ -26,4 +26,8 @@ class dart::abstract::teamcity_agent_node_est_ngic {
         mode    => '0755',
     }
 
+    class { 'postgresql::server':
+        hba_conf    => 'puppet:///private-domain/postgresql/teamcity_agent_pg_hba.conf',
+    }
+
 }
