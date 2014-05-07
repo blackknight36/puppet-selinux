@@ -23,7 +23,7 @@ class dart::mdct_aos_master_f20 {
     class { 'dart::abstract::aos_master_node':
         django_user     => 'django',
         django_group    => 'django',
-        python_ver      => '2.7',
+        python_ver      => '3.3',
     }
 
 }
