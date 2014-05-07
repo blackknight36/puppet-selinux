@@ -38,7 +38,12 @@ class dart::mdct_dev12 inherits dart::abstract::workstation_node {
         theme   => 'details',
     }
 
-    include 'apache'            # only need for serving man2html
+    # Apache httpd is needed for at least serving man2html, but may be used
+    # for development and/or debugging setups of dhcpd-driven-master or
+    # firewall-driven-master, hence the network_connect setting.
+    class { 'apache':
+        network_connect => true,
+    }
 
     class { 'bacula::client':
         dir_passwd      => '204f4392ecdcfd3324ce6efb2cb142f4',
