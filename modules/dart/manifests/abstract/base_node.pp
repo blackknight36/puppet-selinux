@@ -25,7 +25,15 @@ class dart::abstract::base_node {
     include 'packages::base'
     include 'prophile'
     #include 'selinux'
-    include 'sendmail'
+
+    class { 'sendmail':
+        enable  => $hostname ? {
+            'mdct-dev12'    => true,
+            'tc-util'       => true,
+            default         => false,
+        },
+    }
+
     include 'sudo'
     include 'timezone'
 
