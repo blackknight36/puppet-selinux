@@ -66,7 +66,7 @@ class dart::mdct_dev12 inherits dart::abstract::workstation_node {
     }
 
     printer { 'dell':
-        uri         => 'socket://10.1.193.23:9100',
+        uri         => 'socket://10.209.123.23:9100',
         description => 'Dell 3100cn',
         location    => 'Florian\'s office',
         model       => 'foomatic:Dell-3100cn-pxlcolor.ppd',
