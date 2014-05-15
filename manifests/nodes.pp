@@ -12,6 +12,7 @@ node 'mdct-00dw.dartcontainer.com'              { include 'dart::mdct_00dw' }
 node 'mdct-00fs.dartcontainer.com'              { include 'dart::mdct_00fs' }
 node 'mdct-00sw.dartcontainer.com'              { include 'dart::mdct_00sw' }
 node 'mdct-00tl.dartcontainer.com'              { include 'dart::mdct_00tl' }
+node 'mdct-00tlup.dartcontainer.com'            { include 'dart::mdct_00tlup' }
 node 'mdct-00pi.dartcontainer.com'              { include 'dart::mdct_00pi' }
 node 'mdct-01pi.dartcontainer.com'              { include 'dart::mdct_01pi' }
 node 'mdct-01pt.dartcontainer.com'              { include 'dart::mdct_01pt' }
@@ -40,6 +41,7 @@ node 'mdct-73pi.dartcontainer.com'              { include 'dart::mdct_73pi' }
 node 'mdct-73pt.dartcontainer.com'              { include 'dart::mdct_73pt' }
 node 'mdct-75pi.dartcontainer.com'              { include 'dart::mdct_75pi' }
 node 'mdct-75pt.dartcontainer.com'              { include 'dart::mdct_75pt' }
+node 'mdct-76pi.dartcontainer.com'              { include 'dart::mdct_76pi' }
 node 'mdct-76pt.dartcontainer.com'              { include 'dart::mdct_76pt' }
 node 'mdct-77pt.dartcontainer.com'              { include 'dart::mdct_77pt' }
 node 'mdct-99pi.dartcontainer.com'              { include 'dart::mdct_99pi' }
