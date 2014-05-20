@@ -17,22 +17,18 @@ node 'mdct-00pi.dartcontainer.com'              { include 'dart::mdct_00pi' }
 node 'mdct-01pi.dartcontainer.com'              { include 'dart::mdct_01pi' }
 node 'mdct-01pt.dartcontainer.com'              { include 'dart::mdct_01pt' }
 node 'mdct-02pi.dartcontainer.com'              { include 'dart::mdct_02pi' }
-node 'mdct-02ut.dartcontainer.com'              { include 'dart::mdct_02ut' }
 node 'mdct-0302pi.dartcontainer.com'            { include 'dart::mdct_0302pi' }
 node 'mdct-0310pi.dartcontainer.com'            { include 'dart::mdct_0310pi' }
 node 'mdct-0314pi.dartcontainer.com'            { include 'dart::mdct_0314pi' }
 node 'mdct-03pt.dartcontainer.com'              { include 'dart::mdct_03pt' }
-node 'mdct-03ut.dartcontainer.com'              { include 'dart::mdct_03ut' }
 node 'mdct-04pi.dartcontainer.com'              { include 'dart::mdct_04pi' }
 node 'mdct-04pt.dartcontainer.com'              { include 'dart::mdct_04pt' }
 node 'mdct-05pi.dartcontainer.com'              { include 'dart::mdct_05pi' }
 node 'mdct-05pt.dartcontainer.com'              { include 'dart::mdct_05pt' }
-node 'mdct-10ut.dartcontainer.com'              { include 'dart::mdct_10ut' }
 node 'mdct-11pi.dartcontainer.com'              { include 'dart::mdct_11pi' }
 node 'mdct-15pi.dartcontainer.com'              { include 'dart::mdct_15pi' }
 node 'mdct-15pt.dartcontainer.com'              { include 'dart::mdct_15pt' }
 node 'mdct-19pt.dartcontainer.com'              { include 'dart::mdct_19pt' }
-node 'mdct-19ut.dartcontainer.com'              { include 'dart::mdct_19ut' }
 node 'mdct-25pt.dartcontainer.com'              { include 'dart::mdct_25pt' }
 node 'mdct-39pt.dartcontainer.com'              { include 'dart::mdct_39pt' }
 node 'mdct-47pi.dartcontainer.com'              { include 'dart::mdct_47pi' }
@@ -89,3 +85,4 @@ node /^mdct-foreman.*\.dartcontainer\.com$/     { include 'dart::mdct_foreman' }
 node /^mdct-ovirt-node-.*\.dartcontainer\.com$/ { include 'dart::mdct_ovirt_node' }
 node /^mdct-puppet.*\.dartcontainer\.com$/      { include 'dart::mdct_puppet' }
 node /^mdct-teamcity-agent.*\.dartcontainer.com$/   { include 'dart::mdct_teamcity_agent' }
+node /^mdct-\d+ut\.dartcontainer\.com$/         { include 'dart::mdct_ut' }
