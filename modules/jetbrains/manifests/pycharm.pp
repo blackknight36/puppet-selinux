@@ -87,13 +87,13 @@ class jetbrains::pycharm {
     # EAP Releases
     #
 
-    jetbrains::pycharm_release { 'pycharm-135.763':
-        build   => '135.763',
+    jetbrains::pycharm_release { 'pycharm-135.889':
+        build   => '135.889',
         edition => 'professional',
     }
 
-    jetbrains::pycharm_release { 'pycharm-133.738':
-        build   => '133.738',
+    jetbrains::pycharm_release { 'pycharm-135.763':
+        build   => '135.763',
         edition => 'professional',
         ensure  => 'absent',
     }
