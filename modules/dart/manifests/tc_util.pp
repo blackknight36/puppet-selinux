@@ -109,6 +109,14 @@ password=T5A!ENsER
         require         => Group['tcadmins'],
     }
 
+    mounted_tc_volume { 'teamcenter_preproduction_delta':
+        host            => 'mas-cad55',
+        share_name      => 'volumes',
+        group           => "${tcadmins_gid}",
+        options         => "rw,uid=0,gid=${tcadmins_gid},file_mode=0660,noperm",
+        require         => Group['tcadmins'],
+    }
+
     file { '/usr/local/bin/teamcenter-sync':
         owner   => 'root',
         group   => 'root',
