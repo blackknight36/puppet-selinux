@@ -112,6 +112,6 @@ krb5_realm = DARTCONTAINER.COM
 ldap_id_use_start_tls = False
 ldap_search_base = dc=dartcontainer,dc=com
 ldap_tls_cacertdir = /etc/openldap/cacerts
-ldap_uri = ldap://10.1.192.106
+ldap_uri = ldap://10.1.192.106,ldap://10.2.192.1
 min_id = 500
 pwd_expiration_warning = 14
