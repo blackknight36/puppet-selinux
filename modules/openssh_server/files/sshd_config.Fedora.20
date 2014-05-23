@@ -92,7 +92,7 @@ ChallengeResponseAuthentication no
 #GSSAPIAuthentication no
 GSSAPIAuthentication yes
 #GSSAPICleanupCredentials yes
-GSSAPICleanupCredentials yes
+GSSAPICleanupCredentials no
 #GSSAPIStrictAcceptorCheck yes
 #GSSAPIKeyExchange no
 
