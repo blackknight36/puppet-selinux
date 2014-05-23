@@ -1,81 +1,76 @@
 # modules/bacula/manifests/client.pp
 #
 # Synopsis:
-#       Configures a host as a Bacula client.
+#       Configures the Bacula File (Client) Daemon on a host.
 #
 # Parameters:
-#       Name__________  Default_______  Description___________________________
+#       Name__________  Notes_  Description___________________________
 #
-#       dir_passwd      *none*          Password that the Director should use
-#                                       to connect to this client for full
-#                                       control.
+#       name                    instance name; not used
 #
-#       mon_passwd      *none*          Password that should be used to
-#                                       connect to this client for restricted
-#                                       control, chiefly status updates.
+#       dir_name                the Director's name
 #
-# Example Usage:
+#       dir_passwd              pasword authorizing connections to the
+#                               Director for full privileges
 #
-#       class { 'bacula::client':
-#           dir_passwd      => 'super-secret-squirrel-sauce',
-#           mon_passwd      => 'stunningly-saturated-squirrel-sausage',
-#       }
+#       mon_name                the Monitor's name
+#
+#       mon_passwd              pasword authorizing connections to the
+#                               Director for restricted privileges
+#
+# Notes:
+#
+#       NONE
 
-class bacula::client($dir_passwd, $mon_passwd) {
 
-    # The introduction of systemd brought subtle configuration changes that
-    # must be reflected here.
-    if $operatingsystemrelease >= 15 {
-        $ossuffix='.Fedora15+'
-    } else {
-        $ossuffix=''
-    }
+class bacula::client (
+    $dir_name, $dir_passwd,
+    $mon_name, $mon_passwd,
+    ) {
 
-    # Fedora packages Bacula so that multiple major versions can coexist.  We
-    # only need one of them and force the absence of the other primarily to
-    # ensure that the other has already been configured and has a service
-    # started and listening on the reserved port.  Essentially, we're evicting
-    # any potential port squatter.
-    $conflict_packages = [ 'bacula2-client', 'bacula2-common', ]
+    include 'bacula::common'
+    include 'bacula::params'
 
-    package { $conflict_packages:
-        ensure  => absent,
-    }
-
-    package { 'bacula-client':
+    package { $bacula::params::fd_packages:
         ensure  => installed,
-        require => Package[$conflict_packages],
     }
 
     File {
-        owner   => 'root',
-        group   => 'root',
-        mode    => '0640',
-        require => Package['bacula-client'],
+        owner       => 'root',
+        group       => 'bacula',
+        mode        => '0640',
+        seluser     => 'system_u',
+        selrole     => 'object_r',
+        seltype     => 'etc_t',
+        subscribe   => [
+            Package[$bacula::params::common_packages],
+            Package[$bacula::params::fd_packages],
+        ]
     }
 
     file { '/etc/bacula/bacula-fd.conf':
-        content => template('bacula/bacula-fd.conf'),
+        content	=> template('bacula/bacula-fd.conf'),
     }
 
     file { '/etc/sysconfig/bacula-fd':
-        source  => "puppet:///modules/bacula/bacula-fd${ossuffix}",
+        source  => 'puppet:///modules/bacula/bacula-fd',
     }
 
     iptables::tcp_port {
         'bacula-fd':    port => '9102';
     }
 
-    service { 'bacula-fd':
-        enable      => true,
-        ensure      => running,
-        hasrestart  => true,
-        hasstatus   => true,
-        require     => Package['bacula-client'],
-        subscribe   => [
+    service { $bacula::params::fd_service_name:
+        enable		=> true,
+        ensure		=> running,
+        hasrestart	=> true,
+        hasstatus	=> true,
+        subscribe       => [
             File['/etc/bacula/bacula-fd.conf'],
             File['/etc/sysconfig/bacula-fd'],
-        ]
+            Package[$bacula::params::common_packages],
+            Package[$bacula::params::fd_packages],
+        ],
     }
 
 }

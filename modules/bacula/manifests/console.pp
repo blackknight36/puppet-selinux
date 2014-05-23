@@ -1,7 +1,7 @@
-# modules/bacula/manifests/admin.pp
+# modules/bacula/manifests/console.pp
 #
 # Synopsis:
-#       Configures a host with Bacula administration tools.
+#       Configures the Bacula Console on a host.
 #
 # Parameters:
 #       Name__________  Notes_  Description___________________________
@@ -20,13 +20,13 @@
 #       NONE
 
 
-class bacula::admin (
+class bacula::console (
     $dir_address, $dir_name, $dir_passwd,
     ) {
 
     include 'bacula::params'
 
-    package { $bacula::params::admin_packages:
+    package { $bacula::params::con_packages:
         ensure  => installed,
     }
 
@@ -37,14 +37,11 @@ class bacula::admin (
         seluser     => 'system_u',
         selrole     => 'object_r',
         seltype     => 'etc_t',
-        subscribe   => Package[$bacula::params::admin_packages],
-        # It seems only the bacula-client package provides the bacula group.
-        # TODO: prove and file a BZ
-        require     => Class['bacula::client'],
+        subscribe   => Package[$bacula::params::con_packages],
     }
 
-    file { '/etc/bacula/bat.conf':
-        content => template('bacula/bat.conf'),
+    file { '/etc/bacula/bconsole.conf':
+        content => template('bacula/bconsole.conf'),
     }
 
 }

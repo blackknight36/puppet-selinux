@@ -45,12 +45,19 @@ class dart::mdct_dev12 inherits dart::abstract::workstation_node {
         network_connect => true,
     }
 
-    class { 'bacula::client':
-        dir_passwd      => '204f4392ecdcfd3324ce6efb2cb142f4',
-        mon_passwd      => '9183e6fe26d853f50e9e57e561057951',
+    class { 'bacula::admin':
+        dir_address => "mdct-00bk.${domain}",
+        dir_name    => 'mdct-00bk-dir',
+        dir_passwd  => 'a/kIuMrD+AIJxl5HlDZhdEdugagOer5nUi43qgip2DED',
     }
 
-    include 'bacula::admin'
+    class { 'bacula::client':
+        dir_name    => 'mdct-bacula-dir',
+        dir_passwd  => '204f4392ecdcfd3324ce6efb2cb142f4',
+        mon_name    => 'mdct-bacula-mon',
+        mon_passwd  => '9183e6fe26d853f50e9e57e561057951',
+    }
+
     include 'dart::subsys::yum_cron'
     include 'jetbrains::pycharm'
 

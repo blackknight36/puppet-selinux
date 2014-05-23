@@ -16,7 +16,9 @@
 class dart::mdct_aos_master_f19 {
 
     class { 'bacula::client':
+        dir_name    => 'mdct-bacula-dir',
         dir_passwd  => 'hobe9yveB940mWreqoVzfTMIXfWurWi5ROughoJw7A39',
+        mon_name    => 'mdct-bacula-mon',
         mon_passwd  => 'zdJxxdFhes9YxlJNhAHFOaSbneIy9N3FmlzTkA1wdowU',
     }
 
