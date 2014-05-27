@@ -1,4 +1,6 @@
-# /etc/sysconfig/bacula-fd (provided by puppet bacula::client)
+# /etc/sysconfig/bacula-fd
+#
+# Origin: modules/bacula/files/bacula-fd
 
 # User and group for bacula client
 # If no user is set bacula will run as root
