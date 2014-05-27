@@ -51,7 +51,7 @@ class bacula::client (
     }
 
     file { '/etc/bacula/bacula-fd.conf':
-        content	=> template('bacula/bacula-fd.conf'),
+        content => template('bacula/bacula-fd.conf'),
     }
 
     file { '/etc/sysconfig/bacula-fd':
@@ -63,11 +63,11 @@ class bacula::client (
     }
 
     service { $bacula::params::fd_service_name:
-        enable		=> true,
-        ensure		=> running,
-        hasrestart	=> true,
-        hasstatus	=> true,
-        subscribe       => [
+        enable      => true,
+        ensure      => running,
+        hasrestart  => true,
+        hasstatus   => true,
+        subscribe   => [
             File['/etc/bacula/bacula-fd.conf'],
             File['/etc/sysconfig/bacula-fd'],
             Package[$bacula::params::common_packages],

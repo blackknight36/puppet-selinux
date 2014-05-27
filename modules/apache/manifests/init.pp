@@ -52,7 +52,7 @@ class apache (
     }
 
     file { '/etc/httpd/conf/httpd.conf':
-        content	=> template("apache/httpd.conf.${operatingsystem}.${operatingsystemrelease}"),
+        content => template("apache/httpd.conf.${operatingsystem}.${operatingsystemrelease}"),
     }
 
     iptables::tcp_port {

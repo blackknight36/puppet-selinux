@@ -75,10 +75,10 @@ class bacula::storage_daemon (
     }
 
     service { $bacula::params::sd_service_name:
-        enable		=> true,
-        ensure		=> running,
-        hasrestart	=> true,
-        hasstatus	=> true,
+        enable      => true,
+        ensure      => running,
+        hasrestart  => true,
+        hasstatus   => true,
         subscribe   => $external_package_deps,
     }
 
