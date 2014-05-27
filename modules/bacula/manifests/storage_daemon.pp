@@ -1,33 +1,34 @@
 # modules/bacula/manifests/storage_daemon.pp
 #
-# Synopsis:
-#       Configures the Bacula Storage Daemon on a host.
+# == Class: bacula::storage_daemon
 #
-# Parameters:
-#       Name__________  Notes_  Description___________________________
+# Configures a host as a Bacula Storage Daemon.
 #
-#       name                    instance name; not used
+# === Parameters
 #
-#       dir_name                the Director's name
+# [*dir_name*]
+#   The name of the Bacula Director.
 #
-#       mon_name                the Monitor's name
+# [*mon_name*]
+#   The name of the Bacula Monitor.
 #
-#       mon_passwd              pasword authorizing connections to the
-#                               Director for restricted privileges
+# [*mon_passwd*]
+#   The password authorizing connections to the Bacula Director, albeit with
+#   restricted (i.e., monitoring) privileges.
 #
-#       sd_name                 the Storage Daemon's name
+# [*sd_name*]
+#   The name of the Bacula Storage Daemon.
 #
-#       sd_address              hostname/IP of Storage Daemon
+# [*sd_passwd*]
+#   The password authorizing connections to this Bacula Storage Daemon.
 #
-#       sd_passwd               pasword authorizing connections to this
-#                               Storage Daemon
+# [*sd_archive_dev*]
+#   The name of the device where this Bacula Storage Daemon will write backup
+#   archives (AKA volumes).
 #
-#       sd_archive_dev          Device name where Storage Daemon will write
-#                               backup archives (AKA volumes).
+# === Authors
 #
-# Notes:
-#
-#       NONE
+#   John Florian <jflorian@doubledog.org>
 
 
 class bacula::storage_daemon (

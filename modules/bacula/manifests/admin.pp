@@ -1,23 +1,24 @@
 # modules/bacula/manifests/admin.pp
 #
-# Synopsis:
-#       Configures a host with Bacula administration tools.
+# == Class: bacula::admin
 #
-# Parameters:
-#       Name__________  Notes_  Description___________________________
+# Configures the Bacula administration tools on a host.
 #
-#       name                    instance name; not used
+# === Parameters
 #
-#       dir_address             hostname/IP of Director
+# [*dir_address*]
+#   The hostname or IP address where the Bacula Director can be reached.
 #
-#       dir_name                the Director's name
+# [*dir_name*]
+#   The name of the Bacula Director.
 #
-#       dir_passwd              pasword authorizing connections to the
-#                               Director for full privileges
+# [*dir_passwd*]
+#   The password authorizing connections to the Bacula Director, with
+#   unrestricted privileges.
 #
-# Notes:
+# === Authors
 #
-#       NONE
+#   John Florian <jflorian@doubledog.org>
 
 
 class bacula::admin (

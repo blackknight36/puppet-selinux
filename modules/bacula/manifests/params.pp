@@ -1,7 +1,12 @@
 # modules/bacula/manifests/params.pp
 #
-# Synopsis:
-#       Parameters for the bacula puppet module.
+# == Class: bacula::params
+#
+# Parameters for the bacula puppet module.
+#
+# === Authors
+#
+#   John Florian <jflorian@doubledog.org>
 
 
 class bacula::params {

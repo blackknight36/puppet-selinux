@@ -1,26 +1,28 @@
 # modules/bacula/manifests/client.pp
 #
-# Synopsis:
-#       Configures the Bacula File (Client) Daemon on a host.
+# == Class: bacula::client
 #
-# Parameters:
-#       Name__________  Notes_  Description___________________________
+# Configures the Bacula File (Client) Daemon on a host.
 #
-#       name                    instance name; not used
+# === Parameters
 #
-#       dir_name                the Director's name
+# [*dir_name*]
+#   The name of the Bacula Director.
 #
-#       dir_passwd              pasword authorizing connections to the
-#                               Director for full privileges
+# [*dir_passwd*]
+#   The password authorizing connections to the Bacula Director, with
+#   unrestricted privileges.
 #
-#       mon_name                the Monitor's name
+# [*mon_name*]
+#   The name of the Bacula Monitor.
 #
-#       mon_passwd              pasword authorizing connections to the
-#                               Director for restricted privileges
+# [*mon_passwd*]
+#   The password authorizing connections to the Bacula Director, albeit with
+#   restricted (i.e., monitoring) privileges.
 #
-# Notes:
+# === Authors
 #
-#       NONE
+#   John Florian <jflorian@doubledog.org>
 
 
 class bacula::client (

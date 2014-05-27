@@ -1,13 +1,17 @@
 # modules/bacula/manifests/common.pp
 #
-# Synopsis:
-#       Configures the common parts of Bacula.
+# == Class: bacula::common
 #
-# Parameters:
-#       NONE
+# Configures the common parts of Bacula.
 #
-# Requires:
-#       NONE
+# === Parameters
+#
+# NONE
+#
+# === Authors
+#
+#   John Florian <jflorian@doubledog.org>
+
 
 class bacula::common {
 

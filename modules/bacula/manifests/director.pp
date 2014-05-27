@@ -1,18 +1,20 @@
 # modules/bacula/manifests/director.pp
 #
-# Synopsis:
-#       Configures the Bacula Director Daemon on a host.
+# == Class: bacula::director
 #
-# Parameters:
-#       Name__________  Notes_  Description___________________________
+# Configures the Bacula Director Daemon on a host.
 #
-#       dir_conf                content of the Director's configuration
+# === Parameters
 #
-#       pgpass_source           URI of Postgres password file
+# [*dir_conf*]
+#   Content of the Bacula Director's configuration.
 #
-# Notes:
+# [*pgpass_source*]
+#   URI of the Postgres password file.
 #
-#       NONE
+# === Authors
+#
+#   John Florian <john.florian@dart.biz>
 
 
 class bacula::director ($dir_conf, $pgpass_source) {

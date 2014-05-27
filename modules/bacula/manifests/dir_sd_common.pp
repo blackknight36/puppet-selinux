@@ -1,14 +1,17 @@
 # modules/bacula/manifests/dir_sd_common.pp
 #
-# Synopsis:
-#       Configures the common parts of Bacula as needed on Directors and
-#       Storage Daemons.
+# == Class: bacula::dir_sd_common
 #
-# Parameters:
-#       NONE
+# Configures the parts of Bacula common to both Directors and Storage Daemons.
 #
-# Requires:
-#       NONE
+# === Parameters
+#
+# NONE
+#
+# === Authors
+#
+#   John Florian <jflorian@doubledog.org>
+
 
 class bacula::dir_sd_common {
 
