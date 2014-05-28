@@ -35,4 +35,15 @@ class dart::mdct_00bk inherits dart::abstract::guarded_server_node {
         hba_conf    => 'puppet:///private-host/postgresql/pg_hba.conf',
     }
 
+    bacula::director::inclusion {
+        'clients':
+            content => template('dart/bacula/clients.conf');
+        'file-sets':
+            content => template('dart/bacula/file-sets.conf');
+        'jobs':
+            content => template('dart/bacula/jobs.conf');
+        'schedules':
+            content => template('dart/bacula/schedules.conf');
+    }
+
 }
