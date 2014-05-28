@@ -53,6 +53,10 @@ class bacula::director ($dir_conf, $pgpass_source) {
         content => "${dir_conf}",
     }
 
+    file { '/etc/bacula/director':
+        ensure  => directory,
+    }
+
     file { '/root/.pgpass':
         mode    => '0600',
         seltype => 'admin_home_t',
