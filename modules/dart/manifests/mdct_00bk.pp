@@ -17,6 +17,11 @@ class dart::mdct_00bk inherits dart::abstract::guarded_server_node {
         dir_passwd  => $dart::params::bacula_dir_passwd,
     }
 
+    class { 'bacula::director':
+        dir_conf        => template('dart/bacula/director.conf'),
+        pgpass_source   => 'puppet:///private-host/.pgpass',
+    }
+
     class { 'bacula::storage_daemon':
         dir_name        => $dart::params::bacula_dir_name,
         mon_name        => $dart::params::bacula_mon_name,

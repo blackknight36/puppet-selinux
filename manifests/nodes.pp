@@ -1,11 +1,16 @@
 # manifests/nodes.pp
 # vim: tw=90
 
-# This file only contains node/class associations.  Every host now gets its
-# own class which should inherit one of the abstract node-type classes.  All
-# such classes are in the dart module (see
-# manifests/nodes.pp
+# Bring in the domain-level parameters that transcend classes and modules.
+include 'dart::params'
 
+# Now associate host names with their corresponding class.  Since this is handled on a
+# first match wins basis, our strategy is start with very specific associations and finish
+# with generalized associations.
+
+#
+# This section must consist only of very specific host:class relations on a 1:1 basis.
+#
 node 'mdct-00bk.dartcontainer.com'              { include 'dart::mdct_00bk' }
 node 'mdct-00dtl.dartcontainer.com'             { include 'dart::mdct_00dtl' }
 node 'mdct-00dw.dartcontainer.com'              { include 'dart::mdct_00dw' }
@@ -80,6 +85,10 @@ node 'mole-dev.dartcontainer.com'               { include 'dart::mole_dev' }
 node 'mole.dartcontainer.com'                   { include 'dart::mole' }
 node 'tc-util.dartcontainer.com'                { include 'dart::tc_util' }
 
+
+#
+# This section consists only of loose host(s):class relations on a M:1 basis.
+#
 node /^mdct-dev10-.*\.dartcontainer\.com$/      { include 'dart::mdct_dev10_srvr' }
 node /^mdct-foreman.*\.dartcontainer\.com$/     { include 'dart::mdct_foreman' }
 node /^mdct-ovirt-node-.*\.dartcontainer\.com$/ { include 'dart::mdct_ovirt_node' }
