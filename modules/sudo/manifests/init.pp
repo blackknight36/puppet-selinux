@@ -1,27 +1,25 @@
 # modules/sudo/manifests/init.pp
+#
+# == Class: sudo
+#
+# Configures a sudo on a host.
+#
+# === Parameters
+#
+# NONE
+#
+# === Authors
+#
+#   John Florian <john.florian@dart.biz>
+
 
 class sudo {
 
-    package { "sudo":
-        ensure  => installed
+    include 'sudo::params'
+
+    package { $sudo::params::packages:
+        ensure  => installed,
     }
 
-    if  $operatingsystem == "Fedora" and
-        $operatingsystemrelease == 'Rawhide' or
-        $operatingsystemrelease >= 13
-    {
-
-        file { "/etc/sudoers.d/mdct":
-            group   => "root",
-            mode    => 440,
-            owner   => "root",
-            require => Package["sudo"],
-            source  => [
-                "puppet:///modules/sudo/sudoers.$hostname",
-                "puppet:///modules/sudo/sudoers.mdct",
-            ],
-        }
-
-    }
 
 }

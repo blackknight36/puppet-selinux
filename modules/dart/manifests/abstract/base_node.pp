@@ -35,6 +35,14 @@ class dart::abstract::base_node {
     }
 
     include 'sudo'
+
+    sudo::drop_in { 'mdct':
+        source  =>  [
+            "puppet:///private-host/sudo/mdct",
+            "puppet:///private-domain/sudo/mdct",
+        ],
+    }
+
     include 'timezone'
 
     if  $operatingsystem == 'Fedora' and
