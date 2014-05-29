@@ -19,10 +19,6 @@
 
 class dart::mdct_teamcity_f20 inherits dart::abstract::teamcity_server_node {
 
-    # Most TeamCity Servers also feature a bundled Agent, so we do too,
-    # though our Puppet infrastructure doesn't require it.
-    include 'dart::abstract::teamcity_agent_node'
-
     sendmail::alias { 'root':
         recipient   => 'john.florian@dart.biz',
     }
