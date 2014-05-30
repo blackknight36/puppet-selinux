@@ -37,7 +37,7 @@ class dart::mdct_00bk inherits dart::abstract::guarded_server_node {
         device  => '/dev/BackupVG/lvol1',
         ensure  => 'mounted',
         fstype  => 'auto',
-        options => 'defaults',
+        options => '_netdev,defaults',
         require => File['/storage'],
     }
 
