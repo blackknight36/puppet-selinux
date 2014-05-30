@@ -21,4 +21,8 @@ class dart::abstract::tomcat_web_app inherits dart::abstract::guarded_server_nod
         'tomcat_web_app': port => '8080';
     }
 
+    sudo::drop_in { 'tomcat-service':
+        source  =>  'puppet:///private-domain/sudo/tomcat-service',
+    }
+
 }

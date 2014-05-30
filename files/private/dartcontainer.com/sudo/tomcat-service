@@ -1,0 +1,10 @@
+# Origin: files/private/dartcontainer.com/sudo/tomcat-service
+#
+# vim: filetype=sudoers
+
+dr      ALL=(root)  NOPASSWD: /bin/systemctl stop tomcat.service, /bin/systemctl start tomcat.service
+
+est     ALL=(root)  NOPASSWD: /bin/systemctl stop tomcat6.service, /bin/systemctl start tomcat6.service
+est     ALL=(root)  NOPASSWD: /bin/systemctl stop tomcat.service, /bin/systemctl start tomcat.service
+
+ngic    ALL=(root)  NOPASSWD: /bin/systemctl stop tomcat.service, /bin/systemctl start tomcat.service
