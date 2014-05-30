@@ -8,6 +8,32 @@
 
 class dart::mdct_00bk inherits dart::abstract::guarded_server_node {
 
+    class { 'network':
+        service         => 'nm',
+        domain          => $dart::params::dns_domain,
+        name_servers    => $dart::params::dns_servers,
+    }
+
+    network::interface { 'ens34':
+        template    => 'static',
+        ip_address  => '192.168.1.7',
+        netmask     => '255.255.255.0',
+        stp         => 'no',
+    }
+
+    file { '/storage':
+        ensure  => directory,
+    }
+
+    mount { '/storage':
+        atboot  => true,
+        device  => '/dev/BackupVG/lvol1',
+        ensure  => 'mounted',
+        fstype  => 'auto',
+        options => 'defaults',
+        require => File['/storage'],
+    }
+
     include 'iscsi::initiator'
 
     class { 'puppet::client':
