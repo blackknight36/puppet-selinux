@@ -18,4 +18,8 @@ class dart::params {
     $bacula_sd_name         = 'mdct-bacula-sd'
     $bacula_sd_passwd       = 'oPm5LiIU7n77WlEFAnZPA0gmINQA5fyJxmBvULOuof5C'
 
+    # DNS
+    $dns_domain     = $domain
+    $dns_servers    = ['10.1.0.98', '10.1.0.99']
+
 }

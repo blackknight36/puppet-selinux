@@ -17,8 +17,8 @@ class dart::mdct_dev12 inherits dart::abstract::workstation_node {
 
     class { 'network':
         service         => 'nm',
-        domain          => 'dartcontainer.com',
-        name_servers    => ['10.1.0.98', '10.1.0.99'],
+        domain          => $dart::params::dns_domain,
+        name_servers    => $dart::params::dns_servers,
     }
 
     network::interface { 'br0':
