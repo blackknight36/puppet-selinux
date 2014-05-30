@@ -14,6 +14,13 @@ class dart::mdct_00bk inherits dart::abstract::guarded_server_node {
         name_servers    => $dart::params::dns_servers,
     }
 
+    network::interface { 'ens32':
+        template    => 'static',
+        ip_address  => '10.1.250.47',
+        netmask     => '255.255.0.0',
+        stp         => 'no',
+    }
+
     network::interface { 'ens34':
         template    => 'static',
         ip_address  => '192.168.1.7',
