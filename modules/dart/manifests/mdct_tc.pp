@@ -23,9 +23,9 @@ class dart::mdct_tc inherits dart::abstract::guarded_server_node {
     }
 
     class { 'bacula::client':
-        dir_name    => 'mdct-bacula-dir',
+        dir_name    => $dart::params::bacula_dir_name,
         dir_passwd  => 'uUue45lLldkNNhfla3jf9dkfjxxDkfjAldkfjLKDJE',
-        mon_name    => 'mdct-bacula-mon',
+        mon_name    => $dart::params::bacula_mon_name,
         mon_passwd  => '8QNsZ1MehmXv61Kx8l2IcnOhtjrXeV3iFBm3GNOqukMU',
     }
 

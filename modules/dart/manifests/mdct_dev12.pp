@@ -52,9 +52,9 @@ class dart::mdct_dev12 inherits dart::abstract::workstation_node {
     }
 
     class { 'bacula::client':
-        dir_name    => 'mdct-bacula-dir',
+        dir_name    => $dart::params::bacula_dir_name,
         dir_passwd  => '204f4392ecdcfd3324ce6efb2cb142f4',
-        mon_name    => 'mdct-bacula-mon',
+        mon_name    => $dart::params::bacula_mon_name,
         mon_passwd  => '9183e6fe26d853f50e9e57e561057951',
     }
 

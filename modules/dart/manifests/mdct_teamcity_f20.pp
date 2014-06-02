@@ -30,9 +30,9 @@ class dart::mdct_teamcity_f20 inherits dart::abstract::teamcity_server_node {
     }
 
     class { 'bacula::client':
-        dir_name    => 'mdct-bacula-dir',
+        dir_name    => $dart::params::bacula_dir_name,
         dir_passwd  => 'RFdZ9Dm9bxuIEIp1Q7Gu0sEoHX9AUHecFbwE6weT1IAz',
-        mon_name    => 'mdct-bacula-mon',
+        mon_name    => $dart::params::bacula_mon_name,
         mon_passwd  => 'hRGbzxczzByoo9chMe7y6Qlxeo0dmfedAKJCP9Y2M4o6',
     }
 
