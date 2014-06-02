@@ -14,7 +14,7 @@
 #
 # === Authors
 #
-#   John Florian <john.florian@dart.biz>
+#   John Florian <jflorian@doubledog.org>
 
 
 class bacula::director ($dir_conf, $pgpass_source) {
