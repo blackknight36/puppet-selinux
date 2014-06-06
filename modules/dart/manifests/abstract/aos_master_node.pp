@@ -92,6 +92,7 @@ class dart::abstract::aos_master_node (
     }
 
     class { 'vsftpd':
+        source          => 'puppet:///private-host/vsftpd/vsftpd.conf',
         allow_use_nfs   => true,
     }
 

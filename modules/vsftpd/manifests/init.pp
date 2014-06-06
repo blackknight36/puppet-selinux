@@ -1,67 +1,75 @@
 # modules/vsftpd/manifests/init.pp
 #
-# Synopsis:
-#       Configures a host as a vsftpd server.
+# == Class: vsftpd
 #
-# Parameters:
-#       $allow_use_nfs  true/false      Configure SELinux to permit vsftpd to
-#                                       export content residing on NFS.
+# Configures a host as a vsftpd server.
 #
-# Requires:
-#       NONE
+# === Parameters
 #
-# Example usage:
+# [*content*]
+#   Literal content for the vsftpd.conf file.  One and only one of "content"
+#   or "source" must be given.
 #
-#       class { 'vsftpd':
-#           allow_use_nfs      => true,
-#       }
+# [*source*]
+#   URI of the vsftpd.conf file content.  One and only one of "content" or
+#   "source" must be given.
+#
+# [*allow_use_nfs*]
+#   If true, configure SELinux to permit vsftpd to export content residing on
+#   NFS.  The default is false.
+#
+# === Authors
+#
+#   John Florian <john.florian@dart.biz>
 
-class vsftpd($allow_use_nfs=false) {
 
-    package { 'vsftpd':
+class vsftpd($content=undef, $source=undef, $allow_use_nfs=false) {
+
+    include 'vsftpd::params'
+
+    package { $vsftpd::params::packages:
         ensure  => installed,
+        notify  => Service[$vsftpd::params::service_name],
+    }
+
+    File {
+        owner       => 'root',
+        group       => 'root',
+        mode        => '0600',
+        seluser     => 'system_u',
+        selrole     => 'object_r',
+        seltype     => 'etc_t',
+        before      => Service[$vsftpd::params::service_name],
+        notify      => Service[$vsftpd::params::service_name],
+        subscribe   => Package[$vsftpd::params::packages],
     }
 
     file { '/etc/vsftpd/vsftpd.conf':
-        group   => 'root',
-        mode    => '0600',
-        owner   => 'root',
-        require => Package['vsftpd'],
-        seluser => 'system_u',
-        selrole => 'object_r',
-        seltype => 'etc_t',
-        source  => [
-            'puppet:///private-host/vsftpd/vsftpd.conf',
-            'puppet:///private-domain/vsftpd/vsftpd.conf',
-            'puppet:///modules/vsftpd/vsftpd.conf',
-        ],
+        content     => $content,
+        source      => $source,
     }
 
     iptables::tcp_port {
         'vsftpd':   port => '21';
     }
 
-    if $operatingsystem == 'Fedora' and $operatingsystemrelease < 18 {
-        $seboolname = 'allow_ftpd_use_nfs'
-    } else {
-        $seboolname = 'ftpd_use_nfs'
-    }
-    selinux::boolean { $seboolname:
-        before      => Service['vsftpd'],
+    Selinux::Boolean {
+        before      => Service[$vsftpd::params::service_name],
         persistent  => true,
+    }
+
+    selinux::boolean { $vsftpd::params::bool_allow_use_nfs:
         value       => $allow_use_nfs ? {
             true    => on,
             default => off,
         }
     }
 
-    service { 'vsftpd':
+    service { $vsftpd::params::service_name:
         enable      => true,
         ensure      => running,
         hasrestart  => true,
         hasstatus   => true,
-        require     => Package['vsftpd'],
-        subscribe   => File['/etc/vsftpd/vsftpd.conf'],
     }
 
 }
