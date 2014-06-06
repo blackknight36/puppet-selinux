@@ -25,9 +25,14 @@
 # === Authors
 #
 #   John Florian <john.florian@dart.biz>
+#   John Florian <jflorian@doubledog.org>
 
 
-define MODULE_NAME::DEFINE_NAME ($ensure='present', $source) {
+define MODULE_NAME::DEFINE_NAME (
+        $ensure='present',
+        $content=undef,
+        $source=undef,
+    ) {
 
     include 'MODULE_NAME::params'
 
@@ -42,6 +47,7 @@ define MODULE_NAME::DEFINE_NAME ($ensure='present', $source) {
         before      => Service[$MODULE_NAME::params::service_name],
         notify      => Service[$MODULE_NAME::params::service_name],
         subscribe   => Package[$MODULE_NAME::params::packages],
+        content     => $content,
         source      => $source,
     }
 

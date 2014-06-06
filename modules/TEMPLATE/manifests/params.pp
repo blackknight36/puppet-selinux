@@ -7,6 +7,7 @@
 # === Authors
 #
 #   John Florian <john.florian@dart.biz>
+#   John Florian <jflorian@doubledog.org>
 
 
 class MODULE_NAME::params {
@@ -18,6 +19,15 @@ class MODULE_NAME::params {
                 'PACKAGE_NAME',
             ]
             $service_name = 'SERVICE_NAME'
+
+            # Hint:
+            #   sudo semanage boolean  --list | grep MODULE_NAME
+            if $::operatingsystemrelease < 18 {
+                $bool_name1 = 'allow_httpd_anon_write'
+            } else {
+                $bool_name1 = 'httpd_anon_write'
+            }
+            $bool_name2 = 'httpd_can_network_connect'
 
         }
 

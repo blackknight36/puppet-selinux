@@ -1,8 +1,8 @@
-# modules/MODULE_NAME/manifests/init.pp
+# modules/MODULE_NAME/manifests/CLASS_NAME.pp
 #
-# == Class: MODULE_NAME
+# == Class: MODULE_NAME::CLASS_NAME
 #
-# Configures a host as a MODULE_NAME.
+# Configures a host as a MODULE_NAME CLASS_NAME.
 #
 # === Parameters
 #
@@ -10,20 +10,20 @@
 #   Instance is to be 'present' (default) or 'absent'.
 #
 # [*content*]
-#   Literal content for the MODULE_NAME file.  One and only one of "content"
-#   or "source" must be given.
+#   Literal content for the MODULE_NAME CLASS_NAME file.  One and only one of
+#   "content" or "source" must be given.
 #
 # [*source*]
-#   URI of the MODULE_NAME file content.  One and only one of "content" or
-#   "source" must be given.
+#   URI of the MODULE_NAME CLASS_NAME file content.  One and only one of
+#   "content" or "source" must be given.
 #
 # === Authors
 #
 #   John Florian <john.florian@dart.biz>
-#   John Florian <john.florian@dart.biz>
+#   John Florian <jflorian@doubledog.org>
 
 
-class MODULE_NAME (
+class MODULE_NAME::CLASS_NAME (
         $ensure='present',
         $content=undef,
         $source=undef,
