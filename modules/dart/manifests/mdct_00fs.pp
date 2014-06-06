@@ -90,4 +90,9 @@ class dart::mdct_00fs {
 
     include 'picaps::backup_agent'
 
+    class { 'vsftpd':
+        source          => 'puppet:///private-host/vsftpd/vsftpd.conf',
+        allow_use_nfs   => false,
+    }
+
 }
