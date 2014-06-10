@@ -72,13 +72,13 @@ class jetbrains::pycharm {
     # to ensure that no more than two stable releases are installed at any
     # given time.
 
-    jetbrains::pycharm_release { 'pycharm-3.4':
-        build   => '3.4',
+    jetbrains::pycharm_release { 'pycharm-3.4.1':
+        build   => '3.4.1',
         edition => 'professional',
     }
 
-    jetbrains::pycharm_release { 'pycharm-3.1.2':
-        build   => '3.1.2',
+    jetbrains::pycharm_release { 'pycharm-3.4':
+        build   => '3.4',
         edition => 'professional',
         ensure  => 'absent',
     }
