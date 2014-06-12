@@ -20,6 +20,12 @@ class dart::abstract::tomcat_web_app inherits dart::abstract::guarded_server_nod
     iptables::tcp_port {
         'tomcat_web_app': port => '8080';
     }
+    iptables::tcp_port {
+        'postgres_external': port => '5432';
+    }
+    iptables::tcp_port {
+        'remote_debug': port => '5005';
+    }
 
     sudo::drop_in { 'tomcat-service':
         source  =>  'puppet:///private-domain/sudo/tomcat-service',
