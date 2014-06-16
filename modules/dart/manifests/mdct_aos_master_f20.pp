@@ -22,6 +22,13 @@ class dart::mdct_aos_master_f20 {
         mon_passwd  => 'zdJxxdFhes9YxlJNhAHFOaSbneIy9N3FmlzTkA1wdowU',
     }
 
+    # Kludge for https://bugzilla.redhat.com/show_bug.cgi?id=1067236
+    cron::job { 'restart-cron':
+        command => 'systemctl restart crond.service',
+        minute  => '53',
+        hour    => '6',
+    }
+
     class { 'dart::abstract::aos_master_node':
         django_user     => 'django',
         django_group    => 'django',
