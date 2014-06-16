@@ -1,32 +1,32 @@
 # modules/cron/manifests/daemon.pp
 #
-# Synopsis:
-#       Configures a host for the cron daemon.
+# == Class: cron::daemon
 #
-# Parameters:
-#       NONE
+# Configures a host as a cron daemon.
 #
-# Requires:
-#       NONE
+# === Parameters
 #
-# Example usage:
+# NONE
 #
-#       include 'cron::daemon'
+# === Authors
+#
+#   John Florian <jflorian@doubledog.org>
+
 
 class cron::daemon {
 
-    package { 'cronie':
+    include 'cron::params'
+
+    package { $cron::params::packages:
         ensure  => installed,
+        notify  => Service[$cron::params::service_name],
     }
 
-    service { 'crond':
+    service { $cron::params::service_name:
         enable      => true,
         ensure      => running,
         hasrestart  => true,
         hasstatus   => true,
-        require     => [
-            Package['cronie'],
-        ],
     }
 
 }

@@ -1,47 +1,49 @@
 # modules/cron/manifests/jobfile.pp
 #
-# Synopsis:
-#       Installs a single cron job file.
+# == Define: cron::jobfile
 #
-# Parameters:
-#       Name__________  Default_______  Description___________________________
-#       name                            used as /etc/cron.d/$name
-#       ensure          present         absent/present
-#       source                          puppet URI for obtaining the job file
+# Installs a single job configuration for cron.
 #
-# Requires:
-#       Class['cron::daemon']
+# === Parameters
 #
-# Example usage:
+# [*namevar*]
+#   An arbitrary identifier for the job instance.  Results in a cron job file
+#   named "/etc/cron.d/$name".
 #
-#       include 'cron::daemon'
+# [*ensure*]
+#   Instance is to be 'present' (default) or 'absent'.
 #
-#       cron::jobfile { 'example':
-#           require => [
-#               File['foo'],
-#               Package['bar'],
-#           ],
-#           source  => 'puppet:///private-host/example/example.cron',
-#       }
+# [*content*]
+#   Literal content for the job file file.  One and only one of "content"
+#   or "source" must be given.
+#
+# [*source*]
+#   URI of the job file file content.  One and only one of "content" or
+#   "source" must be given.
+#
+# === Authors
+#
+#   John Florian <jflorian@doubledog.org>
 
 
-define cron::jobfile ($source, $ensure='present') {
+define cron::jobfile (
+        $ensure='present',
+        $content=undef,
+        $source=undef,
+    ) {
 
-    case $source {
-        '': {
-            fail('Required $source variable is not defined')
-        }
-    }
+    include 'cron::params'
 
     file { "/etc/cron.d/${name}":
-        ensure  => $ensure,
-        group   => 'root',
-        mode    => '0644',
-        owner   => 'root',
-        selrole => 'object_r',
-        seltype => 'system_cron_spool_t',
-        seluser => 'system_u',
-        source  => $source,
+        ensure      => $ensure,
+        owner       => 'root',
+        group       => 'root',
+        mode        => '0644',
+        seluser     => 'system_u',
+        selrole     => 'object_r',
+        seltype     => 'system_cron_spool_t',
+        content     => $content,
+        source      => $source,
     }
 
 }

@@ -52,19 +52,23 @@
 #
 # === Authors
 #
-#   John Florian <john.florian@dart.biz>
+#   John Florian <jflorian@doubledog.org>
 
 
-define cron::job ($command,
-                  $ensure='present',
-                  $minute='*',
-                  $hour='*',
-                  $dom='*',
-                  $month='*',
-                  $dow='*',
-                  $mailto='root',
-                  $path='/sbin:/bin:/usr/sbin:/usr/bin',
-                  $user='root') {
+define cron::job (
+        $command,
+        $ensure='present',
+        $minute='*',
+        $hour='*',
+        $dom='*',
+        $month='*',
+        $dow='*',
+        $mailto='root',
+        $path='/sbin:/bin:/usr/sbin:/usr/bin',
+        $user='root'
+    ) {
+
+    include 'cron::params'
 
     case $dom {
         '': {
@@ -115,14 +119,14 @@ define cron::job ($command,
     }
 
     file { "/etc/cron.d/${name}":
-        content => template('cron/job'),
-        ensure  => $ensure,
-        group   => 'root',
-        mode    => '0644',
-        owner   => 'root',
-        selrole => 'object_r',
-        seltype => 'system_cron_spool_t',
-        seluser => 'system_u',
+        ensure      => $ensure,
+        owner       => 'root',
+        group       => 'root',
+        mode        => '0644',
+        seluser     => 'system_u',
+        selrole     => 'object_r',
+        seltype     => 'system_cron_spool_t',
+        content     => template('cron/job'),
     }
 
 }
