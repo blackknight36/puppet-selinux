@@ -38,7 +38,9 @@ class dart::mdct_00fs {
     include 'flock_herder'
     include 'git_daemon'
 
-    include 'mirrmaid'
+    class { 'mirrmaid':
+        ensure  => latest,
+    }
 
     # Configure SSH keys to permit mirrmaid to make passwordless connections
     # to the Picaps servers as needed for both mirrmaid-picaps and
