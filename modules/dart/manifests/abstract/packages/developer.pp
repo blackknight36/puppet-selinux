@@ -67,6 +67,15 @@ class dart::abstract::packages::developer {
                 ensure  => installed,
             }
         }
+        if  $operatingsystemrelease == 'Rawhide' or
+            $operatingsystemrelease >= 19
+        {
+            package { [
+                'rubygem-git-up',
+                ]:
+                ensure  => installed,
+            }
+        }
 
     }
 
