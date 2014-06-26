@@ -1,6 +1,6 @@
-# modules/packages/manifests/developer.pp
+# modules/dart/manifests/abstract/packages/developer.pp
 
-class packages::developer {
+class dart::abstract::packages::developer {
 
     include 'rpm_build_tools'
 

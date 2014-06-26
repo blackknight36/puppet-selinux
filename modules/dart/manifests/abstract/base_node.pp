@@ -6,8 +6,9 @@ class dart::abstract::base_node {
     # modules/dart/manifests/classes/mdct-00fs.pp until such time that class
     # can make direct use of this class.
 
-    include 'cron::daemon'
     include 'cachefilesd'
+    include 'cron::daemon'
+    include 'dart::abstract::packages::base'
     include 'dart::subsys::dns::no_dns_hosts'
     include 'logwatch'
 
@@ -22,7 +23,6 @@ class dart::abstract::base_node {
     }
 
     include 'openssh_server'
-    include 'packages::base'
     include 'prophile'
     #include 'selinux'
 

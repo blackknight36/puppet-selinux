@@ -1,6 +1,6 @@
-# modules/packages/manifests/base.pp
+# modules/dart/manifests/abstract/packages/base.pp
 
-class packages::base {
+class dart::abstract::packages::base {
 
     ### Universal Package Inclusion ###
 

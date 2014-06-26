@@ -26,7 +26,7 @@ class dart::abstract::picaps_test_node inherits dart::abstract::unguarded_server
     include 'samba'
 
     # PICAPS installation is via cvs
-    include 'packages::developer'
+    include 'dart::abstract::packages::developer'
 
     # PICAPS stores are via MySQL
 

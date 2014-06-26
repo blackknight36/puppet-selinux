@@ -1,6 +1,6 @@
-# modules/packages/manifests/virtualization.pp
+# modules/dart/manifests/abstract/packages/virtualization.pp
 
-class packages::virtualization {
+class dart::abstract::packages::virtualization {
 
     ### Universal Package Inclusion ###
 

@@ -19,7 +19,7 @@ class dart::mdct_00fs {
     include 'logwatch'
     include 'ntp'
     #@# include 'openssh_server'
-    include 'packages::base'
+    include 'dart::abstract::packages::base'
 
     class { 'puppet::client':
     }
@@ -28,7 +28,7 @@ class dart::mdct_00fs {
     include 'timezone'
 
     #@# From server_node.pp
-    include 'packages::net_tools'
+    include 'dart::abstract::packages::net_tools'
 
 
     ####

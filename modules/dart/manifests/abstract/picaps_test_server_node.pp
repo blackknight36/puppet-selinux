@@ -43,7 +43,7 @@ class dart::abstract::picaps_test_server_node inherits dart::abstract::unguarded
     include 'samba'
 
     # Developer tools (includes python, cvs, git, etc)
-    include 'packages::developer'
+    include 'dart::abstract::packages::developer'
 
     # JDK's
     oracle::jdk { 'jdk-7u55-linux-x64':

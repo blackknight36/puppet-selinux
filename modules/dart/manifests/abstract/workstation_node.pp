@@ -2,6 +2,11 @@
 
 class dart::abstract::workstation_node inherits dart::abstract::base_node {
 
+    include 'dart::abstract::packages::developer'
+    include 'dart::abstract::packages::media'
+    include 'dart::abstract::packages::net_tools'
+    include 'dart::abstract::packages::virtualization'
+    include 'dart::abstract::packages::workstation'
     include 'dart::subsys::autofs::common'
     include 'flock_herder'
 
@@ -11,11 +16,6 @@ class dart::abstract::workstation_node inherits dart::abstract::base_node {
 
     # Lotus Notes has been disabled for now due to poor functioning.
     #include 'lotus_notes_client'
-    include 'packages::developer'
-    include 'packages::media'
-    include 'packages::net_tools'
-    include 'packages::virtualization'
-    include 'packages::workstation'
 
     class { 'puppet::client':
     }

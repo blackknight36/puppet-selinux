@@ -15,9 +15,9 @@
 
 class dart::abstract::teamcity_server_node inherits dart::abstract::guarded_server_node {
 
+    include 'dart::abstract::packages::developer'
     include 'dart::subsys::autofs::common'
     include 'dart::subsys::yum_cron'
-    include 'packages::developer'
     include 'puppet::client'
 
     # This package allows optimal performance in production environments.

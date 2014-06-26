@@ -1,6 +1,6 @@
-# modules/packages/manifests/workstation.pp
+# /etc/puppet/modules/dart/manifests/abstract/packages/workstation.pp
 
-class packages::workstation {
+class dart::abstract::packages::workstation {
 
     ### Universal Package Inclusion ###
 

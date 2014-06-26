@@ -1,6 +1,6 @@
-# modules/packages/manifests/media.pp
+# modules/dart/manifests/abstract/packages/media.pp
 
-class packages::media {
+class dart::abstract::packages::media {
 
     ### Universal Package Inclusion ###
 

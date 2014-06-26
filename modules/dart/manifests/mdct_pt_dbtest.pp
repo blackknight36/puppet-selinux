@@ -34,7 +34,7 @@ class dart::mdct_pt_dbtest inherits dart::abstract::unguarded_server_node {
     include 'samba'
 
     # PICAPS installation is via cvs
-    include 'packages::developer'
+    include 'dart::abstract::packages::developer'
 
     # PICAPS stores are via MySQL
     #include 'mysql_server' --DISABLED SINCE THIS INSTANCE IS FOR TESTING OTHER RDBMS

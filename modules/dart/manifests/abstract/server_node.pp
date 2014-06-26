@@ -13,7 +13,7 @@
 
 class dart::abstract::server_node inherits dart::abstract::base_node {
 
-    include 'packages::net_tools'
+    include 'dart::abstract::packages::net_tools'
 
     # Servers typically benefit from showing their boot details.
     class { 'plymouth':

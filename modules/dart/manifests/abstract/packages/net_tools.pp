@@ -1,6 +1,6 @@
-# modules/packages/manifests/net_tools.pp
+# modules/dart/manifests/abstract/packages/net_tools.pp
 
-class packages::net_tools {
+class dart::abstract::packages::net_tools {
 
     include 'tsocks'
 

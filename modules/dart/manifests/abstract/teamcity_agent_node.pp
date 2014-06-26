@@ -15,10 +15,10 @@
 
 class dart::abstract::teamcity_agent_node inherits dart::abstract::guarded_server_node {
 
+    include 'dart::abstract::packages::developer'
     include 'dart::abstract::teamcity_agent_node_est_ngic'
     include 'dart::subsys::autofs::common'
     include 'dart::subsys::yum_cron'
-    include 'packages::developer'
     include 'puppet::client'
 
     case $hostname {
