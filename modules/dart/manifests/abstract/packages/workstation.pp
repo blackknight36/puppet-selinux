@@ -7,6 +7,8 @@ class dart::abstract::packages::workstation {
     package { [
 
         'builder',
+        'evolution',
+        'evolution-ews',
         'firefox',
         'galculator',
         'lyx',
