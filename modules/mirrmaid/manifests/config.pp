@@ -13,8 +13,13 @@
 # [*ensure*]
 #   Instance is to be 'present' (default) or 'absent'.
 #
+# [*content*]
+#   Literal content for the configuration file.  One and only one of "content"
+#   or "source" must be given.
+#
 # [*source*]
-#   URI of the config file content.
+#   URI of the configuration file content.  One and only one of "content" or
+#   "source" must be given.
 #
 # [*cronjob*]
 #   URI of the cron job file to be installed.  Use the default (undef) if you
@@ -29,7 +34,8 @@
 
 define mirrmaid::config (
         $ensure='present',
-        $source,
+        $content=undef,
+        $source=undef,
         $cronjob=undef,
     ) {
 
@@ -45,7 +51,8 @@ define mirrmaid::config (
         selrole     => 'object_r',
         seltype     => 'etc_t',
         subscribe   => Package[$mirrmaid::params::packages],
-        source      => "${source}",
+        content     => $content,
+        source      => $source,
     }
 
     if $cronjob != undef {
