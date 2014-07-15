@@ -20,7 +20,7 @@
 # === Authors
 #
 #   John Florian <john.florian@dart.biz>
-#   John Florian <john.florian@dart.biz>
+#   John Florian <jflorian@doubledog.org>
 
 
 class MODULE_NAME (
