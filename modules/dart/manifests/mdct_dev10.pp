@@ -8,7 +8,8 @@
 
 class dart::mdct_dev10 inherits dart::abstract::workstation_node {
 
-    include 'jetbrains::idea'
+    include 'dart::abstract::pycharm::community'
     include 'dart::subsys::yum_cron'
+    include 'jetbrains::idea'
 
 }
