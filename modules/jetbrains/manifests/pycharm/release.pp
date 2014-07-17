@@ -30,6 +30,7 @@ define jetbrains::pycharm::release (
     ) {
 
     include 'jetbrains::params'
+    include 'jetbrains::pycharm'
 
     case $edition {
         'community': {
