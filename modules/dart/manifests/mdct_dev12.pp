@@ -58,8 +58,8 @@ class dart::mdct_dev12 inherits dart::abstract::workstation_node {
         mon_passwd  => 'NBkHwmNJGplxIlmMaQukmf568KCSuY1eKDGINZnLxyTw',
     }
 
+    include 'dart::abstract::pycharm::professional'
     include 'dart::subsys::yum_cron'
-    include 'jetbrains::pycharm'
 
     class { 'koji::cli':
         hub         => 'http://mdct-koji.dartcontainer.com/kojihub',
