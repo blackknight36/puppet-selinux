@@ -26,8 +26,9 @@ define jetbrains::idea::release ($build, $ensure='present') {
 
     $product_name = "idea-IU-${build}"
     $product_root = "${jetbrains::params::idea_root}/${product_name}"
+    $desktop_file = "${jetbrains::idea::launchers_path}/${name}.desktop"
 
-    file { "${jetbrains::idea::launchers_path}/${name}.desktop":
+    file { "${desktop_file}":
         content => template("jetbrains/idea/build.desktop"),
         ensure  => "${ensure}",
         group   => 'root',
@@ -37,6 +38,16 @@ define jetbrains::idea::release ($build, $ensure='present') {
         selrole => 'object_r',
         seltype => 'usr_t',
         seluser => 'system_u',
+    }
+
+    xdg_desktop::menu_entry { "${name}":
+        ensure          => $ensure,
+        dir_file        => "${jetbrains::jetbrains_menu}",
+        desktop_file    => "${desktop_file}",
+        require         => [
+            Class['jetbrains'],
+            File["${desktop_file}"],
+        ],
     }
 
     case $ensure {
