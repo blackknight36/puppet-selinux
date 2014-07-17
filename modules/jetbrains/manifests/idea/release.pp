@@ -1,6 +1,6 @@
-# modules/jetbrains/manifests/idea_release.pp
+# modules/jetbrains/manifests/idea/release.pp
 #
-# == Define: jetbrains::idea_release
+# == Define: jetbrains::idea::release
 #
 # Installs a single, specific JetBrains IDEA release.
 #
@@ -20,7 +20,7 @@
 #   John Florian <john.florian@dart.biz>
 
 
-define jetbrains::idea_release ($build, $ensure='present') {
+define jetbrains::idea::release ($build, $ensure='present') {
 
     include 'jetbrains::params'
 
