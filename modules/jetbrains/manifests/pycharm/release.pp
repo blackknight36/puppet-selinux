@@ -36,21 +36,25 @@ define jetbrains::pycharm::release (
         'community': {
             $install_tag = '-community'
             $package_tag = '-community'
+            $pretty_tag = 'Community'
         }
         'professional': {
             $install_tag = ''
             $package_tag = '-professional'
+            $pretty_tag = 'Professional'
         }
         default: {
             $install_tag = ''
             $package_tag = ''
+            $pretty_tag = 'Classic'
         }
     }
 
     $product_name = "pycharm${install_tag}-${build}"
     $product_root = "${jetbrains::params::pycharm_root}/${product_name}"
+    $desktop_file = "${jetbrains::pycharm::launchers_path}/${product_name}.desktop"
 
-    file { "${jetbrains::pycharm::launchers_path}/${product_name}.desktop":
+    file { "${desktop_file}":
         content => template('jetbrains/pycharm/build.desktop'),
         ensure  => "${ensure}",
         group   => 'root',
@@ -60,6 +64,16 @@ define jetbrains::pycharm::release (
         selrole => 'object_r',
         seltype => 'usr_t',
         seluser => 'system_u',
+    }
+
+    xdg_desktop::menu_entry { "${product_name}":
+        ensure          => $ensure,
+        dir_file        => "${jetbrains::jetbrains_menu}",
+        desktop_file    => "${desktop_file}",
+        require         => [
+            Class['jetbrains'],
+            File["${desktop_file}"],
+        ],
     }
 
     case $ensure {

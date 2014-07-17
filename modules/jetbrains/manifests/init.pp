@@ -34,4 +34,22 @@ class jetbrains {
         require => File['/opt'],
     }
 
+    $jetbrains_config = "${jetbrains::params::root}/etc"
+    file { "${jetbrains_config}":
+        ensure  => directory,
+        require => File["${jetbrains::params::root}"],
+    }
+
+    $jetbrains_icon = "${jetbrains_config}/jetbrains.png"
+    file { "${jetbrains_icon}":
+        source  => 'puppet:///modules/jetbrains/jetbrains.png',
+        require => File["${jetbrains_config}"],
+    }
+
+    $jetbrains_menu = "${jetbrains_config}/jetbrains-jetbrains.directory"
+    file { "${jetbrains_menu}":
+        source  => 'puppet:///modules/jetbrains/jetbrains-jetbrains.directory',
+        require => File["${jetbrains_config}"],
+    }
+
 }

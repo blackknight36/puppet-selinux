@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=PyCharm (<%= @build %>)
+Name=PyCharm (<%= @build %> - <%= @pretty_tag %> Edition)
 Comment=Powerful Python and Django IDE
 MimeType=text/x-java;
 Exec=<%= @product_root %>/bin/pycharm.sh
