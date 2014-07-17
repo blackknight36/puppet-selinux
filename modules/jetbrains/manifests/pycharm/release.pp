@@ -1,6 +1,6 @@
-# modules/jetbrains/manifests/pycharm_release.pp
+# modules/jetbrains/manifests/pycharm/release.pp
 #
-# == Define: jetbrains::pycharm_release
+# == Define: jetbrains::pycharm::release
 #
 # Installs a single, specific JetBrains PyCharm release.
 #
@@ -25,7 +25,7 @@
 #   John Florian <john.florian@dart.biz>
 
 
-define jetbrains::pycharm_release (
+define jetbrains::pycharm::release (
         $build, $ensure='present', $edition='legacy'
     ) {
 
