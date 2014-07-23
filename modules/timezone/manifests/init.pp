@@ -22,7 +22,7 @@ class timezone {
         '75'    => 'Europe/London',                     # England
         '76'    => 'Australia/Sydney',                  # Australia
         '77'    => 'America/Detroit',                   # Canada
-        '78'    => 'America/Mexico City',               # Atlacomulco
+        '78'    => 'America/Mexico_City',               # Atlacomulco
         default => 'America/Detroit',
     }
 
