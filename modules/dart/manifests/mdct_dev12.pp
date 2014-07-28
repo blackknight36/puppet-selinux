@@ -207,24 +207,32 @@ class dart::mdct_dev12 inherits dart::abstract::workstation_node {
         unless  => 'grep -q prophile /root/.bash_profile',
     }
 
+    # Ditch the KDE screenlocker in favor of xscreensaver.
+    file { '/usr/libexec/kde4/kscreenlocker_greet':
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0755',
+        source  => 'puppet:///private-host/kscreenlocker_greet',
+    }
+
     file { '/root/.gvimrc_site':
+        owner   => 'root',
         group   => 'root',
         mode    => '0644',
-        owner   => 'root',
         source  => 'puppet:///private-host/gvimrc_site',
     }
 
     file { '/root/.gitconfig':
+        owner   => 'root',
         group   => 'root',
         mode    => '0644',
-        owner   => 'root',
         source  => 'puppet:///private-host/git/gitconfig',
     }
 
     file { '/root/.gitignore':
+        owner   => 'root',
         group   => 'root',
         mode    => '0644',
-        owner   => 'root',
         source  => 'puppet:///private-host/git/gitignore',
     }
 
