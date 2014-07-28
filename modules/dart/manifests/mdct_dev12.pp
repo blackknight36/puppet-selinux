@@ -46,7 +46,7 @@ class dart::mdct_dev12 inherits dart::abstract::workstation_node {
     }
 
     class { 'bacula::admin':
-        dir_address => "mdct-00bk.${domain}",
+        dir_address => "mdct-00bk.${::domain}",
         dir_name    => 'mdct-00bk-dir',
         dir_passwd  => 'a/kIuMrD+AIJxl5HlDZhdEdugagOer5nUi43qgip2DED',
     }
@@ -97,7 +97,7 @@ class dart::mdct_dev12 inherits dart::abstract::workstation_node {
         ensure  => installed,
     }
 
-    $SUFFIX=".orig-${operatingsystem}${operatingsystemrelease}"
+    $SUFFIX=".orig-${::operatingsystem}${::operatingsystemrelease}"
 
     autofs::map_entry {
 
@@ -145,7 +145,7 @@ class dart::mdct_dev12 inherits dart::abstract::workstation_node {
 
     dart::util::replace_original_with_symlink_to_alternate { '/etc/libvirt':
         alternate   => '/mnt/storage/etc/libvirt',
-        backup      => "/etc/libvirt$SUFFIX",
+        backup      => "/etc/libvirt${SUFFIX}",
         before      => Service['libvirtd'],
         notify      => Service['libvirtd'],
         original    => '/etc/libvirt',
@@ -157,7 +157,7 @@ class dart::mdct_dev12 inherits dart::abstract::workstation_node {
 
     dart::util::replace_original_with_symlink_to_alternate { '/var/lib/libvirt':
         alternate   => '/mnt/storage/var/lib/libvirt',
-        backup      => "/var/lib/libvirt$SUFFIX",
+        backup      => "/var/lib/libvirt${SUFFIX}",
         before      => Service['libvirtd'],
         notify      => Service['libvirtd'],
         original    => '/var/lib/libvirt',
@@ -179,8 +179,8 @@ class dart::mdct_dev12 inherits dart::abstract::workstation_node {
     #   }
 
     service { 'libvirtd':
-        enable      => true,
         ensure      => running,
+        enable      => true,
         hasrestart  => true,
         hasstatus   => true,
         require     => [
@@ -189,8 +189,8 @@ class dart::mdct_dev12 inherits dart::abstract::workstation_node {
 
     # Prefer forced power off as it's much faster than suspending.
     service { 'libvirtd-guests':
-        enable      => false,
         ensure      => stopped,
+        enable      => false,
         hasrestart  => true,
         hasstatus   => true,
         require     => [
