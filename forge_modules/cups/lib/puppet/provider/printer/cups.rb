@@ -26,10 +26,54 @@ Puppet::Type.type(:printer).provide :cups, :parent => Puppet::Provider do
   commands :lpoptions => "/usr/bin/lpoptions"
   commands :lpstat => "/usr/bin/lpstat"
 
-  commands :cupsenable => "/usr/sbin/cupsenable"
-  commands :cupsdisable => "/usr/sbin/cupsdisable"
-  commands :cupsaccept => "/usr/sbin/cupsaccept"
-  commands :cupsreject => "/usr/sbin/cupsreject"
+  #
+  # candidate locations for the enable command
+  # Solaris 11 & Illumos/OpenIndiana have /usr/bin/{enable,disable}
+  #
+  [ "/usr/sbin/cupsenable",
+    "/usr/bin/cupsenable", 
+    "/usr/sbin/enable",
+    "/usr/bin/enable"].each do |cups_command|
+    if File.exists?(cups_command)
+      commands :cupsenable => cups_command
+      break
+    end
+  end
+
+  [ "/usr/sbin/cupsdisable",
+    "/usr/bin/cupsdisable", 
+    "/usr/sbin/disable",
+    "/usr/bin/disable"].each do |cups_command|
+    if File.exists?(cups_command)
+      commands :cupsdisable => cups_command
+      break
+    end
+  end
+
+  #
+  # Candidate locations for the accept and reject commands
+  # Older Fedora and RHEL/CentOS 6.x and earlier have /usr/sbin/{accept,reject}
+  # Solaris 11 & Illumos/OpenIndiana have the same.
+  #
+  [ "/usr/sbin/cupsaccept",
+    "/usr/bin/cupsaccept", 
+    "/usr/sbin/accept",
+    "/usr/bin/accept"].each do |cups_command|
+    if File.exists?(cups_command)
+      commands :cupsaccept => cups_command
+      break
+    end
+  end
+
+  [ "/usr/sbin/cupsreject",
+    "/usr/bin/cupsreject", 
+    "/usr/sbin/reject",
+    "/usr/bin/reject"].each do |cups_command|
+    if File.exists?(cups_command)
+      commands :cupsreject => cups_command
+      break
+    end
+  end
 
   mk_resource_methods
 
@@ -40,7 +84,8 @@ Puppet::Type.type(:printer).provide :cups, :parent => Puppet::Provider do
       :uri         => '-v%s',
       :description => '-D%s',
       :location    => '-L%s',
-      :ppd         => '-P%s'  # Also not idempotent
+      :ppd         => '-P%s', # Also not idempotent
+      :interface   => '-i%s' 
   }
 
   # The instances method collects information through a number of different command line utilities because no single
@@ -57,7 +102,8 @@ Puppet::Type.type(:printer).provide :cups, :parent => Puppet::Provider do
       printer[:uri] = prefetched_uris[printer[:name]] if prefetched_uris.key?(printer[:name])
 
       # derived from options
-      printer[:shared] = printer[:options]['printer-is-shared']
+      # shared property is deprecated
+      # printer[:shared] = printer[:options]['printer-is-shared']
 
       provider_instances << new(printer)
     end
@@ -81,7 +127,8 @@ Puppet::Type.type(:printer).provide :cups, :parent => Puppet::Provider do
         printer[:uri] = prefetched_uris[printer[:name]] if prefetched_uris.key?(printer[:name])
 
         # derived from options
-        printer[:shared] = printer[:options]['printer-is-shared']
+        # shared property is deprecated
+        #printer[:shared] = printer[:options]['printer-is-shared']
 
         resource.provider = new(printer)
       else
@@ -116,7 +163,9 @@ Puppet::Type.type(:printer).provide :cups, :parent => Puppet::Provider do
             printer[:description] = line.match(/\tDescription: (.*)/).captures[0]
           when /^\tLocation/
             printer[:location] = line.match(/\tLocation: (.*)/).captures[0]
-          when /^\tInterface/
+          when /^\tInterface.*\/interface\/.*/
+            printer[:interface] = line.match(/\tInterface: (.*)/).captures[0]
+          when /^\tInterface.*\/ppd\/.*/
             printer[:ppd] = line.match(/\tInterface: (.*)/).captures[0]
           when /^\tRejecting Jobs/
             printer[:accept] = :false
@@ -176,7 +225,7 @@ Puppet::Type.type(:printer).provide :cups, :parent => Puppet::Provider do
 
       lpstat('-v').split("\n").each { |line|
         caps = line.match(/device for (.*): (.*)/).captures # TODO: i18n
-        uris[caps[0]] = caps[1]
+        uris[caps[0]] = caps[1].gsub(/^\//, 'file:/')
       }
 
       uris
@@ -224,14 +273,20 @@ Puppet::Type.type(:printer).provide :cups, :parent => Puppet::Provider do
           params.unshift Cups_Options[k] % @resource[k] if @resource[k]
         end
 
-        options.push '-o printer-is-shared=true' if @property_hash[:shared] === :true
+        if @resource[:shared] == :true
+          params.push '-o printer-is-shared=true'
+        end
+
+        if @resource[:shared] == :false
+          params.push '-o printer-is-shared=false'
+        end
 
         if @property_hash[:options].is_a? Hash
           @property_hash[:options].each_pair do |k, v|
             # EB: Workaround for some command line options having 2 forms, short switch via lpadmin or
             # long "option-name" via -o. We don't want to allow setting of these options via -o
             next if k == 'device-uri'
-            next if k == 'printer-is-shared'
+            next if k == 'printer-is-shared' # Cannot set unless you are creating the queue
             next if k == 'printer-is-accepting-jobs'
             next if k == 'printer-state' # causes reject/enable to be ignored
             options.push "-o %s='%s'" % [k, v]

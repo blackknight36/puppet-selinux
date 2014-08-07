@@ -69,8 +69,10 @@ An example using almost every possible parameter:
         # OR
         model       => "", # A valid model, you can list these with lpinfo -m, this is usually what you would call a
                            # list of installed drivers.
+        # OR
+        interface   => "/path/to/system/v/interface/file", # Interface script run for this destination
+        shared      => false, # Printer will be shared and published by CUPS
         enabled     => true, # Enabled by default
-        shared      => false, # Disabled by default
         options     => { media => 'A4' }, # Hash of options ( name => value ), these are non vendor specific options.
         ppd_options => { 'HPOption_Duplexer' => 'False' }, # Hash of vendor PPD options
     }
