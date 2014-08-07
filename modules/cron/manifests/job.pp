@@ -50,9 +50,15 @@
 #   Executable search path to be used in environment while running command.
 #   Defaults to "/sbin:/bin:/usr/sbin:/usr/bin".
 #
+# [*location*]
+#   File system path to where the cron job file is to be installed.  Defaults
+#   to "/etc/cron.d" which is appropriate for most job files.  See also the
+#   "namevar" parameter.
+#
 # === Authors
 #
 #   John Florian <jflorian@doubledog.org>
+#   John Florian <john.florian@dart.biz>
 
 
 define cron::job (
@@ -65,7 +71,8 @@ define cron::job (
         $dow='*',
         $mailto='root',
         $path='/sbin:/bin:/usr/sbin:/usr/bin',
-        $user='root'
+        $user='root',
+        $location='/etc/cron.d',
     ) {
 
     include 'cron::params'
@@ -85,6 +92,12 @@ define cron::job (
     case $hour {
         '': {
             fail('Required $hour variable is not defined')
+        }
+    }
+
+    case $location {
+        '': {
+            fail('Required $location variable is not defined')
         }
     }
 
@@ -118,7 +131,7 @@ define cron::job (
         }
     }
 
-    file { "/etc/cron.d/${name}":
+    file { "${location}/${name}":
         ensure      => $ensure,
         owner       => 'root',
         group       => 'root',
