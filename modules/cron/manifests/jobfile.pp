@@ -26,6 +26,11 @@
 #   to "/etc/cron.d" which is appropriate for most job files.  See also the
 #   "namevar" parameter.
 #
+# [*mode*]
+#   File access mode.  Defaults to '0644' which is appropriate for most job
+#   files.  This might need to be something like '0755' if "location" is
+#   "/etc/cron.daily" or similar.
+#
 # === Authors
 #
 #   John Florian <jflorian@doubledog.org>
@@ -37,6 +42,7 @@ define cron::jobfile (
         $content=undef,
         $source=undef,
         $location='/etc/cron.d',
+        $mode='0644',
     ) {
 
     include 'cron::params'
@@ -45,7 +51,7 @@ define cron::jobfile (
         ensure      => $ensure,
         owner       => 'root',
         group       => 'root',
-        mode        => '0644',
+        mode        => $mode,
         seluser     => 'system_u',
         selrole     => 'object_r',
         seltype     => 'system_cron_spool_t',
