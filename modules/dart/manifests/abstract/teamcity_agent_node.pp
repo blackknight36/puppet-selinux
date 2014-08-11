@@ -19,9 +19,10 @@ class dart::abstract::teamcity_agent_node inherits dart::abstract::guarded_serve
     include 'dart::abstract::teamcity_agent_node_est_ngic'
     include 'dart::subsys::autofs::common'
     include 'dart::subsys::yum_cron'
+    include 'lyx'
     include 'puppet::client'
 
-    case $hostname {
+    case $::hostname {
         'mdct-est-ci': {
             jetbrains::teamcity::agent_release { 'TeamCity-7.1':
                 build   => '7.1',

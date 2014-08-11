@@ -4,6 +4,8 @@ class dart::abstract::packages::workstation {
 
     ### Universal Package Inclusion ###
 
+    include 'lyx'
+
     package { [
 
         'builder',
@@ -11,7 +13,6 @@ class dart::abstract::packages::workstation {
         'evolution-ews',
         'firefox',
         'galculator',
-        'lyx',
         'pavucontrol',
         'plant-launchers',
         'putty',
@@ -24,10 +25,10 @@ class dart::abstract::packages::workstation {
 
     ### Select Package Inclusion ###
 
-    if $operatingsystem == 'Fedora' {
+    if $::operatingsystem == 'Fedora' {
 
-        if  $operatingsystemrelease == 'Rawhide' or
-            $operatingsystemrelease >= 18
+        if  $::operatingsystemrelease == 'Rawhide' or
+            $::operatingsystemrelease >= 18
         {
             package { [
                 'libreoffice-calc',
@@ -36,7 +37,7 @@ class dart::abstract::packages::workstation {
                 ]:
                 ensure => installed,
             }
-        } elsif $operatingsystemrelease >= 15 {
+        } elsif $::operatingsystemrelease >= 15 {
             package { [
                 'libreoffice-calc',
                 'libreoffice-writer',
