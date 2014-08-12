@@ -80,4 +80,19 @@ class dart::subsys::dns::no_dns_hosts {
         host_aliases    => [ 'tc-util' ],
     }
 
+    host { 'mdct-ovirt-engine.dartcontainer.com':
+        ip              => '10.1.192.170',
+        host_aliases    => [ 'mdct-ovirt-engine' ],
+    }
+
+    host { 'mdct-ovirt-node-production1.dartcontainer.com':
+        ip              => '10.1.192.171',
+        host_aliases    => [ 'mdct-ovirt-node-production1' ],
+    }
+
+    host { 'mdct-ovirt-node-production2.dartcontainer.com':
+        ip              => '10.1.192.172',
+        host_aliases    => [ 'mdct-ovirt-node-production2' ],
+    }
+
 }
