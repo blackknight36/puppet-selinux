@@ -149,4 +149,9 @@ class dart::abstract::aos_master_node (
         source  => 'puppet:///private-domain/ssh/aos-master-host_rsa_key.pub',
     }
 
+    # The builder package is mostly needed here for the yum-snapshot tool.
+    package { 'builder':
+        ensure  => 'latest',
+    }
+
 }
