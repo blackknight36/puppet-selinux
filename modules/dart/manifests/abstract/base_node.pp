@@ -54,7 +54,6 @@ class dart::abstract::base_node {
 
     class { 'yum':
         conf_source => $hostname ? {
-            /^mdct-foreman/  => 'puppet:///modules/dart/yum/yum-proxied.conf',
             /^mdct-ovirt-/  => 'puppet:///modules/dart/yum/yum-proxied.conf',
             default         => 'puppet:///modules/dart/yum/yum.conf',
         },

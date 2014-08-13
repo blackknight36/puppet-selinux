@@ -97,7 +97,6 @@ node 'tc-util.dartcontainer.com'                { include 'dart::tc_util' }
 # This section consists only of loose host(s):class relations on a M:1 basis.
 #
 node /^mdct-dev10-.*\.dartcontainer\.com$/      { include 'dart::mdct_dev10_srvr' }
-node /^mdct-foreman.*\.dartcontainer\.com$/     { include 'dart::mdct_foreman' }
 node /^mdct-ovirt-node-.*\.dartcontainer\.com$/ { include 'dart::mdct_ovirt_node' }
 node /^mdct-puppet.*\.dartcontainer\.com$/      { include 'dart::mdct_puppet' }
 node /^mdct-teamcity-agent.*\.dartcontainer.com$/   { include 'dart::mdct_teamcity_agent' }

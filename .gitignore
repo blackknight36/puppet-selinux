@@ -15,4 +15,3 @@
 
 # Puppet manages these files and only the sources need be tracked.
 /puppet.conf
-/node.rb

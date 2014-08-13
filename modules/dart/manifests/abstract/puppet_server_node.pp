@@ -8,10 +8,6 @@ class dart::abstract::puppet_server_node inherits dart::abstract::guarded_server
     class { 'puppet::client':
     }
 
-    class { 'puppet::foreman':
-        foreman_url => 'http://10.1.250.106:3000/',
-    }
-
     class { 'puppet::server':
         use_passenger   => false,
         cert_name       => "$fqdn",
