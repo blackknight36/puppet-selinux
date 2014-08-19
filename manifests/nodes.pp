@@ -65,6 +65,7 @@ node 'mdct-dev17.dartcontainer.com'             { include 'dart::mdct_dev17' }
 node 'mdct-dev18.dartcontainer.com'             { include 'dart::mdct_dev18' }
 node 'mdct-dev19.dartcontainer.com'             { include 'dart::mdct_dev19' }
 node 'mdct-dev20.dartcontainer.com'             { include 'dart::mdct_dev20' }
+node 'mdct-dev21.dartcontainer.com'             { include 'dart::mdct_dev21' }
 node 'mdct-dev6-test.dartcontainer.com'         { include 'dart::mdct_dev6_test' }
 node 'mdct-dev6.dartcontainer.com'              { include 'dart::mdct_dev6' }
 node 'mdct-dev7.dartcontainer.com'              { include 'dart::mdct_dev7' }
@@ -78,6 +79,7 @@ node 'mdct-f14-builder.dartcontainer.com'       { include 'dart::mdct_f14_builde
 node 'mdct-f15-builder.dartcontainer.com'       { include 'dart::mdct_f15_builder' }
 node 'mdct-f16-builder.dartcontainer.com'       { include 'dart::mdct_f16_builder' }
 node 'mdct-f17-builder.dartcontainer.com'       { include 'dart::mdct_f17_builder' }
+node 'mdct-fogbugz.dartcontainer.com'           { include 'dart::mdct_fogbugz' }
 node 'mdct-koji.dartcontainer.com'              { include 'dart::mdct_koji' }
 node 'mdct-nexus.dartcontainer.com'             { include 'dart::mdct_nexus' }
 node 'mdct-ngic-dev.dartcontainer.com'          { include 'dart::mdct_ngic_dev' }
