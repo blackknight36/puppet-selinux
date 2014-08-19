@@ -44,7 +44,7 @@ define xdg_desktop::menu_entry (
 
         'absent': {
             exec { "uninstall-xdg-menu-entry-${name}":
-                command => "${xdg_desktop::params::menu_command} install ${dir_file} ${desktop_file}",
+                command => "${xdg_desktop::params::menu_command} uninstall ${dir_file} ${desktop_file}",
                 onlyif  => "test -e \"${xdg_desktop::params::app_dir}/${name}.desktop\"",
             }
         }
