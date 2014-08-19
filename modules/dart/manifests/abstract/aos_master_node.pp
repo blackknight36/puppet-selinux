@@ -82,7 +82,10 @@ class dart::abstract::aos_master_node (
     }
 
     include 'flock_herder'
-    include 'mdct_puppeteer_admin'
+
+    class { 'mdct_puppeteer::admin':
+        source  => 'puppet:///modules/dart/mdct_puppeteer/mdct-puppeteer-admin.conf',
+    }
 
     class { 'postgresql::server':
         hba_conf    => 'puppet:///private-host/postgresql/pg_hba.conf',
