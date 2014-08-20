@@ -37,10 +37,10 @@ class dart::abstract::packages::developer {
 
     ### Select Package Inclusion ###
 
-    if $operatingsystem == 'Fedora' {
+    if $::operatingsystem == 'Fedora' {
 
-        if  $operatingsystemrelease == 'Rawhide' or
-            $operatingsystemrelease >= 12
+        if  $::operatingsystemrelease == 'Rawhide' or
+            $::operatingsystemrelease >= 12
         {
             package { [
                 'python-ipaddr',
@@ -49,8 +49,8 @@ class dart::abstract::packages::developer {
             }
         }
 
-        if  $operatingsystemrelease == 'Rawhide' or
-            $operatingsystemrelease >= 15
+        if  $::operatingsystemrelease == 'Rawhide' or
+            $::operatingsystemrelease >= 15
         {
             package { [
                 'jtbox',
@@ -58,17 +58,18 @@ class dart::abstract::packages::developer {
                 ensure  => installed,
             }
         }
-        if  $operatingsystemrelease == 'Rawhide' or
-            $operatingsystemrelease >= 18
+        if  $::operatingsystemrelease == 'Rawhide' or
+            $::operatingsystemrelease >= 18
         {
             package { [
+                'rubygem-puppet-lint',
                 'rubygem-ronn',
                 ]:
                 ensure  => installed,
             }
         }
-        if  $operatingsystemrelease == 'Rawhide' or
-            $operatingsystemrelease >= 19
+        if  $::operatingsystemrelease == 'Rawhide' or
+            $::operatingsystemrelease >= 19
         {
             package { [
                 'rubygem-git-up',
