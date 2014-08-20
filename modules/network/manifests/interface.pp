@@ -61,7 +61,7 @@ define network::interface (
     # something like "<%= @macaddress_<%= name %>%>", so this little trick is
     # used here to accomplish the variable interpolation.
     $mac_fact = "macaddress_${name}"
-    $interface_hwaddr = inline_template("<%= scope.lookupvar(@mac_fact) %>")
+    $interface_hwaddr = inline_template('<%= scope.lookupvar(@mac_fact) %>')
 
     file { "/etc/sysconfig/network-scripts/ifcfg-${name}":
         ensure  => $ensure,
