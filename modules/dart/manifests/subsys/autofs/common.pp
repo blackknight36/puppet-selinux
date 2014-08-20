@@ -43,6 +43,12 @@ class dart::subsys::autofs::common {
         options => '--timeout=600 --ghost',
     }
 
+    # TODO: use NFSv4
+    #   - /etc/exports will need fsid=0
+    #   - What will the impact be on ACLs (e.g., /pub/fedora/mdct/) from the
+    #   client perspective?
+    #   - What about bind mounts exposed through /pub (e.g.,
+    #   /storage/projects)?
     autofs::map_entry { '/mnt/pub':
         mount   => '/mnt',
         key     => 'pub',
