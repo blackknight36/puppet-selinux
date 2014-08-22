@@ -7,39 +7,38 @@
 #
 # === Parameters
 #
-# [*settings*]
-#   Soure URI that provides the /etc/firewall-driven.conf content.
+# [*ensure*]
+#   What state should the package be in?  One of: "present" (the default, also
+#   called "installed"), "absent", "latest" or some specific version.
+#
+# [*content*]
+#   Literal content for the master configuration file.  One and only one of
+#   "content" or "source" must be given.
+#
+# [*source*]
+#   URI of the master configuration file content.  One and only one of
+#   "content" or "source" must be given.
 #
 # === Authors
 #
 #   John Florian <john.florian@dart.biz>
 
 
-class firewall_driven::master ($settings) {
+class firewall_driven::master (
+        $ensure='present',
+        $content=undef,
+        $source=undef,
+    ) {
 
-    include 'apache'
-    include 'apache::params'
-    include 'firewall_driven::params'
+    include 'firewall_driven::master::params'
 
-    package { $firewall_driven::params::master_packages:
-        ensure  => installed,
-        notify  => Service[$apache::params::services],
+    package { $firewall_driven::master::params::packages:
+        ensure  => $ensure,
     }
 
-    File {
-        owner       => 'root',
-        group       => 'root',
-        mode        => '0644',
-        seluser     => 'system_u',
-        selrole     => 'object_r',
-        seltype     => 'etc_t',
-        before      => Service[$apache::params::services],
-        notify      => Service[$apache::params::services],
-        subscribe   => Package[$firewall_driven::params::master_packages],
-    }
-
-    file { '/etc/firewall-driven.conf':
-        source  => $settings,
+    firewall_driven::master::config { 'firewall-driven':
+        content => $content,
+        source  => $source,
     }
 
 }
