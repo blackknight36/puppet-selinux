@@ -26,6 +26,8 @@ class dart::abstract::aos_master_node (
         $python_ver, $django_user, $django_group,
     ) inherits dart::abstract::server_node {
 
+    include 'apache::params'
+
     $python_base="/usr/lib/python${python_ver}/site-packages"
 
     class { 'apache':
@@ -70,11 +72,13 @@ class dart::abstract::aos_master_node (
     }
 
     class { 'dhcpd_driven::master':
-        settings        => 'puppet:///private-host/dhcpd-driven/dhcpd-driven.conf',
+        before  => Service[$apache::params::services],
+        notify  => Service[$apache::params::services],
+        source  => 'puppet:///private-host/dhcpd-driven/dhcpd-driven.conf',
     }
 
     class { 'firewall_driven::master':
-        settings        => 'puppet:///private-host/firewall-driven/firewall-driven.conf',
+        settings    => 'puppet:///private-host/firewall-driven/firewall-driven.conf',
     }
 
     apache::site_config { 'django-apps':

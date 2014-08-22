@@ -7,39 +7,38 @@
 #
 # === Parameters
 #
-# [*settings*]
-#   Soure URI that provides the /etc/dhcpd-driven.conf content.
+# [*ensure*]
+#   What state should the package be in?  One of: "present" (the default, also
+#   called "installed"), "absent", "latest" or some specific version.
+#
+# [*content*]
+#   Literal content for the master configuration file.  One and only one of
+#   "content" or "source" must be given.
+#
+# [*source*]
+#   URI of the master configuration file content.  One and only one of
+#   "content" or "source" must be given.
 #
 # === Authors
 #
 #   John Florian <john.florian@dart.biz>
 
 
-class dhcpd_driven::master ($settings) {
+class dhcpd_driven::master (
+        $ensure='present',
+        $content=undef,
+        $source=undef,
+    ) {
 
-    include 'apache'
-    include 'apache::params'
-    include 'dhcpd_driven::params'
+    include 'dhcpd_driven::master::params'
 
-    package { $dhcpd_driven::params::master_packages:
-        ensure  => installed,
-        notify  => Service[$apache::params::services],
+    package { $dhcpd_driven::master::params::packages:
+        ensure  => $ensure,
     }
 
-    File {
-        owner       => 'root',
-        group       => 'root',
-        mode        => '0644',
-        seluser     => 'system_u',
-        selrole     => 'object_r',
-        seltype     => 'etc_t',
-        before      => Service[$apache::params::services],
-        notify      => Service[$apache::params::services],
-        subscribe   => Package[$dhcpd_driven::params::master_packages],
-    }
-
-    file { '/etc/dhcpd-driven.conf':
-        source  => $settings,
+    dhcpd_driven::master::config { 'dhcpd-driven':
+        content => $content,
+        source  => $source,
     }
 
 }
