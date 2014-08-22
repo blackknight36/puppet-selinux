@@ -8,6 +8,8 @@
 
 class dart::tc_util inherits dart::abstract::guarded_server_node {
 
+    tag 'tc_util'
+
     include 'dart::abstract::packages::developer'
 
     class { 'puppet::client':
