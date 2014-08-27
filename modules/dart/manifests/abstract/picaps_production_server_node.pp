@@ -40,8 +40,8 @@ class dart::abstract::picaps_production_server_node inherits dart::abstract::ung
     # PICAPS admins desire puppet only for tasks at server inception and forgo
     # all run-state management.
     class { 'puppet::client':
-        enable  => false,
         ensure  => 'stopped',
+        enable  => false,
     }
 
     # Sendmail alias
@@ -67,28 +67,28 @@ class dart::abstract::picaps_production_server_node inherits dart::abstract::ung
     include 'dart::abstract::packages::developer'
 
     # JDK's
+    oracle::jdk { 'jdk-7u65-linux-x64':
+        ensure  => 'present',
+        version => '7',
+        update  => '65',
+    }
     oracle::jdk { 'jdk-7u60-linux-x64':
         ensure  => 'present',
         version => '7',
         update  => '60',
-    }
-    oracle::jdk { 'jdk-7u55-linux-x64':
-        ensure  => 'present',
-        version => '7',
-        update  => '55',
         before  => [
-            Exec["install oracle jdk-7u60-linux-x64"],
+            Exec['install oracle jdk-7u65-linux-x64'],
         ],
     }
-    file { "/usr/java/latest/jre/lib/management/jmxremote.password":
-        group   => "root",
-        mode    => 600,
-        owner   => "root",
+    file { '/usr/java/latest/jre/lib/management/jmxremote.password':
+        group   => 'root',
+        mode    => '0600',
+        owner   => 'root',
         source  => [
             'puppet:///modules/dart/picaps_servers/jmxremote.password',
         ],
-        require  => [
-            Exec["install oracle jdk-7u60-linux-x64"],
+        require => [
+            Exec['install oracle jdk-7u65-linux-x64'],
         ],
     }
 
@@ -99,60 +99,60 @@ class dart::abstract::picaps_production_server_node inherits dart::abstract::ung
     class { 'mariadb::server':
         config_uri => 'puppet:///modules/dart/picaps_servers/picaps-mariadb-server.cnf',
     }
-    file { "/etc/systemd/system/mariadb.service": # modified mariadb.service is necessary to configure NUMA interleaving for MariaDB process
-        group   => "root",
-        mode    => 644,
-        owner   => "root",
+    file { '/etc/systemd/system/mariadb.service': # modified mariadb.service is necessary to configure NUMA interleaving for MariaDB process
+        group   => 'root',
+        mode    => '0644',
+        owner   => 'root',
         source  => 'puppet:///modules/dart/picaps_servers/picaps-mariadb.service',
         before  => File['/storage/mysql'],
     }
     file { '/storage/mysql':
+        ensure  => 'directory',
         owner   => 'mysql',
         group   => 'mysql',
         mode    => '0755',
         seluser => 'system_u',
         selrole => 'object_r',
         seltype => 'mysqld_db_t',
-        ensure  => 'directory',
         before  => Class['mariadb::server'],
     }
     user { 'mysql':
-        provider    => 'useradd',
-        uid         => 444,
-        gid         => 444,
-        home        => '/storage/mysql',
-        system      => true,
-        before      => File['/etc/systemd/system/mariadb.service'],
+        provider=> 'useradd',
+        uid     => '444',
+        gid     => '444',
+        home    => '/storage/mysql',
+        system  => true,
+        before  => File['/etc/systemd/system/mariadb.service'],
     }
     group { 'mysql':
-       provider => 'groupadd',
-       gid      => 444,
-       system   => true,
-       before   => User['mysql'],
+        provider=> 'groupadd',
+        gid     => '444',
+        system  => true,
+        before  => User['mysql'],
     }
 
-    file { "/root/picaps-grant.sql":
-        group   => "root",
-        mode    => 660,
-        owner   => "root",
+    file { '/root/picaps-grant.sql':
+        group   => 'root',
+        mode    => '0660',
+        owner   => 'root',
         content => template('dart/picaps/picaps-grant.sql'),
     }
-    file { "/root/picaps-databases.sql":
-        group   => "root",
-        mode    => 660,
-        owner   => "root",
+    file { '/root/picaps-databases.sql':
+        group   => 'root',
+        mode    => '0660',
+        owner   => 'root',
         source  => 'puppet:///modules/dart/picaps_servers/picaps-databases.sql',
     }
-    file { "/root/picaps-install.sh":
-        group   => "root",
-        mode    => 770,
-        owner   => "root",
+    file { '/root/picaps-install.sh':
+        group   => 'root',
+        mode    => '0770',
+        owner   => 'root',
         source  => 'puppet:///modules/dart/picaps_servers/picaps-install.sh',
     }
-    file { "/root/picaps-initdb.sh":
-        group   => "root",
-        mode    => 770,
-        owner   => "root",
+    file { '/root/picaps-initdb.sh':
+        group   => 'root',
+        mode    => '0770',
+        owner   => 'root',
         source  => 'puppet:///modules/dart/picaps_servers/picaps-initdb.sh',
     }
 
@@ -165,22 +165,22 @@ class dart::abstract::picaps_production_server_node inherits dart::abstract::ung
     # TODO: PICAPS-bridge package
 
     # Link for yum-fanout-mirror
-    file { "/local":
+    file { '/local':
         ensure  => link,
-        target  => "/storage/pub",
+        target  => '/storage/pub',
     }
 
     # PICAPS calls gethostbyname() for its own hostname which must resolve.
     #
     # NB: If you get the following error from puppet here ...
-    #   Parameter ip failed: Invalid IP address ""
+    #   Parameter ip failed: Invalid IP address ''
     # ... it is most likely due to this bug ...
     #   https://projects.puppetlabs.com/issues/15001
     # As a work around, you should either: 1) put the host into DNS or, 2) put
     # the host into /etc/hosts (manually, of course).
-    host { "$fqdn":
-        ip              => "$ipaddress",
-        host_aliases    => [ "$hostname" ],
+    host { $::fqdn:
+        ip              => $::ipaddress,
+        host_aliases    => [ $::hostname ],
     }
 
 }
