@@ -56,36 +56,28 @@ class dart::abstract::picaps_test_server_node inherits dart::abstract::unguarded
         version => '7',
         update  => '51',
         before  => [
-            Exec["install oracle jdk-7u55-linux-x64"],
+            Exec['install oracle jdk-7u55-linux-x64'],
         ],
     }
-    file { "/usr/java/latest/jre/lib/management/jmxremote.password":
-        group   => "root",
-        mode    => 600,
-        owner   => "root",
+    file { '/usr/java/latest/jre/lib/management/jmxremote.password':
+        group   => 'root',
+        mode    => '0600',
+        owner   => 'root',
         source  => [
             'puppet:///modules/dart/picaps_servers/jmxremote.password',
         ],
-        require  => [
-            Exec["install oracle jdk-7u55-linux-x64"],
+        require => [
+            Exec['install oracle jdk-7u55-linux-x64'],
         ],
     }
 
     # Printing support
-    file { "/etc/cups/cupsd.conf":
-        group   => "lp",
-        mode    => 640,
-        owner   => "root",
+    file { '/etc/cups/cupsd.conf':
+        group   => 'lp',
+        mode    => '0640',
+        owner   => 'root',
         source  => [
             'puppet:///modules/dart/picaps_servers/picaps-cupsd.conf',
-        ],
-    }
-    file { "/root/picaps-printer-setup.sh":
-        group   => "root",
-        mode    => 755,
-        owner   => "root",
-        source  => [
-            'puppet:///modules/dart/picaps_servers/picaps-printer-setup.sh',
         ],
     }
 
@@ -93,73 +85,73 @@ class dart::abstract::picaps_test_server_node inherits dart::abstract::unguarded
     class { 'mariadb::server':
         config_uri => 'puppet:///modules/dart/picaps_servers/picaps-test-mariadb-server.cnf',
     }
-    file { "/etc/systemd/system/mysqld.service":
-        group   => "root",
-        mode    => 644,
-        owner   => "root",
+    file { '/etc/systemd/system/mysqld.service':
+        group   => 'root',
+        mode    => '0644',
+        owner   => 'root',
         source  => 'puppet:///modules/dart/picaps_servers/picaps-mysqld.service',
         before  => File['/storage/mysql'],
     }
     file { '/storage/':
+        ensure  => 'directory',
         owner   => 'root',
         group   => 'root',
         mode    => '0755',
-    ensure      => 'directory',
-    before      => File['/storage/mysql'],
+        before  => File['/storage/mysql'],
     }
     file { '/storage/mysql':
+        ensure  => 'directory',
         owner   => 'mysql',
         group   => 'mysql',
         mode    => '0755',
         seluser => 'system_u',
         selrole => 'object_r',
         seltype => 'mysqld_db_t',
-        ensure  => 'directory',
         before  => Class['mariadb::server'],
     }
     user { 'mysql':
         provider    => 'useradd',
-        uid         => 444,
-        gid         => 444,
+        uid         => '444',
+        gid         => '444',
         home        => '/storage/mysql',
         system      => true,
         before      => File['/etc/systemd/system/mysqld.service'],
     }
     group { 'mysql':
-       provider => 'groupadd',
-       gid      => 444,
-       system   => true,
-       before   => User['mysql'],
+        provider => 'groupadd',
+        gid      => '444',
+        system   => true,
+        before   => User['mysql'],
     }
 
-    file { "/root/picaps-grant.sql":
-        group   => "root",
-        mode    => 660,
-        owner   => "root",
+    file { '/root/picaps-grant.sql':
+        group   => 'root',
+        mode    => '0660',
+        owner   => 'root',
         content => template('dart/picaps/picaps-grant.sql'),
     }
-    file { "/root/picaps-databases.sql":
-        group   => "root",
-        mode    => 660,
-        owner   => "root",
+    file { '/root/picaps-databases.sql':
+        group   => 'root',
+        mode    => '0660',
+        owner   => 'root',
         source  => 'puppet:///modules/dart/picaps_servers/picaps-databases.sql',
     }
-    file { "/root/picaps-install.sh":
-        group   => "root",
-        mode    => 770,
-        owner   => "root",
+    file { '/root/picaps-install.sh':
+        group   => 'root',
+        mode    => '0770',
+        owner   => 'root',
         source  => 'puppet:///modules/dart/picaps_servers/picaps-install.sh',
     }
-    file { "/root/picaps-initdb.sh":
-        group   => "root",
-        mode    => 770,
-        owner   => "root",
+    file { '/root/picaps-initdb.sh':
+        group   => 'root',
+        mode    => '0770',
+        owner   => 'root',
         source  => 'puppet:///modules/dart/picaps_servers/picaps-initdb.sh',
     }
-    file { "/root/picaps-test-initdb.sh":
-        group   => "root",
-        mode    => 770,
-        owner   => "root",
+    file { '/root/picaps-test-initdb.sh':
+        group   => 'root',
+        mode    => '0770',
+        owner   => 'root',
         source  => 'puppet:///modules/dart/picaps_servers/picaps-test-initdb.sh',
     }
 
@@ -174,14 +166,14 @@ class dart::abstract::picaps_test_server_node inherits dart::abstract::unguarded
     # PICAPS calls gethostbyname() for its own hostname which must resolve.
     #
     # NB: If you get the following error from puppet here ...
-    #   Parameter ip failed: Invalid IP address ""
+    #   Parameter ip failed: Invalid IP address ''
     # ... it is most likely due to this bug ...
     #   https://projects.puppetlabs.com/issues/15001
     # As a work around, you should either: 1) put the host into DNS or, 2) put
     # the host into /etc/hosts (manually, of course).
-    host { "$fqdn":
-        ip              => "$ipaddress",
-        host_aliases    => [ "$hostname" ],
+    host { $::fqdn:
+        ip              => $::ipaddress,
+        host_aliases    => [ $::hostname ],
     }
 
 }
