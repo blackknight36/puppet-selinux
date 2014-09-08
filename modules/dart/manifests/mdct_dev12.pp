@@ -23,9 +23,9 @@ class dart::mdct_dev12 inherits dart::abstract::workstation_node {
 
     network::interface { 'br0':
         template    => 'static-bridge',
-        ip_address  => '10.1.0.158',
-        netmask     => '255.255.0.0',
-        gateway     => '10.1.0.25',
+        ip_address  => '10.209.23.1',
+        netmask     => '255.255.252.0',
+        gateway     => '10.209.23.254',
         stp         => 'no',
     }
 
