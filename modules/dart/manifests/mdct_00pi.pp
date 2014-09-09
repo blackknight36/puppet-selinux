@@ -27,44 +27,46 @@ class dart::mdct_00pi inherits dart::abstract::picaps_production_server_node {
         options => '-fstype=cifs,rw,credentials=/etc/.credentials/mdcgate.cred',
         remote  => '://mas-fs01/ProdMonData',
     }
-    autofs::map_entry { '/mnt/sm2ci00v-miisbx':
+    autofs::map_entry { '/mnt/mas-sap006-mii-staging':
         mount   => '/mnt',
-        key     => 'sm2ci00v-miisbx',
+        key     => 'mas-sap006-mii-staging',
         options => '-fstype=cifs,rw,credentials=/etc/.credentials/mas_mdc.cred',
-        remote  => '://sm2ci00v/miisbx',
+        remote  => '://mas-sap006/miistaging',
     }
     file { '/etc/.credentials':
+        ensure  => 'directory',
         owner   => 'root',
         group   => 'root',
         mode    => '0750',
-        ensure  => 'directory',
-        before  => File['/etc/.credentials/mdcgate.cred'],
-        before  => File['/etc/.credentials/mas_mdc.cred'],
+        before  => [
+            File['/etc/.credentials/mdcgate.cred'],
+            File['/etc/.credentials/mas_mdc.cred'],
+        ],
     }
-    file { "/etc/.credentials/mdcgate.cred":
-        group   => "root",
-        mode    => 600,
-        owner   => "root",
+    file { '/etc/.credentials/mdcgate.cred':
+        group   => 'root',
+        mode    => '0600',
+        owner   => 'root',
         source  => [
             'puppet:///modules/dart/picaps_servers/mdcgate.cred',
         ],
         before  => Autofs::Map_entry['/mnt/prodmondata'],
     }
-    file { "/etc/.credentials/mas_mdc.cred":
-        group   => "root",
-        mode    => 600,
-        owner   => "root",
+    file { '/etc/.credentials/mas_mdc.cred':
+        group   => 'root',
+        mode    => '0600',
+        owner   => 'root',
         source  => [
             'puppet:///modules/dart/picaps_servers/mas_mdc.cred',
         ],
-        before  => Autofs::Map_entry['/mnt/sm2ci00v-miisbx'],
+        before  => Autofs::Map_entry['/mnt/mas-sap006-mii-staging'],
     }
-    file { "/dist/reportoutput":
+    file { '/dist/reportoutput':
         ensure  => link,
-        target  => "/mnt/prodmondata/staging",
+        target  => '/mnt/prodmondata/staging',
     }
-    file { "/dist/mii":
+    file { '/dist/mii':
         ensure  => link,
-        target  => "/mnt/sm2ci00v-miisbx/MII",
+        target  => '/mnt/mas-sap006-mii-staging',
     }
 }
