@@ -1,6 +1,6 @@
-# modules/jetbrains/manifests/teamcity/agent_release.pp
+# modules/jetbrains/manifests/teamcity/agent/release.pp
 #
-# == Define: jetbrains::teamcity::agent_release
+# == Define: jetbrains::teamcity::agent::release
 #
 # Installs a single, specific JetBrains TeamCity Build Agent release.
 #
@@ -32,7 +32,7 @@
 #   John Florian <john.florian@dart.biz>
 
 
-define jetbrains::teamcity::agent_release (
+define jetbrains::teamcity::agent::release (
         $build, $ensure='present', $active=true,
         $server_url='http://localhost:8111/'
     ) {
@@ -55,7 +55,7 @@ define jetbrains::teamcity::agent_release (
                 #   needed.
                 #   2. Only extract the Build Agent that is bundled and
                 #   distributed with the Server package.  The
-                #   jetbrains::teamcity::server_release class excludes this
+                #   jetbrains::teamcity::server::release class excludes this
                 #   portion so that the puppet portions can remain modular in
                 #   a pure sense.
                 command => "tar xz --transform='s!^TeamCity/buildAgent!${product_name}!' -f /pub/jetbrains/TeamCity-${build}.tar.gz TeamCity/buildAgent/",
@@ -70,17 +70,17 @@ define jetbrains::teamcity::agent_release (
                 before  => Systemd::Unit["${product_name}.service"],
             }
 
-            Jetbrains::Teamcity::Agent_property {
+            Jetbrains::Teamcity::Agent::Property {
                 props_file  => "${product_props}",
                 before      => Systemd::Unit["${product_name}.service"],
                 require     => Exec["extract-${product_name}"],
             }
 
-            jetbrains::teamcity::agent_property { 'name':
+            jetbrains::teamcity::agent::property { 'name':
                 value       =>  "${hostname}",
             }
 
-            jetbrains::teamcity::agent_property { 'serverUrl':
+            jetbrains::teamcity::agent::property { 'serverUrl':
                 value       =>  "${server_url}",
             }
 
@@ -108,8 +108,8 @@ define jetbrains::teamcity::agent_release (
         running         => $active,
         restart_events  => [
             File["${jetbrains::params::teamcity_rc}"],
-            Jetbrains::Teamcity::Agent_property['name'],
-            Jetbrains::Teamcity::Agent_property['serverUrl'],
+            Jetbrains::Teamcity::Agent::Property['name'],
+            Jetbrains::Teamcity::Agent::Property['serverUrl'],
         ],
     }
 

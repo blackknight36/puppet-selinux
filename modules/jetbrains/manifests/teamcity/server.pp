@@ -11,7 +11,7 @@
 # === Notes
 #
 #   1. Generally, you will want to just include the class
-#   'jetbrains::teamcity::server_release' instead.
+#   'jetbrains::teamcity::server::release' instead.
 #
 # === Authors
 #

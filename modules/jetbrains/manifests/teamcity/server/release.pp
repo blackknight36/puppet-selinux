@@ -1,6 +1,6 @@
-# modules/jetbrains/manifests/teamcity/server_release.pp
+# modules/jetbrains/manifests/teamcity/server/release.pp
 #
-# == Define: jetbrains::teamcity::server_release
+# == Define: jetbrains::teamcity::server::release
 #
 # Installs a single, specific JetBrains TeamCity Server release.
 #
@@ -24,7 +24,7 @@
 #   John Florian <john.florian@dart.biz>
 
 
-define jetbrains::teamcity::server_release (
+define jetbrains::teamcity::server::release (
         $build, $ensure='present', $active=true
     ) {
 
@@ -45,7 +45,7 @@ define jetbrains::teamcity::server_release (
                 #   needed.
                 #   2. Exclude the Build Agent that is bundled and distributed
                 #   with the Server package.  The
-                #   jetbrains::teamcity::agent_release class extract that
+                #   jetbrains::teamcity::agent::release class extract that
                 #   portion separately so that the puppet portions can remain
                 #   modular in a pure sense.
                 command => "tar xz --transform='s!^TeamCity!${product_name}!' --exclude=TeamCity/buildAgent -f /pub/jetbrains/TeamCity-${build}.tar.gz",

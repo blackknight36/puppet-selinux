@@ -1,6 +1,6 @@
-# modules/jetbrains/manifests/teamcity/agent_property.pp
+# modules/jetbrains/manifests/teamcity/agent/property.pp
 #
-# == Define: jetbrains::teamcity::agent_property
+# == Define: jetbrains::teamcity::agent::property
 #
 # Configures a single, specific JetBrains TeamCity Build Agent property.
 #
@@ -20,7 +20,7 @@
 #   John Florian <john.florian@dart.biz>
 
 
-define jetbrains::teamcity::agent_property ($props_file, $value) {
+define jetbrains::teamcity::agent::property ($props_file, $value) {
 
     include 'jetbrains::teamcity::agent'
 
