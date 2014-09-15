@@ -27,9 +27,6 @@ class jetbrains {
         seltype => 'usr_t',
     }
 
-    file { '/opt':
-    }
-
     file { $jetbrains::params::root:
         require => File['/opt'],
     }

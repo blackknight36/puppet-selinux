@@ -10,6 +10,7 @@ class dart::abstract::base_node {
     include 'cron::daemon'
     include 'dart::abstract::packages::base'
     include 'dart::subsys::dns::no_dns_hosts'
+    include 'dart::subsys::filesystem'
     include 'logwatch'
 
     class { 'ntp':
