@@ -25,7 +25,7 @@ class dart::abstract::teamcity_server_node inherits dart::abstract::guarded_serv
         ensure  => installed,
     }
 
-    case $hostname {
+    case $::hostname {
         'mdct-est-ci': {
             jetbrains::teamcity::server::release { 'TeamCity-7.1':
                 build   => '7.1',
@@ -56,6 +56,9 @@ class dart::abstract::teamcity_server_node inherits dart::abstract::guarded_serv
                 hba_conf    => 'puppet:///private-host/postgresql/pg_hba.conf',
             }
 
+        }
+        default: {
+            fail('Missing host-specific details!')
         }
     }
 

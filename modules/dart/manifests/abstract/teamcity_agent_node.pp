@@ -43,6 +43,9 @@ class dart::abstract::teamcity_agent_node inherits dart::abstract::guarded_serve
             }
 
         }
+        default: {
+            fail('Missing host-specific details!')
+        }
     }
 
     mock::target { 'Fedora-17-i386':
