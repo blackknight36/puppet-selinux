@@ -24,23 +24,24 @@ class dart::abstract::teamcity_agent_node inherits dart::abstract::guarded_serve
 
     case $::hostname {
         'mdct-est-ci': {
-            jetbrains::teamcity::agent_release { 'TeamCity-7.1':
+            jetbrains::teamcity::agent::release { 'TeamCity-7.1':
                 build   => '7.1',
             }
         }
         /^mdct-teamcity-agent.*$/: {
             include 'openjdk::java_1_7_0'
 
-            jetbrains::teamcity::agent_release { 'TeamCity-8.1.2':
+            jetbrains::teamcity::agent::release { 'TeamCity-8.1.4':
+                build       => '8.1.4',
+                server_url  => 'http://mdct-teamcity-f20.dartcontainer.com:8111/',
+            }
+
+            jetbrains::teamcity::agent::release { 'TeamCity-8.1.2':
+                ensure      => absent,
                 build       => '8.1.2',
                 server_url  => 'http://mdct-teamcity-f20.dartcontainer.com:8111/',
             }
 
-            jetbrains::teamcity::agent_release { 'TeamCity-8.1a':
-                ensure      => absent,
-                build       => '8.1a',
-                server_url  => 'http://mdct-teamcity-f20.dartcontainer.com:8111/',
-            }
         }
     }
 
