@@ -28,25 +28,25 @@ define jetbrains::idea::release ($build, $ensure='present') {
     $product_root = "${jetbrains::params::idea_root}/${product_name}"
     $desktop_file = "${jetbrains::idea::launchers_path}/${name}.desktop"
 
-    file { "${desktop_file}":
-        content => template("jetbrains/idea/build.desktop"),
-        ensure  => "${ensure}",
+    file { $desktop_file:
+        ensure  => $ensure,
+        content => template('jetbrains/idea/build.desktop'),
         group   => 'root',
         mode    => '0644',
         owner   => 'root',
-        require => File["${jetbrains::idea::launchers_path}"],
+        require => File[$jetbrains::idea::launchers_path],
         selrole => 'object_r',
         seltype => 'usr_t',
         seluser => 'system_u',
     }
 
-    xdg_desktop::menu_entry { "${name}":
+    xdg_desktop::menu_entry { $name:
         ensure          => $ensure,
-        dir_file        => "${jetbrains::jetbrains_menu}",
-        desktop_file    => "${desktop_file}",
+        dir_file        => $jetbrains::jetbrains_menu,
+        desktop_file    => $desktop_file,
         require         => [
             Class['jetbrains'],
-            File["${desktop_file}"],
+            File[$desktop_file],
         ],
     }
 
@@ -55,17 +55,17 @@ define jetbrains::idea::release ($build, $ensure='present') {
         'present': {
             exec { "extract-${name}":
                 command => "tar xzf /pub/jetbrains/${name}.tar.gz",
-                creates => "${product_root}",
-                cwd     => "${jetbrains::params::idea_root}",
+                creates => $product_root,
+                cwd     => $jetbrains::params::idea_root,
                 require => [
                     Class['autofs'],
-                    File["${jetbrains::params::idea_root}"],
+                    File[$jetbrains::params::idea_root],
                 ],
             }
         }
 
         'absent': {
-            file { "${product_root}":
+            file { $product_root:
                 ensure  => 'absent',
                 force   => true,
                 recurse => true,

@@ -27,27 +27,27 @@ class jetbrains::teamcity::common {
         seltype => 'etc_t',
     }
 
-    file { "${jetbrains::params::teamcity_root}":
+    file { $jetbrains::params::teamcity_root:
         ensure  => directory,
         mode    => '0755',
         require => File['/opt/jetbrains'],
     }
 
-    file { "${jetbrains::params::teamcity_etc_root}":
+    file { $jetbrains::params::teamcity_etc_root:
         ensure  => directory,
         mode    => '0755',
-        require => File["${jetbrains::params::teamcity_root}"],
+        require => File[$jetbrains::params::teamcity_root],
     }
 
-    file { "${jetbrains::params::teamcity_rc}":
+    file { $jetbrains::params::teamcity_rc:
         content => template('jetbrains/teamcity/rc'),
-        require => File["${jetbrains::params::teamcity_etc_root}"],
+        require => File[$jetbrains::params::teamcity_etc_root],
     }
 
-    file { "${jetbrains::params::teamcity_buildserver_root}":
+    file { $jetbrains::params::teamcity_buildserver_root:
         ensure  => directory,
         mode    => '0755',
-        require => File["${jetbrains::params::teamcity_root}"],
+        require => File[$jetbrains::params::teamcity_root],
     }
 
 }

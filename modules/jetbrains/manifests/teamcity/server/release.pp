@@ -49,8 +49,8 @@ define jetbrains::teamcity::server::release (
                 #   portion separately so that the puppet portions can remain
                 #   modular in a pure sense.
                 command => "tar xz --transform='s!^TeamCity!${product_name}!' --exclude=TeamCity/buildAgent -f /pub/jetbrains/TeamCity-${build}.tar.gz",
-                creates => "${product_root}",
-                cwd     => "${jetbrains::params::teamcity_root}",
+                creates => $product_root,
+                cwd     => $jetbrains::params::teamcity_root,
                 user    => 'teamcity',
                 group   => 'teamcity',
                 require => [
@@ -63,7 +63,7 @@ define jetbrains::teamcity::server::release (
         }
 
         'absent': {
-            file { "${product_root}":
+            file { $product_root:
                 ensure  => 'absent',
                 force   => true,
                 recurse => true,
@@ -78,11 +78,11 @@ define jetbrains::teamcity::server::release (
     }
 
     systemd::unit { "${product_name}.service":
-        content         => template('jetbrains/teamcity/teamcity-server.service'),
         ensure          => $ensure,
+        content         => template('jetbrains/teamcity/teamcity-server.service'),
         enable          => $active,
         running         => $active,
-        restart_events  => File["${jetbrains::params::teamcity_rc}"],
+        restart_events  => File[$jetbrains::params::teamcity_rc],
     }
 
 }

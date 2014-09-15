@@ -59,8 +59,8 @@ define jetbrains::teamcity::agent::release (
                 #   portion so that the puppet portions can remain modular in
                 #   a pure sense.
                 command => "tar xz --transform='s!^TeamCity/buildAgent!${product_name}!' -f /pub/jetbrains/TeamCity-${build}.tar.gz TeamCity/buildAgent/",
-                creates => "${product_root}",
-                cwd     => "${jetbrains::params::teamcity_root}",
+                creates => $product_root,
+                cwd     => $jetbrains::params::teamcity_root,
                 user    => 'teamcity',
                 group   => 'teamcity',
                 require => [
@@ -71,23 +71,23 @@ define jetbrains::teamcity::agent::release (
             }
 
             Jetbrains::Teamcity::Agent::Property {
-                props_file  => "${product_props}",
+                props_file  => $product_props,
                 before      => Systemd::Unit["${product_name}.service"],
                 require     => Exec["extract-${product_name}"],
             }
 
             jetbrains::teamcity::agent::property { 'name':
-                value       =>  "${hostname}",
+                value       =>  $::hostname,
             }
 
             jetbrains::teamcity::agent::property { 'serverUrl':
-                value       =>  "${server_url}",
+                value       =>  $server_url,
             }
 
         }
 
         'absent': {
-            file { "${product_root}":
+            file { $product_root:
                 ensure  => 'absent',
                 force   => true,
                 recurse => true,
@@ -102,12 +102,12 @@ define jetbrains::teamcity::agent::release (
     }
 
     systemd::unit { "${product_name}.service":
-        content         => template('jetbrains/teamcity/teamcity-agent.service'),
         ensure          => $ensure,
+        content         => template('jetbrains/teamcity/teamcity-agent.service'),
         enable          => $active,
         running         => $active,
         restart_events  => [
-            File["${jetbrains::params::teamcity_rc}"],
+            File[$jetbrains::params::teamcity_rc],
             Jetbrains::Teamcity::Agent::Property['name'],
             Jetbrains::Teamcity::Agent::Property['serverUrl'],
         ],

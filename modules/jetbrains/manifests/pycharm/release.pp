@@ -54,25 +54,25 @@ define jetbrains::pycharm::release (
     $product_root = "${jetbrains::params::pycharm_root}/${product_name}"
     $desktop_file = "${jetbrains::pycharm::launchers_path}/${product_name}.desktop"
 
-    file { "${desktop_file}":
+    file { $desktop_file:
+        ensure  => $ensure,
         content => template('jetbrains/pycharm/build.desktop'),
-        ensure  => "${ensure}",
         group   => 'root',
         mode    => '0644',
         owner   => 'root',
-        require => File["${jetbrains::pycharm::launchers_path}"],
+        require => File[$jetbrains::pycharm::launchers_path],
         selrole => 'object_r',
         seltype => 'usr_t',
         seluser => 'system_u',
     }
 
-    xdg_desktop::menu_entry { "${product_name}":
+    xdg_desktop::menu_entry { $product_name:
         ensure          => $ensure,
-        dir_file        => "${jetbrains::jetbrains_menu}",
-        desktop_file    => "${desktop_file}",
+        dir_file        => $jetbrains::jetbrains_menu,
+        desktop_file    => $desktop_file,
         require         => [
             Class['jetbrains'],
-            File["${desktop_file}"],
+            File[$desktop_file],
         ],
     }
 
@@ -81,17 +81,17 @@ define jetbrains::pycharm::release (
         'present': {
             exec { "extract-${product_name}":
                 command => "tar xz --transform='s!^[^/]*!${product_name}!' -f /pub/jetbrains/pycharm${package_tag}-${build}.tar.gz",
-                creates => "${product_root}",
-                cwd     => "${jetbrains::params::pycharm_root}",
+                creates => $product_root,
+                cwd     => $jetbrains::params::pycharm_root,
                 require => [
                     Class['autofs'],
-                    File["${jetbrains::params::pycharm_root}"],
+                    File[$jetbrains::params::pycharm_root],
                 ],
             }
         }
 
         'absent': {
-            file { "${product_root}":
+            file { $product_root:
                 ensure  => 'absent',
                 force   => true,
                 recurse => true,

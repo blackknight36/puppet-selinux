@@ -27,36 +27,36 @@ class jetbrains::idea {
         seltype => 'etc_t',
     }
 
-    file { "${jetbrains::params::idea_root}":
+    file { $jetbrains::params::idea_root:
         ensure  => directory,
         mode    => '0755',
         require => File['/opt/jetbrains'],
     }
 
     $launchers_path = "${jetbrains::params::idea_root}/launchers"
-    file { "${jetbrains::idea::launchers_path}":
+    file { $jetbrains::idea::launchers_path:
         ensure  => directory,
         mode    => '0755',
-        require => File["${jetbrains::params::idea_root}"],
+        require => File[$jetbrains::params::idea_root],
     }
 
     $idea_config = "${jetbrains::params::idea_root}/etc"
-    file { "${idea_config}":
+    file { $idea_config:
         ensure  => directory,
         mode    => '0755',
-        require => File["${jetbrains::params::idea_root}"],
+        require => File[$jetbrains::params::idea_root],
     }
 
     $idea_vmoptions = "${idea_config}/vmoptions"
-    file { "${idea_vmoptions}":
+    file { $idea_vmoptions:
         source  => 'puppet:///modules/jetbrains/idea/vmoptions',
-        require => File["${idea_config}"],
+        require => File[$idea_config],
     }
 
     $idea_rc = "${idea_config}/rc"
-    file { "${idea_rc}":
+    file { $idea_rc:
         content => template('jetbrains/idea/rc'),
-        require => File["${idea_config}"],
+        require => File[$idea_config],
     }
 
     # Stable releases are named with the release, but extract to the
@@ -74,33 +74,33 @@ class jetbrains::idea {
     }
 
     jetbrains::idea::release { 'ideaIU-12.1.4':
-        build   => '129.713',
         ensure  => absent,
+        build   => '129.713',
     }
 
     jetbrains::idea::release { 'ideaIU-12.0.2':
-        build   => '123.123',
         ensure  => absent,
+        build   => '123.123',
     }
 
     jetbrains::idea::release { 'ideaIU-11.1.4':
-        build   => '117.963',
         ensure  => absent,
+        build   => '117.963',
     }
 
     # EAP releases are simpler as their name reflects the build.
     jetbrains::idea::release { 'ideaIU-129.961':
-        build   => "129.961",
+        build   => '129.961',
     }
 
     jetbrains::idea::release { 'ideaIU-123.150':
-        build   => "123.150",
         ensure  => absent,
+        build   => '123.150',
     }
 
     jetbrains::idea::release { 'ideaIU-114.98':
-        build   => "114.98",
         ensure  => absent,
+        build   => '114.98',
     }
 
 }
