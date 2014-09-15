@@ -59,48 +59,4 @@ class jetbrains::idea {
         require => File[$idea_config],
     }
 
-    # Stable releases are named with the release, but extract to the
-    # build.
-    #
-    # Present policy plan is to enforce absence of old stable releases
-    # to ensure that no more than two stable releases are installed at any
-    # given time.
-    jetbrains::idea::release { 'ideaIU-13.1.4b':
-        build   => '135.1230',
-    }
-
-    jetbrains::idea::release { 'ideaIU-13.0.1':
-        build   => '133.331',
-    }
-
-    jetbrains::idea::release { 'ideaIU-12.1.4':
-        ensure  => absent,
-        build   => '129.713',
-    }
-
-    jetbrains::idea::release { 'ideaIU-12.0.2':
-        ensure  => absent,
-        build   => '123.123',
-    }
-
-    jetbrains::idea::release { 'ideaIU-11.1.4':
-        ensure  => absent,
-        build   => '117.963',
-    }
-
-    # EAP releases are simpler as their name reflects the build.
-    jetbrains::idea::release { 'ideaIU-129.961':
-        build   => '129.961',
-    }
-
-    jetbrains::idea::release { 'ideaIU-123.150':
-        ensure  => absent,
-        build   => '123.150',
-    }
-
-    jetbrains::idea::release { 'ideaIU-114.98':
-        ensure  => absent,
-        build   => '114.98',
-    }
-
 }
