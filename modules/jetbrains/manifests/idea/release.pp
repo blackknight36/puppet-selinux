@@ -22,6 +22,7 @@
 
 define jetbrains::idea::release ($build, $ensure='present') {
 
+    include 'jetbrains::idea'
     include 'jetbrains::params'
 
     $product_name = "idea-IU-${build}"
