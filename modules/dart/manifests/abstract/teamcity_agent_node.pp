@@ -101,10 +101,4 @@ class dart::abstract::teamcity_agent_node inherits dart::abstract::guarded_serve
         'd13677':;
     }
 
-    systemd::unit { 'bigger.conf':
-        source  => 'puppet:///modules/dart/teamcity/bigger.conf',
-        enable  => undef,
-        extends => 'tmp.mount',
-    }
-
 }
