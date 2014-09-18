@@ -10,7 +10,7 @@ class dart::subsys::yum::fedora {
     if $operatingsystemrelease != 'Rawhide' {
 
         yum::repo {'local-fedora':
-            server_uri  => "$fedora_repo_uri/mdct/${operatingsystemrelease}/${architecture}",
+            server_uri  => "${::dart::subsys::yum::params::fedora_repo_uri}/mdct/${operatingsystemrelease}/${architecture}",
             pkg_name    => 'yum-local-mirror-conf',
             pkg_release => $operatingsystemrelease ? {
                 '13'    => '13-1.dcc.noarch',

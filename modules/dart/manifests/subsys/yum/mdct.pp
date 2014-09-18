@@ -10,7 +10,7 @@ class dart::subsys::yum::mdct {
     if $operatingsystemrelease != 'Rawhide' {
 
         yum::repo {'mdct':
-            server_uri  => "$fedora_repo_uri/mdct/${operatingsystemrelease}/${architecture}",
+            server_uri  => "${::dart::subsys::yum::params::fedora_repo_uri}/mdct/${::operatingsystemrelease}/${architecture}",
             pkg_name    => 'fedora-mdct-release',
             pkg_release => $operatingsystemrelease ? {
                 '13'    => '13-1.dcc.noarch',
