@@ -29,13 +29,13 @@
 
 define yum::repo($server_uri, $pkg_name, $pkg_release, $use_tsocks=false) {
 
-    $tsocks = $use_tsocks ? {
-        true    => 'tsocks',
-        default => '',
+    $yum_cmd = $use_tsocks ? {
+        true    => 'tsocks yum',
+        default => 'yum',
     }
 
     exec { "install-yum-repo-${name}":
-        command => "$tsocks yum -y install ${server_uri}/${pkg_name}-${pkg_release}.rpm",
+        command => "${yum_cmd} -y install ${server_uri}/${pkg_name}-${pkg_release}.rpm",
         unless  => "rpm -q ${pkg_name}",
     }
 
