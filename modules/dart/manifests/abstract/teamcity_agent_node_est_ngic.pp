@@ -24,7 +24,7 @@ class dart::abstract::teamcity_agent_node_est_ngic {
                 '/home/ngic',
                 '/home/ngic/lucene',
                 '/home/ngic/lucene/indexes',
-           ]:
+        ]:
         ensure  => directory,
         owner   => 'teamcity',
         group   => 'teamcity',
