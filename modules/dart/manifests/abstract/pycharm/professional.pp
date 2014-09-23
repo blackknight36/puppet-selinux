@@ -28,24 +28,24 @@ class dart::abstract::pycharm::professional {
     }
 
     jetbrains::pycharm::release { 'pycharm-professional-3.4':
+        ensure  => 'absent',
         build   => '3.4',
         edition => 'professional',
-        ensure  => 'absent',
     }
 
     #
     # EAP Releases
     #
 
-    jetbrains::pycharm::release { 'pycharm-professional-135.889':
-        build   => '135.889',
+    jetbrains::pycharm::release { 'pycharm-professional-138.2401':
+        build   => '138.2401',
         edition => 'professional',
     }
 
-    jetbrains::pycharm::release { 'pycharm-professional-135.763':
-        build   => '135.763',
-        edition => 'professional',
+    jetbrains::pycharm::release { 'pycharm-professional-135.889':
         ensure  => 'absent',
+        build   => '135.889',
+        edition => 'professional',
     }
 
 }
