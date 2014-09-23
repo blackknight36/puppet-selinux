@@ -17,8 +17,13 @@
 
 class dart::abstract::teamcity_agent_node_est_ngic {
 
-    file { [ '/home/est', '/home/est/lucene', '/home/est/lucene/indexes',
-             '/home/ngic', '/home/ngic/lucene', '/home/ngic/lucene/indexes',
+    file { [
+                '/home/est',
+                '/home/est/lucene',
+                '/home/est/lucene/indexes',
+                '/home/ngic',
+                '/home/ngic/lucene',
+                '/home/ngic/lucene/indexes',
            ]:
         ensure  => directory,
         owner   => 'teamcity',
@@ -28,6 +33,13 @@ class dart::abstract::teamcity_agent_node_est_ngic {
 
     class { 'postgresql::server':
         hba_conf    => 'puppet:///private-domain/postgresql/teamcity_agent_pg_hba.conf',
+    }
+
+    # NB: TeamCity itself uses the OpenJDK.
+    oracle::jdk { 'jdk-8-linux-x64':
+        ensure  => 'present',
+        version => '8',
+        update  => '',
     }
 
 }
