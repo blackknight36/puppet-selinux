@@ -22,12 +22,22 @@
 #   The build target's distribution platform architecture.  E.g., 'x86_64',
 #   'i386', 'arm', 'ppc64', etc.
 #
+# [*legal_host_arches*]
+#   To legally use this build target, the build host must be of a platform
+#   architecture contained in this list.
+#
 # === Authors
 #
 #   John Florian <john.florian@dart.biz>
 
 
-define mock::target ($family, $release, $arch, $ensure='present') {
+define mock::target (
+        $family,
+        $release,
+        $arch,
+        $legal_host_arches,
+        $ensure='present',
+    ) {
 
     include 'mock::common'
     include 'mock::params'

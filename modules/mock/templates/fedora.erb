@@ -1,6 +1,6 @@
 config_opts['root'] = 'fedora-<%= @release %>-<%= @arch %>'
 config_opts['target_arch'] = '<%= @arch %>'
-config_opts['legal_host_arches'] = ('<%= @arch %>',)
+config_opts['legal_host_arches'] = <%= @legal_host_arches %>
 config_opts['chroot_setup_cmd'] = 'install @buildsys-build /usr/bin/pigz /usr/bin/lbzip2'
 config_opts['macros']['%__gzip'] = '/usr/bin/pigz'
 config_opts['macros']['%__bzip2'] = '/usr/bin/lbzip2'
