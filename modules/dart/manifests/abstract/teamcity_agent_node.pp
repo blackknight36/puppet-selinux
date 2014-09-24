@@ -48,18 +48,6 @@ class dart::abstract::teamcity_agent_node inherits dart::abstract::guarded_serve
         }
     }
 
-    mock::target { 'Fedora-17-i386':
-        family  => 'fedora',
-        release => '17',
-        arch    => 'i386',
-    }
-
-    mock::target { 'Fedora-17-x86_64':
-        family  => 'fedora',
-        release => '17',
-        arch    => 'x86_64',
-    }
-
     mock::target { 'Fedora-18-i386':
         family  => 'fedora',
         release => '18',
