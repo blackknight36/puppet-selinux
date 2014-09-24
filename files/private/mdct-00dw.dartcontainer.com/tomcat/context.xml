@@ -19,7 +19,7 @@
 <Context>
     <Parameter name="production" value="true" override="false"/>
     <Parameter name="NGICaddress" value="http://mdct-ngic.dartcontainer.com:8080/Web/com.dartcontainer.ngic.Ngic/estService" override="false"/>
-    <Parameter name="ESTaddress" value="http://mdct-00dw:18080/com.dartcontainer.est.Est/NgicService" override="false"/>
+    <Parameter name="ESTaddress" value="http://mdct-00dw.dartcontainer.com:8080/com.dartcontainer.est.Est/NgicService" override="false"/>
     <Parameter name="user" value="est" override="false"/>
     <Parameter name="pass" value="Ifmp@01a" override="false"/>
     <Parameter name="domain" value="MASON_NTD" override="false"/>
