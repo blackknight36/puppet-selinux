@@ -18,9 +18,14 @@
 # [*release*]
 #   The build target's distribution release.  E.g., '20'.
 #
-# [*arch*]
-#   The build target's distribution platform architecture.  E.g., 'x86_64',
-#   'i386', 'arm', 'ppc64', etc.
+# [*target_arch*]
+#   The machine hardware architecture that mock is to target when building
+#   rpms.  This mostly affects code compilation.
+#
+# [*base_arch*]
+#   The base architecture for the build target.  This affects mock's
+#   configuration for yum repositories so that it can populate the build root
+#   with the minimum package set plus all BuildRequires.
 #
 # [*legal_host_arches*]
 #   To legally use this build target, the build host must be of a platform
@@ -34,7 +39,8 @@
 define mock::target (
         $family,
         $release,
-        $arch,
+        $target_arch,
+        $base_arch,
         $legal_host_arches,
         $ensure='present',
     ) {
@@ -53,7 +59,7 @@ define mock::target (
         subscribe   => Package[$mock::params::packages],
     }
 
-    file { "/etc/mock/${family}-${release}-${arch}.cfg":
+    file { "/etc/mock/${family}-${release}-${base_arch}.cfg":
         content => template("mock/${family}.erb"),
     }
 
