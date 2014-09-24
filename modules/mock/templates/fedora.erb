@@ -5,6 +5,8 @@ config_opts['chroot_setup_cmd'] = 'install @buildsys-build /usr/bin/pigz /usr/bi
 config_opts['macros']['%__gzip'] = '/usr/bin/pigz'
 config_opts['macros']['%__bzip2'] = '/usr/bin/lbzip2'
 config_opts['dist'] = 'fc<%= @release %>'  # only useful for --resultdir variable subst
+config_opts['extra_chroot_dirs'] = [ '/run/lock', ]
+config_opts['releasever'] = '<%= @release %>'
 
 config_opts['yum.conf'] = """
 [main]
@@ -45,19 +47,21 @@ enabled=0
 
 #   [fedora-debuginfo]
 #   name=fedora-debuginfo
-#   mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-debug-<%= @release %>&base_arch=<%= @base_arch %>
+#   metalink=https://mirrors.fedoraproject.org/metalink?repo=fedora-debug-$releasever&arch=<%= @base_arch %>
 #   failovermethod=priority
 #   enabled=0
 
 #   [updates-debuginfo]
 #   name=updates-debuginfo
-#   mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-released-debug-f<%= @release %>&base_arch=<%= @base_arch %>
+#   metalink=https://mirrors.fedoraproject.org/metalink?repo=updates-released-debug-f$releasever&arch=<%= @base_arch %>
 #   failovermethod=priority
 #   enabled=0
 
 #   [updates-testing-debuginfo]
 #   name=updates-testing-debuginfo
-#   mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-testing-debug-f<%= @release %>&base_arch=<%= @base_arch %>
+#   metalink=https://mirrors.fedoraproject.org/metalink?repo=updates-testing-debug-f$releasever&arch=<%= @base_arch %>
 #   failovermethod=priority
 #   enabled=0
 #   """
+
+# vim: filetype=configparser
