@@ -33,6 +33,7 @@ define mock::target ($family, $release, $arch, $ensure='present') {
     include 'mock::params'
 
     File {
+        ensure      => $ensure,
         owner       => 'root',
         group       => 'mock',
         mode        => '0644',
