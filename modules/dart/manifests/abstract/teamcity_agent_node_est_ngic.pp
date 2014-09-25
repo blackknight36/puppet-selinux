@@ -31,9 +31,14 @@ class dart::abstract::teamcity_agent_node_est_ngic {
         mode    => '0755',
     }
 
-    class { 'postgresql::server':
-        hba_conf    => 'puppet:///private-domain/postgresql/teamcity_agent_pg_hba.conf',
-    }
+#    class { 'postgresql::server':
+#        hba_conf    => 'puppet:///private-domain/postgresql/teamcity_agent_pg_hba.conf',
+#    }
+
+#    postgresql::server::db { 'est_junit':
+#        user    => 'est_junit',
+#        password    => postgresql_password('est_junit', 'est_junit'),
+#    }
 
     # NB: TeamCity itself uses the OpenJDK.
     oracle::jdk { 'jdk-8-linux-x64':
