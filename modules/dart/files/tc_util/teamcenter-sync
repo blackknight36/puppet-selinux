@@ -9,17 +9,17 @@
 #       teamcenter-sync [ --dry-run ] TARGET
 #
 #       TARGET is the host name providing the shares to be synchronized and
-#       must be one of: mas-cad16, mas-cad23 or mas-cad26.
+#       must be one of: mas-cad23 or mas-cad26.
 #
 #       The --dry-run option may be specified to to just see what would be
 #       done, without making any changes at all.
 #
 # Examples:
 #
-#       Do a non-destructive mock run to synchronize mas-cad16 with the
+#       Do a non-destructive mock run to synchronize mas-cad23 with the
 #       Production source (i.e., //mas-cad10/volumes).
 #
-#               teamcenter-sync --dry-run mas-cad16
+#               teamcenter-sync --dry-run mas-cad23
 #
 #       Do whatever is necessary to make mas-cad26 just like the Production
 #       source:
@@ -74,12 +74,12 @@ do
         -* )
             warn "ignoring unknown option: $word"
             ;;
-        mas-cad16 | mas-cad23 | mas-cad26 )
+        mas-cad23 | mas-cad26 )
             TARGET="/srv/$word-volumes/"
             break
             ;;
         * )
-            fail "unknown TARGET '$word'\nvalid are: mas-cad16, mas-cad23 and mas-cad26"
+            fail "unknown TARGET '$word'\nvalid are: mas-cad23 and mas-cad26"
             ;;
     esac
 done
