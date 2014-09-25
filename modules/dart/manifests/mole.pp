@@ -8,8 +8,8 @@
 
 class dart::mole inherits dart::abstract::workstation_node {
 
-    class { 'postgresql::server':
-        hba_conf    => 'puppet:///private-host/postgresql/pg_hba.conf',
-    }
+#    class { 'postgresql::server':
+#        hba_conf    => 'puppet:///private-host/postgresql/pg_hba.conf',
+#    }
 
 }

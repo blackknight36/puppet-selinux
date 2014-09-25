@@ -72,7 +72,7 @@ class bacula::director ($dir_conf, $pgpass_source) {
         ensure      => running,
         hasrestart  => true,
         hasstatus   => true,
-        subscribe   => Class['postgresql::server'],
+#        subscribe   => Class['postgresql::server'],
     }
 
 }

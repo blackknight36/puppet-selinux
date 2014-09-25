@@ -4,9 +4,9 @@ class dart::abstract::tomcat_web_app inherits dart::abstract::guarded_server_nod
 
     include 'dart::subsys::autofs::common'
 
-    class { 'postgresql::server':
-        hba_conf    => 'puppet:///private-host/postgresql/pg_hba.conf',
-    }
+#    class { 'postgresql::server':
+#        hba_conf    => 'puppet:///private-host/postgresql/pg_hba.conf',
+#    }
 
     # puppet::client is included this way to prevent duplicate declaration
     # arising out of dart::abstract::teamcity_server_node.  This works only

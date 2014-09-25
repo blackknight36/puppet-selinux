@@ -93,9 +93,9 @@ class dart::abstract::aos_master_node (
         source  => 'puppet:///modules/dart/mdct_puppeteer/mdct-puppeteer-admin.conf',
     }
 
-    class { 'postgresql::server':
-        hba_conf    => 'puppet:///private-host/postgresql/pg_hba.conf',
-    }
+#    class { 'postgresql::server':
+#        hba_conf    => 'puppet:///private-host/postgresql/pg_hba.conf',
+#    }
 
     class { 'puppet::client':
     }
