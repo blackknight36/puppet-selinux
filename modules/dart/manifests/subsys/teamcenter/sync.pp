@@ -16,6 +16,7 @@
 class dart::subsys::teamcenter::sync  {
 
     $credentials_fn = '/etc/tc-credentials'
+    $sync_source = 'mas-cad55'
 
     file { $credentials_fn:
         owner   => 'root',
@@ -53,9 +54,9 @@ password=T5A!ENsER
         ],
     }
 
-    # Sync Sources
+    # Sync Source
     dart::subsys::teamcenter::mount { 'teamcenter_source':
-        host        => 'mas-cad10',
+        host        => $sync_source,
         share_name  => 'volumes',
         group       => 'root',
         mode        => '0555',
@@ -71,17 +72,13 @@ password=T5A!ENsER
         'teamcenter_preproduction_beta':
             host        => 'mas-cad26',
             share_name  => 'volumes';
-
-        'teamcenter_preproduction_delta':
-            host            => 'mas-cad55',
-            share_name      => 'volumes';
     }
 
     file { '/usr/local/bin/teamcenter-sync':
         owner   => 'root',
         group   => 'root',
         mode    => '0755',
-        source  => 'puppet:///modules/dart/tc_util/teamcenter-sync',
+        content => template('dart/tc_util/teamcenter-sync'),
     }
 
 }
