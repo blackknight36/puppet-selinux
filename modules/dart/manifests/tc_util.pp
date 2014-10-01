@@ -23,7 +23,9 @@ class dart::tc_util inherits dart::abstract::guarded_server_node {
     ##
     #
 
-    file { '/etc/tc-credentials':
+    $credentials_fn = '/etc/tc-credentials'
+
+    file { $credentials_fn:
         owner   => 'root',
         group   => 'root',
         mode    => '0400',
@@ -47,60 +49,40 @@ password=T5A!ENsER
         require => Group['tcadmins'],
     }
 
-    define mounted_tc_volume ($host, $share_name,
-                              $owner='root', $group='root', $mode='0775',
-                              $options='ro')
-    {
-
-        file { "/srv/${host}-${share_name}":
-            ensure  => directory,
-            owner   => "${owner}",
-            group   => "${group}",
-            mode    => "${mode}",
-        }
-
-        mount { "/srv/${host}-${share_name}":
-            atboot  => true,
-            device  => "//${host}/${share_name}",
-            ensure  => 'mounted',
-            fstype  => 'cifs',
-            options => "${options},credentials=/etc/tc-credentials,dir_mode=${mode}",
-            require => [
-                File['/etc/tc-credentials'],
-                File["/srv/${host}-${share_name}"],
-            ],
-        }
-
+    # Mount defaults are idealized for sync targets since they number more
+    # than sync sources.  Some parameters may not even be necessary for
+    # sources, but may exist here if harmless or if overrided.
+    Dart::Subsys::Teamcenter::Mount {
+        group   => $tcadmins_gid,
+        options => "rw,uid=0,gid=${tcadmins_gid},file_mode=0660,noperm,credentials=${credentials_fn}",
+        require => [
+            File[$credentials_fn],
+            Group['tcadmins'],
+        ],
     }
 
-    mounted_tc_volume { 'teamcenter_source':
-        host            => 'mas-cad10',
-        share_name      => 'volumes',
-        mode            => '0555',
+    # Sync Sources
+    dart::subsys::teamcenter::mount { 'teamcenter_source':
+        host        => 'mas-cad10',
+        share_name  => 'volumes',
+        group       => 'root',
+        mode        => '0555',
+        options     => "credentials=${credentials_fn}",
     }
 
-    mounted_tc_volume { 'teamcenter_renumber_test':
-        host            => 'mas-cad23',
-        share_name      => 'volumes',
-        group           => "${tcadmins_gid}",
-        options         => "rw,uid=0,gid=${tcadmins_gid},file_mode=0660,noperm",
-        require         => Group['tcadmins'],
-    }
+    # Sync Targets
+    dart::subsys::teamcenter::mount {
+        'teamcenter_renumber_test':
+            host        => 'mas-cad23',
+            share_name  => 'volumes';
 
-    mounted_tc_volume { 'teamcenter_preproduction_beta':
-        host            => 'mas-cad26',
-        share_name      => 'volumes',
-        group           => "${tcadmins_gid}",
-        options         => "rw,uid=0,gid=${tcadmins_gid},file_mode=0660,noperm",
-        require         => Group['tcadmins'],
-    }
+        'teamcenter_preproduction_beta':
+            host        => 'mas-cad26',
+            share_name  => 'volumes';
 
-    mounted_tc_volume { 'teamcenter_preproduction_delta':
-        host            => 'mas-cad55',
-        share_name      => 'volumes',
-        group           => "${tcadmins_gid}",
-        options         => "rw,uid=0,gid=${tcadmins_gid},file_mode=0660,noperm",
-        require         => Group['tcadmins'],
+        'teamcenter_preproduction_delta':
+            host            => 'mas-cad55',
+            share_name      => 'volumes';
     }
 
     file { '/usr/local/bin/teamcenter-sync':
@@ -127,10 +109,10 @@ password=T5A!ENsER
     }
 
     mount { '/storage':
+        ensure  => 'mounted',
         atboot  => true,
         device  => '/dev/mapper/vg_tcutil-lv_storage',
         dump    => 1,
-        ensure  => 'mounted',
         fstype  => 'ext4',
         options => 'defaults',
         pass    => 2,
@@ -144,9 +126,9 @@ password=T5A!ENsER
     }
 
     mount { '/srv/git_home':
+        ensure  => 'mounted',
         atboot  => true,
         device  => '/storage/git_home',
-        ensure  => 'mounted',
         fstype  => 'none',
         options => 'bind',
         require => [
