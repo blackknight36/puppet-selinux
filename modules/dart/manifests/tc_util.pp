@@ -79,14 +79,6 @@ password=T5A!ENsER
         mode            => '0555',
     }
 
-    mounted_tc_volume { 'teamcenter_preproduction_alpha':
-        host            => 'mas-cad16',
-        share_name      => 'volumes',
-        group           => "${tcadmins_gid}",
-        options         => "rw,uid=0,gid=${tcadmins_gid},file_mode=0660,noperm",
-        require         => Group['tcadmins'],
-    }
-
     mounted_tc_volume { 'teamcenter_renumber_test':
         host            => 'mas-cad23',
         share_name      => 'volumes',
