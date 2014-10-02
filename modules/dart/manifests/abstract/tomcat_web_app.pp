@@ -38,7 +38,7 @@ class dart::abstract::tomcat_web_app inherits dart::abstract::guarded_server_nod
         seluser     => 'system_u',
         selrole     => 'object_r',
         seltype     => 'etc_t',
-        subscribe   => Package['tomcat6'],
+        subscribe   => Package['tomcat'],
         source      => 'puppet:///private-host/tomcat/context.xml',
     }
 
