@@ -1,6 +1,6 @@
 [Desktop Entry]
-Name=IntelliJ IDEA (<%= @name %>)
-Comment=The most intelligent IDE
+Name=<%= @name %>
+Comment=IntelliJ IDEA - The most intelligent IDE
 MimeType=text/x-java;
 Exec=<%= @product_root %>/bin/idea.sh
 Icon=<%= @product_root %>/bin/idea.png
