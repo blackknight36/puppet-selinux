@@ -39,7 +39,12 @@ class dart::abstract::idea {
     # EAP Releases
     #
 
+    jetbrains::idea::release { 'ideaIU-14-PublicPreview':
+        build   => '14-PublicPreview',
+    }
+
     jetbrains::idea::release { 'ideaIU-138.1980.1':
+        ensure	=> absent,
         build   => '138.1980.1',
     }
 
