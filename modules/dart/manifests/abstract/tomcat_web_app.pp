@@ -13,7 +13,7 @@ class dart::abstract::tomcat_web_app inherits dart::abstract::guarded_server_nod
     # because the default class params are acceptable here.
     include 'puppet::client'
 
-    package { [ 'tomcat6', 'tomcat6-admin-webapps', ]:
+    package { [ 'tomcat', 'tomcat-admin-webapps', ]:
         ensure  => installed,
     }
 
