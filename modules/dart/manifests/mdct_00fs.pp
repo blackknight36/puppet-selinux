@@ -18,7 +18,7 @@ class dart::mdct_00fs {
     include 'dart::subsys::dns::no_dns_hosts'
     include 'logwatch'
     include 'ntp'
-    #@# include 'openssh_server'
+    #@# include 'openssh::server'
     include 'dart::abstract::packages::base'
 
     class { 'puppet::client':

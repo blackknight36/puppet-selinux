@@ -23,7 +23,14 @@ class dart::abstract::base_node {
         },
     }
 
-    include 'openssh_server'
+    class { 'openssh::server':
+        source  => [
+            'puppet:///private-host/openssh/sshd_config',
+            'puppet:///private-domain/openssh/sshd_config',
+            "puppet:///modules/dart/openssh/sshd_config.${::operatingsystem}.${::operatingsystemrelease}",
+        ],
+    }
+
     include 'prophile'
     #include 'selinux'
 

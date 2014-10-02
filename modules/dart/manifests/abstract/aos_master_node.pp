@@ -143,7 +143,7 @@ class dart::abstract::aos_master_node (
         seluser => 'system_u',
         selrole => 'object_r',
         seltype => 'sshd_key_t',
-        notify  => Class['openssh_server'],
+        notify  => Class['openssh::server'],
         source  => 'puppet:///private-domain/ssh/aos-master-host_rsa_key',
     }
 
@@ -154,7 +154,7 @@ class dart::abstract::aos_master_node (
         seluser => 'system_u',
         selrole => 'object_r',
         seltype => 'etc_t',
-        notify  => Class['openssh_server'],
+        notify  => Class['openssh::server'],
         source  => 'puppet:///private-domain/ssh/aos-master-host_rsa_key.pub',
     }
 
