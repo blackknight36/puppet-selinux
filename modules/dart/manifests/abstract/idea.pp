@@ -40,11 +40,11 @@ class dart::abstract::idea {
     #
 
     jetbrains::idea::release { 'ideaIU-14-PublicPreview':
-        build   => '14-PublicPreview',
+        build   => '138.2458.8',
     }
 
     jetbrains::idea::release { 'ideaIU-138.1980.1':
-        ensure	=> absent,
+        ensure  => absent,
         build   => '138.1980.1',
     }
 

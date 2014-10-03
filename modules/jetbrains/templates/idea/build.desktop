@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=<%= @name %>
+Name=IDEA <%= @build %>
 Comment=IntelliJ IDEA - The most intelligent IDE
 MimeType=text/x-java;
 Exec=<%= @product_root %>/bin/idea.sh
