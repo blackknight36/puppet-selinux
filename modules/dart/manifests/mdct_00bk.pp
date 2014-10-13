@@ -18,6 +18,7 @@ class dart::mdct_00bk inherits dart::abstract::guarded_server_node {
         template    => 'static',
         ip_address  => '10.1.250.47',
         netmask     => '255.255.0.0',
+        gateway     => '10.1.0.25',
         stp         => 'no',
     }
 
@@ -33,9 +34,9 @@ class dart::mdct_00bk inherits dart::abstract::guarded_server_node {
     }
 
     mount { '/storage':
+        ensure  => 'mounted',
         atboot  => true,
         device  => '/dev/BackupVG/lvol1',
-        ensure  => 'mounted',
         fstype  => 'auto',
         options => '_netdev,defaults',
         require => File['/storage'],
