@@ -1,12 +1,12 @@
-# modules/dart/manifests/mdct_00dw.pp
+# modules/dart/manifests/mdct_est_production.pp
 #
 # Synopsis:
 #       EST data warehouse
 #
 # Contact:
-#       Ben Minshall
+#       Collin Baker
 
-class dart::mdct_00dw inherits dart::abstract::guarded_server_node {
+class dart::mdct_est_production inherits dart::abstract::est_server_node {
 
     class { 'puppet::client':
     }
