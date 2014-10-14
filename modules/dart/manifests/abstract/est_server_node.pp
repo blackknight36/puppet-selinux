@@ -10,7 +10,12 @@ class dart::abstract::est_server_node inherits dart::abstract::tomcat_web_app {
         ensure => present,
     }
 
-    user{ 'est':
+    user { 'est':
+        groups => ['estindexers'],
+    }
+
+    user { 'tomcat':
+        ensure => role,
         groups => ['estindexers'],
     }
 }
