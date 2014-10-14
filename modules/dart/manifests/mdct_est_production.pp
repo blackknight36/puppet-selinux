@@ -8,7 +8,5 @@
 
 class dart::mdct_est_production inherits dart::abstract::est_server_node {
 
-    class { 'puppet::client':
-    }
 
 }
