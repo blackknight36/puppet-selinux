@@ -22,6 +22,8 @@ class dart::abstract::picaps_production_server_node inherits dart::abstract::ung
         'pyserial',
         'setserial',
         $python_mx,
+        'yum-cron',
+        'yum-cron-hourly',
         ]:
         ensure  => 'installed',
     }
