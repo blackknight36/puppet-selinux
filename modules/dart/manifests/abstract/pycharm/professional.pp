@@ -37,14 +37,14 @@ class dart::abstract::pycharm::professional {
     # EAP Releases
     #
 
-    jetbrains::pycharm::release { 'pycharm-professional-138.2401':
-        build   => '138.2401',
+    jetbrains::pycharm::release { 'pycharm-professional-139.113':
+        build   => '139.113',
         edition => 'professional',
     }
 
-    jetbrains::pycharm::release { 'pycharm-professional-135.889':
+    jetbrains::pycharm::release { 'pycharm-professional-138.2401':
         ensure  => 'absent',
-        build   => '135.889',
+        build   => '138.2401',
         edition => 'professional',
     }
 
