@@ -8,6 +8,8 @@
 
 class dart::mdct_ovirt_engine inherits dart::abstract::ovirt_node {
 
-    include 'dart::subsys::yum::ovirt'
+
+# Lot's of churn with repo naming / configuration - do it manually for now
+#    include 'dart::subsys::yum::ovirt'
 
 }
