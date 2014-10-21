@@ -36,9 +36,10 @@ class dart::abstract::base_node {
 
     class { 'sendmail':
         enable  => $hostname ? {
-            'mdct-dev12'    => true,
-            'tc-util'       => true,
-            default         => false,
+            'mdct-dev12'        => true,
+            'tc-util'           => true,
+            /^mdct-aos-master/  => true,
+            default             => false,
         },
     }
 
