@@ -17,6 +17,7 @@ class dart::abstract::base_node {
         'mdct-dev12'        => true,
         'tc-util'           => true,
         /^mdct-aos-master/  => true,
+        /^mdct-est-/        => true,
         default             => false,
     }
 
