@@ -22,6 +22,7 @@ class dart::abstract::est_server_node inherits dart::abstract::tomcat_web_app {
 
     class { 'postgresql::server':
         pg_hba_conf_defaults => false,
+        listen_addresses => '*',
     }
 
     postgresql::server::role{'postgres':
@@ -34,7 +35,7 @@ class dart::abstract::est_server_node inherits dart::abstract::tomcat_web_app {
 
 
     postgresql::server::role{'est':
-        password_hash => postgresql_password('est', 'est'),
+        password_hash    => postgresql_password('est', 'est'),
     }
 
     postgresql::server::role{'est_reader':
@@ -55,6 +56,15 @@ class dart::abstract::est_server_node inherits dart::abstract::tomcat_web_app {
         database    => 'all',
         user        => 'all',
         auth_method => 'trust',
+    }
+
+    postgresql::server::pg_hba_rule{'IPv4 connections':
+        description => 'IPv4 connections',
+        type        => 'host',
+        database    => 'all',
+        user        => 'all',
+        address     => '0.0.0.0/0',
+        auth_method => 'md5',
     }
 
     postgresql::server::pg_hba_rule{'IPv4 local connections':
