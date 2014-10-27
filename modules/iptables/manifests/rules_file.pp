@@ -1,32 +1,46 @@
 # modules/iptables/manifests/rules_file.pp
 #
-# Synopsis:
-#       Installs a custom iptables rules file via lokkit.
+# == Define: iptables::rules_file
 #
-# Parameters:
-#       Name__________  Notes_  Description___________________________
+# Installs a custom iptables rules file via lokkit.
 #
-#       name                    instance name
+# === Parameters
 #
-#       ensure          1       one of: 'present' or 'absent'
+# [*namevar*]
+#   An arbitrary identifier for the rules_file instance.  The resultant file
+#   will be named "/etc/sysconfig/iptables.${name}".
 #
-#       source                  origin of custom rules file
+# [*ensure*]
+#   Instance is to be 'present' (default) or 'absent'.  Note that the lokkit
+#   executable lacks the features needed to implement an 'absent' sense.
 #
-#       type            2       one of: 'ipv4' or 'ipv6'
+# [*content*]
+#   Literal content for the rules file file.  One and only one of "content" or
+#   "source" must be given.
 #
-#       table           3       netfilter table to be affected
+# [*source*]
+#   URI of the rules file file content.  One and only one of "content" or
+#   "source" must be given.
 #
-# Notes:
+# [*type*]
+#   One of: 'ipv4' (the default) or 'ipv6'.
 #
-#       1. Default is 'present'.
+# [*table*]
+#   The netfilter table to be affected.  Defaults to 'filter'.
 #
-#       2. Default is 'ipv4'.
+# === Authors
 #
-#       3. Default is 'filter'.
+#   John Florian <john.florian@dart.biz>
+#   John Florian <jflorian@doubledog.org>
 
 
-define iptables::rules_file ($ensure='present', $source, $type='ipv4',
-                           $table='filter') {
+define iptables::rules_file (
+        $ensure='present',
+        $content=undef,
+        $source=undef,
+        $type='ipv4',
+        $table='filter',
+    ) {
 
     if $iptables::managed_host == true {
 
@@ -41,7 +55,7 @@ define iptables::rules_file ($ensure='present', $source, $type='ipv4',
 
                 $rules_file="/etc/sysconfig/iptables.${name}"
 
-                file { "${rules_file}":
+                file { $rules_file:
                     owner   => 'root',
                     group   => 'root',
                     mode    => '0600',
@@ -49,13 +63,14 @@ define iptables::rules_file ($ensure='present', $source, $type='ipv4',
                     selrole => 'object_r',
                     seltype => 'system_conf_t',
                     require => Class['iptables'],
-                    source  => "${source}",
+                    content => $content,
+                    source  => $source,
                 }
 
                 exec { "add-rules-${name}":
                     command => "lokkit --custom-rules=${type}:${table}:${rules_file}",
                     unless  => "grep -q -- '^--custom-rules=${type}:${table}:${rules_file}' /etc/sysconfig/system-config-firewall",
-                    require => File["${rules_file}"],
+                    require => File[$rules_file],
                 }
             }
 
@@ -66,7 +81,7 @@ define iptables::rules_file ($ensure='present', $source, $type='ipv4',
         }
 
     } else {
-        notice("iptables management is disabled on $fqdn via \$iptables::managed_host.")
+        notice("iptables management is disabled on ${::fqdn} via \$iptables::managed_host.")
     }
 
 }
