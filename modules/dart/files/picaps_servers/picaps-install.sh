@@ -21,7 +21,6 @@
 /bin/chmod +x picaps/bin/picaps-cvs-update.sh
 /bin/chmod +x picaps/bin/optimize-tables.sh
 # make systemd startup/shutdown scripts executable
-/bin/chmod +x picaps/bin/startup-shutdown/prepare.sh
 /bin/chmod +x picaps/bin/startup-shutdown/shutdown-core.sh
 /bin/chmod +x picaps/bin/startup-shutdown/shutdown-display.sh
 /bin/chmod +x picaps/bin/startup-shutdown/shutdown-coretocore.sh
@@ -41,6 +40,7 @@
 /bin/ln -s /dist/config/picaps-display /etc/sysconfig/picaps-display
 /bin/ln -s /dist/config/picaps-persister /etc/sysconfig/picaps-persister
 /bin/ln -s /dist/config/picaps-poller /etc/sysconfig/picaps-poller
+/bin/ln -s /dist/config/picaps-replication /etc/sysconfig/picaps-replication
 # corporate only
   #/bin/ln -sd /dist/resource/cron/sap-file-watcher /etc/cron.d/sap-file-watcher
   #/bin/ln -sd /dist/resource/cron/export-sap-pm-measurements /etc/cron.d/export-sap-pm-measurements
@@ -53,21 +53,17 @@
 /bin/cp -a /dist/resource/systemd/picaps-display.service /etc/systemd/system/picaps-display.service
 /bin/cp -a /dist/resource/systemd/picaps-persister.service /etc/systemd/system/picaps-persister.service
 /bin/cp -a /dist/resource/systemd/picaps-poller.service /etc/systemd/system/picaps-poller.service
-/bin/cp -a /dist/resource/systemd/picaps-poller-xmlrpc.service /etc/systemd/system/picaps-poller-xmlrpc.service
+/bin/cp -a /dist/resource/systemd/picaps-replication.service /etc/systemd/system/picaps-replication.service
 /bin/systemctl --system daemon-reload
-# enable services
-#/bin/systemctl enable picaps-core.service
-#/bin/systemctl enable picaps-display.service
-#/bin/systemctl enable picaps-persister.service
-#/bin/systemctl enable picaps-poller.service
-#/bin/systemctl enable picaps-bridge-1.service
-#/bin/systemctl enable picaps-bridge-2.service
-#/bin/systemctl enable picaps-coretocore.service
-#/bin/systemctl enable picaps-all.target
-
-# Additional software -- HB->PICAPS Bridge
-#/bin/wget -P /home/ --no-verbose --mirror --no-host-directories --cut-dirs 3 ftp://mdct-00fs.dartcontainer.com/pub/kickstart/picaps/hbgw
-#/bin/find /home/hbgw -type f -exec rm -f {}/.listing \;
+# disable services
+/bin/systemctl disable picaps-core.service
+/bin/systemctl disable picaps-display.service
+/bin/systemctl disable picaps-persister.service
+/bin/systemctl disable picaps-poller.service
+/bin/systemctl disable picaps-bridge-1.service
+/bin/systemctl disable picaps-bridge-2.service
+/bin/systemctl disable picaps-coretocore.service
+/bin/systemctl disable picaps-all.target
 
 # Configure PICAPS database
 /usr/bin/mysql < /root/picaps-databases.sql
