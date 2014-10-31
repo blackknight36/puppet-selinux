@@ -42,6 +42,8 @@ define iptables::rules_file (
         $table='filter',
     ) {
 
+    include 'iptables::state'
+
     if $iptables::managed_host == true {
 
         case $ensure {
@@ -65,6 +67,7 @@ define iptables::rules_file (
                     require => Class['iptables'],
                     content => $content,
                     source  => $source,
+                    notify  => Class['iptables::state'],
                 }
 
                 exec { "add-rules-${name}":
@@ -72,6 +75,7 @@ define iptables::rules_file (
                     unless  => "grep -q -- '^--custom-rules=${type}:${table}:${rules_file}' /etc/sysconfig/system-config-firewall",
                     require => File[$rules_file],
                 }
+
             }
 
             default: {
