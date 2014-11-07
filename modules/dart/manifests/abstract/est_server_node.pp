@@ -6,6 +6,29 @@ class dart::abstract::est_server_node inherits dart::abstract::tomcat_web_app {
         ensure  => installed,
     }
 
+#    iptables::rules_file { 'est-nat':
+#        source  => 'puppet:///private-domain/iptables/est-nat',
+#        table   => 'nat',
+#    }
+
+     systemd::unit{ 'umask.conf':
+        source  => 'puppet:///modules/dart/est_servers/umask.conf',
+        extends => 'tomcat.service',
+     }
+
+    iptables::tcp_port {
+        'http_external': port => '80';
+    }
+    
+    iptables::tcp_port {
+        'https_external': port => '443';
+    }
+
+    iptables::tcp_port {
+        'https_tomcat': port => '8443';
+    }
+
+
     group { 'estindexers':
         ensure => present,
     }

@@ -7,5 +7,9 @@
 #       Ben Minshall
 
 class dart::mdct_est_dev2 inherits dart::abstract::est_server_node {
+    iptables::rules_file { 'est-nat':
+        content => template('dart/iptables/est-nat.erb'),
+        table   => 'nat',
+    }
 
 }
