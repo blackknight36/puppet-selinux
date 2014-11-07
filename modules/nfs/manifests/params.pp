@@ -21,7 +21,7 @@ class nfs::params {
                     'libnfsidmap',
                     'nfs-utils',
                 ]
-                $kernel_options = 'options nfs nfs4_disable_idmapping=n'
+                $kernel_options = 'options nfs nfs4_disable_idmapping=n callback_tcpport=4005'
             } else {
                 $utils_packages = [
                     'nfs-utils',
