@@ -11,15 +11,15 @@ class dart::abstract::est_server_node inherits dart::abstract::tomcat_web_app {
 #        table   => 'nat',
 #    }
 
-     systemd::unit{ 'umask.conf':
+    systemd::unit{ 'umask.conf':
         source  => 'puppet:///modules/dart/est_servers/umask.conf',
         extends => 'tomcat.service',
-     }
+    }
 
     iptables::tcp_port {
         'http_external': port => '80';
     }
-    
+
     iptables::tcp_port {
         'https_external': port => '443';
     }
@@ -45,7 +45,7 @@ class dart::abstract::est_server_node inherits dart::abstract::tomcat_web_app {
 
     class { 'postgresql::server':
         pg_hba_conf_defaults => false,
-        listen_addresses => '*',
+        listen_addresses     => '*',
     }
 
     postgresql::server::role{'postgres':
