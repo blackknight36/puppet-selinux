@@ -6,10 +6,10 @@ class dart::abstract::est_server_node inherits dart::abstract::tomcat_web_app {
         ensure  => installed,
     }
 
-#    iptables::rules_file { 'est-nat':
-#        source  => 'puppet:///private-domain/iptables/est-nat',
-#        table   => 'nat',
-#    }
+    iptables::rules_file { 'est-nat':
+        content => template('dart/iptables/est-nat.erb'),
+        table   => 'nat',
+    }
 
     systemd::unit{ 'umask.conf':
         source  => 'puppet:///modules/dart/est_servers/umask.conf',

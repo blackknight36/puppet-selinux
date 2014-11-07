@@ -15,10 +15,4 @@ class dart::mdct_est_production inherits dart::abstract::est_server_node {
         mon_passwd  => '68524754e65fe7d71aeb338c38ab0de1',
     }
 
-    iptables::rules_file { 'est-nat':
-        source  => 'puppet:///private-domain/iptables/est-nat',
-        table   => 'nat',
-    }
-
-
 }

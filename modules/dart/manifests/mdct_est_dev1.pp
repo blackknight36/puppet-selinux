@@ -12,9 +12,4 @@ class dart::mdct_est_dev1 inherits dart::abstract::est_server_node {
         'http': port => '80';
     }
 
-    iptables::rules_file { 'est-nat':
-        content => template('dart/iptables/est-nat.erb'),
-        table   => 'nat',
-    }
-
 }
