@@ -109,11 +109,12 @@ define systemd::unit (
             unless  => "systemctl is-active ${target}",
         }
 
-        if $restart_events != undef {
-            exec { "systemctl restart ${target}":
-                refreshonly => true,
-                subscribe   => $restart_events,
-            }
+        exec { "systemctl restart ${target}":
+            refreshonly => true,
+            subscribe   => [
+                File[$fqfn],
+                $restart_events,
+            ],
         }
 
     } elsif $ensure == 'absent' {
