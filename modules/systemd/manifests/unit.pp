@@ -111,6 +111,7 @@ define systemd::unit (
 
         exec { "systemctl restart ${target}":
             refreshonly => true,
+            require     => Class['systemd::daemon'],
             subscribe   => [
                 File[$fqfn],
                 $restart_events,
