@@ -12,20 +12,23 @@ class dart::abstract::picaps_test_server_node inherits dart::abstract::unguarded
     # Other packages required by PICAPS servers
     if $::operatingsystem == 'Fedora' and $::operatingsystemrelease >= 20 {
         $python_mx = 'python-egenix-mx-base'
+        $yum_cron_hourly = 'yum-cron-hourly'
     } else {
         $python_mx = 'mx'
+        $yum_cron_hourly = undef    # not available in F18, dunno about F19
     }
-    package { [
-        'numactl',
-        'numad',
+    $support_packages = delete_undef_values([
+        $python_mx,
+        $yum_cron_hourly,
         'cups',
         'ncftp',
+        'numactl',
+        'numad',
         'pyserial',
         'setserial',
-        $python_mx,
         'yum-cron',
-        'yum-cron-hourly',
-        ]:
+    ])
+    package { $support_packages:
         ensure  => 'installed',
     }
 
