@@ -17,8 +17,23 @@ class nfs::utils {
 
     include 'nfs::params'
 
-    package { $nfs::params::utils_packages:
-        ensure  => installed,
+    if $::operatingsystem == 'Fedora' and $::operatingsystemrelease == 20 {
+
+        # Temporary kludge for FBZ# 1115179.
+        package { 'libnfsidmap':
+            ensure  => installed,
+        }
+
+        package { 'nfs-utils':
+            ensure  => '1.3.0-2.2.fc20',
+        }
+
+    } else {
+
+        package { $nfs::params::utils_packages:
+            ensure  => installed,
+        }
+
     }
 
 }
