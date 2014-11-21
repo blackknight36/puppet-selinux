@@ -22,14 +22,14 @@ class dart::abstract::pycharm::professional {
     # to ensure that no more than two stable releases are installed at any
     # given time.
 
-    jetbrains::pycharm::release { 'pycharm-professional-3.4.1':
-        build   => '3.4.1',
+    jetbrains::pycharm::release { 'pycharm-professional-4.0':
+        build   => '4.0',
         edition => 'professional',
     }
 
-    jetbrains::pycharm::release { 'pycharm-professional-3.4':
+    jetbrains::pycharm::release { 'pycharm-professional-3.4.1':
         ensure  => 'absent',
-        build   => '3.4',
+        build   => '3.4.1',
         edition => 'professional',
     }
 
