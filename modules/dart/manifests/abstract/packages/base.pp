@@ -20,7 +20,6 @@ class dart::abstract::packages::base {
         'openssh-clients',
         'pciutils',
         'psmisc',
-        'python-mdct',
         'screen',
         'strace',
         'system-config-printer',
