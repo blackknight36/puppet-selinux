@@ -24,6 +24,7 @@ class dart::subsys::yum::fedora {
             '18'    => '18-2.fc18.noarch',
             '19'    => '19-1.fc19.noarch',
             '20'    => '20-4.fc20.noarch',
+            '21'    => '21-1.fc21.noarch',
         }
 
         yum::repo {'local-fedora':
