@@ -25,7 +25,7 @@ Facter.add("plant_number") do
 
     # Define a simple data structure to represent a Dart production facility
     # and the subnets used there.
-    Plant = Struct.new(:id, :subnets) unless const_defined?(:Plant)
+    Plant = Struct.new(:id, :subnets) unless defined?(:Plant)
 
     def plant_with_ipaddr(ipaddr)
         plants = [
