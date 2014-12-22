@@ -96,6 +96,22 @@ class dart::abstract::teamcity_agent_node inherits dart::abstract::guarded_serve
         legal_host_arches   => ['x86_64'],
     }
 
+    mock::target { 'Fedora-21-i386':
+        family              => 'fedora',
+        release             => '21',
+        target_arch         => 'i686',
+        base_arch           => 'i386',
+        legal_host_arches   => ['i386', 'i586', 'i686', 'x86_64'],
+    }
+
+    mock::target { 'Fedora-21-x86_64':
+        family              => 'fedora',
+        release             => '21',
+        target_arch         => 'x86_64',
+        base_arch           => 'x86_64',
+        legal_host_arches   => ['x86_64'],
+    }
+
     mock::user {
         'teamcity':;
         'd13677':;
