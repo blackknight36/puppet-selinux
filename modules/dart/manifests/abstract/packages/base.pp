@@ -38,10 +38,10 @@ class dart::abstract::packages::base {
 
     ### Select Package Inclusion ###
 
-    if $operatingsystem == 'Fedora' {
+    if $::operatingsystem == 'Fedora' {
 
-        if  $operatingsystemrelease == 'Rawhide' or
-            $operatingsystemrelease >= 11
+        if  $::operatingsystemrelease == 'Rawhide' or
+            $::operatingsystemrelease >= 11
         {
             package { [
                 'dejavu-lgc-sans-mono-fonts',   # used by vim-X11
@@ -56,8 +56,8 @@ class dart::abstract::packages::base {
             }
         }
 
-        if  $operatingsystemrelease == 'Rawhide' or
-            $operatingsystemrelease >= 13
+        if  $::operatingsystemrelease == 'Rawhide' or
+            $::operatingsystemrelease >= 13
         {
             package { [
                 'cifs-utils',
@@ -66,8 +66,8 @@ class dart::abstract::packages::base {
             }
         }
 
-        if  $operatingsystemrelease == 'Rawhide' or
-            $operatingsystemrelease >= 14
+        if  $::operatingsystemrelease == 'Rawhide' or
+            $::operatingsystemrelease >= 14
         {
             package { [
                 'man-db',
@@ -82,8 +82,8 @@ class dart::abstract::packages::base {
             }
         }
 
-        if  $operatingsystemrelease == 'Rawhide' or
-            $operatingsystemrelease >= 16
+        if  $::operatingsystemrelease == 'Rawhide' or
+            $::operatingsystemrelease >= 16
         {
             package { [
                 'sssd-tools',
@@ -92,8 +92,8 @@ class dart::abstract::packages::base {
             }
         }
 
-        if  $operatingsystemrelease == 'Rawhide' or
-            $operatingsystemrelease >= 17
+        if  $::operatingsystemrelease == 'Rawhide' or
+            $::operatingsystemrelease >= 17
         {
             package { [
                 'rubygem-rdoc',
@@ -128,10 +128,10 @@ class dart::abstract::packages::base {
 
     ### Select Package Exclusion ###
 
-    if $operatingsystem == 'Fedora' {
+    if $::operatingsystem == 'Fedora' {
 
-        if  $operatingsystemrelease == 'Rawhide' or
-            $operatingsystemrelease >= 12
+        if  $::operatingsystemrelease == 'Rawhide' or
+            $::operatingsystemrelease >= 12
         {
             package { [
                 'yum-presto',   # we don't use delta RPM support
@@ -140,8 +140,8 @@ class dart::abstract::packages::base {
             }
         }
 
-        if  $operatingsystemrelease == 'Rawhide' or
-            $operatingsystemrelease >= 14
+        if  $::operatingsystemrelease == 'Rawhide' or
+            $::operatingsystemrelease >= 14
         {
             package { [
                 'PackageKit-yum-plugin', # not used and slows yum startup
