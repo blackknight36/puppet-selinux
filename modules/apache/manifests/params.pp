@@ -18,6 +18,9 @@ class apache::params {
             $packages = [
                 'httpd',
             ]
+            $modpassenger_packages = [
+                'mod_passenger',
+            ]
             $modssl_packages = [
                 'mod_ssl',
             ]
@@ -38,7 +41,7 @@ class apache::params {
         }
 
         default: {
-            fail ("The apache module is not yet supported on $::operatingsystem.")
+            fail ("The apache module is not yet supported on ${::operatingsystem}.")
         }
 
     }
