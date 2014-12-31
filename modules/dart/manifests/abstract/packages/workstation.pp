@@ -12,6 +12,7 @@ class dart::abstract::packages::workstation {
         'evolution',
         'evolution-ews',
         'firefox',
+        'freerdp',
         'galculator',
         'pavucontrol',
         'plant-launchers',
