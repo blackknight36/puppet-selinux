@@ -11,6 +11,7 @@ include 'dart::params'
 #
 # This section must consist only of very specific host:class relations on a 1:1 basis.
 #
+node 'mdct-00ut.dartcontainer.com'              { include 'dart::mdct_00ut' }
 node 'mdct-00bk.dartcontainer.com'              { include 'dart::mdct_00bk' }
 node 'mdct-00dtl.dartcontainer.com'             { include 'dart::mdct_00dtl' }
 node 'mdct-00dw.dartcontainer.com'              { include 'dart::mdct_00dw' }
