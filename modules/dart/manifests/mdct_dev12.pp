@@ -29,7 +29,7 @@ class dart::mdct_dev12 inherits dart::abstract::workstation_node {
         stp         => 'no',
     }
 
-    network::interface { 'em1':
+    network::interface { 'enp0s25':
         template    => 'static',
         bridge      => 'br0',
     }
