@@ -47,6 +47,10 @@ class dart::abstract::idea {
     # EAP Releases
     #
 
+    jetbrains::idea::release { 'ideaIU-139.872.1':
+        build   => '139.872.1',
+    }
+
     jetbrains::idea::release { 'ideaIU-139.144.2':
         build   => '139.144.2',
     }
