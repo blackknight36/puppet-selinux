@@ -30,14 +30,14 @@ if $hostname != 'mdct-00fs' {
     class { 'authconfig':
         stage => 'early';
     }
-    # Why?  Much for the same reason as authconfig.  Not entirely certain this is
-    # necessary, but it seems safest this way.
-    class { 'nfs::rpcidmapd':
+    # It might also be necessary for the NFS ID mapper to be functional early.
+    class { 'nfs::client':
         stage   => 'early',
-        domain  => "${domain}",
-    }
-    class { 'nfs::rpcgssd':
-        stage   => 'early',
+        # While we don't use Kerberos for NFS authentication, it helps to have
+        # it enabled for older Fedora releases.  See commit 948e0c47.  It
+        # certainly is not necessary starting with Fedora 21 though since the
+        # service won't even start if the keytab file isn't present.
+        use_gss => true,
     }
 }
 
