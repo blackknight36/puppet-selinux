@@ -7,16 +7,16 @@
 # === Parameters
 #
 # [*domain*]
-#   Name of the NFS domain.
+#   Name of the NFS domain.  Defaults to the "domain" fact.
 #
 # === Authors
 #
 #   John Florian <john.florian@dart.biz>
 
 
-class nfs::rpcidmapd ($domain) {
-
-    # Stage => early
+class nfs::rpcidmapd (
+        $domain=$::domain,
+    ) {
 
     include 'nfs::params'
     include 'nfs::utils'
@@ -44,13 +44,13 @@ class nfs::rpcidmapd ($domain) {
         file { '/etc/modprobe.d/nfs.conf':
             mode    => '0644',
             seltype => 'modules_conf_t',
-            content => "$nfs::params::kernel_options\n",
+            content => "${nfs::params::kernel_options}\n",
         }
     }
 
     service { $nfs::params::idmap_service:
-        enable      => true,
         ensure      => running,
+        enable      => true,
         hasrestart  => true,
         hasstatus   => true,
     }
