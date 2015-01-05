@@ -6,27 +6,29 @@
 #
 # === Parameters
 #
-# None
+# [*enable*]
+#   If true, enable the General Security Services (GSS) for user
+#   authentication.  The default is true.
 #
 # === Authors
 #
 #   John Florian <john.florian@dart.biz>
 
 
-class nfs::rpcgssd {
-
-    # Stage => early
+class nfs::rpcgssd (
+        $enable=true,
+    ) {
 
     include 'nfs::params'
     include 'nfs::utils'
 
     if $nfs::params::gss_service == undef {
-        warning "nfs::rpcgssd is not supported on $fqdn running $operatingsystem $operatingsystemrelease."
+        warning "nfs::rpcgssd is not supported on ${::fqdn} running ${::operatingsystem} ${::operatingsystemrelease}."
     } else {
 
         service { $nfs::params::gss_service:
-            enable      => true,
-            ensure      => running,
+            ensure      => $enable,
+            enable      => $enable,
             hasrestart  => true,
             hasstatus   => true,
         }
