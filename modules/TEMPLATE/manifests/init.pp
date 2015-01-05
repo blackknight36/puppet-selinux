@@ -2,7 +2,7 @@
 #
 # == Class: MODULE_NAME
 #
-# Configures a host as a MODULE_NAME.
+# Manages MODULE_NAME on a host.
 #
 # === Parameters
 #
@@ -32,8 +32,8 @@ class MODULE_NAME (
     include 'MODULE_NAME::params'
 
     package { $MODULE_NAME::params::packages:
-        ensure  => installed,
-        notify  => Service[$MODULE_NAME::params::service_name],
+        ensure => installed,
+        notify => Service[$MODULE_NAME::params::service_name],
     }
 
     File {
@@ -49,8 +49,8 @@ class MODULE_NAME (
     }
 
     file { '/CONFIG_PATH/CONFIG_NAME':
-        content     => $content,
-        source      => $source,
+        content => $content,
+        source  => $source,
     }
 
     iptables::tcp_port {
@@ -64,17 +64,17 @@ class MODULE_NAME (
     }
 
     selinux::boolean { $MODULE_NAME::params::bool_name1:
-        value       => $allow_use_nfs ? {
+        value => $allow_use_nfs ? {
             true    => on,
             default => off,
         }
     }
 
     service { $MODULE_NAME::params::service_name:
-        enable      => true,
-        ensure      => running,
-        hasrestart  => true,
-        hasstatus   => true,
+        ensure     => running,
+        enable     => true,
+        hasrestart => true,
+        hasstatus  => true,
     }
 
 }
