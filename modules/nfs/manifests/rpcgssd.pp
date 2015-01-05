@@ -8,7 +8,8 @@
 #
 # [*enable*]
 #   If true, enable the General Security Services (GSS) for user
-#   authentication.  The default is true.
+#   authentication.  The default is true.  Depending on the OS release, it
+#   may not be possible to disable GSS for NFS.
 #
 # === Authors
 #
@@ -26,9 +27,16 @@ class nfs::rpcgssd (
         warning "nfs::rpcgssd is not supported on ${::fqdn} running ${::operatingsystem} ${::operatingsystemrelease}."
     } else {
 
+        # Managing the ensure and enable states for a static service is
+        # ineffectual and generates lots of useless reporting.
+        $__enable = $nfs::params::gss_service_is_static ? {
+            true    => undef,
+            default => $enable,
+        }
+
         service { $nfs::params::gss_service:
-            ensure      => $enable,
-            enable      => $enable,
+            ensure      => $__enable,
+            enable      => $__enable,
             hasrestart  => true,
             hasstatus   => true,
         }

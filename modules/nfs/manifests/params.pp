@@ -14,8 +14,8 @@ class nfs::params {
     case $::operatingsystem {
         Fedora: {
 
-            if  $operatingsystemrelease == 'Rawhide' or
-                $operatingsystemrelease >= 15
+            if  $::operatingsystemrelease == 'Rawhide' or
+                $::operatingsystemrelease >= 15
             {
                 $utils_packages = [
                     'libnfsidmap',
@@ -30,17 +30,28 @@ class nfs::params {
                 $kernel_options = undef
             }
 
-            if  $operatingsystemrelease == 'Rawhide' or
-                $operatingsystemrelease >= 16
+            if  $::operatingsystemrelease == 'Rawhide' or
+                $::operatingsystemrelease >= 16
             {
                 $idmap_service = 'nfs-idmap'
                 $gss_service = 'nfs-secure'
-            } elsif $operatingsystemrelease >= 15 {
+            } elsif $::operatingsystemrelease >= 15 {
                 $idmap_service = 'rpcidmapd'
                 $gss_service = 'rpcgssd'
             } else {
                 $idmap_service = 'rpcidmapd'
                 $gss_service = undef    # Sorry, no soup for you.  Upgrade!
+            }
+
+            # As of Fedora 21, the nfs-secure service became static -- the
+            # ensure/enable states cannot be managed.  Instead, they're now
+            # dependent on the existence of the /etc/krb5.keytab file.
+            if  $::operatingsystemrelease == 'Rawhide' or
+                $::operatingsystemrelease >= 21
+            {
+                $gss_service_is_static = true
+            } else {
+                $gss_service_is_static = false
             }
 
         }
