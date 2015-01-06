@@ -20,7 +20,13 @@
 class dart::subsys::autofs::common {
 
     include 'autofs::params'
-    include 'autofs'
+
+    class { 'autofs':
+        require => [
+            Class['authconfig'],
+            Class['nfs::rpcidmapd'],
+        ],
+    }
 
     selinux::boolean { 'use_nfs_home_dirs':
         before      => Service[$autofs::params::service_name],

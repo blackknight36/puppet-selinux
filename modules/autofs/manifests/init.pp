@@ -47,14 +47,10 @@ class autofs {
     }
 
     service { $autofs::params::service_name:
-        enable      => true,
         ensure      => running,
+        enable      => true,
         hasrestart  => true,
         hasstatus   => true,
-        require     => [
-            Class['authconfig'],
-            Class['nfs::rpcidmapd'],
-        ],
     }
 
 }
