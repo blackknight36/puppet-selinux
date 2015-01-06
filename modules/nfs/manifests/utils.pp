@@ -2,7 +2,7 @@
 #
 # == Class: nfs::utils
 #
-# Configures a host to run the NFS ID Mapper daemon.
+# Manages the NFS utilities on a host.
 #
 # === Parameters
 #
@@ -19,6 +19,20 @@ class nfs::utils {
 
     package { $nfs::params::utils_packages:
         ensure  => installed,
+    }
+
+    if $nfs::params::pipefs_service {
+
+        service { $nfs::params::pipefs_service:
+            ensure     => running,
+            enable     => true,
+            hasrestart => true,
+            hasstatus  => true,
+            provider   => systemd,
+            before     => Service[$nfs::params::idmap_service],
+            notify     => Service[$nfs::params::idmap_service],
+        }
+
     }
 
 }

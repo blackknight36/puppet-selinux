@@ -54,6 +54,14 @@ class nfs::params {
                 $gss_service_is_static = false
             }
 
+            if  $::operatingsystemrelease == 'Rawhide' or
+                $::operatingsystemrelease >= 17
+            {
+                $pipefs_service = 'var-lib-nfs-rpc_pipefs.mount'
+            } else {
+                $pipefs_service = undef
+            }
+
         }
 
         default: {
