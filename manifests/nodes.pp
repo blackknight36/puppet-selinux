@@ -50,6 +50,7 @@ node 'mdct-52pi.dartcontainer.com'              { include 'dart::mdct_52pi' }
 node 'mdct-55pi.dartcontainer.com'              { include 'dart::mdct_55pi' }
 node 'mdct-55pt.dartcontainer.com'              { include 'dart::mdct_55pt' }
 node 'mdct-72pi.dartcontainer.com'              { include 'dart::mdct_72pi' }
+node 'mdct-72pt.dartcontainer.com'              { include 'dart::mdct_72pt' }
 node 'mdct-73pi.dartcontainer.com'              { include 'dart::mdct_73pi' }
 node 'mdct-73pt.dartcontainer.com'              { include 'dart::mdct_73pt' }
 node 'mdct-75pi.dartcontainer.com'              { include 'dart::mdct_75pi' }
