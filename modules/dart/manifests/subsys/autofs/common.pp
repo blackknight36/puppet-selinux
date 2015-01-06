@@ -24,7 +24,7 @@ class dart::subsys::autofs::common {
     class { 'autofs':
         require => [
             Class['authconfig'],
-            Class['nfs::rpcidmapd'],
+            Class['nfs::client'],
         ],
     }
 
