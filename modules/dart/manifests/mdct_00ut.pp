@@ -42,7 +42,7 @@ class dart::mdct_00ut inherits dart::abstract::guarded_server_node {
         owner   => 'root',
         group   => 'root',
         mode    => '0755',
-    }    
+    }
 
     mount {'/storage/slideshow':
         device  => '/mnt/eid',
@@ -53,14 +53,6 @@ class dart::mdct_00ut inherits dart::abstract::guarded_server_node {
             File['/storage/slideshow'],
         ],
     }
-
-    #file {'/storage/slideshow':
-    #    ensure  => 'link',
-    #    target  => '/mnt/eid',
-    #    require => [
-    #        File['/storage'],
-    #    ],
-    #}
 
     # AOS devices pull media-playback content using rsync.
     class { 'rsync::server':
