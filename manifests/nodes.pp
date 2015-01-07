@@ -76,6 +76,7 @@ node 'mdct-dev19.dartcontainer.com'             { include 'dart::mdct_dev19' }
 node 'mdct-dev20.dartcontainer.com'             { include 'dart::mdct_dev20' }
 node 'mdct-dev21.dartcontainer.com'             { include 'dart::mdct_dev21' }
 node 'mdct-dev22.dartcontainer.com'             { include 'dart::mdct_dev22' }
+node 'mdct-dev23.dartcontainer.com'             { include 'dart::mdct_dev23' }
 node 'mdct-dev6-test.dartcontainer.com'         { include 'dart::mdct_dev6_test' }
 node 'mdct-dev6.dartcontainer.com'              { include 'dart::mdct_dev6' }
 node 'mdct-dev7.dartcontainer.com'              { include 'dart::mdct_dev7' }
