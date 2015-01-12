@@ -27,28 +27,24 @@ class dart::abstract::packages::media {
 
     ### Select Package Inclusion ###
 
-    if $operatingsystem == 'Fedora' {
+    if $::operatingsystem == 'Fedora' {
 
-        if  $operatingsystemrelease == 'Rawhide' or
-            $operatingsystemrelease >= 14
+        if  $::operatingsystemrelease == 'Rawhide' or
+            $::operatingsystemrelease >= 14
         {
-            package { [
-                'geeqie',
-                ]:
-                ensure => installed,
-            }
-        } else {
-            package { [
-                'gqview',
+            package {
+                [
+                    'geeqie',
                 ]:
                 ensure => installed,
             }
         }
 
-        if  $operatingsystemrelease < 20
+        if  $::operatingsystemrelease < 20
         {
-            package { [
-                'xine-lib-extras-freeworld',
+            package {
+                [
+                    'xine-lib-extras-freeworld',
                 ]:
                 ensure => installed,
             }
