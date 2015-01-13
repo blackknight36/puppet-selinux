@@ -10,6 +10,7 @@ class dart::abstract::packages::developer {
 
         'cmake',
         'cvs',
+        'epydoc',
         'gcc',
         'gcc-c++',
         'git',
