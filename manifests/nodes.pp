@@ -13,6 +13,7 @@ include 'dart::params'
 #
 node 'mdct-00ut.dartcontainer.com'              { include 'dart::mdct_00ut' }
 node 'mdct-00bk.dartcontainer.com'              { include 'dart::mdct_00bk' }
+node 'mdct-00bk-f21.dartcontainer.com'          { include 'dart::mdct_00bk_f21' }
 node 'mdct-00dtl.dartcontainer.com'             { include 'dart::mdct_00dtl' }
 node 'mdct-00dw.dartcontainer.com'              { include 'dart::mdct_00dw' }
 node 'mdct-00fs.dartcontainer.com'              { include 'dart::mdct_00fs' }
@@ -67,7 +68,7 @@ node 'mdct-dr.dartcontainer.com'                { include 'dart::mdct_dr' }
 node 'mdct-est-ci.dartcontainer.com'            { include 'dart::mdct_est_ci' }
 node 'mdct-est-dev1.dartcontainer.com'          { include 'dart::mdct_est_dev1' }
 node 'mdct-est-dev2.dartcontainer.com'          { include 'dart::mdct_est_dev2' }
-node 'mdct-est-production.dartcontainer.com'          { include 'dart::mdct_est_production' }
+node 'mdct-est-production.dartcontainer.com'    { include 'dart::mdct_est_production' }
 node 'mdct-f14-builder.dartcontainer.com'       { include 'dart::mdct_f14_builder' }
 node 'mdct-f15-builder.dartcontainer.com'       { include 'dart::mdct_f15_builder' }
 node 'mdct-f16-builder.dartcontainer.com'       { include 'dart::mdct_f16_builder' }
@@ -91,9 +92,9 @@ node 'tc-util.dartcontainer.com'                { include 'dart::tc_util' }
 #
 # This section consists only of loose host(s):class relations on a M:1 basis.
 #
-node /^mdct-[0-9]{2,4}pt.dartcontainer.com$/    { include 'dart::abstract::picaps_test_server_node' }
-node /^mdct-dev10-.*\.dartcontainer\.com$/      { include 'dart::mdct_dev10_srvr' }
-node /^mdct-ovirt-node-.*\.dartcontainer\.com$/ { include 'dart::mdct_ovirt_node' }
-node /^mdct-puppet.*\.dartcontainer\.com$/      { include 'dart::mdct_puppet' }
+node /^mdct-[0-9]{2,4}pt.dartcontainer.com$/        { include 'dart::abstract::picaps_test_server_node' }
+node /^mdct-dev10-.*\.dartcontainer\.com$/          { include 'dart::mdct_dev10_srvr' }
+node /^mdct-ovirt-node-.*\.dartcontainer\.com$/     { include 'dart::mdct_ovirt_node' }
+node /^mdct-puppet.*\.dartcontainer\.com$/          { include 'dart::mdct_puppet' }
 node /^mdct-teamcity-agent.*\.dartcontainer.com$/   { include 'dart::mdct_teamcity_agent' }
-node /^mdct-\d+ut\.dartcontainer\.com$/         { include 'dart::mdct_ut' }
+node /^mdct-\d+ut\.dartcontainer\.com$/             { include 'dart::mdct_ut' }
