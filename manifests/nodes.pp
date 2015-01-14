@@ -43,6 +43,8 @@ node 'mdct-75pi.dartcontainer.com'              { include 'dart::mdct_75pi' }
 node 'mdct-76pi.dartcontainer.com'              { include 'dart::mdct_76pi' }
 node 'mdct-77pi.dartcontainer.com'              { include 'dart::mdct_77pi' }
 node 'mdct-78pi.dartcontainer.com'              { include 'dart::mdct_78pi' }
+node 'mdct-95pi.dartcontainer.com'              { include 'dart::mdct_95pi' }
+node 'mdct-98pi.dartcontainer.com'              { include 'dart::mdct_98pi' }
 node 'mdct-99pi.dartcontainer.com'              { include 'dart::mdct_99pi' }
 node 'mdct-99pi-x.dartcontainer.com'            { include 'dart::mdct_99pi_x' }
 node 'mdct-aos-master-f19.dartcontainer.com'    { include 'dart::mdct_aos_master_f19' }
