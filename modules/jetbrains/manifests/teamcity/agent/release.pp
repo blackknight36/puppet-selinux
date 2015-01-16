@@ -92,6 +92,7 @@ define jetbrains::teamcity::agent::release (
                 force   => true,
                 recurse => true,
                 require => Systemd::Unit["${product_name}.service"],
+                backup  => false,
             }
         }
 
