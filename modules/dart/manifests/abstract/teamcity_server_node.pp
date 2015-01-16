@@ -34,14 +34,15 @@ class dart::abstract::teamcity_server_node inherits dart::abstract::guarded_serv
         'mdct-teamcity-f20': {
             include 'openjdk::java_1_7_0'
 
-            jetbrains::teamcity::server::release { 'TeamCity-8.1.4':
-                build   => '8.1.4',
+            jetbrains::teamcity::server::release { 'TeamCity-9.0.1':
+                build   => '9.0.1',
 #                require => Class['postgresql::server'],
             }
 
-            jetbrains::teamcity::server::release { 'TeamCity-8.1.2':
+            jetbrains::teamcity::server::release { 'TeamCity-8.1.4':
                 ensure  => absent,
-                build   => '8.1.2',
+                build   => '8.1.4',
+#                require => Class['postgresql::server'],
             }
 
             # TeamCity relies on a manually installed postgresql-jdbc driver

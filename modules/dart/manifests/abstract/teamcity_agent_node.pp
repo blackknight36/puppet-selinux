@@ -31,14 +31,14 @@ class dart::abstract::teamcity_agent_node inherits dart::abstract::guarded_serve
         /^mdct-teamcity-agent.*$/: {
             include 'openjdk::java_1_7_0'
 
-            jetbrains::teamcity::agent::release { 'TeamCity-8.1.4':
-                build       => '8.1.4',
+            jetbrains::teamcity::agent::release { 'TeamCity-9.0.1':
+                build       => '9.0.1',
                 server_url  => 'http://mdct-teamcity-f20.dartcontainer.com:8111/',
             }
 
-            jetbrains::teamcity::agent::release { 'TeamCity-8.1.2':
+            jetbrains::teamcity::agent::release { 'TeamCity-8.1.4':
                 ensure      => absent,
-                build       => '8.1.2',
+                build       => '8.1.4',
                 server_url  => 'http://mdct-teamcity-f20.dartcontainer.com:8111/',
             }
 
