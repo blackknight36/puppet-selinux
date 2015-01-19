@@ -7,19 +7,6 @@
 /bin/cvs -d :pserver:anonymous@10.1.192.105:/home/cvsroot co picaps/resource
   #/bin/cvs -d :pserver:anonymous@10.1.192.105:/home/cvsroot co picaps/reporttemplates # corporate only
 /bin/mkdir -p picaps/reporttemplates
-# make original startup/shutdown scripts executable
-/bin/chmod +x picaps/resource/init.d/picaps
-/bin/chmod +x picaps/bin/startup-core.sh
-/bin/chmod +x picaps/bin/shutdown-core.sh
-/bin/chmod +x picaps/bin/startup-persister.sh
-/bin/chmod +x picaps/bin/startup-display.sh
-/bin/chmod +x picaps/bin/shutdown-display.sh
-/bin/chmod +x picaps/bin/startup-poller.sh
-/bin/chmod +x picaps/bin/shutdown-poller.sh
-/bin/chmod +x picaps/bin/startup-coretocore.sh
-/bin/chmod +x picaps/bin/shutdown-coretocore.sh
-/bin/chmod +x picaps/bin/picaps-cvs-update.sh
-/bin/chmod +x picaps/bin/optimize-tables.sh
 # make systemd startup/shutdown scripts executable
 /bin/chmod +x picaps/bin/startup-shutdown/shutdown-core.sh
 /bin/chmod +x picaps/bin/startup-shutdown/shutdown-display.sh
