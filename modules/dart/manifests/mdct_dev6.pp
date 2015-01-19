@@ -22,7 +22,7 @@ class dart::mdct_dev6 inherits dart::abstract::workstation_node {
         stp         => 'no',
     }
 
-    network::interface { 'em1':
+    network::interface { 'enp0s25':
         template    => 'static',
         bridge      => 'br0',
     }
@@ -116,7 +116,7 @@ class dart::mdct_dev6 inherits dart::abstract::workstation_node {
 
     file { '/cpk':
         ensure  => link,
-        taret   => '/mnt/storage/pub/',
+        target   => '/mnt/storage/pub/',
     }
 
     file { '/dist':
