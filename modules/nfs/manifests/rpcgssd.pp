@@ -14,6 +14,7 @@
 # === Authors
 #
 #   John Florian <john.florian@dart.biz>
+#   John Florian <jflorian@doubledog.org>
 
 
 class nfs::rpcgssd (
@@ -35,10 +36,10 @@ class nfs::rpcgssd (
         }
 
         service { $nfs::params::gss_service:
-            ensure      => $__enable,
-            enable      => $__enable,
-            hasrestart  => true,
-            hasstatus   => true,
+            ensure     => $__enable,
+            enable     => $__enable,
+            hasrestart => true,
+            hasstatus  => true,
         }
 
     }

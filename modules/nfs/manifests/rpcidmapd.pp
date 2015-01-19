@@ -2,7 +2,7 @@
 #
 # == Class: nfs::rpcidmapd
 #
-# Configures a host to run the NFS ID Mapper daemon.
+# Manages the NFS ID Mapper daemon on a host.
 #
 # === Parameters
 #
@@ -12,6 +12,7 @@
 # === Authors
 #
 #   John Florian <john.florian@dart.biz>
+#   John Florian <jflorian@doubledog.org>
 
 
 class nfs::rpcidmapd (
@@ -37,9 +38,6 @@ class nfs::rpcidmapd (
         content => template('nfs/idmapd.conf'),
     }
 
-    # Configuring the nfs kernel module like this is only necessary if the NFS
-    # servers are Fedora < 16.  This works around a kernel bug on older NFS
-    # servers.  Technical contact for this is Levi Harper.
     if $nfs::params::kernel_options != undef {
         file { '/etc/modprobe.d/nfs.conf':
             mode    => '0644',
@@ -48,11 +46,19 @@ class nfs::rpcidmapd (
         }
     }
 
+#   TODO: presently causes dependency loop
+#   firewall { '500 accept NFS-callback packets':
+#       dport  => $nfs::params::callback_tcpport,
+#       proto  => 'tcp',
+#       state  => 'NEW',
+#       action => 'accept',
+#   }
+
     service { $nfs::params::idmap_service:
-        ensure      => running,
-        enable      => true,
-        hasrestart  => true,
-        hasstatus   => true,
+        ensure     => running,
+        enable     => true,
+        hasrestart => true,
+        hasstatus  => true,
     }
 
 }

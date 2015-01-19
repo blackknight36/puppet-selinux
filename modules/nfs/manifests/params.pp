@@ -7,6 +7,7 @@
 # === Authors
 #
 #   John Florian <john.florian@dart.biz>
+#   John Florian <jflorian@doubledog.org>
 
 
 class nfs::params {
@@ -61,6 +62,8 @@ class nfs::params {
             } else {
                 $pipefs_service = undef
             }
+
+            $server_services = [ 'nfs.target' ]
 
         }
 
