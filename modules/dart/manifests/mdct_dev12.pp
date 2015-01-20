@@ -59,6 +59,7 @@ class dart::mdct_dev12 inherits dart::abstract::workstation_node {
     }
 
     include 'dart::abstract::pycharm::professional'
+    include 'dart::mdct_dev12::filesystem'
     include 'dart::mdct_dev12::libvirt'
     include 'dart::subsys::yum_cron'
 
@@ -98,57 +99,6 @@ class dart::mdct_dev12 inherits dart::abstract::workstation_node {
         ensure  => installed,
     }
 
-    autofs::map_entry {
-
-        '/mnt/mas-fs02-d13677':
-            mount   => '/mnt',
-            key     => 'mas-fs02-d13677',
-            options => '-fstype=cifs,uid=d13677,gid=d13677,credentials=/mnt/storage/j/.credentials/d13677.cifs',
-            remote  => '://mas-fs02/Users/d13677';
-
-        '/mnt/mas-fs01-eng':
-            mount   => '/mnt',
-            key     => 'mas-fs01-eng',
-            options => '-fstype=cifs,credentials=/mnt/storage/j/.credentials/d13677.cifs',
-            remote  => '://mas-fs01/Eng';
-
-        '/mnt/mas-fs01-sharedata':
-            mount   => '/mnt',
-            key     => 'mas-fs01-sharedata',
-            options => '-fstype=cifs,credentials=/mnt/storage/j/.credentials/d13677.cifs',
-            remote  => '://mas-fs01/ShareData';
-
-        '/mnt/koji':
-            mount   => '/mnt',
-            key     => 'koji',
-            options => '-rw,hard,nosuid,noatime,fsc',
-            remote  => 'mdct-00fs:/storage/projects/koji';
-
-        '/mnt/storage':
-            mount   => '/mnt',
-            key     => 'storage',
-            options => '-fstype=ext4,rw',
-            remote  => ':/dev/data/storage';
-
-    }
-
-    systemd::mount { '/j':
-        mnt_description => 'my local storage',
-        mnt_what        => '/mnt/storage/j',
-        mnt_options     => 'bind',
-        mnt_requires    => 'autofs.service',
-        mnt_after       => 'autofs.service',
-        require         => Class['autofs'],
-    }
-
-    systemd::mount { '/Pound':
-        mnt_description => 'tunez and pix',
-        mnt_what        => '/mnt/storage/Pound',
-        mnt_options     => 'bind',
-        mnt_requires    => 'autofs.service',
-        mnt_after       => 'autofs.service',
-        require         => Class['autofs'],
-    }
 
     # disabled until once again needed
     #   include 'mysql_server'
