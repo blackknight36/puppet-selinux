@@ -59,6 +59,7 @@ class dart::mdct_dev12 inherits dart::abstract::workstation_node {
     }
 
     include 'dart::abstract::pycharm::professional'
+    include 'dart::mdct_dev12::libvirt'
     include 'dart::subsys::yum_cron'
 
     class { 'koji::cli':
@@ -96,8 +97,6 @@ class dart::mdct_dev12 inherits dart::abstract::workstation_node {
     ]:
         ensure  => installed,
     }
-
-    $SUFFIX=".orig-${::operatingsystem}${::operatingsystemrelease}"
 
     autofs::map_entry {
 
@@ -151,30 +150,6 @@ class dart::mdct_dev12 inherits dart::abstract::workstation_node {
         require         => Class['autofs'],
     }
 
-    dart::util::replace_original_with_symlink_to_alternate { '/etc/libvirt':
-        alternate   => '/mnt/storage/etc/libvirt',
-        backup      => "/etc/libvirt${SUFFIX}",
-        before      => Service['libvirtd'],
-        notify      => Service['libvirtd'],
-        original    => '/etc/libvirt',
-        # TODO: libvirt needs to be a formal service and treated here like
-        # mysql WRT before/require attrs
-        require     => Package['libvirt'],
-        seltype     => 'virt_etc_t',
-    }
-
-    dart::util::replace_original_with_symlink_to_alternate { '/var/lib/libvirt':
-        alternate   => '/mnt/storage/var/lib/libvirt',
-        backup      => "/var/lib/libvirt${SUFFIX}",
-        before      => Service['libvirtd'],
-        notify      => Service['libvirtd'],
-        original    => '/var/lib/libvirt',
-        # TODO: libvirt needs to be a formal service and treated here like
-        # mysql WRT before/require attrs
-        require     => Package['libvirt'],
-        seltype     => 'virt_var_lib_t',
-    }
-
     # disabled until once again needed
     #   include 'mysql_server'
     #   dart::util::replace_original_with_symlink_to_alternate { '/var/lib/mysql':
@@ -185,25 +160,6 @@ class dart::mdct_dev12 inherits dart::abstract::workstation_node {
     #       require     => Package['mysql-server'],
     #       seltype     => 'mysqld_db_t',
     #   }
-
-    service { 'libvirtd':
-        ensure      => running,
-        enable      => true,
-        hasrestart  => true,
-        hasstatus   => true,
-        require     => [
-        ],
-    }
-
-    # Prefer forced power off as it's much faster than suspending.
-    service { 'libvirtd-guests':
-        ensure      => stopped,
-        enable      => false,
-        hasrestart  => true,
-        hasstatus   => true,
-        require     => [
-        ],
-    }
 
     sendmail::alias { 'root':
         recipient   => 'john.florian@dart.biz',
