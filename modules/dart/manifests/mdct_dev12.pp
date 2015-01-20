@@ -133,14 +133,22 @@ class dart::mdct_dev12 inherits dart::abstract::workstation_node {
 
     }
 
-    file { '/j':
-        ensure  => link,
-        target  => '/mnt/storage/j/',
+    systemd::mount { '/j':
+        mnt_description => 'my local storage',
+        mnt_what        => '/mnt/storage/j',
+        mnt_options     => 'bind',
+        mnt_requires    => 'autofs.service',
+        mnt_after       => 'autofs.service',
+        require         => Class['autofs'],
     }
 
-    file { '/Pound':
-        ensure  => link,
-        target  => '/mnt/storage/Pound/',
+    systemd::mount { '/Pound':
+        mnt_description => 'tunez and pix',
+        mnt_what        => '/mnt/storage/Pound',
+        mnt_options     => 'bind',
+        mnt_requires    => 'autofs.service',
+        mnt_after       => 'autofs.service',
+        require         => Class['autofs'],
     }
 
     dart::util::replace_original_with_symlink_to_alternate { '/etc/libvirt':
