@@ -18,6 +18,7 @@ class dart::abstract::packages::workstation {
         'plant-launchers',
         'putty',
         'rdesktop',
+        'spice-xpi',
         'xclip',
 
         ]:
