@@ -15,25 +15,6 @@
 
 class dart::mdct_dev12 inherits dart::abstract::workstation_node {
 
-    class { 'network':
-        service         => 'nm',
-        domain          => $dart::params::dns_domain,
-        name_servers    => $dart::params::dns_servers,
-    }
-
-    network::interface { 'br0':
-        template    => 'static-bridge',
-        ip_address  => '10.209.23.1',
-        netmask     => '255.255.252.0',
-        gateway     => '10.209.23.254',
-        stp         => 'no',
-    }
-
-    network::interface { 'enp0s25':
-        template    => 'static',
-        bridge      => 'br0',
-    }
-
     # Apache httpd is needed for at least serving man2html, but may be used
     # for development and/or debugging setups of dhcpd-driven-master or
     # firewall-driven-master, hence the network_connect setting.
@@ -57,6 +38,7 @@ class dart::mdct_dev12 inherits dart::abstract::workstation_node {
     include 'dart::abstract::pycharm::professional'
     include 'dart::mdct_dev12::filesystem'
     include 'dart::mdct_dev12::libvirt'
+    include 'dart::mdct_dev12::network'
     include 'dart::mdct_dev12::profile'
     include 'dart::subsys::yum_cron'
 
@@ -65,10 +47,6 @@ class dart::mdct_dev12 inherits dart::abstract::workstation_node {
         web         => 'http://mdct-koji.dartcontainer.com/koji',
         downloads   => 'http://mdct-koji.dartcontainer.com/kojifiles',
         top_dir     => '/srv/koji',     # TODO: share via NFS?
-    }
-
-    iptables::rules_file { 'blocks':
-        source  => 'puppet:///private-host/iptables/blocks',
     }
 
     printer { 'dell':
