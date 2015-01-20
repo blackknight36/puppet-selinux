@@ -34,10 +34,6 @@ class dart::mdct_dev12 inherits dart::abstract::workstation_node {
         bridge      => 'br0',
     }
 
-    class { 'plymouth':
-        theme   => 'details',
-    }
-
     # Apache httpd is needed for at least serving man2html, but may be used
     # for development and/or debugging setups of dhcpd-driven-master or
     # firewall-driven-master, hence the network_connect setting.
@@ -61,6 +57,7 @@ class dart::mdct_dev12 inherits dart::abstract::workstation_node {
     include 'dart::abstract::pycharm::professional'
     include 'dart::mdct_dev12::filesystem'
     include 'dart::mdct_dev12::libvirt'
+    include 'dart::mdct_dev12::profile'
     include 'dart::subsys::yum_cron'
 
     class { 'koji::cli':
@@ -83,84 +80,6 @@ class dart::mdct_dev12 inherits dart::abstract::workstation_node {
 
     class { 'selinux':
         mode => 'enforcing',
-    }
-
-    package { [
-        'kcometen4',
-        'kde-plasma-yawp',
-        'kdeartwork-screensavers',
-        'kio_mtp',
-        'man2html',
-        'qstars-kde',
-        'redshift',
-        'rss-glx-kde',
-        'tempest-kde',
-    ]:
-        ensure  => installed,
-    }
-
-
-    # disabled until once again needed
-    #   include 'mysql_server'
-    #   dart::util::replace_original_with_symlink_to_alternate { '/var/lib/mysql':
-    #       alternate   => '/mnt/storage/var/lib/mysql',
-    #       backup      => "/var/lib/mysql$SUFFIX",
-    #       original    => '/var/lib/mysql',
-    #       before      => Service['mysqld'],
-    #       require     => Package['mysql-server'],
-    #       seltype     => 'mysqld_db_t',
-    #   }
-
-    sendmail::alias { 'root':
-        recipient   => 'john.florian@dart.biz',
-    }
-
-    # Make root user source my prophile by default.
-    exec { 'prophile-install -f jflorian':
-        require => Package['prophile'],
-        unless  => 'grep -q prophile /root/.bash_profile',
-    }
-
-    # Ditch the KDE screenlocker in favor of xscreensaver.
-    file { '/usr/libexec/kde4/kscreenlocker_greet':
-        owner   => 'root',
-        group   => 'root',
-        mode    => '0755',
-        source  => 'puppet:///private-host/kscreenlocker_greet',
-    }
-
-    file { '/root/.gvimrc_site':
-        owner   => 'root',
-        group   => 'root',
-        mode    => '0644',
-        source  => 'puppet:///private-host/gvimrc_site',
-    }
-
-    file { '/root/.gitconfig':
-        owner   => 'root',
-        group   => 'root',
-        mode    => '0644',
-        source  => 'puppet:///private-host/git/gitconfig',
-    }
-
-    file { '/root/.gitignore':
-        owner   => 'root',
-        group   => 'root',
-        mode    => '0644',
-        source  => 'puppet:///private-host/git/gitignore',
-    }
-
-    cron::job { 'git-summary':
-        command => 'nice ionice -c 3 git-summary',
-        dow     => 'Mon-Fri',
-        hour    => '7',
-        minute  => '33',
-        user    => 'd13677',
-        mailto  => 'john.florian@dart.biz',
-    }
-
-    mock::user {
-        'd13677':;
     }
 
 }
