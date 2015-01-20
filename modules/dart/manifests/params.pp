@@ -21,7 +21,7 @@ class dart::params {
 
     # DNS
     $dns_domain     = $domain
-    $dns_servers    = ['10.1.0.98', '10.1.0.99']
+    $dns_servers    = ['10.101.1.12', '10.1.0.99']
 
     # SMTP
     $smtp_server    = 'smtp.dartcontainer.com'
