@@ -10,12 +10,12 @@
 #   Instance is to be 'present' (default) or 'absent'.
 #
 # [*content*]
-#   Literal content for the MODULE_NAME CLASS_NAME file.  One and only one of
-#   "content" or "source" must be given.
+#   Literal content for the MODULE_NAME CLASS_NAME file.  If neither "content"
+#   nor "source" is given, the content of the file will be left unmanaged.
 #
 # [*source*]
-#   URI of the MODULE_NAME CLASS_NAME file content.  One and only one of
-#   "content" or "source" must be given.
+#   URI of the MODULE_NAME CLASS_NAME file content.  If neither "content"
+#   nor "source" is given, the content of the file will be left unmanaged.
 #
 # === Authors
 #
