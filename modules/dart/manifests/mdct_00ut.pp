@@ -37,6 +37,17 @@ class dart::mdct_00ut inherits dart::abstract::guarded_server_node {
         ],
     }
 
+    file { '/etc/cron.d/spsync':
+        group   => 'root',
+        mode    => '0644',
+        owner   => 'root',
+        source  => 'puppet:///modules/dart/utility_servers/mdct-00fs-cron',
+        require => [
+            File['/storage/slideshow'],
+            File['/storage/slideshow/priority'],
+        ],
+    }
+
     file {'/storage/slideshow':
         ensure  => 'directory',
         owner   => 'root',
@@ -44,15 +55,22 @@ class dart::mdct_00ut inherits dart::abstract::guarded_server_node {
         mode    => '0755',
     }
 
-    mount {'/storage/slideshow':
-        device  => '/mnt/eid',
-        fstype  => 'auto',
-        options => 'bind',
-        ensure  => 'mounted',
-        require => [
-            File['/storage/slideshow'],
-        ],
+    file {'/storage/slideshow/priority':
+        ensure  => 'directory',
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0755',
     }
+
+    #mount {'/storage/slideshow':
+    #    device  => '/mnt/eid',
+    #    fstype  => 'auto',
+    #    options => 'bind',
+    #    ensure  => 'mounted',
+    #    require => [
+    #        File['/storage/slideshow'],
+    #    ],
+    #}
 
     # AOS devices pull media-playback content using rsync.
     class { 'rsync::server':
