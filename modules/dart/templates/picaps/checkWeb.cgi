@@ -23,7 +23,7 @@ try:
    tn = telnetlib.Telnet(HOST, PORT)
    tn.close()
    # we are good to go send to PICAPS Echo site
-   print '<META HTTP-EQUIV="refresh" content="0;url=https://%s:%s/Echo/">' % (HOST, PORT)
+   print '<META HTTP-EQUIV="refresh" content="0;url=https://%s:%s/Echo">' % (HOST, PORT)
 except:
    # display down site message
    print """<META HTTP-EQUIV="refresh" content="30;">
