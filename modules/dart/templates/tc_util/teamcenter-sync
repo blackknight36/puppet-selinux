@@ -47,6 +47,15 @@ warn() {
     echo >&2 "WARNING: $@"
 }
 
+mounted() {
+    # Test a mount point to determine something is mounted there or not.
+    #
+    # @1:       Mount point to be tested.
+    # @returns: 0 iff mounted; not 0 otherwise.
+    what="$(readlink -f $1)"
+    grep -q "$what" /proc/mounts
+}
+
 # Note: Trailing slash is critical and must be present!
 SOURCE='/srv/<%= sync_source %>-volumes/'
 TARGET=''
@@ -85,6 +94,12 @@ do
 done
 [ $# -eq 0 ] || warn "ignoring unexpected arguments: $@"
 [ -n "$TARGET" ] || fail "missing required argument: TARGET"
+
+mounted "$SOURCE" \
+    || fail "Cannot continue because SOURCE '${SOURCE}' is not mounted."
+
+mounted "$TARGET" \
+    || fail "Cannot continue because TARGET '${TARGET}' is not mounted."
 
 # Establish a crude real-time log monitor to provide immediate feedback of
 # progress (and errors) to the user.
