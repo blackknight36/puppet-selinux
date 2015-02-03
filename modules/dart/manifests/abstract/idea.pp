@@ -22,11 +22,16 @@ class dart::abstract::idea {
     # to ensure that no more than two stable releases are installed at any
     # given time.
 
+    jetbrains::idea::release { 'ideaIU-14.0.3':
+        build   => '139.1117.1',
+    }
+
     jetbrains::idea::release { 'ideaIU-14.0.2':
         build   => '139.659.2',
     }
 
     jetbrains::idea::release { 'ideaIU-14':
+        ensure  => absent,
         build   => '139.224.1',
     }
 
@@ -35,6 +40,7 @@ class dart::abstract::idea {
     }
 
     jetbrains::idea::release { 'ideaIU-13.0.1':
+        ensure  => absent,
         build   => '133.331',
     }
 
@@ -48,10 +54,12 @@ class dart::abstract::idea {
     #
 
     jetbrains::idea::release { 'ideaIU-139.872.1':
+        ensure  => absent,
         build   => '139.872.1',
     }
 
     jetbrains::idea::release { 'ideaIU-139.144.2':
+        ensure  => absent,
         build   => '139.144.2',
     }
 
