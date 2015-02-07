@@ -15,6 +15,10 @@ class postgresql::server::initdb {
     owner  => $user,
     group  => $group,
     mode   => '0700',
+
+    # See https://tickets.puppetlabs.com/browse/MODULES-1745
+    seltype => 'postgresql_db_t',
+
   }
 
   if($xlogdir) {
