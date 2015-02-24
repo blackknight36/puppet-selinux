@@ -79,6 +79,15 @@ class dart::abstract::packages::developer {
                 ensure  => installed,
             }
         }
+        if  $::operatingsystemrelease == 'Rawhide' or
+            $::operatingsystemrelease >= 20
+        {
+            package { [
+                'python3-mdct-doc',
+                ]:
+                ensure  => installed,
+            }
+        }
 
     }
 
