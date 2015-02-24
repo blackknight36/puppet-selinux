@@ -63,6 +63,7 @@ class dart::abstract::packages::developer {
             $::operatingsystemrelease >= 18
         {
             package { [
+                'python3-sphinx',
                 'rubygem-puppet-lint',
                 'rubygem-ronn',
                 ]:
