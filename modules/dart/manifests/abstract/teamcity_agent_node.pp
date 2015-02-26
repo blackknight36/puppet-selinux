@@ -18,6 +18,7 @@ class dart::abstract::teamcity_agent_node inherits dart::abstract::guarded_serve
     include 'dart::abstract::packages::developer'
     include 'dart::abstract::teamcity_agent_node_est_ngic'
     include 'dart::subsys::autofs::common'
+    include '::dart::subsys::mock'
     include 'dart::subsys::yum_cron'
     include 'lyx'
     include 'puppet::client'
@@ -46,75 +47,6 @@ class dart::abstract::teamcity_agent_node inherits dart::abstract::guarded_serve
         default: {
             fail('Missing host-specific details!')
         }
-    }
-
-    mock::target { 'Fedora-18-i386':
-        family              => 'fedora',
-        release             => '18',
-        target_arch         => 'i686',
-        base_arch           => 'i386',
-        legal_host_arches   => ['i386', 'i586', 'i686', 'x86_64'],
-    }
-
-    mock::target { 'Fedora-18-x86_64':
-        family              => 'fedora',
-        release             => '18',
-        target_arch         => 'x86_64',
-        base_arch           => 'x86_64',
-        legal_host_arches   => ['x86_64'],
-    }
-
-    mock::target { 'Fedora-19-i386':
-        family              => 'fedora',
-        release             => '19',
-        target_arch         => 'i686',
-        base_arch           => 'i386',
-        legal_host_arches   => ['i386', 'i586', 'i686', 'x86_64'],
-    }
-
-    mock::target { 'Fedora-19-x86_64':
-        family              => 'fedora',
-        release             => '19',
-        target_arch         => 'x86_64',
-        base_arch           => 'x86_64',
-        legal_host_arches   => ['x86_64'],
-    }
-
-    mock::target { 'Fedora-20-i386':
-        family              => 'fedora',
-        release             => '20',
-        target_arch         => 'i686',
-        base_arch           => 'i386',
-        legal_host_arches   => ['i386', 'i586', 'i686', 'x86_64'],
-    }
-
-    mock::target { 'Fedora-20-x86_64':
-        family              => 'fedora',
-        release             => '20',
-        target_arch         => 'x86_64',
-        base_arch           => 'x86_64',
-        legal_host_arches   => ['x86_64'],
-    }
-
-    mock::target { 'Fedora-21-i386':
-        family              => 'fedora',
-        release             => '21',
-        target_arch         => 'i686',
-        base_arch           => 'i386',
-        legal_host_arches   => ['i386', 'i586', 'i686', 'x86_64'],
-    }
-
-    mock::target { 'Fedora-21-x86_64':
-        family              => 'fedora',
-        release             => '21',
-        target_arch         => 'x86_64',
-        base_arch           => 'x86_64',
-        legal_host_arches   => ['x86_64'],
-    }
-
-    mock::user {
-        'teamcity':;
-        'd13677':;
     }
 
 }
