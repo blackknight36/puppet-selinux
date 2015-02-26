@@ -29,10 +29,10 @@ class dart::mdct_dev12 inherits dart::abstract::workstation_node {
     }
 
     class { 'bacula::client':
-        dir_name    => $dart::params::bacula_dir_name,
-        dir_passwd  => 'RB9c3KBgpRyXzbGC6wXCEA5ao2SAtgAyt24tD8pni17h',
-        mon_name    => $dart::params::bacula_mon_name,
-        mon_passwd  => 'NBkHwmNJGplxIlmMaQukmf568KCSuY1eKDGINZnLxyTw',
+        dir_name   => $dart::params::bacula_dir_name,
+        dir_passwd => 'RB9c3KBgpRyXzbGC6wXCEA5ao2SAtgAyt24tD8pni17h',
+        mon_name   => $dart::params::bacula_mon_name,
+        mon_passwd => 'NBkHwmNJGplxIlmMaQukmf568KCSuY1eKDGINZnLxyTw',
     }
 
     include 'dart::abstract::pycharm::professional'
@@ -40,13 +40,14 @@ class dart::mdct_dev12 inherits dart::abstract::workstation_node {
     include 'dart::mdct_dev12::libvirt'
     include 'dart::mdct_dev12::network'
     include 'dart::mdct_dev12::profile'
+    include 'dart::subsys::mock'
     include 'dart::subsys::yum_cron'
 
     class { 'koji::cli':
-        hub         => 'http://mdct-koji.dartcontainer.com/kojihub',
-        web         => 'http://mdct-koji.dartcontainer.com/koji',
-        downloads   => 'http://mdct-koji.dartcontainer.com/kojifiles',
-        top_dir     => '/srv/koji',     # TODO: share via NFS?
+        hub       => 'http://mdct-koji.dartcontainer.com/kojihub',
+        web       => 'http://mdct-koji.dartcontainer.com/koji',
+        downloads => 'http://mdct-koji.dartcontainer.com/kojifiles',
+        top_dir   => '/srv/koji',     # TODO: share via NFS?
     }
 
     printer { 'dell':
