@@ -12,3 +12,6 @@ est     ALL=(root)  NOPASSWD: /bin/systemctl stop postgresql.service, /bin/syste
 ngic    ALL=(root)  NOPASSWD: /bin/systemctl stop tomcat.service, /bin/systemctl start tomcat.service
 ngic    ALL=(root)  NOPASSWD: /bin/systemctl stop tomcat6.service, /bin/systemctl start tomcat6.service
 ngic    ALL=(root)  NOPASSWD: /bin/systemctl stop postgresql.service, /bin/systemctl start postgresql.service
+
+tcir    ALL=(root)  NOPASSWD: /bin/systemctl stop tomcat.service, /bin/systemctl start tomcat.service
+tcir    ALL=(root)  NOPASSWD: /bin/systemctl stop postgresql.service, /bin/systemctl start postgresql.service
