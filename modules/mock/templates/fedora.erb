@@ -39,10 +39,22 @@ baseurl=http://mdct-00fs.dartcontainer.com/ftp/pub/fedora/updates/testing/<%= @r
 failovermethod=priority
 enabled=0
 
-[local]
-name=local
+[mdct]
+name=MDCT packages
+baseurl=http://mdct-00fs.dartcontainer.com/ftp/pub/fedora/mdct/<%= @release %>/<%= @base_arch %>/
+
+[mdct-noarch]
+name=MDCT portable packages
+baseurl=http://mdct-00fs.dartcontainer.com/ftp/pub/fedora/mdct/<%= @release %>/noarch/
+
+[mdct-testing]
+name=MDCT packages - testing
 baseurl=http://mdct-00fs.dartcontainer.com/ftp/pub/fedora/mdct/testing/<%= @release %>/<%= @base_arch %>/
-cost=2000
+enabled=0
+
+[mdct-noarch-testing]
+name=MDCT portable packages - testing
+baseurl=http://mdct-00fs.dartcontainer.com/ftp/pub/fedora/mdct/testing/<%= @release %>/noarch/
 enabled=0
 
 #   [fedora-debuginfo]
