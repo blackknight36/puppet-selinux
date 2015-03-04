@@ -31,7 +31,7 @@ class dart::abstract::tomcat_web_app inherits dart::abstract::guarded_server_nod
         source  =>  'puppet:///private-domain/sudo/tomcat-service',
     }
 
-    file { '/etc/tomcat/context.xml':
+    File {
         owner       => 'tomcat',
         group       => 'tomcat',
         mode        => '0664',
@@ -39,6 +39,13 @@ class dart::abstract::tomcat_web_app inherits dart::abstract::guarded_server_nod
         selrole     => 'object_r',
         seltype     => 'etc_t',
         subscribe   => Package['tomcat'],
+    }
+
+    file { '/etc/tomcat/tomcat-users.xml':
+        source      => 'puppet:///private-host/tomcat/tomcat-users.xml',
+    }
+
+    file { '/etc/tomcat/context.xml':
         source      => 'puppet:///private-host/tomcat/context.xml',
     }
 

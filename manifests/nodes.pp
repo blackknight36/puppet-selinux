@@ -71,8 +71,8 @@ node 'mdct-est-ci.dartcontainer.com'            { include 'dart::mdct_est_ci' }
 node 'mdct-est-dev1.dartcontainer.com'          { include 'dart::mdct_est_dev1' }
 node 'mdct-est-dev2.dartcontainer.com'          { include 'dart::mdct_est_dev2' }
 node 'mdct-est-production.dartcontainer.com'    { include 'dart::mdct_est_production' }
-node 'mdct-tcir-production.dartcontainer.com'	{ include 'dart::mdct_tcir_production' }
-node 'mdct-tcir-dev.dartcontainer.com'		{ include 'dart::mdct_tcir_dev' }
+node 'mdct-tcir-production.dartcontainer.com'   { include 'dart::mdct_tcir_production' }
+node 'mdct-tcir-dev.dartcontainer.com'          { include 'dart::mdct_tcir_dev' }
 node 'mdct-f14-builder.dartcontainer.com'       { include 'dart::mdct_f14_builder' }
 node 'mdct-f15-builder.dartcontainer.com'       { include 'dart::mdct_f15_builder' }
 node 'mdct-f16-builder.dartcontainer.com'       { include 'dart::mdct_f16_builder' }
