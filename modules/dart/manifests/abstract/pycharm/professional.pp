@@ -23,13 +23,13 @@ class dart::abstract::pycharm::professional {
     # given time.
 
     jetbrains::pycharm::release { 'pycharm-professional-4.0.4':
-        build   => '4.0.4',
+        build   => '4.0.5',
         edition => 'professional',
     }
 
     jetbrains::pycharm::release { 'pycharm-professional-4.0.3':
         ensure  => 'absent',
-        build   => '4.0.3',
+        build   => '4.0.4',
         edition => 'professional',
     }
 
