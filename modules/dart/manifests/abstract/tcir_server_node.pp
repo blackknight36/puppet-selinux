@@ -29,6 +29,38 @@ class dart::abstract::tcir_server_node inherits dart::abstract::tomcat_web_app {
     }
 
 
+    class { 'apache':
+        network_connect => true,
+    }
+
+    apache::site_config {
+        '99-proxy-ajp':
+            content   => "
+<IfModule proxy_ajp_module>
+    <IfModule headers_module>
+        RequestHeader unset Expect early
+    </IfModule>
+    <LocationMatch ^/>
+        ProxyPassMatch ajp://127.0.0.1:8009 timeout=3600 retry=5
+        <IfModule deflate_module>
+            AddOutputFilterByType DEFLATE text/javascript text/css text/html text/xml text/json application/xml application/json application/x-yaml
+        </IfModule>
+    </LocationMatch>
+</IfModule>
+",
+    }
+
+    file { '/etc/tomcat/server.xml':
+        owner     => 'tomcat',
+        group     => 'tomcat',
+        mode      => '0664',
+        seluser   => 'system_u',
+        selrole   => 'object_r',
+        seltype   => 'etc_t',
+        subscribe => Package['tomcat'],
+        source    => 'puppet:///modules/dart/tomcat/tcir-server.xml',
+    }
+
     group { 'tcirindexers':
         ensure => present,
     }

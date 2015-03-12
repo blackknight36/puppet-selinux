@@ -4,10 +4,6 @@ class dart::abstract::tomcat_web_app inherits dart::abstract::guarded_server_nod
 
     include 'dart::subsys::autofs::common'
 
-#    class { 'postgresql::server':
-#        hba_conf    => 'puppet:///private-host/postgresql/pg_hba.conf',
-#    }
-
     # puppet::client is included this way to prevent duplicate declaration
     # arising out of dart::abstract::teamcity_server_node.  This works only
     # because the default class params are acceptable here.
@@ -32,25 +28,25 @@ class dart::abstract::tomcat_web_app inherits dart::abstract::guarded_server_nod
     }
 
     file { '/etc/tomcat/tomcat-users.xml':
-        owner       => 'tomcat',
-        group       => 'tomcat',
-        mode        => '0664',
-        seluser     => 'system_u',
-        selrole     => 'object_r',
-        seltype     => 'etc_t',
-        subscribe   => Package['tomcat'],
-        source      => 'puppet:///private-host/tomcat/tomcat-users.xml',
+        owner     => 'tomcat',
+        group     => 'tomcat',
+        mode      => '0664',
+        seluser   => 'system_u',
+        selrole   => 'object_r',
+        seltype   => 'etc_t',
+        subscribe => Package['tomcat'],
+        source    => 'puppet:///private-host/tomcat/tomcat-users.xml',
     }
 
     file { '/etc/tomcat/context.xml':
-        owner       => 'tomcat',
-        group       => 'tomcat',
-        mode        => '0664',
-        seluser     => 'system_u',
-        selrole     => 'object_r',
-        seltype     => 'etc_t',
-        subscribe   => Package['tomcat'],
-        source      => 'puppet:///private-host/tomcat/context.xml',
+        owner     => 'tomcat',
+        group     => 'tomcat',
+        mode      => '0664',
+        seluser   => 'system_u',
+        selrole   => 'object_r',
+        seltype   => 'etc_t',
+        subscribe => Package['tomcat'],
+        source    => 'puppet:///private-host/tomcat/context.xml',
     }
 
 }
