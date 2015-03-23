@@ -15,10 +15,15 @@ class MODULE_NAME::params {
     case $::operatingsystem {
         Fedora: {
 
+            $packages = 'PACKAGE_NAME'
             $packages = [
                 'PACKAGE_NAME',
             ]
-            $service_name = 'SERVICE_NAME'
+
+            $services = 'SERVICE_NAME'
+            $services = [
+                'SERVICE_NAME',
+            ]
 
             # Hint:
             #   sudo semanage boolean  --list | grep MODULE_NAME
@@ -32,7 +37,7 @@ class MODULE_NAME::params {
         }
 
         default: {
-            fail ("The MODULE_NAME module is not yet supported on ${::operatingsystem}.")
+            fail ("${title}: operating system '${::operatingsystem}' is not supported")
         }
 
     }

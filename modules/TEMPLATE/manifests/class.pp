@@ -6,16 +6,15 @@
 #
 # === Parameters
 #
+# ==== Required
+#
+# ==== Optional
+#
+# [*enable*]
+#   Instance is to be started at boot.  Either true (default) or false.
+#
 # [*ensure*]
-#   Instance is to be 'present' (default) or 'absent'.
-#
-# [*content*]
-#   Literal content for the MODULE_NAME CLASS_NAME file.  If neither "content"
-#   nor "source" is given, the content of the file will be left unmanaged.
-#
-# [*source*]
-#   URI of the MODULE_NAME CLASS_NAME file content.  If neither "content"
-#   nor "source" is given, the content of the file will be left unmanaged.
+#   Instance is to be 'running' (default) or 'stopped'.
 #
 # === Authors
 #
@@ -24,33 +23,30 @@
 
 
 class MODULE_NAME::CLASS_NAME (
-        $ensure='present',
-        $content=undef,
-        $source=undef,
-    ) {
+        $enable=true,
+        $ensure='running',
+    ) inherits ::MODULE_NAME::params {
 
-    include 'MODULE_NAME::params'
-
-    package { $MODULE_NAME::params::packages:
+    package { $::MODULE_NAME::params::packages:
         ensure => installed,
-        notify => Service[$MODULE_NAME::params::service_name],
+        notify => Service[$::MODULE_NAME::params::services],
     }
 
     File {
-        owner       => 'root',
-        group       => 'root',
-        mode        => '0640',
-        seluser     => 'system_u',
-        selrole     => 'object_r',
-        seltype     => 'etc_t',
-        before      => Service[$MODULE_NAME::params::service_name],
-        notify      => Service[$MODULE_NAME::params::service_name],
-        subscribe   => Package[$MODULE_NAME::params::packages],
+        owner     => 'root',
+        group     => 'root',
+        mode      => '0640',
+        seluser   => 'system_u',
+        selrole   => 'object_r',
+        seltype   => 'etc_t',
+        before    => Service[$::MODULE_NAME::params::services],
+        notify    => Service[$::MODULE_NAME::params::services],
+        subscribe => Package[$::MODULE_NAME::params::packages],
     }
 
     file { '/CONFIG_PATH/CONFIG_NAME':
-        content => $content,
-        source  => $source,
+        content => template('MODULE_NAME/example.conf'),
+        source  => 'puppet:///modules/MODULE_NAME/example.conf',
     }
 
     iptables::tcp_port {
@@ -59,20 +55,18 @@ class MODULE_NAME::CLASS_NAME (
     }
 
     Selinux::Boolean {
-        before      => Service[$MODULE_NAME::params::service_name],
-        persistent  => true,
+        before     => Service[$::MODULE_NAME::params::services],
+        persistent => true,
     }
 
-    selinux::boolean { $MODULE_NAME::params::bool_name1:
-        value => $allow_use_nfs ? {
-            true    => on,
-            default => off,
-        }
+    selinux::boolean { $::MODULE_NAME::params::bool_name1:
+        value => true,
+        value => false,
     }
 
-    service { $MODULE_NAME::params::service_name:
-        ensure     => running,
-        enable     => true,
+    service { $::MODULE_NAME::params::services:
+        ensure     => $ensure,
+        enable     => $enable,
         hasrestart => true,
         hasstatus  => true,
     }
