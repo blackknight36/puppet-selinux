@@ -30,6 +30,8 @@ class koji::params {
             ]
             $builder_service_name = 'kojid'
             $kojira_service_name = 'kojira'
+
+            $admin_user = 'kojiadmin'
             $our_mashes = '/etc/mash/ours'
 
         }
