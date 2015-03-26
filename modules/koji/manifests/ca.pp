@@ -1,32 +1,57 @@
 # modules/koji/manifests/ca.pp
 #
-# Synopsis:
-#       Configures a host to provide a SSL Certificate Authority for Koji.
+# == Class: koji::ca
 #
-# Parameters:
-#       Name__________  Notes_  Description___________________________________
+# Manages the Koji SSL Certificate Authority (CA) on a host.
 #
-#       country                 default value for Country Name (2 letter code)
+# This class will establish a Certificate Authority for the entire Koji
+# infrastructure where x509 Certificates are used to identify and authenticate
+# clients to services and vice-versa.  The result of this class will be said
+# CA, its private key, public certificate, related control files and a shell
+# script (certgen.sh) that facilitates simple creation of key/certificate pairs
+# for both users and services.
 #
-#       state                   default value for State or Province Name
+# Once this class has been applied, you should be able to (as root):
 #
-#       locality                default value for Locality Name
+#       cd /etc/pki/Koji
+#       ./certgen.sh -h
 #
-#       organization            default value for Organization Name
+# === Parameters
 #
-# Description:
-#       This class will establish a Certificate Authority for the entire Koji
-#       infrastructure where x509 Certificates are used to identify and
-#       authenticate clients to services and vice-versa.  The result of this
-#       class will be said CA, its private key, public certificate, related
-#       control files and a pair of shell scripts that facilitate simple
-#       creation of key/certificate pairs for both users and services.
+# ==== Required
+#
+# [*country*]
+#   Default value for Country Name (2 letter code) in any certificates created
+#   by this CA.
+#
+# [*state*]
+#   Default value for State or Province Name in any certificates created by
+#   this CA.
+#
+# [*locality*]
+#   Default value for Locality Name in any certificates created by this CA.
+#
+# [*organization*]
+#   Default value for Organization Name in any certificates created by this
+#   CA.
+#
+# ==== Optional
+#
+# === Authors
+#
+#   John Florian <john.florian@dart.biz>
 
 
-class koji::ca ( $country, $state, $locality, $organization ) {
+class koji::ca (
+        $country,
+        $state,
+        $locality,
+        $organization,
+    ) {
 
-    include 'koji::params'
+    include '::koji::params'
 
+    $admin_user = $::koji::params::admin_user
     $ca_name = 'Koji'
     $ca_root = "/etc/pki/${ca_name}"
     $ca_key = "${ca_root}/private/${ca_name}_ca_cert.key"
@@ -44,50 +69,50 @@ class koji::ca ( $country, $state, $locality, $organization ) {
     }
 
     Exec {
-        cwd     => "${ca_root}",
+        cwd => $ca_root,
     }
 
-    file { "${ca_root}":
-        ensure  => directory,
-        mode    => '0755',
+    file { $ca_root:
+        ensure => directory,
+        mode   => '0755',
     }
 
     file { ["${ca_root}/certs", "${ca_root}/private", "${ca_root}/confs", ]:
         ensure  => directory,
         mode    => '0755',
-        require => File["${ca_root}"],
+        require => File[$ca_root],
     }
 
     file { "${ca_root}/certgen.sh":
-        mode    => 0750,
-        require => File["${ca_root}"],
+        mode    => '0754',
+        require => File[$ca_root],
         content => template('koji/ca/certgen.sh'),
     }
 
     file { "${ca_root}/ssl.cnf":
-        require => File["${ca_root}"],
+        require => File[$ca_root],
         content => template('koji/ca/ssl.cnf'),
     }
 
     file { "${ca_root}/index.txt":
-        require => File["${ca_root}"],
         ensure  => present,
+        require => File[$ca_root],
     }
 
     file { "${ca_root}/serial":
-        require => File["${ca_root}"],
+        require => File[$ca_root],
         content => "01\n",  # double-quotes req'd for interpolation
         replace => false,
     }
 
     exec { 'create_ca_key':
         command => "openssl genrsa -out ${ca_key} 2048",
-        creates => "${ca_key}",
+        creates => $ca_key,
     }
 
     exec { 'create_ca_cert':
-        command => "openssl req -config ssl.cnf -new -x509 -subj \"/C=${country}/ST=${state}/L=${locality}/O=Dart Container Corp./OU=${ca_name} Certificate Authority/CN=${fqdn}\" -days 3650 -key ${ca_key} -out ${ca_cert} -extensions v3_ca",
-        creates => "${ca_cert}",
+        command => "openssl req -config ssl.cnf -new -x509 -subj \"/C=${country}/ST=${state}/L=${locality}/O=Dart Container Corp./OU=${ca_name} Certificate Authority/CN=${::fqdn}\" -days 3650 -key ${ca_key} -out ${ca_cert} -extensions v3_ca",
+        creates => $ca_cert,
         require => Exec['create_ca_key'],
     }
 

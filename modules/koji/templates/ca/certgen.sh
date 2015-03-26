@@ -1,8 +1,12 @@
 #!/bin/bash
-
-# Create SSL Certificates for Koji infrastructure.
 #
-# Author: John Florian <john_florian@dart.biz>
+# This file is managed by Puppet via the "<%= @module_name %>" module.
+
+# Synopsis:
+#       Create SSL Certificates for Koji infrastructure.
+#
+# Author:
+#       John Florian <john_florian@dart.biz>
 
 SELF="$(basename $0)"
 
@@ -48,8 +52,8 @@ Options:
             wherever they might be needed.
 
 Examples:
-    $SELF kojiadmin
-    $SELF d13677
+    $SELF <%= @admin_user %>
+    $SELF jflorian
     $SELF -s kojihub
     $SELF -s kojiweb
 
@@ -104,10 +108,10 @@ create_webclient_cert() {
 }
 
 deploy_certs() {
-    # kojiadmin's home assumed to be on local host; all others are on NFS.
-    if [ $user = 'kojiadmin' ]
+    # <%= @admin_user %>'s home assumed to be on local host; all others are on NFS.
+    if [ $user = '<%= @admin_user %>' ]
     then
-        target=~kojiadmin/.koji/
+        target=~<%= @admin_user %>/.koji/
     else
         target="${user}@${NFS_HOME}:~/.koji/"
     fi

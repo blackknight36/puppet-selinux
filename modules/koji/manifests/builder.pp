@@ -1,68 +1,92 @@
 # modules/koji/manifests/builder.pp
 #
-# Synopsis:
-#       Configures a host as a Koji Builder.
+# == Class: koji::builder
 #
-# Parameters:
-#       Name__________  Notes_  Description___________________________________
+# Manages a host as a Koji Builder.
 #
-#       client_cert             URI of builder's identity certificate
+# === Parameters
 #
-#       ca_cert                 URI of CA certificate that signed client_cert
+# ==== Required
 #
-#       web_ca_cert             URI of CA certificate that signed the HTTP cert
+# [*client_cert*]
+#   Puppet source URI providing the builder's identity certificate.
 #
-#       hub                     URL of your Koji-Hub server
+# [*ca_cert*]
+#   Puppet source URI providing the CA certificate that signed "client_cert".
 #
-#       downloads               URL of your package download site
+# [*web_ca_cert*]
+#   Puppet source URI providing the CA certificate that signed the Koji-Web
+#   certificate.
 #
-#       top_dir                 directory containing the repos/ directory
+# [*hub*]
+#   URL of your Koji-Hub service.
+#
+# [*downloads*]
+#   URL of your package download site.
+#
+# [*top_dir*]
+#   Name of the directory containing the "repos/" directory.
+#
+# ==== Optional
+#
+# [*enable*]
+#   Instance is to be started at boot.  Either true (default) or false.
+#
+# [*ensure*]
+#   Instance is to be 'running' (default) or 'stopped'.
+#
+# === Authors
+#
+#   John Florian <john.florian@dart.biz>
 
 
 class koji::builder (
-        $client_cert, $ca_cert, $web_ca_cert,
-        $hub, $downloads, $top_dir
-    ) {
+        $client_cert,
+        $ca_cert,
+        $web_ca_cert,
+        $hub,
+        $downloads,
+        $top_dir,
+        $enable=true,
+        $ensure='running',
+    ) inherits ::koji::params {
 
-    include 'koji::params'
-
-    package { $koji::params::builder_packages:
-        ensure  => installed,
+    package { $::koji::params::builder_packages:
+        ensure => installed,
+        notify => Service[$::koji::params::builder_services],
     }
 
     File {
-        owner       => 'root',
-        group       => 'root',
-        mode        => '0644',
-        seluser     => 'system_u',
-        selrole     => 'object_r',
-        seltype     => 'etc_t',
-        before      => Service[$koji::params::builder_service_name],
-        notify      => Service[$koji::params::builder_service_name],
-        subscribe   => Package[$koji::params::builder_packages],
+        owner     => 'root',
+        group     => 'root',
+        mode      => '0644',
+        seluser   => 'system_u',
+        selrole   => 'object_r',
+        seltype   => 'etc_t',
+        before    => Service[$::koji::params::builder_services],
+        notify    => Service[$::koji::params::builder_services],
+        subscribe => Package[$::koji::params::builder_packages],
     }
 
-    file { '/etc/kojid/kojid.conf':
-        content => template('koji/builder/kojid.conf'),
+    file {
+        '/etc/kojid/kojid.conf':
+            content => template('koji/builder/kojid.conf');
+
+        '/etc/kojid/client.crt':
+            source  => $client_cert;
+
+        '/etc/kojid/clientca.crt':
+            source  => $ca_cert;
+
+        '/etc/kojid/serverca.crt':
+            source  => $web_ca_cert;
     }
 
-    file { '/etc/kojid/client.crt':
-        source  => "${client_cert}",
-    }
-
-    file { '/etc/kojid/clientca.crt':
-        source  => "${ca_cert}",
-    }
-
-    file { '/etc/kojid/serverca.crt':
-        source  => "${web_ca_cert}",
-    }
-
-    service { $koji::params::builder_service_name:
-        enable      => true,
-        ensure      => running,
-        hasrestart  => true,
-        hasstatus   => true,
+    service { $::koji::params::builder_services:
+        ensure     => $ensure,
+        enable     => $enable,
+        hasrestart => true,
+        hasstatus  => true,
     }
 
 }

@@ -1,36 +1,51 @@
 # modules/koji/manifests/cli.pp
 #
-# Synopsis:
-#       Configures a host to provide the koji CLI.
+# == Class: koji::cli
 #
-# Parameters:
-#       Name__________  Notes_  Description___________________________
+# Manages the Koji CLI on a host.
 #
-#       hub                     URL of your Koji-Hub server
+# === Parameters
 #
-#       web                     URL of your Koji-Web server
+# ==== Required
 #
-#       downloads               URL of your package download site
+# [*hub*]
+#   URL of your Koji-Hub server.
 #
-#       top_dir                 directory containing the repos/ directory
+# [*web*]
+#   URL of your Koji-Web server.
+#
+# [*downloads*]
+#   URL of your package download site.
+#
+# [*top_dir*]
+#   Directory containing the "repos/" directory.
+#
+# ==== Optional
+#
+# === Authors
+#
+#   John Florian <john.florian@dart.biz>
 
 
-class koji::cli ( $hub, $web, $downloads, $top_dir ) {
-
-    include 'koji::params'
+class koji::cli (
+        $hub,
+        $web,
+        $downloads,
+        $top_dir,
+    ) inherits ::koji::params {
 
     package { $koji::params::cli_packages:
         ensure  => installed,
     }
 
     File {
-        owner       => 'root',
-        group       => 'root',
-        mode        => '0644',
-        seluser     => 'system_u',
-        selrole     => 'object_r',
-        seltype     => 'etc_t',
-        subscribe   => Package[$koji::params::cli_packages],
+        owner     => 'root',
+        group     => 'root',
+        mode      => '0644',
+        seluser   => 'system_u',
+        selrole   => 'object_r',
+        seltype   => 'etc_t',
+        subscribe => Package[$koji::params::cli_packages],
     }
 
     file { '/etc/koji.conf':

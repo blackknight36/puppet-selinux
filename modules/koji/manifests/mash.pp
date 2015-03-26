@@ -1,41 +1,52 @@
 # modules/koji/manifests/mash.pp
 #
-# Synopsis:
-#       Configures a host as a Koji mash client.
+# == Class: koji::mash
 #
-# Parameters:
-#       Name__________  Notes_  Description___________________________________
+# Manages the Koji mash client on a host.
 #
-#       hub                     URL of your Koji-Hub server
+# === Parameters
 #
-#       top_dir                 directory containing the repos/ directory
+# ==== Required
+#
+# [*hub*]
+#   URL of your Koji-Hub service.
+#
+# [*top_dir*]
+#   Directory containing the "repos/" directory.
+#
+# ==== Optional
+#
+# === Authors
+#
+#   John Florian <john.florian@dart.biz>
 
 
-class koji::mash ( $hub, $top_dir ) {
+class koji::mash (
+        $hub,
+        $top_dir,
+    ) inherits ::koji::params {
 
-    include 'koji::params'
-
-    package { $koji::params::mash_packages:
+    package { $::koji::params::mash_packages:
         ensure  => installed,
     }
 
     File {
-        owner       => 'root',
-        group       => 'root',
-        mode        => '0644',
-        seluser     => 'system_u',
-        selrole     => 'object_r',
-        seltype     => 'etc_t',
-        subscribe   => Package[$koji::params::mash_packages],
+        owner     => 'root',
+        group     => 'root',
+        mode      => '0644',
+        seluser   => 'system_u',
+        selrole   => 'object_r',
+        seltype   => 'etc_t',
+        subscribe => Package[$::koji::params::mash_packages],
     }
 
     file { '/etc/mash/mash.conf':
         content => template('koji/mash/mash.conf'),
     }
 
-    file { "$koji::params::our_mashes":
-        ensure  => directory,
-        mode    => '0755',
+    file { $::koji::params::our_mashes:
+        ensure => directory,
+        mode   => '0755',
     }
 
 }
