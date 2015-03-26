@@ -76,12 +76,10 @@ class koji::database (
         $listen_addresses='localhost',
     ) {
 
-    $schema_cmd = "psql -f ${schema_source} ${dbname} ${username}"
-    $schema_flag = "/var/lib/pgsql/data/${dbname}-schema-imported.flag"
-    $schema_log = "/var/lib/pgsql/data/${dbname}-schema-imported.log"
-    $bstrap_cmd = "psql -c \"insert into users (name, status, usertype) values ('${::koji::params::admin_user}', 0, 0);\" ${dbname} ${username}"
-    $bstrap_flag = "/var/lib/pgsql/data/${dbname}-bootstrap.flag"
-    $bstrap_log = "/var/lib/pgsql/data/${dbname}-bootstrap.log"
+    $admin = $::koji::params::admin_user
+    $bstrap_cmd = "/var/lib/pgsql/data/bootstrap-${dbname}-database"
+    $bstrap_flag = "${bstrap_cmd}.flag"
+    $bstrap_log = "${bstrap_cmd}.log"
 
     class { '::postgresql::server':
         listen_addresses => $listen_addresses,
@@ -118,20 +116,14 @@ class koji::database (
         password => $password,
     } ->
 
-    # Unfortunately (at this time), the puppetlabs-postgresql module provides
-    # no functionality for importing a schema.  The custom postgresql_psql
-    # resource type they provide would be the next best way to handle this,
-    # but alas it's semi-private (i.e., undocumented, at least) and provides
-    # no means of using stdin (unless the SQL does).
-    exec { "import '${name}' schema":
-        user    => 'root',
-        creates => $schema_flag,
-        command => "${schema_cmd} &> ${schema_log} && touch ${schema_flag}",
+    file { $bstrap_cmd:
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0754',
+        content => template('koji/database/bootstrap.sh'),
     } ->
 
-    # Similarly, here's how we must set up the administrator authentication
-    # for use with SSL certificates.
-    exec { "bootstrap initial ${::koji::params::admin_user} user":
+    exec { 'bootstrap Koji database':
         user    => 'root',
         creates => $bstrap_flag,
         command => "${bstrap_cmd} &> ${bstrap_log} && touch ${bstrap_flag}",
