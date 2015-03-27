@@ -28,6 +28,10 @@
 #
 # ==== Optional
 #
+# [*debug*]
+#   Enable verbose debugging for the Koji Hub.
+#   One of: true or false (default).
+#
 # === Authors
 #
 #   John Florian <john.florian@dart.biz>
@@ -39,7 +43,10 @@ class koji::hub (
         $db_passwd,
         $web_cn,
         $top_dir,
+        $debug=false,
     ) inherits ::koji::params {
+
+    validate_bool($debug)
 
     include '::apache::params'
 
