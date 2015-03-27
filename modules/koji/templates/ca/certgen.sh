@@ -44,33 +44,47 @@ Options:
         Revoke a user's certificate instead of generating one.
 
     -s
-        NAME identifies a service rather than user.  Effectively this means:
-            1. Only the basic client certificate is needed.
-            2. No web client certificate is needed.
-            3. The created certificate will not be deployed automatically.  It
-            is up to the system administrator to deploy the resultant files
-            wherever they might be needed.
+        Make a certificate for authenticating a Koji service named NAME to
+        a Koji client.
+
+    -S HOST
+        Make a certificate for authenticating Koji service named NAME running
+        on HOST as a client to the Koji Hub.
 
 Examples:
+    # Create a client certificate for the Koji administrator.
     $SELF <%= @admin_user %>
+
+    # Create a client certificate for a regular user.
     $SELF jflorian
+
+    # Create service certificates for Koji Hub and Koji Web.
     $SELF -s kojihub
     $SELF -s kojiweb
+
+    # Create a client certificate for a Koji Builder running on
+    # host.example.com.
+    $SELF -S host.example.com  kojid
+
+    # Create a client certificate for Kojira running on koji.example.com.
+    $SELF -S koji.example.com  kojira
 
 EOF
 }
 
 get_options_and_arguments() {
-    local opt
-    name_is_service='no'
+    local opt suffix
+    host=''
+    mode='user'
     revoke='no'
     OPTIND=1
-    while getopts ':hrs' opt
+    while getopts ':hrsS:' opt
     do
         case "$opt" in
             h)  usage && exit 0 ;;
             r)  revoke='yes' ;;
-            s)  name_is_service='yes' ;;
+            s)  mode='service' ;;
+            S)  mode='client'; host=$OPTARG ;;
             \?) fail -h "invalid option: -$OPTARG" ;;
             \:) fail -h "option -$OPTARG requires an argument" ;;
         esac
@@ -78,12 +92,13 @@ get_options_and_arguments() {
     shift $((OPTIND-1)); OPTIND=1
     [ $# -eq 1 ] || fail -h "you must specify the NAME argument"
     user="$1"
-    user_cnf="confs/${user}-ssl.cnf"
-    user_crt="certs/${user}.crt"
-    user_csr="certs/${user}.csr"
-    user_key="private/${user}.key"
-    user_pem="certs/${user}.pem"
-    user_web_crt="certs/${user}_browser_cert.p12"
+    [[ -n "$host" ]] && suffix="-on-${host}" || suffix=''
+    user_cnf="confs/${user}${suffix}-ssl.cnf"
+    user_crt="certs/${user}${suffix}.crt"
+    user_csr="certs/${user}${suffix}.csr"
+    user_key="private/${user}${suffix}.key"
+    user_pem="certs/${user}${suffix}.pem"
+    user_web_crt="certs/${user}${suffix}_browser_cert.p12"
 }
 
 notice() {
@@ -91,16 +106,23 @@ notice() {
 }
 
 create_client_cert() {
+    local default_cn default_ou
     notice 'Creating regular client certificate'
     openssl genrsa -out ${user_key} 2048
-    if [ $name_is_service = 'yes' ]
-    then
-        local default_cn="$(hostname -f)"
-        local default_ou="${user}"
-    else
-        local default_cn="${user}"
-        local default_ou='Koji Users'
-    fi
+    case $mode in
+        user)
+            default_cn="${user}"
+            default_ou='Koji Users'
+            ;;
+        service)
+            default_cn="$(hostname -f)"
+            default_ou="${user}"
+            ;;
+        client)
+            default_cn="${user}"
+            default_ou="${host}"
+            ;;
+    esac
     sed "s/@@DEFAULT_CN@@/${default_cn}/;s/@@DEFAULT_OU@@/${default_ou}/" \
             < ssl.cnf > ${user_cnf}
     openssl req -config ${user_cnf} -new -nodes -out ${user_csr} \
@@ -161,7 +183,7 @@ main() {
     else
         create_client_cert
     fi
-    if [ $name_is_service = 'no' ]
+    if [ $mode = 'user' ]
     then
         create_webclient_cert
         deploy_certs
