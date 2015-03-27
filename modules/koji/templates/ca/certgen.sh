@@ -18,7 +18,7 @@ CA_CRT="certs/${CA_NAME}_ca_cert.crt"
 CA_KEY="private/${CA_NAME}_ca_cert.key"
 
 # The hostname providing home directories over NFS.
-NFS_HOME="mdct-00fs"
+NFS_HOME='<%= @nfs_home %>'
 
 
 fail() {

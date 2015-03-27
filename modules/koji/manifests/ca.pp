@@ -35,6 +35,11 @@
 #   Default value for Organization Name in any certificates created by this
 #   CA.
 #
+# [*nfs_home*]
+#   Name of NFS server where home directories are located.  This is required
+#   to pre-configure the certgen.sh script for deploying certificates for each
+#   user.
+#
 # ==== Optional
 #
 # === Authors
@@ -47,6 +52,7 @@ class koji::ca (
         $state,
         $locality,
         $organization,
+        $nfs_home,
     ) {
 
     include '::koji::params'
