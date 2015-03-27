@@ -93,7 +93,16 @@ notice() {
 create_client_cert() {
     notice 'Creating regular client certificate'
     openssl genrsa -out ${user_key} 2048
-    sed 's/insert_hostname/'${user}'/' < ssl.cnf > ${user_cnf}
+    if [ $name_is_service = 'yes' ]
+    then
+        local default_cn="$(hostname -f)"
+        local default_ou="${user}"
+    else
+        local default_cn="${user}"
+        local default_ou='Koji Users'
+    fi
+    sed "s/@@DEFAULT_CN@@/${default_cn}/;s/@@DEFAULT_OU@@/${default_ou}/" \
+            < ssl.cnf > ${user_cnf}
     openssl req -config ${user_cnf} -new -nodes -out ${user_csr} \
         -key ${user_key}
     openssl ca -config ${user_cnf} -keyfile ${CA_KEY} -cert ${CA_CRT} \
