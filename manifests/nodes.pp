@@ -71,15 +71,13 @@ node 'mdct-est-ci.dartcontainer.com'            { include 'dart::mdct_est_ci' }
 node 'mdct-est-dev1.dartcontainer.com'          { include 'dart::mdct_est_dev1' }
 node 'mdct-est-dev2.dartcontainer.com'          { include 'dart::mdct_est_dev2' }
 node 'mdct-est-production.dartcontainer.com'    { include 'dart::mdct_est_production' }
-node 'mdct-tcir-production.dartcontainer.com'   { include 'dart::mdct_tcir_production' }
-node 'mdct-tcir-dev.dartcontainer.com'          { include 'dart::mdct_tcir_dev' }
 node 'mdct-f14-builder.dartcontainer.com'       { include 'dart::mdct_f14_builder' }
 node 'mdct-f15-builder.dartcontainer.com'       { include 'dart::mdct_f15_builder' }
 node 'mdct-f16-builder.dartcontainer.com'       { include 'dart::mdct_f16_builder' }
 node 'mdct-f17-builder.dartcontainer.com'       { include 'dart::mdct_f17_builder' }
 node 'mdct-fogbugz.dartcontainer.com'           { include 'dart::mdct_fogbugz' }
 node 'mdct-koji-b1-f21.dartcontainer.com'       { include 'dart::mdct_koji_b1_f21' }
-node 'mdct-koji.dartcontainer.com'              { include 'dart::mdct_koji' }
+node 'mdct-koji-f21.dartcontainer.com'          { include 'dart::mdct_koji_f21' }
 node 'mdct-nexus.dartcontainer.com'             { include 'dart::mdct_nexus' }
 node 'mdct-ngic-dev.dartcontainer.com'          { include 'dart::mdct_ngic_dev' }
 node 'mdct-ngic.dartcontainer.com'              { include 'dart::mdct_ngic' }
@@ -87,6 +85,8 @@ node 'mdct-ovirt-engine.dartcontainer.com'      { include 'dart::mdct_ovirt_engi
 node 'mdct-pt-dbtest.dartcontainer.com'         { include 'dart::mdct_pt_dbtest' }
 node 'mdct-recov.dartcontainer.com'             { include 'dart::mdct_recov' }
 node 'mdct-tc.dartcontainer.com'                { include 'dart::mdct_tc' }
+node 'mdct-tcir-dev.dartcontainer.com'          { include 'dart::mdct_tcir_dev' }
+node 'mdct-tcir-production.dartcontainer.com'   { include 'dart::mdct_tcir_production' }
 node 'mdct-teamcity-f20.dartcontainer.com'      { include 'dart::mdct_teamcity_f20' }
 node 'mdct-test-agent-32.dartcontainer.com'     { include 'dart::mdct_test_agent_32' }
 node 'mole-dev.dartcontainer.com'               { include 'dart::mole_dev' }
