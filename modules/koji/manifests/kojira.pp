@@ -8,11 +8,21 @@
 #
 # ==== Required
 #
+# [*client_cert*]
+#   Puppet source URI providing Kojira's identity certificate.
+#
+# [*ca_cert*]
+#   Puppet source URI providing the CA certificate that signed "client_cert".
+#
+# [*web_ca_cert*]
+#   Puppet source URI providing the CA certificate that signed the Koji-Web
+#   certificate.
+#
 # [*hub*]
 #   URL of your Koji-Hub service.
 #
 # [*top_dir*]
-#   Directory containing the "repos/" directory.
+#   Name of the directory containing the "repos/" directory.
 #
 # ==== Optional
 #
@@ -28,6 +38,9 @@
 
 
 class koji::kojira (
+        $client_cert,
+        $ca_cert,
+        $web_ca_cert,
         $hub,
         $top_dir,
         $enable=true,
@@ -51,8 +64,18 @@ class koji::kojira (
         subscribe => Package[$::koji::params::kojira_packages],
     }
 
-    file { '/etc/kojira/kojira.conf':
-        content => template('koji/kojira/kojira.conf'),
+    file {
+        '/etc/kojira/kojira.conf':
+            content => template('koji/kojira/kojira.conf');
+
+        '/etc/kojira/client.crt':
+            source  => $client_cert;
+
+        '/etc/kojira/clientca.crt':
+            source  => $ca_cert;
+
+        '/etc/kojira/serverca.crt':
+            source  => $web_ca_cert;
     }
 
     service { $::koji::params::kojira_services:
