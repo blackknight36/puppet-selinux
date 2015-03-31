@@ -9,7 +9,8 @@
 # ==== Required
 #
 # [*client_cert*]
-#   Puppet source URI providing the builder's identity certificate.
+#   Puppet source URI providing the builder's identity certificate which must
+#   be in PEM format.
 #
 # [*ca_cert*]
 #   Puppet source URI providing the CA certificate that signed "client_cert".
@@ -72,7 +73,7 @@ class koji::builder (
         '/etc/kojid/kojid.conf':
             content => template('koji/builder/kojid.conf');
 
-        '/etc/kojid/client.crt':
+        '/etc/kojid/client.pem':
             source  => $client_cert;
 
         '/etc/kojid/clientca.crt':
