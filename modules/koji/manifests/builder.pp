@@ -30,6 +30,10 @@
 #
 # ==== Optional
 #
+# [*debug*]
+#   Enable verbose debugging for the Koji Builder.
+#   One of: true or false (default).
+#
 # [*enable*]
 #   Instance is to be started at boot.  Either true (default) or false.
 #
@@ -48,9 +52,12 @@ class koji::builder (
         $hub,
         $downloads,
         $top_dir,
+        $debug=false,
         $enable=true,
         $ensure='running',
     ) inherits ::koji::params {
+
+    validate_bool($debug)
 
     package { $::koji::params::builder_packages:
         ensure => installed,
@@ -72,6 +79,9 @@ class koji::builder (
     file {
         '/etc/kojid/kojid.conf':
             content => template('koji/builder/kojid.conf');
+
+        '/etc/sysconfig/kojid':
+            content => template('koji/builder/kojid');
 
         '/etc/kojid/client.pem':
             source  => $client_cert;
