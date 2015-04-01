@@ -40,6 +40,10 @@
 # [*ensure*]
 #   Instance is to be 'running' (default) or 'stopped'.
 #
+# [*work_dir*]
+#   Name of the directory where temporary work will be performed.  The default
+#   is '/tmp/koji'.
+#
 # === Authors
 #
 #   John Florian <john.florian@dart.biz>
@@ -52,6 +56,7 @@ class koji::builder (
         $hub,
         $downloads,
         $top_dir,
+        $work_dir='/tmp/koji',
         $debug=false,
         $enable=true,
         $ensure='running',
