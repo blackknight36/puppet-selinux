@@ -51,6 +51,17 @@ class dart::mdct_koji_b1_f21 {
         recipient   => 'john.florian@dart.biz',
     }
 
+    class { '::mock::common':
+    } ->
+
+    mount { '/var/lib/mock':
+        ensure  => 'mounted',
+        atboot  => true,
+        device  => '/dev/disk/by-uuid/554aaf54-ccda-44b2-81fa-9c1990000758',
+        fstype  => 'auto',
+        options => 'defaults',
+    } ->
+
     class { '::koji::builder':
         client_cert => "puppet:///modules/dart/koji/kojid-on-${::fqdn}.pem",
         ca_cert     => 'puppet:///modules/dart/koji/Koji_ca_cert.crt',
