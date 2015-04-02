@@ -11,6 +11,9 @@
 
 class dart::subsys::koji::params {
 
+    # a central toggle for debugging Koji's various components
+    $debug = false
+
     # host providing the Koji Hub, an XML-RPC server that coordinates all
     # resources and tasks
     $hub_host   = 'mdct-koji-f21.dartcontainer.com'

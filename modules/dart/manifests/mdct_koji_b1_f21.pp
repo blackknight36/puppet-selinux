@@ -71,6 +71,7 @@ class dart::mdct_koji_b1_f21 {
         top_dir     => $::dart::subsys::koji::params::topdir,
         work_dir    => $::dart::subsys::koji::params::workdir,
         require     => Class['::dart::subsys::koji::autofs'],
+        debug       => $::dart::subsys::koji::params::debug,
     }
 
 }
