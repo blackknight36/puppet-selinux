@@ -23,6 +23,7 @@ class dart::subsys::koji::params {
     $hub        = "http://${hub_host}/kojihub"
     $repodir    = '/mnt/mdct-new-repo'
     $topdir     = '/mnt/koji'
+    $workdir    = '/var/tmp/koji'
     $web_passwd = 'D0gG0n31t'
 
 }
