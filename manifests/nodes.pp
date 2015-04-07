@@ -78,6 +78,7 @@ node 'mdct-f17-builder.dartcontainer.com'       { include 'dart::mdct_f17_builde
 node 'mdct-fogbugz.dartcontainer.com'           { include 'dart::mdct_fogbugz' }
 node 'mdct-koji-b1-f21.dartcontainer.com'       { include 'dart::mdct_koji_b1_f21' }
 node 'mdct-koji-b2-f21.dartcontainer.com'       { include 'dart::mdct_koji_b2_f21' }
+node 'mdct-koji-b3-f21.dartcontainer.com'       { include 'dart::mdct_koji_b3_f21' }
 node 'mdct-koji-f21.dartcontainer.com'          { include 'dart::mdct_koji_f21' }
 node 'mdct-nexus.dartcontainer.com'             { include 'dart::mdct_nexus' }
 node 'mdct-ngic-dev.dartcontainer.com'          { include 'dart::mdct_ngic_dev' }
