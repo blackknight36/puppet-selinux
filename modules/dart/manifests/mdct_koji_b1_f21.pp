@@ -18,10 +18,6 @@
 #
 # ==== Optional
 #
-# === TODO
-#   - Most of this should be refactored into a new
-#   Define[dart::abstract::subsys::builder]
-#
 # === Authors
 #
 #   John Florian <john.florian@dart.biz>
@@ -43,35 +39,8 @@ class dart::mdct_koji_b1_f21 {
         stp        => 'no',
     }
 
-    include '::dart::abstract::guarded_server_node'
-    include '::dart::subsys::koji::autofs'
-    include '::dart::subsys::koji::params'
-
-    ::sendmail::alias { 'root':
-        recipient   => 'john.florian@dart.biz',
-    }
-
-    class { '::mock::common':
-    } ->
-
-    mount { '/var/lib/mock':
-        ensure  => 'mounted',
-        atboot  => true,
-        device  => '/dev/disk/by-uuid/554aaf54-ccda-44b2-81fa-9c1990000758',
-        fstype  => 'auto',
-        options => 'defaults',
-    } ->
-
-    class { '::koji::builder':
-        client_cert => "puppet:///modules/dart/koji/kojid-on-${::fqdn}.pem",
-        ca_cert     => 'puppet:///modules/dart/koji/Koji_ca_cert.crt',
-        web_ca_cert => 'puppet:///modules/dart/koji/Koji_ca_cert.crt',
-        hub         => $::dart::subsys::koji::params::hub,
-        downloads   => $::dart::subsys::koji::params::downloads,
-        top_dir     => $::dart::subsys::koji::params::topdir,
-        work_dir    => $::dart::subsys::koji::params::workdir,
-        require     => Class['::dart::subsys::koji::autofs'],
-        debug       => $::dart::subsys::koji::params::debug,
+    class { '::dart::abstract::koji_builder_node':
+        mock_disk_uuid => '554aaf54-ccda-44b2-81fa-9c1990000758',
     }
 
 }
