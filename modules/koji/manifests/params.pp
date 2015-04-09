@@ -28,7 +28,7 @@ class koji::params {
             $kojira_services = 'kojira'
 
             $admin_user = 'kojiadmin'
-            $our_mashes = '/etc/mash/ours'
+            $mash_dir = '/etc/mash'
 
         }
 

@@ -12,7 +12,7 @@
 #   URL of your Koji-Hub service.
 #
 # [*top_dir*]
-#   Directory containing the "repos/" directory.
+#   Name of the directory containing the "repos/" directory.
 #
 # ==== Optional
 #
@@ -40,13 +40,13 @@ class koji::mash (
         subscribe => Package[$::koji::params::mash_packages],
     }
 
-    file { '/etc/mash/mash.conf':
-        content => template('koji/mash/mash.conf'),
-    }
+    file {
+        '/etc/mash/mash.conf':
+            content => template('koji/mash/mash.conf');
 
-    file { $::koji::params::our_mashes:
-        ensure => directory,
-        mode   => '0755',
+        $::koji::params::mash_dir:
+            ensure => directory,
+            mode   => '0755';
     }
 
 }
