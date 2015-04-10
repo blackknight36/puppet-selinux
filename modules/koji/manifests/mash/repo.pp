@@ -114,7 +114,7 @@ define koji::mash::repo (
         $multilib_method='devel',
         $repo_name=undef,
         $repodata_path='%(arch)s',
-        $repoview_title="Packages from ${tag} for %(arch)s",
+        $repoview_title="Packages from ${dist_tag} for %(arch)s",
         $repoview_url=undef,
         $rpm_path='%(arch)s',
         $source_path='SRPMS',
