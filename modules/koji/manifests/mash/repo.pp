@@ -75,8 +75,8 @@
 #   Title to be used atop the repoview pages.
 #
 # [*repoview_url*]
-#   The URL users should follow for repoview pages of this repository.
-#   Defaults to "Packages from $tag for $arch".
+#   Repository URL to use when generating the RSS feed.  The default disables
+#   RSS feed generation.
 #
 # [*rpm_path*]
 #   Directory name where the binary RPMs are to land.  The default is
