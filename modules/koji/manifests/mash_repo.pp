@@ -36,7 +36,9 @@
 #   Undocumented.  Defaults to "cpe:/o:fedoraproject:fedora:$repo_name Null".
 #
 # [*hash_packages*]
-#   Undocumented.  Defaults to true.
+#   If true, each RPM will be placed within a subdirectory whose name matches
+#   the first character of the RPM.  Otherwise such subdirectories will not be
+#   used.  Defaults to true.
 #
 # [*inherit*]
 #   Undocumented.  Defaults to false.
