@@ -1,6 +1,6 @@
-# modules/koji/manifests/mash_repo.pp
+# modules/koji/manifests/mash/repo.pp
 #
-# == Define: koji::mash_repo
+# == Define: koji::mash::repo
 #
 # Manages a repository configuration file for Koji's mash client.
 #
@@ -9,9 +9,9 @@
 # ==== Required
 #
 # [*namevar*]
-#   An arbitrary identifier for the mash_repo instance unless the "repo_name"
-#   parameter is not set in which case this must provide the value normally
-#   set with the "repo_name" parameter.
+#   An arbitrary identifier for the mash repository instance unless the
+#   "repo_name" parameter is not set in which case this must provide the value
+#   normally set with the "repo_name" parameter.
 #
 # [*dist_tag*]
 #   Pull RPMs from what tag?
@@ -98,7 +98,7 @@
 #   John Florian <john.florian@dart.biz>
 
 
-define koji::mash_repo (
+define koji::mash::repo (
         $dist_tag,
         $ensure='present',
         $arches=['i386', 'x86_64'],
