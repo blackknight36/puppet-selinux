@@ -29,6 +29,8 @@ class koji::params {
 
             $admin_user = 'kojiadmin'
             $mash_dir = '/etc/mash'
+            $mash_everything_bin = '/usr/local/bin/mash-everything'
+            $mash_everything_conf = '/etc/mash/mash-everything.conf'
 
         }
 

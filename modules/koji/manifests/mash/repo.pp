@@ -25,6 +25,10 @@
 #   A list of the platform architectures to be included in the repository.
 #   Defaults to ['i386', 'x86_64'].
 #
+# [*comp_dir*]
+#   Name of the directory into which this repository is to be composited by
+#   mash-everything.  Defaults to the value set by "repo_name".
+#
 # [*debug_info*]
 #   If true, the debug-info files will be copied into the mashed repository;
 #   otherwise they will be skipped.
@@ -102,6 +106,7 @@ define koji::mash::repo (
         $dist_tag,
         $ensure='present',
         $arches=['i386', 'x86_64'],
+        $comp_dir=undef,
         $debug_info=true,
         $delta=false,
         $distro_tags=undef,
@@ -129,6 +134,12 @@ define koji::mash::repo (
         $repo_name_ = $name
     }
 
+    if $comp_dir {
+        $comp_dir_ = $comp_dir
+    } else {
+        $comp_dir_ = $repo_name_
+    }
+
     if $distro_tags {
         $distro_tags_ = $distro_tags
     } else {
@@ -145,6 +156,12 @@ define koji::mash::repo (
         seltype => 'etc_t',
         require => Class['koji::mash'],
         content => template('koji/mash/template.mash'),
+    }
+
+    concat::fragment { "include mash of ${repo_name_}":
+        target  => $::koji::params::mash_everything_conf,
+        content => "${repo_name_}:${comp_dir_}\n",
+        order   => '02',
     }
 
 }
