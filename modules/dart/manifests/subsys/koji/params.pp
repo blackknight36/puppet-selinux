@@ -9,7 +9,10 @@
 #   John Florian <john.florian@dart.biz>
 
 
-class dart::subsys::koji::params {
+class dart::subsys::koji::params inherits ::koji::params {
+
+    # Who should get any administrative type email?
+    $admin_email = 'john.florian@dart.biz'
 
     # a central toggle for debugging Koji's various components
     $debug = false
@@ -26,16 +29,16 @@ class dart::subsys::koji::params {
     # autofs which dominates /home
     $local_homes = '/var/local/home'
 
-    # details regarding the Koji database
+    # details of the Koji database
     $db_passwd  = 'mdct.koji'
     $db_user    = 'koji'
 
     # various directory locations used by one or more Koji services
-    $repodir    = '/mnt/mdct-new-repo'
+    $repodir    = '/mnt/dart-repo'
     $topdir     = '/mnt/koji'
     $workdir    = '/var/tmp/koji'
 
-    # details regard the Koji Web service
+    # details of the Koji Web service
     $web_passwd = 'D0gG0n31t'
 
 }

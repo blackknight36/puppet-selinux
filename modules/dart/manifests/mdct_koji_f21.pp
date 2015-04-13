@@ -110,32 +110,11 @@ class dart::mdct_koji_f21 inherits ::dart::subsys::koji::params {
     include '::dart::subsys::koji::database'
     include '::dart::subsys::koji::hub'
     include '::dart::subsys::koji::kojira'
+    include '::dart::subsys::koji::mash'
     include '::dart::subsys::koji::web'
 
     ::sendmail::alias { 'root':
         recipient   => 'john.florian@dart.biz',
     }
-
-#   class { '::koji::mash':
-#       hub     => $hub,
-#       top_dir => $topdir,
-#       require => [
-#           Class['::dart::subsys::koji::autofs'],
-#           Class['::Koji::Hub'],
-#       ],
-#   }
-
-#   ::koji::mash_repo { '19':
-#       source  => 'puppet:///modules/dart/koji/19.mash',
-#       require => Class['::dart::subsys::koji::autofs'],
-#   }
-
-#   include '::cron::daemon'
-
-#   ::cron::job { 'mash_19':
-#       command => "mash -o ${repodir} 19 &> ${repodir}/logs/mash_19",
-#       minute  => '*/15',
-#       mailto  => '',
-#   }
 
 }

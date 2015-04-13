@@ -29,9 +29,9 @@ class dart::subsys::koji::autofs inherits ::dart::subsys::koji::params {
 
         $::dart::subsys::koji::params::repodir:
             mount   => '/mnt',
-            key     => 'mdct-new-repo',
+            key     => 'dart-repo',
             options => '-rw,hard,nosuid,noatime,fsc',
-            remote  => 'mdct-00fs:/storage/projects/mdct-new-repo';
+            remote  => 'mdct-00fs:/storage/projects/dart-repo';
 
     }
 

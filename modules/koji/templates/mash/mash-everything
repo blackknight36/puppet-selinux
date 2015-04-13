@@ -8,7 +8,7 @@ REPO_DIR='<%= @repo_dir %>'
 CONF='<%= @mash_everything_conf %>'
 
 # Other constants which may be derived from those from Puppet:
-MASH_DIR="${TOP_DIR}/mash"
+MASH_DIR="/tmp/mash"
 COMPOSITE_DIR="${MASH_DIR}/composite"
 
 # Logging levels:
