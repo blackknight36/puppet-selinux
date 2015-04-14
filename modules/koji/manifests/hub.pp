@@ -32,6 +32,10 @@
 #   Enable verbose debugging for the Koji Hub.
 #   One of: true or false (default).
 #
+# [*email_domain*]
+#   The domain name that will be append to Koji user names when creating email
+#   notifications.  Defaults to the $domain fact.
+#
 # === Authors
 #
 #   John Florian <john.florian@dart.biz>
@@ -44,6 +48,7 @@ class koji::hub (
         $web_cn,
         $top_dir,
         $debug=false,
+        $email_domain=$::domain,
     ) inherits ::koji::params {
 
     validate_bool($debug)

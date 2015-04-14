@@ -57,6 +57,11 @@
 # [*ensure*]
 #   Instance is to be 'running' (default) or 'stopped'.
 #
+# [*smtp_host*]
+#   The mail host to use for sending email notifications.  The Koji Builder
+#   must be able to connect to this host via TCP on port 25.  The default is
+#   'localhost'.
+#
 # [*work_dir*]
 #   Name of the directory where temporary work will be performed.  The default
 #   is '/tmp/koji'.
@@ -75,6 +80,7 @@ class koji::builder (
         $top_dir,
         $work_dir='/tmp/koji',
         $allowed_scms=undef,
+        $smtp_host='localhost',
         $debug=false,
         $enable=true,
         $ensure='running',
