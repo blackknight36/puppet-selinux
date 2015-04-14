@@ -1,16 +1,39 @@
 # modules/dart/manifests/mdct_00fs.pp
 #
-# Synopsis:
-#       MDC/PMES file server
+# == Class: dart::mdct_00fs
 #
-# Contact:
-#       John Florian
+# Manages the MDCT/PMES file server.
+#
+# === Parameters
+#
+# ==== Required
+#
+# ==== Optional
+#
+# === Notes
+#   This host was already deployed with critical configuration changes, most
+#   of which were applied without the use of any CMS such as Puppet.  To
+#   prevent adverse effects much of this class is effectively disabled, except
+#   any changes to be applied since inception of this class.  Future builds of
+#   this host would ideally leverage much more use of a CMS.
+#
+#   In the meantime, the comment tag "#@#" indicates where this class could
+#   have applied certain resources (likely through inheritance), but were
+#   defeated for reasons stated above.  They're kept here as a reminder or so
+#   that they may be selectively enabled with extreme care.  In such a case,
+#   it would be very wise to diff against the base classes (or other correct
+#   origin) to ensure current practices are followed as things here are quite
+#   likely stale to some extent.
+#
+# === Authors
+#
+#   John Florian <john.florian@dart.biz>
 
-#@# Not ready to take on full-on management; scope is very limited at this time.
+
 #@# class dart::mdct_00fs inherits dart::abstract::unguarded_server_node {
 class dart::mdct_00fs {
 
-    #@# From base_node
+    #@# From base_node {{{
 
     #@# include 'dart::subsys::autofs::common'
     include 'cron::daemon'
@@ -26,14 +49,35 @@ class dart::mdct_00fs {
 
     include 'sudo'
     include 'timezone'
+    #@# From base_node }}}
 
-    #@# From server_node.pp
+    #@# From server_node.pp {{{
     include 'dart::abstract::packages::net_tools'
-
+    #@# From server_node.pp }}}
 
     ####
     # Other resources specific to mdct-00fs:
     ####
+
+    class { 'apache':
+        server_admin => 'Bryan_Coleman@dart.biz',
+    }
+
+    apache::site_config {
+        'git':
+            source  => 'puppet:///modules/dart/httpd/git.conf';
+        'pub':
+            source  => 'puppet:///modules/dart/httpd/pub.conf';
+    }
+
+    # This symlink exists for backwards compatibility.  Anything wanting
+    # access to http://mdct-00fs/ftp/pub should instead simply use
+    # http://mdct-00fs/pub which is the de facto standard on all other hosts.
+    # (See the site_config for pub above).
+    file  { '/var/www/html/ftp':
+        ensure => link,
+        target => '/var/ftp',
+    }
 
     include 'flock_herder'
     include 'git_daemon'
@@ -61,7 +105,7 @@ class dart::mdct_00fs {
 
     # This config is merely note referring the reader to the others.
     mirrmaid::config { 'mirrmaid':
-        source => 'puppet:///private-host/mirrmaid/mirrmaid.conf',
+        source  => 'puppet:///private-host/mirrmaid/mirrmaid.conf',
         cronjob => 'puppet:///private-host/mirrmaid/mirrmaid.cron',
     }
 
@@ -93,8 +137,10 @@ class dart::mdct_00fs {
     include 'picaps::backup_agent'
 
     class { 'vsftpd':
-        source          => 'puppet:///private-host/vsftpd/vsftpd.conf',
-        allow_use_nfs   => false,
+        source        => 'puppet:///private-host/vsftpd/vsftpd.conf',
+        allow_use_nfs => false,
     }
 
 }
+
+# vim: foldmethod=marker
