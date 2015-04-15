@@ -26,6 +26,11 @@
 #   If true, open the HTTP port on the firewall.  Otherwise the firewall is
 #   left unaffected.  Defaults to true.
 #
+# [*server_admin*]
+#   The email address to where problems with the server should be sent.  This
+#   address appears on some server-generated pages, such as error documents.
+#   Defaults to "root@localhost".
+#
 # === Authors
 #
 #   John Florian <jflorian@doubledog.org>
@@ -37,6 +42,7 @@ class apache (
         $network_connect_db=false,
         $use_nfs=false,
         $manage_firewall=true,
+        $server_admin='root@localhost',
     ) {
 
     include 'apache::params'
