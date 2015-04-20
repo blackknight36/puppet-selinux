@@ -57,7 +57,7 @@ class dart::abstract::koji_builder_node (
         downloads    => $::dart::subsys::koji::params::downloads,
         top_dir      => $::dart::subsys::koji::params::topdir,
         work_dir     => $::dart::subsys::koji::params::workdir,
-        allowed_scms => 'mdct-00fs.dartcontainer.com:/home/git/*.git:no',
+        allowed_scms => 'mdct-00fs.dartcontainer.com:/git/*:no',
         smtp_host    => $::dart::params::smtp_server,
         debug        => $::dart::subsys::koji::params::debug,
         require      => Class['::dart::subsys::koji::autofs'],
