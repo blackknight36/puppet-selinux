@@ -20,6 +20,16 @@
 #
 # ==== Optional
 #
+# [*theme*]
+#   Name of the web theme that Koji is to use.  Content under
+#   /usr/share/koji-web/static/themes/$theme will be used instead of the
+#   normal files under /usr/share/koji-web/static/.  Any absent files will
+#   fall back to the normal files.
+#
+# [*theme_source*]
+#   This should point to a gzipped tarball providing content for the named
+#   "theme".  The default is to not install an alternate theme.
+#
 # === Authors
 #
 #   John Florian <john.florian@dart.biz>
@@ -27,6 +37,8 @@
 
 class koji::web (
         $secret,
+        $theme='default',
+        $theme_source=undef,
     ) inherits ::koji::params {
 
     include '::apache::params'
@@ -67,6 +79,19 @@ class koji::web (
 
     file { '/etc/kojiweb/web.conf':
         content => template('koji/web/web.conf'),
+    }
+
+    if $theme_source {
+        $themes_dir = '/usr/share/koji-web/static/themes'
+        $theme_path = "${themes_dir}/${theme}"
+        $theme_tgz = "${theme_path}.tgz"
+        file { $theme_tgz:
+            source => $theme_source,
+        } ->
+        exec { "tar xzf ${theme_tgz}":
+            cwd     => $themes_dir,
+            creates => $theme_path,
+        }
     }
 
 }
