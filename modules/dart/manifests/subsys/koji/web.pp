@@ -18,7 +18,9 @@
 class dart::subsys::koji::web inherits ::dart::subsys::koji::params {
 
     class { '::koji::web':
-        secret => $dart::subsys::koji::params::web_passwd,
+        secret       => $dart::subsys::koji::params::web_passwd,
+        theme        => 'fedora-koji',
+        theme_source => 'puppet:///modules/dart/koji/fedora-koji-theme.tgz',
     }
 
 }
