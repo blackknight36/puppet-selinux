@@ -57,6 +57,22 @@
 # [*ensure*]
 #   Instance is to be 'running' (default) or 'stopped'.
 #
+# [*failed_buildroot_lifetime*]
+#   The number of seconds a buildroot should be retained by kojid after
+#   a build failure occurs.  It is sometimes necessary to manually chroot into
+#   the buildroot to determine exactly why a build failed and what might done
+#   to resolve the issue.  The default is 4 hours (or 14,400 seconds).
+#
+#   It must be noted here that this feature is somewhat flakey because Koji
+#   seems to set the expiration time based not on when the build started but
+#   on some other event, likely when the buildroot was created.  This might
+#   not sound all that different but bear in mind that kojid doesn't fully
+#   destroy the build roots; it merely empties them.  So in effect, kojid can
+#   reuse a buildroot -- one which may already be hours towards its
+#   expiration.  If you wish to use this feature, you may want to use a value
+#   of a day or more, but keep in mind you might then exhaust the storage
+#   capacity of the "mock_dir".
+#
 # [*mock_dir*]
 #   The directory under which mock will do its work and create buildroots.
 #   The default is '/var/lib/mock'.
@@ -86,6 +102,7 @@ class koji::builder (
         $debug=false,
         $enable=true,
         $ensure='running',
+        $failed_buildroot_lifetime=60 * 60 * 4,
         $mock_dir='/var/lib/mock',
         $smtp_host='localhost',
         $work_dir='/tmp/koji',
