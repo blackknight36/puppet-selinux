@@ -57,6 +57,10 @@
 # [*ensure*]
 #   Instance is to be 'running' (default) or 'stopped'.
 #
+# [*mock_dir*]
+#   The directory under which mock will do its work and create buildroots.
+#   The default is '/var/lib/mock'.
+#
 # [*smtp_host*]
 #   The mail host to use for sending email notifications.  The Koji Builder
 #   must be able to connect to this host via TCP on port 25.  The default is
@@ -78,12 +82,13 @@ class koji::builder (
         $hub,
         $downloads,
         $top_dir,
-        $work_dir='/tmp/koji',
         $allowed_scms=undef,
-        $smtp_host='localhost',
         $debug=false,
         $enable=true,
         $ensure='running',
+        $mock_dir='/var/lib/mock',
+        $smtp_host='localhost',
+        $work_dir='/tmp/koji',
     ) inherits ::koji::params {
 
     validate_bool($debug)
