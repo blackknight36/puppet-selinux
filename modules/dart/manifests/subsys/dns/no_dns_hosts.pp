@@ -7,6 +7,13 @@
 class dart::subsys::dns::no_dns_hosts {
 
     # Abandoned hosts; names/addresses free for recycling {{{
+    #
+    # Please be nice and group with a purge tag dated ~30 days in the future
+    # and ensure absent until then.  That gives plenty of opportunity for all
+    # nodes to drop these entries.  After the purge date, the records can be
+    # deleted from here permanently.
+
+    # Purge after 2015-05-22 {{{
     host { 'mdct-f14-builder.dartcontainer.com':
         ensure       => absent,
         ip           => '10.1.192.137',
@@ -30,10 +37,75 @@ class dart::subsys::dns::no_dns_hosts {
         ip           => '10.1.192.143',
         host_aliases => [ 'mdct-f17-builder', 'f17b' ],
     }
+    #}}}
 
     #}}}
 
     # Active hosts {{{
+
+    # Koji and friends {{{
+
+    host { 'mdct-koji-b1-f21.dartcontainer.com':
+        ip           => '10.1.192.135',
+        host_aliases => [ 'mdct-koji-b1-f21', 'mdct-koji-b1' ],
+    }
+
+    host { 'mdct-koji-b2-f21.dartcontainer.com':
+        ip           => '10.1.192.136',
+        host_aliases => [ 'mdct-koji-b2-f21', 'mdct-koji-b2' ],
+    }
+
+    host { 'mdct-koji-b3-f21.dartcontainer.com':
+        ip           => '10.1.192.137',
+        host_aliases => [ 'mdct-koji-b3-f21', 'mdct-koji-b3' ],
+    }
+
+    host { 'mdct-koji-f21.dartcontainer.com':
+        ip           => '10.1.192.124',
+        host_aliases => [ 'mdct-koji-f21', 'mdct-koji', 'koji' ],
+    }
+
+    #}}}
+
+    # oVirt {{{
+
+    host { 'mdct-ovirt-engine.dartcontainer.com':
+        ip           => '10.1.192.170',
+        host_aliases => [ 'mdct-ovirt-engine' ],
+    }
+
+    host { 'mdct-ovirt-node-production1.dartcontainer.com':
+        ip           => '10.1.192.171',
+        host_aliases => [ 'mdct-ovirt-node-production1' ],
+    }
+
+    host { 'mdct-ovirt-node-production2.dartcontainer.com':
+        ip           => '10.1.192.172',
+        host_aliases => [ 'mdct-ovirt-node-production2' ],
+    }
+
+    #}}}
+
+    # TeamCity {{{
+
+    host { 'mdct-teamcity-agent1.dartcontainer.com':
+        ip           => '10.1.192.125',
+        host_aliases => [ 'mdct-teamcity-agent1' ],
+    }
+
+    host { 'mdct-teamcity-agent2.dartcontainer.com':
+        ip           => '10.1.192.133',
+        host_aliases => [ 'mdct-teamcity-agent2' ],
+    }
+
+    host { 'mdct-teamcity-agent3.dartcontainer.com':
+        ip           => '10.1.192.134',
+        host_aliases => [ 'mdct-teamcity-agent3' ],
+    }
+
+    #}}}
+
+    # Workstations {{{
 
     host { 'mdct-dev15.dartcontainer.com':
         ip           => '10.1.250.50',
@@ -60,64 +132,16 @@ class dart::subsys::dns::no_dns_hosts {
         host_aliases => [ 'mdct-dev19' ],
     }
 
-    host { 'mdct-koji-b1-f21.dartcontainer.com':
-        ip           => '10.1.192.135',
-        host_aliases => [ 'mdct-koji-b1-f21', 'mdct-koji-b1' ],
-    }
-
-    host { 'mdct-koji-b2-f21.dartcontainer.com':
-        ip           => '10.1.192.136',
-        host_aliases => [ 'mdct-koji-b2-f21', 'mdct-koji-b2' ],
-    }
-
-    host { 'mdct-koji-b3-f21.dartcontainer.com':
-        ip           => '10.1.192.137',
-        host_aliases => [ 'mdct-koji-b3-f21', 'mdct-koji-b3' ],
-    }
-
-    host { 'mdct-koji-f21.dartcontainer.com':
-        ip           => '10.1.192.124',
-        host_aliases => [ 'mdct-koji-f21', 'mdct-koji', 'koji' ],
-    }
+    #}}}
 
     host { 'mdct-pt-dbtest.dartcontainer.com':
         ip           => '10.1.192.144',
         host_aliases => [ 'mdct-pt-dbtest' ],
     }
 
-    host { 'mdct-teamcity-agent1.dartcontainer.com':
-        ip           => '10.1.192.125',
-        host_aliases => [ 'mdct-teamcity-agent1' ],
-    }
-
-    host { 'mdct-teamcity-agent2.dartcontainer.com':
-        ip           => '10.1.192.133',
-        host_aliases => [ 'mdct-teamcity-agent2' ],
-    }
-
-    host { 'mdct-teamcity-agent3.dartcontainer.com':
-        ip           => '10.1.192.134',
-        host_aliases => [ 'mdct-teamcity-agent3' ],
-    }
-
     host { 'tc-util.dartcontainer.com':
         ip           => '10.1.250.61',
         host_aliases => [ 'tc-util' ],
-    }
-
-    host { 'mdct-ovirt-engine.dartcontainer.com':
-        ip           => '10.1.192.170',
-        host_aliases => [ 'mdct-ovirt-engine' ],
-    }
-
-    host { 'mdct-ovirt-node-production1.dartcontainer.com':
-        ip           => '10.1.192.171',
-        host_aliases => [ 'mdct-ovirt-node-production1' ],
-    }
-
-    host { 'mdct-ovirt-node-production2.dartcontainer.com':
-        ip           => '10.1.192.172',
-        host_aliases => [ 'mdct-ovirt-node-production2' ],
     }
 
     #}}}
