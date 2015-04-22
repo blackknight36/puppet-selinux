@@ -1,9 +1,39 @@
 # modules/dart/manifests/subsys/dns/no_dns_hosts.pp
+# vim: foldmethod=marker
 #
 # Synopsis:
 #       Host resolution details for hosts not in Dart's DNS records.
 
 class dart::subsys::dns::no_dns_hosts {
+
+    # Abandoned hosts; names/addresses free for recycling {{{
+    host { 'mdct-f14-builder.dartcontainer.com':
+        ensure       => absent,
+        ip           => '10.1.192.137',
+        host_aliases => [ 'mdct-f14-builder', 'f14b' ],
+    }
+
+    host { 'mdct-f15-builder.dartcontainer.com':
+        ensure       => absent,
+        ip           => '10.1.192.138',
+        host_aliases => [ 'mdct-f15-builder', 'f15b' ],
+    }
+
+    host { 'mdct-f16-builder.dartcontainer.com':
+        ensure       => absent,
+        ip           => '10.1.192.139',
+        host_aliases => [ 'mdct-f16-builder', 'f16b' ],
+    }
+
+    host { 'mdct-f17-builder.dartcontainer.com':
+        ensure       => absent,
+        ip           => '10.1.192.143',
+        host_aliases => [ 'mdct-f17-builder', 'f17b' ],
+    }
+
+    #}}}
+
+    # Active hosts {{{
 
     host { 'mdct-dev15.dartcontainer.com':
         ip           => '10.1.250.50',
@@ -28,26 +58,6 @@ class dart::subsys::dns::no_dns_hosts {
     host { 'mdct-dev19.dartcontainer.com':
         ip           => '10.1.250.183',
         host_aliases => [ 'mdct-dev19' ],
-    }
-
-    host { 'mdct-f14-builder.dartcontainer.com':
-        ip           => '10.1.192.137',
-        host_aliases => [ 'mdct-f14-builder', 'f14b' ],
-    }
-
-    host { 'mdct-f15-builder.dartcontainer.com':
-        ip           => '10.1.192.138',
-        host_aliases => [ 'mdct-f15-builder', 'f15b' ],
-    }
-
-    host { 'mdct-f16-builder.dartcontainer.com':
-        ip           => '10.1.192.139',
-        host_aliases => [ 'mdct-f16-builder', 'f16b' ],
-    }
-
-    host { 'mdct-f17-builder.dartcontainer.com':
-        ip           => '10.1.192.143',
-        host_aliases => [ 'mdct-f17-builder', 'f17b' ],
     }
 
     host { 'mdct-koji-b1-f21.dartcontainer.com':
@@ -109,5 +119,7 @@ class dart::subsys::dns::no_dns_hosts {
         ip           => '10.1.192.172',
         host_aliases => [ 'mdct-ovirt-node-production2' ],
     }
+
+    #}}}
 
 }
