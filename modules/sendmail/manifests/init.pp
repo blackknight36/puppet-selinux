@@ -2,37 +2,41 @@
 #
 # == Class: sendmail
 #
-# Configures a host with a basic mail configuration so that locally generated
+# Manages a host with a basic mail configuration so that locally generated
 # mail is forwarded to the local MX.
 #
 # === Parameters
 #
+# ==== Required
+#
+# ==== Optional
+#
 # [*enable*]
-#   Should the service be enabled and running?  Must be one of true or false
-#   (default).
+#   Instance is to be started at boot.  Either true or false (default).
+#
+# [*ensure*]
+#   Instance is to be 'running' (default) or 'stopped'.
 #
 # === Authors
 #
 #   John Florian <john.florian@dart.biz>
 
 
-class sendmail ($enable=false) {
+class sendmail (
+        $enable=false,
+        $ensure='stopped',
+    ) inherits ::sendmail::params {
 
-    include 'sendmail::params'
-
-    package { $sendmail::params::packages:
-        ensure  => installed,
-        notify  => Service[$sendmail::params::services],
+    package { $::sendmail::params::packages:
+        ensure => installed,
+        notify => Service[$::sendmail::params::services],
     }
 
-    service { $sendmail::params::services:
-        enable      => $enable,
-        ensure      => $enable ? {
-            true    => running,
-            default => stopped,
-        },
-        hasrestart  => true,
-        hasstatus   => true,
+    service { $::sendmail::params::services:
+        ensure     => $ensure,
+        enable     => $enable,
+        hasrestart => true,
+        hasstatus  => true,
     }
 
     # Puppet will not automatically exec newaliases when mail aliases are
@@ -42,9 +46,9 @@ class sendmail ($enable=false) {
     # This is defined here, not in sendmail::alias from which the event
     # originates, because to define it there would result in duplicate
     # declarations of the Exec, iff more than one sendmail::alias is declared.
-    exec { $sendmail::params::newaliases_cmd:
+    exec { $::sendmail::params::newaliases_cmd:
         refreshonly => true,
-        require     => Package[$sendmail::params::packages],
+        require     => Package[$::sendmail::params::packages],
     }
 
 }

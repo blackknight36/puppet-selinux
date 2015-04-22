@@ -14,9 +14,7 @@ class sendmail::params {
     case $::operatingsystem {
         Fedora: {
 
-            $packages = [
-                'sendmail',
-            ]
+            $packages = 'sendmail'
             $services = [
                 'sendmail',
                 'sm-client',
@@ -26,7 +24,7 @@ class sendmail::params {
         }
 
         default: {
-            fail ("The sendmail module is not yet supported on ${::operatingsystem}.")
+            fail ("${title}: operating system '${::operatingsystem}' is not supported")
         }
 
     }
