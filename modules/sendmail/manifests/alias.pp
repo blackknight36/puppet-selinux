@@ -23,6 +23,7 @@
 
 define sendmail::alias ($ensure='present', $recipient) {
 
+    include '::sendmail'
     include 'sendmail::params'
 
     mailalias { $name:
