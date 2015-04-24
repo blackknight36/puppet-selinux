@@ -50,6 +50,11 @@ class dart::mdct_dev12 inherits dart::abstract::workstation_node {
         top_dir   => '/srv/koji',     # TODO: share via NFS?
     }
 
+    class { '::sigul::client':
+        bridge_hostname => $::dart::subsys::sigul::params::bridge_hostname,
+        server_hostname => $::dart::subsys::sigul::params::server_hostname,
+    }
+
     printer { 'dell':
         uri         => 'socket://10.209.123.23:9100',
         description => 'Dell 3100cn',
