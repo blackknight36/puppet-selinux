@@ -11,6 +11,12 @@
 
 class dart::subsys::sigul::params {
 
+    # The hostname acting as the Sigul Bridge.
+    $bridge_hostname = 'mdct-sigul-bridge-f21.dartcontainer.com'
+
+    # The hostname acting as the Sigul Server.
+    $server_hostname = 'mdct-sigul-f21.dartcontainer.com'
+
     # The Client, Hub and Server can all have distinct passwords for their
     # private NSS certificate database, but to keep things simple here they
     # all share the same one.
