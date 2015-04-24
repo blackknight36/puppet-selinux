@@ -41,20 +41,7 @@ class dart::mdct_dev12 inherits dart::abstract::workstation_node {
     include '::dart::mdct_dev12::network'
     include '::dart::mdct_dev12::profile'
     include '::dart::subsys::mock'
-    include '::dart::subsys::sigul::params'
     include '::dart::subsys::yum_cron'
-
-    class { '::koji::cli':
-        hub       => 'http://mdct-koji.dartcontainer.com/kojihub',
-        web       => 'http://mdct-koji.dartcontainer.com/koji',
-        downloads => 'http://mdct-koji.dartcontainer.com/kojifiles',
-        top_dir   => '/srv/koji',     # TODO: share via NFS?
-    }
-
-    class { '::sigul::client':
-        bridge_hostname => $::dart::subsys::sigul::params::bridge_hostname,
-        server_hostname => $::dart::subsys::sigul::params::server_hostname,
-    }
 
     printer { 'dell':
         uri         => 'socket://10.209.123.23:9100',
