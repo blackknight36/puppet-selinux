@@ -43,7 +43,7 @@ class dart::subsys::dns::no_dns_hosts {
 
     # Active hosts {{{
 
-    # Koji and friends {{{
+    # Koji/Sigul {{{
 
     host { 'mdct-koji-b1-f21.dartcontainer.com':
         ip           => '10.1.192.135',
@@ -63,6 +63,11 @@ class dart::subsys::dns::no_dns_hosts {
     host { 'mdct-koji-f21.dartcontainer.com':
         ip           => '10.1.192.124',
         host_aliases => [ 'mdct-koji-f21', 'mdct-koji', 'koji' ],
+    }
+
+    host { 'mdct-sigul-bridge-f21.dartcontainer.com':
+        ip           => '10.1.192.138',
+        host_aliases => [ 'mdct-sigul-bridge-f21', 'mdct-sigul-bridge', 'sigul-bridge' ],
     }
 
     #}}}
