@@ -9,8 +9,8 @@
 # ==== Required
 #
 # [*client_cert*]
-#   Puppet source URI providing the builder's identity certificate which must
-#   be in PEM format.
+#   Puppet source URI providing the Kojira component's identity certificate
+#   which must be in PEM format.
 #
 # [*ca_cert*]
 #   Puppet source URI providing the CA certificate that signed "client_cert".
@@ -67,16 +67,20 @@ class koji::kojira (
 
     file {
         '/etc/kojira/kojira.conf':
-            content => template('koji/kojira/kojira.conf');
+            content => template('koji/kojira/kojira.conf'),
+            ;
 
         '/etc/kojira/client.pem':
-            source  => $client_cert;
+            source  => $client_cert,
+            ;
 
         '/etc/kojira/clientca.crt':
-            source  => $ca_cert;
+            source  => $ca_cert,
+            ;
 
         '/etc/kojira/serverca.crt':
-            source  => $web_ca_cert;
+            source  => $web_ca_cert,
+            ;
     }
 
     service { $::koji::params::kojira_services:
