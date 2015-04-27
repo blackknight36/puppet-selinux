@@ -30,4 +30,11 @@ class dart::mdct_sigul_f21 inherits ::dart::abstract::sigul_node {
         nss_password    => $::dart::subsys::sigul::params::nss_password,
     }
 
+    # Strangely rpm-sign is not pulled as a dependency by the sigul package,
+    # though it absolutely is a requirement for sigul_server.  Reported here:
+    # https://bugzilla.redhat.com/show_bug.cgi?id=1215678
+    package { 'rpm-sign':
+        ensure => installed,
+    }
+
 }
