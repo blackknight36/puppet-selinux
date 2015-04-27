@@ -33,6 +33,8 @@ class dart::mdct_sigul_f21 inherits ::dart::abstract::sigul_node {
     # Strangely rpm-sign is not pulled as a dependency by the sigul package,
     # though it absolutely is a requirement for sigul_server.  Reported here:
     # https://bugzilla.redhat.com/show_bug.cgi?id=1215678
+    #
+    # TODO: According to CLOSE of rhbz#1215678, this can be removed as of F23.
     package { 'rpm-sign':
         ensure => installed,
     }
