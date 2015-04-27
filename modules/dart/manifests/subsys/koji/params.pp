@@ -2,7 +2,7 @@
 #
 # == Class: dart::subsys::koji::params
 #
-# Parameters for a Dart host as a Koji RPM package builder.
+# Parameters for a Dart's Koji infrastructure.
 #
 # === Authors
 #

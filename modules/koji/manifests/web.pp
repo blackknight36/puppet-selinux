@@ -15,6 +15,17 @@
 #
 # ==== Required
 #
+# [*client_cert*]
+#   Puppet source URI providing the Koji-Web component's identity certificate
+#   which must be in PEM format.
+#
+# [*ca_cert*]
+#   Puppet source URI providing the CA certificate that signed "client_cert".
+#
+# [*hub_ca_cert*]
+#   Puppet source URI providing the CA certificate that signed the Koji-Hub
+#   certificate.
+#
 # [*secret*]
 #   Undocumented by the Koji project, but required.  FIXME
 #
@@ -36,6 +47,9 @@
 
 
 class koji::web (
+        $client_cert,
+        $ca_cert,
+        $hub_ca_cert,
         $secret,
         $theme='default',
         $theme_source=undef,
@@ -77,8 +91,23 @@ class koji::web (
         subscribe => Package[$::koji::params::web_packages],
     }
 
-    file { '/etc/kojiweb/web.conf':
-        content => template('koji/web/web.conf'),
+    file {
+        '/etc/kojiweb/web.conf':
+            content => template('koji/web/web.conf'),
+            ;
+
+        '/etc/kojiweb/kojiweb.crt':
+            source  => $client_cert,
+            ;
+
+        '/etc/kojiweb/clientca.crt':
+            source  => $ca_cert,
+            ;
+
+        '/etc/kojiweb/kojihubca.crt':
+            source  => $hub_ca_cert,
+            ;
+
     }
 
     if $theme_source {
