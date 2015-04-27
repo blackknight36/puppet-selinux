@@ -18,7 +18,7 @@
 class dart::subsys::koji::web inherits ::dart::subsys::koji::params {
 
     class { '::koji::web':
-        client_cert  => "puppet:///modules/dart/koji/kojiweb-on-${::fqdn}.pem",
+        client_cert  => "puppet:///modules/dart/koji/kojiweb-on-${::dart::subsys::koji::params::web_host}.pem",
         ca_cert      => 'puppet:///modules/dart/koji/Koji_ca_cert.crt',
         hub_ca_cert  => 'puppet:///modules/dart/koji/Koji_ca_cert.crt',
         secret       => $dart::subsys::koji::params::web_passwd,
