@@ -36,6 +36,11 @@
 #   The domain name that will be append to Koji user names when creating email
 #   notifications.  Defaults to the $domain fact.
 #
+# [*plugins*]
+#   A list of Koji-Hub plugins that are to be enabled.  This should be an
+#   array of strings, each representing one plugin.  The default is for no
+#   plugins to be enabled.
+#
 # === Authors
 #
 #   John Florian <john.florian@dart.biz>
@@ -49,6 +54,7 @@ class koji::hub (
         $top_dir,
         $debug=false,
         $email_domain=$::domain,
+        $plugins=[],
     ) inherits ::koji::params {
 
     validate_bool($debug)

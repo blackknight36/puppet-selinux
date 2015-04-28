@@ -16,7 +16,10 @@ class koji::params {
 
             $builder_packages = 'koji-builder'
             $cli_packages = 'koji'
-            $hub_packages = 'koji-hub'
+            $hub_packages = [
+                'koji-hub',
+                'koji-hub-plugins',
+            ]
             $kojira_packages = 'koji-utils'
             $mash_packages = [
                 'mash',
