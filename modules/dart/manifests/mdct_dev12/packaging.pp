@@ -18,7 +18,7 @@ class dart::mdct_dev12::packaging {
     include '::dart::subsys::koji::cli'
     include '::dart::subsys::sigul::params'
 
-    class { '::sigul::client':
+    ::sigul::client_config { '/etc/sigul/client.conf':
         bridge_hostname => $::dart::subsys::sigul::params::bridge_hostname,
         server_hostname => $::dart::subsys::sigul::params::server_hostname,
     }
