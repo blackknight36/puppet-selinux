@@ -19,7 +19,7 @@ class dart::subsys::koji::cli inherits ::dart::subsys::koji::params {
 
     class { '::koji::cli':
         hub       => $::dart::subsys::koji::params::hub,
-        web       => "http://${::fqdn}/koji",
+        web       => "http://${::dart::subsys::koji::params::web_host}/koji",
         downloads => $::dart::subsys::koji::params::downloads,
         top_dir   => $::dart::subsys::koji::params::topdir,
         require   => Class['::dart::subsys::koji::autofs'],
