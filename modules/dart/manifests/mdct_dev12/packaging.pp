@@ -15,13 +15,7 @@
 
 class dart::mdct_dev12::packaging {
 
-    class { '::koji::cli':
-        hub       => 'http://mdct-koji.dartcontainer.com/kojihub',
-        web       => 'http://mdct-koji.dartcontainer.com/koji',
-        downloads => 'http://mdct-koji.dartcontainer.com/kojifiles',
-        top_dir   => '/srv/koji',     # TODO: share via NFS?
-    }
-
+    include '::dart::subsys::koji::cli'
     include '::dart::subsys::sigul::params'
 
     class { '::sigul::client':
