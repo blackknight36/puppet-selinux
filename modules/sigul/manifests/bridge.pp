@@ -66,10 +66,7 @@ class sigul::bridge (
         $koji_dir='/var/lib/sigul/.koji',
     ) inherits ::sigul::params {
 
-    package { $::sigul::params::packages:
-        ensure => installed,
-        notify => Service[$::sigul::params::bridge_services],
-    }
+    include '::sigul'
 
     File {
         owner     => 'sigul',
@@ -121,6 +118,7 @@ class sigul::bridge (
         enable     => $enable,
         hasrestart => true,
         hasstatus  => true,
+        subscribe  => Package[$::sigul::params::packages],
     }
 
 }

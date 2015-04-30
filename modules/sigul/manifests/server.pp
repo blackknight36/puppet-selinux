@@ -42,6 +42,8 @@ class sigul::server (
         $ensure='running',
     ) inherits ::sigul::params {
 
+    include '::sigul'
+
     File {
         owner     => 'root',
         group     => 'sigul',
@@ -54,14 +56,10 @@ class sigul::server (
         subscribe => Package[$::sigul::params::packages],
     }
 
-    package { $::sigul::params::packages:
-        ensure => installed,
-        notify => Service[$::sigul::params::server_services],
-    } ->
-
     exec { 'sigul_server_create_db':
         creates => $database_path,
         notify  => File[$database_path],
+        require => Package[$::sigul::params::packages],
     } ->
 
     file {
@@ -81,6 +79,7 @@ class sigul::server (
         enable     => $enable,
         hasrestart => true,
         hasstatus  => true,
+        subscribe  => Package[$::sigul::params::packages],
     }
 
 }

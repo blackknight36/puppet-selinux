@@ -29,9 +29,7 @@ class sigul::client (
         $server_hostname,
     ) inherits ::sigul::params {
 
-    package { $::sigul::params::packages:
-        ensure => installed,
-    }
+    include '::sigul'
 
     File {
         owner     => 'root',
