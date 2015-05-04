@@ -29,6 +29,15 @@ class dart::mdct_sigul_bridge_f21 inherits ::dart::abstract::sigul_node {
         stp        => 'no',
     }
 
+    # NB: sigul-0.100-4.fc21.noarch ships with SysV init scripts that behave
+    # poorly in that Puppet can't seem to start them and if the Server is
+    # started by hand, not all child processes will terminate together with
+    # service shutdown.  Reported here:
+    # https://bugzilla.redhat.com/show_bug.cgi?id=1217068
+    #
+    # I have created systemd unit files for the Sigul services that behave as
+    # expected.  They're available with RHBZ#1217068, but are otherwise
+    # unmanaged in the hopes that they'll be packaged in future versions.
     class { '::sigul::bridge':
         client_cert  => "puppet:///modules/dart/koji/kojiweb-on-${::dart::subsys::koji::params::web_host}.pem",
         ca_cert      => 'puppet:///modules/dart/koji/Koji_ca_cert.crt',
