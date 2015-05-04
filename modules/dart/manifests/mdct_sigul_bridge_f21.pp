@@ -17,6 +17,8 @@
 
 class dart::mdct_sigul_bridge_f21 inherits ::dart::abstract::sigul_node {
 
+    include '::dart::subsys::koji::autofs'
+    include '::dart::subsys::koji::cli'
     include '::dart::subsys::koji::params'
 
     network::interface { 'eth0':
@@ -36,6 +38,24 @@ class dart::mdct_sigul_bridge_f21 inherits ::dart::abstract::sigul_node {
         nss_password => $::dart::subsys::sigul::params::nss_password,
         top_dir      => $::dart::subsys::koji::params::topdir,
         web          => "http://${::fqdn}/koji",
+    }
+
+    class { '::sigul::auto_signer':
+        hub_hostname    => $::dart::subsys::koji::params::hub_host,
+        client_cert     => "puppet:///modules/dart/koji/ass-on-${::fqdn}.pem",
+        ca_cert         => 'puppet:///modules/dart/koji/Koji_ca_cert.crt',
+        web_ca_cert     => 'puppet:///modules/dart/koji/Koji_ca_cert.crt',
+        bridge_hostname => $::dart::subsys::sigul::params::bridge_hostname,
+        server_hostname => $::dart::subsys::sigul::params::server_hostname,
+        nss_password    => 'Bung0',
+        key_map         => {
+            'mdct-legacy' => {
+                'key_id' => '0F9F5D3B',
+                'pass'   => 'mdct.gpg',
+                'tag'    => 'f20-candidates',
+                'v3'     => true,
+            },
+        },
     }
 
 }
