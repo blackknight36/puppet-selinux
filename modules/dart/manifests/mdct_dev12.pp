@@ -41,7 +41,6 @@ class dart::mdct_dev12 inherits dart::abstract::workstation_node {
     include '::dart::mdct_dev12::network'
     include '::dart::mdct_dev12::profile'
     include '::dart::subsys::mock'
-    include '::dart::subsys::yum_cron'
 
     printer { 'dell':
         uri         => 'socket://10.209.123.23:9100',
