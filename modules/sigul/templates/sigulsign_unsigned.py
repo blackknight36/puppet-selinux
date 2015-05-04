@@ -1,5 +1,7 @@
 #!/usr/bin/python
 #
+# This file is managed by Puppet via the "<%= @module_name %>" module.
+#
 # sigulsign_unsigned.py - A utility to use sigul to sign rpms in koji
 #
 # Copyright (C) 2009-2013 Red Hat, Inc.
@@ -29,43 +31,19 @@ status = 0
 rpmdict = {}
 unsigned = []
 # Should probably set these from a koji config file
-SERVERCA = os.path.expanduser('~/.fedora-server-ca.cert')
-CLIENTCA = os.path.expanduser('~/.fedora-upload-ca.cert')
-CLIENTCERT = os.path.expanduser('~/.fedora.cert')
+SERVERCA = os.path.expanduser('~/.koji/serverca.crt')
+CLIENTCA = os.path.expanduser('~/.koji/clientca.crt')
+CLIENTCERT = os.path.expanduser('~/.koji/client.crt')
 # Setup a dict of our key names as sigul knows them to the actual key ID
 # that koji would use. This information can also be obtained using
 # SigulHelper() instances
 KEYS = {
-    'fedora-12-sparc': {'id': 'b3eb779b', 'v3': True},
-    'fedora-13-sparc': {'id': '5bf71b5e', 'v3': True},
-    'fedora-14-secondary': {'id': '19be0bf9', 'v3': True},
-    'fedora-15-secondary': {'id': '3ad31d0b', 'v3': True},
-    'fedora-16-secondary': {'id': '10d90a9e', 'v3': True},
-    'fedora-17-secondary': {'id': 'f8df67e6', 'v3': True},
-    'fedora-18-secondary': {'id': 'a4d647e9', 'v3': True},
-    'fedora-19-secondary': {'id': 'ba094068', 'v3': True},
-    'fedora-20-secondary': {'id': 'efe550f5', 'v3': True},
-    'fedora-21-secondary': {'id': 'a0a7badb', 'v3': True},
-    'fedora-22-secondary': {'id': 'a29cb19c', 'v3': True},
-    'fedora-23-secondary': {'id': '873529b8', 'v3': True},
-    'fedora-10': {'id': '4ebfc273', 'v3': False},
-    'fedora-11': {'id': 'd22e77f2', 'v3': True},
-    'fedora-12': {'id': '57bbccba', 'v3': True},
-    'fedora-13': {'id': 'e8e40fde', 'v3': True},
-    'fedora-14': {'id': '97a1071f', 'v3': True},
-    'fedora-15': {'id': '069c8460', 'v3': True},
-    'fedora-16': {'id': 'a82ba4b7', 'v3': True},
-    'fedora-17': {'id': '1aca3465', 'v3': True},
-    'fedora-18': {'id': 'de7f38bd', 'v3': True},
-    'fedora-19': {'id': 'fb4b18e6', 'v3': True},
-    'fedora-20': {'id': '246110c1', 'v3': True},
-    'fedora-21': {'id': '95a43f54', 'v3': True},
-    'fedora-22': {'id': '8e1431d5', 'v3': True},
-    'fedora-23': {'id': '34ec9cba', 'v3': True},
-    'fedora-10-testing': {'id': '0b86274e', 'v3': False},
-    'epel-5': {'id': '217521f6', 'v3': False},
-    'epel-6': {'id': '0608b895', 'v3': True},
-    'epel-7': {'id': '352c64e5', 'v3': True},
+<% key_map.each_pair do |k, v| -%>
+    '<%= k %>': {
+        'id': '<%= v['key_id'].downcase %>',
+        'v3': <%= {true => 'True', false => 'False'}[v['v3']] %>
+    },
+<% end -%>
 }
 
 
@@ -178,13 +156,13 @@ class KojiHelper(object):
     def __init__(self, arch=None):
         if arch:
             self.kojihub = \
-                'http://{arch}.koji.fedoraproject.org/kojihub'.format(
+                'http://{arch}.<%= @hub_hostname %>/kojihub'.format(
                     arch=arch)
         else:
-            self.kojihub = 'https://koji.fedoraproject.org/kojihub'
-        self.serverca = os.path.expanduser('~/.fedora-server-ca.cert')
-        self.clientca = os.path.expanduser('~/.fedora-upload-ca.cert')
-        self.clientcert = os.path.expanduser('~/.fedora.cert')
+            self.kojihub = 'https://<%= @hub_hostname %>/kojihub'
+        self.serverca = os.path.expanduser('~/.koji/serverca.crt')
+        self.clientca = os.path.expanduser('~/.koji/clientca.crt')
+        self.clientcert = os.path.expanduser('~/.koji/client.crt')
         self.kojisession = koji.ClientSession(self.kojihub)
         self.kojisession.ssl_login(self.clientcert, self.clientca,
                                    self.serverca)
