@@ -124,6 +124,8 @@ sync_repo_tree() {
         --archive \
         --copy-links \
         --delay-updates \
+        --delete \
+        --delete-delay \
         --no-group \
         --no-owner \
         --stats \
