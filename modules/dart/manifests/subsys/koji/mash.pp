@@ -19,6 +19,12 @@ class dart::subsys::koji::mash inherits ::dart::subsys::koji::params {
 
     $repoview_server = 'http://mdct-00fs.dartcontainer.com'
     $rpm_signing_keys = ['6004207A']
+    $repoview_url_fmt = join(
+            [ $repoview_server,
+              '/pub/fedora/dart/%s/%d/%%(arch)s/',
+              'repoview/index.html'
+            ],
+            '')
 
     class { '::koji::mash':
         hub      => $::dart::subsys::koji::params::hub,
@@ -39,19 +45,19 @@ class dart::subsys::koji::mash inherits ::dart::subsys::koji::params {
         'f20-candidates':
             comp_dir     => 'candidates/20',
             dist_tag     => 'f20-candidates',
-            repoview_url => "${repoview_server}/pub/fedora/dart/candidates/20/%(arch)s/repoview/index.html",
+            repoview_url => sprintf($repoview_url_fmt, 'candidates', 20),
             ;
 
         'f20-testing':
             comp_dir     => 'testing/20',
             dist_tag     => 'f20-testing',
-            repoview_url => "${repoview_server}/pub/fedora/dart/testing/20/%(arch)s/repoview/index.html",
+            repoview_url => sprintf($repoview_url_fmt, 'testing', 20),
             ;
 
         'f20-released':
             comp_dir     => 'released/20',
             dist_tag     => 'f20-released',
-            repoview_url => "${repoview_server}/pub/fedora/dart/released/20/%(arch)s/repoview/index.html",
+            repoview_url => sprintf($repoview_url_fmt, 'released', 20),
             ;
     }
 
