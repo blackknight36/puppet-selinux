@@ -35,22 +35,24 @@ class dart::subsys::koji::mash inherits ::dart::subsys::koji::params {
         keys          => $rpm_signing_keys,
     }
 
-    ::koji::mash::repo { 'f20-candidates':
-        comp_dir     => 'candidates/20',
-        dist_tag     => 'f20-candidates',
-        repoview_url => "${repoview_server}/pub/fedora/dart/candidates/20/%(arch)s/repoview/index.html",
-    }
+    ::koji::mash::repo {
+        'f20-candidates':
+            comp_dir     => 'candidates/20',
+            dist_tag     => 'f20-candidates',
+            repoview_url => "${repoview_server}/pub/fedora/dart/candidates/20/%(arch)s/repoview/index.html",
+            ;
 
-    ::koji::mash::repo { 'f20-testing':
-        comp_dir     => 'testing/20',
-        dist_tag     => 'f20-testing',
-        repoview_url => "${repoview_server}/pub/fedora/dart/testing/20/%(arch)s/repoview/index.html",
-    }
+        'f20-testing':
+            comp_dir     => 'testing/20',
+            dist_tag     => 'f20-testing',
+            repoview_url => "${repoview_server}/pub/fedora/dart/testing/20/%(arch)s/repoview/index.html",
+            ;
 
-    ::koji::mash::repo { 'f20-released':
-        comp_dir     => 'released/20',
-        dist_tag     => 'f20-released',
-        repoview_url => "${repoview_server}/pub/fedora/dart/released/20/%(arch)s/repoview/index.html",
+        'f20-released':
+            comp_dir     => 'released/20',
+            dist_tag     => 'f20-released',
+            repoview_url => "${repoview_server}/pub/fedora/dart/released/20/%(arch)s/repoview/index.html",
+            ;
     }
 
     # TODO: Replace this cron job with an event driven model, perhaps using
