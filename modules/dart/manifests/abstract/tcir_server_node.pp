@@ -2,8 +2,13 @@
 
 class dart::abstract::tcir_server_node inherits dart::abstract::tomcat_web_app {
 
-    package { [ 'postgresql.x86_64', 'postgresql-contrib.x86_64', 'postgresql-jdbc.noarch', 'postgresql-libs.x86_64', 'postgresql-server.x86_64', ]:
+    package { [ 'postgresql.x86_64', 'postgresql-contrib.x86_64', 'postgresql-jdbc.noarch', 'postgresql-libs.x86_64', 'postgresql-server.x86_64', 'tomcat-native.x86_64', ]:
         ensure  => installed,
+    }
+
+    file { '/usr/share/tomcat/lib/postgresql-jdbc.jar':
+        ensure  => link,
+        target  => '/usr/share/java/postgresql-jdbc.jar',
     }
 
     systemd::unit{ 'umask.conf':
