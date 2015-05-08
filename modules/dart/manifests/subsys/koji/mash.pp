@@ -59,6 +59,24 @@ class dart::subsys::koji::mash inherits ::dart::subsys::koji::params {
             dist_tag     => 'f20-released',
             repoview_url => sprintf($repoview_url_fmt, 'released', 20),
             ;
+
+        'f21-candidates':
+            comp_dir     => 'candidates/21',
+            dist_tag     => 'f21-candidates',
+            repoview_url => sprintf($repoview_url_fmt, 'candidates', 21),
+            ;
+
+        'f21-testing':
+            comp_dir     => 'testing/21',
+            dist_tag     => 'f21-testing',
+            repoview_url => sprintf($repoview_url_fmt, 'testing', 21),
+            ;
+
+        'f21-released':
+            comp_dir     => 'released/21',
+            dist_tag     => 'f21-released',
+            repoview_url => sprintf($repoview_url_fmt, 'released', 21),
+            ;
     }
 
     # TODO: Replace this cron job with an event driven model, perhaps using
