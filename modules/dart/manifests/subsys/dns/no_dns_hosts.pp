@@ -31,12 +31,6 @@ class dart::subsys::dns::no_dns_hosts {
         ip           => '10.1.192.139',
         host_aliases => [ 'mdct-f16-builder', 'f16b' ],
     }
-
-    host { 'mdct-f17-builder.dartcontainer.com':
-        ensure       => absent,
-        ip           => '10.1.192.143',
-        host_aliases => [ 'mdct-f17-builder', 'f17b' ],
-    }
     #}}}
 
     #}}}
@@ -58,6 +52,11 @@ class dart::subsys::dns::no_dns_hosts {
     host { 'mdct-koji-b3-f21.dartcontainer.com':
         ip           => '10.1.192.137',
         host_aliases => [ 'mdct-koji-b3-f21', 'mdct-koji-b3' ],
+    }
+
+    host { 'mdct-koji-b4-f21.dartcontainer.com':
+        ip           => '10.1.192.143',
+        host_aliases => [ 'mdct-koji-b4-f21', 'mdct-koji-b4' ],
     }
 
     host { 'mdct-koji-f21.dartcontainer.com':
