@@ -64,6 +64,12 @@ class dart::mdct_sigul_bridge_f21 inherits ::dart::abstract::sigul_node {
                 'tag'    => 'f20-candidates',
                 'v3'     => true,
             },
+            'mdct-legacy' => {
+                'key_id' => '0F9F5D3B',
+                'pass'   => 'mdct.gpg',
+                'tag'    => 'f21-candidates',
+                'v3'     => true,
+            },
         },
     }
 
