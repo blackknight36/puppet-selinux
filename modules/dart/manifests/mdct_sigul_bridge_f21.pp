@@ -58,17 +58,17 @@ class dart::mdct_sigul_bridge_f21 inherits ::dart::abstract::sigul_node {
         server_hostname => $::dart::subsys::sigul::params::server_hostname,
         nss_password    => 'Bung0',
         key_map         => {
-            'mdct-legacy' => {
-                'key_id' => '0F9F5D3B',
-                'pass'   => 'mdct.gpg',
-                'tag'    => 'f20-candidates',
-                'v3'     => true,
+            'f20-candidates' => {
+                'key_name' => 'mdct-legacy',
+                'key_id'   => '0F9F5D3B',
+                'pass'     => 'mdct.gpg',
+                'v3'       => true,
             },
-            'mdct-legacy' => {
-                'key_id' => '0F9F5D3B',
-                'pass'   => 'mdct.gpg',
-                'tag'    => 'f21-candidates',
-                'v3'     => true,
+            'f21-candidates' => {
+                'key_name' => 'mdct-legacy',
+                'key_id'   => '0F9F5D3B',
+                'pass'     => 'mdct.gpg',
+                'v3'       => true,
             },
         },
     }

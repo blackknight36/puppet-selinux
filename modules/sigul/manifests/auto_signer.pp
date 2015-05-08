@@ -33,14 +33,23 @@
 #   FQDN of the Koji Hub.
 #
 # [*key_map*]
-#   A Ruby hash expressing each of the Sigul key names and the Koji/GPG key ID
-#   to which they are associated along with a boolean value indicating whether
-#   Sigul is to sign using a PGP version 3 format signature.  For example:
+#   A Ruby hash expressing each of Koji tags representing builds to be signed
+#   along with details of the signing key and method to be used.  Each entry
+#   in key_map should be the name of a Koji tag where unsigned builds can be
+#   found.  The value for each entry should be another Ruby hash with all of
+#   the following key/value pairs:
+#       key_name    The Sigul identifier for the key to be used.
+#       key_id      The Koji identifier for the same key.
+#       pass        The passphrase required to access key as a Sigul client.
+#       v3          A boolean value indicating whether Sigul is to sign using
+#                   a PGP version 3 format signature.
+#
+#   For example:
 #       key_map => {
-#           'mdct-legacy' => {
-#               'key_id'    => '0F9F5D3B',
-#               'pass'      => 'mdct.gpg',
-#               'tag'       => 'f20-candidates',
+#           'f20-candidates' => {
+#               'key_name'  => 'f20-signing-key',
+#               'key_id'    => '1EAE6C4C',
+#               'pass'      => 'MeeSeekretKeez',
 #               'v3'        => true,
 #           },
 #       }
