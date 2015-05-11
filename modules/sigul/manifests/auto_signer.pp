@@ -66,6 +66,10 @@
 #   If true, debug-level messages will be enabled.  These messages will be
 #   emailed to "root" on the local host.  The default is false.
 #
+# [*interval*]
+#   Execute the signing process once for each entry in "key_map" every
+#   "interval" minutes.  The default is 1 (or once per minute).
+#
 # [*user*]
 #   The user name to perform the automatic signing.  Defaults to "ass" (the
 #   Automated Sigul Signer).
@@ -85,6 +89,7 @@ class sigul::auto_signer (
         $nss_password,
         $key_map,
         $debug=false,
+        $interval=1,
         $user='ass',
     ) inherits ::sigul::params {
 

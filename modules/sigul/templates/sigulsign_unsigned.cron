@@ -7,5 +7,5 @@ MAILTO=root
 PATH="/usr/sbin:/usr/bin"
 
 <% key_map.each_pair do |k, v| -%>
-* * * * * <%= @user %>    nice ionice -c 3 printf '<%= v['pass'] %>\0' | <%= @script %> --batch-mode <% if @debug -%>-v -v <% end -%><%= v['key_name'] %> --tag <%= k %>
+*/<%= @interval %> * * * * <%= @user %>    nice ionice -c 3 printf '<%= v['pass'] %>\0' | <%= @script %> --batch-mode <% if @debug -%>-v -v <% end -%><%= v['key_name'] %> --tag <%= k %>
 <% end -%>
