@@ -41,42 +41,51 @@ class dart::subsys::dns::no_dns_hosts {
 
     host { 'mdct-koji-b1-f21.dartcontainer.com':
         ip           => '10.1.192.135',
-        host_aliases => [ 'mdct-koji-b1-f21', 'mdct-koji-b1' ],
+        host_aliases => [ 'mdct-koji-b1.dartcontainer.com',
+                          'mdct-koji-b1-f21', 'mdct-koji-b1' ],
     }
 
     host { 'mdct-koji-b2-f21.dartcontainer.com':
         ip           => '10.1.192.136',
-        host_aliases => [ 'mdct-koji-b2-f21', 'mdct-koji-b2' ],
+        host_aliases => [ 'mdct-koji-b2.dartcontainer.com',
+                          'mdct-koji-b2-f21', 'mdct-koji-b2' ],
     }
 
     host { 'mdct-koji-b3-f21.dartcontainer.com':
         ip           => '10.1.192.137',
-        host_aliases => [ 'mdct-koji-b3-f21', 'mdct-koji-b3' ],
+        host_aliases => [ 'mdct-koji-b3.dartcontainer.com',
+                          'mdct-koji-b3-f21', 'mdct-koji-b3' ],
     }
 
     host { 'mdct-koji-b4-f21.dartcontainer.com':
         ip           => '10.1.192.143',
-        host_aliases => [ 'mdct-koji-b4-f21', 'mdct-koji-b4' ],
+        host_aliases => [ 'mdct-koji-b4.dartcontainer.com',
+                          'mdct-koji-b4-f21', 'mdct-koji-b4' ],
     }
 
     host { 'mdct-koji-b5-f21.dartcontainer.com':
         ip           => '10.1.192.145',
-        host_aliases => [ 'mdct-koji-b5-f21', 'mdct-koji-b5' ],
+        host_aliases => [ 'mdct-koji-b5.dartcontainer.com',
+                          'mdct-koji-b5-f21', 'mdct-koji-b5' ],
     }
 
     host { 'mdct-koji-f21.dartcontainer.com':
         ip           => '10.1.192.124',
-        host_aliases => [ 'mdct-koji-f21', 'mdct-koji', 'koji' ],
+        host_aliases => [ 'mdct-koji.dartcontainer.com',
+                          'mdct-koji-f21', 'mdct-koji', 'koji' ],
     }
 
     host { 'mdct-sigul-bridge-f21.dartcontainer.com':
         ip           => '10.1.192.138',
-        host_aliases => [ 'mdct-sigul-bridge-f21', 'mdct-sigul-bridge', 'sigul-bridge' ],
+        host_aliases => [ 'mdct-sigul-bridge.dartcontainer.com',
+                          'mdct-sigul-bridge-f21', 'mdct-sigul-bridge',
+                          'sigul-bridge' ],
     }
 
     host { 'mdct-sigul-f21.dartcontainer.com':
         ip           => '10.1.192.139',
-        host_aliases => [ 'mdct-sigul-f21', 'mdct-sigul', 'sigul' ],
+        host_aliases => [ 'mdct-sigul.dartcontainer.com',
+                          'mdct-sigul-f21', 'mdct-sigul', 'sigul' ],
     }
 
     #}}}
