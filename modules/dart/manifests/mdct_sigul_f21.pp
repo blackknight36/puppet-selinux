@@ -25,6 +25,13 @@ class dart::mdct_sigul_f21 inherits ::dart::abstract::sigul_node {
         stp        => 'no',
     }
 
+    class { '::bacula::client':
+        dir_name   => $dart::params::bacula_dir_name,
+        dir_passwd => 'FU79NdRq7INnQS9548bJ5p8dWBUS268AwimyOXUq6iKN',
+        mon_name   => $dart::params::bacula_mon_name,
+        mon_passwd => 'w95TDuKWSWmnqOV9gB6ytzcY8h6hTQT3fWChDvqWId7k',
+    }
+
     # NB: sigul-0.100-4.fc21.noarch ships with SysV init scripts that behave
     # poorly in that Puppet can't seem to start them and if the Server is
     # started by hand, not all child processes will terminate together with
