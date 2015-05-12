@@ -79,6 +79,11 @@ class dart::abstract::base_node {
         stage       => 'first';
     }
 
+    class { '::dart::subsys::yum::dart':
+        require => Class['yum'],
+        stage   => 'first',
+    }
+
     class { 'dart::subsys::yum::fedora':
         require => Class['yum'],
         stage   => 'first',
