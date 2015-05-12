@@ -103,6 +103,13 @@ class dart::mdct_koji_f21 inherits ::dart::subsys::koji::params {
         stp        => 'no',
     }
 
+    class { '::bacula::client':
+        dir_name   => $dart::params::bacula_dir_name,
+        dir_passwd => 'pSKBn8yre7g7nLjDAxSlPZpky5X13hWMgdQeEzftjim9',
+        mon_name   => $dart::params::bacula_mon_name,
+        mon_passwd => 'gn4IS28lZIXMWDzcHDJYpR0Ugj1mFuHKi08GiEAB0o66',
+    }
+
     include '::dart::abstract::guarded_server_node'
     include '::dart::subsys::koji::authentication'
     include '::dart::subsys::koji::autofs'
