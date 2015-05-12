@@ -1,6 +1,6 @@
 [mariadb]
 name = MariaDB
-baseurl = http://mdct-00fs.dartcontainer.com/ftp/pub/mariadb/mariadb-5.5.28/fedora16-amd64
+baseurl = http://mdct-00fs.dartcontainer.com/pub/mariadb/mariadb-5.5.28/fedora16-amd64
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-MariaDB
 gpgcheck=1
 enabled=1

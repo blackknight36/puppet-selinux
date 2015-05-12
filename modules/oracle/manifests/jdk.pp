@@ -49,7 +49,7 @@ define oracle::jdk (
     }
 
     exec { "install oracle $name":
-        command => "rpm -i --force http://mdct-00fs.dartcontainer.com/ftp/pub/oracle/jdk-${version}${update_tag1}-linux-${arch}.rpm",
+        command => "rpm -i --force http://mdct-00fs.dartcontainer.com/pub/oracle/jdk-${version}${update_tag1}-linux-${arch}.rpm",
         unless  => "rpm -q jdk-1.${version}.0${update_tag2}-fcs",
         # Allow extra time, especially for trans-WAN installations.
         timeout => 1200,

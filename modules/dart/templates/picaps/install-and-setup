@@ -35,7 +35,7 @@ kickstart_clone() {
     #   # Install OS instead of upgrade
     #   install
     #   # Use network installation
-    #   url --url=http://mdct-00fs/ftp/pub/fedora/7/Fedora/x86_64/os
+    #   url --url=http://mdct-00fs/pub/fedora/7/Fedora/x86_64/os
     #   # Network information
     #   network --bootproto=dhcp --device=eth0 --onboot=on --noipv6 --hostname mdct-??pi
     #   # Reboot after installation

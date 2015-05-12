@@ -25,36 +25,36 @@ syslog_device=
 
 [fedora]
 name=fedora
-baseurl=http://mdct-00fs.dartcontainer.com/ftp/pub/fedora/<%= @release %>/Everything/<%= @base_arch %>/os/
+baseurl=http://mdct-00fs.dartcontainer.com/pub/fedora/<%= @release %>/Everything/<%= @base_arch %>/os/
 failovermethod=priority
 
 [updates]
 name=updates
-baseurl=http://mdct-00fs.dartcontainer.com/ftp/pub/fedora/updates/<%= @release %>/<%= @base_arch %>/
+baseurl=http://mdct-00fs.dartcontainer.com/pub/fedora/updates/<%= @release %>/<%= @base_arch %>/
 failovermethod=priority
 
 [updates-testing]
 name=updates-testing
-baseurl=http://mdct-00fs.dartcontainer.com/ftp/pub/fedora/updates/testing/<%= @release %>/<%= @base_arch %>/
+baseurl=http://mdct-00fs.dartcontainer.com/pub/fedora/updates/testing/<%= @release %>/<%= @base_arch %>/
 failovermethod=priority
 enabled=0
 
 [mdct]
 name=MDCT packages
-baseurl=http://mdct-00fs.dartcontainer.com/ftp/pub/fedora/mdct/<%= @release %>/<%= @base_arch %>/
+baseurl=http://mdct-00fs.dartcontainer.com/pub/fedora/mdct/<%= @release %>/<%= @base_arch %>/
 
 [mdct-noarch]
 name=MDCT portable packages
-baseurl=http://mdct-00fs.dartcontainer.com/ftp/pub/fedora/mdct/<%= @release %>/noarch/
+baseurl=http://mdct-00fs.dartcontainer.com/pub/fedora/mdct/<%= @release %>/noarch/
 
 [mdct-testing]
 name=MDCT packages - testing
-baseurl=http://mdct-00fs.dartcontainer.com/ftp/pub/fedora/mdct/testing/<%= @release %>/<%= @base_arch %>/
+baseurl=http://mdct-00fs.dartcontainer.com/pub/fedora/mdct/testing/<%= @release %>/<%= @base_arch %>/
 enabled=0
 
 [mdct-noarch-testing]
 name=MDCT portable packages - testing
-baseurl=http://mdct-00fs.dartcontainer.com/ftp/pub/fedora/mdct/testing/<%= @release %>/noarch/
+baseurl=http://mdct-00fs.dartcontainer.com/pub/fedora/mdct/testing/<%= @release %>/noarch/
 enabled=0
 
 #   [fedora-debuginfo]

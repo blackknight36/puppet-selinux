@@ -4,7 +4,7 @@
 # Origin: modules/repoview/files/mdct-repoview
 
 repo_server='mdct-00fs.dartcontainer.com'
-repo_base_url="http://$repo_server/ftp/pub/fedora/mdct"
+repo_base_url="http://$repo_server/pub/fedora/mdct"
 
 html_top() {
     cat <<EOF

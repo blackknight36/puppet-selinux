@@ -2,7 +2,7 @@
 
 class lotus_notes_client {
 
-    $key_store="http://mdct-00fs.dartcontainer.com/ftp/pub/fedora/mdct/signing_keys"
+    $key_store="http://mdct-00fs.dartcontainer.com/pub/fedora/mdct/signing_keys"
 
     exec { "import_ibm_signing_key":
         command => "rpm --import $key_store/pub_ibm_lotus_notes.gpg",

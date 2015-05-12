@@ -9,7 +9,7 @@ class dart::abstract::picaps_test_node inherits dart::abstract::unguarded_server
     include 'dart::subsys::autofs::common'
 
     # Declare the source of the JDK to be installed.
-    $jdk_rpm_source='http://mdct-00fs.dartcontainer.com/ftp/pub/oracle/jdk-7u5-linux-x64.rpm'
+    $jdk_rpm_source='http://mdct-00fs.dartcontainer.com/pub/oracle/jdk-7u5-linux-x64.rpm'
 
     # Declare the JDK that PICAPS is to use.
     $picaps_jdk='/usr/java/jdk1.7.0_05'

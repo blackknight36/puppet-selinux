@@ -12,7 +12,7 @@ class mariadb_server_pref18 {
         ],
     }
 
-    $key_store="http://mdct-00fs.dartcontainer.com/ftp/pub/fedora/mdct/signing_keys"
+    $key_store="http://mdct-00fs.dartcontainer.com/pub/fedora/mdct/signing_keys"
 
     exec { "import_mariadb_signing_key":
         command => "rpm --import $key_store/RPM-GPG-KEY-MariaDB",
@@ -33,15 +33,15 @@ class mariadb_server_pref18 {
 
     mariadb_package { "MariaDB-common":
         source  => $operatingsystemrelease ? {
-            16 => 'http://mdct-00fs/ftp/pub/mariadb/mariadb-5.5.28/fedora16-amd64/rpms/MariaDB-5.5.28-fedora16-x86_64-common.rpm',
-            17 => 'http://mdct-00fs/ftp/pub/mariadb/mariadb-5.5.28/fedora17-amd64/rpms/MariaDB-5.5.28-fedora17-x86_64-common.rpm',
+            16 => 'http://mdct-00fs/pub/mariadb/mariadb-5.5.28/fedora16-amd64/rpms/MariaDB-5.5.28-fedora16-x86_64-common.rpm',
+            17 => 'http://mdct-00fs/pub/mariadb/mariadb-5.5.28/fedora17-amd64/rpms/MariaDB-5.5.28-fedora17-x86_64-common.rpm',
         }
     }
 
     mariadb_package { "MariaDB-client":
         source  => $operatingsystemrelease ? {
-            16 => 'http://mdct-00fs/ftp/pub/mariadb/mariadb-5.5.28/fedora16-amd64/rpms/MariaDB-5.5.28-fedora16-x86_64-client.rpm',
-            17 => 'http://mdct-00fs/ftp/pub/mariadb/mariadb-5.5.28/fedora17-amd64/rpms/MariaDB-5.5.28-fedora17-x86_64-client.rpm',
+            16 => 'http://mdct-00fs/pub/mariadb/mariadb-5.5.28/fedora16-amd64/rpms/MariaDB-5.5.28-fedora16-x86_64-client.rpm',
+            17 => 'http://mdct-00fs/pub/mariadb/mariadb-5.5.28/fedora17-amd64/rpms/MariaDB-5.5.28-fedora17-x86_64-client.rpm',
         },
         require => [
             Package[ "MariaDB-common" ],
@@ -50,8 +50,8 @@ class mariadb_server_pref18 {
 
     mariadb_package { "MariaDB-server":
         source      => $operatingsystemrelease ? {
-            16 => 'http://mdct-00fs/ftp/pub/mariadb/mariadb-5.5.28/fedora16-amd64/rpms/MariaDB-5.5.28-fedora16-x86_64-server.rpm',
-            17 => 'http://mdct-00fs/ftp/pub/mariadb/mariadb-5.5.28/fedora17-amd64/rpms/MariaDB-5.5.28-fedora17-x86_64-server.rpm',
+            16 => 'http://mdct-00fs/pub/mariadb/mariadb-5.5.28/fedora16-amd64/rpms/MariaDB-5.5.28-fedora16-x86_64-server.rpm',
+            17 => 'http://mdct-00fs/pub/mariadb/mariadb-5.5.28/fedora17-amd64/rpms/MariaDB-5.5.28-fedora17-x86_64-server.rpm',
         },
         require => [
             Package[ "MariaDB-common" ],
