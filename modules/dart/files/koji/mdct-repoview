@@ -3,6 +3,7 @@
 # This file is managed by puppet.
 # Origin: modules/repoview/files/mdct-repoview
 
+SELF=$(basename $0)
 repo_server='mdct-00fs.dartcontainer.com'
 repo_base_url="http://$repo_server/pub/fedora/mdct"
 
@@ -62,7 +63,7 @@ html_bottom() {
         </tbody></table></div></li></ul>
 
         <p class="footernote">
-          <span>Listing generated: $(date) by mdct-repoview</span>
+          <span>Listing generated: $(date) by ${SELF}</span>
         </p>
     </div>
 
@@ -81,7 +82,7 @@ make_repoview() {
 }
 
 main() {
-    local new_index="/tmp/mdct-repoview.$$"
+    local new_index="/tmp/${SELF}.$$"
     local live_index="/pub/fedora/mdct/repoview/index.html"
     html_top > $new_index
 
@@ -109,4 +110,4 @@ main() {
     mv $new_index $live_index
 }
 
-main "$@" &> /var/log/mdct-repoview/mdct-repoview
+main "$@" &> /var/log/${SELF}/${SELF}

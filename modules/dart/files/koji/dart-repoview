@@ -1,0 +1,126 @@
+#!/bin/sh
+
+# This file is managed by puppet.
+# Origin: modules/repoview/files/dart-repoview
+
+SELF=$(basename $0)
+repo_server='mdct-00fs.dartcontainer.com'
+repo_base_url="http://$repo_server/pub/fedora/dart"
+
+html_top() {
+    cat <<EOF
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html><head>
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type"> <title>RepoView: Dart on Fedora</title> <link href="repoview_files/repostyle.css" type="text/css"
+  rel="stylesheet"> <meta content="index,follow" name="robots"> </head>
+<body>
+    <div class="levbar">
+    <p class="pagetitle">Dart on Fedora</p>
+    </div>
+    <div class="main">
+        <h3>Index of Repositories</h3>
+
+        <span class="anchor" id="line-24"></span><span class="anchor" id="line-25"></span><p class="line862">The Dart repositories for Fedora can be browsed directly to see what's
+        in them. Indexes of each repository are made using <a class="http" href="http://fedorahosted.org/repoview/">RepoView</a>. <span class="anchor" id="line-26"></span><span
+            class="anchor" id="line-27"></span></p><ul><li style="list-style-type:none"><div><table style="font-size: small;"><tbody>
+        <tr>
+            <td style="text-align: center;"><p class="line862"> <strong>Fedora Release</strong> </p></td>
+            <td style="text-align: center;"><p class="line862"> <strong>Repository </strong> </p></td>
+            <td colspan="4" style="text-align: center;"><p class="line862"> <strong>Arch </strong> </p></td>
+        </tr>
+EOF
+}
+
+html_for_release() {
+    local osrelease="$1"
+    cat <<EOF
+    <tr>
+        <td colspan="1" rowspan="3" style="text-align: center;"><span class="anchor" id="line-29"></span><p class="line862"> $osrelease </p></td>
+        <td><p class="line862">dart-released</p></td>
+        <td><p class="line891"><a class="http" href="$repo_base_url/released/$osrelease/SRPMS/repoview/">source</a></p></td>
+        <td><p class="line891"><a class="http" href="$repo_base_url/released/$osrelease/i386/repoview/">i386</a></p></td>
+        <td><p class="line891"><a class="http" href="$repo_base_url/released/$osrelease/x86_64/repoview/">x86_64</a></p></td>
+    </tr>
+    <tr>
+        <td><span class="anchor" id="line-31"></span><p class="line862">dart-testing</p></td>
+        <td><p class="line891"><a class="http" href="$repo_base_url/testing/$osrelease/SRPMS/repoview/">source</a></p></td>
+        <td><p class="line891"><a class="http" href="$repo_base_url/testing/$osrelease/i386/repoview/">i386</a></p></td>
+        <td><p class="line891"><a class="http" href="$repo_base_url/testing/$osrelease/x86_64/repoview/">x86_64</a></p></td>
+    </tr>
+    <tr>
+        <td><span class="anchor" id="line-31"></span><p class="line862">dart-candidates</p></td>
+        <td><p class="line891"><a class="http" href="$repo_base_url/candidates/$osrelease/SRPMS/repoview/">source</a></p></td>
+        <td><p class="line891"><a class="http" href="$repo_base_url/candidates/$osrelease/i386/repoview/">i386</a></p></td>
+        <td><p class="line891"><a class="http" href="$repo_base_url/candidates/$osrelease/x86_64/repoview/">x86_64</a></p></td>
+    </tr>
+EOF
+}
+
+html_bottom() {
+    cat <<EOF
+        <tr>
+            <td colspan="13" style="text-align: left;"><span class="anchor"
+            id="line-44"></span><p class="line862"> <img alt="/!\"
+            src="repoview_files/alert.png" title="/!\" height="15" width="15">
+
+            Note: It is normal for the dart-testing repositories to be empty
+            if there are no package builds undergoing testing currently.
+            Likewise with dart-candidates if no packages are actively being
+            built at present.  The dart-released repositories should almost
+            always have builds present, except when the support effort for
+            a new Fedora release begins.<br>
+
+            </td>
+        </tr>
+
+        </tbody></table></div></li></ul>
+
+        <p class="footernote">
+          <span>Listing generated: $(date) by ${SELF}</span>
+        </p>
+    </div>
+
+</body></html>
+EOF
+}
+
+make_repoview() {
+    local osrelease="$1"
+    local arch="$2"
+    local repo="$3"
+    echo "Making repoview for $repo on Fedora $osrelease ($arch)."
+    /usr/bin/repoview \
+        -t "Dart on Fedora $osrelease ($arch)" \
+        /pub/fedora/$repo/$osrelease/$arch/
+}
+
+main() {
+    local new_index="/tmp/${SELF}.$$"
+    local live_index="/pub/fedora/dart/repoview/index.html"
+    html_top > $new_index
+
+    for osrelease in "$@"
+    do
+        if [ $osrelease -ge 18 ]
+        then
+            arches="i386 x86_64 noarch SRPMS"
+        else
+            arches="i386 SRPMS"
+        fi
+        for arch in $arches
+        do
+            for repo in 'mdct' 'mdct/testing'
+            do
+                echo "## processing: $osrelease $arch $repo"
+                make_repoview $osrelease $arch $repo
+                echo
+            done
+        done
+        html_for_release $osrelease >> $new_index
+    done
+
+    html_bottom >> $new_index
+    mv $new_index $live_index
+}
+
+main "$@" &> /var/log/${SELF}/${SELF}
