@@ -126,6 +126,7 @@ sync_repo_tree() {
         --delay-updates \
         --delete \
         --delete-delay \
+        --exclude=/repoview/ \
         --no-group \
         --no-owner \
         --stats \
