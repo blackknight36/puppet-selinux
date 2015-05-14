@@ -62,7 +62,7 @@ class koji::mash (
         ensure => 'present',
     }
 
-    concat::fragment { 'header':
+    concat::fragment { 'mash-everything-header':
         target  => $::koji::params::mash_everything_conf,
         content => template('koji/mash/mash-everything.conf'),
         order   => '01',
