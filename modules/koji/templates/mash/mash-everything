@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# This file is managed by Puppet via the "koji" module.
+# This file is managed by Puppet via the "<%= @module_name %>" module.
 
 # Constants defined in part or wholly by Puppet resources:
 TOP_DIR='<%= @top_dir %>'
@@ -8,48 +8,11 @@ REPO_DIR='<%= @repo_dir %>'
 CONF='<%= @mash_everything_conf %>'
 
 # Other constants which may be derived from those from Puppet:
+SELF=$(basename $0)
 MASH_DIR="/tmp/mash"
 COMPOSITE_DIR="${MASH_DIR}/composite"
 
-# Logging levels:
-EMERG=0
-ALERT=1
-CRIT=2
-ERR=3
-WARNING=4
-NOTICE=5
-INFO=6
-DEBUG=7
-
-
-say() {
-    # Output a message with a priority prefix recognized by systemd-cat.
-    local level=$1; shift
-<%# Note that the '<%%' yields a literal '<%' after ERB template rendering. -%>
-    printf '<%%s>%s\n' $level "$@"
-}
-
-crit() {
-    # Convenience function for say() at the CRITICAL priority level.
-    say $CRIT "$@"
-}
-
-err() {
-    # Convenience function for say() at the ERROR priority level.
-    say $ERR "$@"
-}
-
-info() {
-    # Convenience function for say() at the INFORMATION priority level.
-    say $INFO "$@"
-}
-
-fail() {
-    # Issue a message at the ERROR priority level and quit, returning
-    # a non-success exit code.
-    err "$@"
-    exit 1
-}
+source '<%= @helpers_bin %>'
 
 ensure_composite_dir() {
     # Ensure the repository composition directory exists and is as expected.
@@ -83,18 +46,11 @@ clone_into_composite_dir() {
             || fail "Could not create composite clone '${clone}'."
 }
 
-config_lines() {
-    # Return, via stdout, lines within this script's configuration file that
-    # are not comments or empty lines or lines consisting of nothing more than
-    # whitespace.  In other words, the actual active configuration content.
-    grep -Ev '^[[:space:]]*#|^[[:space:]]*$' $CONF
-}
-
 mash_all_repositories() {
     # Iterate over each listed mash configuration and composite them.
     local repo comp_dir clone
     info 'Started mashing all repositories.'
-    config_lines | while IFS=: read repo comp_dir
+    config_lines $CONF | while IFS=: read repo comp_dir
     do
         info "Mashing '${repo}'."
         mash -o $MASH_DIR $repo \

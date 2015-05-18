@@ -31,6 +31,7 @@ class koji::params {
             $kojira_services = 'kojira'
 
             $admin_user = 'kojiadmin'
+            $helpers_bin = '/usr/local/libexec/_shared_koji_helpers'
             $mash_dir = '/etc/mash'
             $mash_everything_bin = '/usr/local/bin/mash-everything'
             $mash_everything_conf = '/etc/mash/mash-everything.conf'

@@ -31,6 +31,8 @@ class koji::mash (
         $top_dir,
     ) inherits ::koji::params {
 
+    include '::koji::helpers'
+
     package { $::koji::params::mash_packages:
         ensure  => installed,
     }
