@@ -118,6 +118,7 @@ class dart::mdct_koji_f21 inherits ::dart::subsys::koji::params {
     include '::dart::subsys::koji::hub'
     include '::dart::subsys::koji::kojira'
     include '::dart::subsys::koji::mash'
+    include '::dart::subsys::koji::regen_repos'
     include '::dart::subsys::koji::repoview'
     include '::dart::subsys::koji::web'
 

@@ -40,6 +40,7 @@ class dart::subsys::koji::params inherits ::koji::params {
     $db_user        = 'koji'
 
     # various directory locations used by one or more Koji services
+    $ext_repo_dir   = '/pub/fedora'
     $repodir        = '/mnt/dart-repo'
     $topdir         = '/mnt/koji'
     $workdir        = '/var/tmp/koji'

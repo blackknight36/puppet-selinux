@@ -35,6 +35,9 @@ class koji::params {
             $mash_dir = '/etc/mash'
             $mash_everything_bin = '/usr/local/bin/mash-everything'
             $mash_everything_conf = '/etc/mash/mash-everything.conf'
+            $regen_repos_bin = '/usr/local/bin/regen-repos'
+            $regen_repos_conf = '/etc/regen-repos.conf'
+            $regen_repos_states = '/var/lib/regen-repos'
 
         }
 
