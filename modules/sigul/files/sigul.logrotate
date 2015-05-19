@@ -1,0 +1,5 @@
+/var/log/sigul*.log {
+    missingok
+    notifempty
+    copytruncate
+}
