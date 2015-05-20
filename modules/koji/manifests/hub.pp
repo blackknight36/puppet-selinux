@@ -102,13 +102,8 @@ class koji::hub (
     }
 
     file {
-        $top_dir:
-            ensure  => directory,
-            mode    => '0755',
-            seltype => 'var_t',
-            ;
-
         [
+                $top_dir,
                 "${top_dir}/images",
                 "${top_dir}/packages",
                 "${top_dir}/repos",
