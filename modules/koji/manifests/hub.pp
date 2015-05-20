@@ -101,28 +101,30 @@ class koji::hub (
         subscribe => Package[$koji::params::hub_packages],
     }
 
-    file { $top_dir:
-        ensure  => directory,
-        mode    => '0755',
-        seltype => 'var_t',
-    }
+    file {
+        $top_dir:
+            ensure  => directory,
+            mode    => '0755',
+            seltype => 'var_t',
+            ;
 
-    file { [
+        [
                 "${top_dir}/images",
                 "${top_dir}/packages",
                 "${top_dir}/repos",
                 "${top_dir}/scratch",
                 "${top_dir}/work",
-            ]:
-        ensure  => directory,
-        owner   => 'apache',
-        group   => 'apache',
-        mode    => '0755',
-        seltype => 'public_content_rw_t',
-    }
+        ]:
+            ensure  => directory,
+            owner   => 'apache',
+            group   => 'apache',
+            mode    => '0755',
+            seltype => 'public_content_rw_t',
+            ;
 
-    file { '/etc/koji-hub/hub.conf':
-        content => template('koji/hub/hub.conf'),
+        '/etc/koji-hub/hub.conf':
+            content => template('koji/hub/hub.conf'),
+            ;
     }
 
 }
