@@ -22,31 +22,35 @@ class dart::abstract::pycharm::professional {
     # to ensure that no more than two stable releases are installed at any
     # given time.
 
-    jetbrains::pycharm::release { 'pycharm-professional-4.0.4':
-        build   => '4.0.5',
-        edition => 'professional',
-    }
+    jetbrains::pycharm::release {
+        'pycharm-professional-4.5.1':
+            build   => '4.5.1',
+            edition => 'professional',
+            ;
 
-    jetbrains::pycharm::release { 'pycharm-professional-4.0.3':
-        ensure  => 'absent',
-        build   => '4.0.4',
-        edition => 'professional',
+        'pycharm-professional-4.0.4':
+            ensure  => 'absent',
+            build   => '4.0.5',
+            edition => 'professional',
+            ;
     }
 
     #
     # EAP Releases
     #
 
-    jetbrains::pycharm::release { 'pycharm-professional-139.431':
-        ensure  => 'absent',
-        build   => '139.431',
-        edition => 'professional',
-    }
+    jetbrains::pycharm::release {
+        'pycharm-professional-139.431':
+            ensure  => 'absent',
+            build   => '139.431',
+            edition => 'professional',
+            ;
 
-    jetbrains::pycharm::release { 'pycharm-professional-139.354':
-        ensure  => 'absent',
-        build   => '139.354',
-        edition => 'professional',
+        'pycharm-professional-139.354':
+            ensure  => 'absent',
+            build   => '139.354',
+            edition => 'professional',
+            ;
     }
 
 }
