@@ -1,0 +1,7 @@
+# This file is managed by Puppet via the "<%= @module_name %>" module.
+#
+# vim: filetype=sh
+
+#
+# Optional arguments passed to rpcbind. See rpcbind(8)
+RPCBIND_ARGS=""

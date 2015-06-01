@@ -37,6 +37,10 @@ class nfs::server (
 
     include 'nfs::params'
 
+    class { '::nfs::rpcbind':
+        manage_firewall => $manage_firewall,
+    }
+
     File {
         owner       => 'root',
         group       => 'root',
@@ -60,7 +64,7 @@ class nfs::server (
 
     if $manage_firewall {
         firewall { '550 accept NFS packets':
-            dport  => ['111', '2049'],
+            dport  => ['2049'],
             proto  => 'tcp',
             state  => 'NEW',
             action => 'accept',

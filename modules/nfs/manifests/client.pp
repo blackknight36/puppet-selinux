@@ -6,6 +6,10 @@
 #
 # === Parameters
 #
+# ==== Required
+#
+# ==== Optional
+#
 # [*domain*]
 #   Name of the NFS domain.  Defaults to the "domain" fact.
 #
@@ -22,15 +26,13 @@
 class nfs::client (
         $domain=$::domain,
         $use_gss=true,
-    ) {
+    ) inherits ::nfs::params {
 
-    include 'nfs::params'
-
-    class { 'nfs::rpcidmapd':
+    class { '::nfs::rpcidmapd':
         domain  => $domain,
     }
 
-    class { 'nfs::rpcgssd':
+    class { '::nfs::rpcgssd':
         enable  => $use_gss,
     }
 

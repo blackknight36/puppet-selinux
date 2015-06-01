@@ -31,6 +31,9 @@ class nfs::params {
                 $kernel_options = undef
             }
 
+            $bind_packages = 'rpcbind'
+            $bind_service = 'rpcbind'
+
             # Which $gss_service?
             if  $::operatingsystemrelease == 'Rawhide' or
                 $::operatingsystemrelease >= 16
