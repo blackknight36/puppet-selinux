@@ -31,17 +31,26 @@ class nfs::params {
                 $kernel_options = undef
             }
 
+            # Which $gss_service?
             if  $::operatingsystemrelease == 'Rawhide' or
                 $::operatingsystemrelease >= 16
             {
-                $idmap_service = 'nfs-idmap'
                 $gss_service = 'nfs-secure'
             } elsif $::operatingsystemrelease >= 15 {
-                $idmap_service = 'rpcidmapd'
                 $gss_service = 'rpcgssd'
             } else {
-                $idmap_service = 'rpcidmapd'
                 $gss_service = undef    # Sorry, no soup for you.  Upgrade!
+            }
+
+            # Which $idmap_service?
+            if  $::operatingsystemrelease == 'Rawhide' or
+                $::operatingsystemrelease >= 21
+            {
+                $idmap_service = 'nfs-idmapd'
+            } elsif $::operatingsystemrelease >= 16 {
+                $idmap_service = 'nfs-idmap'
+            } else {
+                $idmap_service = 'rpcidmapd'
             }
 
             # As of Fedora 21, the nfs-secure service became static -- the
@@ -55,6 +64,7 @@ class nfs::params {
                 $gss_service_is_static = false
             }
 
+            # Which $pipefs_service?
             if  $::operatingsystemrelease == 'Rawhide' or
                 $::operatingsystemrelease >= 17
             {
@@ -63,12 +73,19 @@ class nfs::params {
                 $pipefs_service = undef
             }
 
-            $server_services = [ 'nfs.target' ]
+            # Which $server_services?
+            if  $::operatingsystemrelease == 'Rawhide' or
+                $::operatingsystemrelease >= 20
+            {
+                $server_services = 'nfs-server.service'
+            } else {
+                $server_services = 'nfs.target'
+            }
 
         }
 
         default: {
-            fail ("The nfs module is not yet supported on ${::operatingsystem}.")
+            fail ("${title}: operating system '${::operatingsystem}' is not supported")
         }
 
     }
