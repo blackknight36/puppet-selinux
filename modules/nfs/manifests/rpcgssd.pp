@@ -2,7 +2,7 @@
 #
 # == Class: nfs::rpcgssd
 #
-# Configures a host to run the NFS ID Mapper daemon.
+# Configures a host to run the RPCSEC_GSS (per RFC 5403) daemon.
 #
 # === Parameters
 #
