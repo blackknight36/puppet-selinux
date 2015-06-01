@@ -6,6 +6,10 @@
 #
 # === Parameters
 #
+# ==== Required
+#
+# ==== Optional
+#
 # [*enabled*]
 #   If true (default), the instance will be enabled.
 #
@@ -33,9 +37,7 @@ class nfs::server (
         $exports_content=undef,
         $exports_source=undef,
         $manage_firewall=true,
-    ) {
-
-    include 'nfs::params'
+    ) inherits ::nfs::params {
 
     class { '::nfs::rpcbind':
         manage_firewall => $manage_firewall,
@@ -48,8 +50,8 @@ class nfs::server (
         seluser     => 'system_u',
         selrole     => 'object_r',
         seltype     => 'exports_t',
-        before      => Service[$nfs::params::server_services],
-        notify      => Service[$nfs::params::server_services],
+        before      => Service[$::nfs::params::server_services],
+        notify      => Service[$::nfs::params::server_services],
     }
 
     if $enabled {
@@ -71,7 +73,7 @@ class nfs::server (
         }
     }
 
-    service { $nfs::params::server_services:
+    service { $::nfs::params::server_services:
         ensure     => $ensure,
         enable     => $enabled,
         hasrestart => true,

@@ -53,9 +53,9 @@ class nfs::rpcbind (
     }
 
     if $manage_firewall {
-	    ::iptables::tcp_port {
-	        'sunrpc': port => '111';
-		}
+        iptables::tcp_port {
+            'sunrpc': port => '111';
+        }
     }
 
     file { '/etc/sysconfig/rpcbind':

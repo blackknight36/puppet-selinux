@@ -6,7 +6,9 @@
 #
 # === Parameters
 #
-# None.
+# ==== Required
+#
+# ==== Optional
 #
 # === Authors
 #
@@ -14,24 +16,22 @@
 #   John Florian <john.florian@dart.biz>
 
 
-class nfs::utils {
+class nfs::utils inherits ::nfs::params {
 
-    include 'nfs::params'
-
-    package { $nfs::params::utils_packages:
+    package { $::nfs::params::utils_packages:
         ensure  => installed,
     }
 
-    if $nfs::params::pipefs_service {
+    if $::nfs::params::pipefs_service {
 
-        service { $nfs::params::pipefs_service:
+        service { $::nfs::params::pipefs_service:
             ensure     => running,
             enable     => true,
             hasrestart => true,
             hasstatus  => true,
             provider   => systemd,
-            before     => Service[$nfs::params::idmap_service],
-            notify     => Service[$nfs::params::idmap_service],
+            before     => Service[$::nfs::params::idmap_service],
+            notify     => Service[$::nfs::params::idmap_service],
         }
 
     }

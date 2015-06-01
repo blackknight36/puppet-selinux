@@ -6,6 +6,10 @@
 #
 # === Parameters
 #
+# ==== Required
+#
+# ==== Optional
+#
 # [*domain*]
 #   Name of the NFS domain.  Defaults to the "domain" fact.
 #
@@ -17,10 +21,9 @@
 
 class nfs::rpcidmapd (
         $domain=$::domain,
-    ) {
+    ) inherits ::nfs::params {
 
-    include 'nfs::params'
-    include 'nfs::utils'
+    include '::nfs::utils'
 
     File {
         owner       => 'root',
@@ -29,32 +32,32 @@ class nfs::rpcidmapd (
         seluser     => 'system_u',
         selrole     => 'object_r',
         seltype     => 'etc_t',
-        before      => Service[$nfs::params::idmap_service],
-        notify      => Service[$nfs::params::idmap_service],
-        subscribe   => Package[$nfs::params::utils_packages],
+        before      => Service[$::nfs::params::idmap_service],
+        notify      => Service[$::nfs::params::idmap_service],
+        subscribe   => Package[$::nfs::params::utils_packages],
     }
 
     file { '/etc/idmapd.conf':
         content => template('nfs/idmapd.conf'),
     }
 
-    if $nfs::params::kernel_options != undef {
+    if $::nfs::params::kernel_options != undef {
         file { '/etc/modprobe.d/nfs.conf':
             mode    => '0644',
             seltype => 'modules_conf_t',
-            content => "${nfs::params::kernel_options}\n",
+            content => "${::nfs::params::kernel_options}\n",
         }
     }
 
 #   TODO: presently causes dependency loop
 #   firewall { '500 accept NFS-callback packets':
-#       dport  => $nfs::params::callback_tcpport,
+#       dport  => $::nfs::params::callback_tcpport,
 #       proto  => 'tcp',
 #       state  => 'NEW',
 #       action => 'accept',
 #   }
 
-    service { $nfs::params::idmap_service:
+    service { $::nfs::params::idmap_service:
         ensure     => running,
         enable     => true,
         hasrestart => true,
