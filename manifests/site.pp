@@ -20,28 +20,6 @@ stage { 'final':
 }
 
 #
-# Associate classes with run stages (instead of the default Stage['main']).
-#
-
-# Why?  Most classes install packages and many create user/group accounts and
-# the authconfig class lowers the default min_id value.  Doing authconfig
-# early ensures that these new accounts fall below the min_id.
-if $hostname != 'mdct-00fs' {
-    class { 'authconfig':
-        stage => 'early';
-    }
-    # It might also be necessary for the NFS ID mapper to be functional early.
-    class { 'nfs::client':
-        stage   => 'early',
-        # While we don't use Kerberos for NFS authentication, it helps to have
-        # it enabled for older Fedora releases.  See commit 948e0c47.  It
-        # certainly is not necessary starting with Fedora 21 though since the
-        # service won't even start if the keytab file isn't present.
-        use_gss => true,
-    }
-}
-
-#
 # Global Defaults for Resource Types
 #
 
