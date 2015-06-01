@@ -42,7 +42,6 @@ class dart::abstract::base_node {
         }
 
         class { '::nfs::client':
-            stage   => 'early',
             # While we don't use Kerberos for NFS authentication, it helps to
             # have it enabled for older Fedora releases.  See commit 948e0c47.
             # It certainly is not necessary starting with Fedora 21 though
