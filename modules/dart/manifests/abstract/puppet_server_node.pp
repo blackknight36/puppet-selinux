@@ -14,8 +14,8 @@ class dart::abstract::puppet_server_node inherits dart::abstract::guarded_server
     }
 
     class { 'puppet::tools':
-        cron_cleanup    => 'puppet:///private-host/puppet/puppet-report-cleanup.cron',
-        tools_conf      => 'puppet:///private-host/puppet/puppet-tools.conf',
+        cron_cleanup => 'puppet:///modules/dart/puppet/tools/puppet-report-cleanup.cron',
+        tools_conf   => 'puppet:///modules/dart/puppet/tools/puppet-tools.conf',
     }
 
     include 'dart::subsys::yum_cron'
