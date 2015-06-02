@@ -12,3 +12,5 @@
 # rather than to expect each server to also play the role of mail forwarder.
 sendmail::enable:           false
 sendmail::ensure:           stopped
+
+yum::conf_source:           puppet:///modules/dart/yum/yum.conf

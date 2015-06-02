@@ -19,11 +19,6 @@ class dart::abstract::base_node {
         default         => undef,
     }
 
-    $yum_conf_source = $::hostname ? {
-        /^mdct-ovirt-/  => 'puppet:///modules/dart/yum/yum-proxied.conf',
-        default         => 'puppet:///modules/dart/yum/yum.conf',
-    }
-
     if $::hostname != 'mdct-00fs' {
         # The authconfig class lowers the default min_id value, which must be
         # done early to ensure that installation of any package which may
@@ -84,9 +79,8 @@ class dart::abstract::base_node {
         include 'systemd'
     }
 
-    class { 'yum':
-        conf_source => $yum_conf_source,
-        stage       => 'first';
+    class { '::yum':
+        stage => 'first',
     }
 
     class { '::dart::subsys::yum::dart':

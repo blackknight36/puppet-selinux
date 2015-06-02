@@ -1,0 +1,9 @@
+# hiera/node/mdct-ovirt-node-production2.dartcontainer.com.yaml
+#
+# Synopsis:
+#       These settings are specific to mdct-ovirt-node-production2.
+
+
+---
+
+yum::conf_source:           puppet:///modules/dart/yum/yum-proxied.conf

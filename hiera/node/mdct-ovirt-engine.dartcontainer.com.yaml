@@ -1,0 +1,9 @@
+# hiera/node/mdct-ovirt-engine.dartcontainer.com.yaml
+#
+# Synopsis:
+#       These settings are specific to mdct-ovirt-engine.
+
+
+---
+
+yum::conf_source:           puppet:///modules/dart/yum/yum-proxied.conf
