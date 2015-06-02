@@ -1,0 +1,10 @@
+# hiera/node/mdct-est-production.dartcontainer.com.yaml
+#
+# Synopsis:
+#       These settings are specific to mdct-est-production.
+
+
+---
+
+sendmail::enable:           true
+sendmail::ensure:           running

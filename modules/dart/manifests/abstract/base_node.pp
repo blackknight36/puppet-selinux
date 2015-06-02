@@ -19,14 +19,6 @@ class dart::abstract::base_node {
         default         => undef,
     }
 
-    $enable_sendmail = $::hostname ? {
-        'mdct-dev12'        => true,
-        'tc-util'           => true,
-        /^mdct-aos-master/  => true,
-        /^mdct-est-/        => true,
-        default             => false,
-    }
-
     $yum_conf_source = $::hostname ? {
         /^mdct-ovirt-/  => 'puppet:///modules/dart/yum/yum-proxied.conf',
         default         => 'puppet:///modules/dart/yum/yum.conf',
@@ -73,11 +65,7 @@ class dart::abstract::base_node {
 
     include 'prophile'
     #include 'selinux'
-
-    class { 'sendmail':
-        enable  => $enable_sendmail,
-    }
-
+    include '::sendmail'
     include 'sudo'
 
     sudo::drop_in { 'mdct':

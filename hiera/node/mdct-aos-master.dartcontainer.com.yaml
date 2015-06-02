@@ -1,0 +1,10 @@
+# hiera/node/mdct-aos-master.dartcontainer.com.yaml
+#
+# Synopsis:
+#       These settings are specific to mdct-aos-master.
+
+
+---
+
+sendmail::enable:           true
+sendmail::ensure:           running

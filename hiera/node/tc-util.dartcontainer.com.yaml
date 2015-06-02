@@ -1,0 +1,10 @@
+# hiera/node/tc-util.dartcontainer.com.yaml
+#
+# Synopsis:
+#       These settings are specific to tc-util.
+
+
+---
+
+sendmail::enable:           true
+sendmail::ensure:           running

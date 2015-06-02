@@ -1,0 +1,10 @@
+# hiera/node/mdct-dev12.dartcontainer.com.yaml
+#
+# Synopsis:
+#       These settings are specific to mdct-dev12.
+
+
+---
+
+sendmail::enable:           true
+sendmail::ensure:           running

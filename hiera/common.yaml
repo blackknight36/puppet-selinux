@@ -1,0 +1,14 @@
+# hiera/common.yaml
+#
+# Synopsis:
+#       These settings are common to all Puppet nodes.  They may be overrided
+#       selectively according to the Hiera hierarchy.  See /etc/hiera.yaml for
+#       more details.
+
+
+---
+
+# It's generally advisable for services to use a proper internal MX host
+# rather than to expect each server to also play the role of mail forwarder.
+sendmail::enable:           false
+sendmail::ensure:           stopped
