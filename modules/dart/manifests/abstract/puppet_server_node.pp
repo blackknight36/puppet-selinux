@@ -20,6 +20,10 @@ class dart::abstract::puppet_server_node inherits ::dart::abstract::guarded_serv
     include '::dart::abstract::packages::developer'
     include '::dart::subsys::autofs::common'
 
+    class { '::hiera':
+        source => 'puppet:///modules/dart/hiera/hiera.yaml',
+    }
+
     class { '::puppet::client':
     }
 
