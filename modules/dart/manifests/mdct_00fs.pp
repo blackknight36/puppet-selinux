@@ -36,11 +36,11 @@ class dart::mdct_00fs {
     #@# From base_node {{{
 
     #@# include 'dart::subsys::autofs::common'
+    include '::chrony'
     include 'cron::daemon'
     #@# include 'cachefilesd'
     include 'dart::subsys::dns::no_dns_hosts'
     include 'logwatch'
-    include 'ntp'
     #@# include 'openssh::server'
     include 'dart::abstract::packages::base'
 
