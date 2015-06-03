@@ -1,0 +1,11 @@
+# hiera/node/mdct-0314pi.dartcontainer.com.yaml
+#
+# Synopsis:
+#       These settings are specific to mdct-0314pi.
+
+
+---
+
+chrony::client_allow:
+    - 10.7.212/22 iburst
+chrony::serve_ntp:          true

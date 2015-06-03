@@ -8,17 +8,6 @@
 
 class dart::abstract::base_node {
 
-    #
-    # TODO: Replace these selectors with polymorphism and/or hiera.
-    #
-    $allow_ntp_clients = $::hostname ? {
-        'mdct-0302pi'   => ['10.7.84/22'],
-        'mdct-0310pi'   => ['10.31.52/22'],
-        'mdct-0314pi'   => ['10.7.212/22'],
-        'mdct-47pi'     => ['10.47/16'],
-        default         => undef,
-    }
-
     if $::hostname != 'mdct-00fs' {
         # The authconfig class lowers the default min_id value, which must be
         # done early to ensure that installation of any package which may
@@ -40,15 +29,12 @@ class dart::abstract::base_node {
     }
 
     include 'cachefilesd'
+    include '::chrony'
     include 'cron::daemon'
     include 'dart::abstract::packages::base'
     include 'dart::subsys::dns::no_dns_hosts'
     include 'dart::subsys::filesystem'
     include 'logwatch'
-
-    class { 'ntp':
-        allow_clients   => $allow_ntp_clients,
-    }
 
     class { 'openssh::server':
         source  => [

@@ -1,6 +1,0 @@
-# Command line options for ntpd
-#
-# This differs from the Fedora default by the addition of -x to prefer slewing
-# the clock rather than stepping it.  (It still step at startup, if necessary,
-# because of the -g option.)
-OPTIONS="-g -x"
