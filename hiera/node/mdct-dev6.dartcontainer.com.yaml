@@ -1,0 +1,9 @@
+# hiera/node/mdct-dev6.dartcontainer.com.yaml
+#
+# Synopsis:
+#       These settings are specific to mdct-dev6.
+
+
+---
+
+openssh::server::source:    puppet:///private-host/openssh/sshd_config

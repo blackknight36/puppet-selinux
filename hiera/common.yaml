@@ -15,6 +15,9 @@ chrony::servers:
     - "%{::default_route} iburst"
 
 
+openssh::server::source:    "puppet:///modules/dart/openssh/sshd_config.%{::operatingsystem}.%{::operatingsystemrelease}"
+
+
 # It's generally advisable for services to use a proper internal MX host
 # rather than to expect each server to also play the role of mail forwarder.
 sendmail::enable:           false

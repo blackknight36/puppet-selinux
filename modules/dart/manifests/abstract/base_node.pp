@@ -35,15 +35,7 @@ class dart::abstract::base_node {
     include 'dart::subsys::dns::no_dns_hosts'
     include 'dart::subsys::filesystem'
     include 'logwatch'
-
-    class { 'openssh::server':
-        source  => [
-            'puppet:///private-host/openssh/sshd_config',
-            'puppet:///private-domain/openssh/sshd_config',
-            "puppet:///modules/dart/openssh/sshd_config.${::operatingsystem}.${::operatingsystemrelease}",
-        ],
-    }
-
+    include '::openssh::server'
     include 'prophile'
     #include 'selinux'
     include '::sendmail'
