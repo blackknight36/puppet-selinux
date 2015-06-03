@@ -1,9 +1,23 @@
 # modules/dart/manifests/abstract/base_node.pp
 #
-# NOTICE:
-#       Any changes made here should also be considered for
-#       modules/dart/manifests/classes/mdct-00fs.pp until such time that class
-#       can make direct use of this class.
+# == Class: dart::abstract::base_node
+#
+# Manages numerous resources common to all Dart hosts.
+#
+# === Parameters
+#
+# ==== Required
+#
+# ==== Optional
+#
+# === Notes
+#   Any changes made here should also be considered for
+#   modules/dart/manifests/mdct_00fs.pp until such time that class can make
+#   direct use of this class.
+#
+# === Authors
+#
+#   John Florian <john.florian@dart.biz>
 
 
 class dart::abstract::base_node {
@@ -28,31 +42,32 @@ class dart::abstract::base_node {
 
     }
 
-    include 'cachefilesd'
+    include '::cachefilesd'
     include '::chrony'
-    include 'cron::daemon'
-    include 'dart::abstract::packages::base'
-    include 'dart::subsys::dns::no_dns_hosts'
-    include 'dart::subsys::filesystem'
-    include 'logwatch'
+    include '::cron::daemon'
+    include '::dart::abstract::packages::base'
+    include '::dart::subsys::dns::no_dns_hosts'
+    include '::dart::subsys::filesystem'
+    include '::logwatch'
     include '::openssh::server'
-    include 'prophile'
-    #include 'selinux'
+    include '::ovirt::guest'
+    include '::prophile'
+    #include '::selinux'
     include '::sendmail'
-    include 'sudo'
+    include '::sudo'
 
-    sudo::drop_in { 'mdct':
+    ::sudo::drop_in { 'mdct':
         source  => hiera('sudo::drop_in::source'),
     }
-
-    include 'timezone'
 
     if  $::operatingsystem == 'Fedora' and
         $::operatingsystemrelease == 'Rawhide' or
         $::operatingsystemrelease >= 15
     {
-        include 'systemd'
+        include '::systemd'
     }
+
+    include '::timezone'
 
     class { '::yum':
         stage => 'first',
@@ -63,16 +78,14 @@ class dart::abstract::base_node {
         stage   => 'first',
     }
 
-    class { 'dart::subsys::yum::fedora':
+    class { '::dart::subsys::yum::fedora':
         require => Class['yum'],
         stage   => 'first',
     }
 
-    class { 'dart::subsys::yum::mdct':
+    class { '::dart::subsys::yum::mdct':
         require => Class['yum'],
         stage   => 'first',
     }
-
-    include 'ovirt::guest'
 
 }
