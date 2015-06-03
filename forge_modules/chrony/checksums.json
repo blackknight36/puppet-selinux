@@ -1,0 +1,15 @@
+{
+  "LICENSE": "783b7e40cdfb4a1344d15b1f7081af66",
+  "README.md": "d4207251abc7264142a0938816c419ff",
+  "Rakefile": "20b80e526e351a74df2001f504e756d2",
+  "manifests/config.pp": "fd7b2b91e834f573dde1c4bd4a3b3587",
+  "manifests/init.pp": "3d047c4fa8b08efeed8bc572b9da5ee0",
+  "manifests/install.pp": "9960eac9945473e346907c1ac2fbe9a4",
+  "manifests/params.pp": "d08006ac47420430a989cd41f8cefa9d",
+  "manifests/service.pp": "ff9b6cb944bc28e5d0e4accbd06199ed",
+  "metadata.json": "3f29574fbf7e3a7e1add011c9cafbbce",
+  "spec/classes/init_spec.rb": "54beaef46a3824bcfdeb19bf55ad2f95",
+  "spec/spec_helper.rb": "a55d1e6483344f8ec6963fcb2c220372",
+  "templates/chronyd.conf.erb": "6f6f7b0121b196fe3a1d82aea4e00086",
+  "tests/init.pp": "ae6cff3033d78112380d81dc97d05a93"
+}
