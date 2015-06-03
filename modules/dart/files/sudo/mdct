@@ -1,4 +1,4 @@
-# modules/sudo/files/sudoers.mdct
+# modules/dart/files/sudo/mdct
 
 # root cannot access user's home when mounted via NFS and root_squash, so
 # might as well set HOME to something useful.

@@ -42,10 +42,7 @@ class dart::abstract::base_node {
     include 'sudo'
 
     sudo::drop_in { 'mdct':
-        source  =>  [
-            'puppet:///private-host/sudo/mdct',
-            'puppet:///private-domain/sudo/mdct',
-        ],
+        source  => hiera('sudo::drop_in::source'),
     }
 
     include 'timezone'

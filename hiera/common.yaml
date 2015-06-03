@@ -24,4 +24,7 @@ sendmail::enable:           false
 sendmail::ensure:           stopped
 
 
+sudo::drop_in::source:      puppet:///modules/dart/sudo/mdct
+
+
 yum::conf_source:           puppet:///modules/dart/yum/yum.conf

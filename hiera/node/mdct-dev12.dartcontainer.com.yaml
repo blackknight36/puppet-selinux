@@ -8,3 +8,6 @@
 
 sendmail::enable:           true
 sendmail::ensure:           running
+
+
+sudo::drop_in::source:      "puppet:///modules/dart/sudo/%{::hostname}"
