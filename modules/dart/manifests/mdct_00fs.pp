@@ -35,35 +35,36 @@ class dart::mdct_00fs {
 
     #@# From base_node {{{
 
-    #@# include 'dart::subsys::autofs::common'
+    #@# include '::cachefilesd'
     include '::chrony'
-    include 'cron::daemon'
-    #@# include 'cachefilesd'
-    include 'dart::subsys::dns::no_dns_hosts'
-    include 'logwatch'
-    #@# include 'openssh::server'
-    include 'dart::abstract::packages::base'
+    include '::cron::daemon'
+    include '::dart::abstract::packages::base'
+    include '::dart::subsys::dns::no_dns_hosts'
+    #@# include '::dart::subsys::filesystem'
+    include '::logwatch'
+    #@# include '::openssh::server'
+    include '::prophile'
 
-    class { 'puppet::client':
+    class { '::puppet::client':
     }
 
-    include 'sudo'
-    include 'timezone'
+    include '::sudo'
+    include '::timezone'
     #@# From base_node }}}
 
     #@# From server_node.pp {{{
-    include 'dart::abstract::packages::net_tools'
+    include '::dart::abstract::packages::net_tools'
     #@# From server_node.pp }}}
 
     ####
     # Other resources specific to mdct-00fs:
     ####
 
-    class { 'apache':
+    class { '::apache':
         server_admin => 'Bryan_Coleman@dart.biz',
     }
 
-    apache::site_config {
+    ::apache::site_config {
         'git':
             source  => 'puppet:///modules/dart/httpd/git.conf';
         'pub':
@@ -79,10 +80,10 @@ class dart::mdct_00fs {
         target => '/var/ftp',
     }
 
-    include 'flock_herder'
-    include 'git_daemon'
+    include '::flock_herder'
+    include '::git_daemon'
 
-    class { 'mirrmaid':
+    class { '::mirrmaid':
         ensure  => latest,
     }
 
@@ -99,44 +100,44 @@ class dart::mdct_00fs {
         force   => true,
         purge   => true,
         recurse => true,
-        require => Class['mirrmaid'],
+        require => Class['::mirrmaid'],
         source  => 'puppet:///private-host/mirrmaid/.ssh',
     }
 
     # This config is merely note referring the reader to the others.
-    mirrmaid::config { 'mirrmaid':
+    ::mirrmaid::config { 'mirrmaid':
         source  => 'puppet:///private-host/mirrmaid/mirrmaid.conf',
         cronjob => 'puppet:///private-host/mirrmaid/mirrmaid.cron',
     }
 
-    mirrmaid::config { 'mirrmaid-picaps':
+    ::mirrmaid::config { 'mirrmaid-picaps':
         source  => 'puppet:///private-host/mirrmaid/mirrmaid-picaps.conf',
         cronjob => 'puppet:///private-host/mirrmaid/mirrmaid-picaps.cron',
     }
 
-    mirrmaid::config { 'mirrmaid-fedora':
+    ::mirrmaid::config { 'mirrmaid-fedora':
         source  => 'puppet:///private-host/mirrmaid/mirrmaid-fedora.conf',
         cronjob => 'puppet:///private-host/mirrmaid/mirrmaid-fedora.cron',
     }
 
-    mirrmaid::config { 'mirrmaid-mariadb':
+    ::mirrmaid::config { 'mirrmaid-mariadb':
         source  => 'puppet:///private-host/mirrmaid/mirrmaid-mariadb.conf',
         cronjob => 'puppet:///private-host/mirrmaid/mirrmaid-mariadb.cron',
     }
 
-    mirrmaid::config { 'mirrmaid-rpmfusion':
+    ::mirrmaid::config { 'mirrmaid-rpmfusion':
         source  => 'puppet:///private-host/mirrmaid/mirrmaid-rpmfusion.conf',
         cronjob => 'puppet:///private-host/mirrmaid/mirrmaid-rpmfusion.cron',
     }
 
-    mirrmaid::config { 'mirrmaid-yum-fanout':
+    ::mirrmaid::config { 'mirrmaid-yum-fanout':
         source  => 'puppet:///private-host/mirrmaid/mirrmaid-yum-fanout.conf',
         cronjob => 'puppet:///private-host/mirrmaid/mirrmaid-yum-fanout.cron',
     }
 
-    include 'picaps::backup_agent'
+    include '::picaps::backup_agent'
 
-    class { 'vsftpd':
+    class { '::vsftpd':
         source        => 'puppet:///private-host/vsftpd/vsftpd.conf',
         allow_use_nfs => false,
     }
