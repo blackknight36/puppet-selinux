@@ -17,9 +17,6 @@ class dart::abstract::workstation_node inherits dart::abstract::base_node {
     # Lotus Notes has been disabled for now due to poor functioning.
     #include 'lotus_notes_client'
 
-    class { 'puppet::client':
-    }
-
     include 'test_automation'
     include 'unwanted_services'
 

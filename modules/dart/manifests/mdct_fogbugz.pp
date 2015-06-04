@@ -13,9 +13,6 @@ class dart::mdct_fogbugz inherits dart::abstract::guarded_server_node {
     class { 'mariadb::server':
     }
 
-    class { 'puppet::client':
-    }
-
     class { 'apache':
         network_connect => true,
     }

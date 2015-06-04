@@ -18,7 +18,6 @@ class dart::abstract::teamcity_server_node inherits dart::abstract::guarded_serv
     include 'dart::abstract::packages::developer'
     include 'dart::subsys::autofs::common'
     include 'dart::subsys::yum_cron'
-    include 'puppet::client'
 
     # This package allows optimal performance in production environments.
     package { 'tomcat-native':

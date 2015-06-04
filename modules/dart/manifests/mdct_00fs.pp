@@ -44,10 +44,7 @@ class dart::mdct_00fs {
     include '::logwatch'
     include '::openssh::server'
     include '::prophile'
-
-    class { '::puppet::client':
-    }
-
+    include '::puppet::client'
     include '::sudo'
     include '::timezone'
     #@# From base_node }}}

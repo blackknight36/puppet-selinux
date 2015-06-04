@@ -40,13 +40,6 @@ class dart::abstract::picaps_production_server_node inherits dart::abstract::ung
         source => 'puppet:///modules/dart/picaps_servers/picaps-root-bash-prompt.sh',
     }
 
-    # PICAPS admins desire puppet only for tasks at server inception and forgo
-    # all run-state management.
-    class { 'puppet::client':
-        ensure  => 'stopped',
-        enable  => false,
-    }
-
     # Sendmail alias
     sendmail::alias { 'root':
         recipient   => 'chris.kennedy@dart.biz',

@@ -97,9 +97,6 @@ class dart::abstract::aos_master_node (
 #        hba_conf    => 'puppet:///private-host/postgresql/pg_hba.conf',
 #    }
 
-    class { 'puppet::client':
-    }
-
     class { 'vsftpd':
         source          => 'puppet:///private-host/vsftpd/vsftpd.conf',
         allow_use_nfs   => true,

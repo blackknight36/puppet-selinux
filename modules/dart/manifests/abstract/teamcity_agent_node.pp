@@ -21,7 +21,6 @@ class dart::abstract::teamcity_agent_node inherits dart::abstract::guarded_serve
     include '::dart::subsys::mock'
     include '::dart::subsys::yum_cron'
     include '::lyx'
-    include '::puppet::client'
 
     case $::hostname {
         'mdct-est-ci': {

@@ -52,6 +52,7 @@ class dart::abstract::base_node {
     include '::openssh::server'
     include '::ovirt::guest'
     include '::prophile'
+    include '::puppet::client'
     #include '::selinux'
     include '::sendmail'
     include '::sudo'

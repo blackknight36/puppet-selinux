@@ -8,7 +8,4 @@
 
 class dart::mdct_00dtl inherits dart::abstract::semi_guarded_server_node {
 
-    class { 'puppet::client':
-    }
-
 }

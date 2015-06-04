@@ -32,9 +32,6 @@ class dart::abstract::picaps_test_server_node inherits dart::abstract::unguarded
         ensure  => 'installed',
     }
 
-    class { 'puppet::client':
-    }
-
     sendmail::alias { 'root':
         recipient   => 'nathan.nephew@dart.biz',
     }

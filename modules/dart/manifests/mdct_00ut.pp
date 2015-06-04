@@ -10,9 +10,6 @@ class dart::mdct_00ut inherits dart::abstract::guarded_server_node {
 
     include 'dart::subsys::autofs::common'
 
-    class { 'puppet::client':
-    }
-
     file { '/etc/davfs2/secrets':
         group   => 'root',
         mode    => '0600',

@@ -10,9 +10,6 @@ class dart::mdct_nexus inherits dart::abstract::guarded_server_node {
 
     include 'apache'
 
-    class { 'puppet::client':
-    }
-
     class { 'bacula::client':
         dir_name    => $dart::params::bacula_dir_name,
         dir_passwd  => 'v1OUZExhC5RwX6VtphBlrD61PI1XrlwVZH7yMFCVy1Yj',

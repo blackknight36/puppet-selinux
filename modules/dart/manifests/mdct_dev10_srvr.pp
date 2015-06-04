@@ -8,7 +8,4 @@
 
 class dart::mdct_dev10_srvr inherits dart::abstract::guarded_server_node {
 
-    class { 'puppet::client':
-    }
-
 }

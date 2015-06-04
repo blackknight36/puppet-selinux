@@ -44,9 +44,6 @@ class dart::mdct_00bk inherits dart::abstract::guarded_server_node {
 
     include 'iscsi::initiator'
 
-    class { 'puppet::client':
-    }
-
 #    class { 'postgresql::server':
 #        hba_conf    => 'puppet:///private-host/postgresql/pg_hba.conf',
 #    }

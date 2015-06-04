@@ -18,13 +18,6 @@ class dart::mdct_pt_dbtest inherits dart::abstract::unguarded_server_node {
     # Enable automatic package updates
     include 'dart::subsys::yum_cron'
 
-    # PICAPS admins desire puppet only for tasks at server inception and forgo
-    # all run-state management.
-    class { 'puppet::client':
-        enable  => false,
-        ensure  => 'stopped',
-    }
-
     # PICAPS uses rsync for backup and other similar uses
     class { 'rsync::server':
         source  => 'puppet:///modules/dart/picaps_servers/rsyncd/rsyncd.conf',

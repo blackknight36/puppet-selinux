@@ -23,7 +23,4 @@ class dart::tc_util inherits dart::abstract::guarded_server_node {
     include 'dart::subsys::teamcenter::sync'
     include 'dart::subsys::yum_cron'
 
-    class { 'puppet::client':
-    }
-
 }

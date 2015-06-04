@@ -6,7 +6,4 @@ class dart::abstract::ovirt_node inherits dart::abstract::server_node {
         managed_host    => false,
     }
 
-    class { 'puppet::client':
-    }
-
 }

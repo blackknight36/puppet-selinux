@@ -4,11 +4,6 @@ class dart::abstract::tomcat_web_app inherits dart::abstract::guarded_server_nod
 
     include 'dart::subsys::autofs::common'
 
-    # puppet::client is included this way to prevent duplicate declaration
-    # arising out of dart::abstract::teamcity_server_node.  This works only
-    # because the default class params are acceptable here.
-    include 'puppet::client'
-
     package { [ 'tomcat', 'tomcat-admin-webapps', ]:
         ensure  => installed,
     }
