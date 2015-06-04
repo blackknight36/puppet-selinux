@@ -49,6 +49,11 @@ class dart::mdct_00fs {
     #include '::selinux'
     include '::sendmail'
     include '::sudo'
+
+    ::sudo::drop_in { 'mdct':
+        source  => hiera('sudo::drop_in::source'),
+    }
+
     include '::timezone'
 
     class { '::yum':
