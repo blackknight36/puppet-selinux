@@ -42,7 +42,6 @@ class dart::abstract::base_node {
 
     }
 
-    include '::cachefilesd'
     include '::chrony'
     include '::cron::daemon'
     include '::dart::abstract::packages::base'

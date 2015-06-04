@@ -35,7 +35,6 @@ class dart::mdct_00fs {
 
     #@# From base_node {{{
 
-    #@# include '::cachefilesd'
     include '::chrony'
     include '::cron::daemon'
     include '::dart::abstract::packages::base'
