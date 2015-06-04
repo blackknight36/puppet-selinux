@@ -42,7 +42,7 @@ class dart::mdct_00fs {
     include '::dart::subsys::dns::no_dns_hosts'
     include '::dart::subsys::filesystem'
     include '::logwatch'
-    #@# include '::openssh::server'
+    include '::openssh::server'
     include '::prophile'
 
     class { '::puppet::client':
