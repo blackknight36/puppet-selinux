@@ -15,10 +15,16 @@ class sendmail::params {
         Fedora: {
 
             $packages = 'sendmail'
-            $services = [
-                'sendmail',
-                'sm-client',
-            ]
+
+            if $::operatingsystemrelease > 14 {
+                $services = [
+                    'sendmail',
+                    'sm-client',
+                ]
+            } else {
+                $services = 'sendmail'
+            }
+
             $newaliases_cmd = '/usr/bin/newaliases'
 
         }

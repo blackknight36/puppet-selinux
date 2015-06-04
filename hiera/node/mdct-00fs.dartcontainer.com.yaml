@@ -1,0 +1,10 @@
+# hiera/node/mdct-00fs.dartcontainer.com.yaml
+#
+# Synopsis:
+#       These settings are specific to mdct-00fs.
+
+
+---
+
+sendmail::enable:           true
+sendmail::ensure:           running

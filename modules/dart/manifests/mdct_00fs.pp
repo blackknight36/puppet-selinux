@@ -46,6 +46,8 @@ class dart::mdct_00fs {
     include '::ovirt::guest'
     include '::prophile'
     include '::puppet::client'
+    #include '::selinux'
+    include '::sendmail'
     include '::sudo'
     include '::timezone'
     #@# From base_node }}}
