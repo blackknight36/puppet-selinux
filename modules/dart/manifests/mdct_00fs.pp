@@ -43,6 +43,7 @@ class dart::mdct_00fs {
     include '::dart::subsys::filesystem'
     include '::logwatch'
     include '::openssh::server'
+    include '::ovirt::guest'
     include '::prophile'
     include '::puppet::client'
     include '::sudo'
