@@ -40,7 +40,7 @@ class dart::mdct_00fs {
     include '::cron::daemon'
     include '::dart::abstract::packages::base'
     include '::dart::subsys::dns::no_dns_hosts'
-    #@# include '::dart::subsys::filesystem'
+    include '::dart::subsys::filesystem'
     include '::logwatch'
     #@# include '::openssh::server'
     include '::prophile'
