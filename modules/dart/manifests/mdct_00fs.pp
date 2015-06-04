@@ -50,6 +50,25 @@ class dart::mdct_00fs {
     include '::sendmail'
     include '::sudo'
     include '::timezone'
+
+    class { '::yum':
+        stage => 'first',
+    }
+
+    class { '::dart::subsys::yum::dart':
+        require => Class['yum'],
+        stage   => 'first',
+    }
+
+    class { '::dart::subsys::yum::fedora':
+        require => Class['yum'],
+        stage   => 'first',
+    }
+
+    class { '::dart::subsys::yum::mdct':
+        require => Class['yum'],
+        stage   => 'first',
+    }
     #@# From base_node }}}
 
     #@# From server_node.pp {{{
