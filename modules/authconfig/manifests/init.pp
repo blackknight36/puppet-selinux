@@ -50,16 +50,16 @@ class authconfig (
     }
 
     file { '/etc/pam.d/system-auth-ac':
-        before  => Exec['authconfig'],
-        source  => [
-            "puppet:///modules/authconfig/system-auth-ac.${operatingsystem}.${operatingsystemrelease}",
+        before => Exec['authconfig'],
+        source => [
+            "puppet:///modules/authconfig/system-auth-ac.${::operatingsystem}.${::operatingsystemrelease}",
             'puppet:///modules/authconfig/system-auth-ac',
         ],
     }
 
     file { '/etc/pam.d/password-auth-ac':
-        before  => Exec['authconfig'],
-        source  => 'puppet:///modules/authconfig/password-auth-ac',
+        before => Exec['authconfig'],
+        source => 'puppet:///modules/authconfig/password-auth-ac',
     }
 
     # Fedora requires encryption to a directory server if it is to be used for
@@ -70,7 +70,7 @@ class authconfig (
     exec { 'authconfig':
         before  => File['/etc/sssd/sssd.conf'],
         command => 'authconfig --enableldap --disableldapauth --ldapserver="ldap://10.1.192.106" --ldapbasedn="dc=dartcontainer,dc=com" --disableldaptls --enablesssd --disablesssdauth --enablekrb5 --krb5realm=DARTCONTAINER.COM --krb5kdc=dartcontainer.com --enablecachecreds --updateall --disablefingerprint',
-        unless => 'grep -q "^ *USEKERBEROS=yes" /etc/sysconfig/authconfig'
+        unless  => 'grep -q "^ *USEKERBEROS=yes" /etc/sysconfig/authconfig'
     }
 
     # According to authconfig(8), authconfig does NOT configure the domain in
@@ -78,10 +78,10 @@ class authconfig (
     # provided here.
     file { '/etc/sssd/sssd.conf':
         mode    => '0600',
-        seltype => "$authconfig::params::sssd_seltype",
+        seltype => $authconfig::params::sssd_seltype,
         source  => [
-            "puppet:///private-host/authconfig/$authconfig::params::sssd_conf",
-            "puppet:///modules/authconfig/$authconfig::params::sssd_conf",
+            "puppet:///private-host/authconfig/${authconfig::params::sssd_conf}",
+            "puppet:///modules/authconfig/${authconfig::params::sssd_conf}",
         ],
     }
 
