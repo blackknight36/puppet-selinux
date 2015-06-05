@@ -6,18 +6,25 @@
 #
 # === Parameters
 #
-# NONE
+# ==== Required
+#
+# ==== Optional
+#
+# [*enable*]
+#   Instance is to be started at boot.  Either true (default) or false.
+#
+# [*ensure*]
+#   Instance is to be 'running' (default) or 'stopped'.
 #
 # === Authors
 #
 #   John Florian <john.florian@dart.biz>
 
 
-class authconfig {
-
-    # Stage => early
-
-    include 'authconfig::params'
+class authconfig (
+        $enable=true,
+        $ensure='running',
+    ) inherits ::authconfig::params {
 
     # nscd (and it's dependencies) have been replaced by sssd, but oddly
     # the packaging may not obsolete it, so we do so here.
@@ -79,10 +86,10 @@ class authconfig {
     }
 
     service { $authconfig::params::service_name:
-        enable      => true,
-        ensure      => running,
-        hasrestart  => true,
-        hasstatus   => true,
+        ensure     => $ensure,
+        enable     => $enable,
+        hasrestart => true,
+        hasstatus  => true,
     }
 
 }
