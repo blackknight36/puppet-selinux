@@ -13,17 +13,10 @@
 # === Notes
 #   This host was already deployed with critical configuration changes, most
 #   of which were applied without the use of any CMS such as Puppet.  To
-#   prevent adverse effects much of this class is effectively disabled, except
-#   any changes to be applied since inception of this class.  Future builds of
-#   this host would ideally leverage much more use of a CMS.
-#
-#   In the meantime, the comment tag "#@#" indicates where this class could
-#   have applied certain resources (likely through inheritance), but were
-#   defeated for reasons stated above.  They're kept here as a reminder or so
-#   that they may be selectively enabled with extreme care.  In such a case,
-#   it would be very wise to diff against the base classes (or other correct
-#   origin) to ensure current practices are followed as things here are quite
-#   likely stale to some extent.
+#   prevent adverse effects this class does not yet inherit from
+#   dart::abstract::*_server_node as it ideally would.  It does now at least
+#   inherit from dart::abstract::base_node through very careful review of
+#   incremental reconciliation and many "puppet agent --test --noop" runs.
 #
 # === Authors
 #
@@ -31,57 +24,7 @@
 
 
 #@# class dart::mdct_00fs inherits dart::abstract::unguarded_server_node {
-class dart::mdct_00fs {
-
-    #@# From base_node {{{
-
-    class { '::nfs::client':
-        # While we don't use Kerberos for NFS authentication, it helps to have
-        # it enabled for older Fedora releases.  See commit 948e0c47.  It
-        # certainly is not necessary starting with Fedora 21 though since the
-        # service won't even start if the keytab file isn't present.
-        use_gss => true,
-    }
-
-    include '::chrony'
-    include '::cron::daemon'
-    include '::dart::abstract::packages::base'
-    include '::dart::subsys::dns::no_dns_hosts'
-    include '::dart::subsys::filesystem'
-    include '::logwatch'
-    include '::openssh::server'
-    include '::ovirt::guest'
-    include '::prophile'
-    include '::puppet::client'
-    #include '::selinux'
-    include '::sendmail'
-    include '::sudo'
-
-    ::sudo::drop_in { 'mdct':
-        source  => hiera('sudo::drop_in::source'),
-    }
-
-    include '::timezone'
-
-    class { '::yum':
-        stage => 'first',
-    }
-
-    class { '::dart::subsys::yum::dart':
-        require => Class['yum'],
-        stage   => 'first',
-    }
-
-    class { '::dart::subsys::yum::fedora':
-        require => Class['yum'],
-        stage   => 'first',
-    }
-
-    class { '::dart::subsys::yum::mdct':
-        require => Class['yum'],
-        stage   => 'first',
-    }
-    #@# From base_node }}}
+class dart::mdct_00fs inherits ::dart::abstract::base_node {
 
     #@# From server_node.pp {{{
     include '::dart::abstract::packages::net_tools'
