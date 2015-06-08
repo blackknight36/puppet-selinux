@@ -1,0 +1,9 @@
+# hiera/node/mdct-dev24.dartcontainer.com.yaml
+#
+# Synopsis:
+#       These settings are specific to mdct-dev24.
+
+
+---
+
+yum::conf_source:           puppet:///modules/dart/yum/yum-proxied.conf
