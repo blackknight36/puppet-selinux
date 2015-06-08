@@ -50,10 +50,18 @@ class nfs::params {
                 $::operatingsystemrelease >= 21
             {
                 $idmap_service = 'nfs-idmapd'
+                # As of Fedora 21, the client uses a different mechanism.  See
+                # nfsidmap(5) of the libnfsidmap package.  As such, these
+                # clients no longer require a locally running ID mapper
+                # daemon.  Additionally, the nfs-idmapd service became static
+                # -- the ensure/enable states can/need not be managed.
+                $idmap_service_is_static = true
             } elsif $::operatingsystemrelease >= 16 {
                 $idmap_service = 'nfs-idmap'
+                $idmap_service_is_static = false
             } else {
                 $idmap_service = 'rpcidmapd'
+                $idmap_service_is_static = false
             }
 
             # As of Fedora 21, the nfs-secure service became static -- the

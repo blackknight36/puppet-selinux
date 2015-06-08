@@ -28,12 +28,25 @@ class nfs::client (
         $use_gss=true,
     ) inherits ::nfs::params {
 
+    # Managing the ensure and enable states for a static service is
+    # ineffectual and generates lots of useless reporting.
+    $idmap_ensure = $::nfs::params::idmap_service_is_static ? {
+        true    => 'stopped',
+        default => true,
+    }
+    $idmap_enable = $::nfs::params::idmap_service_is_static ? {
+        true    => undef,
+        default => true,
+    }
+
     class { '::nfs::rpcidmapd':
-        domain  => $domain,
+        ensure => $idmap_ensure,
+        enable => $idmap_enable,
+        domain => $domain,
     }
 
     class { '::nfs::rpcgssd':
-        enable  => $use_gss,
+        enable => $use_gss,
     }
 
 }

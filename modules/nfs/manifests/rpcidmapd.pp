@@ -13,6 +13,12 @@
 # [*domain*]
 #   Name of the NFS domain.  Defaults to the "domain" fact.
 #
+# [*enable*]
+#   Instance is to be started at boot.  Either true (default) or false.
+#
+# [*ensure*]
+#   Instance is to be 'running' (default) or 'stopped'.
+#
 # === Authors
 #
 #   John Florian <john.florian@dart.biz>
@@ -21,6 +27,8 @@
 
 class nfs::rpcidmapd (
         $domain=$::domain,
+        $enable=true,
+        $ensure='running',
     ) inherits ::nfs::params {
 
     include '::nfs::utils'
@@ -58,8 +66,8 @@ class nfs::rpcidmapd (
 #   }
 
     service { $::nfs::params::idmap_service:
-        ensure     => running,
-        enable     => true,
+        ensure     => $ensure,
+        enable     => $enable,
         hasrestart => true,
         hasstatus  => true,
     }
