@@ -43,8 +43,8 @@ class dart::mdct_dev12::filesystem {
 
         '/mnt/storage':
             key     => 'storage',
-            options => '-fstype=ext4,rw',
-            remote  => ':/dev/data/storage';
+            options => '-fstype=xfs,rw',
+            remote  => ':/dev/disk/by-uuid/35f5e141-4534-4e7e-ac01-1c71b8a5e9a7';
 
     }
 
