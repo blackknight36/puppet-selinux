@@ -8,4 +8,10 @@ PATH=/sbin:/bin:/usr/sbin:/usr/bin
 RSYNC_PROXY=mdct-proxy:8080
 
 # Fedora mirroring
-*/16 * * * * mirrmaid       nice ionice -c3 mirrmaid -c /etc/mirrmaid/mirrmaid-fedora.conf
+#
+# Schedule is set here to avoid running during Mason business hours.  This is
+# not so much to avoid bandwidth use during office hours but rather to help
+# keep the repositories stable during office hours.  Instability severely
+# hampers AOS image generation due to how Koji internalizes the metadata for
+# external repositories such as these.
+16 17-23,0-7 * * * mirrmaid       nice ionice -c3 mirrmaid -c /etc/mirrmaid/mirrmaid-fedora.conf
