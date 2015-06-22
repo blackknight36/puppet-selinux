@@ -23,16 +23,18 @@ class dart::abstract::pycharm::professional {
     # given time.
 
     jetbrains::pycharm::release {
+
+        'pycharm-professional-4.5.2':
+            build   => '4.5.2',
+            edition => 'professional',
+            ;
+
         'pycharm-professional-4.5.1':
+            ensure  => 'absent',
             build   => '4.5.1',
             edition => 'professional',
             ;
 
-        'pycharm-professional-4.0.4':
-            ensure  => 'absent',
-            build   => '4.0.5',
-            edition => 'professional',
-            ;
     }
 
     #
@@ -40,6 +42,7 @@ class dart::abstract::pycharm::professional {
     #
 
     jetbrains::pycharm::release {
+
         'pycharm-professional-139.431':
             ensure  => 'absent',
             build   => '139.431',
@@ -51,6 +54,7 @@ class dart::abstract::pycharm::professional {
             build   => '139.354',
             edition => 'professional',
             ;
+
     }
 
 }
