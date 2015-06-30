@@ -88,6 +88,7 @@ node 'mdct-recov.dartcontainer.com'             { include 'dart::mdct_recov' }
 node 'mdct-sigul-bridge-f21.dartcontainer.com'  { include 'dart::mdct_sigul_bridge_f21' }
 node 'mdct-sigul-f21.dartcontainer.com'         { include 'dart::mdct_sigul_f21' }
 node 'mdct-tc.dartcontainer.com'                { include 'dart::mdct_tc' }
+node 'mdct-tc-f20.dartcontainer.com'            { include 'dart::mdct_tc' }
 node 'mdct-tcir-dev.dartcontainer.com'          { include 'dart::mdct_tcir_dev' }
 node 'mdct-tcir-production.dartcontainer.com'   { include 'dart::mdct_tcir_production' }
 node 'mdct-teamcity-f20.dartcontainer.com'      { include 'dart::mdct_teamcity_f20' }

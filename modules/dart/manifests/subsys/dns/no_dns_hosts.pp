@@ -172,6 +172,11 @@ class dart::subsys::dns::no_dns_hosts {
         host_aliases => [ 'tc-util' ],
     }
 
+    host { 'mdct-tc-f20.dartcontainer.com':
+        ip           => '10.201.64.3',
+        host_aliases => [ 'mdct-tc-f20' ],
+    }
+
     #}}}
 
 }
