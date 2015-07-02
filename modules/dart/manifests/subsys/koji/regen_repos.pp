@@ -29,11 +29,13 @@ class dart::subsys::koji::regen_repos inherits ::dart::subsys::koji::params {
         ],
     }
 
+    # buildroot_dependency maintenance policy:
+    #   1. Add a new buildroot_dependency to begin supporting a new Fedora
+    #   release.
+    #
+    #   2. Delete an old buildroot_dependency when the Fedora release reaches
+    #   EoL but only after our mirror has quiesced.
     ::koji::buildroot_dependency {
-        'f20-build':
-            ext_repo_dirs => ['20/Everything', 'updates/20'],
-            ;
-
         'f21-build':
             ext_repo_dirs => ['21/Everything', 'updates/21'],
             ;
