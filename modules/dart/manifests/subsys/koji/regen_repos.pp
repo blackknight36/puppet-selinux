@@ -39,6 +39,10 @@ class dart::subsys::koji::regen_repos inherits ::dart::subsys::koji::params {
         'f21-build':
             ext_repo_dirs => ['21/Everything', 'updates/21'],
             ;
+
+        'f22-build':
+            ext_repo_dirs => ['22/Everything', 'updates/22'],
+            ;
     }
 
     include '::cron::daemon'
