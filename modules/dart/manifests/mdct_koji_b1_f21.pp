@@ -40,7 +40,7 @@ class dart::mdct_koji_b1_f21 {
     }
 
     class { '::dart::abstract::koji_builder_node':
-        mock_disk_uuid => '554aaf54-ccda-44b2-81fa-9c1990000758',
+        mock_disk_uuid => '541bfb8b-d68c-460c-8b1e-af5a319f6d10',
     }
 
 }
