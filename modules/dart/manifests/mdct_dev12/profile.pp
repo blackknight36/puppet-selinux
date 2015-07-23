@@ -35,6 +35,14 @@ class dart::mdct_dev12::profile {
         ensure  => installed,
     }
 
+    # Ditch the KDE screenlocker in favor of xscreensaver.
+    file { '/usr/libexec/kde4/kscreenlocker_greet':
+        owner  => 'root',
+        group  => 'root',
+        mode   => '0755',
+        source => 'puppet:///private-host/kscreenlocker_greet',
+    }
+
     cron::job { 'git-summary':
         command => 'nice ionice -c 3 git-summary',
         dow     => 'Mon-Fri',
