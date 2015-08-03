@@ -91,6 +91,7 @@ Facter.add("plant_number") do
             ]),
             Plant.new('78', [
                 IPAddr.new('10.78.0.0/16'),
+                IPAddr.new('10.202.78.0/24'),
             ]),
             Plant.new('96', [
                 IPAddr.new('10.96.0.0/16'),
