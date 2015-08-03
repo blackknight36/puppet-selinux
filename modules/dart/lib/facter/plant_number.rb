@@ -17,7 +17,7 @@
 #       determined with certainty, a value of "unknown" will be returned.
 #
 # Author: John Florian <john_florian@dart.biz>
-# Copyright 2011-2014 Dart Container Corp.
+# Copyright 2011-2015 Dart Container Corp.
 
 
 Facter.add("plant_number") do
@@ -48,6 +48,7 @@ Facter.add("plant_number") do
             ]),
             Plant.new('10', [
                 IPAddr.new('10.10.0.0/16'),
+                IPAddr.new('10.110.4.0/22'),
             ]),
             Plant.new('11', [
                 IPAddr.new('10.11.0.0/16'),
