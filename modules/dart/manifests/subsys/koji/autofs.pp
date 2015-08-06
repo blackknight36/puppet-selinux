@@ -24,13 +24,13 @@ class dart::subsys::koji::autofs inherits ::dart::subsys::koji::params {
         $::dart::subsys::koji::params::topdir:
             mount   => '/mnt',
             key     => 'koji',
-            options => '-rw,hard,nosuid,noatime,fsc',
+            options => '-nfsvers=3,rw,hard,nosuid,noatime',
             remote  => 'mdct-00fs:/storage/projects/koji';
 
         $::dart::subsys::koji::params::repodir:
             mount   => '/mnt',
             key     => 'dart-repo',
-            options => '-rw,hard,nosuid,noatime,fsc',
+            options => '-nfsvers=3,rw,hard,nosuid,noatime',
             remote  => 'mdct-00fs:/storage/projects/dart-repo';
 
     }

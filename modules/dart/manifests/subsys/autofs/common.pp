@@ -41,7 +41,7 @@ class dart::subsys::autofs::common {
     autofs::map_entry { '/home/00/*':
         mount   => '/home/00',
         key     => '*',
-        options => '-fstype=nfs4,rw,hard,intr,nosuid,relatime,fsc',
+        options => '-nfsvers=4,sec=sys,rw,hard,intr,nosuid,relatime',
         remote  => 'mdct-00fs:/&',
     }
 
@@ -58,7 +58,7 @@ class dart::subsys::autofs::common {
     autofs::map_entry { '/mnt/pub':
         mount   => '/mnt',
         key     => 'pub',
-        options => '-rw,hard,intr,nosuid,noatime,fsc',
+        options => '-nfsvers=3,rw,hard,intr,nosuid,noatime',
         remote  => 'mdct-00fs:/storage/pub',
     }
 

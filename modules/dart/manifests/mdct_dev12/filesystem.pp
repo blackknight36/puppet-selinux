@@ -38,7 +38,7 @@ class dart::mdct_dev12::filesystem {
 
         '/mnt/koji':
             key     => 'koji',
-            options => '-rw,hard,nosuid,noatime,fsc',
+            options => '-nfsvers=3,rw,hard,nosuid,noatime',
             remote  => 'mdct-00fs:/storage/projects/koji';
 
         '/mnt/storage':
