@@ -1,0 +1,48 @@
+#!/bin/sh
+#
+# Author: John Florian <john_florian@dart.biz>
+# Copyright 2015 Dart Container Corp.
+
+
+SELF="$(basename $0)"
+
+ARCHIVES='<%= archives %>'
+KEEP_DAYS='<%= keep_days %>'
+NAME='<%= aos_build_name %>'
+TARGET='<%= target %>'
+
+
+source '/usr/libexec/builder/_shared_functions'
+
+
+purge_expired_images () {
+    cd "$ARCHIVES" || fail "Couldn't enter ARCHIVES directory '$ARCHIVES'."
+    inform "Purging images more than $KEEP_DAYS days old from '$ARCHIVES' ..."
+    find -type f -name 'mdct-aos-flash-*.iso' -mtime +$KEEP_DAYS \
+            -print -delete
+    inform "Purging emtpy directories from '$ARCHIVES' ..."
+    rmdir *-*-*@*:* 2> /dev/null
+}
+
+make_new_image() {
+    cd "$ARCHIVES" || fail "Couldn't enter ARCHIVES directory '$ARCHIVES'."
+    inform "Starting build-iso to create a new image ..."
+    set -x
+    build-iso \
+            --color never \
+            --no-checksum \
+            --in-timestamped-dir \
+            --no-reboot-on-panic \
+            --enable-dart-testing-repo \
+            $NAME $TARGET
+    set +x
+}
+
+main() {
+    purge_expired_images
+    make_new_image
+}
+
+
+main "$@"
+exit 0

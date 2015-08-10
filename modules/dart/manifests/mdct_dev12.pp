@@ -36,6 +36,7 @@ class dart::mdct_dev12 inherits dart::abstract::workstation_node {
     }
 
     include '::dart::abstract::pycharm::professional'
+    include '::dart::mdct_dev12::aos_nightlies'
     include '::dart::mdct_dev12::filesystem'
     include '::dart::mdct_dev12::libvirt'
     include '::dart::mdct_dev12::network'
