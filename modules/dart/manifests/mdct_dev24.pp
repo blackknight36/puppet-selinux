@@ -16,12 +16,17 @@ class dart::mdct_dev24 inherits dart::abstract::workstation_node {
     }
 
     network::interface {
-        'eno1':
-            template   => 'static',
+        'br0':
+            template   => 'static-bridge',
             ip_address => '10.1.250.186',
             netmask    => '255.255.0.0',
             gateway    => '10.1.0.25',
             stp        => 'no',
+            ;
+
+        'eno1':
+            template => 'static',
+            bridge   => 'br0',
             ;
     }
 
