@@ -10,6 +10,8 @@ ARCHIVES='<%= archives %>'
 KEEP_DAYS='<%= keep_days %>'
 NAME='<%= aos_build_name %>'
 TARGET='<%= target %>'
+LATEST='latest'
+README='README'
 
 
 source '/usr/libexec/builder/_shared_functions'
@@ -24,23 +26,40 @@ purge_expired_images () {
     rmdir *-*-*@*:* 2> /dev/null
 }
 
-make_new_image() {
-    cd "$ARCHIVES" || fail "Couldn't enter ARCHIVES directory '$ARCHIVES'."
-    inform "Starting build-iso to create a new image ..."
+build_for_arch() {
+    local arch="$1"
+    inform "Starting build-iso to create a new image for ${arch} ..."
     set -x
     build-iso \
             --color never \
             --no-checksum \
-            --in-timestamped-dir \
             --no-reboot-on-panic \
             --enable-dart-testing-repo \
-            $NAME $TARGET
+            $NAME $TARGET $arch
     set +x
+}
+
+make_new_images() {
+    cd "$ARCHIVES" || fail "Couldn't enter ARCHIVES directory '$ARCHIVES'."
+    # Not using build-iso's --in-timestamped-dir option because we want the
+    # images for all architectures to land in the same directory.
+    local dir="$(date +%Y-%m-%d@%H:%M)"
+    mkdir "$dir" || fail "Couldn't make dated directory '$dir'."
+    cd "$dir"
+    echo "These images are being built right now.  Please wait!" > "$README"
+    for arch in i386 x86_64
+    do
+        build_for_arch $arch
+    done
+    rm "$README"
+    cd ..
+    [ -L "$LATEST" ] && rm "$LATEST"
+    ln -s "$dir" "$LATEST"
 }
 
 main() {
     purge_expired_images
-    make_new_image
+    make_new_images
 }
 
 
