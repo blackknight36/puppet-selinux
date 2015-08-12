@@ -34,13 +34,16 @@ class dart::mdct_dev12::profile::root {
 
     file {
         '/root/.gvimrc_site':
-            source  => 'puppet:///private-host/gvimrc_site';
+            source  => 'puppet:///modules/dart/mdct-dev12/gvimrc_site',
+            ;
 
         '/root/.gitconfig':
-            source  => 'puppet:///private-host/git/gitconfig';
+            source  => 'puppet:///modules/dart/mdct-dev12/git/gitconfig',
+            ;
 
         '/root/.gitignore':
-            source  => 'puppet:///private-host/git/gitignore';
+            source  => 'puppet:///modules/dart/mdct-dev12/git/gitignore',
+            ;
     }
 
 }

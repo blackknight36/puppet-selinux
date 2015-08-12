@@ -24,17 +24,17 @@ class dart::mdct_dev12::libvirt {
     }
 
     dart::util::replace_original_with_symlink_to_alternate { '/etc/libvirt':
-        alternate   => '/mnt/storage/etc/libvirt',
-        backup      => "/etc/libvirt${SUFFIX}",
-        original    => '/etc/libvirt',
-        seltype     => 'virt_etc_t',
+        alternate => '/mnt/storage/etc/libvirt',
+        backup    => "/etc/libvirt${SUFFIX}",
+        original  => '/etc/libvirt',
+        seltype   => 'virt_etc_t',
     }
 
     dart::util::replace_original_with_symlink_to_alternate { '/var/lib/libvirt':
-        alternate   => '/mnt/storage/var/lib/libvirt',
-        backup      => "/var/lib/libvirt${SUFFIX}",
-        original    => '/var/lib/libvirt',
-        seltype     => 'virt_var_lib_t',
+        alternate => '/mnt/storage/var/lib/libvirt',
+        backup    => "/var/lib/libvirt${SUFFIX}",
+        original  => '/var/lib/libvirt',
+        seltype   => 'virt_var_lib_t',
     }
 
     service {

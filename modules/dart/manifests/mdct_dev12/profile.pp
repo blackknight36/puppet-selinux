@@ -40,7 +40,7 @@ class dart::mdct_dev12::profile {
         owner  => 'root',
         group  => 'root',
         mode   => '0755',
-        source => 'puppet:///private-host/kscreenlocker_greet',
+        source => 'puppet:///modules/dart/mdct-dev12/kscreenlocker_greet',
     }
 
     cron::job { 'git-summary':
