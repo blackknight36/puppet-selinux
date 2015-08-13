@@ -23,11 +23,12 @@ class dart::mdct_dev12::network {
 
     network::interface {
         'br0':
-            template   => 'static-bridge',
-            ip_address => '10.209.23.1',
-            netmask    => '255.255.252.0',
-            gateway    => '10.209.23.254',
-            stp        => 'no',
+            template    => 'static-bridge',
+            ip_address  => '10.209.23.1',
+            netmask     => '255.255.252.0',
+            gateway     => '10.209.23.254',
+            stp         => 'no',
+            mac_address => '0e:00:00:d1:36:77',
             ;
 
         'enp0s25':
