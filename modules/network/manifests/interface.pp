@@ -66,6 +66,11 @@
 #   Pre-shared key for wireless encryption.  Ignored for all but the wireless
 #   template.
 #
+# [*mac_address*]
+#   The MAC address to be assigned to the interface.  This is not used for
+#   identifying a physical interface but rather to override what the
+#   manufacturer of the interface used.
+#
 # === Authors
 #
 #   John Florian <jflorian@doubledog.org>
@@ -85,6 +90,7 @@ define network::interface (
         $key_mgmt='WPA-PSK',
         $mode='Managed',
         $psk=undef,
+        $mac_address=undef,
     ) {
 
     # Sterilize the name.
