@@ -31,6 +31,13 @@ class dart::subsys::dns::no_dns_hosts {
         ip           => '10.1.192.139',
         host_aliases => [ 'mdct-f16-builder', 'f16b' ],
     }
+
+    host { 'mdct-dev15.dartcontainer.com':
+        ensure       => absent,
+        ip           => '10.1.250.50',
+        host_aliases => [ 'mdct-dev15' ],
+    }
+
     #}}}
 
     #}}}
@@ -129,11 +136,6 @@ class dart::subsys::dns::no_dns_hosts {
     #}}}
 
     # Workstations {{{
-
-    host { 'mdct-dev15.dartcontainer.com':
-        ip           => '10.1.250.50',
-        host_aliases => [ 'mdct-dev15' ],
-    }
 
     host { 'mdct-dev16.dartcontainer.com':
         ip           => '10.1.250.46',
