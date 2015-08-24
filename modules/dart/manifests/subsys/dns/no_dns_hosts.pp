@@ -138,17 +138,17 @@ class dart::subsys::dns::no_dns_hosts {
     # Workstations {{{
 
     host { 'mdct-dev16.dartcontainer.com':
-        ip           => '10.1.250.46',
+        ip           => '10.209.44.16',
         host_aliases => [ 'mdct-dev16' ],
     }
 
     host { 'mdct-dev17.dartcontainer.com':
-        ip           => '10.1.250.36',
+        ip           => '10.209.44.17',
         host_aliases => [ 'mdct-dev17' ],
     }
 
     host { 'mdct-dev19.dartcontainer.com':
-        ip           => '10.1.250.183',
+        ip           => '10.209.44.19',
         host_aliases => [ 'mdct-dev19' ],
     }
 
