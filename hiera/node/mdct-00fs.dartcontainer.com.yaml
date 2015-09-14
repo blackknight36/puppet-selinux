@@ -6,5 +6,7 @@
 
 ---
 
+dart::mdct_00fs::rsync_proxy:   "%{hiera('http_proxy')}:8080"
+
 sendmail::enable:           true
 sendmail::ensure:           running

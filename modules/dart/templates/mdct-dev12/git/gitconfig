@@ -2,6 +2,9 @@
 #
 # Make vim mimic 'git config' behavior.
 # vim: filetype=gitconfig noexpandtab tabstop=8
+#
+# This file is managed by Puppet.
+# Origin: modules/dart/templates/mdct-dev12/git/gitconfig
 
 [alias]
 	###
@@ -14,7 +17,9 @@
 	# commit = commit -v                Why doesn't this work?
 	find = ! git ls-files | grep
 	grab = checkout
-	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	# Note the ERB escape on the author name (an) tag to protect the git
+	# templating syntax.
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%%an>%Creset' --abbrev-commit --date=relative
 	lgs = log --shortstat
 	ls = ls-files
 	preview = diff --cached
@@ -60,7 +65,7 @@
 	autocorrect = 30
 
 [http]
-	proxy = http://mdct-proxy:8080
+	proxy = <%= @git_proxy %>
 
 [merge]
 	tool = meld

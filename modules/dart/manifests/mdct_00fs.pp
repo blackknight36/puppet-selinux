@@ -8,6 +8,10 @@
 #
 # ==== Required
 #
+# [* rsync_proxy *]
+#   The proxy that mirrmaid is to use, for those configurations which require
+#   one.
+#
 # ==== Optional
 #
 # === Notes
@@ -24,7 +28,9 @@
 
 
 #@# class dart::mdct_00fs inherits dart::abstract::unguarded_server_node {
-class dart::mdct_00fs inherits ::dart::abstract::base_node {
+class dart::mdct_00fs (
+        $rsync_proxy,
+    ) inherits ::dart::abstract::base_node {
 
     #@# From server_node.pp {{{
     include '::dart::abstract::packages::net_tools'
@@ -90,18 +96,18 @@ class dart::mdct_00fs inherits ::dart::abstract::base_node {
     }
 
     ::mirrmaid::config { 'mirrmaid-fedora':
-        source      => 'puppet:///modules/dart/mirrmaid/mirrmaid-fedora.conf',
-        cron_source => 'puppet:///modules/dart/mirrmaid/mirrmaid-fedora.cron',
+        source       => 'puppet:///modules/dart/mirrmaid/mirrmaid-fedora.conf',
+        cron_content => template('dart/mirrmaid/mirrmaid-fedora.cron'),
     }
 
     ::mirrmaid::config { 'mirrmaid-mariadb':
-        source      => 'puppet:///modules/dart/mirrmaid/mirrmaid-mariadb.conf',
-        cron_source => 'puppet:///modules/dart/mirrmaid/mirrmaid-mariadb.cron',
+        source       => 'puppet:///modules/dart/mirrmaid/mirrmaid-mariadb.conf',
+        cron_content => template('dart/mirrmaid/mirrmaid-mariadb.cron'),
     }
 
     ::mirrmaid::config { 'mirrmaid-rpmfusion':
-        source      => 'puppet:///modules/dart/mirrmaid/mirrmaid-rpmfusion.conf',
-        cron_source => 'puppet:///modules/dart/mirrmaid/mirrmaid-rpmfusion.cron',
+        source       => 'puppet:///modules/dart/mirrmaid/mirrmaid-rpmfusion.conf',
+        cron_content => template('dart/mirrmaid/mirrmaid-rpmfusion.cron'),
     }
 
     ::mirrmaid::config { 'mirrmaid-yum-fanout':

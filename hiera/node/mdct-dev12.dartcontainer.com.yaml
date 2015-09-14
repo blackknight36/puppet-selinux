@@ -6,6 +6,9 @@
 
 ---
 
+dart::mdct_dev12::profile::root::git_proxy:   "http://%{hiera('http_proxy')}:8080"
+
+
 flock_herder::conf_source:  puppet:///modules/dart/mdct-dev12/etc/herd.conf
 sendmail::enable:           true
 sendmail::ensure:           running

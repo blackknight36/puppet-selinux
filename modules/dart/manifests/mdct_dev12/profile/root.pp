@@ -7,14 +7,21 @@
 #
 # === Parameters
 #
-# NONE
+# ==== Required
+#
+# [* git_proxy *]
+#   The proxy that git is to use, for those configurations which require one.
+#
+# ==== Optional
 #
 # === Authors
 #
 #   John Florian <john.florian@dart.biz>
 
 
-class dart::mdct_dev12::profile::root {
+class dart::mdct_dev12::profile::root (
+        $git_proxy,
+    ) {
 
     sendmail::alias { 'root':
         recipient   => 'john.florian@dart.biz',
@@ -38,7 +45,7 @@ class dart::mdct_dev12::profile::root {
             ;
 
         '/root/.gitconfig':
-            source  => 'puppet:///modules/dart/mdct-dev12/git/gitconfig',
+            content => template('dart/mdct-dev12/git/gitconfig'),
             ;
 
         '/root/.gitignore':
