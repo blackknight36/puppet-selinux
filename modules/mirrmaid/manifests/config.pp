@@ -21,10 +21,16 @@
 #   URI of the configuration file content.  One and only one of "content" or
 #   "source" must be given.
 #
-# [*cronjob*]
+# [*cron_source*]
 #   URI of the cron job file to be installed.  Use the default (undef) if you
 #   do not want a cron job file installed.  See the cron::jobfile definition
 #   for more details regarding format, requirements, etc.
+#
+# [*cron_content*]
+#   Literal content for the  cron job file to be installed.  Use the default
+#   (undef) if you do not want a cron job file installed.  See the
+#   cron::jobfile definition for more details regarding format, requirements,
+#   etc.
 #
 # === Authors
 #
@@ -36,30 +42,32 @@ define mirrmaid::config (
         $ensure='present',
         $content=undef,
         $source=undef,
-        $cronjob=undef,
+        $cron_content=undef,
+        $cron_source=undef,
     ) {
 
     include 'cron::daemon'
     include 'mirrmaid::params'
 
     file { "/etc/mirrmaid/${name}.conf":
-        ensure      => $ensure,
-        owner       => 'root',
-        group       => 'mirrmaid',
-        mode        => '0640',
-        seluser     => 'system_u',
-        selrole     => 'object_r',
-        seltype     => 'etc_t',
-        subscribe   => Package[$mirrmaid::params::packages],
-        content     => $content,
-        source      => $source,
+        ensure    => $ensure,
+        owner     => 'root',
+        group     => 'mirrmaid',
+        mode      => '0640',
+        seluser   => 'system_u',
+        selrole   => 'object_r',
+        seltype   => 'etc_t',
+        subscribe => Package[$mirrmaid::params::packages],
+        content   => $content,
+        source    => $source,
     }
 
-    if $cronjob != undef {
+    if $cron_source != undef and $cron_source != undef {
 
-        cron::jobfile { "${name}":
+        cron::jobfile { $name:
             require => Class['mirrmaid'],
-            source  => "${cronjob}",
+            source  => $cron_source,
+            content => $cron_content,
         }
 
     }
