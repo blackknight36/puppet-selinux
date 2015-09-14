@@ -75,44 +75,44 @@ class dart::mdct_00fs inherits ::dart::abstract::base_node {
         purge   => true,
         recurse => true,
         require => Class['::mirrmaid'],
-        source  => 'puppet:///private-host/mirrmaid/.ssh',
+        source  => 'puppet:///modules/dart/mirrmaid/.ssh',
     }
 
     # This config is merely note referring the reader to the others.
     ::mirrmaid::config { 'mirrmaid':
-        source  => 'puppet:///private-host/mirrmaid/mirrmaid.conf',
-        cronjob => 'puppet:///private-host/mirrmaid/mirrmaid.cron',
+        source  => 'puppet:///modules/dart/mirrmaid/mirrmaid.conf',
+        cronjob => 'puppet:///modules/dart/mirrmaid/mirrmaid.cron',
     }
 
     ::mirrmaid::config { 'mirrmaid-picaps':
-        source  => 'puppet:///private-host/mirrmaid/mirrmaid-picaps.conf',
-        cronjob => 'puppet:///private-host/mirrmaid/mirrmaid-picaps.cron',
+        source  => 'puppet:///modules/dart/mirrmaid/mirrmaid-picaps.conf',
+        cronjob => 'puppet:///modules/dart/mirrmaid/mirrmaid-picaps.cron',
     }
 
     ::mirrmaid::config { 'mirrmaid-fedora':
-        source  => 'puppet:///private-host/mirrmaid/mirrmaid-fedora.conf',
-        cronjob => 'puppet:///private-host/mirrmaid/mirrmaid-fedora.cron',
+        source  => 'puppet:///modules/dart/mirrmaid/mirrmaid-fedora.conf',
+        cronjob => 'puppet:///modules/dart/mirrmaid/mirrmaid-fedora.cron',
     }
 
     ::mirrmaid::config { 'mirrmaid-mariadb':
-        source  => 'puppet:///private-host/mirrmaid/mirrmaid-mariadb.conf',
-        cronjob => 'puppet:///private-host/mirrmaid/mirrmaid-mariadb.cron',
+        source  => 'puppet:///modules/dart/mirrmaid/mirrmaid-mariadb.conf',
+        cronjob => 'puppet:///modules/dart/mirrmaid/mirrmaid-mariadb.cron',
     }
 
     ::mirrmaid::config { 'mirrmaid-rpmfusion':
-        source  => 'puppet:///private-host/mirrmaid/mirrmaid-rpmfusion.conf',
-        cronjob => 'puppet:///private-host/mirrmaid/mirrmaid-rpmfusion.cron',
+        source  => 'puppet:///modules/dart/mirrmaid/mirrmaid-rpmfusion.conf',
+        cronjob => 'puppet:///modules/dart/mirrmaid/mirrmaid-rpmfusion.cron',
     }
 
     ::mirrmaid::config { 'mirrmaid-yum-fanout':
-        source  => 'puppet:///private-host/mirrmaid/mirrmaid-yum-fanout.conf',
-        cronjob => 'puppet:///private-host/mirrmaid/mirrmaid-yum-fanout.cron',
+        source  => 'puppet:///modules/dart/mirrmaid/mirrmaid-yum-fanout.conf',
+        cronjob => 'puppet:///modules/dart/mirrmaid/mirrmaid-yum-fanout.cron',
     }
 
     include '::picaps::backup_agent'
 
     class { '::vsftpd':
-        source        => 'puppet:///private-host/vsftpd/vsftpd.conf',
+        source        => 'puppet:///modules/dart/vsftpd/vsftpd.conf',
         allow_use_nfs => false,
     }
 
