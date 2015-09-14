@@ -84,35 +84,39 @@ class dart::mdct_00fs (
         source  => 'puppet:///modules/dart/mirrmaid/.ssh',
     }
 
-    # This config is merely note referring the reader to the others.
-    ::mirrmaid::config { 'mirrmaid':
-        source      => 'puppet:///modules/dart/mirrmaid/mirrmaid.conf',
-        cron_source => 'puppet:///modules/dart/mirrmaid/mirrmaid.cron',
-    }
+    $mirrmaid_sources = 'puppet:///modules/dart/mirrmaid'
+    ::mirrmaid::config {
+        # This config is merely note referring the reader to the others.
+        'mirrmaid':
+            source      => "${mirrmaid_sources}/mirrmaid.conf",
+            cron_source => "${mirrmaid_sources}/mirrmaid.cron",
+            ;
 
-    ::mirrmaid::config { 'mirrmaid-picaps':
-        source      => 'puppet:///modules/dart/mirrmaid/mirrmaid-picaps.conf',
-        cron_source => 'puppet:///modules/dart/mirrmaid/mirrmaid-picaps.cron',
-    }
+        'mirrmaid-picaps':
+            source      => "${mirrmaid_sources}/mirrmaid-picaps.conf",
+            cron_source => "${mirrmaid_sources}/mirrmaid-picaps.cron",
+            ;
 
-    ::mirrmaid::config { 'mirrmaid-fedora':
-        source       => 'puppet:///modules/dart/mirrmaid/mirrmaid-fedora.conf',
-        cron_content => template('dart/mirrmaid/mirrmaid-fedora.cron'),
-    }
+        'mirrmaid-fedora':
+            source       => "${mirrmaid_sources}/mirrmaid-fedora.conf",
+            cron_content => template('dart/mirrmaid/mirrmaid-fedora.cron'),
+            ;
 
-    ::mirrmaid::config { 'mirrmaid-mariadb':
-        source       => 'puppet:///modules/dart/mirrmaid/mirrmaid-mariadb.conf',
-        cron_content => template('dart/mirrmaid/mirrmaid-mariadb.cron'),
-    }
+        'mirrmaid-mariadb':
+            source       => "${mirrmaid_sources}/mirrmaid-mariadb.conf",
+            cron_content => template('dart/mirrmaid/mirrmaid-mariadb.cron'),
+            ;
 
-    ::mirrmaid::config { 'mirrmaid-rpmfusion':
-        source       => 'puppet:///modules/dart/mirrmaid/mirrmaid-rpmfusion.conf',
-        cron_content => template('dart/mirrmaid/mirrmaid-rpmfusion.cron'),
-    }
+        'mirrmaid-rpmfusion':
+            source       => "${mirrmaid_sources}/mirrmaid-rpmfusion.conf",
+            cron_content => template('dart/mirrmaid/mirrmaid-rpmfusion.cron'),
+            ;
 
-    ::mirrmaid::config { 'mirrmaid-yum-fanout':
-        source      => 'puppet:///modules/dart/mirrmaid/mirrmaid-yum-fanout.conf',
-        cron_source => 'puppet:///modules/dart/mirrmaid/mirrmaid-yum-fanout.cron',
+        'mirrmaid-yum-fanout':
+            source      => "${mirrmaid_sources}/mirrmaid-yum-fanout.conf",
+            cron_source => "${mirrmaid_sources}/mirrmaid-yum-fanout.cron",
+            ;
+
     }
 
     include '::picaps::backup_agent'
