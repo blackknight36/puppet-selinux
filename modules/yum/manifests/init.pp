@@ -1,14 +1,35 @@
 # modules/yum/manifests/init.pp
 #
-# Synopsis:
-#       Configures YUM on a host.
+# == Class: yum
 #
-# Parameters:
-#       Name__________  Notes_  Description___________________________
+# Manages yum on a host.
 #
-#       conf_source             URI for main yum.conf content.
+# === Parameters
+#
+# ==== Required
+#
+# ==== Optional
+#
+# [*deltarpm*]
+#   See 'deltarpm' in yum.conf(5).
+#
+# [*http_caching*]
+#   See 'http_caching' in yum.conf(5).
+#
+# [*proxy*]
+#   See 'proxy' in yum.conf(5).
+#
+# === Authors
+#
+#   John Florian <john.florian@dart.biz>
+#   John Florian <jflorian@doubledog.org>
 
-class yum ($conf_source) {
+
+class yum (
+        $deltarpm=undef,
+        $http_caching=undef,
+        $proxy=undef,
+    ) {
 
     file { '/etc/yum.conf':
         owner   => 'root',
@@ -17,7 +38,7 @@ class yum ($conf_source) {
         seluser => 'system_u',
         selrole => 'object_r',
         seltype => 'etc_t',
-        source  => $conf_source,
+        content => template('yum/yum.conf.erb'),
     }
 
 }

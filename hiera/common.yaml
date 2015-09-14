@@ -15,6 +15,9 @@ chrony::servers:
     - "%{::default_route} iburst"
 
 
+http_proxy:                 mdct-proxy.dartcontainer.com
+
+
 openssh::server::source:    "puppet:///modules/dart/openssh/sshd_config.%{::operatingsystem}.%{::operatingsystemrelease}"
 
 
@@ -27,4 +30,9 @@ sendmail::ensure:           stopped
 sudo::drop_in::source:      puppet:///modules/dart/sudo/mdct
 
 
-yum::conf_source:           puppet:///modules/dart/yum/yum.conf
+# Dart has no need for delta rpms since we have a local mirror.
+yum::deltarpm:              0
+# Instruct upstream caches to only cache the RPM package downloads and not the
+# repository metadata.  This alleviates certain caching issues we've seen on
+# occasion.
+yum::http_caching:          packages

@@ -6,4 +6,4 @@
 
 ---
 
-yum::conf_source:           puppet:///modules/dart/yum/yum-proxied.conf
+yum::proxy:                 "http://%{hiera('http_proxy')}:8080"
