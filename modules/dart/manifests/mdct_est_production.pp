@@ -8,7 +8,7 @@
 
 class dart::mdct_est_production inherits dart::abstract::est_server_node {
 
-    class { 'bacula::client':
+    class { 'jaf_bacula::client':
         dir_name    => $dart::params::bacula_dir_name,
         dir_passwd  => '83a2c60033d6d19a7148517653f32e78',
         mon_name    => $dart::params::bacula_mon_name,

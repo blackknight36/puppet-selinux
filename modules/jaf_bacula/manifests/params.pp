@@ -1,6 +1,6 @@
 # modules/bacula/manifests/params.pp
 #
-# == Class: bacula::params
+# == Class: jaf_bacula::params
 #
 # Parameters for the bacula puppet module.
 #
@@ -9,7 +9,7 @@
 #   John Florian <jflorian@doubledog.org>
 
 
-class bacula::params {
+class jaf_bacula::params {
 
     case $::operatingsystem {
         Fedora: {

@@ -1,6 +1,6 @@
 # modules/bacula/manifests/admin.pp
 #
-# == Class: bacula::admin
+# == Class: jaf_bacula::admin
 #
 # Configures the Bacula administration tools on a host.
 #
@@ -21,13 +21,13 @@
 #   John Florian <jflorian@doubledog.org>
 
 
-class bacula::admin (
+class jaf_bacula::admin (
     $dir_address, $dir_name, $dir_passwd,
     ) {
 
-    include 'bacula::params'
+    include 'jaf_bacula::params'
 
-    package { $bacula::params::admin_packages:
+    package { $jaf_bacula::params::admin_packages:
         ensure  => installed,
     }
 
@@ -38,14 +38,14 @@ class bacula::admin (
         seluser     => 'system_u',
         selrole     => 'object_r',
         seltype     => 'etc_t',
-        subscribe   => Package[$bacula::params::admin_packages],
+        subscribe   => Package[$jaf_bacula::params::admin_packages],
         # It seems only the bacula-client package provides the bacula group.
         # TODO: prove and file a BZ
-        require     => Class['bacula::client'],
+        require     => Class['jaf_bacula::client'],
     }
 
     file { '/etc/bacula/bat.conf':
-        content => template('bacula/bat.conf'),
+        content => template('jaf_bacula/bat.conf'),
     }
 
 }

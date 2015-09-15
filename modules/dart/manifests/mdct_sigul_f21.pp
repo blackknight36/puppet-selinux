@@ -25,7 +25,7 @@ class dart::mdct_sigul_f21 inherits ::dart::abstract::sigul_node {
         stp        => 'no',
     }
 
-    class { '::bacula::client':
+    class { '::jaf_bacula::client':
         dir_name   => $dart::params::bacula_dir_name,
         dir_passwd => 'FU79NdRq7INnQS9548bJ5p8dWBUS268AwimyOXUq6iKN',
         mon_name   => $dart::params::bacula_mon_name,

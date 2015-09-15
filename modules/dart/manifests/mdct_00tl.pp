@@ -8,7 +8,7 @@
 
 class dart::mdct_00tl inherits dart::abstract::semi_guarded_server_node {
 
-    class { 'bacula::client':
+    class { 'jaf_bacula::client':
         dir_name    => $dart::params::bacula_dir_name,
         dir_passwd  => 'VrLkRkBWWIhDHF8ARkPfGH5mNWnF1wZd939DmfFAhNzS',
         mon_name    => $dart::params::bacula_mon_name,

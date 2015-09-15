@@ -8,7 +8,7 @@
 
 class dart::mdct_ngic inherits dart::abstract::ngic_server_node {
 
-    class { 'bacula::client':
+    class { 'jaf_bacula::client':
         dir_name    => $dart::params::bacula_dir_name,
         dir_passwd  => 'jJwusfSjdlflSdFe23rtunxNnsnsdeif9939HyL3ds',
         mon_name    => $dart::params::bacula_mon_name,

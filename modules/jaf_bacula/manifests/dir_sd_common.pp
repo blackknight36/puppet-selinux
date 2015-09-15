@@ -1,6 +1,6 @@
 # modules/bacula/manifests/dir_sd_common.pp
 #
-# == Class: bacula::dir_sd_common
+# == Class: jaf_bacula::dir_sd_common
 #
 # Configures the parts of Bacula common to both Directors and Storage Daemons.
 #
@@ -13,11 +13,11 @@
 #   John Florian <jflorian@doubledog.org>
 
 
-class bacula::dir_sd_common {
+class jaf_bacula::dir_sd_common {
 
-    include 'bacula::params'
+    include 'jaf_bacula::params'
 
-    package { $bacula::params::dir_sd_common_packages:
+    package { $jaf_bacula::params::dir_sd_common_packages:
         ensure  => installed,
     }
 

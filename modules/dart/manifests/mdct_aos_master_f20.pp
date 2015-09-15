@@ -15,7 +15,7 @@
 
 class dart::mdct_aos_master_f20 {
 
-    class { 'bacula::client':
+    class { 'jaf_bacula::client':
         dir_name    => $dart::params::bacula_dir_name,
         dir_passwd  => 'hobe9yveB940mWreqoVzfTMIXfWurWi5ROughoJw7A39',
         mon_name    => $dart::params::bacula_mon_name,

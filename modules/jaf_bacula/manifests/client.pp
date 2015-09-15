@@ -1,6 +1,6 @@
 # modules/bacula/manifests/client.pp
 #
-# == Class: bacula::client
+# == Class: jaf_bacula::client
 #
 # Configures the Bacula File (Client) Daemon on a host.
 #
@@ -25,15 +25,15 @@
 #   John Florian <jflorian@doubledog.org>
 
 
-class bacula::client (
+class jaf_bacula::client (
     $dir_name, $dir_passwd,
     $mon_name, $mon_passwd,
     ) {
 
-    include 'bacula::common'
-    include 'bacula::params'
+    include 'jaf_bacula::common'
+    include 'jaf_bacula::params'
 
-    package { $bacula::params::fd_packages:
+    package { $jaf_bacula::params::fd_packages:
         ensure  => installed,
     }
 
@@ -45,24 +45,24 @@ class bacula::client (
         selrole     => 'object_r',
         seltype     => 'etc_t',
         subscribe   => [
-            Package[$bacula::params::common_packages],
-            Package[$bacula::params::fd_packages],
+            Package[$jaf_bacula::params::common_packages],
+            Package[$jaf_bacula::params::fd_packages],
         ]
     }
 
     file { '/etc/bacula/bacula-fd.conf':
-        content => template('bacula/bacula-fd.conf'),
+        content => template('jaf_bacula/bacula-fd.conf'),
     }
 
     file { '/etc/sysconfig/bacula-fd':
-        source  => 'puppet:///modules/bacula/bacula-fd',
+        source  => 'puppet:///modules/jaf_bacula/bacula-fd',
     }
 
     iptables::tcp_port {
         'bacula-fd':    port => '9102';
     }
 
-    service { $bacula::params::fd_service_name:
+    service { $jaf_bacula::params::fd_service_name:
         enable      => true,
         ensure      => running,
         hasrestart  => true,
@@ -70,8 +70,8 @@ class bacula::client (
         subscribe   => [
             File['/etc/bacula/bacula-fd.conf'],
             File['/etc/sysconfig/bacula-fd'],
-            Package[$bacula::params::common_packages],
-            Package[$bacula::params::fd_packages],
+            Package[$jaf_bacula::params::common_packages],
+            Package[$jaf_bacula::params::fd_packages],
         ],
     }
 

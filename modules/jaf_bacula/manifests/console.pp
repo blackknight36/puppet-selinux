@@ -1,6 +1,6 @@
 # modules/bacula/manifests/console.pp
 #
-# == Class: bacula::console
+# == Class: jaf_bacula::console
 #
 # Configures the Bacula Console on a host.
 #
@@ -21,13 +21,13 @@
 #   John Florian <jflorian@doubledog.org>
 
 
-class bacula::console (
+class jaf_bacula::console (
     $dir_address, $dir_name, $dir_passwd,
     ) {
 
-    include 'bacula::params'
+    include 'jaf_bacula::params'
 
-    package { $bacula::params::con_packages:
+    package { $jaf_bacula::params::con_packages:
         ensure  => installed,
     }
 
@@ -38,11 +38,11 @@ class bacula::console (
         seluser     => 'system_u',
         selrole     => 'object_r',
         seltype     => 'etc_t',
-        subscribe   => Package[$bacula::params::con_packages],
+        subscribe   => Package[$jaf_bacula::params::con_packages],
     }
 
     file { '/etc/bacula/bconsole.conf':
-        content => template('bacula/bconsole.conf'),
+        content => template('jaf_bacula/bconsole.conf'),
     }
 
 }

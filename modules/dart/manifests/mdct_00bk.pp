@@ -48,20 +48,20 @@ class dart::mdct_00bk inherits dart::abstract::guarded_server_node {
 #        hba_conf    => 'puppet:///private-host/postgresql/pg_hba.conf',
 #    }
 
-    class { 'bacula::client':
+    class { 'jaf_bacula::client':
         dir_name    => $dart::params::bacula_dir_name,
         dir_passwd  => 'Aq3b8OdDuJ4Z6pmbsK7tJNRvPSMosspucxCEJ4vFNxAz',
         mon_name    => $dart::params::bacula_mon_name,
         mon_passwd  => 'Ojx6xUeoCuBymMWsB6RCutwlEKydA8ZpKPJaXHxi6eTn',
     }
 
-    class { 'bacula::console':
+    class { 'jaf_bacula::console':
         dir_address => $dart::params::bacula_dir_fqdn,
         dir_name    => $dart::params::bacula_dir_name,
         dir_passwd  => $dart::params::bacula_dir_passwd,
     }
 
-    class { 'bacula::storage_daemon':
+    class { 'jaf_bacula::storage_daemon':
         dir_name        => $dart::params::bacula_dir_name,
         mon_name        => $dart::params::bacula_mon_name,
         mon_passwd      => $dart::params::bacula_mon_passwd,
@@ -70,13 +70,13 @@ class dart::mdct_00bk inherits dart::abstract::guarded_server_node {
         sd_archive_dev  => '/storage/backup',
     }
 
-    class { 'bacula::director':
+    class { 'jaf_bacula::director':
         dir_conf        => template('dart/bacula/director.conf'),
         pgpass_source   => 'puppet:///private-host/.pgpass',
 #        require         => Class['postgresql::server'],
     }
 
-    bacula::director::inclusion {
+    jaf_bacula::director::inclusion {
         'clients':
             content => template('dart/bacula/clients.conf');
         'file-sets':

@@ -1,6 +1,6 @@
 # modules/bacula/manifests/director.pp
 #
-# == Class: bacula::director
+# == Class: jaf_bacula::director
 #
 # Configures the Bacula Director Daemon on a host.
 #
@@ -17,15 +17,15 @@
 #   John Florian <jflorian@doubledog.org>
 
 
-class bacula::director ($dir_conf, $pgpass_source) {
+class jaf_bacula::director ($dir_conf, $pgpass_source) {
 
-    include 'bacula::common'
-    include 'bacula::dir_sd_common'
-    include 'bacula::params'
+    include 'jaf_bacula::common'
+    include 'jaf_bacula::dir_sd_common'
+    include 'jaf_bacula::params'
 
-    package { $bacula::params::dir_packages:
+    package { $jaf_bacula::params::dir_packages:
         ensure  => installed,
-        notify  => Service[$bacula::params::dir_service_name],
+        notify  => Service[$jaf_bacula::params::dir_service_name],
     }
 
     File {
@@ -35,18 +35,18 @@ class bacula::director ($dir_conf, $pgpass_source) {
         seluser     => 'system_u',
         selrole     => 'object_r',
         seltype     => 'etc_t',
-        before      => Service[$bacula::params::dir_service_name],
-        notify      => Service[$bacula::params::dir_service_name],
+        before      => Service[$jaf_bacula::params::dir_service_name],
+        notify      => Service[$jaf_bacula::params::dir_service_name],
         subscribe   => [
-            Package[$bacula::params::common_packages],
-            Package[$bacula::params::dir_packages],
-            Package[$bacula::params::dir_sd_common_packages],
+            Package[$jaf_bacula::params::common_packages],
+            Package[$jaf_bacula::params::dir_packages],
+            Package[$jaf_bacula::params::dir_sd_common_packages],
         ]
     }
 
     file { '/etc/bacula/backup_conf_files':
         mode    => '0750',
-        source  => 'puppet:///modules/bacula/backup_conf_files',
+        source  => 'puppet:///modules/jaf_bacula/backup_conf_files',
     }
 
     file { '/etc/bacula/bacula-dir.conf':
@@ -67,7 +67,7 @@ class bacula::director ($dir_conf, $pgpass_source) {
         'bacula-dir':   port => '9101';
     }
 
-    service { $bacula::params::dir_service_name:
+    service { $jaf_bacula::params::dir_service_name:
         enable      => true,
         ensure      => running,
         hasrestart  => true,

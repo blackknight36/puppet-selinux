@@ -1,6 +1,6 @@
 # modules/bacula/manifests/director/inclusion.pp
 #
-# == Define: bacula::director::inclusion
+# == Define: jaf_bacula::director::inclusion
 #
 # Installs a configuration file fragment for inclusion in the Bacula
 # Director's main configuration file.
@@ -27,11 +27,11 @@
 #   John Florian <john.florian@dart.biz>
 
 
-define bacula::director::inclusion (
+define jaf_bacula::director::inclusion (
     $ensure='present', $content=undef, $source=undef
     ) {
 
-    include 'bacula::params'
+    include 'jaf_bacula::params'
 
     file { "/etc/bacula/director/${name}.conf":
         ensure      => $ensure,
@@ -41,9 +41,9 @@ define bacula::director::inclusion (
         seluser     => 'system_u',
         selrole     => 'object_r',
         seltype     => 'etc_t',
-        before      => Service[$bacula::params::dir_service_name],
-        notify      => Service[$bacula::params::dir_service_name],
-        subscribe   => Package[$bacula::params::dir_packages],
+        before      => Service[$jaf_bacula::params::dir_service_name],
+        notify      => Service[$jaf_bacula::params::dir_service_name],
+        subscribe   => Package[$jaf_bacula::params::dir_packages],
         content     => $content,
         source      => $source,
     }

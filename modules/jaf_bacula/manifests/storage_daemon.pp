@@ -1,6 +1,6 @@
 # modules/bacula/manifests/storage_daemon.pp
 #
-# == Class: bacula::storage_daemon
+# == Class: jaf_bacula::storage_daemon
 #
 # Configures a host as a Bacula Storage Daemon.
 #
@@ -31,24 +31,24 @@
 #   John Florian <jflorian@doubledog.org>
 
 
-class bacula::storage_daemon (
+class jaf_bacula::storage_daemon (
     $dir_name,
     $mon_name, $mon_passwd,
     $sd_name, $sd_passwd, $sd_archive_dev,
     ) {
 
-    include 'bacula::common'
-    include 'bacula::dir_sd_common'
-    include 'bacula::params'
+    include 'jaf_bacula::common'
+    include 'jaf_bacula::dir_sd_common'
+    include 'jaf_bacula::params'
 
     $external_package_deps = [
-        Package[$bacula::params::common_packages],
-        Package[$bacula::params::dir_sd_common_packages],
+        Package[$jaf_bacula::params::common_packages],
+        Package[$jaf_bacula::params::dir_sd_common_packages],
     ]
 
-    package { $bacula::params::sd_packages:
+    package { $jaf_bacula::params::sd_packages:
         ensure  => installed,
-        notify  => Service[$bacula::params::sd_service_name],
+        notify  => Service[$jaf_bacula::params::sd_service_name],
     }
 
     File {
@@ -58,23 +58,23 @@ class bacula::storage_daemon (
         seluser     => 'system_u',
         selrole     => 'object_r',
         seltype     => 'etc_t',
-        before      => Service[$bacula::params::sd_service_name],
-        notify      => Service[$bacula::params::sd_service_name],
+        before      => Service[$jaf_bacula::params::sd_service_name],
+        notify      => Service[$jaf_bacula::params::sd_service_name],
         subscribe   => [
-            Package[$bacula::params::sd_packages],
+            Package[$jaf_bacula::params::sd_packages],
             $external_package_deps,
         ]
     }
 
     file { '/etc/bacula/bacula-sd.conf':
-        content => template('bacula/bacula-sd.conf'),
+        content => template('jaf_bacula/bacula-sd.conf'),
     }
 
     iptables::tcp_port {
         'bacula-sd':    port   => '9103';
     }
 
-    service { $bacula::params::sd_service_name:
+    service { $jaf_bacula::params::sd_service_name:
         enable      => true,
         ensure      => running,
         hasrestart  => true,

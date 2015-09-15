@@ -17,7 +17,7 @@ class dart::mdct_fogbugz inherits dart::abstract::guarded_server_node {
         network_connect => true,
     }
 
-    class { 'bacula::client':
+    class { 'jaf_bacula::client':
         dir_name    => $dart::params::bacula_dir_name,
         mon_name    => $dart::params::bacula_mon_name,
         dir_passwd      => '0dec843864c41aa0a93e87c44d262e19',

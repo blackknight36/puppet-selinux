@@ -23,7 +23,7 @@ class dart::mdct_teamcity_f20 inherits dart::abstract::teamcity_server_node {
         recipient   => 'john.florian@dart.biz',
     }
 
-    class { 'bacula::client':
+    class { 'jaf_bacula::client':
         dir_name    => $dart::params::bacula_dir_name,
         dir_passwd  => 'RFdZ9Dm9bxuIEIp1Q7Gu0sEoHX9AUHecFbwE6weT1IAz',
         mon_name    => $dart::params::bacula_mon_name,

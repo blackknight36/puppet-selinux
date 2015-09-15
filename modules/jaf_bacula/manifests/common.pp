@@ -1,6 +1,6 @@
 # modules/bacula/manifests/common.pp
 #
-# == Class: bacula::common
+# == Class: jaf_bacula::common
 #
 # Configures the common parts of Bacula.
 #
@@ -13,11 +13,11 @@
 #   John Florian <jflorian@doubledog.org>
 
 
-class bacula::common {
+class jaf_bacula::common {
 
-    include 'bacula::params'
+    include 'jaf_bacula::params'
 
-    package { $bacula::params::common_packages:
+    package { $jaf_bacula::params::common_packages:
         ensure  => installed,
     }
 
