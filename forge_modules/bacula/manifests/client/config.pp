@@ -125,7 +125,7 @@ define bacula::client::config (
 ) {
   include ::bacula::params
 
-  if !is_domain_name($name) {
+  if !is_domain_name("${name}") {
     fail "Name for client ${name} must be a fully qualified domain name"
   }
 
