@@ -6,10 +6,10 @@
 
 SELF="$(basename $0)"
 
-ARCHIVES='<%= archives %>'
-KEEP_DAYS='<%= keep_days %>'
-NAME='<%= aos_build_name %>'
-TARGET='<%= target %>'
+ARCHIVES='<%= @archives %>'
+KEEP_DAYS='<%= @keep_days %>'
+NAME='<%= @aos_build_name %>'
+TARGET='<%= @target %>'
 LATEST='latest'
 README='README'
 

@@ -8,7 +8,7 @@ repodata_path = <%= @repodata_path %>
 source_path = <%= @source_path %>
 debuginfo = <%= @debug_info %>
 multilib = <%= @multilib %>
-multilib_method = <%= multilib_method %>
+multilib_method = <%= @multilib_method %>
 tag = <%= @dist_tag %>
 inherit = <%= @inherit %>
 strict_keys = <%= @strict_keys %>

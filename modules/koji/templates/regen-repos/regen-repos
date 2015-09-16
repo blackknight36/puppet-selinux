@@ -5,7 +5,7 @@
 # Constants defined in part or wholly by Puppet resources:
 CONF='<%= @regen_repos_conf %>'
 EXT_REPO_ROOT='<%= @ext_repo_root %>'
-STATE_DIR='<%= regen_repos_states %>'
+STATE_DIR='<%= @regen_repos_states %>'
 
 # Other constants which may be derived from those from Puppet:
 SELF=$(basename $0)

@@ -41,7 +41,7 @@ KEYS = {
     # NB: Duplicate, but otherwise harmless entries may exist here due to the
     # way Class[sigul::auto_signer]] must handle key key sharing across
     # distro releases in the key_map parameter.
-<% key_map.each_pair do |k, v| -%>
+<% @key_map.each_pair do |k, v| -%>
     '<%= v['key_name'] %>': {
         'id': '<%= v['key_id'].downcase %>',
         'v3': <%= {true => 'True', false => 'False'}[v['v3']] %>

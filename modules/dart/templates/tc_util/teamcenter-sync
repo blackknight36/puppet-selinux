@@ -17,7 +17,7 @@
 # Examples:
 #
 #       Do a non-destructive mock run to synchronize mas-cad23 with the
-#       Production source (i.e., //<%= sync_source %>/volumes).
+#       Production source (i.e., //<%= @sync_source %>/volumes).
 #
 #               teamcenter-sync --dry-run mas-cad23
 #
@@ -57,7 +57,7 @@ mounted() {
 }
 
 # Note: Trailing slash is critical and must be present!
-SOURCE='/srv/<%= sync_source %>-volumes/'
+SOURCE='/srv/<%= @sync_source %>-volumes/'
 TARGET=''
 
 # A space delimited list of who will receive the operations log.
