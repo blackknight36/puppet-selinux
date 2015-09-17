@@ -122,10 +122,14 @@ define bacula::client::config (
   $restore_where       = '/var/tmp/bacula-restores',
   $run_scripts         = undef,
   $storage_server      = undef,
-  $tls_ca_cert         = undef,
-  $tls_ca_cert_dir     = undef,
-  $tls_require         = 'yes',
-  $use_tls             = false,
+  $tls_allowed_cn    = [],
+  $tls_ca_cert       = undef,
+  $tls_ca_cert_dir   = undef,
+  $tls_cert          = undef,
+  $tls_key           = undef,
+  $tls_require       = 'yes',
+  $tls_verify_peer   = 'yes',
+  $use_tls           = false
 ) {
   include ::bacula::params
 

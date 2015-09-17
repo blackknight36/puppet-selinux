@@ -7,14 +7,20 @@ Client {
   Job Retention  = 1 Year
   Auto Prune = Yes
 <% if @use_tls -%>
-  TLS Enable = Yes
+  TLS Enable = yes
   TLS Require = <%= @tls_require %>
+  TLS Verify Peer = <%= @tls_verify_peer %>
+<% @tls_allowed_cn.each do |allowed_cn| -%>
+  TLS Allowed CN = "<%= allowed_cn %>"
+<% end -%>
 <% if @tls_ca_cert -%>
   TLS CA Certificate File = <%= @tls_ca_cert %>
 <% end -%>
 <% if @tls_ca_cert_dir -%>
   TLS CA Certificate Dir = <%= @tls_ca_cert_dir %>
 <% end -%>
+  TLS Certificate = <%= @tls_cert %>
+  TLS Key = <%= @tls_key %>
 <% end -%>
 }
 
