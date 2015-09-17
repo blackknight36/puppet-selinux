@@ -1,6 +1,6 @@
 Client {
   Name     = "<%= @name %>"
-  Address  = "<%= @name %>"
+  Address  = "<%= @client_address_real %>"
   Password = "<%= @director_password_real %>"
   Catalog  = "<%= @director_server_real %>:<%= @db_backend_real %>"
   File Retention = 6 Weeks
@@ -68,6 +68,7 @@ Job {
 <% end -%>
 }
 
+<%- if @restore_enable.downcase == 'yes' -%>
 Job {
   Name     = "<%= @name %> Restore"
   Client   = "<%= @name %>"
@@ -79,3 +80,4 @@ Job {
   Messages = "<%= @director_server_real %>:messages:standard"
   Where    = <%= @restore_where %>
 }
+<%- end -%>

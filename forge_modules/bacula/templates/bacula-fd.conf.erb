@@ -30,7 +30,7 @@ Director {
 
 # Now configure the actual File Daemon
 FileDaemon {
-  Name = "<%= scope.lookupvar('::fqdn') -%>"
+  Name = "<%= @client_name -%>"
   Working Directory = /var/lib/bacula
 <% if @plugin_dir -%>
   Plugin Directory = <%= @plugin_dir %>

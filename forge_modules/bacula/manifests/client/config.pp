@@ -11,6 +11,9 @@
 #   If the backup job for the client should be enabled <code>'yes'</code> (default) or <code>'no'</code>.
 # [*client_schedule*]
 #   The schedule for backups to be performed.
+# [*client_address*]
+#   The address of the client. If you want to use a name that is not the <code>$fqdn</code> then this may come
+#   in handy. Defaults to <code>$name</code>
 # [*db_backend*]
 #   The database backend of the catalog storing information about the backup
 # [*director_password*]
@@ -103,6 +106,7 @@
 define bacula::client::config (
   $ensure              = file,
   $backup_enable       = 'yes',
+  $client_address      = undef,
   $client_schedule     = 'WeeklyCycle',
   $db_backend          = undef,
   $director_password   = '',
@@ -127,6 +131,19 @@ define bacula::client::config (
 
   if !is_domain_name("${name}") {
     fail "Name for client ${name} must be a fully qualified domain name"
+  }
+
+  # default the client_address to $name rather than $fqdn since for exported
+  # resources $fqdn would be evaluated on the director.
+  if $client_address and $client_address != '' {
+    $client_address_real = $client_address
+  }
+  else {
+    $client_address_real = "${name}"
+  }
+
+  if !is_domain_name($client_address_real) {
+    fail "Name for client_address ${client_address_real} must be a fully qualified domain name"
   }
 
   validate_re($backup_enable, '^(yes|Yes|no|No)$')
@@ -193,7 +210,7 @@ define bacula::client::config (
   }
 
   if $run_scripts {
-    case type($run_scripts) {
+    case type3x($run_scripts) {
       'array' : {
         # TODO figure out how to validate each item in the array is a hash.
         $run_scripts_real = $run_scripts

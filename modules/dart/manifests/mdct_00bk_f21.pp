@@ -51,49 +51,57 @@ class dart::mdct_00bk_f21 inherits dart::abstract::guarded_server_node {
 #        require => File['/storage'],
 #    }
 
-#    include 'iscsi::initiator'
-
-#    class { 'postgresql::server':
-#        hba_conf    => 'puppet:///private-host/postgresql/pg_hba.conf',
-#    }
-
-    class { 'jaf_bacula::client':
-        dir_name    => $dart::params::bacula_dir_name,
-        dir_passwd  => 'Aq3b8OdDuJ4Z6pmbsK7tJNRvPSMosspucxCEJ4vFNxAz',
-        mon_name    => $dart::params::bacula_mon_name,
-        mon_passwd  => 'Ojx6xUeoCuBymMWsB6RCutwlEKydA8ZpKPJaXHxi6eTn',
+    file { '/var/lib/bacula/ssl':
+        ensure  =>  directory,
+        recurse =>  true,
+        source  =>  'file:/var/lib/puppet/ssl',
+        owner   =>  'bacula',
+        group   =>  'bacula',
     }
 
-    class { 'jaf_bacula::console':
-        dir_address => $dart::params::bacula_dir_fqdn,
-        dir_name    => $dart::params::bacula_dir_name,
-        dir_passwd  => $dart::params::bacula_dir_passwd,
+
+    class { '::postgresql::server':
     }
 
-    class { 'jaf_bacula::storage_daemon':
-        dir_name        => $dart::params::bacula_dir_name,
-        mon_name        => $dart::params::bacula_mon_name,
-        mon_passwd      => $dart::params::bacula_mon_passwd,
-        sd_name         => $dart::params::bacula_sd_name,
-        sd_passwd       => $dart::params::bacula_sd_passwd,
-        sd_archive_dev  => '/storage/volumes',
+    $bacula_clients = {
+        "${::fqdn}" => {
+            client_schedule =>  'WeeklyCycle',
+            fileset         =>  'Basic:noHome',
+            use_tls         =>  true,
+            tls_ca_cert     =>  '/var/lib/bacula/ssl/certs/ca.pem',
+            director_password   =>  'test',
+            director_server =>  "${::fqdn}",
+#            tls_key         =>  "/var/lib/bacula/ssl/private_keys/${::fqdn}.pem",
+#            tls_cert        =>  "/var/lib/bacula/ssl/certs/${::fqdn}.pem",
+            tls_require     =>  'yes',
+#            tls_verify_peer =>  'yes',
+        },
     }
 
-    class { 'jaf_bacula::director':
-        dir_conf        => template('dart/bacula/director.conf'),
-        pgpass_source   => 'puppet:///private-host/.pgpass',
-#        require         => Class['postgresql::server'],
-    }
 
-    jaf_bacula::director::inclusion {
-        'clients':
-            content => template('dart/bacula/clients.conf');
-        'file-sets':
-            content => template('dart/bacula/file-sets.conf');
-        'jobs':
-            content => template('dart/bacula/jobs.conf');
-        'schedules':
-            content => template('dart/bacula/schedules.conf');
-    }
 
+    class { '::bacula':
+        clients         =>  $bacula_clients,
+        is_client       =>  true,
+        is_director     =>  true,
+        is_storage      =>  true,
+        director_server =>  "${::fqdn}",
+        director_password   =>  'test',
+        console_password    =>  'test',
+        mail_to         =>  'd35110@dart.biz',
+        manage_console  =>  true,
+        storage_server  =>  'mdct-00bk-f21.dartcontainer.com',
+        db_backend      =>  'postgresql',
+        use_tls         =>  true,
+        tls_ca_cert     =>  '/var/lib/bacula/ssl/certs/ca.pem',
+        tls_key         =>  "/var/lib/bacula/ssl/private_keys/${::fqdn}.pem",
+        tls_cert        =>  "/var/lib/bacula/ssl/certs/${::fqdn}.pem",
+        tls_require     =>  'yes',
+        tls_verify_peer =>  'yes',
+        manage_db       =>  true,
+        manage_db_tables    =>  true,
+        backup_catalog  =>  false,
+        db_user         =>  'bacula',
+        db_password     =>  'bacula',
+    }
 }

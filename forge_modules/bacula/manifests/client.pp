@@ -31,6 +31,7 @@
 # limitations under the License.
 #
 class bacula::client (
+  $client_name       = $::fqdn,
   $director_password = '',
   $director_server   = undef,
   $plugin_dir        = undef,

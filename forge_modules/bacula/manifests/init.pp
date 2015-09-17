@@ -11,6 +11,9 @@
 # [*clients*]
 #   For directors, <tt>$clients</tt> is a hash of clients.  The keys are the clients while the value is a hash of parameters. The
 #   parameters accepted are the same as the <tt>bacula::client::config</tt> define.
+# [*client_name*]
+#   For clients, the name of the client to be used in the file daemon configuration. The default should work in most cases.
+#   Default: <tt>$::fqdn</tt>
 # [*console_password*]
 #   The console's password
 # [*console_template*]
@@ -186,13 +189,14 @@
 class bacula (
   $backup_catalog        = true,
   $clients               = undef,
+  $client_name           = undef,
   $console_password      = '',
   $console_template      = undef,
   $db_backend            = 'sqlite',
   $db_database           = 'bacula',
   $db_host               = 'localhost',
   $db_password           = '',
-  $db_port               = '3306',
+  $db_port               = undef,
   $db_user               = '',
   $db_user_host          = undef,
   $director_password     = '',
@@ -254,6 +258,15 @@ class bacula (
     default => $manage_logwatch,
   }
 
+  $db_port_real = $db_port ? {
+    undef => $db_backend ? {
+      'mysql'      => '3306',
+      'postgresql' => '5432',
+      default      => '',
+    },
+    default => $db_port,
+  }
+
   # Validate our parameters
   # It's ugly to do it in the parent class
   class { '::bacula::params::validate':
@@ -263,7 +276,7 @@ class bacula (
     db_database           => $db_database,
     db_host               => $db_host,
     db_password           => $db_password,
-    db_port               => $db_port,
+    db_port               => $db_port_real,
     db_user               => $db_user,
     director_password     => $director_password,
     director_server       => $director_server_real,
@@ -304,7 +317,7 @@ class bacula (
     db_database       => $db_database,
     db_host           => $db_host,
     db_password       => $db_password,
-    db_port           => $db_port,
+    db_port           => $db_port_real,
     db_user           => $db_user,
     is_client         => $is_client,
     is_director       => $is_director,
@@ -325,7 +338,7 @@ class bacula (
       db_database           => $db_database,
       db_host               => $db_host,
       db_password           => $db_password,
-      db_port               => $db_port,
+      db_port               => $db_port_real,
       db_user               => $db_user,
       db_user_host          => $db_user_host,
       dir_template          => $director_template,
@@ -390,6 +403,7 @@ class bacula (
 
   if $is_client {
     class { '::bacula::client':
+      client_name       => $client_name,
       director_server   => $director_server_real,
       director_password => $director_password,
       plugin_dir        => $plugin_dir,
