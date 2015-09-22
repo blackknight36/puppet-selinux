@@ -18,4 +18,30 @@ class dart::mdct_tcir_dev inherits dart::abstract::tcir_server_node {
     iptables::tcp_port {
         'postgresql':   port => '5432';
     }
+
+    iptables::tcp_port {
+        'bacula_fd': port => '9102';
+    }
+
+
+    file { '/var/lib/bacula/ssl':
+        ensure  =>  directory,
+        recurse =>  true,
+        source  =>  'file:/var/lib/puppet/ssl',
+        owner   =>  'bacula',
+        group   =>  'bacula',
+    }
+
+    class { '::bacula': 
+        is_client       =>  true,
+        director_server =>  "mdct-00bk-f21.dartcontainer.com",
+        director_password   =>  'test',
+        storage_server  =>  'mdct-00bk-f21.dartcontainer.com',
+        use_tls         =>  true,
+        tls_ca_cert     =>  '/var/lib/bacula/ssl/certs/ca.pem',
+        tls_key         =>  "/var/lib/bacula/ssl/private_keys/${::fqdn}.pem",
+        tls_cert        =>  "/var/lib/bacula/ssl/certs/${::fqdn}.pem",
+        tls_require     =>  'yes',
+        tls_verify_peer =>  'yes',
+    }
 }

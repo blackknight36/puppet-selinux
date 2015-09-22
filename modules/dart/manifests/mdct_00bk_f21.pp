@@ -34,23 +34,6 @@ class dart::mdct_00bk_f21 inherits dart::abstract::guarded_server_node {
         ensure  => directory,
     }
 
-    file { '/storage/database':
-        ensure  => directory,
-    }
-
-    file { '/storage/volumes':
-        ensure  => directory,
-    }
-
-#    mount { '/storage':
-#        ensure  => 'mounted',
-#        atboot  => true,
-#        device  => '/dev/BackupVG/lvol1',
-#        fstype  => 'auto',
-#        options => '_netdev,defaults',
-#        require => File['/storage'],
-#    }
-
     file { '/var/lib/bacula/ssl':
         ensure  =>  directory,
         recurse =>  true,
@@ -67,14 +50,35 @@ class dart::mdct_00bk_f21 inherits dart::abstract::guarded_server_node {
         "${::fqdn}" => {
             client_schedule =>  'WeeklyCycle',
             fileset         =>  'Basic:noHome',
-            use_tls         =>  true,
-            tls_ca_cert     =>  '/var/lib/bacula/ssl/certs/ca.pem',
             director_password   =>  'test',
             director_server =>  "${::fqdn}",
-#            tls_key         =>  "/var/lib/bacula/ssl/private_keys/${::fqdn}.pem",
-#            tls_cert        =>  "/var/lib/bacula/ssl/certs/${::fqdn}.pem",
+            use_tls         =>  true,
+            tls_ca_cert     =>  '/var/lib/bacula/ssl/certs/ca.pem',
+            tls_key         =>  "/var/lib/bacula/ssl/private_keys/${::fqdn}.pem",
+            tls_cert        =>  "/var/lib/bacula/ssl/certs/${::fqdn}.pem",
             tls_require     =>  'yes',
-#            tls_verify_peer =>  'yes',
+        },
+        "10.201.64.2" => {
+            client_schedule =>  'WeeklyCycle',
+            fileset         =>  'Basic:noHome',
+            director_password   =>  'test',
+            director_server =>  "${::fqdn}",
+            use_tls         =>  true,
+            tls_ca_cert     =>  '/var/lib/bacula/ssl/certs/ca.pem',
+            tls_key         =>  "/var/lib/bacula/ssl/private_keys/${::fqdn}.pem",
+            tls_cert        =>  "/var/lib/bacula/ssl/certs/${::fqdn}.pem",
+            tls_require     =>  'yes',
+        },
+        "mdct-tcir-dev.dartcontainer.com" => {
+            client_schedule =>  'WeeklyCycle',
+            fileset         =>  'Basic:noHome',
+            director_password   =>  'test',
+            director_server =>  "${::fqdn}",
+            use_tls         =>  true,
+            tls_ca_cert     =>  '/var/lib/bacula/ssl/certs/ca.pem',
+            tls_key         =>  "/var/lib/bacula/ssl/private_keys/${::fqdn}.pem",
+            tls_cert        =>  "/var/lib/bacula/ssl/certs/${::fqdn}.pem",
+            tls_require     =>  'yes',
         },
     }
 
@@ -103,5 +107,6 @@ class dart::mdct_00bk_f21 inherits dart::abstract::guarded_server_node {
         backup_catalog  =>  false,
         db_user         =>  'bacula',
         db_password     =>  'bacula',
+        storage_default_mount   =>  '/storage/volumes',
     }
 }
