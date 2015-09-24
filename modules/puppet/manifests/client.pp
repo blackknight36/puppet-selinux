@@ -50,7 +50,7 @@ class puppet::client ($enable=true, $ensure='running') {
     File {
         owner       => 'root',
         group       => 'puppet',
-        mode        => '0640',
+        mode        => '0644',
         seluser     => 'system_u',
         selrole     => 'object_r',
         seltype     => 'puppet_etc_t',
