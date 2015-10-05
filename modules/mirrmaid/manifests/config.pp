@@ -62,12 +62,12 @@ define mirrmaid::config (
         source    => $source,
     }
 
-    if $cron_source != undef and $cron_source != undef {
+    if $cron_content != undef or $cron_source != undef {
 
         cron::jobfile { $name:
             require => Class['mirrmaid'],
-            source  => $cron_source,
             content => $cron_content,
+            source  => $cron_source,
         }
 
     }
