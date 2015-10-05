@@ -6,20 +6,24 @@
 #
 # === Parameters
 #
+# ==== Required
+#
 # [*namevar*]
 #   Instance name for the config file, resulting in:
 #   /etc/mirrmaid/${name}.conf
+#
+# ==== Optional
 #
 # [*ensure*]
 #   Instance is to be 'present' (default) or 'absent'.
 #
 # [*content*]
-#   Literal content for the configuration file.  One and only one of "content"
-#   or "source" must be given.
+#   Literal content for the configuration file.  If neither "content" nor
+#   "source" is given, the content of the file will be left unmanaged.
 #
 # [*source*]
-#   URI of the configuration file content.  One and only one of "content" or
-#   "source" must be given.
+#   URI of the configuration file content.  If neither "content" nor "source"
+#   is given, the content of the file will be left unmanaged.
 #
 # [*cron_source*]
 #   URI of the cron job file to be installed.  Use the default (undef) if you
