@@ -50,8 +50,8 @@ define mirrmaid::config (
         $cron_source=undef,
     ) {
 
-    include 'cron::daemon'
-    include 'mirrmaid::params'
+    include '::cron::daemon'
+    include '::mirrmaid::params'
 
     file { "/etc/mirrmaid/${name}.conf":
         ensure    => $ensure,
@@ -61,7 +61,7 @@ define mirrmaid::config (
         seluser   => 'system_u',
         selrole   => 'object_r',
         seltype   => 'etc_t',
-        subscribe => Package[$mirrmaid::params::packages],
+        subscribe => Package[$::mirrmaid::params::packages],
         content   => $content,
         source    => $source,
     }
@@ -69,7 +69,7 @@ define mirrmaid::config (
     if $cron_content != undef or $cron_source != undef {
 
         cron::jobfile { $name:
-            require => Class['mirrmaid'],
+            require => Class['::mirrmaid'],
             content => $cron_content,
             source  => $cron_source,
         }
