@@ -43,14 +43,14 @@ class dart::abstract::pycharm::professional {
 
     jetbrains::pycharm::release {
 
-        'pycharm-professional-143.24':
-            build   => '143.24',
+        'pycharm-professional-143.165':
+            build   => '143.165',
             edition => 'professional',
             ;
 
-        'pycharm-professional-142.5084':
+        'pycharm-professional-143.24':
             ensure  => 'absent',
-            build   => '142.5084',
+            build   => '143.24',
             edition => 'professional',
             ;
 
