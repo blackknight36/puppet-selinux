@@ -8,3 +8,6 @@
 
 sendmail::enable:           true
 sendmail::ensure:           running
+
+vsftpd::source:             puppet:///modules/dart/mdct-aos-master/vsftpd/vsftpd.conf
+vsftpd::allow_use_nfs:      true

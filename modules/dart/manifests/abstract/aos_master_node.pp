@@ -97,10 +97,7 @@ class dart::abstract::aos_master_node (
 #        hba_conf    => 'puppet:///private-host/postgresql/pg_hba.conf',
 #    }
 
-    class { 'vsftpd':
-        source          => 'puppet:///private-host/vsftpd/vsftpd.conf',
-        allow_use_nfs   => true,
-    }
+    include 'vsftpd'
 
     # vsftpd will deny clients access to /pub/mdct-aos-flash/ so we must rbind
     # mount that content to an acceptable location.
