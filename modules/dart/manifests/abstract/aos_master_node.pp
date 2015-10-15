@@ -72,9 +72,9 @@ class dart::abstract::aos_master_node (
     }
 
     class { 'dhcpd_driven::master':
-        before  => Service[$apache::params::services],
-        notify  => Service[$apache::params::services],
-        source  => 'puppet:///private-host/dhcpd-driven/dhcpd-driven.conf',
+        before => Service[$apache::params::services],
+        notify => Service[$apache::params::services],
+        source => 'puppet:///modules/dart/mdct-aos-master/dhcpd-driven/dhcpd-driven.conf',
     }
 
     class { 'firewall_driven::master':
