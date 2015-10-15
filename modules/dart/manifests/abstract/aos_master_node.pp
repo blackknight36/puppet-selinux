@@ -78,9 +78,9 @@ class dart::abstract::aos_master_node (
     }
 
     class { 'firewall_driven::master':
-        before  => Service[$apache::params::services],
-        notify  => Service[$apache::params::services],
-        source  => 'puppet:///private-host/firewall-driven/firewall-driven.conf',
+        before => Service[$apache::params::services],
+        notify => Service[$apache::params::services],
+        source => 'puppet:///modules/dart/mdct-aos-master/firewall-driven/firewall-driven.conf',
     }
 
     apache::site_config { 'django-apps':
