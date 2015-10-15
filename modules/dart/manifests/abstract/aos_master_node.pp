@@ -116,7 +116,7 @@ class dart::abstract::aos_master_node (
     }
 
     iptables::rules_file { 'blocks':
-        source  => 'puppet:///private-host/iptables/blocks',
+        source  => 'puppet:///modules/dart/mdct-aos-master/iptables/blocks',
     }
 
     class { 'selinux':
