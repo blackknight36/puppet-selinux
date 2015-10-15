@@ -36,14 +36,14 @@ class dart::abstract::aos_master_node (
     }
 
     apache::site_config { 'pub':
-        source  => 'puppet:///private-host/apache/pub.conf',
+        source => 'puppet:///modules/dart/mdct-aos-master/httpd/pub.conf',
     }
 
     file { '/var/www/html/index.html':
-        owner   => 'root',
-        group   => 'root',
-        mode    => '0644',
-        source  => 'puppet:///private-host/apache/index.html',
+        owner  => 'root',
+        group  => 'root',
+        mode   => '0644',
+        source => 'puppet:///modules/dart/mdct-aos-master/httpd/index.html',
     }
 
     systemd::mount { '/var/www/pub':
