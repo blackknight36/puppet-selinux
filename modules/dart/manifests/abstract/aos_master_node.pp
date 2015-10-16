@@ -93,9 +93,24 @@ class dart::abstract::aos_master_node (
         source  => 'puppet:///modules/dart/mdct_puppeteer/mdct-puppeteer-admin.conf',
     }
 
-#    class { 'postgresql::server':
-#        hba_conf    => 'puppet:///private-host/postgresql/pg_hba.conf',
-#    }
+    class { '::postgresql::server':
+    }
+
+    Postgresql::Server::Pg_hba_rule {
+        auth_method => 'trust',
+        order       => '001',
+        type        => 'local',
+        user        => 'root',
+    }
+
+    ::postgresql::server::pg_hba_rule {
+        'allow root user connections to managed_firewalls via Unix domain socket':
+            database => 'managed_firewalls',
+        ;
+        'allow root user connections to managed_switches via Unix domain socket':
+            database => 'managed_switches',
+        ;
+    }
 
     include 'vsftpd'
 
