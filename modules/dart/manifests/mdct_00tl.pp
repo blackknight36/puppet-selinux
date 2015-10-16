@@ -18,5 +18,18 @@ class dart::mdct_00tl inherits dart::abstract::semi_guarded_server_node {
     iptables::tcp_port {
         'http': port => '80';
     }
+    class { 'network':
+        service         => 'legacy',
+        domain          => $dart::params::dns_domain,
+        name_servers    => $dart::params::dns_servers,
+    }
+
+    network::interface { 'eth0':
+        template    => 'static',
+        ip_address  => '10.201.64.15',
+        netmask     => '255.255.252.0',
+        gateway     => '10.201.67.254',
+        stp         => 'no',
+    }
 
 }

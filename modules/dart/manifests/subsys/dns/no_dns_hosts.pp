@@ -13,32 +13,6 @@ class dart::subsys::dns::no_dns_hosts {
     # nodes to drop these entries.  After the purge date, the records can be
     # deleted from here permanently.
 
-    # Purge after 2015-05-22 {{{
-    host { 'mdct-f14-builder.dartcontainer.com':
-        ensure       => absent,
-        ip           => '10.1.192.137',
-        host_aliases => [ 'mdct-f14-builder', 'f14b' ],
-    }
-
-    host { 'mdct-f15-builder.dartcontainer.com':
-        ensure       => absent,
-        ip           => '10.1.192.138',
-        host_aliases => [ 'mdct-f15-builder', 'f15b' ],
-    }
-
-    host { 'mdct-f16-builder.dartcontainer.com':
-        ensure       => absent,
-        ip           => '10.1.192.139',
-        host_aliases => [ 'mdct-f16-builder', 'f16b' ],
-    }
-
-    host { 'mdct-dev15.dartcontainer.com':
-        ensure       => absent,
-        ip           => '10.1.250.50',
-        host_aliases => [ 'mdct-dev15' ],
-    }
-
-    #}}}
 
     #}}}
 
@@ -116,44 +90,51 @@ class dart::subsys::dns::no_dns_hosts {
 
     #}}}
 
-    # TeamCity {{{
+    #Purge after 2015-11-16 Teamcity{{{
 
     host { 'mdct-teamcity-agent1.dartcontainer.com':
-        ip           => '10.1.192.125',
+	ensure       => absent,
+	ip           => '10.1.192.125',
         host_aliases => [ 'mdct-teamcity-agent1' ],
     }
 
     host { 'mdct-teamcity-agent2.dartcontainer.com':
+    	ensure       => absent,
         ip           => '10.1.192.133',
         host_aliases => [ 'mdct-teamcity-agent2' ],
     }
 
     host { 'mdct-teamcity-agent3.dartcontainer.com':
+    	ensure       => absent,
         ip           => '10.1.192.134',
         host_aliases => [ 'mdct-teamcity-agent3' ],
     }
 
     #}}}
 
-    # Workstations {{{
+    #Purge after 2015-11-16 Workstations {{{
 
     host { 'mdct-dev16.dartcontainer.com':
+    	ensure       => absent,
         ip           => '10.209.44.16',
         host_aliases => [ 'mdct-dev16' ],
     }
 
     host { 'mdct-dev17.dartcontainer.com':
+    	ensure       => absent,
         ip           => '10.209.44.17',
         host_aliases => [ 'mdct-dev17' ],
     }
 
     host { 'mdct-dev19.dartcontainer.com':
+    	ensure       => absent,
         ip           => '10.209.44.19',
         host_aliases => [ 'mdct-dev19' ],
     }
 
     host { 'mdct-dev24.dartcontainer.com':
-        ip           => '10.1.250.186',
+    	ensure       => absent,
+        ip           => '10.209.44.24',
         host_aliases => [ 'mdct-dev24' ],
     }
 
@@ -175,5 +156,6 @@ class dart::subsys::dns::no_dns_hosts {
     }
 
     #}}}
+
 
 }
