@@ -6,6 +6,9 @@
 
 ---
 
+logwatch::conf_source:      puppet:///private-host/logwatch/logwatch.conf
+logwatch::ignore_source:    puppet:///private-host/logwatch/ignore.conf
+
 sendmail::enable:           true
 sendmail::ensure:           running
 
