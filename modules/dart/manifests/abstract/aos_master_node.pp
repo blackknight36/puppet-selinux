@@ -24,18 +24,19 @@
 
 class dart::abstract::aos_master_node (
         $python_ver, $django_user, $django_group,
-    ) inherits dart::abstract::server_node {
+    ) inherits ::dart::abstract::server_node {
 
-    include 'apache::params'
+    include '::apache::params'
 
+    # This is used by the Apache::Site_config['django-apps'] template.
     $python_base="/usr/lib/python${python_ver}/site-packages"
 
-    class { 'apache':
+    class { '::apache':
         network_connect => true,
         use_nfs         => true,
     }
 
-    apache::site_config { 'pub':
+    ::apache::site_config { 'pub':
         source => 'puppet:///modules/dart/mdct-aos-master/httpd/pub.conf',
     }
 
@@ -46,55 +47,54 @@ class dart::abstract::aos_master_node (
         source => 'puppet:///modules/dart/mdct-aos-master/httpd/index.html',
     }
 
-    systemd::mount { '/var/www/pub':
+    ::systemd::mount { '/var/www/pub':
         mnt_description => '/pub served via httpd',
         mnt_what        => '/mnt/pub',
         mnt_options     => 'bind,context=system_u:object_r:httpd_sys_content_t',
         mnt_requires    => 'autofs.service',
         mnt_after       => 'autofs.service',
-        require         => Class['autofs', 'apache'],
+        require         => Class['::autofs', '::apache'],
     }
 
-    include 'dart::subsys::autofs::common'
+    include '::dart::subsys::autofs::common'
 
     group { $django_group:
         system  => true,
     }
 
     user { $django_user:
-        comment     => 'Django application WSGI daemon account',
-        home        => '/var/www/',
-        password    => '!',
-        system      => true,
-        subscribe   => Group[$django_group],
-        before      => Class['dhcpd_driven::master'],
-        notify      => Class['dhcpd_driven::master'],
+        comment   => 'Django application WSGI daemon account',
+        home      => '/var/www/',
+        password  => '!',
+        system    => true,
+        subscribe => Group[$django_group],
+        before    => Class['::dhcpd_driven::master'],
+        notify    => Class['::dhcpd_driven::master'],
     }
 
-    class { 'dhcpd_driven::master':
-        before => Service[$apache::params::services],
-        notify => Service[$apache::params::services],
+    class { '::dhcpd_driven::master':
+        before => Service[$::apache::params::services],
+        notify => Service[$::apache::params::services],
         source => 'puppet:///modules/dart/mdct-aos-master/dhcpd-driven/dhcpd-driven.conf',
     }
 
-    class { 'firewall_driven::master':
-        before => Service[$apache::params::services],
-        notify => Service[$apache::params::services],
+    class { '::firewall_driven::master':
+        before => Service[$::apache::params::services],
+        notify => Service[$::apache::params::services],
         source => 'puppet:///modules/dart/mdct-aos-master/firewall-driven/firewall-driven.conf',
     }
 
-    apache::site_config { 'django-apps':
+    ::apache::site_config { 'django-apps':
         content  => template('dart/httpd/aos-master-django-apps.erb'),
     }
 
-    include 'flock_herder'
+    include '::flock_herder'
 
-    class { 'mdct_puppeteer::admin':
+    class { '::mdct_puppeteer::admin':
         source  => 'puppet:///modules/dart/mdct_puppeteer/mdct-puppeteer-admin.conf',
     }
 
-    class { '::postgresql::server':
-    }
+    include '::postgresql::server'
 
     Postgresql::Server::Pg_hba_rule {
         auth_method => 'trust',
@@ -122,24 +122,24 @@ class dart::abstract::aos_master_node (
         mnt_options     => 'rbind',
         mnt_requires    => 'autofs.service',
         mnt_after       => 'autofs.service',
-        require         => Class['autofs', 'vsftpd'],
+        require         => Class['::autofs', '::vsftpd'],
     }
 
-    class { 'iptables':
-        enabled         => true,
-        kernel_modules  => 'nf_conntrack_ftp',
+    class { '::iptables':
+        enabled        => true,
+        kernel_modules => 'nf_conntrack_ftp',
     }
 
     iptables::rules_file { 'blocks':
-        source  => 'puppet:///modules/dart/mdct-aos-master/iptables/blocks',
+        source => 'puppet:///modules/dart/mdct-aos-master/iptables/blocks',
     }
 
-    class { 'selinux':
-        mode    => 'enforcing',
+    class { '::selinux':
+        mode => 'enforcing',
     }
 
-    sendmail::alias { 'root':
-        recipient   => 'john.florian@dart.biz',
+    ::sendmail::alias { 'root':
+        recipient => 'john.florian@dart.biz',
     }
 
     # All AOS Masters require the same SSH host keys lest the nodes not
@@ -152,7 +152,7 @@ class dart::abstract::aos_master_node (
         seluser => 'system_u',
         selrole => 'object_r',
         seltype => 'sshd_key_t',
-        notify  => Class['openssh::server'],
+        notify  => Class['::openssh::server'],
         source  => 'puppet:///modules/dart/mdct-aos-master/ssh/ssh_host_rsa_key',
     }
 
@@ -163,13 +163,13 @@ class dart::abstract::aos_master_node (
         seluser => 'system_u',
         selrole => 'object_r',
         seltype => 'etc_t',
-        notify  => Class['openssh::server'],
+        notify  => Class['::openssh::server'],
         source  => 'puppet:///modules/dart/mdct-aos-master/ssh/ssh_host_rsa_key.pub',
     }
 
     # The builder package is mostly needed here for the yum-snapshot tool.
     package { 'builder':
-        ensure  => 'latest',
+        ensure => 'latest',
     }
 
 }
