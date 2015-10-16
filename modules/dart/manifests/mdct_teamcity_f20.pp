@@ -30,18 +30,4 @@ class dart::mdct_teamcity_f20 inherits dart::abstract::teamcity_server_node {
         mon_passwd  => 'hRGbzxczzByoo9chMe7y6Qlxeo0dmfedAKJCP9Y2M4o6',
     }
 
-    class { 'network':
-            service         => 'legacy',
-            domain          => $dart::params::dns_domain,
-            name_servers    => $dart::params::dns_servers,
-    }
-
-    network::interface { 'eth0':
-            template    => 'static',
-            ip_address  => '10.201.64.16',
-            netmask     => '255.255.252.0',
-            gateway     => '10.201.67.254',
-            stp         => 'no',
-    }
-
 }
