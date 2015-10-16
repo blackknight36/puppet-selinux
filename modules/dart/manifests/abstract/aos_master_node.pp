@@ -138,7 +138,7 @@ class dart::abstract::aos_master_node (
         selrole => 'object_r',
         seltype => 'sshd_key_t',
         notify  => Class['openssh::server'],
-        source  => 'puppet:///private-domain/ssh/aos-master-host_rsa_key',
+        source  => 'puppet:///modules/dart/mdct-aos-master/ssh/ssh_host_rsa_key',
     }
 
     file { '/etc/ssh/ssh_host_rsa_key.pub':
@@ -149,7 +149,7 @@ class dart::abstract::aos_master_node (
         selrole => 'object_r',
         seltype => 'etc_t',
         notify  => Class['openssh::server'],
-        source  => 'puppet:///private-domain/ssh/aos-master-host_rsa_key.pub',
+        source  => 'puppet:///modules/dart/mdct-aos-master/ssh/ssh_host_rsa_key.pub',
     }
 
     # The builder package is mostly needed here for the yum-snapshot tool.
