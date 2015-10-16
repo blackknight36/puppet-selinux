@@ -24,4 +24,17 @@ class dart::mdct_fogbugz inherits dart::abstract::guarded_server_node {
         mon_passwd      => 'rlgfP6nL1RbmTV7MiSJqOPSEp5Uh06J5aeon9fOk93i1',
     }
 
+    class { 'network':
+            service         => 'nm',
+            domain          => $dart::params::dns_domain,
+            name_servers    => $dart::params::dns_servers,
+    }
+
+    network::interface { 'eth0':
+            template    => 'static',
+            ip_address  => '10.201.64.14',
+            netmask     => '255.255.252.0',
+            gateway     => '10.201.67.254',
+            stp         => 'no',
+    }
 }
