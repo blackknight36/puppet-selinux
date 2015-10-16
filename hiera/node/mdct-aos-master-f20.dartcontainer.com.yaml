@@ -6,8 +6,8 @@
 
 ---
 
-logwatch::conf_source:      puppet:///private-host/logwatch/logwatch.conf
-logwatch::ignore_source:    puppet:///private-host/logwatch/ignore.conf
+logwatch::conf_source:      puppet:///modules/dart/mdct-aos-master/logwatch/logwatch.conf
+logwatch::ignore_source:    puppet:///modules/dart/mdct-aos-master/logwatch/ignore.conf
 
 sendmail::enable:           true
 sendmail::ensure:           running

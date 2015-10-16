@@ -11,7 +11,7 @@ dart::mdct_dev12::profile::root::git_proxy:   "http://%{hiera('http_proxy')}:808
 
 flock_herder::conf_source:  puppet:///modules/dart/mdct-dev12/etc/herd.conf
 
-logwatch::ignore_source:    puppet:///private-host/logwatch/ignore.conf
+logwatch::ignore_source:    puppet:///modules/dart/mdct-dev12/logwatch/ignore.conf
 
 sendmail::enable:           true
 sendmail::ensure:           running

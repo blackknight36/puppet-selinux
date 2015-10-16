@@ -8,8 +8,8 @@
 
 dart::mdct_00fs::rsync_proxy:   "%{hiera('http_proxy')}:8080"
 
-logwatch::conf_source:      puppet:///private-host/logwatch/logwatch.conf
-logwatch::ignore_source:    puppet:///private-host/logwatch/ignore.conf
+logwatch::conf_source:      puppet:///modules/dart/mdct-00fs/logwatch/logwatch.conf
+logwatch::ignore_source:    puppet:///modules/dart/mdct-00fs/logwatch/ignore.conf
 
 sendmail::enable:           true
 sendmail::ensure:           running
