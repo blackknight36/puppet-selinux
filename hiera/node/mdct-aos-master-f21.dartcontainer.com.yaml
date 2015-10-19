@@ -1,0 +1,16 @@
+# hiera/node/mdct-aos-master-f21.dartcontainer.com.yaml
+#
+# Synopsis:
+#       These settings are specific to mdct-aos-master-f21.
+
+
+---
+
+logwatch::conf_source:      puppet:///modules/dart/mdct-aos-master/logwatch/logwatch.conf
+logwatch::ignore_source:    puppet:///modules/dart/mdct-aos-master/logwatch/ignore.conf
+
+sendmail::enable:           true
+sendmail::ensure:           running
+
+vsftpd::source:             puppet:///modules/dart/mdct-aos-master/vsftpd/vsftpd.conf
+vsftpd::allow_use_nfs:      true
