@@ -34,6 +34,9 @@ class dart::unwanted_services {
         'livesys-late':
             ensure => undef,    # there is nothing to stop
         ;
+
+        'ModemManager':
+        ;
     }
 
     # Puppet will endlessly change enable from true to false.  The systemd

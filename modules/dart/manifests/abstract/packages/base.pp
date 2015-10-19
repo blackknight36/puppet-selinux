@@ -121,7 +121,6 @@ class dart::abstract::packages::base {
     # Kludging around puppet's inability to remove deps,
     # system-config-keyboard in this case.
     yum::remove {
-        'ModemManager':;
         'firstboot':;
         'gnome-initial-setup':;
     }
