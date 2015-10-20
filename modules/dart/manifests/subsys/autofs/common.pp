@@ -58,7 +58,7 @@ class dart::subsys::autofs::common {
     autofs::map_entry { '/mnt/pub':
         mount   => '/mnt',
         key     => 'pub',
-        options => '-nfsvers=3,rw,hard,intr,nosuid,noatime',
+        options => '-nfsvers=3,rw,hard,intr,nosuid,noatime,nolock',
         remote  => 'mdct-00fs:/storage/pub',
     }
 
