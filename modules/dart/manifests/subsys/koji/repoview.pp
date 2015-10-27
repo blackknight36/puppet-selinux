@@ -45,8 +45,8 @@ class dart::subsys::koji::repoview {
 
     ::cron::job { 'dart-repoview':
         command => 'nice ionice -c 3 /usr/libexec/dart-repoview 22 21 20',
-        minute  => '*/15',
-        hour    => '*',
+        minute  => '15',
+        hour    => '5,12',
         user    => 'repomgr',
     }
 
