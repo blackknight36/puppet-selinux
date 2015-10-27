@@ -1,7 +1,13 @@
 #!/bin/sh
 
+# Synopsis: Generate top-level repoview index.
+#
 # This file is managed by puppet.
 # Origin: modules/repoview/files/dart-repoview
+#
+# This does not run repoview to generate details for every Dart package.  That
+# job is handled by mash.  This merely makes an index available for selecting
+# a particular repoview by the OS release and platform architecture.
 
 SELF=$(basename $0)
 repo_server='mdct-00fs.dartcontainer.com'
@@ -84,16 +90,6 @@ html_bottom() {
 EOF
 }
 
-make_repoview() {
-    local osrelease="$1"
-    local arch="$2"
-    local repo="$3"
-    echo "Making repoview for $repo on Fedora $osrelease ($arch)."
-    /usr/bin/repoview \
-        -t "Dart on Fedora $osrelease ($arch)" \
-        /pub/fedora/$repo/$osrelease/$arch/
-}
-
 main() {
     local new_index="/tmp/${SELF}.$$"
     local live_index="/pub/fedora/dart/repoview/index.html"
@@ -101,21 +97,6 @@ main() {
 
     for osrelease in "$@"
     do
-        if [ $osrelease -ge 18 ]
-        then
-            arches="i386 x86_64 noarch SRPMS"
-        else
-            arches="i386 SRPMS"
-        fi
-        for arch in $arches
-        do
-            for repo in 'mdct' 'mdct/testing'
-            do
-                echo "## processing: $osrelease $arch $repo"
-                make_repoview $osrelease $arch $repo
-                echo
-            done
-        done
         html_for_release $osrelease >> $new_index
     done
 
