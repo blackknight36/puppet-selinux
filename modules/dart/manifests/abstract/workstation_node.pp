@@ -8,6 +8,7 @@ class dart::abstract::workstation_node inherits dart::abstract::base_node {
     include 'dart::abstract::packages::virtualization'
     include 'dart::abstract::packages::workstation'
     include 'dart::subsys::autofs::common'
+    include 'dart::unwanted_services'
     include 'flock_herder'
 
     class { 'iptables':
@@ -18,7 +19,6 @@ class dart::abstract::workstation_node inherits dart::abstract::base_node {
     #include 'lotus_notes_client'
 
     include 'test_automation'
-    include 'unwanted_services'
 
     class { 'dart::subsys::yum::rpmfusion':
         require => Class['yum'],
