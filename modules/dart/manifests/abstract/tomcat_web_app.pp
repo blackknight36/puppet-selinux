@@ -1,4 +1,5 @@
 # modules/dart/manifests/abstract/tomcat_web_app.pp
+#  Not really used for generic tomcat web apps - should be refactored / renamed
 
 class dart::abstract::tomcat_web_app inherits dart::abstract::guarded_server_node {
 
@@ -25,7 +26,7 @@ class dart::abstract::tomcat_web_app inherits dart::abstract::guarded_server_nod
     file { '/etc/tomcat/tomcat-users.xml':
         owner     => 'tomcat',
         group     => 'tomcat',
-        mode      => '0664',
+        mode      => '0660',
         seluser   => 'system_u',
         selrole   => 'object_r',
         seltype   => 'etc_t',
