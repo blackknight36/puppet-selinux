@@ -25,6 +25,7 @@ node 'mdct-02pi.dartcontainer.com'              { include 'dart::mdct_02pi' }
 node 'mdct-0302pi.dartcontainer.com'            { include 'dart::mdct_0302pi' }
 node 'mdct-0310pi.dartcontainer.com'            { include 'dart::mdct_0310pi' }
 node 'mdct-0314pi.dartcontainer.com'            { include 'dart::mdct_0314pi' }
+node 'mdct-0377pi.dartcontainer.com'            { include 'dart::mdct_0377pi' }
 node 'mdct-3800-admin.dartcontainer.com'        { include 'dart::mdct_3800_admin' }
 node 'mdct-03pi.dartcontainer.com'              { include 'dart::mdct_03pi' }
 node 'mdct-04pi.dartcontainer.com'              { include 'dart::mdct_04pi' }
@@ -106,3 +107,4 @@ node /^mdct-dev10-.*\.dartcontainer\.com$/          { include 'dart::mdct_dev10_
 node /^mdct-ovirt-node-.*\.dartcontainer\.com$/     { include 'dart::mdct_ovirt_node' }
 node /^mdct-puppet.*\.dartcontainer\.com$/          { include 'dart::mdct_puppet' }
 node /^mdct-teamcity-agent.*\.dartcontainer.com$/   { include 'dart::mdct_teamcity_agent' }
+node /^appdev-cats.*\.dartcontainer\.com$/          { include 'dart::appdev_cats' }
