@@ -35,7 +35,7 @@ class dart::abstract::teamcity_agent_node_est_ngic {
         ipv4acls    => [
                         'host    est_junit       est_junit       samehost                trust',
                         'host    all             all             samehost                md5',
-                       ],
+        ],
     }
 
     postgresql::server::db { 'est_junit':
@@ -46,6 +46,11 @@ class dart::abstract::teamcity_agent_node_est_ngic {
     postgresql::server::db { 'tcir_junit':
         user    => 'tcir_junit',
         password    => postgresql_password('tcir_junit', 'tcir_junit'),
+    }
+
+    postgresql::server::db { 'cats_junit':
+        user    => 'cats_junit',
+        password    => postgresql_password('cats_junit', 'cats_junit'),
     }
 
     # NB: TeamCity itself uses the OpenJDK.
