@@ -28,6 +28,17 @@ class nfs::client (
         $use_gss=true,
     ) inherits ::nfs::params {
 
+    # NB: The client also requires rpcbind (formerly known as the portmapper),
+    # but only for NFSv3 and earlier.  NFSv4 does not use rpcbind at all.  We
+    # shouldn't need to manage rpcbind here because nfs-utils ships the
+    # service as static and starts it running automatically via the
+    # rpcbind.socket unit, but only if needed (for v3 or earlier).
+    #
+    # However, F21 hosts built as of late by puppet don't seem to have
+    # a usable NFSv3 client.  It seems necessary to "systemctl enable
+    # rpcbind.service" on these.  That has been done manually for a few until
+    # a proper solution can be achieved.
+
     # Managing the ensure and enable states for a static service is
     # ineffectual and generates lots of useless reporting.
     $idmap_ensure = $::nfs::params::idmap_service_is_static ? {
