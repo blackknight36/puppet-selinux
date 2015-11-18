@@ -93,19 +93,19 @@ class dart::subsys::dns::no_dns_hosts {
     #Purge after 2015-11-16 Teamcity{{{
 
     host { 'mdct-teamcity-agent1.dartcontainer.com':
-	ensure       => absent,
-	ip           => '10.1.192.125',
+        ensure       => absent,
+        ip           => '10.1.192.125',
         host_aliases => [ 'mdct-teamcity-agent1' ],
     }
 
     host { 'mdct-teamcity-agent2.dartcontainer.com':
-    	ensure       => absent,
+        ensure       => absent,
         ip           => '10.1.192.133',
         host_aliases => [ 'mdct-teamcity-agent2' ],
     }
 
     host { 'mdct-teamcity-agent3.dartcontainer.com':
-    	ensure       => absent,
+        ensure       => absent,
         ip           => '10.1.192.134',
         host_aliases => [ 'mdct-teamcity-agent3' ],
     }
@@ -115,25 +115,25 @@ class dart::subsys::dns::no_dns_hosts {
     #Purge after 2015-11-16 Workstations {{{
 
     host { 'mdct-dev16.dartcontainer.com':
-    	ensure       => absent,
+        ensure       => absent,
         ip           => '10.209.44.16',
         host_aliases => [ 'mdct-dev16' ],
     }
 
     host { 'mdct-dev17.dartcontainer.com':
-    	ensure       => absent,
+        ensure       => absent,
         ip           => '10.209.44.17',
         host_aliases => [ 'mdct-dev17' ],
     }
 
     host { 'mdct-dev19.dartcontainer.com':
-    	ensure       => absent,
+        ensure       => absent,
         ip           => '10.209.44.19',
         host_aliases => [ 'mdct-dev19' ],
     }
 
     host { 'mdct-dev24.dartcontainer.com':
-    	ensure       => absent,
+        ensure       => absent,
         ip           => '10.209.44.24',
         host_aliases => [ 'mdct-dev24' ],
     }
@@ -156,6 +156,5 @@ class dart::subsys::dns::no_dns_hosts {
     }
 
     #}}}
-
 
 }
