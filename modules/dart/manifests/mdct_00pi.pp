@@ -27,11 +27,11 @@ class dart::mdct_00pi inherits dart::abstract::picaps_production_server_node {
         options => '-fstype=cifs,rw,credentials=/etc/.credentials/mdcgate.cred',
         remote  => '://mas-fs01/ProdMonData',
     }
-    autofs::map_entry { '/mnt/mas-sap006-mii-staging':
+    autofs::map_entry { '/mnt/mii-staging':
         mount   => '/mnt',
-        key     => 'mas-sap006-mii-staging',
+        key     => 'mii-staging',
         options => '-fstype=cifs,rw,credentials=/etc/.credentials/mas_mdc.cred',
-        remote  => '://mas-sap006/miistaging',
+        remote  => '://oak-sapfs01/miistaging',
     }
     file { '/etc/.credentials':
         ensure  => 'directory',
@@ -59,7 +59,7 @@ class dart::mdct_00pi inherits dart::abstract::picaps_production_server_node {
         source  => [
             'puppet:///modules/dart/picaps_servers/mas_mdc.cred',
         ],
-        before  => Autofs::Map_entry['/mnt/mas-sap006-mii-staging'],
+        before  => Autofs::Map_entry['/mnt/mii-staging'],
     }
     file { '/dist/reportoutput':
         ensure  => link,
@@ -67,6 +67,6 @@ class dart::mdct_00pi inherits dart::abstract::picaps_production_server_node {
     }
     file { '/dist/mii':
         ensure  => link,
-        target  => '/mnt/mas-sap006-mii-staging',
+        target  => '/mnt/mii-staging',
     }
 }
