@@ -1,2 +1,2 @@
-* * * * * root /usr/bin/rsync -av --exclude=lost+found --exclude=Forms --no-perms --no-owner --no-group --delete --modify-window=3 --checksum --partial --timeout=120 --partial-dir=/tmp/partial /mnt/eid/* /storage/slideshow/ > /dev/null 2>&1; touch /storage/slideshow/priority
+* * * * * root /usr/bin/rsync -av --exclude=lost+found --exclude=Forms --no-perms --no-owner --no-group --delete --modify-window=3 --checksum --partial --timeout=120 --partial-dir=/tmp/partial /mnt/eid/ /storage/slideshow/ > /dev/null 2>&1; touch /storage/slideshow/priority
 
