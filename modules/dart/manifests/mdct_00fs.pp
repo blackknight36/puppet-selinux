@@ -97,6 +97,11 @@ class dart::mdct_00fs (
             cron_source => "${mirrmaid_sources}/mirrmaid-picaps.cron",
             ;
 
+        'mirrmaid-picaps-tablearchive':
+            source      => "${mirrmaid_sources}/mirrmaid-picaps-tablearchive.conf",
+            cron_source => "${mirrmaid_sources}/mirrmaid-picaps-tablearchive.cron",
+            ;
+
         'mirrmaid-fedora':
             source       => "${mirrmaid_sources}/mirrmaid-fedora.conf",
             cron_content => template('dart/mirrmaid/mirrmaid-fedora.cron'),
