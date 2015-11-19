@@ -63,17 +63,17 @@ class dart::abstract::picaps_production_server_node inherits dart::abstract::ung
     include 'dart::abstract::packages::developer'
 
     # JDK's
-    oracle::jdk { 'jdk-7u71-linux-x64':
+    oracle::jdk { 'jdk-8u66-linux-x64':
         ensure  => 'present',
-        version => '7',
-        update  => '71',
+        version => '8',
+        update  => '66',
     }
-    oracle::jdk { 'jdk-7u67-linux-x64':
+    oracle::jdk { 'jdk-8u60-linux-x64':
         ensure  => 'present',
-        version => '7',
-        update  => '67',
+        version => '8',
+        update  => '60',
         before  => [
-            Exec['install oracle jdk-7u71-linux-x64'],
+            Exec['install oracle jdk-8u66-linux-x64'],
         ],
     }
     file { '/usr/java/latest/jre/lib/management/jmxremote.password':
@@ -84,7 +84,7 @@ class dart::abstract::picaps_production_server_node inherits dart::abstract::ung
             'puppet:///modules/dart/picaps_servers/jmxremote.password',
         ],
         require => [
-            Exec['install oracle jdk-7u71-linux-x64'],
+            Exec['install oracle jdk-8u66-linux-x64'],
         ],
     }
 
