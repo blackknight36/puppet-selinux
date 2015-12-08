@@ -33,6 +33,16 @@ class dart::abstract::packages::workstation {
             $::operatingsystemrelease >= 18
         {
             package { [
+                'adobe-source-code-pro-fonts',
+                'google-roboto-fonts',
+                'google-roboto-mono-fonts',
+                ]:
+                ensure => installed,
+            }
+        } elsif  $::operatingsystemrelease == 'Rawhide' or
+            $::operatingsystemrelease >= 18
+        {
+            package { [
                 'libreoffice-calc',
                 'libreoffice-writer',
                 'systemd-ui',
