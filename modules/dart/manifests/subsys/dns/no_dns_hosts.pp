@@ -21,7 +21,7 @@ class dart::subsys::dns::no_dns_hosts {
     # Koji/Sigul {{{
 
     host { 'mdct-koji-b1-f21.dartcontainer.com':
-        ip           => '10.1.192.135',
+        ip           => '10.201.64.34',
         host_aliases => [ 'mdct-koji-b1.dartcontainer.com',
                           'mdct-koji-b1-f21', 'mdct-koji-b1' ],
     }

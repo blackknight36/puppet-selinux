@@ -33,9 +33,9 @@ class dart::mdct_koji_b1_f21 {
 
     network::interface { 'eth0':
         template   => 'static',
-        ip_address => '10.1.192.135',
-        netmask    => '255.255.0.0',
-        gateway    => '10.1.0.25',
+        ip_address => '10.201.64.34',
+        netmask    => '255.255.252.0',
+        gateway    => '10.201.67.254',
         stp        => 'no',
     }
 
