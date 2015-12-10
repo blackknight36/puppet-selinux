@@ -24,6 +24,11 @@ class dart::abstract::pycharm::professional {
 
     ::jetbrains::pycharm::release {
 
+        'pycharm-professional-5.0.2':
+            build   => '5.0.2',
+            edition => 'professional',
+            ;
+
         'pycharm-professional-5.0.1':
             build   => '5.0.1',
             edition => 'professional',
@@ -32,11 +37,6 @@ class dart::abstract::pycharm::professional {
         'pycharm-professional-5.0':
             ensure  => 'absent',
             build   => '5.0',
-            edition => 'professional',
-            ;
-
-        'pycharm-professional-4.5.4':
-            build   => '4.5.4',
             edition => 'professional',
             ;
 
@@ -49,13 +49,8 @@ class dart::abstract::pycharm::professional {
     ::jetbrains::pycharm::release {
 
         'pycharm-professional-143.1183.2':
-            build   => '143.1183.2',
-            edition => 'professional',
-            ;
-
-        'pycharm-professional-143.1015.4':
             ensure  => 'absent',
-            build   => '143.1015.4',
+            build   => '143.1183.2',
             edition => 'professional',
             ;
 
