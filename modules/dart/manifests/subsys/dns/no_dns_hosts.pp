@@ -64,7 +64,7 @@ class dart::subsys::dns::no_dns_hosts {
     }
 
     host { 'mdct-sigul-f21.dartcontainer.com':
-        ip           => '10.1.192.139',
+        ip           => '10.201.64.43',
         host_aliases => [ 'mdct-sigul.dartcontainer.com',
                           'mdct-sigul-f21', 'mdct-sigul', 'sigul' ],
     }
