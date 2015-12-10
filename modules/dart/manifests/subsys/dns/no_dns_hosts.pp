@@ -57,7 +57,7 @@ class dart::subsys::dns::no_dns_hosts {
     }
 
     host { 'mdct-sigul-bridge-f21.dartcontainer.com':
-        ip           => '10.1.192.138',
+        ip           => '10.201.64.42',
         host_aliases => [ 'mdct-sigul-bridge.dartcontainer.com',
                           'mdct-sigul-bridge-f21', 'mdct-sigul-bridge',
                           'sigul-bridge' ],
