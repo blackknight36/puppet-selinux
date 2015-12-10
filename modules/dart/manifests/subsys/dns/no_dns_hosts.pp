@@ -51,7 +51,7 @@ class dart::subsys::dns::no_dns_hosts {
     }
 
     host { 'mdct-koji-f21.dartcontainer.com':
-        ip           => '10.1.192.124',
+        ip           => '10.201.64.39',
         host_aliases => [ 'mdct-koji.dartcontainer.com',
                           'mdct-koji-f21', 'mdct-koji', 'koji' ],
     }
