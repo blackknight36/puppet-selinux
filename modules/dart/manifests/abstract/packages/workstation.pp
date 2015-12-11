@@ -30,7 +30,7 @@ class dart::abstract::packages::workstation {
     if $::operatingsystem == 'Fedora' {
 
         if  $::operatingsystemrelease == 'Rawhide' or
-            $::operatingsystemrelease >= 18
+            $::operatingsystemrelease >= 19
         {
             package { [
                 'adobe-source-code-pro-fonts',
