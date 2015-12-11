@@ -22,6 +22,10 @@ class dart::abstract::idea {
     # to ensure that no more than two stable releases are installed at any
     # given time.
 
+    jetbrains::idea::release { 'ideaIU-15.0.2':
+        build   => '143.1184.17',
+    }
+
     jetbrains::idea::release { 'ideaIU-14.1.3':
         build   => '141.1010.3',
     }
