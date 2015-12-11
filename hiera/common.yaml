@@ -29,6 +29,14 @@ sendmail::ensure:           stopped
 
 sudo::drop_in::source:      puppet:///modules/dart/sudo/mdct
 
+tsocks::local_networks:
+    # Most Dart resources are located here.
+    - 10.0.0.0/255.0.0.0
+    # The MDCT SOCKS proxy lives here, which is also local.
+    - 172.26.26.0/255.255.254.0
+tsocks::proxy_server:       "%{hiera('http_proxy')}"
+tsocks::server_type:        5
+
 
 # Dart has no need for delta rpms since we have a local mirror.
 yum::deltarpm:              0
