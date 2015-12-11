@@ -1,0 +1,13 @@
+# This file is managed by Puppet.
+# Origin: modules/tsocks/templates/tsocks.conf.erb
+
+# The local network which does not require a SOCKS proxy for access.
+<% @local_networks.each do |local_network| -%>
+local = <%= local_network %>
+<% end -%>
+
+# Otherwise we use the SOCKS proxy server.
+server = <%= @proxy_server %>
+
+# The SOCKS version the proxy server provides.
+server_type = <%= @server_type %>
