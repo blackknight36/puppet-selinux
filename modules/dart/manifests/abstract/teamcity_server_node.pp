@@ -39,8 +39,8 @@ class dart::abstract::teamcity_server_node inherits dart::abstract::guarded_serv
             }
 
             jetbrains::teamcity::server::release { 'TeamCity-8.1.4':
-                ensure  => absent,
-                build   => '8.1.4',
+                ensure => absent,
+                build  => '8.1.4',
 #                require => Class['postgresql::server'],
             }
 

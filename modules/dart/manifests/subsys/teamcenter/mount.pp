@@ -46,10 +46,10 @@ define dart::subsys::teamcenter::mount (
     ) {
 
     file { "/srv/${host}-${share_name}":
-        ensure  => directory,
-        owner   => $owner,
-        group   => $group,
-        mode    => $mode,
+        ensure => directory,
+        owner  => $owner,
+        group  => $group,
+        mode   => $mode,
     }
 
     mount { "/srv/${host}-${share_name}":

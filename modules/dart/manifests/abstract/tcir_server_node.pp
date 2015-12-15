@@ -7,8 +7,8 @@ class dart::abstract::tcir_server_node inherits dart::abstract::tomcat_web_app {
     }
 
     file { '/usr/share/tomcat/lib/postgresql-jdbc.jar':
-        ensure  => link,
-        target  => '/usr/share/java/postgresql-jdbc.jar',
+        ensure => link,
+        target => '/usr/share/java/postgresql-jdbc.jar',
     }
 
     systemd::unit{ 'umask.conf':

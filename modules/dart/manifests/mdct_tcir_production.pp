@@ -33,16 +33,16 @@ class dart::mdct_tcir_production inherits dart::abstract::tcir_server_node {
     }
 
     class { '::bacula':
-        is_client       =>  true,
-        director_server =>  "mdct-00bk-f21.dartcontainer.com",
-        director_password   =>  'test',
-        storage_server  =>  'mdct-00bk-f21.dartcontainer.com',
-        use_tls         =>  true,
-        tls_ca_cert     =>  '/var/lib/bacula/ssl/certs/ca.pem',
-        tls_key         =>  "/var/lib/bacula/ssl/private_keys/${::fqdn}.pem",
-        tls_cert        =>  "/var/lib/bacula/ssl/certs/${::fqdn}.pem",
-        tls_require     =>  'yes',
-        tls_verify_peer =>  'yes',
+        is_client         =>  true,
+        director_server   =>  'mdct-00bk-f21.dartcontainer.com',
+        director_password =>  'test',
+        storage_server    =>  'mdct-00bk-f21.dartcontainer.com',
+        use_tls           =>  true,
+        tls_ca_cert       =>  '/var/lib/bacula/ssl/certs/ca.pem',
+        tls_key           =>  "/var/lib/bacula/ssl/private_keys/${::fqdn}.pem",
+        tls_cert          =>  "/var/lib/bacula/ssl/certs/${::fqdn}.pem",
+        tls_require       =>  'yes',
+        tls_verify_peer   =>  'yes',
     }
 
     class { '::network':
@@ -50,10 +50,10 @@ class dart::mdct_tcir_production inherits dart::abstract::tcir_server_node {
     }
 
     network::interface { 'eth0':
-            template    => 'static',
-            ip_address  => '10.201.64.12',
-            netmask     => '255.255.252.0',
-            gateway     => '10.201.67.254',
-            stp         => 'no',
+            template   => 'static',
+            ip_address => '10.201.64.12',
+            netmask    => '255.255.252.0',
+            gateway    => '10.201.67.254',
+            stp        => 'no',
     }
 }

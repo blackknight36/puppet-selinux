@@ -10,9 +10,9 @@ class dart::abstract::plant_utility_server_node inherits dart::abstract::guarded
 
     # AOS devices pull media-playback content using rsync.
     class { 'rsync::server':
-        export_all_ro   => true,
-        source          => 'puppet:///modules/dart/utility_servers/rsyncd/rsyncd.conf',
-        xinetd_source   => 'puppet:///modules/dart/utility_servers/rsyncd/rsync.xinetd',
+        export_all_ro => true,
+        source        => 'puppet:///modules/dart/utility_servers/rsyncd/rsyncd.conf',
+        xinetd_source => 'puppet:///modules/dart/utility_servers/rsyncd/rsync.xinetd',
     }
 
     # That same media-playback content is pushed in via Windows systems.

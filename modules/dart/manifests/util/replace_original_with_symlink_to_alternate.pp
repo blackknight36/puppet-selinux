@@ -2,7 +2,7 @@
 
 define dart::util::replace_original_with_symlink_to_alternate(
         $original, $backup, $alternate,
-        $seluser="system_u", $selrole="object_r", $seltype="etc_t"
+        $seluser='system_u', $selrole='object_r', $seltype='etc_t'
     ) {
 
     # Make a local backup of the original file or directory that can be
@@ -10,18 +10,18 @@ define dart::util::replace_original_with_symlink_to_alternate(
     # carried over from prior OS releases.  The "file" type does provide a
     # backup parameter, but I've seen it fail with directory structures
     # containing intra-relative symlinks; hence this workaround.
-    exec { "archive-$original-to-$backup":
-        command => "cp -a $original $backup",
-        unless  => "test -e $backup",
+    exec { "archive-${original-to-}${backup}":
+        command => "cp -a ${original} ${backup}",
+        unless  => "test -e ${backup}",
     }
 
     # Now make a symlink from the original location to an alternate one.
-    file { "$original":
+    file { $original:
         ensure  => $alternate,
         force   => true,
         require => [
-            Exec["archive-$original-to-$backup"],
-            Service["autofs"],
+            Exec["archive-${original-to-}${backup}"],
+            Service['autofs'],
         ],
         selrole => $selrole,
         seltype => $seltype,

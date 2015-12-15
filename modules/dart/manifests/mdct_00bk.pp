@@ -11,18 +11,18 @@ class dart::mdct_00bk inherits dart::abstract::guarded_server_node {
     include '::network'
 
     network::interface { 'ens32':
-        template    => 'static',
-        ip_address  => '10.201.64.1',
-        netmask     => '255.255.252.0',
-        gateway     => '10.201.67.254',
-        stp         => 'no',
+        template   => 'static',
+        ip_address => '10.201.64.1',
+        netmask    => '255.255.252.0',
+        gateway    => '10.201.67.254',
+        stp        => 'no',
     }
 
     network::interface { 'ens34':
-        template    => 'static',
-        ip_address  => '192.168.1.7',
-        netmask     => '255.255.255.0',
-        stp         => 'no',
+        template   => 'static',
+        ip_address => '192.168.1.7',
+        netmask    => '255.255.255.0',
+        stp        => 'no',
     }
 
     file { '/storage':
@@ -45,10 +45,10 @@ class dart::mdct_00bk inherits dart::abstract::guarded_server_node {
 #    }
 
     class { 'jaf_bacula::client':
-        dir_name    => $dart::params::bacula_dir_name,
-        dir_passwd  => 'Aq3b8OdDuJ4Z6pmbsK7tJNRvPSMosspucxCEJ4vFNxAz',
-        mon_name    => $dart::params::bacula_mon_name,
-        mon_passwd  => 'Ojx6xUeoCuBymMWsB6RCutwlEKydA8ZpKPJaXHxi6eTn',
+        dir_name   => $dart::params::bacula_dir_name,
+        dir_passwd => 'Aq3b8OdDuJ4Z6pmbsK7tJNRvPSMosspucxCEJ4vFNxAz',
+        mon_name   => $dart::params::bacula_mon_name,
+        mon_passwd => 'Ojx6xUeoCuBymMWsB6RCutwlEKydA8ZpKPJaXHxi6eTn',
     }
 
     class { 'jaf_bacula::console':
@@ -58,17 +58,17 @@ class dart::mdct_00bk inherits dart::abstract::guarded_server_node {
     }
 
     class { 'jaf_bacula::storage_daemon':
-        dir_name        => $dart::params::bacula_dir_name,
-        mon_name        => $dart::params::bacula_mon_name,
-        mon_passwd      => $dart::params::bacula_mon_passwd,
-        sd_name         => $dart::params::bacula_sd_name,
-        sd_passwd       => $dart::params::bacula_sd_passwd,
-        sd_archive_dev  => '/storage/backup',
+        dir_name       => $dart::params::bacula_dir_name,
+        mon_name       => $dart::params::bacula_mon_name,
+        mon_passwd     => $dart::params::bacula_mon_passwd,
+        sd_name        => $dart::params::bacula_sd_name,
+        sd_passwd      => $dart::params::bacula_sd_passwd,
+        sd_archive_dev => '/storage/backup',
     }
 
     class { 'jaf_bacula::director':
-        dir_conf        => template('dart/bacula/director.conf'),
-        pgpass_source   => 'puppet:///private-host/.pgpass',
+        dir_conf      => template('dart/bacula/director.conf'),
+        pgpass_source => 'puppet:///private-host/.pgpass',
 #        require         => Class['postgresql::server'],
     }
 

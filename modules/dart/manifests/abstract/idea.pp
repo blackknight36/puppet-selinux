@@ -35,13 +35,13 @@ class dart::abstract::idea {
     }
 
     jetbrains::idea::release { 'ideaIU-14.0.2':
-        ensure  => absent,
-        build   => '139.659.2',
+        ensure => absent,
+        build  => '139.659.2',
     }
 
     jetbrains::idea::release { 'ideaIU-14':
-        ensure  => absent,
-        build   => '139.224.1',
+        ensure => absent,
+        build  => '139.224.1',
     }
 
     jetbrains::idea::release { 'ideaIU-13.1.4b':
@@ -49,13 +49,13 @@ class dart::abstract::idea {
     }
 
     jetbrains::idea::release { 'ideaIU-13.0.1':
-        ensure  => absent,
-        build   => '133.331',
+        ensure => absent,
+        build  => '133.331',
     }
 
     jetbrains::idea::release { 'ideaIU-12.1.4':
-        ensure  => absent,
-        build   => '129.713',
+        ensure => absent,
+        build  => '129.713',
     }
 
     #
@@ -63,33 +63,33 @@ class dart::abstract::idea {
     #
 
     jetbrains::idea::release { 'ideaIU-139.872.1':
-        ensure  => absent,
-        build   => '139.872.1',
+        ensure => absent,
+        build  => '139.872.1',
     }
 
     jetbrains::idea::release { 'ideaIU-139.144.2':
-        ensure  => absent,
-        build   => '139.144.2',
+        ensure => absent,
+        build  => '139.144.2',
     }
 
     jetbrains::idea::release { 'ideaIU-14-PublicPreview':
-        ensure  => absent,
-        build   => '138.2458.8',
+        ensure => absent,
+        build  => '138.2458.8',
     }
 
     jetbrains::idea::release { 'ideaIU-138.1980.1':
-        ensure  => absent,
-        build   => '138.1980.1',
+        ensure => absent,
+        build  => '138.1980.1',
     }
 
     jetbrains::idea::release { 'ideaIU-129.961':
-        ensure  => absent,
-        build   => '129.961',
+        ensure => absent,
+        build  => '129.961',
     }
 
     jetbrains::idea::release { 'ideaIU-123.150':
-        ensure  => absent,
-        build   => '123.150',
+        ensure => absent,
+        build  => '123.150',
     }
 
 }

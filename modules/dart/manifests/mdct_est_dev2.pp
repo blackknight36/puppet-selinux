@@ -13,11 +13,11 @@ class dart::mdct_est_dev2 inherits dart::abstract::est_server_node {
     }
 
 network::interface { 'eth0':
-        template    => 'static',
-        ip_address  => '10.201.64.7',
-        netmask     => '255.255.252.0',
-	gateway     => '10.201.67.254',
-        stp         => 'no',
+        template   => 'static',
+        ip_address => '10.201.64.7',
+        netmask    => '255.255.252.0',
+  gateway          => '10.201.67.254',
+        stp        => 'no',
     }
 
 }

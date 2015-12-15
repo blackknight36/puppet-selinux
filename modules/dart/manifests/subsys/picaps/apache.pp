@@ -19,18 +19,18 @@ class dart::subsys::picaps::apache {
 
     user { 'apache':
         provider => 'useradd',
-        uid    => 48,
-        gid    => 48,
-        home   => '/var/www',
-        system => true,
-        before => Class['::apache'],
+        uid      => 48,
+        gid      => 48,
+        home     => '/var/www',
+        system   => true,
+        before   => Class['::apache'],
     }
 
     group { 'apache':
-        provider    => 'groupadd',
-        gid         => 48,
-        system      => true,
-        before      => User['apache'],
+        provider => 'groupadd',
+        gid      => 48,
+        system   => true,
+        before   => User['apache'],
     }
 
     file { '/var/www/html/index.html':
@@ -38,7 +38,7 @@ class dart::subsys::picaps::apache {
     }
 
     file { '/var/www/cgi-bin/checkWeb.cgi':
-        mode    => 0755,
+        mode    => '0755',
         content => template('dart/picaps/checkWeb.cgi'),
     }
 

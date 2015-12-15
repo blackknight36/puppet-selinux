@@ -26,8 +26,8 @@ class dart::abstract::cats_server_node inherits dart::abstract::guarded_server_n
     }
 
     file { '/usr/share/tomcat/lib/postgresql-jdbc.jar':
-        ensure    => link,
-        target    => '/usr/share/java/postgresql-jdbc.jar',
+        ensure => link,
+        target => '/usr/share/java/postgresql-jdbc.jar',
     }
 
     iptables::tcp_port {

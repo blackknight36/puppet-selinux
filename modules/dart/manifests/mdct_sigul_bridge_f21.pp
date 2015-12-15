@@ -64,7 +64,7 @@ class dart::mdct_sigul_bridge_f21 inherits ::dart::abstract::sigul_node {
                 'pass'     => 'mdct.gpg',
                 'v3'       => true,
             },
-            'f20-testing' => {
+            'f20-testing'    => {
                 'key_name' => 'mdct-legacy',
                 'key_id'   => '0F9F5D3B',
                 'pass'     => 'mdct.gpg',
@@ -76,7 +76,7 @@ class dart::mdct_sigul_bridge_f21 inherits ::dart::abstract::sigul_node {
                 'pass'     => 'mdct.gpg',
                 'v3'       => true,
             },
-            'f21-testing' => {
+            'f21-testing'    => {
                 'key_name' => 'mdct-legacy',
                 'key_id'   => '0F9F5D3B',
                 'pass'     => 'mdct.gpg',
@@ -88,7 +88,7 @@ class dart::mdct_sigul_bridge_f21 inherits ::dart::abstract::sigul_node {
                 'pass'     => 'mdct.gpg',
                 'v3'       => true,
             },
-            'f22-testing' => {
+            'f22-testing'    => {
                 'key_name' => 'mdct-legacy',
                 'key_id'   => '0F9F5D3B',
                 'pass'     => 'mdct.gpg',

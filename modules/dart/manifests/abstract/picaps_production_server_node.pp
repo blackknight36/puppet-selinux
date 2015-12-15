@@ -96,11 +96,11 @@ class dart::abstract::picaps_production_server_node inherits dart::abstract::ung
         config_uri => 'puppet:///modules/dart/picaps_servers/picaps-mariadb-server.cnf',
     }
     file { '/etc/systemd/system/mariadb.service': # modified mariadb.service is necessary to configure NUMA interleaving for MariaDB process
-        group   => 'root',
-        mode    => '0644',
-        owner   => 'root',
-        source  => 'puppet:///modules/dart/picaps_servers/picaps-mariadb.service',
-        before  => File['/storage/mysql'],
+        group  => 'root',
+        mode   => '0644',
+        owner  => 'root',
+        source => 'puppet:///modules/dart/picaps_servers/picaps-mariadb.service',
+        before => File['/storage/mysql'],
     }
     file { '/storage/mysql':
         ensure  => 'directory',
@@ -113,18 +113,18 @@ class dart::abstract::picaps_production_server_node inherits dart::abstract::ung
         before  => Class['mariadb::server'],
     }
     user { 'mysql':
-        provider=> 'useradd',
-        uid     => '444',
-        gid     => '444',
-        home    => '/storage/mysql',
-        system  => true,
-        before  => File['/etc/systemd/system/mariadb.service'],
+        provider => 'useradd',
+        uid      => '444',
+        gid      => '444',
+        home     => '/storage/mysql',
+        system   => true,
+        before   => File['/etc/systemd/system/mariadb.service'],
     }
     group { 'mysql':
-        provider=> 'groupadd',
-        gid     => '444',
-        system  => true,
-        before  => User['mysql'],
+        provider => 'groupadd',
+        gid      => '444',
+        system   => true,
+        before   => User['mysql'],
     }
 
     file { '/root/picaps-grant.sql':
@@ -134,22 +134,22 @@ class dart::abstract::picaps_production_server_node inherits dart::abstract::ung
         content => template('dart/picaps/picaps-grant.sql'),
     }
     file { '/root/picaps-databases.sql':
-        group   => 'root',
-        mode    => '0660',
-        owner   => 'root',
-        source  => 'puppet:///modules/dart/picaps_servers/picaps-databases.sql',
+        group  => 'root',
+        mode   => '0660',
+        owner  => 'root',
+        source => 'puppet:///modules/dart/picaps_servers/picaps-databases.sql',
     }
     file { '/root/picaps-install.sh':
-        group   => 'root',
-        mode    => '0770',
-        owner   => 'root',
-        source  => 'puppet:///modules/dart/picaps_servers/picaps-install.sh',
+        group  => 'root',
+        mode   => '0770',
+        owner  => 'root',
+        source => 'puppet:///modules/dart/picaps_servers/picaps-install.sh',
     }
     file { '/root/picaps-initdb.sh':
-        group   => 'root',
-        mode    => '0770',
-        owner   => 'root',
-        source  => 'puppet:///modules/dart/picaps_servers/picaps-initdb.sh',
+        group  => 'root',
+        mode   => '0770',
+        owner  => 'root',
+        source => 'puppet:///modules/dart/picaps_servers/picaps-initdb.sh',
     }
 
     # PICAPS Software
@@ -162,8 +162,8 @@ class dart::abstract::picaps_production_server_node inherits dart::abstract::ung
 
     # Link for yum-fanout-mirror
     file { '/local':
-        ensure  => link,
-        target  => '/storage/pub',
+        ensure => link,
+        target => '/storage/pub',
     }
 
     # PICAPS calls gethostbyname() for its own hostname which must resolve.
@@ -175,8 +175,8 @@ class dart::abstract::picaps_production_server_node inherits dart::abstract::ung
     # As a work around, you should either: 1) put the host into DNS or, 2) put
     # the host into /etc/hosts (manually, of course).
     host { $::fqdn:
-        ip              => $::ipaddress,
-        host_aliases    => [ $::hostname ],
+        ip           => $::ipaddress,
+        host_aliases => [ $::hostname ],
     }
 
 }

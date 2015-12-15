@@ -75,10 +75,10 @@ class dart::abstract::picaps_test_server_node inherits dart::abstract::unguarded
 
     # Printing support
     file { '/etc/cups/cupsd.conf':
-        group   => 'lp',
-        mode    => '0640',
-        owner   => 'root',
-        source  => [
+        group  => 'lp',
+        mode   => '0640',
+        owner  => 'root',
+        source => [
             'puppet:///modules/dart/picaps_servers/picaps-cupsd.conf',
         ],
     }
@@ -88,18 +88,18 @@ class dart::abstract::picaps_test_server_node inherits dart::abstract::unguarded
         config_uri => 'puppet:///modules/dart/picaps_servers/picaps-test-mariadb-server.cnf',
     }
     file { '/etc/systemd/system/mysqld.service':
-        group   => 'root',
-        mode    => '0644',
-        owner   => 'root',
-        source  => 'puppet:///modules/dart/picaps_servers/picaps-mysqld.service',
-        before  => File['/storage/mysql'],
+        group  => 'root',
+        mode   => '0644',
+        owner  => 'root',
+        source => 'puppet:///modules/dart/picaps_servers/picaps-mysqld.service',
+        before => File['/storage/mysql'],
     }
     file { '/storage/':
-        ensure  => 'directory',
-        owner   => 'root',
-        group   => 'root',
-        mode    => '0755',
-        before  => File['/storage/mysql'],
+        ensure => 'directory',
+        owner  => 'root',
+        group  => 'root',
+        mode   => '0755',
+        before => File['/storage/mysql'],
     }
     file { '/storage/mysql':
         ensure  => 'directory',
@@ -112,12 +112,12 @@ class dart::abstract::picaps_test_server_node inherits dart::abstract::unguarded
         before  => Class['mariadb::server'],
     }
     user { 'mysql':
-        provider    => 'useradd',
-        uid         => '444',
-        gid         => '444',
-        home        => '/storage/mysql',
-        system      => true,
-        before      => File['/etc/systemd/system/mysqld.service'],
+        provider => 'useradd',
+        uid      => '444',
+        gid      => '444',
+        home     => '/storage/mysql',
+        system   => true,
+        before   => File['/etc/systemd/system/mysqld.service'],
     }
     group { 'mysql':
         provider => 'groupadd',
@@ -133,28 +133,28 @@ class dart::abstract::picaps_test_server_node inherits dart::abstract::unguarded
         content => template('dart/picaps/picaps-grant.sql'),
     }
     file { '/root/picaps-databases.sql':
-        group   => 'root',
-        mode    => '0660',
-        owner   => 'root',
-        source  => 'puppet:///modules/dart/picaps_servers/picaps-databases.sql',
+        group  => 'root',
+        mode   => '0660',
+        owner  => 'root',
+        source => 'puppet:///modules/dart/picaps_servers/picaps-databases.sql',
     }
     file { '/root/picaps-install.sh':
-        group   => 'root',
-        mode    => '0770',
-        owner   => 'root',
-        source  => 'puppet:///modules/dart/picaps_servers/picaps-install.sh',
+        group  => 'root',
+        mode   => '0770',
+        owner  => 'root',
+        source => 'puppet:///modules/dart/picaps_servers/picaps-install.sh',
     }
     file { '/root/picaps-initdb.sh':
-        group   => 'root',
-        mode    => '0770',
-        owner   => 'root',
-        source  => 'puppet:///modules/dart/picaps_servers/picaps-initdb.sh',
+        group  => 'root',
+        mode   => '0770',
+        owner  => 'root',
+        source => 'puppet:///modules/dart/picaps_servers/picaps-initdb.sh',
     }
     file { '/root/picaps-test-initdb.sh':
-        group   => 'root',
-        mode    => '0770',
-        owner   => 'root',
-        source  => 'puppet:///modules/dart/picaps_servers/picaps-test-initdb.sh',
+        group  => 'root',
+        mode   => '0770',
+        owner  => 'root',
+        source => 'puppet:///modules/dart/picaps_servers/picaps-test-initdb.sh',
     }
 
     # PICAPS Software
@@ -174,8 +174,8 @@ class dart::abstract::picaps_test_server_node inherits dart::abstract::unguarded
     # As a work around, you should either: 1) put the host into DNS or, 2) put
     # the host into /etc/hosts (manually, of course).
     host { $::fqdn:
-        ip              => $::ipaddress,
-        host_aliases    => [ $::hostname ],
+        ip           => $::ipaddress,
+        host_aliases => [ $::hostname ],
     }
 
 }

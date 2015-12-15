@@ -32,39 +32,39 @@ class dart::mdct_00pi inherits dart::abstract::picaps_production_server_node {
         remote  => '://oak-sapfs01/miistaging',
     }
     file { '/etc/.credentials':
-        ensure  => 'directory',
-        owner   => 'root',
-        group   => 'root',
-        mode    => '0750',
-        before  => [
+        ensure => 'directory',
+        owner  => 'root',
+        group  => 'root',
+        mode   => '0750',
+        before => [
             File['/etc/.credentials/mdcgate.cred'],
             File['/etc/.credentials/mas_mdc.cred'],
         ],
     }
     file { '/etc/.credentials/mdcgate.cred':
-        group   => 'root',
-        mode    => '0600',
-        owner   => 'root',
-        source  => [
+        group  => 'root',
+        mode   => '0600',
+        owner  => 'root',
+        source => [
             'puppet:///modules/dart/picaps_servers/mdcgate.cred',
         ],
-        before  => Autofs::Map_entry['/mnt/prodmondata'],
+        before => Autofs::Map_entry['/mnt/prodmondata'],
     }
     file { '/etc/.credentials/mas_mdc.cred':
-        group   => 'root',
-        mode    => '0600',
-        owner   => 'root',
-        source  => [
+        group  => 'root',
+        mode   => '0600',
+        owner  => 'root',
+        source => [
             'puppet:///modules/dart/picaps_servers/mas_mdc.cred',
         ],
-        before  => Autofs::Map_entry['/mnt/mii-staging'],
+        before => Autofs::Map_entry['/mnt/mii-staging'],
     }
     file { '/dist/reportoutput':
-        ensure  => link,
-        target  => '/mnt/prodmondata/staging',
+        ensure => link,
+        target => '/mnt/prodmondata/staging',
     }
     file { '/dist/mii':
-        ensure  => link,
-        target  => '/mnt/mii-staging',
+        ensure => link,
+        target => '/mnt/mii-staging',
     }
 }

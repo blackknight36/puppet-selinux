@@ -13,16 +13,16 @@ class dart::mdct_dev6 inherits dart::abstract::workstation_node {
     }
 
     network::interface { 'br0':
-        template    => 'static-bridge',
-        ip_address  => '10.1.0.156',
-        netmask     => '255.255.0.0',
-        gateway     => '10.1.0.25',
-        stp         => 'no',
+        template   => 'static-bridge',
+        ip_address => '10.1.0.156',
+        netmask    => '255.255.0.0',
+        gateway    => '10.1.0.25',
+        stp        => 'no',
     }
 
     network::interface { 'enp0s25':
-        template    => 'static',
-        bridge      => 'br0',
+        template => 'static',
+        bridge   => 'br0',
     }
 
 #   class { 'xorg_server':
@@ -103,63 +103,63 @@ class dart::mdct_dev6 inherits dart::abstract::workstation_node {
     }
 
     file { '/etc/.credentials':
-        ensure  => link,
-        target  => '/mnt/storage/etc/.credentials',
+        ensure => link,
+        target => '/mnt/storage/etc/.credentials',
     }
 
     file { '/storage':
-        ensure  => link,
-        target  => '/mnt/storage/',
+        ensure => link,
+        target => '/mnt/storage/',
     }
 
     file { '/cpk':
-        ensure  => link,
-        target   => '/mnt/storage/pub/',
+        ensure => link,
+        target => '/mnt/storage/pub/',
     }
 
     file { '/dist':
-        ensure  => link,
-        target  => '/mnt/storage/dist/',
+        ensure => link,
+        target => '/mnt/storage/dist/',
     }
 
     file { '/etc/init.d/picaps':
-        ensure  => link,
-        target  => '/mnt/storage/dist/resource/init.d/picaps',
+        ensure => link,
+        target => '/mnt/storage/dist/resource/init.d/picaps',
     }
 
     file { '/etc/sysconfig/picaps':
-        ensure  => link,
-        target  => '/mnt/storage/dist/resource/init.d/sysconfig',
+        ensure => link,
+        target => '/mnt/storage/dist/resource/init.d/sysconfig',
     }
 
     file { '/usr/local/yjp':
-        ensure  => link,
-        target  => '/mnt/storage/usr/local/yjp',
+        ensure => link,
+        target => '/mnt/storage/usr/local/yjp',
     }
 
     file { '/usr/local/selinux':
-        ensure  => link,
-        target  => '/mnt/storage/usr/local/selinux',
+        ensure => link,
+        target => '/mnt/storage/usr/local/selinux',
     }
 
     dart::util::replace_original_with_symlink_to_alternate { '/etc/libvirt':
-        alternate   => '/mnt/storage/etc/libvirt',
-        backup      => "/etc/libvirt${SUFFIX}",
-        original    => '/etc/libvirt',
+        alternate => '/mnt/storage/etc/libvirt',
+        backup    => "/etc/libvirt${SUFFIX}",
+        original  => '/etc/libvirt',
         # TODO: libvirt needs to be a formal service and treated here like
         # mysql WRT before/require attrs
-        require     => Package['libvirt'],
-        seltype     => 'virt_etc_t',
+        require   => Package['libvirt'],
+        seltype   => 'virt_etc_t',
     }
 
     dart::util::replace_original_with_symlink_to_alternate { '/var/lib/libvirt':
-        alternate   => '/mnt/storage/var/lib/libvirt',
-        backup      => "/var/lib/libvirt${SUFFIX}",
-        original    => '/var/lib/libvirt',
+        alternate => '/mnt/storage/var/lib/libvirt',
+        backup    => "/var/lib/libvirt${SUFFIX}",
+        original  => '/var/lib/libvirt',
         # TODO: libvirt needs to be a formal service and treated here like
         # mysql WRT before/require attrs
-        require     => Package['libvirt'],
-        seltype     => 'virt_var_lib_t',
+        require   => Package['libvirt'],
+        seltype   => 'virt_var_lib_t',
     }
 
 #    dart::util::replace_original_with_symlink_to_alternate { '/var/lib/mysql':

@@ -30,8 +30,8 @@ password=T5A!ENsER
 
     $tcadmins_gid = '54321'
     group { 'tcadmins':
-        gid     => $tcadmins_gid,
-        system  => false,
+        gid    => $tcadmins_gid,
+        system => false,
     }
 
     # Users defined in Active Directory; this just for group membership since
@@ -56,11 +56,11 @@ password=T5A!ENsER
 
     # Sync Source
     dart::subsys::teamcenter::mount { 'teamcenter_source':
-        host        => $sync_source,
-        share_name  => 'volumes',
-        group       => 'root',
-        mode        => '0555',
-        options     => "credentials=${credentials_fn}",
+        host       => $sync_source,
+        share_name => 'volumes',
+        group      => 'root',
+        mode       => '0555',
+        options    => "credentials=${credentials_fn}",
     }
 
     # Sync Targets

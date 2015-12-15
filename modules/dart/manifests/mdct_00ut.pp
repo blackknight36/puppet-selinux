@@ -46,17 +46,17 @@ class dart::mdct_00ut inherits dart::abstract::guarded_server_node {
     }
 
     file {'/storage/slideshow':
-        ensure  => 'directory',
-        owner   => 'root',
-        group   => 'root',
-        mode    => '0755',
+        ensure => 'directory',
+        owner  => 'root',
+        group  => 'root',
+        mode   => '0755',
     }
 
     file {'/storage/slideshow/priority':
-        ensure  => 'directory',
-        owner   => 'root',
-        group   => 'root',
-        mode    => '0755',
+        ensure => 'directory',
+        owner  => 'root',
+        group  => 'root',
+        mode   => '0755',
     }
 
     #mount {'/storage/slideshow':
@@ -71,9 +71,9 @@ class dart::mdct_00ut inherits dart::abstract::guarded_server_node {
 
     # AOS devices pull media-playback content using rsync.
     class { 'rsync::server':
-        export_all_ro   => true,
-        source          => 'puppet:///modules/dart/utility_servers/rsyncd/rsyncd.conf',
-        xinetd_source   => 'puppet:///modules/dart/utility_servers/rsyncd/rsync.xinetd',
+        export_all_ro => true,
+        source        => 'puppet:///modules/dart/utility_servers/rsyncd/rsyncd.conf',
+        xinetd_source => 'puppet:///modules/dart/utility_servers/rsyncd/rsync.xinetd',
     }
 
     # That same media-playback content is pushed in via Windows systems.

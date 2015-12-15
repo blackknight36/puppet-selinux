@@ -25,10 +25,10 @@ class dart::abstract::teamcity_agent_node_est_ngic {
                 '/home/ngic/lucene',
                 '/home/ngic/lucene/indexes',
         ]:
-        ensure  => directory,
-        owner   => 'teamcity',
-        group   => 'teamcity',
-        mode    => '0755',
+        ensure => directory,
+        owner  => 'teamcity',
+        group  => 'teamcity',
+        mode   => '0755',
     }
 
     class { 'postgresql::server':
@@ -39,18 +39,18 @@ class dart::abstract::teamcity_agent_node_est_ngic {
     }
 
     postgresql::server::db { 'est_junit':
-        user    => 'est_junit',
-        password    => postgresql_password('est_junit', 'est_junit'),
+        user     => 'est_junit',
+        password => postgresql_password('est_junit', 'est_junit'),
     }
 
     postgresql::server::db { 'tcir_junit':
-        user    => 'tcir_junit',
-        password    => postgresql_password('tcir_junit', 'tcir_junit'),
+        user     => 'tcir_junit',
+        password => postgresql_password('tcir_junit', 'tcir_junit'),
     }
 
     postgresql::server::db { 'cats_junit':
-        user    => 'cats_junit',
-        password    => postgresql_password('cats_junit', 'cats_junit'),
+        user     => 'cats_junit',
+        password => postgresql_password('cats_junit', 'cats_junit'),
     }
 
     # NB: TeamCity itself uses the OpenJDK.
