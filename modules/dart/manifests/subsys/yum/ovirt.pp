@@ -8,7 +8,7 @@ class dart::subsys::yum::ovirt {
     # Rawhide systems begin life as the latest stable release and should be
     # fully puppetized prior to upgrading to rawhide.  Once there, they have
     # no need for this section, which would only throw errors anyway.
-    if $operatingsystemrelease != 'Rawhide' {
+    if $::operatingsystemrelease != 'Rawhide' {
 
         yum::repo {'ovirt':
             server_uri  => 'http://ovirt.org/releases',

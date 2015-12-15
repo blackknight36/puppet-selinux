@@ -28,7 +28,7 @@ class dart::mdct_dev6_test inherits dart::abstract::workstation_node {
         hasstatus  => true,
     }
 
-    $SUFFIX=".orig-${operatingsystem}${operatingsystemrelease}"
+    $SUFFIX=".orig-${::operatingsystem}${::operatingsystemrelease}"
 
     autofs::map_entry { '/mnt/storage':
         mount   => '/mnt',

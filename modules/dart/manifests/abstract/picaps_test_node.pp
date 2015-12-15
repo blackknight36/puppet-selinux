@@ -31,7 +31,7 @@ class dart::abstract::picaps_test_node inherits dart::abstract::unguarded_server
     # PICAPS stores are via MySQL
 
 
-    case $hostname {
+    case $::hostname {
         'mdct-04pt', 'mdct-55pt': {
             $dbserver = 'mariadb_server_pref18'
         }
@@ -63,9 +63,9 @@ class dart::abstract::picaps_test_node inherits dart::abstract::unguarded_server
     #   https://projects.puppetlabs.com/issues/15001
     # As a work around, you should either: 1) put the host into DNS or, 2) put
     # the host into /etc/hosts (manually, of course).
-    host { $fqdn:
-        ip           => $ipaddress,
-        host_aliases => [ $hostname ],
+    host { $::fqdn:
+        ip           => $::ipaddress,
+        host_aliases => [ $::hostname ],
     }
 
     file { '/usr/local/bin/picaps-install-and-setup':
