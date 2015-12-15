@@ -15,15 +15,15 @@ class dart::mdct_dev6_test inherits dart::abstract::workstation_node {
     include 'mysql_server'
 
     service { 'NetworkManager':
-        enable     => false,
         ensure     => stopped,
+        enable     => false,
         hasrestart => true,
         hasstatus  => true,
     }
 
     service { 'network':
-        enable     => true,
         ensure     => running,
+        enable     => true,
         hasrestart => true,
         hasstatus  => true,
     }
