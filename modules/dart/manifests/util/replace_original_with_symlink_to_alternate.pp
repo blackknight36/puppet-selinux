@@ -10,7 +10,7 @@ define dart::util::replace_original_with_symlink_to_alternate(
     # carried over from prior OS releases.  The "file" type does provide a
     # backup parameter, but I've seen it fail with directory structures
     # containing intra-relative symlinks; hence this workaround.
-    exec { "archive-${original-to-}${backup}":
+    exec { "archive-${original}-to-${backup}":
         command => "cp -a ${original} ${backup}",
         unless  => "test -e ${backup}",
     }
@@ -20,7 +20,7 @@ define dart::util::replace_original_with_symlink_to_alternate(
         ensure  => $alternate,
         force   => true,
         require => [
-            Exec["archive-${original-to-}${backup}"],
+            Exec["archive-${original}-to-${backup}"],
             Service['autofs'],
         ],
         selrole => $selrole,
