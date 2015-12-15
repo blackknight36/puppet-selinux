@@ -18,6 +18,12 @@ chrony::servers:
 http_proxy:                 mdct-proxy.dartcontainer.com
 
 
+network::service:           nm
+network::domain:            "%{::domain}"
+network::name_servers:
+    - 10.201.40.69
+    - 10.201.40.70
+
 openssh::server::source:    "puppet:///modules/dart/openssh/sshd_config.%{::operatingsystem}.%{::operatingsystemrelease}"
 
 

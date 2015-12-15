@@ -3,6 +3,12 @@
 # == Class: dart::params
 #
 # Commonly used domain-level parameters for Dart Container.
+#
+# NOTICE:
+#
+#   DO NOT ADD ANY MORE VALUES HERE.  PLEASE ADD THEM TO HIERA INSTEAD.
+#
+#   This class is deprecated and slated for eventual removal.
 
 
 class dart::params {
@@ -18,10 +24,6 @@ class dart::params {
     $bacula_sd_name         = 'mdct-bacula-sd'
     $bacula_sd_passwd       = 'oPm5LiIU7n77WlEFAnZPA0gmINQA5fyJxmBvULOuof5C'
     $bacula_team            = 'john.florian@dart.biz,levi.harper@dart.biz,chris.pugh@dart.biz,ben.minshall@dart.biz,nathan.nephew@dart.biz,elizabeth.scott@dart.biz,kristina.doyle@dart.biz'
-
-    # DNS
-    $dns_domain     = $::domain
-    $dns_servers    = ['10.201.40.69', '10.201.40.70']
 
     # SMTP
     $smtp_server    = 'smtp.dartcontainer.com'

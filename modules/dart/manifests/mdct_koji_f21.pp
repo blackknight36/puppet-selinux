@@ -89,11 +89,7 @@
 
 class dart::mdct_koji_f21 inherits ::dart::subsys::koji::params {
 
-    class { '::network':
-        service      => 'nm',
-        domain       => $dart::params::dns_domain,
-        name_servers => $dart::params::dns_servers,
-    }
+    include '::network'
 
     network::interface { 'eth0':
         template   => 'static',

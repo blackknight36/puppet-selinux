@@ -22,11 +22,7 @@ class dart::mdct_nexus inherits dart::abstract::guarded_server_node {
         ensure  => installed,
     }
 
-    class { 'network':
-            service         => 'nm',
-            domain          => $dart::params::dns_domain,
-            name_servers    => $dart::params::dns_servers,
-    }
+    include '::network'
 
     network::interface { 'eth0':
             template    => 'static',

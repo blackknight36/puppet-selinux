@@ -19,10 +19,8 @@ class dart::mdct_dr inherits dart::abstract::dr_server_node {
         'postgresql':   port => '5432';
     }
 
-    class { 'network':
-            service         => 'legacy',
-            domain          => $dart::params::dns_domain,
-            name_servers    => $dart::params::dns_servers,
+    class { '::network':
+        service => 'legacy',
     }
 
     network::interface { 'eth0':

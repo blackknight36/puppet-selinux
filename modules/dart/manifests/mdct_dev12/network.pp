@@ -15,11 +15,7 @@
 
 class dart::mdct_dev12::network {
 
-    class { '::network':
-        service      => 'nm',
-        domain       => $dart::params::dns_domain,
-        name_servers => $dart::params::dns_servers,
-    }
+    include '::network'
 
     network::interface {
         'br0':

@@ -11,10 +11,9 @@ class dart::mdct_est_dev1 inherits dart::abstract::est_server_node {
     iptables::tcp_port {
         'http': port => '80';
     }
-    class { 'network':
-            service         => 'legacy',
-            domain          => $dart::params::dns_domain,
-            name_servers    => $dart::params::dns_servers,
+
+    class { '::network':
+        service => 'legacy',
     }
 
     network::interface { 'eth0':

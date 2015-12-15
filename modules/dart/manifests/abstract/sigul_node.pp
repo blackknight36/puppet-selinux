@@ -19,11 +19,7 @@ class dart::abstract::sigul_node inherits ::dart::abstract::guarded_server_node 
 
     include '::dart::subsys::sigul::params'
 
-    class { '::network':
-        service      => 'nm',
-        domain       => $dart::params::dns_domain,
-        name_servers => $dart::params::dns_servers,
-    }
+    include '::network'
 
     ::sendmail::alias { 'root':
         recipient   => $::dart::subsys::sigul::params::root_email_recipient,

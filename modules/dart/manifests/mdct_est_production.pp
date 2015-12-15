@@ -14,10 +14,9 @@ class dart::mdct_est_production inherits dart::abstract::est_server_node {
         mon_name    => $dart::params::bacula_mon_name,
         mon_passwd  => '68524754e65fe7d71aeb338c38ab0de1',
     }
-    class { 'network':
-            service         => 'legacy',
-            domain          => $dart::params::dns_domain,
-            name_servers    => $dart::params::dns_servers,
+
+    class { '::network':
+        service => 'legacy',
     }
 
     network::interface { 'eth0':

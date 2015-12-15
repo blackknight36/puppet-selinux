@@ -8,10 +8,8 @@
 
 class dart::mdct_est_dev2 inherits dart::abstract::est_server_node {
 
-class { 'network':
-        service         => 'legacy',
-        domain          => $dart::params::dns_domain,
-        name_servers    => $dart::params::dns_servers,
+    class { '::network':
+        service => 'legacy',
     }
 
 network::interface { 'eth0':

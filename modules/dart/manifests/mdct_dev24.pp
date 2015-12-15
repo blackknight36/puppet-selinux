@@ -9,11 +9,7 @@
 
 class dart::mdct_dev24 inherits dart::abstract::workstation_node {
 
-    class { '::network':
-        service      => 'nm',
-        domain       => $dart::params::dns_domain,
-        name_servers => $dart::params::dns_servers,
-    }
+    include '::network'
 
     network::interface {
         'br0':

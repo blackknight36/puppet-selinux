@@ -15,11 +15,7 @@ class dart::mdct_dev17 inherits dart::abstract::workstation_node {
         'tomcat': port => '8080';
     }
 
-class { 'network':
-        service         => 'nm',
-        domain          => $dart::params::dns_domain,
-        name_servers    => $dart::params::dns_servers,
-    }
+    include '::network'
 
 network::interface { 'em1':
         template    => 'static',

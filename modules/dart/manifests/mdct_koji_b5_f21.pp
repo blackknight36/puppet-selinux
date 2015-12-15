@@ -25,11 +25,7 @@
 
 class dart::mdct_koji_b5_f21 {
 
-    class { '::network':
-        service      => 'nm',
-        domain       => $dart::params::dns_domain,
-        name_servers => $dart::params::dns_servers,
-    }
+    include '::network'
 
     network::interface { 'eth0':
         template   => 'static',

@@ -8,10 +8,8 @@
 
 class dart::mdct_01pi inherits dart::abstract::picaps_production_server_node {
 
-    class { 'network':
+    class { '::network':
         service         => 'legacy',
-        domain          => $dart::params::dns_domain,
-        name_servers    => $dart::params::dns_servers,
     }
 
 #    network::interface { 'em1':

@@ -45,10 +45,8 @@ class dart::mdct_tcir_production inherits dart::abstract::tcir_server_node {
         tls_verify_peer =>  'yes',
     }
 
-    class { 'network':
-            service         => 'legacy',
-            domain          => $dart::params::dns_domain,
-            name_servers    => $dart::params::dns_servers,
+    class { '::network':
+        service => 'legacy',
     }
 
     network::interface { 'eth0':

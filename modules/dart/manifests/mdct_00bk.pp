@@ -8,11 +8,7 @@
 
 class dart::mdct_00bk inherits dart::abstract::guarded_server_node {
 
-    class { 'network':
-        service         => 'nm',
-        domain          => $dart::params::dns_domain,
-        name_servers    => $dart::params::dns_servers,
-    }
+    include '::network'
 
     network::interface { 'ens32':
         template    => 'static',
