@@ -19,9 +19,9 @@ class dart::mdct_aos_master_f21 {
 
     ::network::interface { 'eth0':
         template   => 'static',
-        ip_address => '10.1.192.128',
-        netmask    => '255.255.255.0',
-        gateway    => '10.1.0.25',
+        ip_address => '10.201.64.33',
+        netmask    => '255.255.252.0',
+        gateway    => '10.201.67.254',
     }
 
     class { '::jaf_bacula::client':
