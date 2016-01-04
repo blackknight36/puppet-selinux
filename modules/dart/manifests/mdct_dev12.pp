@@ -2,7 +2,7 @@
 #
 # == Class: dart::mdct_dev12
 #
-# Configures a host as John Florian's workstation.
+# Manages John Florian's workstation.
 #
 # === Parameters
 #
@@ -44,10 +44,14 @@ class dart::mdct_dev12 inherits dart::abstract::workstation_node {
     include '::dart::subsys::mock'
 
     printer { 'dell':
-        uri         => 'socket://10.209.123.23:9100',
+        uri         => 'socket://10.209.44.64:9100',
         description => 'Dell 3100cn',
-        location    => 'Florian\'s office',
+        location    => 'cubicle of Chris Kennedy',
         model       => 'foomatic:Dell-3100cn-pxlcolor.ppd',
+    } ->
+
+    default_printer { 'dell':
+        ensure => present,
     }
 
     class { '::selinux':
