@@ -3,11 +3,29 @@ node default {
 
     # Test bug where single quote caused location string to fail
     printer { "Printer_A":
-        ensure      => present,
-        uri         => "http://localhost",
-        description => "This is the printer description",
-        location    => "John's office",
-        shared      => false,
+        ensure       => present,
+        uri          => "http://localhost",
+        description  => "This is the printer descriptionx",
+        location     => "Example Location",
+        model        => 'drv:///sample.drv/generic.ppd',
+        shared       => false,
+        error_policy => abort_job,
+        options      => {
+          'auth-info-required' => 'negotiate',
+        }
+    }
+
+    printer { "Printer_B":
+        ensure       => present,
+        uri          => "http://localhost",
+        description  => "This is the printer descriptionx",
+        location     => "Example Location",
+        model        => 'drv:///sample.drv/generic.ppd',
+        shared       => false,
+        error_policy => abort_job,
+        options      => {
+            'auth-info-required' => 'negotiate',
+        }
     }
 
 }

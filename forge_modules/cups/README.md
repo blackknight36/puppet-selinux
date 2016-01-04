@@ -1,5 +1,10 @@
 ## puppet-cups module
 
+## Important
+
+After git tag 1.4.0_RC1 I have made a non-backwards compatible change to the way ppd_options and options parameters
+work. If you want to use the old behavior, please use tag 1.4.0_RC1 or 1.3.0
+
 ## User Guide
 
 ### Overview
@@ -7,9 +12,8 @@
 This type provides the ability to manage cups printers and options.
 
 Limitations:
+
 + It currently does not support classes.
-+ It currently does not set default printers.
-+ It does not set vendor ppd options (where an external process is responsible for modifying the ppd).
 
 ### Installation
 
@@ -17,17 +21,7 @@ You can install the latest release version from the module forge by executing th
 
     puppet module install mosen-cups
 
-If you are feeling brave, or want to test the version in development you can clone the github repository into
-your module path.
-
-This module provides new types in the form of plugins, so pluginsync must be enabled for every agent in the
-puppet configuration (usually /etc/puppet/puppet.conf) like this:
-
-    [agent]
-    pluginsync = true
-
-Without pluginsync enabled, any manifest with a `printer` resource in it will throw an error
-or possibly just do nothing.
+You can also clone the source repository into your module path, but be aware that HEAD is sometimes broken.
 
 ### Examples
 
@@ -39,7 +33,8 @@ The most basic printer install possible:
         ensure      => present,
         uri         => "lpd://hostname/printer_a",
         description => "This is the printer description",
-        ppd         => "/Library/Printers/PPDs/Printer.ppd", # PPD file will be autorequired
+        ppd         => "/Library/Printers/PPDs/Printer.ppd", # OR
+        model       => "drv:///sample.drv/okidata9.ppd", # Model from `lpinfo -m`
     }
 
 - The uri identifies how you will connect to the printer. running `lpinfo -v` at the command line will give you some
@@ -61,24 +56,54 @@ Removing the printer "Basic_Printer" from the previous example:
 An example using almost every possible parameter:
 
     printer { "Extended_Printer":
-        ensure      => present,
-        uri         => "lpd://localhost/printer_a",
-        description => "This is the printer description",
-        location    => "Main office",
-        ppd         => "/Library/Printers/PPDs/Printer.ppd", # Full path to vendor PPD
+        ensure       => present,
+        uri          => "lpd://localhost/printer_a",
+        description  => "This is the printer description",
+        location     => "Main office",
+
+        # Printer driver/description
+        ppd          => "/Library/Printers/PPDs/Printer.ppd", # Full path to vendor PPD
         # OR
-        model       => "", # A valid model, you can list these with lpinfo -m, this is usually what you would call a
-                           # list of installed drivers.
+        model        => "", # A valid model, you can list these with lpinfo -m, this is usually what you would call a
+                            # list of installed drivers.
         # OR
-        interface   => "/path/to/system/v/interface/file", # Interface script run for this destination
-        shared      => false, # Printer will be shared and published by CUPS
-        enabled     => true, # Enabled by default
-        options     => { media => 'A4' }, # Hash of options ( name => value ), these are non vendor specific options.
-        ppd_options => { 'HPOption_Duplexer' => 'False' }, # Hash of vendor PPD options
+        interface    => "/path/to/system/v/interface/file", # Interface script run for this destination
+
+        shared       => false, # Printer will be shared and published by CUPS
+        error_policy => abort_job, # underscored version of error policy
+        enabled      => true, # Enabled by default
+        options      => {  }, # Hash of options ( name => value ), supplied as -o flag to lpadmin.
+
+        # Vendor/driver options
+        page_size    => 'A4',
+        input_tray   => 'Tray1',
+        color_model  => 'CMYK',  # or 'Gray' usually for grayscale.
+        duplex       => '',
+        
+        # AND Any other custom driver specific option...
+        ppd_options  => { 'HPOption_Duplexer' => 'False' }, # Hash of vendor PPD options, set on creation.
     }
 
-- The easiest way to find out a list of valid options for any single printer is to install that printer locally, and
-run `lpoptions -l` at the command line.
+- To find valid vendor/ppd values for a printer, install it locally using the vendor supplied PPD and
+run `lpoptions -p <dest> -l`. You can also read the PPD if that's your thing.
+- Note that some options like `shared` and `error_policy` are parameters available at creation time only.
+
+### Default Printer
+
+To make the basic printer from the previous section the default:
+
+    default_printer { "Basic_Printer":
+        ensure => present,
+        require => Printer['Basic_Printer'],
+    }
+
+Note that this has almost zero effect on Mac OS X, due to the GUI not really respecting the system wide lpoptions.
+
+**Why not add a `default` property to the printer resource?**
+Because the command line makes it unfeasible to set the default printer to nothing. This makes it impossible for all
+instances to have `default => false`. It also means that changing default from true to false sometimes fails and creates
+a non-idempotent resource.
+(This could be overcome in future by editing `/etc/cups/lpoptions`).
 
 ### Facts
 
@@ -110,13 +135,8 @@ If you select "Last Used Printer", it will select the printer in:
 
 As the default printer.
 
-If you want to set the default printer, you cannot use `lpoptions` or `lpadmin` to do it. The system preference pane
-primarily reads and writes to:
-
-    ~/.cups/lpoptions
-
-To determine the current default printer queue. You can make this file part of your login script or manage it using
-a commercial osx management solution.
+If you want to set the default printer, you probably shouldn't use `lpoptions` because it only governs the default
+when submitting jobs under certain circumstances.
 
 #### Default Paper Size
 
@@ -129,16 +149,6 @@ Under the plist key `DefaultPaperID`, which has a string that relates to a non-l
 framework seems to have these listed in a binary plist under OSX 10.8. You can dump some localised strings using
 
     /usr/libexec/plistbuddy -c "print" /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/PrintCore.framework/Versions/Current/Resources/English.lproj/Localizable.strings
-
-#### Vendor PPD Options
-
-The provider does not currently generate PPD files based upon the vendor supplied printer definition. This means that
-if the vendor has supplied a PPD with Apple extensions i.e You see a UI which allows you to pick printer features, then
-you need to generate your own ppd first for distribution.
-
-I would recommend doing a manual installation of the printer with the customizations from the ui picker, and then using
-the resulting PPD as the printer description. On OS X you can retrieve the ppd from /private/etc/cups/ppd after you have
-customized the printer features.
 
 ### Contributing
 
@@ -159,3 +169,18 @@ Install the necessary gems:
 And run the tests from the root of the source code:
 
     rake test
+
+#### Acceptance Tests
+
+You can execute the beaker tests starting with:
+
+    BEAKER_destroy=no bundle exec rspec spec/acceptance
+
+And then re-use the provisioned guests with
+
+    BEAKER_destroy=no BEAKER_provision=no bundle exec rspec spec/acceptance
+
+Unset `BEAKER_destroy` after testing has finished or VM is dirty for the purposes of testing.
+
+You may also use `BEAKER_set=centos6`, for example, if you do not want to test against the default vagrant box
+(Currently Ubuntu Precise).

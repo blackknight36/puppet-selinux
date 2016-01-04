@@ -62,8 +62,19 @@ Puppet::Type.newtype(:printer) do
     defaultto :false
   end
 
+  # Error policy is a parameter because it is not displayed in the output of
+  # lpoptions -p or lpoptions -p -l, so it cannot be idempotent.
+  newparam(:error_policy) do
+    desc "Set the error policy for this destination, one of: abort_job, retry_job, retry_current_job, or stop_printer"
+
+    newvalues(:abort_job, :retry_job, :retry_current_job, :stop_printer)
+  end
+
   newproperty(:options) do
-    desc "Sets a list of options for the printer"
+    desc "Set cups options.
+
+    Some of these options are described in the lpadmin(8) manpage. You can query these options using
+    lpoptions -p destination."
 
     validate do |value|
       raise ArgumentError, "invalid value supplied for printer options" unless value.is_a? Hash
@@ -71,13 +82,31 @@ Puppet::Type.newtype(:printer) do
   end
 
   newproperty(:ppd_options) do
-    desc "Sets a list of PPD (vendor specific) options for the printer.
+    desc "Set vendor (ppd) options. These are sometimes specific to the model of printer.
 
     Use lpoptions -p destination -l to get a list of valid vendor PPD options for that queue."
 
     validate do |value|
       raise ArgumentError, "invalid value supplied for printer PPD options" unless value.is_a? Hash
     end
+  end
+
+  # Standard PPD Options
+
+  newproperty(:input_tray) do
+    desc "Set the input slot/input tray (Value depends on PPD)"
+  end
+
+  newproperty(:duplex) do
+    desc "Set duplex mode (Value depends on PPD)"
+  end
+  #
+  newproperty(:page_size) do
+    desc "Set the page size (Value depends on PPD)"
+  end
+  #
+  newproperty(:color_model) do
+    desc "Set the color model (CMY, CMYK, RGB, Gray)"
   end
 
   # Allow a printer resource without explicitly specifying a file resource for the PPD.
