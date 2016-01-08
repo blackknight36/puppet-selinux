@@ -155,11 +155,18 @@ deploy_certs() {
     cp ${CA_CRT} ${tmp2}/serverca.crt
     cp ${user_pem} ${tmp2}/client.crt
     cp ${user_web_crt} ${tmp2}/
-    rsync -av ${tmp2}/ ${target}
-    rm -rf ${tmp}
+    if rsync -av ${tmp2}/ ${target}
+    then
+        rm -rf ${tmp}
+    else
+        cat <<EOF
 
+Warning:
+    Failed to copy the certificates to the user's home directory.  You need to
+    manually copy everything in ${tmp2} to ${target}.
+EOF
+    fi
     cat <<EOF
-
 
 Reminder:
     You must import ~/.koji/$(basename ${user_web_crt}) into your web
