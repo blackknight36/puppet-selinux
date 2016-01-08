@@ -4,6 +4,14 @@ class dart::abstract::cats_server_node inherits dart::abstract::guarded_server_n
 
     include 'dart::subsys::autofs::common'
 
+    yumrepo { 'nexus-release':
+        name            => 'nexus-release',
+        baseurl         => 'http://mdct-nexus:8080/content/repositories/releases',
+        gpgcheck        => False,
+        enabled         => True,
+        metadata_expire => 60,
+    }
+
     package { [ 'tomcat', 'tomcat-admin-webapps', ]:
         ensure  => installed,
     }
