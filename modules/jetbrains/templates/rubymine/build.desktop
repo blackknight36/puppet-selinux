@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=RubyMine (<%= @build %>)
+Comment=The Most Intelligent Ruby and Rails IDE
+MimeType=text/x-java;
+Exec=<%= @product_root %>/bin/rubymine.sh
+Icon=<%= scope.lookupvar("jetbrains::rubymine::rubymine_icon") %>
+Type=Application
+Terminal=0
+MapNotify=false
+Categories=Utility;TextEditor;
+X-Desktop-File-Install-Version=0.15

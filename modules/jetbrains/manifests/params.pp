@@ -15,6 +15,7 @@ class jetbrains::params {
 
     $idea_root = "${root}/idea"
     $pycharm_root = "${root}/pycharm"
+    $rubymine_root = "${root}/rubymine"
     $teamcity_root = "${root}/teamcity"
 
     $teamcity_buildserver_root = "${teamcity_root}/.BuildServer"
