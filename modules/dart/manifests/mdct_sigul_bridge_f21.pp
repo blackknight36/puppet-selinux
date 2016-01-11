@@ -25,7 +25,7 @@ class dart::mdct_sigul_bridge_f21 inherits ::dart::abstract::sigul_node {
         template   => 'static',
         ip_address => '10.201.64.42',
         netmask    => '255.255.252.0',
-        gateway    => '10.1.0.25',
+        gateway    => '10.201.67.254',
         stp        => 'no',
     }
 
