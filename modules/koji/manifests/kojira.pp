@@ -48,10 +48,7 @@ class koji::kojira (
         $ensure='running',
     ) inherits ::koji::params {
 
-    package { $::koji::params::utils_packages:
-        ensure => installed,
-        notify => Service[$::koji::params::kojira_services],
-    }
+    include '::koji::packages::utils'
 
     File {
         owner     => 'root',
@@ -88,6 +85,7 @@ class koji::kojira (
         enable     => $enable,
         hasrestart => true,
         hasstatus  => true,
+        subscribe  => Class['::koji::packages::utils'],
     }
 
 }
