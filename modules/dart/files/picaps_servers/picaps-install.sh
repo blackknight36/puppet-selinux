@@ -21,7 +21,6 @@
   #/bin/ln -s /dist/resource/init.d/sysconfig /etc/sysconfig/picaps
 # configuration files
 /bin/ln -s /dist/config/picaps /etc/sysconfig/picaps
-/bin/ln -s /dist/config/picaps-bridge /etc/sysconfig/picaps-bridge
 /bin/ln -s /dist/config/picaps-core /etc/sysconfig/picaps-core
 /bin/ln -s /dist/config/picaps-coretocore /etc/sysconfig/picaps-coretocore
 /bin/ln -s /dist/config/picaps-display /etc/sysconfig/picaps-display
@@ -33,8 +32,6 @@
   #/bin/ln -sd /dist/resource/cron/export-sap-pm-measurements /etc/cron.d/export-sap-pm-measurements
 # systemd target & services
 /bin/cp -a /dist/resource/systemd/picaps-all.target /etc/systemd/system/picaps-all.target
-/bin/cp -a /dist/resource/systemd/picaps-bridge-1.service /etc/systemd/system/picaps-bridge-1.service
-/bin/cp -a /dist/resource/systemd/picaps-bridge-2.service /etc/systemd/system/picaps-bridge-2.service
 /bin/cp -a /dist/resource/systemd/picaps-core.service /etc/systemd/system/picaps-core.service
 /bin/cp -a /dist/resource/systemd/picaps-coretocore.service /etc/systemd/system/picaps-coretocore.service
 /bin/cp -a /dist/resource/systemd/picaps-display.service /etc/systemd/system/picaps-display.service
@@ -47,8 +44,6 @@
 /bin/systemctl disable picaps-display.service
 /bin/systemctl disable picaps-persister.service
 /bin/systemctl disable picaps-poller.service
-/bin/systemctl disable picaps-bridge-1.service
-/bin/systemctl disable picaps-bridge-2.service
 /bin/systemctl disable picaps-coretocore.service
 /bin/systemctl disable picaps-all.target
 
