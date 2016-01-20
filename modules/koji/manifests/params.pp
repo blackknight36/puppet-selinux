@@ -20,11 +20,11 @@ class koji::params {
                 'koji-hub',
                 'koji-hub-plugins',
             ]
-            $kojira_packages = 'koji-utils'
             $mash_packages = [
                 'mash',
                 'repoview',
             ]
+            $utils_packages = 'koji-utils'
             $web_packages = 'koji-web'
 
             $builder_services = 'kojid'
