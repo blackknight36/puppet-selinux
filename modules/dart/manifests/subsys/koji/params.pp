@@ -48,4 +48,8 @@ class dart::subsys::koji::params inherits ::koji::params {
     # details of the Koji Web service
     $web_passwd     = 'D0gG0n31t'
 
+    # a map of all extant signing keys
+    $rpm_signing_keys = {
+        'mdct-legacy' => '0F9F5D3B',
+    }
 }

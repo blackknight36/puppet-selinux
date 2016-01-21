@@ -18,7 +18,6 @@
 class dart::subsys::koji::mash inherits ::dart::subsys::koji::params {
 
     $repoview_server = 'http://mdct-00fs.dartcontainer.com'
-    $rpm_signing_keys = ['0F9F5D3B']
     $repoview_url_fmt = join(
             [ $repoview_server,
               '/pub/fedora/dart/%s/%d/%%(arch)s/',
@@ -38,7 +37,7 @@ class dart::subsys::koji::mash inherits ::dart::subsys::koji::params {
 
     Koji::Mash::Repo {
         hash_packages => false,
-        keys          => $rpm_signing_keys,
+        keys          => $::dart::subsys::koji::params::rpm_signing_keys,
     }
 
     ::koji::mash::repo {
