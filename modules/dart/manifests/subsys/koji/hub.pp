@@ -10,6 +10,9 @@
 #
 # ==== Optional
 #
+# === Dependencies
+#   Module[yo61-logrotate] >= v1.3.0
+#
 # === Authors
 #
 #   John Florian <john.florian@dart.biz>
@@ -28,6 +31,17 @@ class dart::subsys::koji::hub inherits ::dart::subsys::koji::params {
             Class['::dart::subsys::koji::autofs'],
             Class['::koji::database'],
         ],
+    }
+
+    class { '::logrotate':
+        config => {
+            # This matches the defaults of httpd-2.4.16-1.fc21:
+            dateext  => true,
+            # These values vary from those same defaults:
+            # Compression is needed, especially for the httpd logs which have
+            # lots of activity from other Koji/Sigul components.
+            compress => true,
+        },
     }
 
 }
