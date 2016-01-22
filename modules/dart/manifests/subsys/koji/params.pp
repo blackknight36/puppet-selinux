@@ -21,6 +21,9 @@ class dart::subsys::koji::params inherits ::koji::params {
     # resources and tasks
     $hub_host       = 'mdct-koji-f21.dartcontainer.com'
 
+    # host providing the Koji garbage collector service
+    $koji_gc_host   = $hub_host
+
     # host providing the Kojira component for repository maintenance.
     $kojira_host    = $hub_host
 

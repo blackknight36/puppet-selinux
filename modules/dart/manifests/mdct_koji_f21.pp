@@ -58,13 +58,18 @@
 #       A web interface for the masses, this is a set of scripts that run in
 #       mod_wsgi and use the Cheetah templating engine to provide a web
 #       interface to Koji.  Koji-Web exposes a lot of information and also
-#       provides a means for certain operations, such as cancelling builds.
+#       provides a means for certain operations, such as canceling builds.
 #
 #   - Kojira
 #
 #       This daemon handles Yum repository creation and maintenance.
 #
-# Once you've successully gotten Puppet to build your Koji server, you will
+#   - Koji Garbage Collector
+#
+#       This removes builds from the system that are no longer needed,
+#       according to a configurable policy.
+#
+# Once you've successfully gotten Puppet to build your Koji server, you will
 # need to continue by bootstrapping the Koji build environment as discussed
 # here:
 #       https://fedoraproject.org/wiki/Koji/ServerBootstrap
@@ -111,6 +116,7 @@ class dart::mdct_koji_f21 inherits ::dart::subsys::koji::params {
     include '::dart::subsys::koji::autofs'
     include '::dart::subsys::koji::cli'
     include '::dart::subsys::koji::database'
+    include '::dart::subsys::koji::gc'
     include '::dart::subsys::koji::hub'
     include '::dart::subsys::koji::kojira'
     include '::dart::subsys::koji::mash'
