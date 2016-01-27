@@ -24,7 +24,10 @@ class koji::params {
                 'mash',
                 'repoview',
             ]
-            $utils_packages = 'koji-utils'
+            $utils_packages = [
+                'koji-utils',
+                'koji-tools',
+            ]
             $web_packages = 'koji-web'
 
             $builder_services = 'kojid'

@@ -25,6 +25,9 @@
 #   GPG key IDs that were used to sign packages, as a map.  E.g.,
 #   { 'fedora-gold' => '4F2A6FD2', 'fedora-test' => '30C9ECF8' }
 #
+# [*top_dir*]
+#   Directory containing the "repos/" directory.
+#
 # [*web*]
 #   URL of your Koji-Web server.
 #
@@ -41,6 +44,11 @@
 # [*grace_period*]
 #   Determines the length of time that builds are held in the trash can before
 #   their ultimate demise.  The default is "4 weeks".
+#
+# [*oldest_scratch*]
+#   Any scratch builds that were last modified more than this number of days
+#   ago are eligible for purging.  Set to a negative number to prohibit
+#   purging any scratch builds.  The default is 90 days.
 #
 # [*smtp_host*]
 #   The mail host to use for sending email notifications.  The Koji garbage
@@ -61,10 +69,12 @@ class koji::gc (
         $client_cert,
         $hub,
         $keys,
+        $top_dir,
         $web,
         $web_ca_cert,
         $email_domain=$::domain,
         $grace_period='4 weeks',
+        $oldest_scratch=90,
         $smtp_host='localhost',
         $unprotected_keys=[],
     ) inherits ::koji::params {
@@ -85,13 +95,14 @@ class koji::gc (
         '/etc/koji-gc/client.pem':
             source  => $client_cert,
             ;
-
         '/etc/koji-gc/clientca.crt':
             source  => $ca_cert,
             ;
-
         '/etc/koji-gc/serverca.crt':
             source  => $web_ca_cert,
+            ;
+        '/etc/koji-tools/koji-tools.conf':
+            content => template('koji/gc/koji-tools.conf'),
             ;
     }
 
@@ -114,11 +125,19 @@ class koji::gc (
         content => template('koji/gc/koji-gc.conf'),
     }
 
-    ::cron::job { 'koji-gc':
-        command => 'koji-gc',
-        user    => 'koji',
-        hour    => '4',
-        minute  => '42',
+    ::cron::job {
+        'koji-cleaner':
+            command => 'koji-cleaner --summary --verbose',
+            user    => 'apache',
+            hour    => '4',
+            minute  => '24',
+            ;
+        'koji-gc':
+            command => 'koji-gc',
+            user    => 'koji',
+            hour    => '4',
+            minute  => '42',
+            ;
     }
 
 }

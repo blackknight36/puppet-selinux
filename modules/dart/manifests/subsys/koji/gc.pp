@@ -18,14 +18,16 @@
 class dart::subsys::koji::gc inherits ::dart::subsys::koji::params {
 
     class { '::koji::gc':
-        client_cert  => "puppet:///modules/dart/koji/koji-gc-on-${::dart::subsys::koji::params::koji_gc_host}.pem",
-        ca_cert      => 'puppet:///modules/dart/koji/Koji_ca_cert.crt',
-        web_ca_cert  => 'puppet:///modules/dart/koji/Koji_ca_cert.crt',
-        hub          => $::dart::subsys::koji::params::hub,
-        keys         => $::dart::subsys::koji::params::rpm_signing_keys,
-        web          => "http://${::dart::subsys::koji::params::web_host}/koji",
-        smtp_host    => $::dart::params::smtp_server,
-        grace_period => '2 weeks',
+        ca_cert        => 'puppet:///modules/dart/koji/Koji_ca_cert.crt',
+        client_cert    => "puppet:///modules/dart/koji/koji-gc-on-${::dart::subsys::koji::params::koji_gc_host}.pem",
+        grace_period   => '2 weeks',
+        hub            => $::dart::subsys::koji::params::hub,
+        keys           => $::dart::subsys::koji::params::rpm_signing_keys,
+        oldest_scratch => '30',
+        smtp_host      => $::dart::params::smtp_server,
+        top_dir        => $::dart::subsys::koji::params::topdir,
+        web            => "http://${::dart::subsys::koji::params::web_host}/koji",
+        web_ca_cert    => 'puppet:///modules/dart/koji/Koji_ca_cert.crt',
     }
 
     ::koji::gc::policy {
