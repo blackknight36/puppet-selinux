@@ -28,7 +28,8 @@
 /bin/ln -s /dist/config/picaps-poller /etc/sysconfig/picaps-poller
 /bin/ln -s /dist/config/picaps-replication /etc/sysconfig/picaps-replication
 # corporate only
-  #/bin/ln -sd /dist/resource/cron/sap-file-watcher /etc/cron.d/sap-file-watcher
+  #/bin/ln -sd /dist/resource/cron/sap-file-watcher /etc/cron.d/sap-file-watcher-pwo
+  #/bin/ln -sd /dist/resource/cron/sap-file-watcher /etc/cron.d/sap-file-watcher-mat
   #/bin/ln -sd /dist/resource/cron/export-sap-pm-measurements /etc/cron.d/export-sap-pm-measurements
 # systemd target & services
 /bin/cp -a /dist/resource/systemd/picaps-all.target /etc/systemd/system/picaps-all.target
