@@ -147,9 +147,19 @@ class dart::abstract::aos_master_node (
     # is being replaced with a fresh build and there's a transitional period.
     # Note that OpenSSH is necessarily forgiving of a mismatch for the
     # hostname and/or IP address of the AOS Master.
-    ::openssh::hostkey { 'ssh_host_rsa_key':
-        private_source => 'puppet:///modules/dart/mdct-aos-master/ssh/ssh_host_rsa_key',
-        public_source  => 'puppet:///modules/dart/mdct-aos-master/ssh/ssh_host_rsa_key.pub',
+    ::openssh::hostkey {
+        'ssh_host_ecdsa_key':
+            private_source => 'puppet:///modules/dart/mdct-aos-master/ssh/ssh_host_ecdsa_key',
+            public_source  => 'puppet:///modules/dart/mdct-aos-master/ssh/ssh_host_ecdsa_key.pub',
+            ;
+        'ssh_host_ed25519_key':
+            private_source => 'puppet:///modules/dart/mdct-aos-master/ssh/ssh_host_ed25519_key',
+            public_source  => 'puppet:///modules/dart/mdct-aos-master/ssh/ssh_host_ed25519_key.pub',
+            ;
+        'ssh_host_rsa_key':
+            private_source => 'puppet:///modules/dart/mdct-aos-master/ssh/ssh_host_rsa_key',
+            public_source  => 'puppet:///modules/dart/mdct-aos-master/ssh/ssh_host_rsa_key.pub',
+            ;
     }
 
     # The builder package is mostly needed here for the yum-snapshot tool.
