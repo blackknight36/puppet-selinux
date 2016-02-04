@@ -59,6 +59,7 @@ define openssh::hostkey (
         mode    => '0644',
         content => $public_content,
         source  => $public_source,
+        notify  => Service[$::openssh::params::services],
     }
 
     file { "${location}/${name}":
@@ -71,6 +72,7 @@ define openssh::hostkey (
         mode    => '0640',
         content => $private_content,
         source  => $private_source,
+        notify  => Service[$::openssh::params::services],
     }
 
 }
