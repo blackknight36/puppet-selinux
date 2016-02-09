@@ -24,19 +24,19 @@ class dart::abstract::pycharm::professional {
 
     ::jetbrains::pycharm::release {
 
+        'pycharm-professional-5.0.4':
+            build   => '5.0.4',
+            edition => 'professional',
+            ;
+
         'pycharm-professional-5.0.3':
             build   => '5.0.3',
             edition => 'professional',
             ;
 
         'pycharm-professional-5.0.2':
-            build   => '5.0.2',
-            edition => 'professional',
-            ;
-
-        'pycharm-professional-5.0.1':
             ensure  => 'absent',
-            build   => '5.0.1',
+            build   => '5.0.2',
             edition => 'professional',
             ;
 
