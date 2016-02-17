@@ -30,7 +30,7 @@ class dart::abstract::packages::workstation {
     if $::operatingsystem == 'Fedora' {
 
         if  $::operatingsystemrelease == 'Rawhide' or
-            $::operatingsystemrelease >= 21
+            $::operatingsystemrelease >= '21'
         {
             package { [
                 'adobe-source-code-pro-fonts',
@@ -40,7 +40,7 @@ class dart::abstract::packages::workstation {
                 ensure => installed,
             }
         } elsif  $::operatingsystemrelease == 'Rawhide' or
-            $::operatingsystemrelease >= 18
+            $::operatingsystemrelease >= '18'
         {
             package { [
                 'libreoffice-calc',
@@ -49,7 +49,7 @@ class dart::abstract::packages::workstation {
                 ]:
                 ensure => installed,
             }
-        } elsif $::operatingsystemrelease >= 15 {
+        } elsif $::operatingsystemrelease >= '15' {
             package { [
                 'libreoffice-calc',
                 'libreoffice-writer',

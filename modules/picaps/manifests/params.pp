@@ -7,7 +7,7 @@
 class picaps::params {
 
     case $::operatingsystem {
-        Fedora: {
+        'Fedora': {
 
             $backup_packages = [
                 'picaps-backup-agent',

@@ -13,7 +13,7 @@
 class mirrmaid::params {
 
     case $::operatingsystem {
-        Fedora: {
+        'Fedora': {
 
             $packages = [
                 'mirrmaid',

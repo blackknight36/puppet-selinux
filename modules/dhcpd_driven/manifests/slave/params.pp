@@ -12,7 +12,7 @@
 class dhcpd_driven::slave::params {
 
     case $::operatingsystem {
-        Fedora: {
+        'Fedora': {
 
             $packages = [
                 'dhcpd-driven-slave',

@@ -9,7 +9,7 @@ class dart::subsys::picaps::apache {
     File {
         owner   => 'root',
         group   => 'root',
-        mode    => 0644,
+        mode    => '0644',
         require => Package['httpd'],
         before  => Service['httpd'],
     }
@@ -19,8 +19,8 @@ class dart::subsys::picaps::apache {
 
     user { 'apache':
         provider => 'useradd',
-        uid      => 48,
-        gid      => 48,
+        uid      => '48',
+        gid      => '48',
         home     => '/var/www',
         system   => true,
         before   => Class['::apache'],
@@ -28,7 +28,7 @@ class dart::subsys::picaps::apache {
 
     group { 'apache':
         provider => 'groupadd',
-        gid      => 48,
+        gid      => '48',
         system   => true,
         before   => User['apache'],
     }

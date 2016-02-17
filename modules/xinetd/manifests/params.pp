@@ -12,7 +12,7 @@
 class xinetd::params {
 
     case $::operatingsystem {
-        Fedora: {
+        'Fedora': {
 
             $packages = [
                 'xinetd',

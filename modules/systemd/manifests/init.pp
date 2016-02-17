@@ -30,7 +30,7 @@ class systemd {
 
     if  $operatingsystem == 'Fedora' and
         $operatingsystemrelease == 'Rawhide' or
-        $operatingsystemrelease >= 18
+        $operatingsystemrelease >= '18'
     {
 
         file { '/etc/systemd/journald.conf':

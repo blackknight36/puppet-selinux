@@ -12,7 +12,7 @@
 class firewall_driven::master::params {
 
     case $::operatingsystem {
-        Fedora: {
+        'Fedora': {
 
             $packages = [
                 'firewall-driven-master',

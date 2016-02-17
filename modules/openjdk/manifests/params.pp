@@ -12,7 +12,7 @@
 class openjdk::params {
 
     case $::operatingsystem {
-        Fedora: {
+        'Fedora': {
 
             $packages_1_7_0 = 'java-1.7.0-openjdk-headless'
             $packages_1_8_0 = 'java-1.8.0-openjdk-headless'

@@ -13,7 +13,7 @@ class network::params {
 
     case $::operatingsystem {
 
-        Fedora: {
+        'Fedora': {
             $legacy_packages = [
                 'initscripts',
             ]
@@ -30,7 +30,7 @@ class network::params {
             # Furthermore, when referencing the classic network service with
             # systemd (at least for enabling), it's necessary to use the
             # '.service' suffix.
-            if $::operatingsystemrelease >= 19 {
+            if $::operatingsystemrelease >= '19' {
                 $legacy_service_provider = 'systemd'
                 $legacy_services = [
                     'network.service',

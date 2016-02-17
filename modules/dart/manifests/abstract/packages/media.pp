@@ -38,7 +38,7 @@ class dart::abstract::packages::media {
     if $::operatingsystem == 'Fedora' {
 
         if  $::operatingsystemrelease == 'Rawhide' or
-            $::operatingsystemrelease >= 14
+            $::operatingsystemrelease >= '14'
         {
             package {
                 [
@@ -48,7 +48,7 @@ class dart::abstract::packages::media {
             }
         }
 
-        if  $::operatingsystemrelease < 20
+        if  $::operatingsystemrelease < '20'
         {
             package {
                 [

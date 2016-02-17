@@ -12,7 +12,7 @@
 class iscsi::params {
 
     case $::operatingsystem {
-        Fedora: {
+        'Fedora': {
 
             $packages = [
                 'iscsi-initiator-utils',

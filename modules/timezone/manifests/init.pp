@@ -26,7 +26,7 @@ class timezone {
         default => 'America/Detroit',
     }
 
-    if $operatingsystem == 'Fedora' and $operatingsystemrelease < 18 {
+    if $operatingsystem == 'Fedora' and $operatingsystemrelease < '18' {
 
         file { '/etc/sysconfig/clock':
             group   => 'root',

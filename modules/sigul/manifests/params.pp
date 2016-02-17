@@ -12,7 +12,7 @@
 class sigul::params {
 
     case $::operatingsystem {
-        Fedora: {
+        'Fedora': {
 
             # The Client, Bridge and Server are all provided by the same
             # package.

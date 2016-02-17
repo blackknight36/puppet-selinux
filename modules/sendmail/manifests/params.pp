@@ -12,11 +12,11 @@
 class sendmail::params {
 
     case $::operatingsystem {
-        Fedora: {
+        'Fedora': {
 
             $packages = 'sendmail'
 
-            if $::operatingsystemrelease > 14 {
+            if $::operatingsystemrelease > '14' {
                 $services = [
                     'sendmail',
                     'sm-client',

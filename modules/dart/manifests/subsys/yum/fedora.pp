@@ -9,7 +9,7 @@ class dart::subsys::yum::fedora {
     # no need for this section, which would only throw errors anyway.
     if $::operatingsystemrelease != 'Rawhide' {
 
-        if $::operatingsystemrelease >= 18 {
+        if $::operatingsystemrelease >= '18' {
             $repo_arch = 'noarch'
         } else {
             $repo_arch = $::architecture

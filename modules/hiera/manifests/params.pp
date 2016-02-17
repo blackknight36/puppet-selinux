@@ -13,7 +13,7 @@
 class hiera::params {
 
     case $::operatingsystem {
-        Fedora: {
+        'Fedora': {
 
             $packages = 'hiera'
 

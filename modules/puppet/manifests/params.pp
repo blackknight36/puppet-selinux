@@ -14,13 +14,13 @@ class puppet::params {
 
     case $::operatingsystem {
 
-        Fedora: {
+        'Fedora': {
 
             ## Client ##
             # Apparently the brilliant packagers at puppetlabs have no clue
             # what stability means or why it's a good thing.  See:
             # https://tickets.puppetlabs.com/browse/PUP-1200
-            if $::operatingsystemrelease >= 19 and
+            if $::operatingsystemrelease >= '19' and
                versioncmp($puppetversion, '3.1.1') >= 0 and
                versioncmp($puppetversion, '3.4.0') < 0 {
                 $client_services = [

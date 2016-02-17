@@ -41,7 +41,7 @@ class dart::abstract::packages::base {
     if $::operatingsystem == 'Fedora' {
 
         if  $::operatingsystemrelease == 'Rawhide' or
-            $::operatingsystemrelease >= 11
+            $::operatingsystemrelease >= '11'
         {
             package { [
                 'dejavu-lgc-sans-mono-fonts',   # used by vim-X11
@@ -57,7 +57,7 @@ class dart::abstract::packages::base {
         }
 
         if  $::operatingsystemrelease == 'Rawhide' or
-            $::operatingsystemrelease >= 13
+            $::operatingsystemrelease >= '13'
         {
             package { [
                 'cifs-utils',
@@ -67,7 +67,7 @@ class dart::abstract::packages::base {
         }
 
         if  $::operatingsystemrelease == 'Rawhide' or
-            $::operatingsystemrelease >= 14
+            $::operatingsystemrelease >= '14'
         {
             package { [
                 'man-db',
@@ -83,7 +83,7 @@ class dart::abstract::packages::base {
         }
 
         if  $::operatingsystemrelease == 'Rawhide' or
-            $::operatingsystemrelease >= 16
+            $::operatingsystemrelease >= '16'
         {
             package { [
                 'sssd-tools',
@@ -93,7 +93,7 @@ class dart::abstract::packages::base {
         }
 
         if  $::operatingsystemrelease == 'Rawhide' or
-            $::operatingsystemrelease >= 17
+            $::operatingsystemrelease >= '17'
         {
             package { [
                 'rubygem-rdoc',
@@ -130,7 +130,7 @@ class dart::abstract::packages::base {
     if $::operatingsystem == 'Fedora' {
 
         if  $::operatingsystemrelease == 'Rawhide' or
-            $::operatingsystemrelease >= 12
+            $::operatingsystemrelease >= '12'
         {
             package { [
                 'yum-presto',   # we don't use delta RPM support
@@ -140,7 +140,7 @@ class dart::abstract::packages::base {
         }
 
         if  $::operatingsystemrelease == 'Rawhide' or
-            $::operatingsystemrelease >= 14
+            $::operatingsystemrelease >= '14'
         {
             package { [
                 'PackageKit-yum-plugin', # not used and slows yum startup

@@ -12,7 +12,7 @@
 class xdg_desktop::params {
 
     case $::operatingsystem {
-        Fedora: {
+        'Fedora': {
 
             $menu_command = 'xdg-desktop-menu'
             $app_dir = '/usr/local/share/applications'

@@ -7,9 +7,9 @@
 class iptables::params {
 
     case $::operatingsystem {
-        Fedora: {
+        'Fedora': {
 
-            if $::operatingsystemrelease < 16 {
+            if $::operatingsystemrelease < '16' {
                 $packages = [
                     'iptables',
                     'iptables-ipv6',
@@ -29,7 +29,7 @@ class iptables::params {
                 ]
             }
             if $::operatingsystemrelease == 'Rawhide' or
-               $::operatingsystemrelease >= 18
+               $::operatingsystemrelease >= '18'
             {
                 $conflicting_packages = [
                     'firewalld',

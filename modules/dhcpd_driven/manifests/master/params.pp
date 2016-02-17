@@ -12,7 +12,7 @@
 class dhcpd_driven::master::params {
 
     case $::operatingsystem {
-        Fedora: {
+        'Fedora': {
 
             $packages = [
                 'dhcpd-driven-master',

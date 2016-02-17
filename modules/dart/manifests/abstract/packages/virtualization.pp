@@ -19,7 +19,7 @@ class dart::abstract::packages::virtualization {
     if $::operatingsystem == 'Fedora' {
 
         if  $::operatingsystemrelease == 'Rawhide' or
-            $::operatingsystemrelease >= 19
+            $::operatingsystemrelease >= '19'
         {
             package { [
                 'virt-install',
@@ -29,7 +29,7 @@ class dart::abstract::packages::virtualization {
         }
 
         if  $::operatingsystemrelease == 'Rawhide' or
-            $::operatingsystemrelease >= 17
+            $::operatingsystemrelease >= '17'
         {
             package { [
                 'libvirt-daemon-kvm',
@@ -39,7 +39,7 @@ class dart::abstract::packages::virtualization {
         }
 
         if  $::operatingsystemrelease == 'Rawhide' or
-            $::operatingsystemrelease >= 11
+            $::operatingsystemrelease >= '11'
         {
             package { [
                 'qemu-kvm',

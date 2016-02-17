@@ -38,7 +38,7 @@ class yum::cron ($conf_source) {
         source  => $conf_source,
     }
 
-    if $operatingsystemrelease < 16 {
+    if $operatingsystemrelease < '16' {
         service { $yum::params::services:
             enable      => true,
             ensure      => running,

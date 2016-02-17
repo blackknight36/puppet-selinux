@@ -7,7 +7,7 @@
 class mariadb::params {
 
     case $::operatingsystem {
-        Fedora: {
+        'Fedora': {
 
             $serverpackages = [
                 'mariadb-server',
@@ -15,7 +15,7 @@ class mariadb::params {
             $clientpackages = [
                 'mariadb',
             ]
-            if $::operatingsystemrelease >= 20 {
+            if $::operatingsystemrelease >= '20' {
                 $service_name = 'mariadb'
             } else {
                 $service_name = 'mysqld'

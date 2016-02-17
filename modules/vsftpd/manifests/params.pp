@@ -12,14 +12,14 @@
 class vsftpd::params {
 
     case $::operatingsystem {
-        Fedora: {
+        'Fedora': {
 
             $packages = [
                 'vsftpd',
             ]
             $service_name = 'vsftpd'
 
-            if $::operatingsystemrelease < 18 {
+            if $::operatingsystemrelease < '18' {
                 $bool_allow_use_nfs = 'allow_ftpd_use_nfs'
             } else {
                 $bool_allow_use_nfs = 'ftpd_use_nfs'
