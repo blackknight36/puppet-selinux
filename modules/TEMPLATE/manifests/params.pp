@@ -13,7 +13,7 @@
 class MODULE_NAME::params {
 
     case $::operatingsystem {
-        Fedora: {
+        'Fedora': {
 
             $packages = 'PACKAGE_NAME'
             $packages = [
@@ -27,7 +27,7 @@ class MODULE_NAME::params {
 
             # Hint:
             #   sudo semanage boolean  --list | grep MODULE_NAME
-            if $::operatingsystemrelease < 18 {
+            if $::operatingsystemrelease < '18' {
                 $bool_name1 = 'allow_httpd_anon_write'
             } else {
                 $bool_name1 = 'httpd_anon_write'

@@ -12,7 +12,7 @@
 class firewall_driven::slave::params {
 
     case $::operatingsystem {
-        Fedora: {
+        'Fedora': {
 
             $packages = [
                 'firewall-driven-slave',

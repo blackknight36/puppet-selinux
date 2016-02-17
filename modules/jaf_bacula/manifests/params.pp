@@ -12,7 +12,7 @@
 class jaf_bacula::params {
 
     case $::operatingsystem {
-        Fedora: {
+        'Fedora': {
 
             # Administrator Tools
             $admin_packages = [
@@ -25,7 +25,7 @@ class jaf_bacula::params {
                 'bacula-common',
                 'bacula-libs',
             ]
-            if $::operatingsystemrelease < 19 {
+            if $::operatingsystemrelease < '19' {
                 $dir_sd_common_packages = [
                     'bacula-libs-postgresql',
                 ]
@@ -45,7 +45,7 @@ class jaf_bacula::params {
             ]
             $fd_service_name = 'bacula-fd'
 
-            if $::operatingsystemrelease < 19 {
+            if $::operatingsystemrelease < '19' {
                 # Bacula Director
                 $dir_packages = [
                     'bacula-director-common',

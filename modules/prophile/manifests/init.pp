@@ -22,7 +22,7 @@ class prophile {
     file { '/etc/profile.d/prophiles.sh':
         owner   => 'root',
         group   => 'root',
-        mode    => 0644,
+        mode    => '0644',
         content => "alias jf='source prophile jflorian' 2>/dev/null\n",
     }
 

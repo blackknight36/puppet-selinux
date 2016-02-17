@@ -12,9 +12,9 @@
 class sudo::params {
 
     case $::operatingsystem {
-        Fedora: {
+        'Fedora': {
 
-            if $::operatingsystemrelease < 13 {
+            if $::operatingsystemrelease < '13' {
                 fail ("The sudo module is not supported for Fedora < 13.")
             }
 

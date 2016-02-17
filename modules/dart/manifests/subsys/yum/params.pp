@@ -7,7 +7,7 @@
 class dart::subsys::yum::params {
 
     case $::operatingsystem {
-        Fedora: {
+        'Fedora': {
             $fedora_repo_uri = 'http://mdct-00fs.dartcontainer.com/pub/fedora'
         }
 

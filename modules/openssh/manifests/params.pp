@@ -13,7 +13,7 @@
 class openssh::params {
 
     case $::operatingsystem {
-        Fedora: {
+        'Fedora': {
 
             $services = [
                 'sshd',

@@ -12,7 +12,7 @@
 class logwatch::params {
 
     case $::operatingsystem {
-        Fedora: {
+        'Fedora': {
 
             $packages = 'logwatch'
 

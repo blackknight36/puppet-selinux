@@ -12,7 +12,7 @@ class xorg_server($drivers=undef, $config=undef) {
         file { '/etc/X11/xorg.conf':
             owner   => 'root',
             group   => 'root',
-            mode    => 0644,
+            mode    => '0644',
             source  => $config,
         }
     }

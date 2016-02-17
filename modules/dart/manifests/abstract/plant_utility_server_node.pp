@@ -25,7 +25,7 @@ class dart::abstract::plant_utility_server_node inherits dart::abstract::guarded
     include 'media_disbursal'
 
     # Other packages required by a plant utility server
-    if $::operatingsystem == 'Fedora' and $::operatingsystemrelease > 15 {
+    if $::operatingsystem == 'Fedora' and $::operatingsystemrelease > '15' {
         package { [
             'open-vm-tools',
             ]:

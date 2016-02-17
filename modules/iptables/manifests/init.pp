@@ -55,7 +55,7 @@ class iptables($managed_host=true, $enabled=true, $kernel_modules='') {
         content => template('iptables/ip6tables-config'),
     }
 
-    if $::operatingsystem == 'Fedora' and $::operatingsystemrelease < 16 {
+    if $::operatingsystem == 'Fedora' and $::operatingsystemrelease < '16' {
         service { 'iptables':
             hasstatus   => false,   # it does, but always exits 0
             # weak strategy, best so far: look for rules prefixed with a line

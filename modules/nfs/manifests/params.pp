@@ -13,10 +13,10 @@
 class nfs::params {
 
     case $::operatingsystem {
-        Fedora: {
+        'Fedora': {
 
             if  $::operatingsystemrelease == 'Rawhide' or
-                $::operatingsystemrelease >= 15
+                $::operatingsystemrelease >= '15'
             {
                 $utils_packages = [
                     'libnfsidmap',
@@ -36,10 +36,10 @@ class nfs::params {
 
             # Which $gss_service?
             if  $::operatingsystemrelease == 'Rawhide' or
-                $::operatingsystemrelease >= 16
+                $::operatingsystemrelease >= '16'
             {
                 $gss_service = 'nfs-secure'
-            } elsif $::operatingsystemrelease >= 15 {
+            } elsif $::operatingsystemrelease >= '15' {
                 $gss_service = 'rpcgssd'
             } else {
                 $gss_service = undef    # Sorry, no soup for you.  Upgrade!
@@ -47,7 +47,7 @@ class nfs::params {
 
             # Which $idmap_service?
             if  $::operatingsystemrelease == 'Rawhide' or
-                $::operatingsystemrelease >= 21
+                $::operatingsystemrelease >= '21'
             {
                 $idmap_service = 'nfs-idmapd'
                 # As of Fedora 21, the client uses a different mechanism.  See
@@ -56,7 +56,7 @@ class nfs::params {
                 # daemon.  Additionally, the nfs-idmapd service became static
                 # -- the ensure/enable states can/need not be managed.
                 $idmap_service_is_static = true
-            } elsif $::operatingsystemrelease >= 16 {
+            } elsif $::operatingsystemrelease >= '16' {
                 $idmap_service = 'nfs-idmap'
                 $idmap_service_is_static = false
             } else {
@@ -68,7 +68,7 @@ class nfs::params {
             # ensure/enable states cannot be managed.  Instead, they're now
             # dependent on the existence of the /etc/krb5.keytab file.
             if  $::operatingsystemrelease == 'Rawhide' or
-                $::operatingsystemrelease >= 21
+                $::operatingsystemrelease >= '21'
             {
                 $gss_service_is_static = true
             } else {
@@ -77,7 +77,7 @@ class nfs::params {
 
             # Which $pipefs_service?
             if  $::operatingsystemrelease == 'Rawhide' or
-                $::operatingsystemrelease >= 17
+                $::operatingsystemrelease >= '17'
             {
                 $pipefs_service = 'var-lib-nfs-rpc_pipefs.mount'
             } else {
@@ -86,7 +86,7 @@ class nfs::params {
 
             # Which $server_services?
             if  $::operatingsystemrelease == 'Rawhide' or
-                $::operatingsystemrelease >= 20
+                $::operatingsystemrelease >= '20'
             {
                 $server_services = 'nfs-server.service'
             } else {

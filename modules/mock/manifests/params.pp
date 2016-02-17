@@ -7,7 +7,7 @@
 class mock::params {
 
     case $::operatingsystem {
-        Fedora: {
+        'Fedora': {
 
             $packages = [
                 'mock',

@@ -12,7 +12,7 @@
 class mdct_puppeteer::admin::params {
 
     case $::operatingsystem {
-        Fedora: {
+        'Fedora': {
 
             $packages = [
                 'mdct-puppeteer-admin',

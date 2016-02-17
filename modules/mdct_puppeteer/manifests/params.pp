@@ -12,7 +12,7 @@
 class mdct_puppeteer::params {
 
     case $::operatingsystem {
-        Fedora: {
+        'Fedora': {
 
             $packages = [
                 'mdct-puppeteer',

@@ -27,7 +27,7 @@ class dart::subsys::yum::mdct {
     # Rawhide systems begin life as the latest stable release and should be
     # fully puppetized prior to upgrading to rawhide.  Once there, they have
     # no need for this section, which would only throw errors anyway.
-    if $::operatingsystemrelease != 'Rawhide' and $::operatingsystemrelease <= 19 {
+    if $::operatingsystemrelease != 'Rawhide' and $::operatingsystemrelease <= '19' {
 
         $pkg_release = $::operatingsystemrelease ? {
             '13'    => '13-1.dcc.noarch',

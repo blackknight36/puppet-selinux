@@ -12,7 +12,7 @@
 class lyx::params {
 
     case $::operatingsystem {
-        Fedora: {
+        'Fedora': {
 
             $packages = [
                 'lyx',

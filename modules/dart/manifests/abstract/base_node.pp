@@ -52,7 +52,7 @@ class dart::abstract::base_node {
 
     if  $::operatingsystem == 'Fedora' and
         $::operatingsystemrelease == 'Rawhide' or
-        $::operatingsystemrelease >= 15
+        $::operatingsystemrelease >= '15'
     {
         include '::systemd'
     }

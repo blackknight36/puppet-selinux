@@ -7,9 +7,9 @@
 class selinux::params {
 
     case $::operatingsystem {
-        Fedora: {
+        'Fedora': {
 
-            if $::operatingsystemrelease < 18 {
+            if $::operatingsystemrelease < '18' {
                 $packages = [
                     'libselinux',
                     'libselinux-utils',

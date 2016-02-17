@@ -10,7 +10,7 @@ class dart::abstract::picaps_test_server_node inherits dart::abstract::unguarded
     include 'dart::subsys::picaps::apache'
 
     # Other packages required by PICAPS servers
-    if $::operatingsystem == 'Fedora' and $::operatingsystemrelease >= 20 {
+    if $::operatingsystem == 'Fedora' and $::operatingsystemrelease >= '20' {
         $python_mx = 'python-egenix-mx-base'
         $yum_cron_hourly = 'yum-cron-hourly'
     } else {

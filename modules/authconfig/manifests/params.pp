@@ -12,7 +12,7 @@
 class authconfig::params {
 
     case $::operatingsystem {
-        Fedora: {
+        'Fedora': {
 
             $packages = [
                 'authconfig',
@@ -25,7 +25,7 @@ class authconfig::params {
 
 
             if  $::operatingsystemrelease == 'Rawhide' or
-                $::operatingsystemrelease >= 15
+                $::operatingsystemrelease >= '15'
             {
                 $sssd_conf = 'sssd.conf.Fedora.15+'
             } else {
@@ -33,7 +33,7 @@ class authconfig::params {
             }
 
             if  $::operatingsystemrelease == 'Rawhide' or
-                $::operatingsystemrelease >= 18
+                $::operatingsystemrelease >= '18'
             {
                 $sssd_seltype = 'sssd_conf_t'
             } else {

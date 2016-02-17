@@ -12,7 +12,7 @@
 class koji::params {
 
     case $::operatingsystem {
-        Fedora: {
+        'Fedora': {
 
             $builder_packages = 'koji-builder'
             $cli_packages = 'koji'

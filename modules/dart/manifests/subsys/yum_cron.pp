@@ -2,7 +2,7 @@
 
 class dart::subsys::yum_cron {
 
-    if $::operatingsystemrelease < 19 {
+    if $::operatingsystemrelease < '19' {
         $yum_cron_conf = 'yum-cron.conf.Fedora18-'
     } else {
         # Fedora 19 also provides an hourly job, but it will be left

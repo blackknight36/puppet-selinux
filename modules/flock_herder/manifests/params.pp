@@ -13,7 +13,7 @@ class flock_herder::params {
 
     case $::operatingsystem {
 
-        Fedora: {
+        'Fedora': {
             $packages = 'flock-herder'
         }
 

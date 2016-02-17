@@ -62,7 +62,7 @@ class dart::subsys::autofs::common {
         remote  => 'mdct-00fs:/storage/pub',
     }
 
-    if $::operatingsystemrelease < 19 {
+    if $::operatingsystemrelease < '19' {
         # Older versions of puppet and/or Fedora prevent the SELinux context
         # from actually changing, so don't even try as it otherwise generates
         # an endless stream of tagmail.

@@ -7,7 +7,7 @@
 class yum::params {
 
     case $::operatingsystem {
-        Fedora: {
+        'Fedora': {
 
             $services = [
                 'yum-cron',
@@ -16,7 +16,7 @@ class yum::params {
                 'yum-cron',
             ]
 
-            if $::operatingsystemrelease < 19 {
+            if $::operatingsystemrelease < '19' {
                 $cron_conf_target = '/etc/sysconfig/yum-cron'
             } else {
                 # Fedora 19 also provides an hourly job, but it will be left

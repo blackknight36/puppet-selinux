@@ -45,7 +45,7 @@ class dart::unwanted_services {
     # endless noise from puppet tagmail reports.
     if  $::operatingsystem == 'Fedora' and
         $::operatingsystemrelease != 'Rawhide' and
-        $::operatingsystemrelease < 17
+        $::operatingsystemrelease < '17'
     {
         service { 'pcscd': }
     }

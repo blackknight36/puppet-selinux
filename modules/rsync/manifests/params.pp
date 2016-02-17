@@ -12,7 +12,7 @@
 class rsync::params {
 
     case $::operatingsystem {
-        Fedora: {
+        'Fedora': {
 
             $packages = [
                 'rsync',
