@@ -40,12 +40,18 @@ class dart::subsys::filesystem {
     #           product2_from_vendor2
     $opt = '/opt'
 
+    # $storage is the standard location for statically mounted of file
+    # systems.  These may be backed by a physical or virtual device.
+    $storage = '/storage'
+
     file {
         $opt:
             seltype => 'usr_t',
             ;
         $exports:
             seltype => 'nfs_t',
+            ;
+        $storage:
             ;
     }
 
