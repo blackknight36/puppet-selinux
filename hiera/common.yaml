@@ -15,6 +15,12 @@ chrony::servers:
     - "%{::default_route} iburst"
 
 
+filesystem:
+    mount_opts:
+        fs:                 rw,nosuid,nodev,async,relatime,acl
+        nfs:                hard
+
+
 http_proxy:                 mdct-proxy.dartcontainer.com
 
 
