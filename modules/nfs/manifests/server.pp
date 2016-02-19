@@ -65,11 +65,8 @@ class nfs::server (
     }
 
     if $manage_firewall {
-        firewall { '550 accept NFS packets':
-            dport  => ['2049'],
-            proto  => 'tcp',
-            state  => 'NEW',
-            action => 'accept',
+        ::iptables::tcp_port { '550 accept NFS packets':
+            port => '2049',
         }
     }
 
