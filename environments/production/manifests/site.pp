@@ -1,7 +1,5 @@
 # manifests/site.pp
 
-import 'nodes'
-
 # The filebucket option allows for file backups to the server
 filebucket { 'main':
     server  => 'puppet.dartcontainer.com',

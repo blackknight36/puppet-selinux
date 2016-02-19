@@ -43,7 +43,7 @@ class hiera (
         subscribe => Package[$::hiera::params::packages],
     }
 
-    file { '/etc/hiera.yaml':
+    file { '/etc/puppet/hiera.yaml':
         content => $content,
         source  => $source,
     }
