@@ -10,6 +10,15 @@ class dart::mdct_00ut inherits dart::abstract::guarded_server_node {
 
     include 'dart::subsys::autofs::common'
 
+    ::dart::subsys::filesystem::exported_storage {
+        'old_fedoras':
+            backing => '/dev/disk/by-uuid/4703cc94-ee0b-44d1-9559-66d80d9924cc';
+    } ->
+
+    class { '::nfs::server':
+        exports_source => 'puppet:///modules/dart/nfs/exports',
+    }
+
     file { '/etc/davfs2/secrets':
         group   => 'root',
         mode    => '0600',

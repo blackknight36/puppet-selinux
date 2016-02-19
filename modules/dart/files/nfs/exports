@@ -1,0 +1,3 @@
+/exports                10.0.0.0/8(rw,insecure,no_root_squash,async,no_subtree_check,fsid=0)
+
+/exports/old_fedoras    10.0.0.0/8(ro,insecure,subtree_check)
