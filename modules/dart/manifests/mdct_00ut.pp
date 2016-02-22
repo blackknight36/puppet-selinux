@@ -16,7 +16,7 @@ class dart::mdct_00ut inherits dart::abstract::guarded_server_node {
     } ->
 
     class { '::nfs::server':
-        exports_source => 'puppet:///modules/dart/nfs/exports',
+        exports_source => 'puppet:///modules/dart/nfs/mdct-00ut-exports',
     }
 
     file { '/etc/davfs2/secrets':
