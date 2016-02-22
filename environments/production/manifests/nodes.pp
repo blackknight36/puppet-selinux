@@ -98,6 +98,7 @@ node 'mdct-test-agent-32.dartcontainer.com'     { include 'dart::mdct_test_agent
 node 'mole-dev.dartcontainer.com'               { include 'dart::mole_dev' }
 node 'mole.dartcontainer.com'                   { include 'dart::mole' }
 node 'tc-util.dartcontainer.com'                { include 'dart::tc_util' }
+node 'mdct-puppet-f21.dartcontainer.com'        { include 'dart::mdct_puppet_f21' }
 
 
 #
