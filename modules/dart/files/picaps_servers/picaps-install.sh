@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # CVS checkout components and deploy
-/bin/cvs -d :pserver:anonymous@10.1.192.105:/home/cvsroot co picaps/bin
-/bin/cvs -d :pserver:anonymous@10.1.192.105:/home/cvsroot co picaps/config
-/bin/cvs -d :pserver:anonymous@10.1.192.105:/home/cvsroot co picaps/static
-/bin/cvs -d :pserver:anonymous@10.1.192.105:/home/cvsroot co picaps/resource
-  #/bin/cvs -d :pserver:anonymous@10.1.192.105:/home/cvsroot co picaps/reporttemplates # corporate only
+/bin/cvs -d :pserver:anonymous@mdct-00fs.dartcontainer.com:/home/cvsroot co picaps/bin
+/bin/cvs -d :pserver:anonymous@mdct-00fs.dartcontainer.com:/home/cvsroot co picaps/config
+/bin/cvs -d :pserver:anonymous@mdct-00fs.dartcontainer.com:/home/cvsroot co picaps/static
+/bin/cvs -d :pserver:anonymous@mdct-00fs.dartcontainer.com:/home/cvsroot co picaps/resource
+  #/bin/cvs -d :pserver:anonymous@mdct-00fs.dartcontainer.com:/home/cvsroot co picaps/reporttemplates # corporate only
 /bin/mkdir -p picaps/reporttemplates
 # make systemd startup/shutdown scripts executable
 /bin/chmod +x picaps/bin/startup-shutdown/shutdown-core.sh
