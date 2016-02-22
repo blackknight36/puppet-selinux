@@ -17,7 +17,7 @@ class dart::abstract::picaps_test_server_node inherits dart::abstract::unguarded
         $python_mx = 'mx'
         $yum_cron_hourly = undef    # not available in F18, dunno about F19
     }
-    $support_packages = delete_undef_values([
+    $support_packages = [
         $python_mx,
         $yum_cron_hourly,
         'cups',
@@ -27,7 +27,8 @@ class dart::abstract::picaps_test_server_node inherits dart::abstract::unguarded
         'pyserial',
         'setserial',
         'yum-cron',
-    ])
+    ].filter |$items| { $items !~ Variant[Undef, String[0,0]] }
+
     package { $support_packages:
         ensure  => 'installed',
     }
