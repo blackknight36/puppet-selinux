@@ -6,5 +6,8 @@
 
 ---
 
+lvm_snapshot_tools::origin_vgs:
+    - fedora
+
 sendmail::enable:           true
 sendmail::ensure:           running

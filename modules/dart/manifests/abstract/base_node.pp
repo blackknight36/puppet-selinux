@@ -38,6 +38,7 @@ class dart::abstract::base_node {
     include '::dart::subsys::dns::no_dns_hosts'
     include '::dart::subsys::filesystem'
     include '::logwatch'
+    include '::lvm_snapshot_tools'
     include '::openssh::server'
     include '::ovirt::guest'
     include '::prophile'
