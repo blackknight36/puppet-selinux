@@ -92,15 +92,7 @@ class dart::abstract::picaps_test_server_node inherits dart::abstract::unguarded
         mode   => '0644',
         owner  => 'root',
         source => 'puppet:///modules/dart/picaps_servers/picaps-mysqld.service',
-        before => File['/storage/mysql'],
-    }
-    file { '/storage/':
-        ensure => 'directory',
-        owner  => 'root',
-        group  => 'root',
-        mode   => '0755',
-        before => File['/storage/mysql'],
-    }
+    } ->
     file { '/storage/mysql':
         ensure  => 'directory',
         owner   => 'mysql',
@@ -110,6 +102,7 @@ class dart::abstract::picaps_test_server_node inherits dart::abstract::unguarded
         selrole => 'object_r',
         seltype => 'mysqld_db_t',
         before  => Class['mariadb::server'],
+        require => Class['::dart::subsys::filesystem'],
     }
     user { 'mysql':
         provider => 'useradd',
@@ -118,6 +111,7 @@ class dart::abstract::picaps_test_server_node inherits dart::abstract::unguarded
         home     => '/storage/mysql',
         system   => true,
         before   => File['/etc/systemd/system/mysqld.service'],
+        require  => Class['::dart::subsys::filesystem'],
     }
     group { 'mysql':
         provider => 'groupadd',

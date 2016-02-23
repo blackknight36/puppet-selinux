@@ -111,6 +111,7 @@ class dart::abstract::picaps_production_server_node inherits dart::abstract::ung
         selrole => 'object_r',
         seltype => 'mysqld_db_t',
         before  => Class['mariadb::server'],
+        require => Class['::dart::subsys::filesystem'],
     }
     user { 'mysql':
         provider => 'useradd',
@@ -119,6 +120,7 @@ class dart::abstract::picaps_production_server_node inherits dart::abstract::ung
         home     => '/storage/mysql',
         system   => true,
         before   => File['/etc/systemd/system/mariadb.service'],
+        require  => Class['::dart::subsys::filesystem'],
     }
     group { 'mysql':
         provider => 'groupadd',
@@ -164,6 +166,7 @@ class dart::abstract::picaps_production_server_node inherits dart::abstract::ung
     file { '/local':
         ensure => link,
         target => '/storage/pub',
+        require => Class['::dart::subsys::filesystem'],
     }
 
     # PICAPS calls gethostbyname() for its own hostname which must resolve.

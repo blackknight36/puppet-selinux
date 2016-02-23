@@ -25,17 +25,13 @@ class dart::mdct_00bk inherits dart::abstract::guarded_server_node {
         stp        => 'no',
     }
 
-    file { '/storage':
-        ensure  => directory,
-    }
-
     mount { '/storage':
         ensure  => 'mounted',
         atboot  => true,
         device  => '/dev/BackupVG/lvol1',
         fstype  => 'auto',
         options => '_netdev,defaults',
-        require => File['/storage'],
+        require => Class['::dart::subsys::filesystem'],
     }
 
     include 'iscsi::initiator'
@@ -64,6 +60,7 @@ class dart::mdct_00bk inherits dart::abstract::guarded_server_node {
         sd_name        => $dart::params::bacula_sd_name,
         sd_passwd      => $dart::params::bacula_sd_passwd,
         sd_archive_dev => '/storage/backup',
+        require        => Class['::dart::subsys::filesystem'],
     }
 
     class { 'jaf_bacula::director':

@@ -15,16 +15,6 @@
 
 class dart::subsys::teamcenter::git {
 
-    file { '/storage':
-        ensure  => 'directory',
-        owner   => 'root',
-        group   => 'root',
-        mode    => '0755',
-        seluser => 'system_u',
-        selrole => 'object_r',
-        seltype => 'file_t',
-    }
-
     mount { '/storage':
         ensure  => 'mounted',
         atboot  => true,
@@ -33,7 +23,7 @@ class dart::subsys::teamcenter::git {
         fstype  => 'ext4',
         options => 'defaults',
         pass    => 2,
-        require => File['/storage'],
+        require => Class['::dart::subsys::filesystem'],
     }
 
     file { '/srv/git_home':

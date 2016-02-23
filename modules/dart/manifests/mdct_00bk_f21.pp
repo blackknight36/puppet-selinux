@@ -26,10 +26,6 @@ class dart::mdct_00bk_f21 inherits dart::abstract::guarded_server_node {
 #        stp         => 'no',
 #    }
 
-    file { '/storage':
-        ensure  => directory,
-    }
-
     file { '/var/lib/bacula/ssl':
         ensure  =>  directory,
         recurse =>  true,
@@ -81,28 +77,29 @@ class dart::mdct_00bk_f21 inherits dart::abstract::guarded_server_node {
 
 
     class { '::bacula':
-        clients               =>  $bacula_clients,
-        is_client             =>  true,
-        is_director           =>  true,
-        is_storage            =>  true,
-        director_server       =>  $::fqdn,
-        director_password     =>  'test',
-        console_password      =>  'test',
-        mail_to               =>  'd35110@dart.biz',
-        manage_console        =>  true,
-        storage_server        =>  'mdct-00bk-f21.dartcontainer.com',
-        db_backend            =>  'postgresql',
-        use_tls               =>  true,
-        tls_ca_cert           =>  '/var/lib/bacula/ssl/certs/ca.pem',
-        tls_key               =>  "/var/lib/bacula/ssl/private_keys/${::fqdn}.pem",
-        tls_cert              =>  "/var/lib/bacula/ssl/certs/${::fqdn}.pem",
-        tls_require           =>  'yes',
-        tls_verify_peer       =>  'yes',
-        manage_db             =>  true,
-        manage_db_tables      =>  true,
-        backup_catalog        =>  false,
-        db_user               =>  'bacula',
-        db_password           =>  'bacula',
-        storage_default_mount =>  '/storage/volumes',
+        clients               => $bacula_clients,
+        is_client             => true,
+        is_director           => true,
+        is_storage            => true,
+        director_server       => $::fqdn,
+        director_password     => 'test',
+        console_password      => 'test',
+        mail_to               => 'd35110@dart.biz',
+        manage_console        => true,
+        storage_server        => 'mdct-00bk-f21.dartcontainer.com',
+        db_backend            => 'postgresql',
+        use_tls               => true,
+        tls_ca_cert           => '/var/lib/bacula/ssl/certs/ca.pem',
+        tls_key               => "/var/lib/bacula/ssl/private_keys/${::fqdn}.pem",
+        tls_cert              => "/var/lib/bacula/ssl/certs/${::fqdn}.pem",
+        tls_require           => 'yes',
+        tls_verify_peer       => 'yes',
+        manage_db             => true,
+        manage_db_tables      => true,
+        backup_catalog        => false,
+        db_user               => 'bacula',
+        db_password           => 'bacula',
+        storage_default_mount => '/storage/volumes',
+        require               => Class['::dart::subsys::filesystem'],
     }
 }

@@ -12,18 +12,6 @@
 
 class media_disbursal {
 
-    # Establish a root for shared file resources.
-    file { '/storage':
-        before  => [
-            Class['samba'],
-            Class['rsync::server'],
-        ],
-        ensure  => directory,
-        group   => 'root',
-        mode    => '0755',
-        owner   => 'root',
-    }
-
     # Establish a root for shared slide-show file resources.
     file { '/storage/slideshow':
         before  => [
@@ -34,8 +22,8 @@ class media_disbursal {
         group   => 'root',
         mode    => '3777',
         owner   => 'root',
-        require => File['/storage'],
-    }
+        require => Class['::dart::subsys::filesystem'],
+    } ->
 
     # Establish a mount point for shared weather-media slide-show file
     # resources.
@@ -45,8 +33,7 @@ class media_disbursal {
             Class['rsync::server'],
         ],
         ensure  => directory,
-        require => File['/storage/slideshow'],
-    }
+    } ->
 
     # mdct-00fs has the master copies of weather-media that
     # plant_utility_server_node will need via NFS for disbursal to the AOS
@@ -57,19 +44,14 @@ class media_disbursal {
         ensure  => 'mounted',
         fstype  => 'nfs',
         options => 'tcp,hard,intr,ro',
-        require => File['/storage/slideshow/weathermedia'],
-    }
+    } ->
 
     # This script does all the work.
     file { '/usr/local/bin/disburse-media':
         group   => 'root',
         mode    => '0754',
         owner   => 'root',
-        require => [
-            Class['samba'],
-            File['/storage/slideshow'],
-            Mount['/storage/slideshow/weathermedia'],
-        ],
+        require => Class['samba'],
         source  => 'puppet:///modules/media_disbursal/disburse-media',
     }
 
