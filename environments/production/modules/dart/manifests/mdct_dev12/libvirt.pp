@@ -15,7 +15,7 @@
 
 class dart::mdct_dev12::libvirt {
 
-    $SUFFIX=".orig-${::operatingsystem}${::operatingsystemrelease}"
+    $suffix=".orig-${::operatingsystem}${::operatingsystemrelease}"
 
     Dart::Util::Replace_original_with_symlink_to_alternate {
         before      => Service['libvirtd'],
@@ -25,14 +25,14 @@ class dart::mdct_dev12::libvirt {
 
     dart::util::replace_original_with_symlink_to_alternate { '/etc/libvirt':
         alternate => '/mnt/storage/etc/libvirt',
-        backup    => "/etc/libvirt${SUFFIX}",
+        backup    => "/etc/libvirt${suffix}",
         original  => '/etc/libvirt',
         seltype   => 'virt_etc_t',
     }
 
     dart::util::replace_original_with_symlink_to_alternate { '/var/lib/libvirt':
         alternate => '/mnt/storage/var/lib/libvirt',
-        backup    => "/var/lib/libvirt${SUFFIX}",
+        backup    => "/var/lib/libvirt${suffix}",
         original  => '/var/lib/libvirt',
         seltype   => 'virt_var_lib_t',
     }
