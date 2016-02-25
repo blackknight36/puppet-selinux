@@ -46,6 +46,8 @@ class hiera (
     file { '/etc/puppet/hiera.yaml':
         content => $content,
         source  => $source,
+        group   => 'puppet',
+        seltype   => 'puppet_etc_t',
     }
 
 }
