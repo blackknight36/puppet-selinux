@@ -7,8 +7,8 @@ class dart::abstract::cats_server_node inherits dart::abstract::guarded_server_n
     yumrepo { 'nexus-release':
         name            => 'nexus-release',
         baseurl         => 'http://mdct-nexus:8080/content/repositories/releases',
-        gpgcheck        => False,
-        enabled         => True,
+        gpgcheck        => false,
+        enabled         => true,
         metadata_expire => 60,
     }
 
