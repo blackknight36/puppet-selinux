@@ -34,7 +34,17 @@ File {
     backup  => 'main',
 }
 
-Package {
-    # Depend on yum being used and configured first.
-    provider    => 'yum',
+if versioncmp($::puppetversion,'3.6.1') >= 0 {
+    $allow_virtual_packages = hiera('allow_virtual_packages',false)
+        Package {
+            # Depend on yum being used and configured first.
+            provider    => 'yum',
+            # Preserve current behavior and disable the annoying warning message
+            allow_virtual => $allow_virtual_packages,
+        }
+}
+else {
+    Package {
+        provider => 'yum',
+    }
 }
