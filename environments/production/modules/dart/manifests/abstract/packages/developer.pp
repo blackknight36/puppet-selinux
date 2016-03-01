@@ -65,7 +65,6 @@ class dart::abstract::packages::developer {
             package { [
                 'python3-django',
                 'python3-sphinx',
-                'rubygem-puppet-lint',
                 'rubygem-ronn',
                 ]:
                 ensure  => installed,

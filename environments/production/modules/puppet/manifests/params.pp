@@ -58,12 +58,13 @@ class puppet::params {
             ## Tools ##
             $tools_packages = [
                 'puppet-tools',
+                'rubygem-puppet-lint',
             ]
 
         }
 
         default: {
-            fail ("The puppet module is not yet supported on $::operatingsystem.")
+            fail ("${title}: operating system '${::operatingsystem}' is not supported")
         }
 
     }
