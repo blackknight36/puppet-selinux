@@ -31,6 +31,7 @@ class dart::subsys::yum::dart {
         $pkg_release = $::operatingsystemrelease ? {
             '20'    => '20-2.fc20.noarch',
             '21'    => '21-2.fc21.noarch',
+            '22'    => '22-1.fc22.noarch',
         }
 
         ::yum::repo { 'dart':

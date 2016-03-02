@@ -127,27 +127,25 @@ class dart::abstract::packages::base {
     ### Select Package Exclusion ###
 
     if $::operatingsystem == 'Fedora' {
-
-        if  $::operatingsystemrelease == 'Rawhide' or
-            $::operatingsystemrelease >= '12'
-        {
-            package { [
-                'yum-presto',   # we don't use delta RPM support
-                ]:
-                ensure => absent,
-            }
+      if $::operatingsystemrelease >= '12' and $::operatingsystemrelease <= '21' {
+        package { 'yum-presto':
+          ensure => absent,
         }
-
-        if  $::operatingsystemrelease == 'Rawhide' or
-            $::operatingsystemrelease >= '14'
-        {
-            package { [
-                'PackageKit-yum-plugin', # not used and slows yum startup
-                ]:
-                ensure => absent,
-            }
+      }
+      elsif $::operatingsystemrelease == 'Rawhide' {
+        package { 'yum-presto':
+          ensure => absent,
         }
-
+      }
+      if $::operatingsystemrelease >= '14' and $::operatingsystemrelease <= '21' {
+        package {'PackageKit-yum-plugin':
+          ensure => absent,
+        }
+      }
+      elsif $::operatingsystemrelease == 'Rawhide' {
+        package {'PackageKit-yum-plugin':
+          ensure => absent,
+        }
+      }
     }
-
 }
