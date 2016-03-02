@@ -31,7 +31,7 @@ class dart::mdct_dev24 inherits dart::abstract::workstation_node {
     }
 
     include '::dart::abstract::idea'
-    include '::dart::abstract::pycharm::community'
+    include '::dart::abstract::pycharm::professional'
     include '::dart::subsys::koji::autofs'
     include '::dart::subsys::koji::cli'
     include '::dart::subsys::yum_cron'
