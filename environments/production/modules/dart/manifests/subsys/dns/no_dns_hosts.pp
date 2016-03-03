@@ -74,7 +74,7 @@ class dart::subsys::dns::no_dns_hosts {
     # oVirt {{{
 
     host { 'mdct-ovirt-engine.dartcontainer.com':
-        ip           => '10.1.192.170',
+        ip           => '10.201.64.47',
         host_aliases => [ 'mdct-ovirt-engine' ],
     }
 
