@@ -99,6 +99,7 @@ node 'mole-dev.dartcontainer.com'               { include 'dart::mole_dev' }
 node 'mole.dartcontainer.com'                   { include 'dart::mole' }
 node 'tc-util.dartcontainer.com'                { include 'dart::tc_util' }
 node 'mdct-puppet-f21.dartcontainer.com'        { include 'dart::mdct_puppet_f21' }
+node 'mdct-puppet-f22.dartcontainer.com'        { include 'dart::mdct_puppet_f22' }
 
 
 #
