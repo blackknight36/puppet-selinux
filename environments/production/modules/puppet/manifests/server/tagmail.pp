@@ -13,7 +13,7 @@
 
 class puppet::server::tagmail() {
 
-    if versioncmp($::puppetversion, '3.7') > 0 {
+    if versioncmp($::puppetversion, '4.0') >= 0 {
         exec{'install-tagmail':
             creates => "/etc/puppet/environments/${::environment}/forge_modules/tagmail",
             command => "puppet module install --environment ${::environment} puppetlabs-tagmail",
