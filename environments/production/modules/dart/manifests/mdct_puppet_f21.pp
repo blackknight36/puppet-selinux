@@ -9,6 +9,7 @@
 class dart::mdct_puppet_f21 inherits dart::abstract::puppet_server_node {
 
     include '::network'
+    include 'puppet::server::tagmail'
 
     ::network::interface { 'eth0':
         template   => 'static',

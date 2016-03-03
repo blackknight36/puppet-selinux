@@ -12,7 +12,10 @@
 # package archives such as those made by this2rpm, only applies to project root
 /*.tar.gz
 
-
 # Puppet manages these files and only the sources need be tracked.
 /puppet.conf
 /hiera.yaml
+/tagmail.conf
+
+# This directory is created by puppet on servers running Puppet 4
+/environments/*/forge_modules/tagmail/
