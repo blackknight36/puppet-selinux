@@ -27,6 +27,7 @@ class dart::subsys::mock::fedora::i386 {
         'Fedora-19-i386': release => '19';
         'Fedora-20-i386': release => '20';
         'Fedora-21-i386': release => '21';
+        'Fedora-22-i386': release => '22';
     }
 
 }
