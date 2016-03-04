@@ -28,6 +28,7 @@ class dart::subsys::mock::fedora::x86_64 {
         'Fedora-20-x86_64': release => '20';
         'Fedora-21-x86_64': release => '21';
         'Fedora-22-x86_64': release => '22';
+        'Fedora-23-x86_64': release => '23';
     }
 
 }
