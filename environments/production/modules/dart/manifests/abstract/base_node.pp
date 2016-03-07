@@ -13,6 +13,7 @@
 # === Authors
 #
 #   John Florian <john.florian@dart.biz>
+#   Michael Watters <michael.watters@dart.biz>
 
 
 class dart::abstract::base_node {
@@ -46,6 +47,10 @@ class dart::abstract::base_node {
     #include '::selinux'
     include '::sendmail'
     include '::sudo'
+
+    if $::operatingsystem == 'Fedora' and $::operatingsystemrelease >= '21' {
+        include '::openssl::ca_certificate::dart'
+    }
 
     ::sudo::drop_in { 'mdct':
         source  => hiera('sudo::drop_in::source'),
