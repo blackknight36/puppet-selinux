@@ -1,0 +1,10 @@
+# hiera/node/mdct-puppet-f22.dartcontainer.com.yaml
+#
+# Synopsis:
+#       These settings are specific to mdct-puppet-f22.
+
+
+---
+
+sendmail::enable:           true
+sendmail::ensure:           running
