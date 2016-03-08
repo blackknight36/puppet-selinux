@@ -20,6 +20,14 @@ class puppet::server::tagmail() {
         }
     }
 
+    $tagmail_template = $::operatingsystemrelease ? {
+        '21' => 'puppet/tagmail/tagmail.conf.f21.erb',
+        '22' => 'puppet/tagmail/tagmail.conf.f22.erb',
+    }
+
+    $puppet_admins = hiera('puppet_admins', 'root')
+    $tcutil_admins = hiera('tcutil_admins', 'root')
+
     file { '/etc/puppet/tagmail.conf':
         owner   => 'root',
         group   => 'puppet',
@@ -27,7 +35,7 @@ class puppet::server::tagmail() {
         seluser => 'system_u',
         selrole => 'object_r',
         seltype => 'puppet_etc_t',
-        source  => 'puppet:///private-host/puppet/tagmail.conf',
+        content => template($tagmail_template),
     }
 
     # provide patched version of tagmail to silence empty reports

@@ -9,6 +9,6 @@
 #all, !mdct_koji_f21,!mdct_koji_builder: chris.kennedy@dart.biz, collin.baker@dart.biz, levi.harper@dart.biz
 
 # Ordinarily though, this is what we want:
-all: john.florian@dart.biz, chris.kennedy@dart.biz, collin.baker@dart.biz, levi.harper@dart.biz, michael.watters@dart.biz
+all, !mdct_dev27*: <%= @puppet_admins %>
 
-tc_util: forrest.styx@dart.biz
+tc_util: <%= @tcutil_admins %>
