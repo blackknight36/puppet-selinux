@@ -32,6 +32,7 @@ class dart::subsys::yum::dart {
             '20'    => '20-2.fc20.noarch',
             '21'    => '21-2.fc21.noarch',
             '22'    => '22-1.fc22.noarch',
+            '23'    => '23-1.fc23.noarch',
         }
 
         ::yum::repo { 'dart':
