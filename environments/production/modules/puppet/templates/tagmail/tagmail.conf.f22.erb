@@ -7,5 +7,5 @@ smtpport = 25
 smtphelo = <%= @fqdn %>
 
 [tagmap]
-all, !mdct_dev27*: <%= @puppet_admins %>
+all, !mdct_dev27, !mdct_dev27_kstest: <%= @puppet_admins %>
 tc_util: <%= @tcutil_admins %>

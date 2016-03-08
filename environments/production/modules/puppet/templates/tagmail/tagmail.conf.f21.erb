@@ -9,6 +9,6 @@
 #all, !mdct_koji_f21,!mdct_koji_builder: chris.kennedy@dart.biz, collin.baker@dart.biz, levi.harper@dart.biz
 
 # Ordinarily though, this is what we want:
-all, !mdct_dev27*: <%= @puppet_admins %>
+all, !mdct_dev27, !mdct_dev27_kstest: <%= @puppet_admins %>
 
 tc_util: <%= @tcutil_admins %>
