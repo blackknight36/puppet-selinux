@@ -43,6 +43,7 @@
 # === Authors
 #
 #   John Florian <jflorian@doubledog.org>
+#   Michael Watters <michael.watters@dart.biz>
 #
 # === Copyright
 #
@@ -75,8 +76,7 @@ class puppet::tools (
     file { '/etc/puppet-tools.conf':
         seltype => 'puppet_etc_t',
         before  => Cron::Jobfile['puppet-tools'],
-        content => $conf_content,
-        source  => $conf_source,
+        content => template($conf_content),
     }
 
     file { '/etc/puppet-lint.rc':

@@ -13,6 +13,7 @@
 # === Authors
 #
 #   John Florian <john.florian@dart.biz>
+#   Michael Watters <michael.watters@dart.biz>
 
 
 class dart::abstract::puppet_server_node inherits ::dart::abstract::guarded_server_node {
@@ -30,9 +31,9 @@ class dart::abstract::puppet_server_node inherits ::dart::abstract::guarded_serv
     }
 
     class { '::puppet::tools':
-        conf_source => 'puppet:///modules/dart/puppet/tools/puppet-tools.conf',
-        cron_source => 'puppet:///modules/dart/puppet/tools/puppet-tools.cron',
-        lint_source => 'puppet:///modules/dart/puppet/tools/puppet-lint.rc',
+        conf_content => 'dart/puppet/tools/puppet-tools.conf.erb',
+        cron_source  => 'puppet:///modules/dart/puppet/tools/puppet-tools.cron',
+        lint_source  => 'puppet:///modules/dart/puppet/tools/puppet-lint.rc',
     }
 
     include '::dart::subsys::yum_cron'

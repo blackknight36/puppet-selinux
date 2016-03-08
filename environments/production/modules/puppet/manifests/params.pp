@@ -12,6 +12,8 @@
 
 class puppet::params {
 
+    $puppet_admins = hiera('puppet_admins')
+
     case $::operatingsystem {
 
         'Fedora': {
@@ -48,6 +50,10 @@ class puppet::params {
             ]
 
             ## Server ##
+            if $::fqdn =~ /^mdct-puppet-f(\d+)/ {
+                $is_puppet_master = true
+            }
+
             $server_services = [
                 'puppetmaster',
             ]
@@ -58,13 +64,12 @@ class puppet::params {
             ## Tools ##
             $tools_packages = [
                 'puppet-tools',
-                'rubygem-puppet-lint',
             ]
 
         }
 
         default: {
-            fail ("${title}: operating system '${::operatingsystem}' is not supported")
+            fail ("The puppet module is not yet supported on $::operatingsystem.")
         }
 
     }
