@@ -59,11 +59,15 @@ class puppet::client ($enable=true, $ensure='running') {
         subscribe   => Package[$puppet::params::client_packages],
     }
 
-    file { '/etc/puppet/puppet.conf':
-        source  => [
-            'puppet:///private-host/puppet/puppet.conf',
-            "puppet:///modules/puppet/puppet.conf.${era}",
-        ],
+    if $puppet::params::is_puppet_master == true {
+        file { '/etc/puppet/puppet.conf':
+            source  => 'puppet:///private-host/puppet/puppet.conf',
+        }
+    }
+    else {
+        file { '/etc/puppet/puppet.conf':
+            content => template("puppet/puppet.conf.${era}.erb"),
+        }
     }
 
     service { $puppet::params::client_services:
