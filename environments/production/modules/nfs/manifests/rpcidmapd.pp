@@ -23,6 +23,7 @@
 #
 #   John Florian <john.florian@dart.biz>
 #   John Florian <jflorian@doubledog.org>
+#   Michael Watters <michael.watters@dart.biz>
 
 
 class nfs::rpcidmapd (
@@ -65,9 +66,19 @@ class nfs::rpcidmapd (
 #       action => 'accept',
 #   }
 
+    $idmap_ensure = $::nfs::params::idmap_service_is_static ? {
+        true => 'stopped',
+        default => true,
+    }
+
+    $idmap_enable = $::nfs::params::idmap_service_is_static ? {
+        true => undef,
+        default => true,
+    }
+
     service { $::nfs::params::idmap_service:
-        ensure     => $ensure,
-        enable     => $enable,
+        ensure     => $idmap_ensure,
+        enable     => $idmap_enable,
         hasrestart => true,
         hasstatus  => true,
     }

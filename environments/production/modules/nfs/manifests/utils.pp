@@ -14,6 +14,7 @@
 #
 #   John Florian <jflorian@doubledog.org>
 #   John Florian <john.florian@dart.biz>
+#   Michael Watters <michael.watters@dart.biz>
 
 
 class nfs::utils inherits ::nfs::params {
@@ -24,9 +25,19 @@ class nfs::utils inherits ::nfs::params {
 
     if $::nfs::params::pipefs_service {
 
+        $pipefs_ensure = $::nfs::params::pipefs_service_is_static ? {
+            true => 'stopped',
+            default => true,
+        }
+
+        $pipefs_enable = $::nfs::params::pipefs_service_is_static ? {
+            true => undef,
+            default => true,
+        }
+
         service { $::nfs::params::pipefs_service:
-            ensure     => running,
-            enable     => true,
+            ensure     => $pipefs_ensure,
+            enable     => $pipefs_enable,
             hasrestart => true,
             hasstatus  => true,
             provider   => systemd,

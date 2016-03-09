@@ -8,6 +8,7 @@
 #
 #   John Florian <john.florian@dart.biz>
 #   John Florian <jflorian@doubledog.org>
+#   Michael Watters <michael.watters@dart.biz>
 
 
 class nfs::params {
@@ -82,6 +83,13 @@ class nfs::params {
                 $pipefs_service = 'var-lib-nfs-rpc_pipefs.mount'
             } else {
                 $pipefs_service = undef
+            }
+
+            # set pipefs to be static on fedora 23+
+            if $::operatingsystemrelease >= '23' {
+                $pipefs_service_is_static = true
+            } else {
+                $pipefs_service_is_static = false
             }
 
             # Which $server_services?
