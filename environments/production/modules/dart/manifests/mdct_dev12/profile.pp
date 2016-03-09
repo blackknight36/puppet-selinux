@@ -22,15 +22,9 @@ class dart::mdct_dev12::profile {
     }
 
     package { [
-        'kcometen4',
-        'kde-plasma-yawp',
-        'kdeartwork-screensavers',
         'kio_mtp',
         'man2html',
-        'qstars-kde',
         'redshift',
-        'rss-glx-kde',
-        'tempest-kde',
     ]:
         ensure  => installed,
     }
