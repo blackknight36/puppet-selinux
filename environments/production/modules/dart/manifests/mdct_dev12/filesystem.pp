@@ -36,11 +36,6 @@ class dart::mdct_dev12::filesystem {
             options => '-fstype=cifs,credentials=/mnt/storage/j/.credentials/d13677.cifs',
             remote  => '://mas-fs01/ShareData';
 
-        '/mnt/koji':
-            key     => 'koji',
-            options => '-nfsvers=3,rw,hard,nosuid,noatime',
-            remote  => 'mdct-00fs:/storage/projects/koji';
-
         '/mnt/storage':
             key     => 'storage',
             options => '-fstype=xfs,rw',

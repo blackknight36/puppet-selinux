@@ -1,0 +1,32 @@
+Hostname    "<%= @fqdn %>"
+
+FQDNLookup  false
+BaseDir     "/var/lib/collectd"
+TypesDB     "/usr/share/collectd/types.db"
+
+LoadPlugin cpu
+LoadPlugin load
+LoadPlugin memory
+LoadPlugin network
+
+<Plugin network>
+	<Listen "<%= @ipaddress %>" "25826">
+		SecurityLevel "Encrypt"
+		AuthFile "/etc/collectd.d/passwd"
+		Interface "vtnet0"
+	</Listen>
+</Plugin>
+
+LoadPlugin write_graphite
+
+<Plugin write_graphite>
+ <Node "<%= @fqdn %>">
+    Host "<%= @graphite_host %>"
+    Port "2003"
+    Protocol "tcp"
+    LogSendErrors true
+    StoreRates true
+    AlwaysAppendDS false
+    EscapeCharacter "_"
+  </Node>
+</Plugin>

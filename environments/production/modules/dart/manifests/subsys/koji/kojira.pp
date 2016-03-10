@@ -24,6 +24,8 @@
 
 class dart::subsys::koji::kojira inherits ::dart::subsys::koji::params {
 
+    include '::dart::subsys::koji::autofs'
+
     class { '::koji::kojira':
         client_cert => "puppet:///modules/dart/koji/kojira-on-${::dart::subsys::koji::params::kojira_host}.pem",
         ca_cert     => 'puppet:///modules/dart/koji/Koji_ca_cert.crt',

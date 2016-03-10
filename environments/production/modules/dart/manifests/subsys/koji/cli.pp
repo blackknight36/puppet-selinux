@@ -17,6 +17,8 @@
 
 class dart::subsys::koji::cli inherits ::dart::subsys::koji::params {
 
+    include '::dart::subsys::koji::autofs'
+
     class { '::koji::cli':
         hub       => $::dart::subsys::koji::params::hub,
         web       => "http://${::dart::subsys::koji::params::web_host}/koji",

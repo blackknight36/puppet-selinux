@@ -1,0 +1,20 @@
+FQDNLookup false
+
+LoadPlugin syslog
+LoadPlugin network
+LoadPlugin cpu
+LoadPlugin disk
+LoadPlugin interface
+LoadPlugin load
+LoadPlugin memory
+
+LoadPlugin network
+
+<Plugin "network">
+  <Server "<%= @collectd_server %>">
+    SecurityLevel "Encrypt"
+    Username "<%= @collectd_user %>"
+    Password "<%= @collectd_pass %>"
+  </Server>
+</Plugin>
+
