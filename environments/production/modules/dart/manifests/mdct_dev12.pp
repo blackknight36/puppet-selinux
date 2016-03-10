@@ -41,6 +41,7 @@ class dart::mdct_dev12 inherits dart::abstract::workstation_node {
     include '::dart::mdct_dev12::filesystem'
     include '::dart::mdct_dev12::libvirt'
     include '::dart::mdct_dev12::network'
+    include '::dart::mdct_dev12::packaging'
     include '::dart::mdct_dev12::profile'
     include '::dart::subsys::mock'
 
