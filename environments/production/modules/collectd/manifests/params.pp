@@ -18,6 +18,7 @@ class collectd::params {
 
                 selboolean { 'collectd_tcp_network_connect':
                     value => 'on',
+                    persistent => true,
                 }
            }
         }

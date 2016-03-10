@@ -64,3 +64,5 @@ collectd_server:            'mdct-dev27-graphite.dartcontainer.com'
 collectd_user:              'user0'
 collectd_pass:              'iM3xookae4Pohmie'
 
+graphite_secret_key:        'gieKeizenah7Ahch0Hae'
+

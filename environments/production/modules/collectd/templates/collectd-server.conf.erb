@@ -10,18 +10,19 @@ LoadPlugin memory
 LoadPlugin network
 
 <Plugin network>
-	<Listen "<%= @ipaddress %>" "25826">
+	<Listen "0.0.0.0" "25826">
 		SecurityLevel "Encrypt"
 		AuthFile "/etc/collectd.d/passwd"
 		Interface "vtnet0"
 	</Listen>
 </Plugin>
 
+# send metrics to the local carbon-cache service
 LoadPlugin write_graphite
 
 <Plugin write_graphite>
  <Node "<%= @fqdn %>">
-    Host "<%= @graphite_host %>"
+    Host "localhost"
     Port "2003"
     Protocol "tcp"
     LogSendErrors true
