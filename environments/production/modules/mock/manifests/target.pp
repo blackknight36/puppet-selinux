@@ -48,6 +48,12 @@ define mock::target (
     include 'mock::common'
     include 'mock::params'
 
+    if $family == 'fedora' and $release >= '20' {
+        $generation = '.20+'
+    } else {
+        $generation = ''
+    }
+
     file { "/etc/mock/${family}-${release}-${base_arch}.cfg":
         ensure    => $ensure,
         owner     => 'root',
@@ -57,7 +63,7 @@ define mock::target (
         selrole   => 'object_r',
         seltype   => 'etc_t',
         subscribe => Package[$mock::params::packages],
-        content   => template("mock/${family}.erb"),
+        content   => template("mock/${family}${generation}.erb"),
     }
 
 }
