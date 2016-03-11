@@ -11,7 +11,17 @@
 
 class graphite() {
     
+    class {'apache':
+        network_connect => true,
+        server_admin => 'michael.watters@dart.biz',
+    }
+
     include 'graphite::params'
+
+    File {
+        before => Service[$apache::params::services],
+        notify => Service[$apache::params::services],
+    }
 
     package { $graphite::params::packages:
         ensure => latest,
@@ -37,7 +47,7 @@ class graphite() {
 
     apache::site_config {'graphite-web':
         content => template('graphite/graphite-web.conf.erb'),
-    } ~>
+    } 
 
     service { $graphite::params::services:
         ensure => running,
