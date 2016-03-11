@@ -107,6 +107,12 @@ class dart::abstract::packages::base {
             }
         }
 
+        if $::operatingsystemrelease == 'Rawhide' or $::operatingsystemrelease >= '22' {
+            package { ['python-dnf-plugins-extras-tracer']:
+                ensure => installed,
+            }
+        }
+
     }
 
     ### Universal Package Exclusion ###
