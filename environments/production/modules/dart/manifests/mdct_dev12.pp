@@ -22,12 +22,6 @@ class dart::mdct_dev12 inherits dart::abstract::workstation_node {
         network_connect => true,
     }
 
-    class { '::jaf_bacula::admin':
-        dir_address => "mdct-00bk.${::domain}",
-        dir_name    => 'mdct-00bk-dir',
-        dir_passwd  => 'a/kIuMrD+AIJxl5HlDZhdEdugagOer5nUi43qgip2DED',
-    }
-
     class { '::jaf_bacula::client':
         dir_name   => $::dart::params::bacula_dir_name,
         dir_passwd => 'RB9c3KBgpRyXzbGC6wXCEA5ao2SAtgAyt24tD8pni17h',
