@@ -11,7 +11,6 @@
 
 class graphite() {
     
-    include 'apache'
     include 'graphite::params'
 
     package { $graphite::params::packages:
@@ -28,7 +27,13 @@ class graphite() {
     file { '/etc/graphite-web/local_settings.py':
         ensure => file,
         content => template('graphite/local_settings.py.erb'),
-    } ->
+    }
+
+    file { '/etc/graphite-web/graphTemplates.conf':
+        selrole => 'object_r',
+        seltype => 'httpd_config_t',
+        source  => 'puppet:///modules/graphite/graphTemplates.conf',
+    }
 
     apache::site_config {'graphite-web':
         content => template('graphite/graphite-web.conf.erb'),
