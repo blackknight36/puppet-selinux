@@ -26,11 +26,11 @@ class dart::subsys::yum::rpmfusion {
     # Fedora 23 needs to have the development repos enabled for rpmfusion based packages
     if $::operatingsystemrelease == '23' {
         yumrepo { ['local-rpmfusion-free-development', 'local-rpmfusion-nonfree-development'] :
-            enabled => true,
+            enabled => 1,
         }
 
-        yumrepo { ['local-rpmfusion-free', 'local-rpmfusion-free-updates', 'local-rpmfusion-nonfree', 'local-rpmfusion-nonfree-updates' ] :
-            enabled => false,
+        yumrepo { ['local-rpmfusion-free', 'local-rpmfusion-free-updates', 'local-rpmfusion-nonfree', 'local-rpmfusion-nonfree-updates', 'rpmfusion-nonfree-updates-testing' ] :
+            enabled => 0,
         }
     }
 }
