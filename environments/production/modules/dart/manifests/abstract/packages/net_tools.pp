@@ -11,11 +11,8 @@ class dart::abstract::packages::net_tools {
         'bind-utils',
         'bridge-utils',
         'conntrack-tools',
-        'enmasse',
         'ethtool',
-        'ipcalculator',
         'mtr',
-        'netstat-nat',
         'nmap',
         'openldap-clients',
         'tcpdump',
@@ -27,6 +24,16 @@ class dart::abstract::packages::net_tools {
     }
 
     ### Select Package Inclusion ###
+
+    if $::operatingsystem != 'CentOS' {
+        package { [
+            'enmasse',
+            'ipcalculator',
+            'netstat-nat',
+            ]:
+            ensure => installed,
+        }
+    }
 
     # none
 

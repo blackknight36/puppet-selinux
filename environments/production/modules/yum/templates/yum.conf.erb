@@ -12,6 +12,9 @@ obsoletes=1
 gpgcheck=1
 plugins=1
 installonly_limit=3
+<% if @operatingsystem == 'CentOS' -%>
+distroverpkg=centos-release
+<% end -%>
 <% if @deltarpm -%>
 deltarpm=<%= @deltarpm %>
 <% end -%>

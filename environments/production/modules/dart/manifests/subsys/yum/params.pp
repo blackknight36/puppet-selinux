@@ -11,6 +11,10 @@ class dart::subsys::yum::params {
             $fedora_repo_uri = 'http://mdct-00fs.dartcontainer.com/pub/fedora'
         }
 
+				'CentOS': {
+						$fedora_repo_uri = undef
+				}
+
         default: {
             fail ("The yum module is not yet supported on ${::operatingsystem}.")
         }

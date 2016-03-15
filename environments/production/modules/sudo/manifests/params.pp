@@ -24,6 +24,10 @@ class sudo::params {
 
         }
 
+				'CentOS': {
+					$packages = 'sudo'
+				}
+
         default: {
             fail ("The sudo module is not yet supported on ${::operatingsystem}.")
         }

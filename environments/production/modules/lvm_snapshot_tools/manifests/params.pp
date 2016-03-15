@@ -19,6 +19,10 @@ class lvm_snapshot_tools::params {
 
         }
 
+				'CentOS': {
+						$packages = undef
+				}
+
         default: {
             fail ("${title}: operating system '${::operatingsystem}' is not supported")
         }

@@ -42,8 +42,10 @@ class dart::abstract::base_node {
     include '::lvm_snapshot_tools'
     include '::openssh::server'
     include '::ovirt::guest'
-    include '::prophile'
-    include '::puppet::client'
+    if $::operatingsystem != 'CentOS' {
+        include '::prophile'
+        include '::puppet::client'
+    }
     #include '::selinux'
     include '::sendmail'
     include '::sudo'
@@ -74,10 +76,12 @@ class dart::abstract::base_node {
         stage   => 'first',
     }
 
-    class { '::dart::subsys::yum::fedora':
-        require => Class['yum'],
-        stage   => 'first',
-    }
+		if $operatingsystem == 'Fedora' {
+        class { '::dart::subsys::yum::fedora':
+            require => Class['yum'],
+            stage   => 'first',
+        }
+		}
 
     class { '::dart::subsys::yum::mdct':
         require => Class['yum'],

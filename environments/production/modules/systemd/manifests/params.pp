@@ -7,7 +7,7 @@
 class systemd::params {
 
     case $::operatingsystem {
-        'Fedora': {
+        'Fedora', 'CentOS': {
 
             $packages = [
                 'systemd',

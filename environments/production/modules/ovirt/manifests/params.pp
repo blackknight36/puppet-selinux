@@ -12,7 +12,7 @@
 class ovirt::params {
 
     case $::operatingsystem {
-        'Fedora': {
+        'Fedora', 'CentOS': {
 
             $guest_packages = [
                 'ovirt-guest-agent-common',

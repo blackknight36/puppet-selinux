@@ -13,13 +13,17 @@ class tsocks::params {
 
     case $::operatingsystem {
         'Fedora': {
-
             $packages = 'tsocks'
+        }
 
+        'CentOS': {
+            $packages = undef
         }
 
         default: {
-            fail ("${title}: operating system '${::operatingsystem}' is not supported")
+            notify {'unsupported':
+                message => "${module_name}: operating system '${::operatingsystem}' is not supported by this module.",
+            }
         }
 
     }

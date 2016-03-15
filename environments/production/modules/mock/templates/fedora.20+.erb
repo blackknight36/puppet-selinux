@@ -7,6 +7,7 @@ config_opts['macros']['%__bzip2'] = '/usr/bin/lbzip2'
 config_opts['dist'] = 'fc<%= @release %>'  # only useful for --resultdir variable subst
 config_opts['extra_chroot_dirs'] = [ '/run/lock', ]
 config_opts['releasever'] = '<%= @release %>'
+config_opts['nosync'] = True
 
 config_opts['yum.conf'] = """
 [main]

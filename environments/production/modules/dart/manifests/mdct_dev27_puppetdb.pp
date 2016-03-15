@@ -12,7 +12,7 @@ class dart::mdct_dev27_puppetdb inherits dart::abstract::guarded_server_node {
 
     include 'collectd::client'
 
-    package { ['most', 'mc', 'screen']:
+    package { [ 'mc' ]:
         ensure => latest,
     }
 

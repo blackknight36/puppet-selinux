@@ -41,6 +41,12 @@ class iptables::params {
 
         }
 
+        'CentOS': {
+            $packages = [ 'iptables', 'system-config-firewall-base' ]
+            $conflicting_packages = 'firewalld'
+            $services = [ 'iptables', 'ip6tables' ]
+        }
+
         default: {
             fail ("The iptables module is not yet supported on ${::operatingsystem}.")
         }

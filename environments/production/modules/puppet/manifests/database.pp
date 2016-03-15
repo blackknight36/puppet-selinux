@@ -11,16 +11,12 @@
 # === Authors
 #
 #   John Florian <jflorian@doubledog.org>
+#   Michael Watters <michael.watters@dart.biz>
 
 
 class puppet::database {
 
     include 'puppet::params'
-
-    package { $puppet::params::db_packages:
-        ensure  => installed,
-        notify  => Service[$puppet::params::db_services],
-    }
 
     File {
         owner       => 'root',
@@ -34,15 +30,49 @@ class puppet::database {
         subscribe   => Package[$puppet::params::db_packages],
     }
 
+    package { $puppet::params::db_packages:
+        ensure => installed,
+        notify => Service[$puppet::params::db_services],
+    }
+
     iptables::tcp_port {
         'puppet_database':  port => '8081';
     }
 
+    $ssldir = $::operatingsystem ? {
+        'Fedora' => '/var/lib/puppet/ssl',
+        'CentOS' => '/etc/puppetlabs/puppet/ssl',
+    }
+
+    file { '/etc/puppetlabs/puppetdb/ssl/private.pem':
+        ensure => file,
+        owner  => 'puppetdb',
+        group  => 'puppetdb',
+        mode   => '0600',
+        source => "${ssldir}/private_keys/${::fqdn}.pem",
+    }
+
+    file { '/etc/puppetlabs/puppetdb/ssl/public.pem':
+        ensure => file,
+        owner  => 'puppetdb',
+        group  => 'puppetdb',
+        mode   => '0600',
+        source => "${ssldir}/certs/${::fqdn}.pem",
+    }
+    
+    file { '/etc/puppetlabs/puppetdb/ssl/ca.pem':
+        ensure => file,
+        owner  => 'puppetdb',
+        group  => 'puppetdb',
+        mode   => '0600',
+        source => "${ssldir}/certs/ca.pem",
+    }
+
     service { $puppet::params::db_services:
-        enable      => true,
-        ensure      => running,
-        hasrestart  => true,
-        hasstatus   => true,
+        ensure     => running,
+        enable     => true,
+        hasrestart => true,
+        hasstatus  => true,
         # I've found cases where the agent reports:
         #   Error: Could not retrieve catalog from remote server: Error 400 on
         #       SERVER: Failed to submit 'replace facts' command for

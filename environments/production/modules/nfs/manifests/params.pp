@@ -103,6 +103,25 @@ class nfs::params {
 
         }
 
+        'CentOS': {
+            $utils_packages = [ 'libnfsidmap', 'nfs-utils', ]
+            $kernel_options = 'options nfs nfs4_disable_idmapping=n callback_tcpport=4005'
+
+            $bind_packages = 'rpcbind'
+            $bind_service = 'rpcbind'
+
+            $gss_service = 'rpcgssd'
+            $gss_service_is_static = true
+
+            $idmap_service = 'nfs-idmapd'
+            $idmap_service_is_static = true
+
+            $pipefs_service = undef
+            $pipefs_service_is_static = false
+
+            $server_services = 'nfs-server.service'
+        }
+
         default: {
             fail ("${title}: operating system '${::operatingsystem}' is not supported")
         }
