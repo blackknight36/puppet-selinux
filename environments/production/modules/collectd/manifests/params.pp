@@ -1,9 +1,9 @@
 class collectd::params {
 
     case $::operatingsystem {
-        'Fedora': {
+        'Fedora', 'CentOS': {
 
-            if $::operatingsystemrelease < '21' {
+            if $::operatingsystem == 'Fedora' and $::operatingsystemrelease < '21' {
                 notify{'oldfedora':
                     message => "The ${module_name} module is not supported on Fedora < 21.  Please upgrade your operating system.",
                 }
@@ -17,14 +17,14 @@ class collectd::params {
                 $server_template = 'collectd/collectd-server.conf.erb'
 
                 selboolean { 'collectd_tcp_network_connect':
-                    value => 'on',
+                    value      => 'on',
                     persistent => true,
                 }
            }
         }
 
         default: {
-            fail ("${title} is not supported on ${::operatingsystem}.")
+            fail ("${module_name} is not supported on ${::operatingsystem}.")
         }
     }
 
