@@ -48,9 +48,11 @@ class lvm_snapshot_tools (
         $snapshots_root='/var/spool/backup_snapshots',
     ) inherits ::lvm_snapshot_tools::params {
 
-    package { $::lvm_snapshot_tools::params::packages:
-        ensure => installed,
-    }
+    if $::lvm_snapshot_tools::params::packages != undef {
+			package { $::lvm_snapshot_tools::params::packages:
+				ensure => installed,
+			}
+		}
 
     File {
         owner     => 'root',

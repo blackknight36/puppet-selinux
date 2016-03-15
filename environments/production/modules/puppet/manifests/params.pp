@@ -68,8 +68,34 @@ class puppet::params {
 
         }
 
+        'CentOS': {
+
+            package {'puppetlabs-release-pc1':
+                ensure => installed,
+                provider => 'rpm',
+                source => 'https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm',
+            } ->
+
+            yumrepo{'puppetlabs-pc1' :
+                enabled => 1,
+            }
+              
+            $client_packages = [ 'puppet-agent' ]
+            $client_services = [ 'puppet' ]
+
+            $db_packages = [
+                'puppetdb',
+                'puppetdb-terminus',
+            ]
+
+            $db_services = [
+                'puppetdb',
+            ]
+
+        }
+                        
         default: {
-            fail ("The puppet module is not yet supported on $::operatingsystem.")
+            fail ("${module_name} is not supported on $::operatingsystem.")
         }
 
     }

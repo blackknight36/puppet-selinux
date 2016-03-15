@@ -30,6 +30,17 @@ class selinux::params {
 
         }
 
+        'CentOS': {
+
+            $packages = [
+                'libselinux',
+                'libselinux-utils',
+                'selinux-policy',
+                'selinux-policy-devel',     # provides audit2why
+                'selinux-policy-targeted',
+                ]
+        }
+
         default: {
             fail ("The selinux module is not yet supported on ${operatingsystem}.")
         }

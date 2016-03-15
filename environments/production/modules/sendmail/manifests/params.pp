@@ -29,6 +29,13 @@ class sendmail::params {
 
         }
 
+				'CentOS': {
+
+					$packages = 'sendmail'
+					$services = [ 'sendmail', 'sm-client' ]
+          $newaliases_cmd = '/usr/bin/newaliases'
+				}
+
         default: {
             fail ("${title}: operating system '${::operatingsystem}' is not supported")
         }

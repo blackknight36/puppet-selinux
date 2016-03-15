@@ -11,6 +11,7 @@ class mock::params {
 
             $packages = [
                 'mock',
+                'nosync',
             ]
 
         }

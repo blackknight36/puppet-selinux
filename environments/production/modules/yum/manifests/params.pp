@@ -25,6 +25,12 @@ class yum::params {
             }
         }
 
+				'CentOS': {
+					$services = [ 'yum-cron' ]
+					$packages = [ 'yum-cron' ]
+          $cron_conf_target = '/etc/yum/yum-cron.conf'
+				}
+
         default: {
             fail ("The yum module is not yet supported on ${operatingsystem}.")
         }

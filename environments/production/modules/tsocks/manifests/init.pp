@@ -35,11 +35,7 @@ class tsocks (
         $server_type='4',
     ) inherits ::tsocks::params {
 
-    package { $::tsocks::params::packages:
-        ensure => installed,
-    }
-
-    File {
+		File {
         owner     => 'root',
         group     => 'root',
         mode      => '0644',
@@ -49,8 +45,14 @@ class tsocks (
         subscribe => Package[$::tsocks::params::packages],
     }
 
-    file { '/etc/tsocks.conf':
-        content => template('tsocks/tsocks.conf.erb'),
+		if $::tsocks::params::packages != undef {
+        package { $::tsocks::params::packages:
+            ensure => installed,
+        } ->
+
+        file { '/etc/tsocks.conf':
+        	content => template('tsocks/tsocks.conf.erb'),
+				}
     }
 
 }

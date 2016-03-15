@@ -26,7 +26,7 @@ class nfs::utils inherits ::nfs::params {
     if $::nfs::params::pipefs_service {
 
         $pipefs_ensure = $::nfs::params::pipefs_service_is_static ? {
-            true => 'stopped',
+            true => undef,
             default => true,
         }
 

@@ -6,7 +6,6 @@ class dart::abstract::packages::base {
 
     package { [
 
-        'apt',
         'bash-completion',
         'expect',
         'fuse-sshfs',
@@ -38,6 +37,11 @@ class dart::abstract::packages::base {
     ### Select Package Inclusion ###
 
     if $::operatingsystem == 'Fedora' {
+
+        # apt package is only available in Fedora
+        package { 'apt':
+            ensure => latest,
+        }
 
         if  $::operatingsystemrelease == 'Rawhide' or
             $::operatingsystemrelease >= '11'
