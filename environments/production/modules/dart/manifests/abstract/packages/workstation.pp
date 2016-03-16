@@ -5,6 +5,7 @@ class dart::abstract::packages::workstation {
     ### Universal Package Inclusion ###
 
     include 'lyx'
+    include 'openjdk::workstation'
 
     package { [
 
