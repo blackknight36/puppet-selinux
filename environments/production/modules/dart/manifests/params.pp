@@ -13,17 +13,17 @@
 
 class dart::params {
 
-    # Bacula
-    $bacula_dir_sd_target   = 'localhost'
-    $bacula_dir_fqdn        = 'mdct-00bk.dartcontainer.com'
-    $bacula_dir_name        = 'mdct-bacula-dir'
-    $bacula_dir_passwd      = 'egw444LCYCMTHcR2wefPkzlTer0QIU84PHcU0Uv0b8PN'
-    $bacula_mon_name        = 'mdct-bacula-mon'
-    $bacula_mon_passwd      = 'Mzdhf6ZMzWtevWY7xwRQUFVIjs2t2tCSqpw9WdNGQrtG'
-    $bacula_sd_fqdn         = 'mdct-00bk.dartcontainer.com'
-    $bacula_sd_name         = 'mdct-bacula-sd'
-    $bacula_sd_passwd       = 'oPm5LiIU7n77WlEFAnZPA0gmINQA5fyJxmBvULOuof5C'
-    $bacula_team            = 'john.florian@dart.biz,levi.harper@dart.biz,chris.pugh@dart.biz,ben.minshall@dart.biz,nathan.nephew@dart.biz,elizabeth.scott@dart.biz,kristina.doyle@dart.biz'
+    # Bacula settings
+    $bacula_dir_sd_target = hiera('bacula_dir_sd_target')
+    $bacula_dir_fqdn      = hiera('bacula_dir_fqdn')
+    $bacula_dir_name      = hiera('bacula_dir_name')
+    $bacula_dir_passwd    = hiera('bacula_dir_passwd')
+    $bacula_mon_name      = hiera('bacula_mon_name')
+    $bacula_mon_passwd    = hiera('bacula_mon_passwd')
+    $bacula_sd_fqdn       = hiera('bacula_sd_fqdn')
+    $bacula_sd_name       = hiera('bacula_sd_name')
+    $bacula_sd_passwd     = hiera('bacula_sd_passwd')
+    $bacula_team          = join(hiera('bacula_team'), ',')
 
     # SMTP
     $smtp_server = hiera('smtp_server', 'smtp.dartcontainer.com')
