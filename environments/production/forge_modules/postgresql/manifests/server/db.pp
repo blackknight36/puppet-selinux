@@ -3,7 +3,6 @@
 define postgresql::server::db (
   $user,
   $password,
-  $comment    = undef,
   $dbname     = $title,
   $encoding   = $postgresql::server::encoding,
   $locale     = $postgresql::server::locale,
@@ -16,7 +15,6 @@ define postgresql::server::db (
 
   if ! defined(Postgresql::Server::Database[$dbname]) {
     postgresql::server::database { $dbname:
-      comment    => $comment,
       encoding   => $encoding,
       tablespace => $tablespace,
       template   => $template,
@@ -29,7 +27,6 @@ define postgresql::server::db (
   if ! defined(Postgresql::Server::Role[$user]) {
     postgresql::server::role { $user:
       password_hash => $password,
-      before        => Postgresql::Server::Database[$dbname],
     }
   }
 

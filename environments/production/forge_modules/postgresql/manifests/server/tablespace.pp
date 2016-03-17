@@ -2,26 +2,18 @@
 define postgresql::server::tablespace(
   $location,
   $owner   = undef,
-  $spcname = $title,
-  $connect_settings = $postgresql::server::default_connect_settings,
+  $spcname = $title
 ) {
   $user      = $postgresql::server::user
   $group     = $postgresql::server::group
+  $port      = $postgresql::server::port
   $psql_path = $postgresql::server::psql_path
 
-  # If the connection settings do not contain a port, then use the local server port
-  if $connect_settings != undef and has_key( $connect_settings, 'PGPORT') {
-    $port = undef
-  } else {
-    $port = $postgresql::server::port
-  }
-
   Postgresql_psql {
-    psql_user        => $user,
-    psql_group       => $group,
-    psql_path        => $psql_path,
-    port             => $port,
-    connect_settings => $connect_settings,
+    psql_user  => $user,
+    psql_group => $group,
+    psql_path  => $psql_path,
+    port       => $port,
   }
 
   if ($owner == undef) {
@@ -40,7 +32,6 @@ define postgresql::server::tablespace(
     seluser => 'system_u',
     selrole => 'object_r',
     seltype => 'postgresql_db_t',
-    require => Class['postgresql::server'],
   }
 
   $create_ts = "Create tablespace '${spcname}'"

@@ -1,66 +1,56 @@
 # Class for setting cross-class global overrides. See README.md for more
 # details.
 class postgresql::globals (
-  $client_package_name      = undef,
-  $server_package_name      = undef,
-  $contrib_package_name     = undef,
-  $devel_package_name       = undef,
-  $java_package_name        = undef,
-  $docs_package_name        = undef,
-  $perl_package_name        = undef,
-  $plperl_package_name      = undef,
-  $plpython_package_name    = undef,
-  $python_package_name      = undef,
-  $postgis_package_name     = undef,
+  $client_package_name  = undef,
+  $server_package_name  = undef,
+  $contrib_package_name = undef,
+  $devel_package_name   = undef,
+  $java_package_name    = undef,
+  $perl_package_name    = undef,
+  $plperl_package_name  = undef,
+  $python_package_name  = undef,
+  $postgis_package_name = undef,
 
-  $service_name             = undef,
-  $service_provider         = undef,
-  $service_status           = undef,
-  $default_database         = undef,
+  $service_name         = undef,
+  $service_provider     = undef,
+  $service_status       = undef,
+  $default_database     = undef,
 
-  $validcon_script_path     = undef,
+  $initdb_path          = undef,
+  $createdb_path        = undef,
+  $psql_path            = undef,
+  $pg_hba_conf_path     = undef,
+  $pg_ident_conf_path   = undef,
+  $postgresql_conf_path = undef,
 
-  $initdb_path              = undef,
-  $createdb_path            = undef,
-  $psql_path                = undef,
-  $pg_hba_conf_path         = undef,
-  $pg_ident_conf_path       = undef,
-  $postgresql_conf_path     = undef,
-  $recovery_conf_path       = undef,
-  $default_connect_settings = undef,
+  $pg_hba_conf_defaults = undef,
 
-  $pg_hba_conf_defaults     = undef,
+  $datadir              = undef,
+  $confdir              = undef,
+  $bindir               = undef,
+  $xlogdir              = undef,
 
-  $datadir                  = undef,
-  $confdir                  = undef,
-  $bindir                   = undef,
-  $xlogdir                  = undef,
-  $logdir                   = undef,
+  $user                 = undef,
+  $group                = undef,
 
-  $user                     = undef,
-  $group                    = undef,
+  $version              = undef,
+  $postgis_version      = undef,
 
-  $version                  = undef,
-  $postgis_version          = undef,
-  $repo_proxy               = undef,
+  $needs_initdb         = undef,
 
-  $needs_initdb             = undef,
+  $encoding             = undef,
+  $locale               = undef,
 
-  $encoding                 = undef,
-  $locale                   = undef,
+  $manage_pg_hba_conf   = undef,
+  $manage_pg_ident_conf = undef,
 
-  $manage_pg_hba_conf       = undef,
-  $manage_pg_ident_conf     = undef,
-  $manage_recovery_conf     = undef,
-
-  $manage_package_repo      = undef,
+  $manage_package_repo  = undef
 ) {
   # We are determining this here, because it is needed by the package repo
   # class.
   $default_version = $::osfamily ? {
     /^(RedHat|Linux)/ => $::operatingsystem ? {
       'Fedora' => $::operatingsystemrelease ? {
-        /^(22)$/ => '9.4',
         /^(21)$/ => '9.3',
         /^(18|19|20)$/ => '9.2',
         /^(17)$/ => '9.1',
@@ -73,24 +63,15 @@ class postgresql::globals (
         /^5\./ => '8.1',
         default => undef,
       },
-      default => $::operatingsystemrelease ? {
-        /^7\./ => '9.2',
-        /^6\./ => '8.4',
-        /^5\./ => '8.1',
-        default => undef,
-      },
     },
     'Debian' => $::operatingsystem ? {
       'Debian' => $::operatingsystemrelease ? {
         /^6\./ => '8.4',
         /^(wheezy|7\.)/ => '9.1',
-        /^(jessie|8\.)/ => '9.4',
+        /^(jessie|8\.)/ => '9.3',
         default => undef,
       },
       'Ubuntu' => $::operatingsystemrelease ? {
-        /^(15.10)$/ => '9.4',
-        /^(15.04)$/ => '9.4',
-        /^(14.10)$/ => '9.4',
         /^(14.04)$/ => '9.3',
         /^(11.10|12.04|12.10|13.04|13.10)$/ => '9.1',
         /^(10.04|10.10|11.04)$/ => '8.4',
@@ -103,18 +84,8 @@ class postgresql::globals (
       default => '9.2',
     },
     'FreeBSD' => '93',
-    'OpenBSD' => $::operatingsystemrelease ? {
-      /5\.6/ => '9.3',
-      /5\.[7-9]/ => '9.4',
-    },
     'Suse' => $::operatingsystem ? {
-      'SLES' => $::operatingsystemrelease ? {
-        /11\.[0-4]/ => '91',
-        default => '93',
-      },
-      'OpenSuSE' => $::operatingsystemrelease ? {
-        '13.2' => '93',
-      },
+      'SLES' => '91',
       default => undef,
     },
     default => undef,
@@ -133,20 +104,14 @@ class postgresql::globals (
     '9.2'   => '2.0',
     '9.3'   => '2.1',
     '93'    => '2.1',
-    '9.4'   => '2.1',
-    '9.5'   => '2.2',
     default => undef,
   }
-  $globals_postgis_version = $postgis_version ? {
-    undef   => $default_postgis_version,
-    default => $postgis_version,
-  }
+  $globals_postgis_version = pick($postgis_version, $default_postgis_version)
 
   # Setup of the repo only makes sense globally, so we are doing this here.
   if($manage_package_repo) {
     class { 'postgresql::repo':
-      version => $globals_version,
-      proxy   => $repo_proxy,
+      version => $globals_version
     }
   }
 }

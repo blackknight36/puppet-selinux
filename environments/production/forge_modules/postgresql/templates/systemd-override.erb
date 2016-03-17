@@ -1,8 +1,4 @@
-<%- if scope.lookupvar('::operatingsystem') == 'Fedora' -%>
-.include /lib/systemd/system/<%= @service_name %>.service
-<% else -%>
-.include /usr/lib/systemd/system/<%= @service_name %>.service
-<% end -%>
+.include /lib/systemd/system/postgresql.service
 [Service]
 Environment=PGPORT=<%= @port %>
 Environment=PGDATA=<%= @datadir %>
