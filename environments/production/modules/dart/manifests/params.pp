@@ -26,6 +26,6 @@ class dart::params {
     $bacula_team            = 'john.florian@dart.biz,levi.harper@dart.biz,chris.pugh@dart.biz,ben.minshall@dart.biz,nathan.nephew@dart.biz,elizabeth.scott@dart.biz,kristina.doyle@dart.biz'
 
     # SMTP
-    $smtp_server    = 'smtp.dartcontainer.com'
+    $smtp_server = hiera('smtp_server', 'smtp.dartcontainer.com')
 
 }
