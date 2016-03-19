@@ -31,8 +31,8 @@
 #
 # === Authors
 #
-#   Michael Watters <michael.watters@dart.biz>
 #   John Florian <jflorian@doubledog.org>
+#   Michael Watters <michael.watters@dart.biz>
 #
 # === Copyright
 #
@@ -41,14 +41,14 @@
 
 define openssl::ca_certificate (
         $ensure = 'present',
-        $source = undef, 
+        $source = undef,
         $content = undef,
         ) {
 
     include '::openssl::params'
 
     $cert_path = "/etc/pki/ca-trust/source/anchors/${name}.crt"
-    
+
     file { $cert_path:
         ensure    => $ensure,
         owner     => 'root',
@@ -57,7 +57,7 @@ define openssl::ca_certificate (
         source    => $source,
         content   => $content,
         subscribe => Package[$::openssl::params::packages],
-    } 
+    }
 
     # Establish a link to the traditional location since many other services
     # (e.g., openldap, sssd) expect it there.
@@ -67,14 +67,15 @@ define openssl::ca_certificate (
     }
 
     file { "/etc/pki/tls/certs/${name}.crt":
-        ensure => $link_ensure,
-        target => $cert_path,
+        ensure  => $link_ensure,
+        target  => $cert_path,
         require => File[$cert_path],
     } ~>
-    
-    exec { 'update-ca-trust extract':
+
+    exec { "update-ca-trust ${name}":
+        command     => 'update-ca-trust extract',
         unless      => "stat ${cert_path}",
         refreshonly => true,
     }
-    
+
 }
