@@ -67,6 +67,7 @@ collectd_pass:              'iM3xookae4Pohmie'
 graphite_secret_key:        'gieKeizenah7Ahch0Hae'
 
 puppetdb_server:            'mdct-dev27-puppetdb.dartcontainer.com'
+puppetdb_port:              '8081'
 
 smtp_server:                'smtp.dartcontainer.com'
 
