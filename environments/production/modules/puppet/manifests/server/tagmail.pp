@@ -23,6 +23,7 @@ class puppet::server::tagmail() {
     $tagmail_template = $::operatingsystemrelease ? {
         '21' => 'puppet/tagmail/tagmail.conf.f21.erb',
         '22' => 'puppet/tagmail/tagmail.conf.f22.erb',
+        '23' => 'puppet/tagmail/tagmail.conf.f22.erb',
     }
 
     $puppet_admins = hiera('puppet_admins', 'root')
