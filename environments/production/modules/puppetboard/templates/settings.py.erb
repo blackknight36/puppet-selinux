@@ -49,5 +49,5 @@ PUPPETDB_EXPERIMENTAL = False
 REPORTS_COUNT = <%= @reports_count %>
 <% end -%>
 <% @extra_settings.each_pair do |key, value| -%>
-<%= key %> = <%= value %>
+<%= key %> = '<%= value %>'
 <% end -%>
