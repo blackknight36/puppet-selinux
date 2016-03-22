@@ -69,6 +69,12 @@ node 'mdct-dev27-kstest.dartcontainer.com'      { include 'dart::mdct_dev27' }
 node 'mdct-dev27-graphite.dartcontainer.com'    { include 'dart::mdct_dev27_graphite' }
 node 'mdct-dev27-puppetdb.dartcontainer.com'    { include 'dart::mdct_dev27_puppetdb' }
 node 'mdct-dev27-puppetboard.dartcontainer.com' { include 'dart::mdct_dev27_puppetboard' }
+
+node 'mdct-dev27-puppetmaster.dartcontainer.com'{
+    include 'dart::mdct_puppet_f23'
+    include 'collectd::client'
+}
+
 node 'mdct-dev6-test.dartcontainer.com'         { include 'dart::mdct_dev6_test' }
 node 'mdct-dev6.dartcontainer.com'              { include 'dart::mdct_dev6' }
 node 'mdct-dev9.dartcontainer.com'              { include 'dart::mdct_dev9' }

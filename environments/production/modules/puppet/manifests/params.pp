@@ -50,7 +50,7 @@ class puppet::params {
             ]
 
             ## Server ##
-            if $::fqdn =~ /^mdct-puppet-f(\d+)/ {
+            if $::fqdn =~ /^mdct-puppet-f(\d+)/ or $::fqdn == 'mdct-dev27-puppetmaster.dartcontainer.com' {
                 $is_puppet_master = true
             }
 
