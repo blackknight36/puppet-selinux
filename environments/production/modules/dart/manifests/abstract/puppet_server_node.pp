@@ -27,6 +27,7 @@ class dart::abstract::puppet_server_node inherits ::dart::abstract::guarded_serv
 
     class { '::puppet::server':
         use_passenger => false,
+        use_puppetdb  => false,
         cert_name     => $::fqdn,
     }
 

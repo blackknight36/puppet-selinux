@@ -30,14 +30,20 @@
 #   This must match the 'certname' setting in /etc/puppet/puppet.conf in the
 #   [master] section on the puppet master.
 #
+# [*use_puppetdb*]
+#  If true, the puppet master will use puppetdb to store facts and reports.
+#  The default value is false.
+#
 # === Authors
 #
 #   John Florian <jflorian@doubledog.org>
 #   John Florian <john.florian@dart.biz>
+#   Michael Watters <michael.watters@dart.biz>
 
 
 class puppet::server (
-        $enable=true, $ensure='running', $use_passenger, $cert_name,
+        $enable=true, $ensure='running', $use_passenger, $cert_name, 
+        $use_puppetdb=false
     ) {
 
     include 'puppet::params'
@@ -73,6 +79,21 @@ class puppet::server (
             default => Service[$puppet::params::server_services],
         },
         subscribe   => Package[$puppet::params::server_packages],
+    }
+
+    if $use_puppetdb == true {
+        $puppetdb_server = hiera('puppetdb_server')
+        $puppetdb_port   = hiera('puppetdb_port')
+
+        file { '/etc/puppet/puppetdb.conf':
+            ensure => file,
+            content => template('puppet/puppetdb.conf.erb'),
+        }
+
+        file { '/etc/puppet/routes.yaml':
+            ensure => file,
+            source => 'puppet:///modules/puppet/routes.yaml',
+        }
     }
 
     # Manage everything but the content of these.  Content will be managed
