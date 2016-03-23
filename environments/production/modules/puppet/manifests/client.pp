@@ -59,21 +59,14 @@ class puppet::client ($enable=true, $ensure='running') {
         subscribe   => Package[$puppet::params::client_packages],
     }
 
-    if $::operatingsystem == 'CentOS' {
-        $puppet_conf_file = "${puppet::params::puppet_conf_dir}/puppet/puppet.conf"
-    }
-    else {
-        $puppet_conf_file = "${puppet::params::puppet_conf_dir}/puppet.conf"
-    }
-
     if $puppet::params::is_puppet_master == true {
-        file { $puppet_conf_file:
+        file { "${puppet::params::puppet_conf_dir}/puppet.conf":
             ensure  => file,
             source  => 'puppet:///private-host/puppet/puppet.conf',
         }
     }
     else {
-        file { $puppet_conf_file:
+        file { "${puppet::params::puppet_conf_dir}/puppet.conf":
             ensure  => file,
             content => template("puppet/puppet.conf.${era}.erb"),
         }

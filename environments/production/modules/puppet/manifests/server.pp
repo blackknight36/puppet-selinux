@@ -96,9 +96,14 @@ class puppet::server (
         }
     }
 
+    file { "${puppet::params::puppet_conf_dir}/fileserver.conf":
+        ensure => file,
+        content => template('puppet/fileserver.conf'),
+    }
+
     # Manage everything but the content of these.  Content will be managed
     # directly in git.
-    file { ['/etc/puppet/auth.conf', '/etc/puppet/fileserver.conf']:
+    file { ['/etc/puppet/auth.conf']:
     }
 
     # All other puppet configuration files are managed via GIT 'in place'.  If

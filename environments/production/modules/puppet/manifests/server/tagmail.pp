@@ -15,13 +15,14 @@ class puppet::server::tagmail() inherits puppet::params {
 
 
     if $::operatingsystem == 'CentOS' {
-        $forge_module_path = "${puppet::params::puppet_conf_dir}/code/environments/${::environment}/forge_modules"
+        $forge_module_path = "${puppet::params::puppet_code_dir}/environments/${::environment}/forge_modules"
         $command = "/opt/puppetlabs/bin/puppet module install --environment ${::environment} --modulepath $forge_module_path puppetlabs-tagmail"
         $creates = "${forge_module_path}/tagmail"
     }
     else {
+        $forge_module_path = "${puppet::params::puppet_code_dir}/environments/${::environment}/forge_modules"
         $command = "/usr/bin/puppet module install --environment ${::environment} puppetlabs-tagmail"
-        $creates = "${puppet::params::puppet_conf_dir}/environments/${::environment}/forge_modules/tagmail"
+        $creates = "${forge_module_path}/tagmail"
     }
 
     if versioncmp($::puppetversion, '4.0') >= 0 {

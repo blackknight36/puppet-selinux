@@ -67,6 +67,7 @@ class puppet::params {
             ]
 
             $puppet_conf_dir = '/etc/puppet'
+            $puppet_code_dir = '/etc/puppet'
         }
 
         'CentOS': {
@@ -110,7 +111,8 @@ class puppet::params {
                 'puppetdb',
             ]
 
-            $puppet_conf_dir = '/etc/puppetlabs'
+            $puppet_conf_dir = '/etc/puppetlabs/puppet'
+            $puppet_code_dir = '/etc/puppetlabs/code'
         }
                         
         default: {
