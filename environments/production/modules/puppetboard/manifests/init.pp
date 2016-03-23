@@ -157,7 +157,6 @@ class puppetboard(
   $manage_user         = true,
   $manage_group        = true,
   $manage_virtualenv   = false,
-  $reports_count       = $::puppetboard::params::reports_count,
   $listen              = $::puppetboard::params::listen,
   $extra_settings      = $::puppetboard::params::extra_settings,
 ) inherits ::puppetboard::params {
