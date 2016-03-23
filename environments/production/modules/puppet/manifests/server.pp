@@ -85,12 +85,12 @@ class puppet::server (
         $puppetdb_server = hiera('puppetdb_server')
         $puppetdb_port   = hiera('puppetdb_port')
 
-        file { '/etc/puppet/puppetdb.conf':
+        file { "${puppet::params::puppet_conf_dir}/puppetdb.conf":
             ensure => file,
             content => template('puppet/puppetdb.conf.erb'),
         }
 
-        file { '/etc/puppet/routes.yaml':
+        file { "${puppet::params::puppet_conf_dir}/routes.yaml":
             ensure => file,
             source => 'puppet:///modules/puppet/routes.yaml',
         }

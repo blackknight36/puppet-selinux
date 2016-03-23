@@ -66,9 +66,14 @@ class puppet::params {
                 'puppet-tools',
             ]
 
+            $puppet_conf_dir = '/etc/puppet'
         }
 
         'CentOS': {
+
+            yumrepo {'epel': 
+                exclude => 'puppet*',
+            } ->
 
             package {'puppetlabs-release-pc1':
                 ensure => installed,
@@ -76,10 +81,23 @@ class puppet::params {
                 source => 'https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm',
             } ->
 
-            yumrepo{'puppetlabs-pc1' :
+            yumrepo {'puppetlabs-pc1' :
                 enabled => 1,
             }
               
+            ## Server ##
+            if $::fqdn =~ /^mdct-puppet-f(\d+)/ or $::fqdn == 'mdct-dev27-puppetmaster.dartcontainer.com' {
+                $is_puppet_master = true
+            }
+
+            $server_packages = [
+                'puppetserver',
+            ]
+
+            $server_services = [
+                'puppetserver',
+            ]
+
             $client_packages = [ 'puppet-agent' ]
             $client_services = [ 'puppet' ]
 
@@ -92,6 +110,7 @@ class puppet::params {
                 'puppetdb',
             ]
 
+            $puppet_conf_dir = '/etc/puppetlabs'
         }
                         
         default: {
