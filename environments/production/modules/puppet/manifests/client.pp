@@ -67,17 +67,13 @@ class puppet::client ($enable=true, $ensure='running') {
         }
     }
 
-    if $::operatingsystem == 'CentOS' {
-        file { "${puppet::params::puppet_conf_dir}/puppet.conf":
-            ensure  => file,
-            content => template('puppet/puppet.conf.centos7'),
-        }
-    }
-
     else {
         file { "${puppet::params::puppet_conf_dir}/puppet.conf":
             ensure  => file,
-            content => template("puppet/puppet.conf.${era}.erb"),
+            content => $::operatingsystem ? {
+                'CentOS' => template('puppet/puppet.conf.centos7'),
+                'Fedora' => template("puppet/puppet.conf.${era}.erb"),
+            }
         }
     }
 
