@@ -111,6 +111,11 @@ class puppet::params {
                 'puppetdb',
             ]
 
+            group { 'puppet':
+                ensure => present,
+                gid    => 52,
+            }
+
             $puppet_conf_dir = '/etc/puppetlabs/puppet'
             $puppet_code_dir = '/etc/puppetlabs/code'
         }

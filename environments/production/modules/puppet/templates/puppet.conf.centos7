@@ -1,0 +1,25 @@
+# THIS FILE IS MANAGED BY PUPPET
+
+[agent]
+    # The file in which puppetd stores a list of the classes
+    # associated with the retrieved configuratiion.  Can be loaded in
+    # the separate ``puppet`` executable using the ``--loadclasses``
+    # option.
+    # The default value is '$confdir/classes.txt'.
+    classfile = $vardir/classes.txt
+
+    # Where puppetd caches the local configuration.  An
+    # extension indicating the cache format is added automatically.
+    # The default value is '$confdir/localconfig'.
+    localconfig = $vardir/localconfig
+
+    report = true
+    show_diff = true
+
+    # The default 30m interval causes too many errors on the puppetmaster due
+    # to the embedded http server being single threaded.
+    runinterval = 3600
+
+    # Keep environment consistent
+    environment = <%= @environment %>
+

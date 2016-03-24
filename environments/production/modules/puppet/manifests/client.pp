@@ -20,6 +20,7 @@
 #
 #   John Florian <jflorian@doubledog.org>
 #   John Florian <john.florian@dart.biz>
+#   Michael Watters <michael.watters@dart.biz>
 
 
 class puppet::client ($enable=true, $ensure='running') {
@@ -65,6 +66,14 @@ class puppet::client ($enable=true, $ensure='running') {
             source  => 'puppet:///private-host/puppet/puppet.conf',
         }
     }
+
+    if $::operatingsystem == 'CentOS' {
+        file { "${puppet::params::puppet_conf_dir}/puppet.conf":
+            ensure  => file,
+            content => template('puppet/puppet.conf.centos7'),
+        }
+    }
+
     else {
         file { "${puppet::params::puppet_conf_dir}/puppet.conf":
             ensure  => file,
