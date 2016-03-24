@@ -17,13 +17,10 @@ class dart::abstract::packages::developer {
         'gitk',
         'gnupg',                # required for rpmbuild --sign
         'gnupg2',               # required for rpmbuild --sign
-        'kodos',
         'meld',
         'nasm',
         'python-devel',
         'python-tools',
-        'python3-devel',
-        'python3-tools',
         'redhat-rpm-config',
         'rpmdevtools',
         'ruby-devel',
@@ -39,6 +36,14 @@ class dart::abstract::packages::developer {
     ### Select Package Inclusion ###
 
     if $::operatingsystem == 'Fedora' {
+
+        package { [
+            'kodos',
+            'python3-devel',
+            'python3-tools',
+            ]:
+            ensure => installed,
+        }
 
         if  $::operatingsystemrelease == 'Rawhide' or
             $::operatingsystemrelease >= '12'
