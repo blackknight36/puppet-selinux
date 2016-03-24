@@ -21,20 +21,29 @@ class dart::abstract::puppet_server_node inherits ::dart::abstract::guarded_serv
     include '::dart::abstract::packages::developer'
     include '::dart::subsys::autofs::common'
 
-    class { '::hiera':
-        source => 'puppet:///modules/dart/hiera/hiera.yaml',
+    if $::operatingsystem == 'Fedora' {
+        class { '::hiera':
+            source => 'puppet:///modules/dart/hiera/hiera.yaml',
+        }
+
+        $use_puppetdb = false
+
+        class { '::puppet::tools':
+            conf_content => 'dart/puppet/tools/puppet-tools.conf.erb',
+            cron_source  => 'puppet:///modules/dart/puppet/tools/puppet-tools.cron',
+            lint_source  => 'puppet:///modules/dart/puppet/tools/puppet-lint.rc',
+        }
+
     }
 
-    class { '::puppet::server':
+    if $::operatingsystem == 'CentOS' {
+        $use_puppetdb = true
+    }
+
+    class { 'puppet::server':
+        use_puppetdb  => $use_puppetdb,
         use_passenger => false,
-        use_puppetdb  => false,
         cert_name     => $::fqdn,
-    }
-
-    class { '::puppet::tools':
-        conf_content => 'dart/puppet/tools/puppet-tools.conf.erb',
-        cron_source  => 'puppet:///modules/dart/puppet/tools/puppet-tools.cron',
-        lint_source  => 'puppet:///modules/dart/puppet/tools/puppet-lint.rc',
     }
 
     include '::dart::subsys::yum_cron'
