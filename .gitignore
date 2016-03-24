@@ -18,6 +18,8 @@
 /tagmail.conf
 /puppetdb.conf
 /routes.yaml
+/fileserver.conf
+/auth.conf
 
 # This directory is created by puppet on servers running Puppet 4
 /environments/*/forge_modules/tagmail/
