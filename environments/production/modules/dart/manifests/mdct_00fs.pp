@@ -122,6 +122,11 @@ class dart::mdct_00fs (
             cron_source => "${mirrmaid_sources}/mirrmaid-yum-fanout.cron",
             ;
 
+        'mirrmaid-mayflower-fanout':
+            source      => "${mirrmaid_sources}/mirrmaid-mayflower-fanout.conf",
+            cron_source => "${mirrmaid_sources}/mirrmaid-mayflower-fanout.cron",
+            ;
+
     }
 
     include '::picaps::backup_agent'
