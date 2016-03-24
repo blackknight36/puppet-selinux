@@ -7,7 +7,7 @@
 class autofs::params {
 
     case $::operatingsystem {
-        'Fedora': {
+        'Fedora', 'CentOS': {
 
             $packages = [
                 'autofs',
