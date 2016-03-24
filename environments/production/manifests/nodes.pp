@@ -73,7 +73,6 @@ node 'mdct-dev27-puppetboard.dartcontainer.com' { include 'dart::mdct_dev27_pupp
 
 node 'mdct-dev27-puppetmaster.dartcontainer.com' {
     include 'dart::mdct_puppet_f23'
-    include 'puppet::client'
     include 'collectd::client'
 }
 

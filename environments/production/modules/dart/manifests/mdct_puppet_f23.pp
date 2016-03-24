@@ -6,13 +6,7 @@
 # Contact:
 #       Michael Watters
 
-class dart::mdct_puppet_f23 {
-
-    class { 'puppet::server' :
-        use_passenger => false,
-        use_puppetdb  => true,
-        cert_name     => $::fqdn,
-    }
+class dart::mdct_puppet_f23 inherits dart::abstract::puppet_server_node {
 
     include 'puppet::server::tagmail'
 
