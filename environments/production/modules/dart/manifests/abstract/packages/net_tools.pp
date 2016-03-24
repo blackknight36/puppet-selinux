@@ -35,8 +35,6 @@ class dart::abstract::packages::net_tools {
         }
     }
 
-    # none
-
     ### Universal Package Exclusion ###
 
     package { [
@@ -49,4 +47,8 @@ class dart::abstract::packages::net_tools {
 
     # none
 
+    file { '/etc/enmasse/enmasse.conf':
+        ensure => file,
+        source => 'puppet:///modules/dart/net_tools/enmasse.conf',
+    }
 }
