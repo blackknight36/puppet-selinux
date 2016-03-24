@@ -101,9 +101,11 @@ class puppet::server (
         content => template('puppet/fileserver.conf'),
     }
 
-    # Manage everything but the content of these.  Content will be managed
-    # directly in git.
-    file { ['/etc/puppet/auth.conf']:
+    if $::operatingsystem == 'Fedora' {
+        file { "${puppet::params::puppet_conf_dir}/auth.conf":
+            ensure => file,
+            source => 'puppet:///modules/puppet/auth.conf',
+        }
     }
 
     # All other puppet configuration files are managed via GIT 'in place'.  If
