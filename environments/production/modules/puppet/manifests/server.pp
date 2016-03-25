@@ -40,6 +40,26 @@ class puppet::server ($enable=true, $ensure='running', $cert_name, $use_puppetdb
         notify => Service[$puppet::params::server_services],
     }
 
+    if $::operatingsystem == 'CentOS' {
+        package { 'r10k':
+            ensure   => installed,
+            provider => gem,
+        } ->
+
+        file { '/etc/puppetlabs/r10k':
+            ensure => directory,
+            owner  => root,
+            group  => puppet,
+        } ->
+
+       file { '/etc/puppetlabs/r10k/r10k.yaml':
+           ensure => file,
+           owner  => root,
+           group  => puppet,
+           source => 'puppet:///modules/puppet/r10k.yaml',
+       }
+    }
+
     File {
         # Fedora installs puppet files mostly with group => 'root' and mode =>
         # '0644', but the following is more secure by preventing world
