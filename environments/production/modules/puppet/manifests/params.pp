@@ -72,27 +72,33 @@ class puppet::params {
 
         'CentOS': {
 
-            yumrepo {'epel': 
-                exclude => 'puppet*',
-            } ->
-
             package {'puppetlabs-release-pc1':
-                ensure => installed,
+                ensure   => installed,
                 provider => 'rpm',
-                source => 'https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm',
+                source   => 'https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm',
             } ->
 
-            yumrepo {'puppetlabs-pc1' :
+            yumrepo {'puppetlabs-pc1':
                 enabled => 1,
             }
               
+            package {'epel-release':
+                ensure => installed,
+            } ->
+
+            yumrepo {'epel':
+                exclude => 'puppet*',
+                require => Package['epel-release'],
+            }
+
             ## Server ##
-            if $::fqdn =~ /^mdct-puppet-f(\d+)/ or $::fqdn == 'mdct-dev27-puppetmaster.dartcontainer.com' {
+            if $::fqdn =~ /^mdct-puppet-f(\d+)/ or $::fqdn == 'mdct-puppetmaster.dartcontainer.com' {
                 $is_puppet_master = true
             }
 
             $server_packages = [
                 'puppetserver',
+                'puppetdb-termini',
             ]
 
             $server_services = [
@@ -121,7 +127,7 @@ class puppet::params {
         }
                         
         default: {
-            fail ("${module_name} is not supported on $::operatingsystem.")
+            fail ("${module_name} is not supported on ${::operatingsystem}.")
         }
 
     }
