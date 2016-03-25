@@ -15,7 +15,6 @@ class dart::abstract::packages::developer {
         'gcc-c++',
         'git',
         'gitk',
-        'gnupg',                # required for rpmbuild --sign
         'gnupg2',               # required for rpmbuild --sign
         'meld',
         'nasm',
@@ -38,6 +37,7 @@ class dart::abstract::packages::developer {
     if $::operatingsystem == 'Fedora' {
 
         package { [
+            'gnupg',                # required for rpmbuild --sign
             'kodos',
             'python3-devel',
             'python3-tools',
