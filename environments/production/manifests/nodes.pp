@@ -71,7 +71,7 @@ node 'mdct-dev27-graphite.dartcontainer.com'    { include 'dart::mdct_dev27_grap
 node 'mdct-dev27-puppetdb.dartcontainer.com'    { include 'dart::mdct_dev27_puppetdb' }
 node 'mdct-dev27-puppetboard.dartcontainer.com' { include 'dart::mdct_dev27_puppetboard' }
 
-node 'mdct-dev27-puppetmaster.dartcontainer.com' {
+node 'mdct-dev27-puppetmaster.dartcontainer.com', 'mdct-puppetmaster.dartcontainer.com' {
     include 'dart::mdct_puppet_f23'
     include 'collectd::client'
 }
