@@ -41,9 +41,8 @@ class dart::abstract::puppet_server_node inherits ::dart::abstract::guarded_serv
     }
 
     class { 'puppet::server':
-        use_puppetdb  => $use_puppetdb,
-        use_passenger => false,
-        cert_name     => $::fqdn,
+        use_puppetdb => $use_puppetdb,
+        cert_name    => $::fqdn,
     }
 
     include '::dart::subsys::yum_cron'
