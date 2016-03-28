@@ -8,6 +8,7 @@
 #
 #   John Florian <jflorian@doubledog.org>
 #   John Florian <john.florian@dart.biz>
+#   Michael Watters <michael.watters@dart.biz>
 
 
 class puppet::params {
@@ -72,6 +73,8 @@ class puppet::params {
 
         'CentOS': {
 
+            $basearch = $::architecture
+
             package {'puppetlabs-release-pc1':
                 ensure   => installed,
                 provider => 'rpm',
@@ -86,9 +89,16 @@ class puppet::params {
                 ensure => installed,
             } ->
 
+            # Due to https://tickets.puppetlabs.com/browse/PUP-723 we must specify all repo attributes to avoid
+            # having the repo file truncated
             yumrepo {'epel':
-                exclude => 'puppet*',
-                require => Package['epel-release'],
+                descr          => "Extra Packages for Enterprise Linux 7 - ${basearch}",
+                mirrorlist     => "https://mirrors.fedoraproject.org/metalink?repo=epel-7&arch=${basearch}",
+                failovermethod => 'priority',
+                enabled        => '1',
+                gpgcheck       => '1',
+                gpgkey         => 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7',
+                exclude        => 'puppet*',
             }
 
             ## Server ##
