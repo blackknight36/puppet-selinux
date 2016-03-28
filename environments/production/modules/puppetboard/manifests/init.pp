@@ -234,7 +234,7 @@ class puppetboard(
     owner   => $user,
     group   => $user,
     mode    => '0444',
-    source  => "/var/lib/puppet/ssl/certs/${::fqdn}.pem",
+    source  => "${puppet::params::puppet_conf_dir}/ssl/certs/${::fqdn}.pem",
     require => File["${basedir}/ssl/certs"],
   }
   
@@ -243,7 +243,7 @@ class puppetboard(
     owner   => $user,
     group   => $user,
     mode    => '0400',
-    source  => "/var/lib/puppet/ssl/private_keys/${::fqdn}.pem",
+    source  => "${puppet::params::puppet_conf_dir}/ssl/private_keys/${::fqdn}.pem",
     require => File["${basedir}/ssl/private_keys"],
   }
   
@@ -272,6 +272,14 @@ class puppetboard(
     require => Vcsrepo["${basedir}/puppetboard"],
   }
 
+  file {"${basedir}/puppetboard/wsgi.py":
+    ensure  => 'file',
+    group   => $group,
+    mode    => '0755',
+    owner   => $user,
+    content => template('puppetboard/wsgi.py.erb'),
+    notify  => Service[$puppetboard::params::apache_service],
+  }
   
   if $listen == 'public' {
     file_line { 'puppetboard listen':
