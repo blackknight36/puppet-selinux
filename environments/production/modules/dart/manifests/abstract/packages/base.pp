@@ -8,13 +8,10 @@ class dart::abstract::packages::base {
 
         'bash-completion',
         'expect',
-        'fuse-sshfs',
-        'gparted',
         'gpm',
         'iotop',
         'lsof',
         'mlocate',
-        'multitail',
         'openssh-clients',
         'pciutils',
         'psmisc',
@@ -39,8 +36,13 @@ class dart::abstract::packages::base {
     if $::operatingsystem == 'Fedora' {
 
         # apt package is only available in Fedora
-        package { 'apt':
-            ensure => latest,
+        package { [
+            'apt',
+            'fuse-sshfs',
+            'gparted',
+            'multitail',
+        ]:
+        ensure => latest,
         }
 
         if  $::operatingsystemrelease == 'Rawhide' or
