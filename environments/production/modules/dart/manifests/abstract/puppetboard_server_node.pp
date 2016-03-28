@@ -17,18 +17,17 @@
 
 class dart::abstract::puppetboard_server_node {
 
-    include '::dart::abstract::guarded_server_node'
+    include 'apache::mod_wsgi'
+    include 'dart::abstract::guarded_server_node'
     include 'openssl::ca_certificate::puppet_ca'
+
+    package { 'python-pip':
+        ensure => installed,
+    }
 
     class {'apache':
         network_connect => true,
         server_admin    => 'michael.watters@dart.biz',
-    } ->
-
-    class {'puppetboard':
-        puppetdb_host => hiera('puppetdb_server'),
-        puppetdb_port => hiera('puppetdb_port'),
-        puppetdb_ssl_verify => '/etc/pki/tls/certs/puppet_ca.crt',
     }
 
     $user = $::puppetboard::params::user
@@ -40,6 +39,13 @@ class dart::abstract::puppetboard_server_node {
 
     ::apache::site_config{'puppetboard':
         content => template('puppetboard/apache/conf.erb'),
+    }
+
+    class {'puppetboard':
+        puppetdb_host => hiera('puppetdb_server'),
+        puppetdb_port => hiera('puppetdb_port'),
+        puppetdb_ssl_verify => '/etc/pki/tls/certs/puppet_ca.crt',
+        manage_user => true,
     }
 
     ::sendmail::alias { 'puppetboard':
