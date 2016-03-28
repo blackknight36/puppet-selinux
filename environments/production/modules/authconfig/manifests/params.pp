@@ -39,9 +39,8 @@ class authconfig::params {
 		}
 
         'CentOS': {
-			
-			$sssd_conf    = 'sssd.conf.centos-7'
-			$sssd_seltype = 'sssd_conf_t'
+	    $sssd_conf    = 'sssd.conf.centos-7'
+	    $sssd_seltype = 'sssd_conf_t'
         }
 
         default: {
