@@ -68,8 +68,14 @@ node 'mdct-dev27.dartcontainer.com'             { include 'dart::mdct_dev27' }
 node 'mdct-dev28.dartcontainer.com'             { include 'dart::mdct_dev28' }
 node 'mdct-dev27-kstest.dartcontainer.com'      { include 'dart::mdct_dev27' }
 node 'mdct-dev27-graphite.dartcontainer.com'    { include 'dart::mdct_dev27_graphite' }
-node 'mdct-dev27-puppetdb.dartcontainer.com'    { include 'dart::mdct_dev27_puppetdb' }
-node 'mdct-dev27-puppetboard.dartcontainer.com' { include 'dart::mdct_dev27_puppetboard' }
+
+node 'mdct-dev27-puppetdb.dartcontainer.com', 'mdct-puppetdb.dartcontainer.com' {
+    include 'dart::mdct_dev27_puppetdb'
+}
+
+node 'mdct-dev27-puppetboard.dartcontainer.com', 'mdct-puppetboard.dartcontainer.com' {
+    include 'dart::mdct_dev27_puppetboard'
+}
 
 node 'mdct-dev27-puppetmaster.dartcontainer.com', 'mdct-puppetmaster.dartcontainer.com' {
     include 'dart::mdct_puppet_f23'
