@@ -7,13 +7,14 @@
 # === Authors
 #
 #   John Florian <jflorian@doubledog.org>
+#   Michael Watters <michael.watters@dart.biz>
 
 
 class apache::params {
 
     case $::operatingsystem {
 
-        'Fedora': {
+        'CentOS', 'Fedora': {
 
             $packages = [
                 'httpd',
