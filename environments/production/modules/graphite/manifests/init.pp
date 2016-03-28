@@ -11,12 +11,12 @@
 
 class graphite() {
     
+    include 'graphite::params'
+
     class {'apache':
         network_connect => true,
         server_admin    => 'michael.watters@dart.biz',
     }
-
-    include 'graphite::params'
 
     iptables::tcp_port { 'carbon-cache':
         port => '2003';
@@ -41,7 +41,13 @@ class graphite() {
     }
 
     exec { $::graphite::params::db_sync_cmd:
-        creates => '/var/lib/graphite-web/index',
+        creates     => '/var/lib/graphite-web/graphite.db',
+        refreshonly => true,
+    } ->
+
+    file { '/var/lib/graphite-web/graphite.db':
+        owner => apache,
+        group => apache,
     }
 
     $graphite_secret_key = $::graphite::params::graphite_secret_key
@@ -65,5 +71,5 @@ class graphite() {
         ensure => running,
         enable => true,
     }
-    
+
 }
