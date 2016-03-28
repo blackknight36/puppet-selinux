@@ -155,6 +155,11 @@ class dart::subsys::dns::no_dns_hosts {
         host_aliases => [ 'mdct-tc-f20' ],
     }
 
+    host { 'mdct-graphite.dartcontainer.com':
+        ip           => '10.201.64.17',
+        host_aliases => [ 'mdct-graphite' ],
+    }
+
     #}}}
 
 }
