@@ -11,7 +11,7 @@
 class openssl::ca_certificate::puppet_ca() {
 
     openssl::ca_certificate { 'puppet_ca':
-        source => "${puppet::params::puppet_conf_dir}/ssl/certs/ca.pem",
+        source => "${puppet::params::puppet_ssl_dir}/certs/ca.pem",
     }
 
 }

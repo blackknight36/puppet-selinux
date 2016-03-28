@@ -234,7 +234,7 @@ class puppetboard(
     owner   => $user,
     group   => $user,
     mode    => '0444',
-    source  => "${puppet::params::puppet_conf_dir}/ssl/certs/${::fqdn}.pem",
+    source  => "${puppet::params::puppet_ssl_dir}/certs/${::fqdn}.pem",
     require => File["${basedir}/ssl/certs"],
   }
   
@@ -243,7 +243,7 @@ class puppetboard(
     owner   => $user,
     group   => $user,
     mode    => '0400',
-    source  => "${puppet::params::puppet_conf_dir}/ssl/private_keys/${::fqdn}.pem",
+    source  => "${puppet::params::puppet_ssl_dir}/private_keys/${::fqdn}.pem",
     require => File["${basedir}/ssl/private_keys"],
   }
   
