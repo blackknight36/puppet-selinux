@@ -60,7 +60,7 @@ yum::http_caching:          packages
 puppet_admins:              'john.florian@dart.biz, chris.kennedy@dart.biz, collin.baker@dart.biz, levi.harper@dart.biz, michael.watters@dart.biz'
 tcutil_admins:              'forrest.styx@dart.biz'
 
-collectd_server:            'mdct-dev27-graphite.dartcontainer.com'
+collectd_server:            'mdct-graphite.dartcontainer.com'
 collectd_user:              'user0'
 collectd_pass:              'iM3xookae4Pohmie'
 
