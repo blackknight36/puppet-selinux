@@ -6,16 +6,12 @@
 #
 # === Parameters
 #
-# [*manage_firewall*]
-#   If true, open the HTTPS port on the firewall.  Otherwise the firewall is
-#   left unaffected.  Defaults to true.
-#
 # === Authors
 #
 #   Michael Watters <michael.watters@dart.biz>
 
 
-class apache::mod_wsgi {
+class apache::mod_wsgi inherits apache::params {
 
     package { $apache::params::modwsgi_packages:
         ensure => installed,
