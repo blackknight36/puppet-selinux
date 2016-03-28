@@ -155,6 +155,15 @@ class dart::subsys::dns::no_dns_hosts {
         host_aliases => [ 'mdct-tc-f20' ],
     }
 
+    host { 'puppet':
+        ensure => absent,
+    }
+
+    host { 'mdct-puppetmaster.dartcontainer.com':
+        ip           => '10.201.64.50',
+        host_aliases => [ 'puppet.dartcontainer.com', 'puppet' ],
+    }
+
     host { 'mdct-graphite.dartcontainer.com':
         ip           => '10.201.64.17',
         host_aliases => [ 'mdct-graphite' ],
