@@ -20,6 +20,7 @@ class dart::abstract::puppetboard_server_node {
     include 'apache::mod_wsgi'
     include 'dart::abstract::guarded_server_node'
     include 'openssl::ca_certificate::puppet_ca'
+    include 'puppetboard::params'
 
     package { 'python-pip':
         ensure => installed,
