@@ -69,6 +69,7 @@ class puppet::params {
 
             $puppet_conf_dir = '/etc/puppet'
             $puppet_code_dir = '/etc/puppet'
+            $puppet_ssl_dir  = '/var/lib/puppet/ssl'
         }
 
         'CentOS': {
@@ -134,6 +135,7 @@ class puppet::params {
 
             $puppet_conf_dir = '/etc/puppetlabs/puppet'
             $puppet_code_dir = '/etc/puppetlabs/code'
+            $puppet_ssl_dir  = "${puppet_conf_dir}/ssl"
         }
                         
         default: {
