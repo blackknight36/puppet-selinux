@@ -28,10 +28,10 @@ class puppet::database {
         exclude => 'postgresql*',
     }
 
-    yum::repo {'pgdg-centos':
-        server_uri  => 'https://download.postgresql.org/pub/repos/yum/9.4/redhat/rhel-7-x86_64/',
-        pkg_name    => 'pgdg-centos94',
-        pkg_release => '9.4-2',
+    package {'pgdg-centos94':
+        ensure   => installed,
+        provider => 'rpm',
+        source   => 'https://download.postgresql.org/pub/repos/yum/9.4/redhat/rhel-7-x86_64/pgdg-centos94-9.4-2.noarch.rpm',
     }
 
     include 'puppet::params'
