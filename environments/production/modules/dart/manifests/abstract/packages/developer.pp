@@ -37,7 +37,6 @@ class dart::abstract::packages::developer {
     if $::operatingsystem == 'Fedora' {
 
         package { [
-            'gnupg',                # required for rpmbuild --sign
             'kodos',
             'python3-devel',
             'python3-tools',
