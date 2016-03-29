@@ -207,6 +207,7 @@ class puppetboard(
   file { "${basedir}/puppetboard":
     owner   => $user,
     group   => $group,
+    seltype => 'httpd_sys_content_t',
     recurse => true,
   }
 
@@ -214,6 +215,7 @@ class puppetboard(
     ensure  => directory,
     owner   => $user,
     group   => $group,
+    seltype => 'httpd_config_t',
     recurse => true,
   } ->
 
