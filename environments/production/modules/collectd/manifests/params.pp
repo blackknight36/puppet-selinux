@@ -3,7 +3,7 @@ class collectd::params {
     case $::operatingsystem {
         'Fedora', 'CentOS': {
 
-            if $::operatingsystem == 'Fedora' and $::operatingsystemrelease < '21' {
+            if $::operatingsystem == 'Fedora' and $::operatingsystemrelease < '20' {
                 notify{'oldfedora':
                     message => "The ${module_name} module is not supported on Fedora < 21.  Please upgrade your operating system.",
                 }
