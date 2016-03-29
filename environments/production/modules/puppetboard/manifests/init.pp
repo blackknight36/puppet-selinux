@@ -158,6 +158,7 @@ class puppetboard(
   $manage_group        = true,
   $manage_virtualenv   = false,
   $listen              = $::puppetboard::params::listen,
+  $graph_facts         = $::puppetboard::params::graph_facts,
   $extra_settings      = $::puppetboard::params::extra_settings,
 ) inherits ::puppetboard::params {
   validate_bool($enable_query)
@@ -223,12 +224,14 @@ class puppetboard(
     ensure => directory,
     owner  => $user,
     group  => $group,
+    seltype => 'httpd_config_t',
   }
 
   file { "${basedir}/ssl/private_keys":
     ensure => directory,
     owner  => $user,
     group  => $group,
+    seltype => 'httpd_config_t',
   }
 
   file { "${basedir}/ssl/certs/${::fqdn}.pem":
@@ -236,6 +239,7 @@ class puppetboard(
     owner   => $user,
     group   => $user,
     mode    => '0444',
+    seltype => 'httpd_config_t',
     source  => "${puppet::params::puppet_ssl_dir}/certs/${::fqdn}.pem",
     require => File["${basedir}/ssl/certs"],
   }
@@ -245,6 +249,7 @@ class puppetboard(
     owner   => $user,
     group   => $user,
     mode    => '0400',
+    seltype => 'httpd_config_t',
     source  => "${puppet::params::puppet_ssl_dir}/private_keys/${::fqdn}.pem",
     require => File["${basedir}/ssl/private_keys"],
   }
@@ -263,6 +268,7 @@ class puppetboard(
   #$puppetdb_ssl_verify
   #$puppetdb_timeout
   #$unresponsive
+  #$graph_facts
   #$extra_settings
 
   file {"${basedir}/puppetboard/settings.py":
@@ -270,6 +276,7 @@ class puppetboard(
     group   => $group,
     mode    => '0644',
     owner   => $user,
+    seltype => 'httpd_sys_content_t',
     content => template('puppetboard/settings.py.erb'),
     require => Vcsrepo["${basedir}/puppetboard"],
   }
@@ -279,6 +286,7 @@ class puppetboard(
     group   => $group,
     mode    => '0755',
     owner   => $user,
+    seltype => 'httpd_sys_content_t',
     content => template('puppetboard/wsgi.py.erb'),
     notify  => Service[$puppetboard::params::apache_service],
   }

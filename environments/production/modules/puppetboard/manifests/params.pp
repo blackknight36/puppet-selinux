@@ -46,7 +46,8 @@ class puppetboard::params {
   $wsgi_threads = '5'
   $wsgi_max_reqs = '0'
   $docroot = "${basedir}/puppetboard"
-  $extra_settings = { 'GRAPH_FACTS' => "operatingsystem, rubyversion", }
+  $graph_facts = "'operatingsystem', 'operatingsystemrelease', 'rubyversion', 'kernelversion'"
+  $extra_settings = {}
 
   $pip_packages = [
     'Flask',
