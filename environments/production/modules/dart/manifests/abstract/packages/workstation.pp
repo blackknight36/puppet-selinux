@@ -15,6 +15,7 @@ class dart::abstract::packages::workstation {
         'firefox',
         'freerdp',
         'galculator',
+        'okular',
         'pavucontrol',
         'plant-launchers',
         'putty',
