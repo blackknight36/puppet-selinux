@@ -160,6 +160,14 @@ class dart::subsys::dns::no_dns_hosts {
         host_aliases => [ 'mdct-graphite' ],
     }
 
+    if $::operatingsystem == 'Fedora' and $::operatingsystemrelease >= '20' {
+
+        host { 'puppet.dartcontainer.com':
+            ip           => '10.201.64.50',
+            host_aliases => [ 'puppet' ],
+        }
+    }
+
     #}}}
 
 }
