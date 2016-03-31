@@ -10,7 +10,7 @@ class dart::subsys::yum_cron {
         $yum_cron_conf = 'yum-cron.conf.Fedora19+'
     }
     class { 'yum::cron':
-        conf_source => "puppet:///private-domain/yum/${yum_cron_conf}",
+        conf_source => "puppet:///modules/dart/yum/${yum_cron_conf}",
     }
 
 }
