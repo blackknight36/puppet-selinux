@@ -1,9 +1,0 @@
-# hiera/node/mdct-dev24.dartcontainer.com.yaml
-#
-# Synopsis:
-#       These settings are specific to mdct-dev24.
-
-
----
-
-yum::proxy:                 "http://%{hiera('http_proxy')}:8080"

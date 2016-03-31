@@ -1,9 +1,0 @@
-#!/bin/sh
-
-# Maintain a separate copy of the Bacula conf files in case it is the Bacula
-# server itself that needs to be restored.  Having a separate copy makes
-# reinstalling Bacula easy as a minimal OS install plus Bacula plus these
-# configuration files.  It may be easier to try a Bacula bootable CD though.
-
-umask 0077
-tar czf /Pound/History/Backups/bacula/bacula_conf_files.tgz -C/ etc/bacula/

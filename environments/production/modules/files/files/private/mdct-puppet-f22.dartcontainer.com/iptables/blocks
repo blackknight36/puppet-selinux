@@ -1,1 +1,0 @@
--A INPUT -m state --state NEW -m tcp -p tcp --source 10.1.192.109 -j DROP

@@ -1,4 +1,0 @@
-#!/bin/sh
-# Origin: files/private/mdct-dev12.dartcontainer.com/kscreenlocker_greet
-
-/usr/bin/xscreensaver-command -lock
