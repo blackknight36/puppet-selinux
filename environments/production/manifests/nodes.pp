@@ -128,6 +128,5 @@ node /^mdct-[0-9]{2,4}pt.dartcontainer.com$/        { include 'dart::abstract::p
 node /^mdct-\d+ut\.dartcontainer\.com$/             { include 'dart::mdct_ut' }
 node /^mdct-dev10-.*\.dartcontainer\.com$/          { include 'dart::mdct_dev10_srvr' }
 node /^mdct-ovirt-node-.*\.dartcontainer\.com$/     { include 'dart::mdct_ovirt_node' }
-node /^mdct-puppet.*\.dartcontainer\.com$/          { include 'dart::mdct_puppet' }
 node /^mdct-teamcity-agent.*\.dartcontainer.com$/   { include 'dart::mdct_teamcity_agent' }
 node /^appdev-cats.*\.dartcontainer\.com$/          { include 'dart::appdev_cats' }
