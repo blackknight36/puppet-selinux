@@ -10,8 +10,9 @@ mod "puppetlabs-postgresql",  :latest
 mod "puppetlabs-sqlite",      :latest
 mod "puppetlabs-stdlib",      :latest
 mod "puppetlabs-vcsrepo",     :latest
-mod "ringingliberty-chrony",  :latest
 mod "mosen-cups",             :latest
+mod "nanliu-staging",         :latest
+mod "ringingliberty-chrony",  :latest
 mod "yo61-logrotate",         :latest
 
 #An example of using a specific forge module version instead of latest
