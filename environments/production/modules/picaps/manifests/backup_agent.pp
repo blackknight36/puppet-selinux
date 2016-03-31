@@ -30,12 +30,12 @@ class picaps::backup_agent {
     }
 
     file { '/etc/picaps-backup-agent.conf':
-        source  => 'puppet:///private-host/picaps/picaps-backup-agent.conf',
+        source  => "puppet:///modules/files/private/${fqdn}/picaps/picaps-backup-agent.conf",
     }
 
     cron::jobfile { 'picaps-backup-agent':
         require => Package[$picaps::params::backup_packages],
-        source  => 'puppet:///private-host/picaps/picaps-backup-agent.cron',
+        source  => "puppet:///modules/files/private/${fqdn}/picaps/picaps-backup-agent.cron",
     }
 
 }

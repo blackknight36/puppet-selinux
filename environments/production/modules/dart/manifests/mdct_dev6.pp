@@ -26,7 +26,7 @@ class dart::mdct_dev6 inherits dart::abstract::workstation_node {
     }
 
 #   class { 'xorg_server':
-#       config  => 'puppet:///private-host/etc/X11/xorg.conf',
+#       config  => "puppet:///modules/files/private/${fqdn}/etc/X11/xorg.conf",
 #       drivers => ['kmod-nvidia'],
 #   }
 
@@ -37,7 +37,7 @@ class dart::mdct_dev6 inherits dart::abstract::workstation_node {
 #    include 'mysql_server'
     include 'dart::abstract::idea'
 
-    $SUFFIX=".orig-${::operatingsystem}${::operatingsystemrelease}"
+    $suffix=".orig-${::operatingsystem}${::operatingsystemrelease}"
 
     autofs::map_entry { '/mnt/storage':
         mount   => '/mnt',
@@ -144,7 +144,7 @@ class dart::mdct_dev6 inherits dart::abstract::workstation_node {
 
     dart::util::replace_original_with_symlink_to_alternate { '/etc/libvirt':
         alternate => '/mnt/storage/etc/libvirt',
-        backup    => "/etc/libvirt${SUFFIX}",
+        backup    => "/etc/libvirt${suffix}",
         original  => '/etc/libvirt',
         # TODO: libvirt needs to be a formal service and treated here like
         # mysql WRT before/require attrs
@@ -154,7 +154,7 @@ class dart::mdct_dev6 inherits dart::abstract::workstation_node {
 
     dart::util::replace_original_with_symlink_to_alternate { '/var/lib/libvirt':
         alternate => '/mnt/storage/var/lib/libvirt',
-        backup    => "/var/lib/libvirt${SUFFIX}",
+        backup    => "/var/lib/libvirt${suffix}",
         original  => '/var/lib/libvirt',
         # TODO: libvirt needs to be a formal service and treated here like
         # mysql WRT before/require attrs
@@ -164,7 +164,7 @@ class dart::mdct_dev6 inherits dart::abstract::workstation_node {
 
 #    dart::util::replace_original_with_symlink_to_alternate { '/var/lib/mysql':
 #        alternate   => '/mnt/storage/var/lib/mysql',
-#        backup      => "/var/lib/mysql${SUFFIX}",
+#        backup      => "/var/lib/mysql${suffix}",
 #        original    => '/var/lib/mysql',
 #        before      => Service['mysqld'],
 #        require     => Package['mysql-server'],

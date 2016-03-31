@@ -28,7 +28,7 @@
 #
 #       vnc::display_config { 'acme':
 #           notify  => Service['SERVICE_NAME'],
-#           source  => 'puppet:///private-host/acme.conf',
+#           source  => "puppet:///modules/files/private/${fqdn}/acme.conf",
 #       }
 
 

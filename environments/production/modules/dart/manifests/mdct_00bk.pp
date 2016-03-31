@@ -37,7 +37,7 @@ class dart::mdct_00bk inherits dart::abstract::guarded_server_node {
     include 'iscsi::initiator'
 
 #    class { 'postgresql::server':
-#        hba_conf    => 'puppet:///private-host/postgresql/pg_hba.conf',
+#        hba_conf    => "puppet:///modules/files/private/${fqdn}/postgresql/pg_hba.conf",
 #    }
 
     class { 'jaf_bacula::client':
@@ -65,7 +65,7 @@ class dart::mdct_00bk inherits dart::abstract::guarded_server_node {
 
     class { 'jaf_bacula::director':
         dir_conf      => template('dart/bacula/director.conf'),
-        pgpass_source => 'puppet:///private-host/.pgpass',
+        pgpass_source => "puppet:///modules/files/private/${fqdn}/.pgpass",
 #        require         => Class['postgresql::server'],
     }
 

@@ -35,8 +35,8 @@ class systemd {
 
         file { '/etc/systemd/journald.conf':
             source  => [
-                'puppet:///private-host/systemd/journald.conf',
-                'puppet:///private-domain/systemd/journald.conf',
+                "puppet:///modules/files/private/${fqdn}/systemd/journald.conf",
+                "puppet:///modules/files/private/${domain}/systemd/journald.conf",
                 'puppet:///modules/systemd/journald.conf',
             ],
         }

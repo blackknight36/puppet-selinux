@@ -7,7 +7,7 @@ class mariadb_server_pref18 {
         mode    => 644,
         owner   => "root",
         source  => [
-            'puppet:///private-host/etc/yum.repos.d/MariaDB.repo',
+            "puppet:///modules/files/private/${fqdn}/etc/yum.repos.d/MariaDB.repo",
             'puppet:///modules/mariadb_server_pref18/MariaDB.repo',
         ],
     }
@@ -63,7 +63,7 @@ class mariadb_server_pref18 {
         mode    => 644,
         owner   => "root",
         source  => [
-            'puppet:///private-host/etc/my.cnf',
+            "puppet:///modules/files/private/${fqdn}/etc/my.cnf",
             'puppet:///modules/mariadb_server_pref18/my.cnf',
         ],
     }

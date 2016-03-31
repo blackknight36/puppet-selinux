@@ -15,7 +15,7 @@ class git_daemon {
         selrole => "object_r",
         seltype => "etc_t",
         source  => [
-            "puppet:///private-host/git_daemon/xinetd-git.conf",
+            "puppet:///modules/files/private/${fqdn}/git_daemon/xinetd-git.conf",
             "puppet:///modules/git_daemon/xinetd-git.conf",
         ],
     }

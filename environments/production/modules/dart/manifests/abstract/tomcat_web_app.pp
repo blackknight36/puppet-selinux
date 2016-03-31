@@ -31,7 +31,7 @@ class dart::abstract::tomcat_web_app inherits dart::abstract::guarded_server_nod
         selrole   => 'object_r',
         seltype   => 'etc_t',
         subscribe => Package['tomcat'],
-        source    => 'puppet:///private-host/tomcat/tomcat-users.xml',
+        source    => "puppet:///modules/files/private/${fqdn}/tomcat/tomcat-users.xml",
     }
 
     file { '/etc/tomcat/context.xml':
@@ -42,7 +42,7 @@ class dart::abstract::tomcat_web_app inherits dart::abstract::guarded_server_nod
         selrole   => 'object_r',
         seltype   => 'etc_t',
         subscribe => Package['tomcat'],
-        source    => 'puppet:///private-host/tomcat/context.xml',
+        source    => "puppet:///modules/files/private/${fqdn}/tomcat/context.xml",
     }
 
 }

@@ -1,7 +1,7 @@
 # modules/dart/manifests/mdct_puppet_f21.pp
 #
 # Synopsis:
-#       Puppet Master(s)
+#       Legacy Puppet Master
 #
 # Contact:
 #       Michael Watters
@@ -27,14 +27,14 @@ class dart::mdct_puppet_f21 inherits dart::abstract::puppet_server_node {
     }
 
     iptables::rules_file { 'blocks':
-        source  => 'puppet:///private-host/iptables/blocks',
+        source  => "puppet:///modules/files/private/${fqdn}/iptables/blocks",
     }
 
     file { '/etc/motd':
         owner  => 'root',
         group  => 'root',
         mode   => '0644',
-        source => 'puppet:///private-host/motd',
+        source => "puppet:///modules/files/private/${fqdn}/motd",
     }
 
 }
