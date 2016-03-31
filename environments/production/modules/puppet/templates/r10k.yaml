@@ -20,7 +20,7 @@ sources:
 
     # The 'remote' setting determines the location of the VCS repository used
     # for creating environments.
-    remote: '/home/git/puppet.git'
+    remote: 'd861703@mdct-00fs.dartcontainer.com:/home/git/puppet.git'
 
     # The 'basedir' setting specifies where environments will be created for
     # this source. This setting should match the Puppet 'environmentpath'
@@ -28,7 +28,7 @@ sources:
     #
     # See http://docs.puppetlabs.com/references/latest/configuration.html#environmentpath
     # for more information about the Puppet 'environmentpath' setting.
-    basedir: '/etc/puppetlabs/code/environments'
+    basedir: '<%= @basedir %>'
 
   # One or more sources can be specified; each source is simple another entry
   # in the sources map.
