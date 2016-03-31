@@ -20,7 +20,7 @@ class dart::abstract::tomcat_web_app inherits dart::abstract::guarded_server_nod
     }
 
     sudo::drop_in { 'tomcat-service':
-        source  =>  'puppet:///private-domain/sudo/tomcat-service',
+        source  =>  'puppet:///modules/dart/sudo/tomcat-service',
     }
 
     file { '/etc/tomcat/tomcat-users.xml':
