@@ -62,29 +62,18 @@ class puppet::server ($enable=true, $ensure='running', $cert_name, $use_puppetdb
 
     $basedir = "${puppet::params::puppet_code_dir}/environments"
 
-    if $::operatingsystem == 'CentOS' {
-        file { '/etc/puppetlabs/r10k':
-            ensure => directory,
-            owner  => 'root',
-            group  => 'puppet',
-        }
+    file { '/etc/puppetlabs/r10k':
+        ensure => directory,
+        owner  => 'root',
+        group  => 'puppet',
+    } ->
 
-        file { '/etc/puppetlabs/r10k/r10k.yaml':
-            ensure => file,
-            owner  => 'root',
-            group  => 'puppet',
-            content => template('puppet/r10k.yaml'),
-            require => File['/etc/puppetlabs/r10k'],
-        }
-    }
-
-    if $::operatingsystem == 'Fedora' {
-        file { '/etc/r10k.yaml':
-            ensure => file,
-            owner  => 'root',
-            group  => 'puppet',
-            content => template('puppet/r10k.yaml'),
-        }
+    file { '/etc/puppetlabs/r10k/r10k.yaml':
+        ensure => file,
+        owner  => 'root',
+        group  => 'puppet',
+        content => template('puppet/r10k.yaml'),
+        require => File['/etc/puppetlabs/r10k'],
     }
 
     if $use_puppetdb == true {
