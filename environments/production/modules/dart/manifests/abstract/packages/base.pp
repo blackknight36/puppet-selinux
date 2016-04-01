@@ -113,6 +113,12 @@ class dart::abstract::packages::base {
             }
         }
 
+        if $::operatingsystemrelease >= '18' {
+            package { 'finger':
+                ensure => installed,
+            }
+        }
+
         if $::operatingsystemrelease == 'Rawhide' or $::operatingsystemrelease >= '22' {
             package { ['python-dnf-plugins-extras-tracer']:
                 ensure => installed,
