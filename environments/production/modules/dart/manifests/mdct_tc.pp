@@ -11,7 +11,7 @@ class dart::mdct_tc inherits dart::abstract::guarded_server_node {
     include 'apache'
 
 #    class { 'postgresql::server':
-#        hba_conf    => 'puppet:///private-host/postgresql/pg_hba.conf',
+#        hba_conf    => "puppet:///modules/files/private/${fqdn}/postgresql/pg_hba.conf",
 #    }
 
     package { [ 'php', ]:

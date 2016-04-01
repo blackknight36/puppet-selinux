@@ -23,7 +23,7 @@ class dart::mdct_00ut inherits dart::abstract::guarded_server_node {
         group   => 'root',
         mode    => '0600',
         owner   => 'root',
-        source  => 'puppet:///private-host/secrets',
+        source  => "puppet:///modules/files/private/${fqdn}/secrets",
         require => [
             Package['davfs2'],
         ],

@@ -19,6 +19,7 @@
 # === Authors
 #
 #   John Florian <john.florian@dart.biz>
+#   Michael Watters <michael.watters@dart.biz>
 
 
 class authconfig (
@@ -80,7 +81,7 @@ class authconfig (
         mode    => '0600',
         seltype => $authconfig::params::sssd_seltype,
         source  => [
-            "puppet:///private-host/authconfig/${authconfig::params::sssd_conf}",
+            "puppet:///modules/files/private/${fqdn}/authconfig/${authconfig::params::sssd_conf}",
             "puppet:///modules/authconfig/${authconfig::params::sssd_conf}",
         ],
     }

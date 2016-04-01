@@ -63,7 +63,7 @@ class puppet::client ($enable=true, $ensure='running') {
     if $puppet::params::is_puppet_master == true {
         file { "${puppet::params::puppet_conf_dir}/puppet.conf":
             ensure  => file,
-            source  => 'puppet:///private-host/puppet/puppet.conf',
+            source  => "puppet:///modules/files/private/${fqdn}/puppet/puppet.conf",
         }
     }
 

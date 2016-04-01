@@ -35,13 +35,13 @@
 #
 # Example usage:
 #
-#       facter::custom-fact { 'example':
+#       facter::custom_fact { 'example':
 #           before  => Class['WHERE_USED'],
-#           source  => 'puppet:///private-domain/facter/example.rb',
+#           source  => 'puppet:///modules/facter/example.rb',
 #       }
 
 
-define facter::custom-fact ($ensure='present', $source) {
+define facter::custom_fact ($ensure='present', $source) {
 
     file { "${rubysitedir}/facter/local":
         ensure  => directory,
