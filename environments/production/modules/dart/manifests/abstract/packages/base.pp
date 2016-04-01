@@ -33,6 +33,12 @@ class dart::abstract::packages::base {
 
     ### Select Package Inclusion ###
 
+    if $::operatingsystem == 'CentOS' {
+        package {'finger':
+            ensure => installed,
+        }
+    }
+
     if $::operatingsystem == 'Fedora' {
 
         # apt package is only available in Fedora
