@@ -1,7 +1,0 @@
-# hiera/node/mdct-ngic.dartcontainer.com.yaml
-
-
----
-
-lvm_snapshot_tools::origin_vgs:
-    - vg_mdctngic

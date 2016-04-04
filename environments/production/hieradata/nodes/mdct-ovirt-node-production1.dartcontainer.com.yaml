@@ -1,9 +1,0 @@
-# hiera/node/mdct-ovirt-node-production1.dartcontainer.com.yaml
-#
-# Synopsis:
-#       These settings are specific to mdct-ovirt-node-production1.
-
-
----
-
-yum::proxy:                 "http://%{hiera('http_proxy')}:8080"

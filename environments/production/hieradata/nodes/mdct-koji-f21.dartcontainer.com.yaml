@@ -1,7 +1,0 @@
-# hiera/node/mdct-koji-f21.dartcontainer.com.yaml
-
-
----
-
-lvm_snapshot_tools::origin_vgs:
-    - fedora-server

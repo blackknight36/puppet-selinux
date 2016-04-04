@@ -1,8 +1,0 @@
-# ***** THIS FILE IS MANAGED BY PUPPET *****
-# modules/dart/files/mirrmaid/mayflower-fanout.cron
-#
-MAILTO=john.florian@dart.biz
-PATH=/sbin:/bin:/usr/sbin:/usr/bin
-
-# mayflower payload distribution to mirrors local at each plant
-10,40 * * * * mirrmaid     nice ionice -c3 mirrmaid -c /etc/mirrmaid/mirrmaid-mayflower-fanout.conf

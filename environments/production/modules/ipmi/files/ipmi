@@ -1,4 +1,0 @@
-# this file is necessary to load IPMI kernel modules and should be located in /etc/modules-load.d/
-ipmi_msghandler
-ipmi_devintf
-ipmi_si

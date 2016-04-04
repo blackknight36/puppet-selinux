@@ -1,4 +1,0 @@
--ea
--Xms512m
--Xmx1024m
--XX:+UseCompressedOops
