@@ -6,6 +6,8 @@
 
 class selinux::params {
 
+    $modules_dir = '/usr/share/selinux'
+
     case $::operatingsystem {
         'Fedora': {
 
@@ -31,7 +33,6 @@ class selinux::params {
         }
 
         'CentOS': {
-
             $packages = [
                 'libselinux',
                 'libselinux-utils',
