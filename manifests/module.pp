@@ -136,7 +136,6 @@ define selinux::module(
       selmodule { $name:
         ensure        => present,
         selmodulepath => $compiled_pp,
-        syncversion   => true,
       }
 
       # Make sure our module is not disabled
