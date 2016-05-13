@@ -39,11 +39,11 @@ define selinux::fcontext ($type) {
 
     $semanage='/usr/sbin/semanage'
 
-    exec { "$semanage fcontext -a -t \"$type\" \"$name\"":
+    exec { "${semanage} fcontext -a -t \"${type}\" \"${name}\"":
         require => Class['selinux'],
         # NB: This is weak and could easily get wrong matches.
         # More work is needed to see if File resource would be sufficient.
-        unless  => "$semanage fcontext -l | grep -q '^$name.*$type'",
+        unless  => "${semanage} fcontext -l | grep -q '^${name}.*${type}'",
     }
 
 }

@@ -43,7 +43,7 @@ class selinux::params {
         }
 
         default: {
-            fail ("The selinux module is not yet supported on ${operatingsystem}.")
+            fail ("The selinux module is not yet supported on ${::operatingsystem}.")
         }
 
     }
