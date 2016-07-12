@@ -1,4 +1,4 @@
-# Copyright 2016 Dart Container 
+# Copyright 2016 Dart Container
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -49,6 +49,8 @@ define selinux::module(
   $modules_dir = undef,
   $ignore = undef,
 ) {
+
+  include 'selinux::params'
 
   $ensures = [ 'present', 'enabled', 'disabled', 'absent' ]
 
