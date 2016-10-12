@@ -1,41 +1,33 @@
 # modules/selinux/manifests/fcontext.pp
 #
-# Warning:
-#       Work in Progress !!!
+#Synopsis:
+#     Manage SELinux file contexts.
 #
-# Synopsis:
-#       Manage a SELinux file context.
+# === Parameters
 #
-# Parameters:
-#       Name__________  Default_______  Description___________________________
+# ==== Optional
+# [*type*]
+#   The file context type to add.  Defaults to default_t.
 #
-#       name                            SELinux fcontext setting name
-#       persistent      false           Should change persist through reboot?
-#       value                           'on' (enable) or 'off' (disable)
+# [*path*]
+#   Path for the file context to be created.  Defaults to $name.
 #
 # Requires:
 #       Class['selinux']
 #
+# === Authors
+#
+#   John Florian <john.florian@dart.biz>#
+#   Michael Watters <michael.watters@dart.biz>
+#
 # Example usage:
 #
-#       include 'selinux'
-#
-#       selinux::fcontext { 'httpd_use_nfs':
-#           persistent => true,
-#           value      => on,
+#       selinux::fcontext { '/home/cvsroot(/.*)?':
+#           type => 'cvs_data_t',
 #       }
-#
-#       ...
-#
-#       # Note the different resource name!  Puppet does not (yet, at least)
-#       # permit reference to a definition instance.
-#       service { 'httpd':
-#           require => Selboolean['httpd_use_nfs'],
-#       }
-#
 
 
-define selinux::fcontext ($type) {
+define selinux::fcontext ($type='default_t') {
 
     $semanage='/usr/sbin/semanage'
 
@@ -43,7 +35,7 @@ define selinux::fcontext ($type) {
         require => Class['selinux'],
         # NB: This is weak and could easily get wrong matches.
         # More work is needed to see if File resource would be sufficient.
-        unless  => "${semanage} fcontext -l | grep -q '^${name}.*${type}'",
+        unless  => "${semanage} fcontext -l | grep -q '^${$name}.*${type}'",
     }
 
 }
