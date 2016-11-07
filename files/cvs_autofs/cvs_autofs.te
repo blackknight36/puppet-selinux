@@ -1,0 +1,13 @@
+
+module cvs_autofs 1.0;
+
+require {
+	type autofs_t;
+	type nfs_t;
+	type cvs_t;
+	class dir search;
+}
+
+#============= cvs_t ==============
+allow cvs_t autofs_t:dir search;
+allow cvs_t nfs_t:dir search;
