@@ -9,7 +9,7 @@
 #       name                            SELinux boolean setting name
 #       persistent      false           Should change persist through reboot?
 #       value                           'on' (enable) or 'off' (disable)
-#
+#                                       true, false, 0, or 1 will be converted to to 'on' or 'off'
 # Requires:
 #       Class['selinux']
 #
@@ -35,9 +35,17 @@
 define selinux::boolean ($value, $persistent=false) {
 
     if $::selinux_simple == true {
+        case $value {
+            true, 1: { $bool_value = 'on' }
+            false, 0: { $bool_value = 'off' }
+            'on': { $bool_value = 'on' }
+            'off': { $bool_value = 'off' }
+            default: { 'on' }
+        }
+
         selboolean { $name:
             persistent => $persistent,
-            value      => $value,
+            value      => $bool_value,
         }
     }
 
