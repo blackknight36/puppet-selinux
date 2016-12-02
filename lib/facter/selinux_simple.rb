@@ -6,11 +6,10 @@
 #       alternate, simple implementation works more reliably, at least for our
 #       use cases with Fedora Linux.
 
-getenforce_cmd = '/usr/sbin/getenforce'
-
-Facter.add("selinux_simple") do
+Facter.add('selinux_simple') do
+    confine :kernel => :linux
     setcode do
-        mode = Facter::Util::Resolution.exec(getenforce_cmd).chomp
+        mode = Facter::Util::Resolution.exec('/usr/sbin/getenforce').chomp
         if mode.casecmp('Enforcing') == 0
             result = true
         else
