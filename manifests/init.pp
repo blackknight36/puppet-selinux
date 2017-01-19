@@ -47,4 +47,12 @@ class selinux ($mode='enforcing') {
         content => template('selinux/config.erb'),
     }
 
+    if $mode == 'enforcing' and $::selinux_simple == false {
+        exec { '/usr/sbin/setenforce 1': }
+    }
+
+    if $mode == 'permissive' and $::selinux_simple == true {
+        exec { '/usr/sbin/setenforce 0': }
+    }
+
 }
