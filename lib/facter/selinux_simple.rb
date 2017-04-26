@@ -9,11 +9,16 @@
 Facter.add('selinux_simple') do
     confine :kernel => :linux
     setcode do
-        mode = Facter::Util::Resolution.exec('/usr/sbin/getenforce').chomp
-        if mode.casecmp('Enforcing') == 0
-            result = true
-        else
-            result = false
+        case Facter.value('osfamily')
+            when 'RedHat'
+                mode = Facter::Util::Resolution.exec('/usr/sbin/getenforce').chomp
+                if mode.casecmp('Enforcing') == 0
+                    result = true
+                else
+                    result = false
+                end
+            else
+                result = false
         end
         result
     end
