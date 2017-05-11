@@ -1,0 +1,11 @@
+{
+  "name": "selinux",
+  "version": "1.0",
+  "author": "Michael Watters",
+  "summary": "Manages the SELinux configuration on a node.",
+  "license": "GPL-2.0",
+  "source": "",
+  "project_page": null,
+  "issues_url": null,
+  "dependencies": []
+}

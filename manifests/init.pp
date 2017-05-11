@@ -4,14 +4,13 @@
 #       Configures SELinux on a host.
 #
 # Parameters:
-#       Name__________  Notes_  Description___________________________
 #
-#       mode            1       One of: 'enforcing', 'permissive', or
-#                               'disabled'.
+# [*packages*]
+#   List of packages to install.
 #
-# Notes:
-#
-#       1. Default is 'enforcing'.
+# [*mode*]
+#   One of: 'enforcing', 'permissive', or 'disabled'.
+#   Default value is 'enforcing'.
 #
 # Requires:
 #       NONE
@@ -24,14 +23,17 @@
 #       - Switching mode from disabled to enforcing or permissive requires
 #       reboot.
 
-
-class selinux ($mode='enforcing') {
-
-    include 'selinux::params'
-
-    package { $selinux::params::packages:
-        ensure  => installed,
-    }
+class selinux (
+    Array[String] $packages = [
+        'libselinux',
+        'libselinux-utils',
+        'policycoreutils-python',
+        'selinux-policy',
+        'selinux-policy-devel',     # provides audit2why
+        'selinux-policy-targeted',
+        ],
+    Enum['enforcing', 'permissive', 'disabled'] $mode = 'enforcing',
+    ) {
 
     File {
         owner       => 'root',
@@ -40,7 +42,11 @@ class selinux ($mode='enforcing') {
         seluser     => 'system_u',
         selrole     => 'object_r',
         seltype     => 'selinux_config_t',
-        subscribe   => Package[$selinux::params::packages],
+        subscribe   => Package[$packages],
+    }
+
+    package { $packages:
+        ensure => installed,
     }
 
     file { '/etc/selinux/config':
