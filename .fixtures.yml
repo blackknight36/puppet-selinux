@@ -1,0 +1,5 @@
+fixtures:
+    symlinks:
+      selinux: "#{source_dir}"
+    repositories:
+    forge_modules:
