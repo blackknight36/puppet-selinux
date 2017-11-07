@@ -17,7 +17,9 @@ describe 'selinux' do
       # selinux_simple returns false when the current SELinux mode is not set to Enforcing
       # This exec ensure that SELinux is always set to Enforcing mode
       context "mode => enforcing" do
-        let(:facts) {{ :selinux_simple => false }}
+        let(:facts) {
+          facts.merge({ :selinux_simple => false })
+        }
 
         let(:params) {{ 'mode' => 'enforcing' }}
 
@@ -27,7 +29,9 @@ describe 'selinux' do
       end
 
       context "mode => permissive" do
-        let(:facts) {{ :selinux_simple => true }}
+        let(:facts) {
+          facts.merge({ :selinux_simple => true })
+        }
 
         let(:params) {{ 'mode' => 'permissive' }}
 
