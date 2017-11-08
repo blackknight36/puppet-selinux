@@ -1,0 +1,8 @@
+---
+selinux::packages:
+    - 'libselinux'
+    - 'libselinux-utils'
+    - 'policycoreutils-python'
+    - 'selinux-policy'
+    - 'selinux-policy-devel'
+    - 'selinux-policy-targeted'

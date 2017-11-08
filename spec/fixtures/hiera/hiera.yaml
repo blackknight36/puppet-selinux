@@ -1,0 +1,9 @@
+---
+:backends:
+  - yaml
+:hierarchy:
+  - "%{::osfamily}"
+  - "%{::operatingsystem}"
+  - common
+:yaml:
+  :datadir: 'spec/fixtures/hiera'
