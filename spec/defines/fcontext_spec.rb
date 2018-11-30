@@ -13,11 +13,15 @@ describe 'selinux::fcontext' do
   }}
 
   it do
+    is_expected.to contain_class('selinux')
+  end
+
+  it do
     is_expected.to contain_exec("/usr/sbin/semanage fcontext -a -t \"default_t\" \"#{title}\"")
         .with({
-          "unless" => "/usr/sbin/semanage fcontext -l | grep -q '^#{title}.*default_t'",
-          })
-        #.that_requires('Class[selinux]')
+          :unless => "/usr/sbin/semanage fcontext -l | grep -q '^#{title}.*default_t'",
+        })
+        .that_requires('Class[selinux]')
   end
 
 end

@@ -29,7 +29,9 @@
 
 define selinux::fcontext ($type='default_t') {
 
-    $semanage='/usr/sbin/semanage'
+    include 'selinux'
+
+    $semanage = '/usr/sbin/semanage'
 
     exec { "${semanage} fcontext -a -t \"${type}\" \"${name}\"":
         require => Class['selinux'],
